@@ -128,7 +128,7 @@ class BM25 {
 
 let corpusCache: CorpusChunk[] | null = null;
 
-function loadCorpus(): CorpusChunk[] {
+export function loadCorpus(): CorpusChunk[] {
   if (corpusCache) return corpusCache;
   const file = path.join(process.cwd(), "data", "corpus.jsonl");
   const raw = fs.readFileSync(file, "utf-8");
