@@ -163,9 +163,9 @@ export default function Home() {
   }
 
   return (
-    <div className="flex-1 flex flex-col w-full max-w-6xl mx-auto px-4 py-10 gap-8">
+    <div className="flex-1 flex flex-col w-full max-w-6xl mx-auto px-4 py-6 sm:py-10 gap-6 sm:gap-8">
       <header className="flex flex-col gap-2">
-        <h1 className="text-2xl font-semibold tracking-tight">
+        <h1 className="text-xl sm:text-2xl font-semibold tracking-tight">
           Cerebro Regulatorio Chile <span className="text-neutral-400 font-normal">· RegBrain</span>
         </h1>
         <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xl">
@@ -175,7 +175,7 @@ export default function Home() {
         </p>
       </header>
 
-      <div className="flex flex-col lg:flex-row gap-8 lg:items-start">
+      <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:items-start">
         <aside className="order-2 lg:order-1 lg:w-64 lg:flex-shrink-0">
           <PlazosPanel plazos={plazos} />
         </aside>
@@ -188,34 +188,35 @@ export default function Home() {
             }}
             className="flex flex-col gap-3"
           >
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Ej: plazo para notificar reacciones adversas al ISP"
-                className="flex-1 rounded-md border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-neutral-400"
+                className="flex-1 min-w-0 rounded-md border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2.5 sm:py-2 text-base sm:text-sm outline-none focus:ring-2 focus:ring-neutral-400"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="rounded-md bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 px-4 py-2 text-sm font-medium disabled:opacity-50"
+                className="shrink-0 rounded-md bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 px-4 py-2.5 sm:py-2 text-sm font-medium disabled:opacity-50"
               >
                 {loading ? "Buscando…" : "Buscar"}
               </button>
             </div>
-            <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-500 dark:text-neutral-400">
-              <label className="flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-neutral-500 dark:text-neutral-400">
+              <label className="flex items-center gap-1.5 py-1">
                 <input
                   type="checkbox"
                   checked={vigente}
                   onChange={(e) => setVigente(e.target.checked)}
+                  className="h-4 w-4"
                 />
                 solo vigencia verificada
               </label>
               <select
                 value={categoria}
                 onChange={(e) => setCategoria(e.target.value)}
-                className="rounded border border-neutral-300 dark:border-neutral-700 bg-transparent px-2 py-1"
+                className="rounded border border-neutral-300 dark:border-neutral-700 bg-transparent px-2 py-1.5 text-base sm:text-xs w-full sm:w-auto"
               >
                 <option value="">todas las categorías</option>
                 {categorias.map((c) => (
@@ -238,7 +239,7 @@ export default function Home() {
                       setQ(ej);
                       runSearch(ej);
                     }}
-                    className="rounded-full border border-neutral-300 dark:border-neutral-700 px-3 py-1 text-xs hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                    className="rounded-full border border-neutral-300 dark:border-neutral-700 px-3 py-1.5 text-xs hover:bg-neutral-100 dark:hover:bg-neutral-800"
                   >
                     {ej}
                   </button>
