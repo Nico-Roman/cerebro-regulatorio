@@ -1,315 +1,248 @@
-"use client";
+import Link from "next/link";
+import { AREAS, FAQS, SERVICIOS, SITE, WHATSAPP_URL } from "@/lib/site";
+import { BuscadorHome } from "@/components/buscador-home";
+import { FormularioContacto } from "@/components/formulario-contacto";
 
-import { useEffect, useState } from "react";
-import type { NormaReciente, PlazoDetectado } from "@/lib/normativa";
-
-interface SearchResult {
-  score: number;
-  cita: string;
-  titulo: string;
-  tipo: string;
-  numero: string;
-  categoria: string;
-  articulo: string;
-  pagina: number;
-  vigencia: string;
-  vigencia_fuente: string;
-  fuente_texto: string;
-  pdf_path: string;
-  fuente_url: string;
-  texto: string;
-}
-
-function PlazosPanel({ plazos }: { plazos: PlazoDetectado[] | null }) {
-  return (
-    <section>
-      <h2 className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-3">
-        Plazos con fecha límite
-      </h2>
-      {plazos === null ? (
-        <p className="text-xs text-neutral-400">Cargando…</p>
-      ) : plazos.length === 0 ? (
-        <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
-          No se detectan plazos con fecha límite vigente en el corpus actual. Este panel se
-          actualiza solo con la vigilancia diaria del ISP.
-        </p>
-      ) : (
-        <ul className="flex flex-col gap-3">
-          {plazos.map((p, i) => (
-            <li key={i}>
-              <a
-                href={p.fuente_url || undefined}
-                target="_blank"
-                rel="noreferrer"
-                className={`block rounded-lg border border-amber-200 dark:border-amber-900 bg-amber-50 dark:bg-amber-950/30 p-3 text-xs transition-colors ${
-                  p.fuente_url
-                    ? "hover:border-amber-400 dark:hover:border-amber-700"
-                    : "pointer-events-none opacity-70"
-                }`}
-              >
-                <div className="font-medium text-amber-800 dark:text-amber-300">
-                  {[p.tipo, p.numero].filter(Boolean).join(" ")}
-                </div>
-                <p className="text-neutral-600 dark:text-neutral-300 mt-1 leading-snug">{p.resumen}</p>
-                <div className="mt-2 font-medium text-amber-700 dark:text-amber-400">
-                  Vence: {p.fechaLimite}
-                </div>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
-  );
-}
-
-function NormasRecientesPanel({ normas }: { normas: NormaReciente[] | null }) {
-  return (
-    <section>
-      <h2 className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-3">
-        Últimas normas
-      </h2>
-      {normas === null ? (
-        <p className="text-xs text-neutral-400">Cargando…</p>
-      ) : normas.length === 0 ? (
-        <p className="text-xs text-neutral-500">Sin normas en el corpus.</p>
-      ) : (
-        <ul className="flex flex-col gap-3">
-          {normas.map((n, i) => (
-            <li key={i}>
-              <a
-                href={n.fuente_url || undefined}
-                target="_blank"
-                rel="noreferrer"
-                className={`block rounded-lg border border-neutral-200 dark:border-neutral-800 p-3 text-xs transition-colors ${
-                  n.fuente_url
-                    ? "hover:border-neutral-400 dark:hover:border-neutral-600"
-                    : "pointer-events-none opacity-70"
-                }`}
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <span className="font-medium">{[n.tipo, n.numero].filter(Boolean).join(" ")}</span>
-                  {n.fecha && <span className="text-neutral-400 whitespace-nowrap">{n.fecha}</span>}
-                </div>
-                <p className="text-neutral-600 dark:text-neutral-300 mt-1 leading-snug">
-                  {n.titulo.length > 130 ? `${n.titulo.slice(0, 130)}…` : n.titulo}
-                </p>
-                <span
-                  className={`inline-block mt-2 text-[10px] uppercase tracking-wide ${
-                    n.vigencia === "vigente"
-                      ? "text-emerald-600 dark:text-emerald-400"
-                      : "text-amber-600 dark:text-amber-500"
-                  }`}
-                >
-                  {n.vigencia === "vigente" ? "vigente" : "vigencia no verificada"}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
-  );
-}
-
-const EJEMPLOS = [
-  "plazo para notificar reacciones adversas al ISP",
-  "requisitos para importar productos farmacéuticos",
-  "qué regula el Decreto Supremo 3 de 2010",
-  "buenas prácticas de manufactura estériles",
-  "requisitos GCP ensayos clínicos",
+const RUBROS = [
+  "Farmacéuticos",
+  "Cosméticos",
+  "Dispositivos médicos",
+  "Alimentos especiales",
+  "Farmacovigilancia",
 ];
 
+// Schema de FAQ: es lo que puede hacer que Google muestre las preguntas
+// desplegadas directamente en el resultado de búsqueda.
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.p,
+    acceptedAnswer: { "@type": "Answer", text: f.r },
+  })),
+};
+
 export default function Home() {
-  const [q, setQ] = useState("");
-  const [vigente, setVigente] = useState(false);
-  const [categoria, setCategoria] = useState("");
-  const [categorias, setCategorias] = useState<string[]>([]);
-  const [results, setResults] = useState<SearchResult[] | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [searched, setSearched] = useState(false);
-  const [plazos, setPlazos] = useState<PlazoDetectado[] | null>(null);
-  const [normasRecientes, setNormasRecientes] = useState<NormaReciente[] | null>(null);
-
-  useEffect(() => {
-    fetch("/api/categorias")
-      .then((r) => r.json())
-      .then((d) => setCategorias(d.categorias || []))
-      .catch(() => {});
-    fetch("/api/plazos")
-      .then((r) => r.json())
-      .then((d) => setPlazos(d.plazos || []))
-      .catch(() => setPlazos([]));
-    fetch("/api/normativa-reciente")
-      .then((r) => r.json())
-      .then((d) => setNormasRecientes(d.normas || []))
-      .catch(() => setNormasRecientes([]));
-  }, []);
-
-  async function runSearch(query: string) {
-    if (!query.trim()) return;
-    setLoading(true);
-    setSearched(true);
-    try {
-      const params = new URLSearchParams({ q: query, k: "8" });
-      if (vigente) params.set("vigente", "1");
-      if (categoria) params.set("categoria", categoria);
-      const res = await fetch(`/api/search?${params.toString()}`);
-      const data = await res.json();
-      setResults(data.resultados || []);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
-    <div className="flex-1 flex flex-col w-full max-w-6xl mx-auto px-4 py-6 sm:py-10 gap-6 sm:gap-8">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-xl sm:text-2xl font-semibold tracking-tight">
-          Cerebro Regulatorio Chile <span className="text-neutral-400 font-normal">· RegBrain</span>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+
+      {/* ── Hero ─────────────────────────────────────────────────────── */}
+      <section className="mx-auto w-full max-w-6xl px-5 pt-16 pb-14 sm:px-8 sm:pt-24 sm:pb-20">
+        <h1 className="font-display max-w-4xl text-[2.25rem] leading-[1.08] font-medium tracking-tight sm:text-6xl lg:text-7xl">
+          Te asesoramos en tus
+          <br className="hidden sm:block" /> asuntos regulatorios.
         </h1>
-        <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xl">
-          Busca en la normativa farmacéutica y sanitaria chilena (ISP/ANAMED) y obtén los
-          pasajes normativos exactos con cita trazable a la fuente. No redacta respuestas
-          por IA: recuperación pura, sin invención.
+
+        <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+          {SITE.nombre} acompaña a laboratorios, importadores y marcas en el registro
+          sanitario, la vigilancia post-comercialización y el cumplimiento normativo de
+          productos farmacéuticos, cosméticos y dispositivos médicos ante el Instituto de
+          Salud Pública de Chile.
         </p>
-      </header>
 
-      <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:items-start">
-        <aside className="order-2 lg:order-1 lg:w-64 lg:flex-shrink-0">
-          <PlazosPanel plazos={plazos} />
-        </aside>
+        <ul className="mt-9 flex flex-wrap gap-2">
+          {RUBROS.map((r) => (
+            <li key={r} className="label-micro border border-line px-3 py-1.5 text-muted">
+              {r}
+            </li>
+          ))}
+        </ul>
 
-        <main className="order-1 lg:order-2 flex-1 min-w-0 max-w-3xl mx-auto w-full flex flex-col gap-8">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              runSearch(q);
-            }}
-            className="flex flex-col gap-3"
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Link
+            href="#contacto"
+            className="bg-foreground px-7 py-3.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
           >
-            <div className="flex flex-col sm:flex-row gap-2">
-              <input
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="Ej: plazo para notificar reacciones adversas al ISP"
-                className="flex-1 min-w-0 rounded-md border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2.5 sm:py-2 text-base sm:text-sm outline-none focus:ring-2 focus:ring-neutral-400"
-              />
-              <button
-                type="submit"
-                disabled={loading}
-                className="shrink-0 rounded-md bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 px-4 py-2.5 sm:py-2 text-sm font-medium disabled:opacity-50"
-              >
-                {loading ? "Buscando…" : "Buscar"}
-              </button>
-            </div>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-neutral-500 dark:text-neutral-400">
-              <label className="flex items-center gap-1.5 py-1">
-                <input
-                  type="checkbox"
-                  checked={vigente}
-                  onChange={(e) => setVigente(e.target.checked)}
-                  className="h-4 w-4"
-                />
-                solo vigencia verificada
-              </label>
-              <select
-                value={categoria}
-                onChange={(e) => setCategoria(e.target.value)}
-                className="rounded border border-neutral-300 dark:border-neutral-700 bg-transparent px-2 py-1.5 text-base sm:text-xs w-full sm:w-auto"
-              >
-                <option value="">todas las categorías</option>
-                {categorias.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </form>
+            Agenda una evaluación
+          </Link>
+          <Link
+            href="#servicios"
+            className="border border-line px-7 py-3.5 text-sm transition-colors hover:border-foreground"
+          >
+            Ver servicios
+          </Link>
+        </div>
+      </section>
 
-          {!searched && (
-            <div className="flex flex-col gap-2 text-sm">
-              <span className="text-neutral-500 dark:text-neutral-400">Ejemplos:</span>
-              <div className="flex flex-wrap gap-2">
-                {EJEMPLOS.map((ej) => (
-                  <button
-                    key={ej}
-                    onClick={() => {
-                      setQ(ej);
-                      runSearch(ej);
-                    }}
-                    className="rounded-full border border-neutral-300 dark:border-neutral-700 px-3 py-1.5 text-xs hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                  >
-                    {ej}
-                  </button>
-                ))}
+      {/* ── Buscador gratuito ────────────────────────────────────────── */}
+      <section id="buscador" className="border-t border-line">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+          <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
+            <div className="lg:w-64 lg:shrink-0">
+              <span className="label-micro text-muted">Herramienta gratuita</span>
+              <p className="mt-4 text-sm leading-relaxed text-muted">
+                Nuestro buscador de normativa es abierto y no cobramos nada por usarlo. No
+                pedimos registro ni datos de contacto.
+              </p>
+            </div>
+
+            <div className="min-w-0 flex-1">
+              <h2 className="font-display max-w-2xl text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
+                ¿Aún no necesitas asesoría? Usa nuestro buscador para encontrar la
+                regulación que buscas.
+              </h2>
+              <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted">
+                Devuelve el pasaje legal exacto de decretos, resoluciones y normas técnicas
+                del ISP/ANAMED, con la cita y el enlace a la fuente oficial. No genera
+                respuestas con inteligencia artificial: recupera el texto tal como está
+                publicado.
+              </p>
+
+              <div className="mt-8">
+                <BuscadorHome />
               </div>
             </div>
-          )}
+          </div>
+        </div>
+      </section>
 
-          {searched && !loading && results && results.length === 0 && (
-            <p className="text-sm text-neutral-500">
-              Sin resultados en el corpus. El cerebro no inventa: declara ausencia de fuente.
-            </p>
-          )}
+      {/* ── Servicios ────────────────────────────────────────────────── */}
+      <section id="servicios" className="border-t border-line">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+          <span className="label-micro text-muted">Servicios</span>
+          <h2 className="font-display mt-5 max-w-3xl text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
+            Todo lo que necesitas para entrar y mantenerte en el mercado sanitario chileno.
+          </h2>
 
-          <div className="flex flex-col gap-4">
-            {results?.map((r, i) => (
+          <div className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICIOS.map((s) => (
               <article
-                key={i}
-                className="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex flex-col gap-2"
+                key={s.n}
+                className="flex flex-col gap-3 bg-background p-6 transition-colors hover:bg-surface"
               >
-                <div className="flex flex-wrap items-center gap-2 text-xs">
-                  <span className="font-medium">{[r.tipo, r.numero].filter(Boolean).join(" ") || r.categoria}</span>
-                  {r.articulo && <span className="text-neutral-500">· {r.articulo}</span>}
-                  <span className="text-neutral-500">· pág. {r.pagina}</span>
-                  <span
-                    className={
-                      r.vigencia === "vigente"
-                        ? "text-emerald-600 dark:text-emerald-400"
-                        : "text-amber-600 dark:text-amber-400"
-                    }
-                  >
-                    {r.vigencia === "vigente" ? "✅ vigente" : "⚠️ vigencia no verificada"}
-                  </span>
-                </div>
-                <h2 className="text-sm font-medium leading-snug">{r.titulo}</h2>
-                <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                  “{r.texto.replace(/\s+/g, " ").trim().slice(0, 420)}
-                  {r.texto.length > 420 ? "…" : ""}”
-                </p>
-                <div className="flex flex-wrap gap-3 text-xs text-neutral-500">
-                  <span>categoría: {r.categoria}</span>
-                  {r.fuente_url ? (
-                    <a
-                      href={r.fuente_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="underline hover:text-neutral-800 dark:hover:text-neutral-200"
-                    >
-                      ver fuente oficial ↗
-                    </a>
-                  ) : (
-                    <span>fuente: {r.pdf_path}</span>
-                  )}
-                </div>
+                <span className="font-display text-3xl font-medium tracking-tight text-neutral-600">
+                  {s.n}
+                </span>
+                <h3 className="text-sm leading-snug font-medium">{s.titulo}</h3>
+                <p className="text-xs leading-relaxed text-muted">{s.descripcion}</p>
               </article>
             ))}
           </div>
-        </main>
 
-        <aside className="order-3 lg:w-64 lg:flex-shrink-0">
-          <NormasRecientesPanel normas={normasRecientes} />
-        </aside>
-      </div>
+          <p className="mt-8 text-sm text-muted">
+            ¿Tu caso no está en la lista?{" "}
+            <Link href="#contacto" className="text-foreground underline">
+              Cuéntanos qué necesitas
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
 
-      <footer className="mt-auto pt-8 text-xs text-neutral-400 dark:text-neutral-600 border-t border-neutral-200 dark:border-neutral-800">
-        Esta herramienta es un apoyo a la investigación regulatoria y no constituye
-        asesoría regulatoria ni legal formal. Verifica siempre contra la fuente oficial
-        antes de tomar decisiones. Vigencia mostrada según el listado oficial del ISP
-        (última sincronización del corpus).
-      </footer>
-    </div>
+      {/* ── Áreas de práctica ────────────────────────────────────────── */}
+      <section id="areas" className="border-t border-line">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+          <span className="label-micro text-muted">Áreas de práctica</span>
+
+          <div className="mt-12 flex flex-col">
+            {AREAS.map((a, i) => (
+              <div
+                key={a.clave}
+                className={`flex flex-col gap-8 py-12 lg:flex-row lg:gap-16 ${
+                  i > 0 ? "border-t border-line" : ""
+                }`}
+              >
+                <div className="lg:w-64 lg:shrink-0">
+                  <h3 className="font-display text-xl font-medium tracking-tight">
+                    {a.etiqueta}
+                  </h3>
+                  <ul className="mt-5 flex flex-col gap-2">
+                    {a.items.map((it) => (
+                      <li key={it} className="label-micro text-muted">
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="label-micro mt-7 inline-block border border-line px-4 py-2.5 transition-colors hover:border-foreground"
+                  >
+                    Consultar
+                  </a>
+                </div>
+
+                <div className="min-w-0 flex-1">
+                  <p className="font-display max-w-2xl text-xl leading-snug font-medium tracking-tight sm:text-3xl">
+                    {a.titular}
+                  </p>
+                  <div className="mt-7 grid gap-6 sm:grid-cols-2">
+                    <p className="text-sm leading-relaxed text-muted">{a.parrafoA}</p>
+                    <p className="text-sm leading-relaxed text-muted">{a.parrafoB}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Preguntas frecuentes ─────────────────────────────────────── */}
+      <section id="faq" className="border-t border-line">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+          <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
+            <div className="lg:w-64 lg:shrink-0">
+              <span className="label-micro text-muted">Preguntas frecuentes</span>
+            </div>
+            <div className="min-w-0 flex-1">
+              <dl className="flex flex-col">
+                {FAQS.map((f, i) => (
+                  <div key={f.p} className={`py-6 ${i > 0 ? "border-t border-line" : ""}`}>
+                    <dt className="font-display text-base leading-snug font-medium sm:text-lg">
+                      {f.p}
+                    </dt>
+                    <dd className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
+                      {f.r}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Contacto ─────────────────────────────────────────────────── */}
+      <section id="contacto" className="border-t border-line">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+          <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
+            <div className="lg:w-80 lg:shrink-0">
+              <span className="label-micro text-muted">Contacto</span>
+              <h2 className="font-display mt-5 text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
+                Cuéntanos tu caso.
+              </h2>
+              <p className="mt-5 text-sm leading-relaxed text-muted">
+                Revisamos tu situación y te decimos con claridad qué trámite corresponde,
+                qué antecedentes necesitas y en qué orden conviene hacerlo. La primera
+                evaluación no tiene costo.
+              </p>
+              <div className="mt-7 flex flex-col gap-2 text-sm">
+                <a href={`mailto:${SITE.email}`} className="text-muted hover:text-foreground">
+                  {SITE.email}
+                </a>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-muted hover:text-foreground"
+                >
+                  {SITE.whatsappVisible}
+                </a>
+              </div>
+            </div>
+
+            <div className="min-w-0 flex-1">
+              <FormularioContacto />
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

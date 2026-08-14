@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
+/* RegulaMED se compromete a una identidad oscura y monocroma (referencia de
+   marca), por eso no hay variante clara ni media query de prefers-color-scheme:
+   el sitio se ve igual para todos. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0d0d0d;
+  --foreground: #fafafa;
+  --surface: #151515;
+  --border: #262626;
+  --muted: #8f8f8f;
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-line: var(--border);
+  --color-muted: var(--muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-poppins);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Etiqueta micro en mayúsculas con tracking amplio: el recurso tipográfico que
+   estructura toda la página (categorías, numeración, pies de sección). */
+.label-micro {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+::selection {
+  background: var(--foreground);
+  color: var(--background);
 }
