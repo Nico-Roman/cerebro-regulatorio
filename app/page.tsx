@@ -31,72 +31,71 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <section className="mx-auto w-full max-w-6xl px-5 pt-16 pb-14 sm:px-8 sm:pt-24 sm:pb-20">
-        <h1 className="font-display max-w-4xl text-[2.25rem] leading-[1.08] font-medium tracking-tight sm:text-6xl lg:text-7xl">
-          Te asesoramos en tus
-          <br className="hidden sm:block" /> asuntos regulatorios.
-        </h1>
+      {/* ── Buscador gratuito: abre la página ─────────────────────────── */}
+      <section
+        id="buscador"
+        className="mx-auto w-full max-w-6xl px-5 pt-16 pb-16 sm:px-8 sm:pt-20 sm:pb-20"
+      >
+        <span className="label-micro text-muted">Buscador gratuito · ISP / ANAMED</span>
 
-        <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          {SITE.nombre} acompaña a laboratorios, importadores y marcas en el registro
-          sanitario, la vigilancia post-comercialización y el cumplimiento normativo de
-          productos farmacéuticos, cosméticos y dispositivos médicos ante el Instituto de
-          Salud Pública de Chile.
+        <h2 className="font-display mt-5 max-w-4xl text-[2rem] leading-[1.1] font-medium tracking-tight sm:text-5xl lg:text-6xl">
+          Encuentra la regulación
+          <br className="hidden sm:block" /> que estás buscando.
+        </h2>
+
+        <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+          Devuelve el pasaje legal exacto de decretos, resoluciones y normas técnicas del
+          ISP/ANAMED, con la cita y el enlace a la fuente oficial. No genera respuestas con
+          inteligencia artificial: recupera el texto tal como está publicado.
         </p>
 
-        <ul className="mt-9 flex flex-wrap gap-2">
-          {RUBROS.map((r) => (
-            <li key={r} className="label-micro border border-line px-3 py-1.5 text-muted">
-              {r}
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Link
-            href="#contacto"
-            className="bg-foreground px-7 py-3.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
-          >
-            Agenda una evaluación
-          </Link>
-          <Link
-            href="#servicios"
-            className="border border-line px-7 py-3.5 text-sm transition-colors hover:border-foreground"
-          >
-            Ver servicios
-          </Link>
+        <div className="mt-9 max-w-3xl">
+          <BuscadorHome />
         </div>
+
+        <p className="mt-7 max-w-2xl text-sm leading-relaxed text-muted">
+          Es abierto y no cobramos nada por usarlo. No pedimos registro ni datos de contacto.
+        </p>
       </section>
 
-      {/* ── Buscador gratuito ────────────────────────────────────────── */}
-      <section id="buscador" className="border-t border-line">
+      {/* ── Asesoría ─────────────────────────────────────────────────── */}
+      <section className="border-t border-line">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
-            <div className="lg:w-64 lg:shrink-0">
-              <span className="label-micro text-muted">Herramienta gratuita</span>
-              <p className="mt-4 text-sm leading-relaxed text-muted">
-                Nuestro buscador de normativa es abierto y no cobramos nada por usarlo. No
-                pedimos registro ni datos de contacto.
-              </p>
-            </div>
+          <span className="label-micro text-muted">Asesoría regulatoria</span>
 
-            <div className="min-w-0 flex-1">
-              <h2 className="font-display max-w-2xl text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
-                ¿Aún no necesitas asesoría? Usa nuestro buscador para encontrar la
-                regulación que buscas.
-              </h2>
-              <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted">
-                Devuelve el pasaje legal exacto de decretos, resoluciones y normas técnicas
-                del ISP/ANAMED, con la cita y el enlace a la fuente oficial. No genera
-                respuestas con inteligencia artificial: recupera el texto tal como está
-                publicado.
-              </p>
+          <h1 className="font-display mt-5 max-w-4xl text-[2.25rem] leading-[1.08] font-medium tracking-tight sm:text-6xl lg:text-7xl">
+            Te asesoramos en tus
+            <br className="hidden sm:block" /> asuntos regulatorios.
+          </h1>
 
-              <div className="mt-8">
-                <BuscadorHome />
-              </div>
-            </div>
+          <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+            {SITE.nombre} acompaña a laboratorios, importadores y marcas en el registro
+            sanitario, la vigilancia post-comercialización y el cumplimiento normativo de
+            productos farmacéuticos, cosméticos y dispositivos médicos ante el Instituto de
+            Salud Pública de Chile.
+          </p>
+
+          <ul className="mt-9 flex flex-wrap gap-2">
+            {RUBROS.map((r) => (
+              <li key={r} className="label-micro border border-line px-3 py-1.5 text-muted">
+                {r}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link
+              href="#contacto"
+              className="bg-foreground px-7 py-3.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
+            >
+              Agenda una evaluación
+            </Link>
+            <Link
+              href="#servicios"
+              className="border border-line px-7 py-3.5 text-sm transition-colors hover:border-foreground"
+            >
+              Ver servicios
+            </Link>
           </div>
         </div>
       </section>
