@@ -68,7 +68,7 @@ export function getUltimasNormas(limit = 10): NormaReciente[] {
   const rows = loadCorpus();
   const byNorma = new Map<string, CorpusChunk>();
   for (const r of rows) {
-    const key = r.numero ? `${r.tipo}|${r.numero}` : r.doc_id;
+    const key = r.norma_id || r.doc_id;
     const existing = byNorma.get(key);
     if (!existing || r.pagina < existing.pagina) byNorma.set(key, r);
   }
@@ -125,7 +125,7 @@ export function getPlazosProximos(limit = 8): PlazoDetectado[] {
 
   for (const r of rows) {
     const text = r.texto.replace(/\s+/g, " ");
-    const key = r.numero ? `${r.tipo}|${r.numero}` : r.doc_id;
+    const key = r.norma_id || r.doc_id;
     if (seenNorma.has(key)) continue;
 
     DEADLINE_RE.lastIndex = 0;

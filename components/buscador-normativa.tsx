@@ -15,10 +15,32 @@ interface SearchResult {
   pagina: number;
   vigencia: string;
   vigencia_fuente: string;
+  modificada: boolean;
+  disposicion_modificada: boolean;
+  alerta_vigencia: string;
   fuente_texto: string;
+  alertas_ocr: string[];
   pdf_path: string;
   fuente_url: string;
   texto: string;
+}
+
+interface Confianza {
+  confianza: "alta" | "media" | "baja";
+  cobertura: number;
+  cobertura_top: number;
+  recomendacion: "responder" | "responder_con_reservas" | "declarar_ausencia";
+  motivo: string;
+  conceptos_fuera_del_corpus: string[];
+}
+
+// El sello de vigencia es por DISPOSICIÓN, no por norma: una norma puede seguir
+// vigente y aun así tener el punto concreto que se está citando ya reemplazado.
+function selloVigencia(r: SearchResult) {
+  if (r.disposicion_modificada) return { texto: "⛔ disposición modificada", clase: "text-red-400" };
+  if (r.vigencia !== "vigente") return { texto: "⚠️ vigencia no verificada", clase: "text-amber-400" };
+  if (r.modificada) return { texto: "✅ vigente (norma modificada)", clase: "text-amber-300" };
+  return { texto: "✅ vigente", clase: "text-emerald-400" };
 }
 
 function PlazosPanel({ plazos }: { plazos: PlazoDetectado[] | null }) {
@@ -121,6 +143,7 @@ export function BuscadorNormativa() {
   const [categoria, setCategoria] = useState("");
   const [categorias, setCategorias] = useState<string[]>([]);
   const [results, setResults] = useState<SearchResult[] | null>(null);
+  const [confianza, setConfianza] = useState<Confianza | null>(null);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [plazos, setPlazos] = useState<PlazoDetectado[] | null>(null);
@@ -139,6 +162,7 @@ export function BuscadorNormativa() {
         const res = await fetch(`/api/search?${params.toString()}`);
         const data = await res.json();
         setResults(data.resultados || []);
+        setConfianza(data.confianza || null);
       } finally {
         setLoading(false);
       }
@@ -265,6 +289,37 @@ export function BuscadorNormativa() {
             </p>
           )}
 
+          {searched && !loading && confianza && results && results.length > 0 && (
+            <div
+              className={
+                "border-l-2 px-4 py-3 text-xs leading-relaxed " +
+                (confianza.recomendacion === "declarar_ausencia"
+                  ? "border-red-500 bg-red-500/5 text-red-300"
+                  : confianza.confianza === "media"
+                    ? "border-amber-500 bg-amber-500/5 text-amber-200"
+                    : "border-emerald-500 bg-emerald-500/5 text-emerald-200")
+              }
+            >
+              {confianza.recomendacion === "declarar_ausencia" ? (
+                <>
+                  <strong>La evidencia no alcanza para responder.</strong> Los pasajes de abajo son
+                  los más cercanos que hay en el corpus, pero {confianza.motivo}. Trátalos como
+                  contexto, no como respuesta.
+                </>
+              ) : confianza.confianza === "media" ? (
+                <>
+                  <strong>Cobertura parcial.</strong> {confianza.motivo}. Contrasta entre pasajes
+                  antes de concluir.
+                </>
+              ) : (
+                <>
+                  <strong>Cobertura completa.</strong> Los pasajes recuperados cubren los términos
+                  de la consulta.
+                </>
+              )}
+            </div>
+          )}
+
           <div className="flex flex-col gap-4">
             {results?.map((r, i) => (
               <article key={i} className="flex flex-col gap-2 border border-line p-4">
@@ -274,11 +329,31 @@ export function BuscadorNormativa() {
                   </span>
                   {r.articulo && <span className="text-muted">· {r.articulo}</span>}
                   <span className="text-muted">· pág. {r.pagina}</span>
-                  <span className={r.vigencia === "vigente" ? "text-emerald-400" : "text-amber-400"}>
-                    {r.vigencia === "vigente" ? "✅ vigente" : "⚠️ vigencia no verificada"}
-                  </span>
+                  <span className={selloVigencia(r).clase}>{selloVigencia(r).texto}</span>
+                  {r.fuente_texto === "ocr" && (
+                    <span className="text-amber-400/80">· ⚠ texto OCR</span>
+                  )}
                 </div>
                 <h2 className="text-sm font-medium leading-snug">{r.titulo}</h2>
+                {r.alerta_vigencia && (
+                  <p
+                    className={
+                      "border-l-2 pl-3 text-xs leading-relaxed " +
+                      (r.disposicion_modificada
+                        ? "border-red-500 text-red-300"
+                        : "border-amber-500 text-amber-300")
+                    }
+                  >
+                    {r.alerta_vigencia}
+                  </p>
+                )}
+                {r.alertas_ocr?.length > 0 && (
+                  <ul className="flex flex-col gap-1 border-l-2 border-amber-500/50 pl-3 text-xs text-amber-300/80">
+                    {r.alertas_ocr.map((a, j) => (
+                      <li key={j}>⚠ OCR: {a} — verifica la cifra contra el PDF.</li>
+                    ))}
+                  </ul>
+                )}
                 <p className="text-sm leading-relaxed text-neutral-300">
                   “{r.texto.replace(/\s+/g, " ").trim().slice(0, 420)}
                   {r.texto.length > 420 ? "…" : ""}”
