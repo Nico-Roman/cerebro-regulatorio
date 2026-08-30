@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SITE, WHATSAPP_URL } from "@/lib/site";
 
@@ -13,7 +14,14 @@ export function Nav() {
     <header className="border-b border-line">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
         <Link href="/" className="flex items-center gap-2.5" aria-label={`${SITE.nombre} — inicio`}>
-          <span aria-hidden className="block h-3.5 w-3.5 border border-foreground bg-foreground" />
+          <Image
+            src="/logo-regulamed-asuntos-regulatorios.jpg"
+            alt={`${SITE.nombre} — ${SITE.claim}`}
+            width={577}
+            height={577}
+            priority
+            className="block h-7 w-7"
+          />
           <span className="font-display text-base font-medium tracking-tight">
             {SITE.nombre}
           </span>

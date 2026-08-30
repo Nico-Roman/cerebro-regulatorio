@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SITE, WHATSAPP_URL } from "@/lib/site";
 
@@ -8,7 +9,13 @@ export function Footer() {
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div className="max-w-xs">
             <div className="flex items-center gap-2.5">
-              <span aria-hidden className="block h-3 w-3 border border-foreground bg-foreground" />
+              <Image
+                src="/logo-regulamed-asuntos-regulatorios.jpg"
+                alt={`${SITE.nombre} — ${SITE.claim}`}
+                width={577}
+                height={577}
+                className="block h-6 w-6"
+              />
               <span className="font-display text-base font-medium tracking-tight">
                 {SITE.nombre}
               </span>
