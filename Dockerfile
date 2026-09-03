@@ -17,7 +17,9 @@ COPY . .
 
 # NEXT_PUBLIC_* se incrusta en el bundle durante el build, no en runtime:
 # Railway pasa las variables del servicio como build args.
-ARG NEXT_PUBLIC_SITE_URL
+# El valor por defecto evita que un build sin la variable deje la cadena vacía,
+# que no es lo mismo que ausente y rompía `new URL()` en el metadata.
+ARG NEXT_PUBLIC_SITE_URL="https://cerebro-regulatorio.vercel.app"
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 ENV NEXT_TELEMETRY_DISABLED=1
 
@@ -29,6 +31,9 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+# Railway inyecta su propia PORT (hoy 8080) y pisa este valor: esto es solo el
+# defecto para correr la imagen a mano. Si cambias esto, acuérdate de que el
+# "target port" del dominio en Railway tiene que apuntar al puerto real.
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
