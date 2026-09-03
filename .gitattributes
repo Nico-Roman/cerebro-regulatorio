@@ -1,0 +1,10 @@
+# Normaliza saltos de línea: el repo guarda LF y el build corre en Linux.
+# Sin esto, editar en Windows marca archivos completos como modificados.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff binary
+*.woff2 binary

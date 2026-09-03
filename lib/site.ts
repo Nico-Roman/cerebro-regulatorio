@@ -6,7 +6,10 @@ export const SITE = {
   claim: "Asuntos Regulatorios",
   descripcion:
     "Asesoría en asuntos regulatorios para productos farmacéuticos, cosméticos y dispositivos médicos en Chile. Registro sanitario ISP/ANAMED, farmacovigilancia, tecnovigilancia y cumplimiento normativo.",
-  url: "https://cerebro-regulatorio.vercel.app",
+  // La URL canónica vive en NEXT_PUBLIC_SITE_URL para que cambiar de dominio
+  // sea una variable de entorno y no un commit. El valor por defecto es el
+  // sitio actual, para que un entorno sin la variable no quede sin canónica.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://cerebro-regulatorio.vercel.app",
   email: "contacto@regulamed.cl",
   // E.164 sin signos para el link de wa.me, y una versión legible para mostrar.
   whatsapp: "56975892545",
