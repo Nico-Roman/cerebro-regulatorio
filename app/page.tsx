@@ -54,7 +54,8 @@ export default function Home() {
         </div>
 
         <p className="mt-7 max-w-2xl text-sm leading-relaxed text-muted">
-          Es abierto y no cobramos nada por usarlo. No pedimos registro ni datos de contacto.
+          Es gratuito y seguirá siéndolo. Solo pedimos una cuenta para saber qué
+          normativa falta en el corpus y poder avisarte cuando cambie algo que te afecta.
         </p>
       </section>
 

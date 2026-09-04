@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SITE, WHATSAPP_URL } from "@/lib/site";
+import { SITE } from "@/lib/site";
+import { sesionLigera } from "@/lib/sesion";
+import { BotonSalir } from "@/components/boton-salir";
 
 const ENLACES = [
   { href: "/#servicios", label: "Servicios" },
@@ -9,7 +11,9 @@ const ENLACES = [
   { href: "/#contacto", label: "Contacto" },
 ];
 
-export function Nav() {
+export async function Nav() {
+  const usuario = await sesionLigera();
+
   return (
     <header className="border-b border-line">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
@@ -40,14 +44,25 @@ export function Nav() {
           ))}
         </ul>
 
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="label-micro shrink-0 border border-line px-3.5 py-2 transition-colors hover:border-foreground"
-        >
-          Hablemos
-        </a>
+        {usuario ? (
+          <div className="flex shrink-0 items-center gap-3">
+            <Link
+              href="/perfil"
+              className="label-micro hidden text-muted transition-colors hover:text-foreground sm:block"
+              title={usuario.email}
+            >
+              {usuario.email}
+            </Link>
+            <BotonSalir />
+          </div>
+        ) : (
+          <Link
+            href="/ingresar"
+            className="label-micro shrink-0 border border-line px-3.5 py-2 transition-colors hover:border-foreground"
+          >
+            Entrar
+          </Link>
+        )}
       </nav>
     </header>
   );

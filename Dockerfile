@@ -17,9 +17,7 @@ COPY . .
 
 # NEXT_PUBLIC_* se incrusta en el bundle durante el build, no en runtime:
 # Railway pasa las variables del servicio como build args.
-# El valor por defecto evita que un build sin la variable deje la cadena vacía,
-# que no es lo mismo que ausente y rompía `new URL()` en el metadata.
-ARG NEXT_PUBLIC_SITE_URL="https://cerebro-regulatorio.vercel.app"
+ARG NEXT_PUBLIC_SITE_URL
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 ENV NEXT_TELEMETRY_DISABLED=1
 
@@ -31,9 +29,6 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-# Railway inyecta su propia PORT (hoy 8080) y pisa este valor: esto es solo el
-# defecto para correr la imagen a mano. Si cambias esto, acuérdate de que el
-# "target port" del dominio en Railway tiene que apuntar al puerto real.
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
@@ -48,6 +43,14 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # que el corpus se copia explícitamente o el contenedor arranca sin índice.
 COPY --from=builder --chown=nextjs:nodejs /app/data ./data
 
+# Migraciones y su aplicador. Corren al arrancar el contenedor, no en el build:
+# la base de datos no es alcanzable durante el build.
+COPY --from=builder --chown=nextjs:nodejs /app/drizzle ./drizzle
+COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
+
 USER nextjs
 EXPOSE 3000
-CMD ["node", "server.js"]
+
+# Si la migración falla, el contenedor no levanta: es preferible un deploy que
+# no arranca a una app sirviendo contra un esquema que no es el que espera.
+CMD ["sh", "-c", "node scripts/migrate.mjs && node server.js"]

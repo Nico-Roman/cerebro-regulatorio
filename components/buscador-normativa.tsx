@@ -148,6 +148,7 @@ export function BuscadorNormativa() {
   const [searched, setSearched] = useState(false);
   const [plazos, setPlazos] = useState<PlazoDetectado[] | null>(null);
   const [normasRecientes, setNormasRecientes] = useState<NormaReciente[] | null>(null);
+  const [aviso, setAviso] = useState<string | null>(null);
 
   const runSearch = useCallback(
     async (query: string, opts?: { vigente?: boolean; categoria?: string }) => {
@@ -160,7 +161,33 @@ export function BuscadorNormativa() {
         const cat = opts?.categoria ?? categoria;
         if (cat) params.set("categoria", cat);
         const res = await fetch(`/api/search?${params.toString()}`);
+
+        // La sesión puede vencer con la pantalla abierta. Sin esto, un 401 se
+        // vería como "sin resultados", que es exactamente la conclusión
+        // equivocada para un buscador que promete declarar ausencia de fuente.
+        if (res.status === 401) {
+          window.location.href = `/ingresar?next=${encodeURIComponent(
+            `/normativa?q=${query}`
+          )}`;
+          return;
+        }
+        if (res.status === 403) {
+          window.location.href = "/perfil";
+          return;
+        }
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          setAviso(
+            err.mensaje ||
+              "No pudimos completar la búsqueda. Vuelve a intentar en unos segundos."
+          );
+          setResults(null);
+          setConfianza(null);
+          return;
+        }
+
         const data = await res.json();
+        setAviso(null);
         setResults(data.resultados || []);
         setConfianza(data.confianza || null);
       } finally {
@@ -283,7 +310,16 @@ export function BuscadorNormativa() {
             </div>
           )}
 
-          {searched && !loading && results && results.length === 0 && (
+          {aviso && (
+            <p
+              role="alert"
+              className="border-l-2 border-amber-500/60 bg-amber-500/5 px-4 py-3 text-sm text-amber-200"
+            >
+              {aviso}
+            </p>
+          )}
+
+          {searched && !loading && !aviso && results && results.length === 0 && (
             <p className="text-sm text-muted">
               Sin resultados en el corpus. El cerebro no inventa: declara ausencia de fuente.
             </p>
