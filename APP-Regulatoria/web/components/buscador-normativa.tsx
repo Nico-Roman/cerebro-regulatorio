@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { NormaReciente, PlazoDetectado } from "@/lib/normativa";
+import { FeedbackConsulta } from "@/components/feedback-consulta";
 
 interface SearchResult {
   score: number;
@@ -149,6 +150,7 @@ export function BuscadorNormativa() {
   const [plazos, setPlazos] = useState<PlazoDetectado[] | null>(null);
   const [normasRecientes, setNormasRecientes] = useState<NormaReciente[] | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
+  const [consultaId, setConsultaId] = useState<string | null>(null);
 
   const runSearch = useCallback(
     async (query: string, opts?: { vigente?: boolean; categoria?: string }) => {
@@ -183,6 +185,7 @@ export function BuscadorNormativa() {
           );
           setResults(null);
           setConfianza(null);
+          setConsultaId(null);
           return;
         }
 
@@ -190,6 +193,7 @@ export function BuscadorNormativa() {
         setAviso(null);
         setResults(data.resultados || []);
         setConfianza(data.confianza || null);
+        setConsultaId(data.consultaId || null);
       } finally {
         setLoading(false);
       }
@@ -412,6 +416,10 @@ export function BuscadorNormativa() {
               </article>
             ))}
           </div>
+
+          {searched && !loading && !aviso && consultaId && (
+            <FeedbackConsulta consultaId={consultaId} />
+          )}
         </main>
 
         <aside className="order-3 lg:w-60 lg:shrink-0">

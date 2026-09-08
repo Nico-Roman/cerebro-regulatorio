@@ -63,11 +63,16 @@ export async function GET(req: NextRequest) {
 
   const top = resultados[0];
 
+  // El id se genera acá y viaja en la respuesta: es lo que le permite al
+  // navegador votar sobre ESTA búsqueda (tabla feedback) sin exponer nada más.
+  const consultaId = randomUUID();
+  let consultaRegistrada = false;
+
   // El registro no debe poder tumbar una búsqueda que ya salió bien: si falla
   // la escritura, se anota en el log del servidor y la respuesta sigue.
   try {
     await db.insert(consultas).values({
-      id: randomUUID(),
+      id: consultaId,
       userId: usuario.id,
       pregunta: q.slice(0, 2000),
       filtros: {
@@ -84,6 +89,7 @@ export async function GET(req: NextRequest) {
       topCita: top?.cita ?? null,
       topScore: top?.score ?? null,
     });
+    consultaRegistrada = true;
   } catch (e) {
     console.error("[search] no se pudo registrar la consulta:", e);
   }
@@ -106,5 +112,13 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  return NextResponse.json({ query: q, confianza, resultados });
+  return NextResponse.json({
+    query: q,
+    confianza,
+    resultados,
+    // null cuando la consulta no se pudo registrar: sin fila en `consultas` no
+    // hay a qué colgar el voto, y es mejor no mostrar el widget que ofrecer un
+    // botón que va a fallar.
+    consultaId: consultaRegistrada ? consultaId : null,
+  });
 }

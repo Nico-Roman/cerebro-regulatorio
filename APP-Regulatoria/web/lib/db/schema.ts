@@ -125,6 +125,34 @@ export const consultas = pgTable(
   ]
 );
 
+/**
+ * Voto de utilidad sobre una búsqueda concreta. Es la retroalimentación que el
+ * motor no puede darse solo: un "no me sirvió" con cobertura alta significa que
+ * el corpus tiene la norma pero el pasaje recuperado no era el que hacía falta,
+ * y eso no se distingue mirando solo los puntajes.
+ *
+ * Un voto por consulta: votar de nuevo corrige el anterior en vez de sumar.
+ */
+export const feedback = pgTable(
+  "feedback",
+  {
+    id: text("id").primaryKey(),
+    consultaId: text("consulta_id")
+      .notNull()
+      .references(() => consultas.id, { onDelete: "cascade" }),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    util: boolean("util").notNull(),
+    comentario: text("comentario"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("feedback_consulta_idx").on(t.consultaId),
+    index("feedback_created_idx").on(t.createdAt),
+  ]
+);
+
 /** Ventana deslizante en base de datos: evita depender de un Redis extra. */
 export const rateLimit = pgTable(
   "rate_limit",

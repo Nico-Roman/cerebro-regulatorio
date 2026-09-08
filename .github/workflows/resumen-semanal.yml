@@ -1,0 +1,37 @@
+# Resumen semanal por correo (lunes 09:00 Chile).
+#
+# Solo hace una llamada HTTP a la app; no toca el corpus ni el repo. Necesita
+# dos cosas configuradas a mano, una vez:
+#   - Variable CRON_SECRET en Railway (cualquier cadena larga al azar).
+#   - Secret CRON_SECRET en GitHub con ese mismo valor.
+# Mientras no existan, el job falla con 404 a propósito: la app no acepta el
+# disparo sin secreto. También puedes generar el resumen entrando a
+# /api/cron/resumen-semanal con tu sesión de administrador.
+
+name: Resumen semanal
+
+on:
+  schedule:
+    # 12:00 UTC = 09:00 en Chile (UTC-3).
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pedir el resumen a la app
+        env:
+          BASE_URL: ${{ vars.REGULAMED_URL || 'https://regulamed.cl' }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo "Falta el secret CRON_SECRET en GitHub. Ver el encabezado de este workflow."
+            exit 1
+          fi
+          codigo=$(curl -sS -o /tmp/respuesta.json -w "%{http_code}" \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            "$BASE_URL/api/cron/resumen-semanal")
+          cat /tmp/respuesta.json
+          echo
+          [ "$codigo" = "200" ] || { echo "La app respondió $codigo"; exit 1; }
