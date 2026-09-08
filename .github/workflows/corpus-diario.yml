@@ -9,14 +9,30 @@
 # corrida y manda correo cuando falla. La compuerta de calidad sigue mandando:
 # si el recall baja del gate o el motor deja de abstenerse, el job falla y NO
 # se publica nada.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOQUEADO (2026-09-08): www.ispch.gob.cl no es alcanzable desde un runner
+# GitHub-hosted. Falla en dos capas:
+#   1. TLS: el servidor omite el intermedio "GlobalSign GCC R6 AlphaSSL CA
+#      2025"; OpenSSL no arma la cadena. (Resuelto: paso "Confiar el intermedio
+#      TLS…" más abajo.)
+#   2. WAF: con el TLS resuelto, el firewall del sitio acepta el handshake y
+#      corta la conexión sin responder (curl 52, "Empty reply") para IPs de
+#      datacenter/fuera de Chile.
+# El scrape SÍ funciona desde una IP residencial chilena (el PC del usuario:
+# 200 OK en 0.3 s). Hasta decidir ejecutor con IP chilena (runner self-hosted
+# en el PC o VPS en Santiago, o proxy residencial), el `schedule` queda
+# desactivado para no mandar un correo de fallo cada día. Se puede disparar a
+# mano con "Run workflow". Ver APP-Regulatoria/PLAN-migracion-railway.md.
+# ─────────────────────────────────────────────────────────────────────────────
 
 name: Corpus diario
 
 on:
-  schedule:
-    # 11:00 UTC = 08:00 en Chile (UTC-3). GitHub no garantiza el minuto exacto
-    # en horas cargadas; para este pipeline da lo mismo.
-    - cron: "0 11 * * *"
+  # schedule:
+  #   # 11:00 UTC = 08:00 en Chile (UTC-3). Reactivar cuando el ejecutor tenga
+  #   # IP chilena (ver nota de bloqueo arriba).
+  #   - cron: "0 11 * * *"
   workflow_dispatch:
 
 concurrency:
