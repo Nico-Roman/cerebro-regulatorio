@@ -1,0 +1,78 @@
+# Pipeline diario del corpus, ejecutado en un runner self-hosted en el PC de Nico.
+#
+# Por qué existe este archivo además de corpus-diario.yml: www.ispch.gob.cl
+# corta las conexiones de IPs de datacenter (WAF), así que el runner de GitHub
+# nunca va a poder hacer el scrape. Desde una IP residencial chilena responde en
+# 0,3 s. Este workflow corre donde sí se puede, y corpus-diario.yml queda como
+# la versión para runner alojado, desactivada, por si algún día se destraba.
+#
+# Requisitos en el PC (una sola vez):
+#   1. Registrar el runner: GitHub -> repo -> Settings -> Actions -> Runners ->
+#      "New self-hosted runner" -> Windows. Etiquetas: self-hosted, windows,
+#      regulamed. Instalarlo COMO SERVICIO para que corra sin sesión iniciada
+#      (./config.cmd --runasservice, o "Install service" en el asistente).
+#   2. Python con PyMuPDF y Node ya están instalados: son los mismos que usa la
+#      tarea del Programador de tareas hoy.
+#
+# Si el PC está apagado a la hora del cron, el job queda encolado y corre cuando
+# el runner vuelve. Eso es aceptable: el vigía de frescura (vigia-frescura.yml)
+# avisa si el corpus se queda atrás más de 3 días, que es la señal que de verdad
+# importa.
+
+name: Corpus diario (PC)
+
+on:
+  schedule:
+    # 11:00 UTC = 08:00 en Chile (UTC-3).
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+concurrency:
+  # Dos corridas simultáneas commitearían el mismo corpus y chocarían al
+  # empujar. Se encolan.
+  group: corpus-diario
+  cancel-in-progress: false
+
+jobs:
+  corpus:
+    runs-on: [self-hosted, windows, regulamed]
+    timeout-minutes: 60
+
+    steps:
+      - name: Traer el repo
+        uses: actions/checkout@v4
+        with:
+          # Necesario para que el paso de commit pueda empujar con el token del
+          # workflow en vez de con credenciales del PC.
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Correr el pipeline
+        shell: bash
+        env:
+          CI: "true"
+        run: node APP-Regulatoria/cerebro/actualizar-diario.js
+
+      - name: Commitear el corpus si cambió
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- APP-Regulatoria/web/data APP-Regulatoria/cerebro/corpus; then
+            echo "Sin cambios en el corpus."
+            exit 0
+          fi
+          git add APP-Regulatoria/web/data APP-Regulatoria/cerebro/corpus
+          git commit -m "chore(corpus): actualización diaria $(date +%Y-%m-%d)"
+          git push
+
+      - name: Dejar el resumen a la vista
+        if: always()
+        shell: bash
+        run: |
+          echo "### Corpus diario" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f APP-Regulatoria/web/data/estado-corpus.json ]; then
+            cat APP-Regulatoria/web/data/estado-corpus.json >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No se generó estado-corpus.json: el pipeline no llegó al final." >> "$GITHUB_STEP_SUMMARY"
+          fi

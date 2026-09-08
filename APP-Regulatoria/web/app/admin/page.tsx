@@ -84,6 +84,12 @@ export default async function AdminPage({
             {v.etiqueta}
           </Link>
         ))}
+        <Link
+          href="/admin/agenda"
+          className="border border-line px-3 py-1.5 text-muted transition-colors hover:border-foreground hover:text-foreground"
+        >
+          Agenda
+        </Link>
         <span className="ml-auto flex gap-3">
           <a href="/api/admin/export?tipo=usuarios" className="text-muted underline hover:text-foreground">
             CSV usuarios

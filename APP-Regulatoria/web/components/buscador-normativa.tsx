@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { NormaReciente, PlazoDetectado } from "@/lib/normativa";
 import { FeedbackConsulta } from "@/components/feedback-consulta";
+import { RespuestaIa } from "@/components/respuesta-ia";
 
 interface SearchResult {
   score: number;
@@ -416,6 +417,10 @@ export function BuscadorNormativa() {
               </article>
             ))}
           </div>
+
+          {searched && !loading && !aviso && consultaId && results && results.length > 0 && (
+            <RespuestaIa consultaId={consultaId} />
+          )}
 
           {searched && !loading && !aviso && consultaId && (
             <FeedbackConsulta consultaId={consultaId} />

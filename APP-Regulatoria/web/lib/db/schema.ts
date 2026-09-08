@@ -117,6 +117,13 @@ export const consultas = pgTable(
     conceptosFuera: jsonb("conceptos_fuera"),
     topCita: text("top_cita"),
     topScore: real("top_score"),
+    // Capa de IA (fase 5). Nulos mientras la respuesta no se pidió: la mayoría
+    // de las búsquedas se resuelven mirando los pasajes y no gastan modelo.
+    respuestaLlm: text("respuesta_llm"),
+    modelo: text("modelo"),
+    tokensIn: integer("tokens_in"),
+    tokensOut: integer("tokens_out"),
+    latenciaMs: integer("latencia_ms"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
