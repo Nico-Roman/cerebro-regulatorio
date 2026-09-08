@@ -161,6 +161,24 @@ function yaExiste(idx, record) {
   return idx.porNorma.has(`${normKey(record.tipo)}|${(record.numero || "").replace(/\D/g, "")}`);
 }
 
+
+/**
+ * Escapa un enlace del listado del ISP para que curl lo acepte.
+ *
+ * El ISP publica las URLs con espacios y acentos sin escapar
+ * ("…/Resolución Exenta 1.777.pdf"). curl las rechaza con exit 3 ("URL
+ * rejected: malformed input") y la norma queda como "pendiente" para siempre:
+ * el 2026-09-08 eran 134 de 124 normas del listado, y por eso el corpus solo
+ * se podia armar en el PC que ya tenia los PDF bajados a mano.
+ *
+ * Escapa solo lo que hace falta —espacios, no-ASCII y un % suelto— y deja
+ * intactos los %XX ya presentes, para no doble-codificar los enlaces que el
+ * ISP si publica escapados. Es idempotente.
+ */
+function urlSegura(u) {
+  return String(u).replace(/%(?![0-9A-Fa-f]{2})|[^!-~]/g, (c) => encodeURIComponent(c));
+}
+
 function downloadPdf(record) {
   const folder = folderFor(record.categoria);
   const dir = path.join(ANAMED_DIR, folder);
@@ -173,7 +191,7 @@ function downloadPdf(record) {
   // El listado del ISP a veces publica el enlace con espacios al principio o al
   // final (p. ej. Resolución Exenta 873 de Farmacovigilancia). curl los toma
   // como parte de la URL y devuelve 404; con la URL recortada el PDF baja bien.
-  execFileSync("curl", ["-sL", "--max-time", "60", "-A", UA, "-o", dest, (record.enlace || "").trim()]);
+  execFileSync("curl", ["-sL", "--max-time", "60", "-A", UA, "-o", dest, urlSegura((record.enlace || "").trim())]);
   const size = fs.existsSync(dest) ? fs.statSync(dest).size : 0;
   if (size < 1024) {
     fs.rmSync(dest, { force: true });
