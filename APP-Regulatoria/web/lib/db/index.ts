@@ -30,9 +30,23 @@ function sslDeUrl(url: string): false | { rejectUnauthorized: boolean } {
 function crearPool(): Pool {
   const connectionString = process.env.DATABASE_URL;
   if (!connectionString) {
-    throw new Error(
-      "DATABASE_URL no está configurada: la app no puede hablar con Postgres."
+    // `next build` evalúa este módulo al recolectar los datos de las páginas
+    // que dependen de la sesión (/ingresar, /perfil), y en el build no hay
+    // base de datos ni debe haberla: la URL de Postgres es un secreto de
+    // runtime, no un argumento de compilación. Lanzar acá rompía el build
+    // entero ("Failed to collect page data for /ingresar").
+    //
+    // No se pierde la falla temprana: scripts/migrate.mjs aborta el arranque
+    // del contenedor si DATABASE_URL no está, así que un despliegue sin base
+    // no llega a servir tráfico. Este pool imposible solo existe para que el
+    // build pueda importar el módulo; cualquier consulta contra él falla.
+    console.warn(
+      "[db] DATABASE_URL no está configurada: solo válido durante el build."
     );
+    return new Pool({
+      connectionString: "postgres://sin-configurar@127.0.0.1:1/sin-configurar",
+      max: 1,
+    });
   }
   return new Pool({
     connectionString,
