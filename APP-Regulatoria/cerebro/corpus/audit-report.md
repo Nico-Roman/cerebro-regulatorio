@@ -1,18 +1,18 @@
 # Auditoría de corpus — Cerebro Regulatorio
 
-_Generado: 2026-08-30 · listado oficial ISP: snapshot 2026-08-30 (124 normas únicas)_
+_Generado: 2026-09-07 · listado oficial ISP: snapshot 2026-09-08 (124 normas únicas)_
 
 ## Resumen
 
-- **PDFs encontrados:** 163
-- **Documentos indexados (tras colapsar copias):** 120
+- **PDFs encontrados:** 164
+- **Documentos indexados (tras colapsar copias):** 121
 - **Copias duplicadas colapsadas:** 43
 - **Chunks (unidades de recuperación):** 2584
-- **Texto nativo:** 60  ·  **OCR:** 59  ·  **Sin texto extraíble:** 1
-- **Con match en listado oficial (→ vigente):** 119
+- **Texto nativo:** 60  ·  **OCR:** 59  ·  **Sin texto extraíble:** 2
+- **Con match en listado oficial (→ vigente):** 120
 - **Sin match oficial (vigencia no verificada):** 1
-- **Sin metadatos del catálogo vault:** 30
-- **Documentos con modificación conocida:** 89
+- **Sin metadatos del catálogo vault:** 31
+- **Documentos con modificación conocida:** 90
 - **Pasajes con disposición modificada (marcados ⛔):** 2
 - **Pasajes con alerta de OCR:** 224
 - **Aristas del grafo de modificaciones:** 108
@@ -22,6 +22,7 @@ _Generado: 2026-08-30 · listado oficial ISP: snapshot 2026-08-30 (124 normas ú
 | Documento | Tipo | Nº |
 |---|---|---|
 | establecimientos_autorizacion_y_fiscalizacion/NT-128-Medicamentos-Herabarios-Tradicionales | Decreto Exento | 30 |
+| farmacovigilancia/33668_0873-2024 | Resolución Exenta | 873 |
 
 ## ⚠️ Sin match en listado oficial vigente (verificar manualmente)
 
@@ -167,6 +168,7 @@ Ordenados por nº de pasajes con alerta. El texto NO se corrige automáticamente
 | establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 399 | Resolución Exenta | 399 | ocr | vigente | sí | 6 | url | listado_oficial | 6 | 0 | sí |
 | establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 4.489 | Resolución Exenta | 4489 | nativo | vigente | sí | 31 | url | listado_oficial | 0 | 1 | sí |
 | establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 460 | Resolución Exenta | 460 | ocr | vigente | sí | 7 | url | listado_oficial | 3 | 2 | no |
+| farmacovigilancia/33668_0873-2024 | Resolución Exenta | 873 | vacio | vigente | no | 0 | url | listado_oficial | 0 | 0 | sí |
 | farmacovigilancia/35161_Resolucion 3072_25 Actualiza el comite de expertos en FV Vacunas | Resolución Exenta | 3072 | nativo | vigente | no | 10 | url | listado_oficial | 0 | 0 | no |
 | farmacovigilancia/DD_5038465_260421_P | Resolución Exenta | 2053 | nativo | vigente | no | 46 | url | listado_oficial | 0 | 0 | no |
 | farmacovigilancia/Norma-N°670-Guia-Vacunacion-Segura-2013 | Resolución Exenta | 670 | nativo | vigente | no | 85 | url | listado_oficial | 0 | 0 | no |

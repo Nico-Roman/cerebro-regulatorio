@@ -1,0 +1,23 @@
+{
+  "fecha": "2026-09-08",
+  "ejecutado_por": "actualizar-diario.js (paso 2b)",
+  "recuperados": 1,
+  "pendientes": 0,
+  "resultados": {
+    "farmacovigilancia|resolucion exenta|873": {
+      "norma": "Resolución Exenta 873",
+      "enlace": "https://www.ispch.gob.cl/wp-content/uploads/resoluciones/33668_0873-2024.pdf ",
+      "ok": true,
+      "destino": "C:\\Users\\nico2\\Documents\\Claude-Test\\Asuntos-Regulatorios\\ANAMED_Normativa\\farmacovigilancia\\33668_0873-2024.pdf"
+    }
+  },
+  "no_recuperables": [
+    {
+      "clave": "codigo sanitario|decreto exento|725",
+      "norma": "Decreto Exento 725",
+      "categoria": "Código Sanitario",
+      "enlace": "https://www.bcn.cl/leychile/navegar?idNorma=5595",
+      "motivo": "el ISP enlaza a BCN/LeyChile, no publica PDF"
+    }
+  ]
+}
