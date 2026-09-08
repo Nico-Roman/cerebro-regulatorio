@@ -1,0 +1,37 @@
+# Diagnóstico temporal: ¿el runner de GitHub alcanza el sitio del ISP?
+# La corrida del pipeline del 2026-09-08 falló en el scrape con curl saliendo
+# distinto de 0 a los 2.6 s. Desde una IP residencial chilena la misma URL
+# responde 200 en 0.3 s. Este workflow confirma si es bloqueo por IP/WAF o TLS.
+# Borrar una vez resuelto.
+
+name: diag-isp
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: IP de salida del runner
+        run: curl -s https://api.ipify.org ; echo
+
+      - name: GET normativa-anamed (verbose, sin fallar)
+        run: |
+          curl -v -sS -o /tmp/body.html \
+            -w '\nHTTP=%{http_code} EXITCODE=%{exitcode} TIME=%{time_total} SSL=%{ssl_verify_result}\n' \
+            -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36' \
+            --max-time 60 \
+            'https://www.ispch.gob.cl/normativa-anamed/' || echo "curl salió $?"
+          echo "--- primeros 40 renglones del cuerpo ---"
+          head -40 /tmp/body.html || true
+          echo "--- tamaño ---"
+          wc -c /tmp/body.html || true
+
+      - name: Reintento forzando TLS1.2 + HTTP/1.1 + renegociación legacy
+        run: |
+          curl -v -sS -o /dev/null \
+            -w '\nHTTP=%{http_code} EXITCODE=%{exitcode} TIME=%{time_total}\n' \
+            --tlsv1.2 --tls-max 1.2 --http1.1 \
+            -A 'Mozilla/5.0' --max-time 60 \
+            'https://www.ispch.gob.cl/normativa-anamed/' || echo "curl salió $?"
