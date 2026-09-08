@@ -122,6 +122,36 @@ jobs:
           restore-keys: |
             anamed-pdfs-
 
+      # Los 31 PDF de ANAMED_Normativa/otros/ no están en el listado del ISP —
+      # se agregaron a mano y el paso 2b no puede rebajarlos— así que viven en
+      # el repo por Git LFS. checkout NO los materializa (no se le pasa
+      # `lfs: true` a propósito): deja punteros de 130 bytes.
+      #
+      # Por qué así y no `lfs: true`: son 116 MB por corrida contra 1 GB
+      # gratis de ancho de banda LFS al mes, y con el schedule diario eso se
+      # pasa de cuota en la primera semana. El caché de arriba ya guarda toda
+      # la carpeta, así que en la corrida normal (caché caliente) los PDF ya
+      # están y esto no descarga nada. Solo paga cuando el caché se pierde.
+      - name: Materializar los PDF de otros/ si el caché no los trajo
+        run: |
+          set -e
+          # Un puntero LFS es texto que empieza con esta línea; un PDF real
+          # empieza con "%PDF". Basta mirar uno para saber en qué estado quedó
+          # la carpeta, pero se recorren todos por si el caché vino parcial.
+          if grep -rlq --include='*.pdf' '^version https://git-lfs' ANAMED_Normativa/otros/ 2>/dev/null; then
+            echo "Hay punteros sin materializar: bajando de LFS."
+            git lfs pull --include='ANAMED_Normativa/otros/*.pdf'
+          else
+            echo "El caché ya trajo los PDF reales: no se toca LFS."
+          fi
+          total=$(find ANAMED_Normativa/otros -name '*.pdf' | wc -l)
+          punteros=$(grep -rl --include='*.pdf' '^version https://git-lfs' ANAMED_Normativa/otros/ 2>/dev/null | wc -l)
+          echo "PDF en otros/: $total · sin materializar: $punteros"
+          if [ "$punteros" -ne 0 ]; then
+            echo "::error::Quedaron $punteros punteros LFS sin materializar; el corpus saldria incompleto."
+            exit 1
+          fi
+
       - name: Correr el pipeline (scrape, descarga, build, compuerta)
         env:
           CI: "true"

@@ -9,6 +9,15 @@
 # momento (el pipeline lo hace solo, paso 2b). No tiene sentido versionarlos.
 ANAMED_Normativa/**/*.pdf
 
+# --- Los PDF de `otros/` SÍ van a git (vía LFS) ----------------------------
+# Estos 31 PDF (116 MB) NO están en el listado oficial del ISP: se agregaron a
+# mano y el paso 2b no puede rebajarlos. Estaban solo en un disco, igual que
+# los sidecars OCR, y sin ellos el corpus no se puede armar completo fuera de
+# ese PC: el 2026-09-08 GitHub Actions se quedó en recall 87.5% contra un gate
+# de 90% justamente por faltarle dos de éstos. Van por Git LFS para no engordar
+# el árbol de objetos (ver .gitattributes).
+!ANAMED_Normativa/otros/*.pdf
+
 # --- Los sidecars OCR SÍ van a git -----------------------------------------
 # Estos .txt son el texto reconocido de los PDF escaneados. NO se pueden
 # rebajar del ISP: son trabajo hecho una vez y existían en un solo disco.
