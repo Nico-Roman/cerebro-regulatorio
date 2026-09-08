@@ -15,6 +15,9 @@
  *      (enlace que no es PDF, descarga fallida) y desde cuándo está pendiente.
  *
  *   3. ¿El pipeline diario sigue corriendo?
+ *      (Desde sept. 2026 corre en GitHub Actions, no en el PC. El testigo de
+ *      primera línea es el monitor externo sobre /api/estado; esta revisión es
+ *      la segunda mirada, con interpretación.)
  *      Una vigilancia que se cayó en silencio es peor que no tenerla: el corpus
  *      se ve igual de sano mientras envejece. Se revisa la antigüedad del
  *      snapshot, de los logs y del corpus.
@@ -241,7 +244,7 @@ function alertas(salud, faltantes) {
   } else if (salud.dias_desde_snapshot >= 7) {
     out.push({
       nivel: "critico",
-      texto: `El listado oficial no se refresca hace ${salud.dias_desde_snapshot} días. El pipeline diario del Programador de tareas de Windows está caído: el corpus se ve sano pero está envejeciendo en silencio.`,
+      texto: `El listado oficial no se refresca hace ${salud.dias_desde_snapshot} días. El workflow "Corpus diario" de GitHub Actions no está corriendo o falla: revisar la pestaña Actions del repo. El corpus se ve sano pero está envejeciendo en silencio.`,
     });
   } else if (salud.dias_desde_snapshot > 3) {
     out.push({ nivel: "aviso", texto: `Último scrape del ISP hace ${salud.dias_desde_snapshot} días.` });
