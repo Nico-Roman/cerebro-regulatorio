@@ -1,0 +1,91 @@
+# Vigía de frescura del corpus.
+#
+# Tercer testigo, independiente del PC y del pipeline. Los otros dos son
+# /api/estado (que se juzga a sí mismo, leyendo el archivo que él mismo sirve)
+# y el monitor externo de UptimeRobot. Este corre en infraestructura de GitHub,
+# no depende del notebook ni de una IP chilena — pega a Railway, no al ISP —
+# y falla ruidosamente por correo cuando la señal se apaga.
+#
+# La regla que lo justifica: la ausencia de señal tiene que ser ella misma una
+# alarma. El 7 de septiembre de 2026 el pipeline llevó 8 días caído con el
+# healthcheck en 200 y nadie se enteró.
+#
+# Deliberadamente NO reusa dias_desde_generacion del propio JSON para decidir:
+# recalcula la edad desde corpus.generado con la fecha del runner. Un testigo
+# que le cree la aritmética al vigilado no es un testigo.
+
+name: Vigía de frescura
+
+on:
+  schedule:
+    # Cada 6 horas. Con umbral de 3 días, cuatro chances por día alcanzan de
+    # sobra y no llenan la casilla de correo.
+    - cron: "0 */6 * * *"
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: vigia-frescura
+  cancel-in-progress: true
+
+jobs:
+  frescura:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    env:
+      # Apunta a donde la app vive DE VERDAD. Al 2026-09-08 regulamed.cl
+      # todavía resuelve a Vercel (deploy viejo, /api/estado da 404), así que
+      # el valor por defecto es el dominio de Railway. Cuando el DNS apunte a
+      # Railway, define la variable de repo ESTADO_URL como
+      # https://regulamed.cl/api/estado (Settings → Secrets and variables →
+      # Actions → Variables) y este workflow la toma sin necesidad de commit.
+      ENDPOINT: ${{ vars.ESTADO_URL || 'https://cerebro-regulatorio-production.up.railway.app/api/estado' }}
+      # Días de atraso tolerados antes de fallar. El pipeline corre a diario:
+      # 3 días significa que falló tres veces seguidas.
+      MAX_DIAS: "3"
+
+    steps:
+      - name: Consultar /api/estado y verificar la frescura del corpus
+        run: |
+          set -uo pipefail
+
+          cuerpo=$(mktemp)
+          # --fail NO se usa: /api/estado devuelve 503 a propósito cuando el
+          # corpus está vencido, y en ese caso el cuerpo es justamente lo que
+          # hay que mostrar en el correo de la falla.
+          codigo=$(curl -sS --max-time 30 --retry 2 --retry-delay 5 \
+                        -o "$cuerpo" -w '%{http_code}' "$ENDPOINT") || codigo=000
+
+          echo "=== HTTP $codigo — $ENDPOINT ==="
+          cat "$cuerpo"; echo
+
+          if [ "$codigo" != "200" ]; then
+            echo "::error::El endpoint respondió HTTP $codigo (se esperaba 200)."
+            echo "Causas típicas: el servicio de Railway está caído, o /api/estado"
+            echo "devolvió 503 porque el corpus está vencido. El cuerpo de arriba lo dice."
+            exit 1
+          fi
+
+          generado=$(jq -r '.corpus.generado // empty' "$cuerpo")
+          if [ -z "$generado" ]; then
+            echo "::error::El JSON no trae corpus.generado. Un corpus que no puede"
+            echo "demostrar su fecha se trata como vencido."
+            exit 1
+          fi
+
+          ts_generado=$(date -u -d "$generado" +%s 2>/dev/null) || {
+            echo "::error::corpus.generado no es una fecha parseable: '$generado'"
+            exit 1
+          }
+          dias=$(( ( $(date -u +%s) - ts_generado ) / 86400 ))
+
+          echo "Corpus generado: $generado  ->  $dias día(s) de antigüedad (umbral: $MAX_DIAS)."
+
+          if [ "$dias" -gt "$MAX_DIAS" ]; then
+            echo "::error::El corpus tiene $dias días (máximo $MAX_DIAS). El pipeline diario no está corriendo."
+            exit 1
+          fi
+
+          echo "Frescura OK."
