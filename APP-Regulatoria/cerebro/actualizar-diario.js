@@ -170,7 +170,10 @@ function downloadPdf(record) {
     ? base
     : `${record.tipo} ${formatNumero(record.numero)}.pdf`.trim();
   const dest = path.join(dir, filename);
-  execFileSync("curl", ["-sL", "--max-time", "60", "-A", UA, "-o", dest, record.enlace]);
+  // El listado del ISP a veces publica el enlace con espacios al principio o al
+  // final (p. ej. Resolución Exenta 873 de Farmacovigilancia). curl los toma
+  // como parte de la URL y devuelve 404; con la URL recortada el PDF baja bien.
+  execFileSync("curl", ["-sL", "--max-time", "60", "-A", UA, "-o", dest, (record.enlace || "").trim()]);
   const size = fs.existsSync(dest) ? fs.statSync(dest).size : 0;
   if (size < 1024) {
     fs.rmSync(dest, { force: true });
