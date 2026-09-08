@@ -1,5 +1,24 @@
 # Supuestos y pendientes de la noche del 8 de septiembre de 2026
 
+> **SUPERADO — ver `PENDIENTES-2026-09-08.md`.**
+>
+> Este documento se escribió sin red ni base de datos, así que varias de sus
+> afirmaciones eran suposiciones. Al verificarlas contra producción la misma
+> tarde, tres resultaron equivocadas:
+>
+> - **`regulamed.cl` no sirve la app.** Resuelve a Vercel y devuelve un deploy
+>   viejo (`/api/estado`, `/admin`, `/agenda` dan 404). La app vive en
+>   `https://cerebro-regulatorio-production.up.railway.app`. El DNS no es el
+>   punto 8 de 8: es el bloqueo principal.
+> - **El punto 7 ya estaba resuelto**: la pantalla de `/admin` para editar la
+>   agenda existe (`app/admin/agenda/page.tsx`).
+> - **Los 3 commits sí estaban empujados**; era el ref local que estaba viejo.
+>
+> Lo que sí se confirmó: las migraciones corrieron contra la base real y las
+> Fases 2 a 5 están vivas en Railway. Se deja este archivo como registro
+> histórico de las decisiones asumidas, que siguen siendo válidas.
+
+
 Trabajo hecho mientras dormías, con la instrucción de no pausar y anotar cada
 decisión asumida. Esto es la lista para tu visto bueno. Está ordenada por lo que
 te toca decidir o desbloquear, no por cuándo lo hice.
