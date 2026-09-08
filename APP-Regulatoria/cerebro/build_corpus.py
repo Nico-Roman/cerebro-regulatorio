@@ -159,6 +159,38 @@ def strip_boilerplate_ocr(text: str) -> str:
     return "\n".join(kept)
 
 
+# El sidecar OCR se busca sin distinguir mayusculas de minusculas a proposito.
+#
+# actualizar-diario.js baja los PDF con el basename de la URL en minusculas
+# ("decreto exento 1.284.pdf"), mientras que los 65 sidecars versionados en el
+# repo conservan la capitalizacion original ("Decreto Exento 1.284.txt"). En
+# Windows el sistema de archivos no distingue y pareaban solos; en Linux si
+# distingue, y el 2026-09-08 eso dejo 59 PDF escaneados como "vacio" en GitHub
+# Actions, con el recall en 68.8% contra un gate de 90%.
+#
+# El indice por carpeta se cachea: extract_pages() se llama una vez por PDF y
+# escanear el directorio cada vez seria cuadratico.
+_SIDECARS_POR_DIR: dict = {}
+
+
+def buscar_sidecar(pdf_path: Path):
+    """El .txt hermano del PDF, ignorando mayusculas. None si no existe."""
+    exacto = pdf_path.with_suffix(".txt")
+    if exacto.exists():
+        return exacto
+    carpeta = pdf_path.parent
+    clave = str(carpeta)
+    if clave not in _SIDECARS_POR_DIR:
+        try:
+            _SIDECARS_POR_DIR[clave] = {
+                f.name.lower(): f for f in carpeta.iterdir()
+                if f.suffix.lower() == ".txt"
+            }
+        except OSError:
+            _SIDECARS_POR_DIR[clave] = {}
+    return _SIDECARS_POR_DIR[clave].get(exacto.name.lower())
+
+
 def extract_pages(pdf_path: Path):
     """(lista_de_textos_por_pagina, fuente_texto in {'nativo','ocr','vacio'})."""
     pages = []
@@ -172,8 +204,8 @@ def extract_pages(pdf_path: Path):
     total = sum(len(t.strip()) for t in pages)
     if total >= NATIVE_TEXT_MIN:
         return strip_boilerplate_pages(pages), "nativo"
-    txt = pdf_path.with_suffix(".txt")
-    if txt.exists():
+    txt = buscar_sidecar(pdf_path)
+    if txt is not None:
         ocr = txt.read_text(encoding="utf-8", errors="replace")
         ocr = re.sub(r"^\s*\[Texto reconocido por OCR[^\]]*\]\s*", "", ocr)
         ocr = strip_boilerplate_ocr(ocr)
