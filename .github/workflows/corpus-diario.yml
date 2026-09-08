@@ -47,6 +47,30 @@ jobs:
       - name: Instalar PyMuPDF
         run: pip install --upgrade pip && pip install pymupdf
 
+      # El servidor de www.ispch.gob.cl manda solo el certificado hoja y omite
+      # el intermedio "GlobalSign GCC R6 AlphaSSL CA 2025". Windows lo resuelve
+      # solo por AIA; OpenSSL en Ubuntu no, y curl aborta con error 60
+      # ("unable to get local issuer certificate") antes de bajar nada. Se trae
+      # el intermedio vigente desde el AIA del propio cert y, si GlobalSign no
+      # responde, se usa la copia versionada en el repo.
+      - name: Confiar el intermedio TLS que el ISP no envía en su cadena
+        run: |
+          set -e
+          dst=/usr/local/share/ca-certificates/isp-alphassl-intermediate.crt
+          if curl -fsS --max-time 20 http://secure.globalsign.com/cacert/gsgccr6alphasslca2025.crt -o /tmp/isp-int.der \
+             && openssl x509 -inform DER -in /tmp/isp-int.der -out /tmp/isp-int.pem 2>/dev/null; then
+            echo "Intermedio traído desde el AIA de GlobalSign."
+            sudo cp /tmp/isp-int.pem "$dst"
+          else
+            echo "AIA de GlobalSign no disponible: uso la copia versionada."
+            sudo cp vigilancia-isp/isp-alphassl-intermediate.pem "$dst"
+          fi
+          sudo update-ca-certificates
+          # Falla acá con un mensaje claro si la cadena todavía no valida, en vez
+          # de 20 pasos después en mitad del scrape.
+          curl -sSf -o /dev/null -w 'ISP TLS OK (HTTP %{http_code})\n' --max-time 30 \
+            https://www.ispch.gob.cl/normativa-anamed/
+
       # Los 306 MB de PDF no están en el repo: se rebajan del ISP. La caché
       # evita rebajarlos todos los días. La clave sigue al snapshot del listado
       # oficial, así que cambia exactamente cuando cambia la normativa; el
