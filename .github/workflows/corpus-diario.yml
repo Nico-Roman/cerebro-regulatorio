@@ -1,0 +1,94 @@
+# Pipeline diario del corpus normativo.
+#
+# Antes esto vivía en el Programador de tareas de un notebook con Windows. El
+# 7 de septiembre de 2026 llevaba 8 días caído y nada lo notó: el healthcheck
+# respondía 200, la compuerta estaba en verde y la web servía normativa con 8
+# días de atraso como si estuviera al día.
+#
+# Acá corre en infraestructura que siempre está encendida, deja logs de cada
+# corrida y manda correo cuando falla. La compuerta de calidad sigue mandando:
+# si el recall baja del gate o el motor deja de abstenerse, el job falla y NO
+# se publica nada.
+
+name: Corpus diario
+
+on:
+  schedule:
+    # 11:00 UTC = 08:00 en Chile (UTC-3). GitHub no garantiza el minuto exacto
+    # en horas cargadas; para este pipeline da lo mismo.
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+concurrency:
+  # Dos corridas simultáneas commitearían el mismo corpus y chocarían al
+  # empujar. Se encolan.
+  group: corpus-diario
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar PyMuPDF
+        run: pip install --upgrade pip && pip install pymupdf
+
+      # Los 306 MB de PDF no están en el repo: se rebajan del ISP. La caché
+      # evita rebajarlos todos los días. La clave sigue al snapshot del listado
+      # oficial, así que cambia exactamente cuando cambia la normativa; el
+      # restore-key recupera la caché anterior mientras tanto.
+      #
+      # Si la caché se pierde, no pasa nada grave: el paso de reconciliación
+      # rebaja lo que falte. Lo que NO se puede perder son los sidecars OCR, y
+      # por eso están versionados en el repo, no en la caché.
+      - name: Restaurar caché de PDFs
+        uses: actions/cache@v4
+        with:
+          path: ANAMED_Normativa
+          key: anamed-pdfs-${{ hashFiles('vigilancia-isp/snapshots/latest.json') }}
+          restore-keys: |
+            anamed-pdfs-
+
+      - name: Correr el pipeline (scrape, descarga, build, compuerta)
+        env:
+          CI: "true"
+        run: node APP-Regulatoria/cerebro/actualizar-diario.js
+
+      # Solo llega acá si la compuerta aprobó: actualizar-diario.js sale con
+      # error si reprueba, y eso corta el job antes de commitear.
+      - name: Publicar el corpus si cambió
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Sin cambios: el listado oficial no se movió y el corpus es idéntico."
+            exit 0
+          fi
+          git commit -m "chore(corpus): actualización automática $(date -u +%Y-%m-%d)"
+          git push
+
+      # Sube el log de la corrida aunque el job haya fallado: cuando la
+      # compuerta reprueba, el log es justamente lo que hay que leer.
+      - name: Guardar el log de la corrida
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: log-${{ github.run_id }}
+          path: vigilancia-isp/logs/
+          if-no-files-found: ignore
+          retention-days: 30

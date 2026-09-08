@@ -25,6 +25,7 @@ Sin dependencias externas más allá de PyMuPDF (fitz).
 """
 
 import json
+import os
 import re
 import sys
 import unicodedata
@@ -43,8 +44,14 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 # --- Rutas del proyecto -------------------------------------------------------
-ROOT = Path(__file__).resolve().parents[3]  # .../Claude-Test
-ANAMED_DIR = ROOT / "Asuntos-Regulatorios" / "ANAMED_Normativa"
+# La raíz del REPO, no la del disco de nadie. Antes esto era parents[3] más el
+# literal "Asuntos-Regulatorios", lo que ataba el pipeline al árbol de carpetas
+# de un PC concreto: en un runner de CI la ruta no existe. Ahora se deriva de la
+# ubicación del propio archivo dentro del repo, así que resuelve igual en el PC
+# y en GitHub Actions. REGULAMED_ANAMED_DIR permite apuntar los PDF a otra parte
+# (caché de CI, disco externo) sin tocar código.
+ROOT = Path(__file__).resolve().parents[2]  # raíz del repo
+ANAMED_DIR = Path(os.environ.get("REGULAMED_ANAMED_DIR") or (ROOT / "ANAMED_Normativa"))
 VAULT_DIR = Path.home() / "Documents" / "Obsidian Vault" / "Asuntos Regulatorios" / "Normativa ANAMED"
 
 OUT_DIR = Path(__file__).resolve().parent / "corpus"

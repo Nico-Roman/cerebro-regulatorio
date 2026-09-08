@@ -31,8 +31,9 @@ import unicodedata
 from pathlib import Path
 from urllib.parse import unquote
 
-ROOT = Path(__file__).resolve().parents[3]
-SNAPSHOT = ROOT / "Asuntos-Regulatorios" / "vigilancia-isp" / "snapshots" / "latest.json"
+# Raíz del repo (ver nota en build_corpus.py): resuelve igual en el PC y en CI.
+ROOT = Path(__file__).resolve().parents[2]
+SNAPSHOT = ROOT / "vigilancia-isp" / "snapshots" / "latest.json"
 OVERRIDES = Path(__file__).resolve().parent / "overrides.json"
 
 

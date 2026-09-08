@@ -40,10 +40,14 @@ const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
 
-const ROOT = path.resolve(__dirname, "..", "..", ".."); // .../Claude-Test
-const REG_DIR = path.join(ROOT, "Asuntos-Regulatorios");
+// Raíz del repo. Antes se subían tres niveles hasta la carpeta del PC y se
+// concatenaba el literal "Asuntos-Regulatorios": eso ataba el pipeline al árbol
+// de un computador concreto y hacía imposible correrlo en CI. Ahora la raíz es
+// el repo mismo, así que funciona igual en el PC y en el runner.
+const REG_DIR = path.resolve(__dirname, "..", "..");
+const ROOT = REG_DIR;
 const VIGILANCIA_DIR = path.join(REG_DIR, "vigilancia-isp");
-const ANAMED_DIR = path.join(REG_DIR, "ANAMED_Normativa");
+const ANAMED_DIR = process.env.REGULAMED_ANAMED_DIR || path.join(REG_DIR, "ANAMED_Normativa");
 const CEREBRO_DIR = path.join(REG_DIR, "APP-Regulatoria", "cerebro");
 const WEB_DIR = path.join(REG_DIR, "APP-Regulatoria", "web");
 const LOG_DIR = path.join(VIGILANCIA_DIR, "logs");
@@ -52,6 +56,10 @@ const OLLAMA_URL = "http://localhost:11434/api/chat";
 const OLLAMA_MODEL = "qwen3:4b-instruct";
 const GATE_RECALL = 90; // recall@5 mínimo para publicar (gate de Fase 1 del PRD)
 const FORZAR = process.argv.includes("--forzar-publicacion");
+// GitHub Actions (y cualquier CI decente) exporta CI=true. En CI cambian tres
+// cosas: no hay Ollama, el commit lo hace el workflow, y los PDF pueden vivir
+// en el directorio de caché en vez de en el árbol del repo.
+const EN_CI = process.env.CI === "true" || process.env.CI === "1";
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
 
@@ -357,7 +365,7 @@ function main() {
   }
 
   say("Paso 3/6: resumen del día con Ollama local…");
-  const resumen = nCambios > 0 ? ollamaResumen(diff) : null;
+  const resumen = nCambios > 0 && !EN_CI ? ollamaResumen(diff) : null;
   if (resumen) {
     const resumenPath = path.join(LOG_DIR, `resumen-${stamp}.md`);
     fs.writeFileSync(resumenPath, `# Resumen de vigilancia ANAMED — ${stamp}\n\n${resumen}\n`);
@@ -393,20 +401,54 @@ function main() {
     say("  compuerta aprobada.");
   }
 
-  say("Paso 6/6: publicación (copia + commit + push, redeploy en Vercel)…");
+  say("Paso 6/6: publicación (copia + commit + push, redeploy en Railway)…");
   const corpusSrc = path.join(CEREBRO_DIR, "corpus", "corpus.jsonl");
   const corpusDest = path.join(WEB_DIR, "data", "corpus.jsonl");
   fs.mkdirSync(path.dirname(corpusDest), { recursive: true });
   fs.copyFileSync(corpusSrc, corpusDest);
   say(`  corpus copiado a ${corpusDest}`);
+
+  // La web necesita saber CUÁNDO se generó el corpus, no solo qué contiene.
+  // Sin esta fecha, /api/estado no puede distinguir un corpus de hoy de uno de
+  // hace tres meses, y un corpus viejo pasa el healthcheck igual de sano. Es la
+  // falla que tuvo el proyecto 8 días sin que nadie lo notara.
+  const metaSrc = path.join(CEREBRO_DIR, "corpus", "metadata.json");
+  if (fs.existsSync(metaSrc)) {
+    const meta = JSON.parse(fs.readFileSync(metaSrc, "utf-8"));
+    fs.writeFileSync(
+      path.join(WEB_DIR, "data", "estado-corpus.json"),
+      JSON.stringify(
+        {
+          generado: meta.generado,
+          snapshot_fetched_at: meta.snapshot_fetched_at,
+          documentos: (meta.documentos || []).length,
+          normas_listado_oficial: meta.normas_listado_oficial,
+          publicado_por: EN_CI ? "github-actions" : "pc-local",
+        },
+        null,
+        2
+      ),
+      "utf-8"
+    );
+    say("  estado-corpus.json actualizado.");
+  }
+
+  // En CI el commit lo hace el workflow (tiene el token y sabe empujar a la
+  // rama correcta). Acá solo se prepara el árbol y se sale.
+  if (EN_CI) {
+    say("  corriendo en CI: el commit y el push los hace el workflow.");
+    say("=== Fin del pipeline ===");
+    return;
+  }
+
   try {
-    const status = runGit(["status", "--porcelain"], WEB_DIR);
+    const status = runGit(["status", "--porcelain"], REG_DIR);
     if (!status) {
-      say("  sin cambios para commitear en web/.");
+      say("  sin cambios para commitear.");
     } else {
-      runGit(["add", "-A"], WEB_DIR);
-      runGit(["commit", "-m", `chore(corpus): actualización diaria ${stamp} (+${diff.nuevas.length}/~${diff.modificadas.length}/-${diff.eliminadas.length})`], WEB_DIR);
-      runGit(["push"], WEB_DIR);
+      runGit(["add", "-A"], REG_DIR);
+      runGit(["commit", "-m", `chore(corpus): actualización diaria ${stamp} (+${diff.nuevas.length}/~${diff.modificadas.length}/-${diff.eliminadas.length})`], REG_DIR);
+      runGit(["push"], REG_DIR);
       say("  push realizado.");
     }
   } catch (e) {
