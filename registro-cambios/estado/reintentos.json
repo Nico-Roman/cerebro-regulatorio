@@ -1,17 +1,607 @@
 {
   "fecha": "2026-09-08",
   "ejecutado_por": "actualizar-diario.js (paso 2b)",
-  "recuperados": 1,
+  "recuperados": 97,
   "pendientes": 0,
   "resultados": {
+    "medicamentos|ley|20120": {
+      "norma": "Ley 20.120",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Ley 20.120.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/ley 20.120.pdf"
+    },
+    "medicamentos|ley|20000": {
+      "norma": "Ley 20.000",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Ley 20.000.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/ley 20.000.pdf"
+    },
+    "medicamentos|decreto exento|25": {
+      "norma": "Decreto Exento 25",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Exento 25.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto exento 25.pdf"
+    },
+    "medicamentos|decreto supremo|114": {
+      "norma": "Decreto Supremo 114",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Supremo 114.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto supremo 114.pdf"
+    },
+    "medicamentos|decreto exento|107": {
+      "norma": "Decreto Exento 107",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Exento 107.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto exento 107.pdf"
+    },
+    "medicamentos|decreto supremo|405": {
+      "norma": "Decreto Supremo 405",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Supremo 405.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto supremo 405.pdf"
+    },
+    "medicamentos|decreto supremo|404": {
+      "norma": "Decreto Supremo 404",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Supremo 404.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto supremo 404.pdf"
+    },
+    "medicamentos|decreto exento|29": {
+      "norma": "Decreto Exento 29",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Exento 29.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto exento 29.pdf"
+    },
+    "medicamentos|decreto exento|31": {
+      "norma": "Decreto Exento 31",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Exento 31.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto exento 31.pdf"
+    },
+    "medicamentos|resolucion exenta|196": {
+      "norma": "Resolución Exenta 196",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Resolución Exenta 196.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/resolución exenta 196.pdf"
+    },
+    "medicamentos|resolucion exenta|668": {
+      "norma": "Resolución Exenta 668",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Resolución Exenta 668.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/resolución exenta 668.pdf"
+    },
+    "medicamentos|resolucion exenta|5161": {
+      "norma": "Resolución Exenta 5.161",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Resolución Exenta 5.161.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/resolución exenta 5.161.pdf"
+    },
+    "medicamentos|resolucion exenta|460": {
+      "norma": "Resolución Exenta 460",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Resolución Exenta 460.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/resolución exenta 460.pdf"
+    },
+    "medicamentos|resolucion exenta|1651": {
+      "norma": "Resolución Exenta 1.651",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Resolución Exenta 1.651.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/resolución exenta 1.651.pdf"
+    },
+    "medicamentos|resolucion exenta|108": {
+      "norma": "Resolución Exenta 108",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Resolución Exenta 108.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/resolución exenta 108.pdf"
+    },
+    "medicamentos|resolucion exenta|3496": {
+      "norma": "Resolución Exenta 3.496",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Resolución Exenta 3.496.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/resolución exenta 3.496.pdf"
+    },
+    "medicamentos|decreto supremo|79": {
+      "norma": "Decreto Supremo 79",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Supremo 79.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto supremo 79.pdf"
+    },
+    "medicamentos|decreto exento|28": {
+      "norma": "Decreto Exento 28",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Exento 28.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto exento 28.pdf"
+    },
+    "medicamentos|decreto exento|543": {
+      "norma": "Decreto Exento 543",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Exento 543.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto exento 543.pdf"
+    },
+    "medicamentos|decreto exento|30": {
+      "norma": "Decreto Exento 30",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Exento 30.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto exento 30.pdf"
+    },
+    "medicamentos|decreto exento|49": {
+      "norma": "Decreto Exento 49",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Decreto Exento 49.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/decreto exento 49.pdf"
+    },
+    "medicamentos|resolucion exenta|1539": {
+      "norma": "Resolución Exenta 1.539",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Resolución Exenta 1.539.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/resolución exenta 1.539.pdf"
+    },
+    "medicamentos|resolucion exenta|524": {
+      "norma": "Resolución Exenta 524",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/medicamentos/Resolución Exenta 524.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/medicamentos/resolución exenta 524.pdf"
+    },
+    "cosmeticos|decreto supremo|239": {
+      "norma": "Decreto Supremo 239",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/cosmeticos/Decreto Supremo 239.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/cosmeticos/decreto supremo 239.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto con fuerza de ley|1": {
+      "norma": "Decreto con fuerza de ley 1",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto con Fuerza de Ley 1.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto con fuerza de ley 1.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto supremo|3": {
+      "norma": "Decreto Supremo 3",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Supremo 3.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto supremo 3.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto supremo|466": {
+      "norma": "Decreto Supremo 466",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Supremo 466.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto supremo 466.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|57": {
+      "norma": "Decreto Exento 57",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 57.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 57.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|190": {
+      "norma": "Decreto Exento 190",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 190.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 190.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto supremo|9": {
+      "norma": "Decreto Supremo 9",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Supremo 9.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto supremo 9.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|norma tecnica|127": {
+      "norma": "Norma Técnica 127",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Norma Técnica 127.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/norma técnica 127.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|norma tecnica|139": {
+      "norma": "Norma Técnica 139",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Norma Técnica 139.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/norma técnica 139.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|norma tecnica|180": {
+      "norma": "Norma Técnica 180",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Norma Técnica 180.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/norma técnica 180.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|norma tecnica|208": {
+      "norma": "Norma Técnica 208",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Norma Técnica 208.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/norma técnica 208.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|3853": {
+      "norma": "Resolución Exenta 3.853",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 3.853.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 3.853.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|14": {
+      "norma": "Decreto Exento 14",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 14.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 14.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|161": {
+      "norma": "Decreto Exento 161",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 161.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 161.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|399": {
+      "norma": "Resolución Exenta 399",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 399.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 399.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|2627": {
+      "norma": "Resolución Exenta 2.627",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 2.627.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 2.627.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto supremo|6": {
+      "norma": "Decreto Supremo 6",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Supremo 6.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto supremo 6.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto supremo|148": {
+      "norma": "Decreto Supremo 148",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Supremo 148.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto supremo 148.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto supremo|283": {
+      "norma": "Decreto Supremo 283",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Supremo 283.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto supremo 283.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|159": {
+      "norma": "Decreto Exento 159",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 159.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 159.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|1284": {
+      "norma": "Decreto Exento 1.284",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 1.284.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 1.284.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|919": {
+      "norma": "Decreto Exento 919",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 919.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 919.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|27": {
+      "norma": "Decreto Exento 27",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 27.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 27.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|634": {
+      "norma": "Decreto Exento 634",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 634.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 634.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|858": {
+      "norma": "Decreto Exento 858",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 858.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 858.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|122": {
+      "norma": "Decreto Exento 122",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 122.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 122.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|decreto exento|33": {
+      "norma": "Decreto Exento 33",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 33.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/decreto exento 33.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|5174": {
+      "norma": "Resolución Exenta 5.174",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 5.174.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 5.174.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|262": {
+      "norma": "Resolución Exenta 262",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 262.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 262.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|1290": {
+      "norma": "Resolución Exenta 1.290",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 1.290.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 1.290.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resoucion exenta|159": {
+      "norma": "Resoución Exenta 159",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 159.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 159.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|4489": {
+      "norma": "Resolución Exenta 4.489",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 4.489.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 4.489.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|1067": {
+      "norma": "Resolución Exenta 1.067",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 1.067.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 1.067.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|2576": {
+      "norma": "Resolución Exenta 2.576",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 2.576.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 2.576.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|1660": {
+      "norma": "Resolución Exenta 1.660",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 1.660.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 1.660.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|1541": {
+      "norma": "Resolución Exenta 1.541",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 1.541.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 1.541.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|1540": {
+      "norma": "Resolución Exenta 1.540",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 1.540.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 1.540.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|1543": {
+      "norma": "Resolución Exenta 1.543",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 1.543.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 1.543.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|1542": {
+      "norma": "Resolución Exenta 1.542",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 1.542.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 1.542.pdf"
+    },
+    "establecimientos, autorizacion y fiscalizacion|resolucion exenta|1230": {
+      "norma": "Resolución Exenta 1.230",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 1.230.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/establecimientos_autorizacion_y_fiscalizacion/resolución exenta 1.230.pdf"
+    },
+    "importacion y exportacion / control y vigilancia|resolucion exenta|5161": {
+      "norma": "Resolución Exenta 5.161",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/importacion_y_exportacion_control_y_vigilancia/Resolucion Exenta 5.161.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/importacion_y_exportacion_control_y_vigilancia/resolucion exenta 5.161.pdf"
+    },
+    "importacion y exportacion / control y vigilancia|ley|18164": {
+      "norma": "Ley 18.164",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/importacion_y_exportacion_control_y_vigilancia/Ley 18.164.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/importacion_y_exportacion_control_y_vigilancia/ley 18.164.pdf"
+    },
+    "importacion y exportacion / control y vigilancia|decreto exento|1358": {
+      "norma": "Decreto Exento 1.358",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/importacion_y_exportacion_control_y_vigilancia/Decreto Exento 1.358.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/importacion_y_exportacion_control_y_vigilancia/decreto exento 1.358.pdf"
+    },
+    "importacion y exportacion / control y vigilancia|decreto exento|867": {
+      "norma": "Decreto Exento 867",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/importacion_y_exportacion_control_y_vigilancia/Decreto Exento 867.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/importacion_y_exportacion_control_y_vigilancia/decreto exento 867.pdf"
+    },
+    "importacion y exportacion / control y vigilancia|decreto exento|1049": {
+      "norma": "Decreto Exento 1.049",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/importacion_y_exportacion_control_y_vigilancia/Decreto Exento 1.049.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/importacion_y_exportacion_control_y_vigilancia/decreto exento 1.049.pdf"
+    },
+    "laboratorio nacional de control|decreto exento|945": {
+      "norma": "Decreto Exento 945",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/laboratorio_nacional_de_control/Decreto Exento 945.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/laboratorio_nacional_de_control/decreto exento 945.pdf"
+    },
+    "laboratorio nacional de control|resolucion exenta|201": {
+      "norma": "Resolución Exenta 201",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/laboratorio_nacional_de_control/Resolución Exenta 201.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/laboratorio_nacional_de_control/resolución exenta 201.pdf"
+    },
+    "laboratorio nacional de control|resolucion exenta|4489": {
+      "norma": "Resolución Exenta 4.489",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/laboratorio_nacional_de_control/Resolucion Exenta 4.489.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/laboratorio_nacional_de_control/resolucion exenta 4.489.pdf"
+    },
+    "laboratorio nacional de control|resolucion exenta|1409": {
+      "norma": "Resolución Exenta 1.409",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/laboratorio_nacional_de_control/Resolucion Exenta 1.409.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/laboratorio_nacional_de_control/resolucion exenta 1.409.pdf"
+    },
+    "laboratorio nacional de control|resolucion exenta|89": {
+      "norma": "Resolución Exenta 89",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/laboratorio_nacional_de_control/Resolución Exenta 89.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/laboratorio_nacional_de_control/resolución exenta 89.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|441": {
+      "norma": "Resolución Exenta 441",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 441.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 441.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|460": {
+      "norma": "Resolución Exenta 460",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolucion Exenta 460.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolucion exenta 460.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|108": {
+      "norma": "Resolución Exenta 108",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolucion Exenta 108.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolucion exenta 108.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|3496": {
+      "norma": "Resolución Exenta 3.496",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolucion Exenta 3.496.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolucion exenta 3.496.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|381": {
+      "norma": "Resolución Exenta 381",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 381.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 381.pdf"
+    },
+    "farmacovigilancia|decreto|38": {
+      "norma": "Decreto 38",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Decreto 38.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/decreto 38.pdf"
+    },
+    "farmacovigilancia|ley|20850": {
+      "norma": "Ley 20.850",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Ley 20.850.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/ley 20.850.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|1029": {
+      "norma": "Resolución Exenta 1.029",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 1.029.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 1.029.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|1777": {
+      "norma": "Resolución Exenta 1.777",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 1.777.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 1.777.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|2611": {
+      "norma": "Resolución Exenta 2.611",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 2.611.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 2.611.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|1287": {
+      "norma": "Resolución Exenta 1.287",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 1.287.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 1.287.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|2644": {
+      "norma": "Resolución Exenta 2.644",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 2.644.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 2.644.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|504": {
+      "norma": "Resolución Exenta 504",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 504.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 504.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|4310": {
+      "norma": "Resolución Exenta 4.310",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 4.310.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 4.310.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|2741": {
+      "norma": "Resolución Exenta 2.741",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 2.741.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 2.741.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|1823": {
+      "norma": "Resolución Exenta 1.823",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 1.823.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 1.823.pdf"
+    },
+    "farmacovigilancia|resolucion exenta|1599": {
+      "norma": "Resolución Exenta 1.599",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/farmacovigilancia/Resolución Exenta 1.599.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/resolución exenta 1.599.pdf"
+    },
     "farmacovigilancia|resolucion exenta|873": {
       "norma": "Resolución Exenta 873",
       "enlace": "https://www.ispch.gob.cl/wp-content/uploads/resoluciones/33668_0873-2024.pdf ",
       "ok": true,
-      "destino": "C:\\Users\\nico2\\Documents\\Claude-Test\\Asuntos-Regulatorios\\ANAMED_Normativa\\farmacovigilancia\\33668_0873-2024.pdf"
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/farmacovigilancia/33668_0873-2024.pdf"
+    },
+    "ensayos clinicos|resolucion exenta|403": {
+      "norma": "Resolución Exenta 403",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/ensayos_clinicos/Resolución Exenta 403.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/ensayos_clinicos/resolución exenta 403.pdf"
+    },
+    "ensayos clinicos|resolucion exenta|183": {
+      "norma": "Resolución Exenta 183",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/ensayos_clinicos/Resolución Exenta 183.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/ensayos_clinicos/resolución exenta 183.pdf"
+    },
+    "ensayos clinicos|resolucion exenta|27": {
+      "norma": "Resolución Exenta A27",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/ensayos_clinicos/Resolución Exenta A27.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/ensayos_clinicos/resolución exenta a27.pdf"
+    },
+    "ensayos clinicos|circular|1540": {
+      "norma": "Circular A15/ 40 Minsal",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/ensayos_clinicos/Circular A15-40.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/ensayos_clinicos/circular a15-40.pdf"
+    },
+    "ensayos clinicos|circular|1546": {
+      "norma": "Circular A15/ 46 Minsal",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/ensayos_clinicos/Circular A15- 46.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/ensayos_clinicos/circular a15- 46.pdf"
+    },
+    "ensayos clinicos|circular|62015": {
+      "norma": "Circular B6/2015 Minsal",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_anamed/ensayos_clinicos/Circular B6.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/ensayos_clinicos/circular b6.pdf"
     }
   },
   "no_recuperables": [
+    {
+      "clave": "medicamentos|decreto exento|945",
+      "norma": "Decreto Exento 945",
+      "categoria": "Medicamentos",
+      "enlace": "https://www.bcn.cl/leychile/navegar?idNorma=1066249",
+      "motivo": "el ISP enlaza a BCN/LeyChile, no publica PDF"
+    },
+    {
+      "clave": "medicamentos|decreto supremo|3",
+      "norma": "Decreto Supremo 3",
+      "categoria": "Medicamentos",
+      "enlace": "https://www.bcn.cl/leychile/navegar?idNorma=1026879",
+      "motivo": "el ISP enlaza a BCN/LeyChile, no publica PDF"
+    },
     {
       "clave": "codigo sanitario|decreto exento|725",
       "norma": "Decreto Exento 725",
