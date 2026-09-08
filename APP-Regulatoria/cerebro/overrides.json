@@ -1,0 +1,11 @@
+{
+  "_doc": "Curaduría manual para PDFs que el emparejamiento automático no resuelve. Dos formas de uso, ambas por nombre de archivo (minúsculas): (a) {\"tipo\", \"numero\"} apunta a una norma del listado oficial del ISP y hereda toda su metadata; (b) {\"titulo\", \"fuente_url\", \"vigencia\"} declara metadata a mano para un documento que NO está en el listado — `vigencia` solo puede valer \"no_verificada\", porque la vigencia únicamente la certifica el listado oficial. Este archivo es el único lugar donde un humano decide metadata; todo lo demás sale del ISP.",
+  "documentos": {
+    "codigo-etica-isp.pdf": {
+      "titulo": "Código de Ética del Instituto de Salud Pública de Chile",
+      "fuente_url": "https://www.ispch.gob.cl/",
+      "vigencia": "no_verificada",
+      "nota": "Documento institucional del ISP, no una norma del listado ANAMED. Se indexa por contexto, pero su vigencia no la certifica el listado oficial."
+    }
+  }
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "timestamp": "2026-07-14T04:10:10.565Z",
+    "total": 170,
+    "nuevas": 0,
+    "modificadas": 0,
+    "eliminadas": 0,
+    "baseline": true,
+    "contentHash": "9216c2a84a4735d9bed449206b71ef1d8cd68d1e4e1dbbad8256303e963eed3b"
+  },
+  {
+    "timestamp": "2026-07-23T00:57:08.548Z",
+    "total": 170,
+    "nuevas": 0,
+    "modificadas": 0,
+    "eliminadas": 0,
+    "baseline": false,
+    "contentHash": "9216c2a84a4735d9bed449206b71ef1d8cd68d1e4e1dbbad8256303e963eed3b"
+  },
+  {
+    "timestamp": "2026-08-06T02:39:30.028Z",
+    "total": 170,
+    "nuevas": 0,
+    "modificadas": 0,
+    "eliminadas": 0,
+    "baseline": false,
+    "contentHash": "9216c2a84a4735d9bed449206b71ef1d8cd68d1e4e1dbbad8256303e963eed3b"
+  },
+  {
+    "timestamp": "2026-08-06T02:40:49.095Z",
+    "total": 170,
+    "nuevas": 0,
+    "modificadas": 0,
+    "eliminadas": 0,
+    "baseline": false,
+    "contentHash": "9216c2a84a4735d9bed449206b71ef1d8cd68d1e4e1dbbad8256303e963eed3b"
+  },
+  {
+    "timestamp": "2026-08-11T11:00:02.244Z",
+    "total": 170,
+    "nuevas": 0,
+    "modificadas": 0,
+    "eliminadas": 0,
+    "baseline": false,
+    "contentHash": "9216c2a84a4735d9bed449206b71ef1d8cd68d1e4e1dbbad8256303e963eed3b"
+  },
+  {
+    "timestamp": "2026-08-14T11:00:02.118Z",
+    "total": 170,
+    "nuevas": 0,
+    "modificadas": 0,
+    "eliminadas": 0,
+    "baseline": false,
+    "contentHash": "9216c2a84a4735d9bed449206b71ef1d8cd68d1e4e1dbbad8256303e963eed3b"
+  },
+  {
+    "timestamp": "2026-08-24T11:00:02.212Z",
+    "total": 170,
+    "nuevas": 0,
+    "modificadas": 0,
+    "eliminadas": 0,
+    "baseline": false,
+    "contentHash": "9216c2a84a4735d9bed449206b71ef1d8cd68d1e4e1dbbad8256303e963eed3b"
+  },
+  {
+    "timestamp": "2026-08-28T11:00:02.206Z",
+    "total": 170,
+    "nuevas": 0,
+    "modificadas": 0,
+    "eliminadas": 0,
+    "baseline": false,
+    "contentHash": "9216c2a84a4735d9bed449206b71ef1d8cd68d1e4e1dbbad8256303e963eed3b"
+  },
+  {
+    "timestamp": "2026-08-29T11:00:02.086Z",
+    "total": 170,
+    "nuevas": 0,
+    "modificadas": 0,
+    "eliminadas": 0,
+    "baseline": false,
+    "contentHash": "9216c2a84a4735d9bed449206b71ef1d8cd68d1e4e1dbbad8256303e963eed3b"
+  },
+  {
+    "timestamp": "2026-08-30T11:00:02.070Z",
+    "total": 170,
+    "nuevas": 0,
+    "modificadas": 0,
+    "eliminadas": 0,
+    "baseline": false,
+    "contentHash": "9216c2a84a4735d9bed449206b71ef1d8cd68d1e4e1dbbad8256303e963eed3b"
+  }
+]

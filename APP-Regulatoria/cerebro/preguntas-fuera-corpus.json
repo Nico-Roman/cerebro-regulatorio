@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "actualizado": "2026-08-26",
+  "proposito": "Contra-set del set dorado. Estas consultas NO tienen respuesta en el corpus ANAMED: el motor debe declarar confianza `baja` y recomendar `declarar_ausencia`. Sin este set, la señal de confianza puede degradarse a 'siempre responder' sin que nadie lo note — que es exactamente el defecto que la introdujo (hallazgo 02 de la auditoría).",
+  "preguntas": [
+    {
+      "id": "dm-glucometro",
+      "pregunta": "¿Cómo obtengo el registro sanitario de un dispositivo médico glucómetro en Chile?",
+      "motivo": "El corpus MVP no cubre dispositivos médicos. La Ley 20.850 art. 111 A menciona «dispositivo médico» pero regula su uso en investigación, no el registro: es un señuelo temático perfecto."
+    },
+    {
+      "id": "dm-implantes",
+      "pregunta": "¿Cómo registrar un marcapasos o una prótesis de cadera ante el ISP?",
+      "motivo": "Dispositivos médicos implantables, fuera del corpus."
+    },
+    {
+      "id": "alimentos-rotulado",
+      "pregunta": "¿Qué exige el rotulado nutricional de alimentos y los sellos de advertencia?",
+      "motivo": "Materia del Reglamento Sanitario de los Alimentos (DS 977), fuera de ANAMED."
+    },
+    {
+      "id": "veterinaria-sag",
+      "pregunta": "¿Cómo se registran los medicamentos veterinarios para bovinos ante el SAG?",
+      "motivo": "Competencia del SAG, no del ISP."
+    },
+    {
+      "id": "cosmetica-claims",
+      "pregunta": "¿Qué reglas rigen la publicidad en televisión abierta de bebidas alcohólicas?",
+      "motivo": "Fuera de la competencia de ANAMED por completo."
+    }
+  ]
+}

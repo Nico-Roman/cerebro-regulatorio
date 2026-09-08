@@ -1,0 +1,105 @@
+[Texto reconocido por OCR (Tesseract 5, es) — primeras páginas — generado 2026-07-17. Puede contener errores de reconocimiento.]
+
+APRUEBA GUÍA PARA LAS OPERACIONES DE TRANSPORTE
+TERRESTRES Y AÉREOS CON TEMPERATURA
+
+CONTROLADA.
+- ASESORÍA JURÍDICA
+- DPTO. ANAMED
+- SUBDPTO. FISQALIPACIÓN
+HGE/CL7&7?FK
+RESOLUCIÓN EXENTA N* J
+
+SANTIAGO, 1543 159472020
+
+VISTOS: Providencia interna número 261 de 2020 de la
+jefa(S) de la Unidad de Asesoría Jurídica; providencia número 247 de 2020 de Dirección; memorándum
+número 78 de 2020 de la Jefa del Departamento Agencia Nacional de Medicamentos; documento
+denominado “Guía para las operaciones de transporte terrestres y aéreos con temperatura
+controlada”; y TENIENDO PRESENTE: lo dispuesto en la Ley Orgánica Constitucional de Bases Generales
+de la Administración del Estado; en la Ley Núm. 19.880, que establece bases de los procedimientos
+administrativos que rigen los actos de los órganos de la Administración del Estado; en los artículos 60
+y 61 letra a) del Decreto con Fuerza de Ley Núm. 1, de 2005, del Ministerio de Salud; en el artículo 10
+letra a) del Decreto Supremo Núm. 1.222, de 1996, de la misma Secretaría de Estado, que aprueba el
+Reglamento del instituto de Salud Pública de Chile; Decreto Exento N* 90 de 2019, del Ministerio de
+Salud; así como lo establecido en la Resolución N* 7 de 2019, de la Contraloría General de la República:
+
+CONSIDERANDO:
+
+PRIMERO: Que, conforme dispone el Decreto con
+Fuerza de Ley N* 1, de 2005, del Ministerio de Salud, corresponde al Instituto de Salud Pública de Chile
+servir de laboratorio nacional y de referencia en los campos de la microbiología, inmunología,
+bromatología, farmacología, imagenología, radioterapia, bancos de sangre, laboratorio clínico,
+contaminación ambiental y salud ocupacional; así como también ejercer las actividades relativas al
+control de calidad de medicamentos, y demás productos sujetos a control sanitario, vigilando las
+condiciones de internación, exportación, fabricación, almacenamiento, distribución, expendio y uso a
+cualquier título de estos, como asimismo, de su propaganda y promoción.
+
+SEGUNDO: Que, la Norma Técnica N* 147 de Buenas
+Prácticas de Almacenamiento y Distribución, aprobada por el Decreto Exento N* 57, de fecha 25 de
+febrero de 2013, está dirigida al establecimiento de normas asociadas a los procesos de
+almacenamiento, transporte y distribución de productos farmacéuticos, cuyo objetivo es describir las
+medidas especiales que se consideran apropiadas para el almacenamiento y transporte de fármacos.
+
+TERCERO: Que, a su turno, la Norma Técnica N* 127 de
+Buenas Prácticas de Manufactura, aprobada por el Decreto Exenta N* 159, de fecha 11 de abril de 2013,
+está dirigida al establecimiento de normas asociadas a los procesos de manufactura de existencias
+farmacéuticas de modo de asegurar la calidad de los mismos. Particularmente, su anexo 4 y 5 está
+dirigida a un segmento específico de medicamentos, que son aquellos que necesitan cadena de frío
+para su almacenamiento y transporte.
+
+CUARTO: Que, con fecha 17 de septiembre de 2019, el
+
+Página 1 de 21
+
+Ministerio de Salud ha dictado la Norma Técnica número 208 de 2019, relativa al almacenamiento y
+transporte de medicamentos refrigerados y congelados. Su finalidad es complementar la normativa
+existente en la materia, describiendo las medidas que se consideran apropiadas para el
+almacenamiento y transporte de productos que requieren ser almacenados bajo condiciones
+controladas de temperatura y humedad.
+
+QUINTO: Que, la presente guía ha sido redactada para
+facilitar la ejecución del cumplimiento de la Norma Técnica N* 147 de Buenas Prácticas de
+Almacenamiento y Distribución, los anexos 4 y 5 de la Norma Técnica N* 127 de Buenas Prácticas de
+Manufactura y la Norma Técnica número 208 de 2019, relativa al almacenamiento y transporte de
+medicamentos refrigerados y congelados, en lo que respecta a los requisitos de transporte de
+medicamentos con condiciones especiales de almacenamiento (puntos 10.13 y 13.4 de Buenas
+Prácticas de Distribución e ítem V. Transporte y Despacho de la Norma Técnica N” 208).
+
+SEXTO: Que, en razón de lo hasta aquí señalado y lo
+razonado en las consideraciones que preceden, corresponde aprobar administrativamente la referida
+guía, por lo que:
+
+RESOLUCION:
+
+1% APRUÉBASE la denominada GUÍA PARA LAS
+OPERACIONES DE TRANSPORTE TERRESTRES Y AÉREOS CON TEMPERATURA CONTROLADA, cuyo tenor
+es el siguiente:
+
+GUÍA PARA LAS OPERACIONES DE TRANSPORTE TERRESTRES Y AÉREOS CON TEMPERATURA
+CONTROLADA
+
+1. INTRODUCCIÓN
+
+Esta guía ha sido redactada para facilitar el cumplimiento de la Norma Técnica N* 147 de Buenas
+Prácticas de Almacenamiento y Distribución, de los anexos 4 y 5 de la Norma Técnica N” 127 de Buenas
+Prácticas de Manufactura, y de la Norma Técnica N* 208 de Almacenamiento y Transporte de
+Medicamentos Refrigerados y Congelados, en lo que respecta a los requisitos de transporte de
+medicamentos con condiciones especiales de almacenamiento (puntos 10.13 y 13.4 de Buenas
+Prácticas de Distribución e ítem V. Transporte y Despacho de la Norma Técnica N* 208).
+
+Esta guía proporciona orientación de cómo acondicionar, cargar y manejar el equipamiento utilizado
+para el transporte de los PFSTT, a fin de mantener estos productos dentro de rangos de temperatura
+de funcionamiento predefinido. La guía abarca el transporte de vehículos refrigerados y de
+temperatura controlada, así como los contenedores de transporte activos y pasivos para transporte
+por carretera y aire. Sistemas de almacenamiento fijos, tales como cámaras frigoríficas y refrigeradores,
+están fuera del alcance de este documento.
+
+Si bien estas actividades pueden ser realizadas primariamente por las empresas de transporte, se
+espera que los laboratorios farmacéuticos, droguerías y depósitos de farmacéuticos de uso humano
+que utilicen este transporte o servicio sean responsables de garantizar la implementación de los
+requerimientos establecidos en la presente guía y velar por su cumplimiento, de conformidad a los
+convenios que suscriban con las empresas de transporte, teniendo la documentación de respaldo
+correspondiente.
+
+Página 2 de 21

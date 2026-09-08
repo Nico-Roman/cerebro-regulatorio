@@ -1,0 +1,121 @@
+[Texto reconocido por OCR (Tesseract 5, es) — primeras páginas — generado 2026-07-17. Puede contener errores de reconocimiento.]
+
+Instituto de APRUEBA GUÍA TÉCNICA “OTORGA
+Salud Pública:
+
+orcosainta a LINEAMIENTOS Y ORIENTACIÓN PARA LA
+REALIZACIÓN DE ESTUDIOS CLÍNICOS CON
+
+PRODUCTOS BIOLÓGICOS”.
+
+Gobierno de Chite
+GABINETE DIRECTOR.
+
+& 1A NACIONAL DE MEDICAMENTOS.
+Mys /
+
+ENC
+CA 00273 11.02.2022
+J RESOLUCIÓN EXENTA N* /
+
+SANTIAGO,
+
+VISTOS estos antecedentes; la providencia interna
+232, de fecha 28 de enero de 2022, de la Jefa (S) de Asesoría Jurídica; el memorándum 58, de
+fecha 27 de enero de 2022, del Jefe (S) del Departamento Agencia Nacional de Medicamentos; la
+providencia 1089, de fecha 7 de diciembre de 2021, del Jefe (S) del Departamento Agencia
+Nacional de Medicamentos; el memorándum 770, de fecha 6 de diciembre de 2021, del Jefe de
+Asesoría Jurídica; la providencia interna 2331, de fecha 9 de noviembre de 2021, del Jefe de
+Asesoría Jurídica; la providencia 1781, de fecha 8 de noviembre de 2021, del Director (S) del
+Instituto; el memorándum 718, de fecha 2 de noviembre de 2021, del Jefe (S) del Departamento
+Agencia Nacional de Medicamentos, y
+
+CONSIDERANDO
+
+PRIMERO: Que, conforme dispone el inciso tercero
+del artículo 57 del Decreto con Fuerza de Ley N* 1, de 2005, del Ministerio de Salud, “el Instituto
+servirá de laboratorio nacional y de referencia en los campos de la microbiología, inmunología,
+bromatología, farmacología, imagenología, radioterapia, bancos de sangre, laboratorio clínico,
+contaminación ambiental y salud ocupacional y desempeñará las demás funciones que le asigna la
+presente ley”.
+
+A su turno, el inciso primero del artículo 96 del
+Código Sanitario, “el Instituto de Salud Pública de Chile será la autoridad encargada en todo el
+territorio nacional del control sanitario de los productos farmacéuticos, de los establecimientos del
+área y de fiscalizar el cumplimiento de las disposiciones que sobre esta materia se contienen en
+este Código y sus reglamentos”.
+
+A su vez, según dispone el inciso primero del
+artículo 111 A del Código Sanitario, “los productos farmacéuticos y los elementos de uso médico
+para ser utilizados en investigaciones científicas en seres humanos deberán contar con una
+autorización especial para su uso provisional, otorgada por el Instituto de Salud Pública conforme
+al presente Libro”.
+
+SEGUNDO: Que, como se desprende del marco
+normativo expuesto en las consideraciones que anteceden, toca a este Servicio el control,
+supervigilancia y autorización, en todo el territorio nacional, de los productos farmacéuticos, sea
+que estos se encuentren en su etapa de estudio clínico, o bien, incluso en su etapa de post
+comercialización abarcando toda su existencia.
+
+En tal orden de cosas, se ha identificado la brecha
+relativa a materias relacionadas con investigación pre clínica y clínica de productos farmacéuticos
+biológicos, por lo que se ha considerado necesario elaborar una Guía Técnica con lineamientos y
+orientación para la adecuada realización de esta clase de investigaciones, con fundamento tanto
+en la normativa nacional como estándares internacionales aplicables.
+
+Página 1 de 28
+
+TERCERO: Que, en virtud de lo antedicho, se hace
+necesario entonces aprobar administrativamente la citada guía, por lo que
+
+TENIENDO PRESENTE lo dispuesto en la Ley N*
+18.575; lo prescrito en la Ley N* 19.880; lo señalado en los artículos 59 letra b), 60 y 61 del D.F.L.
+N* 1, de 2005, del Ministerio de Salud; lo prescrito en los artículos 8 y 10 letra a) del Decreto
+Supremo N* 1222, de 1996, del Ministerio de Salud, que aprueba el Reglamento del Instituto de
+Salud Pública de Chile; en el Libro Cuarto del Código Sanitario; en el Decreto Supremo 3, de 2010,
+del Ministerio de Salud; lo previsto en la Resolución Exenta N* 7, de 2019, de la Contraloría
+General de la República; y las facultades que al efecto me confiere el Decreto Supremo N* 51, de
+2020, del Ministerio de Salud, dicto la siguiente
+
+RESOLUCIÓN
+
+1.- APRUÉBASE la Guía Técnica “Otorga
+lineamientos y orientación para la realización de estudios clínicos con productos biológicos”, cuyo
+íntegro tenor es el siguiente:
+
+“GUÍA TÉCNICA: OTORGA LINEAMIENTOS Y ORIENTACIÓN PARA LA REALIZACIÓN DE ESTUDIOS
+CLÍNICOS CON PRODUCTOS BIOLÓGICOS.
+
+ÍNDICE
+
+TABLA DE CONTENIDO
+
+1.- INTRODUCCIÓN. 2
+IL.- INORMACIÓN DE CALIDAD PARA SOLICITUDES DE ENSAYOS CLÍNICOS CON PRODUCTOS
+BIOLÓGICOS. 3
+Ill.- INORMACIÓN NO CLÍNICA. 7
+1V.-INFORMACIÓN CLÍNICA. 9
+V.- AUTORIZACIÓN DE ESTABLECIMIENTOS DE PRODUCCIÓN. 14
+VI.-CONSIDERACIONES GENERALES DE BUENAS PRÁCTICAS DE MANUFACTURA (BPM) PARA
+PRODUCTOS FARMACÉUTICOS BIOLÓGICOS DESTINADOS A SU USO EN INVESTIGACIONES
+CIENTÍFICAS EN SERES HUMANOS. 15
+VII.- MARCO REGULATORIO Y REFERENCIAS. 27
+
+1.- INTRODUCCIÓN.
+
+La presente guía está basada en recomendaciones internacionales emitidas por OMS y por
+agencias regulatorias de referencia y otorga lineamientos y orientación para la realización de
+estudios clínicos con productos biológicos, incluyendo terapias avanzadas.
+
+En general, el desarrollo de este tipo de productos sigue los mismos principios aplicables a otros
+medicamentos, sin embargo, dadas las características distintivas y especiales de ellos, tales como
+la complejidad de la estructura, la dificultad de reproducibilidad, la gran variabilidad y la
+reactogenicidad, es crucial una aproximación basada en el riesgo, con un énfasis en la seguridad de
+los eventuales sujetos que serán parte de los estudios clínicos.
+
+Esta guía aborda la estructura y los requisitos para la realización de un estudio clínico local con
+
+medicamentos biológicos de investigación, entregando un panorama general en esta materia. Su
+alcance aborda la información de calidad, el desarrollo no clínico y clínico, las consideraciones de
+
+Página 2 de 28

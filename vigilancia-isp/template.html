@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vigilancia Normativa ISP · ANAMED</title>
+<style>
+  :root {
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --blue: #2a78d6;
+    --blue-soft: #cde2fb;
+    --aqua: #1baf7a;
+    --good: #0ca30c;
+    --good-text: #006300;
+    --warning: #fab219;
+    --critical: #d03b3b;
+    --shadow: 0 1px 2px rgba(11,11,11,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --page: #0d0d0d;
+      --surface: #1a1a19;
+      --ink: #ffffff;
+      --ink-2: #c3c2b7;
+      --muted: #898781;
+      --grid: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255,255,255,0.10);
+      --blue: #3987e5;
+      --blue-soft: #184f95;
+      --aqua: #199e70;
+      --good-text: #0ca30c;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="light"] {
+    --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e;
+    --muted: #898781; --grid: #e1e0d9; --baseline: #c3c2b7; --border: rgba(11,11,11,0.10);
+    --blue: #2a78d6; --blue-soft: #cde2fb; --aqua: #1baf7a; --good-text: #006300;
+    --shadow: 0 1px 2px rgba(11,11,11,0.04);
+  }
+  :root[data-theme="dark"] {
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7;
+    --muted: #898781; --grid: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+    --blue: #3987e5; --blue-soft: #184f95; --aqua: #199e70; --good-text: #0ca30c;
+    --shadow: none;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 60px; }
+
+  /* ---------- header ---------- */
+  header { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
+  header .titles { flex: 1 1 380px; }
+  h1 { font-size: 22px; font-weight: 650; letter-spacing: -0.01em; }
+  .sub { color: var(--ink-2); margin-top: 2px; font-size: 13px; }
+  .sub a { color: var(--ink-2); text-decoration: underline; text-decoration-color: var(--baseline); }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 550;
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+  }
+  .badge .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  #themeBtn {
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink-2);
+    border-radius: 8px; padding: 6px 10px; font: inherit; font-size: 13px; cursor: pointer;
+  }
+  #themeBtn:hover { color: var(--ink); }
+
+  /* ---------- cards / sections ---------- */
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 20px; box-shadow: var(--shadow);
+  }
+  section { margin-top: 22px; }
+  .sec-title { font-size: 15px; font-weight: 650; margin-bottom: 2px; }
+  .sec-sub { color: var(--muted); font-size: 12.5px; margin-bottom: 14px; }
+
+  /* ---------- KPI row ---------- */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+  .tile .label { font-size: 12.5px; color: var(--ink-2); }
+  .tile .value { font-size: 30px; font-weight: 650; margin-top: 2px; letter-spacing: -0.01em; }
+  .tile .note { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .tile .value .mini { font-size: 14px; font-weight: 500; color: var(--muted); margin-left: 4px; }
+  .tile.status .value { display: flex; align-items: center; gap: 8px; }
+  .tile.status .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* ---------- cambios ---------- */
+  .cambio-grupo { margin-top: 14px; }
+  .cambio-grupo h3 { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 650; margin-bottom: 8px; }
+  .cambio-grupo h3 .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .cambio {
+    border: 1px solid var(--border); border-left-width: 3px; border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 8px; background: var(--surface);
+  }
+  .cambio .meta { font-size: 12px; color: var(--muted); }
+  .cambio .desc { margin-top: 2px; }
+  .cambio .campo { margin-top: 6px; font-size: 12.5px; }
+  .cambio .campo .tag { color: var(--muted); }
+  .cambio .antes { color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--baseline); }
+  .cambio .flecha { color: var(--muted); padding: 0 4px; }
+  .aviso {
+    border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px;
+    color: var(--ink-2); font-size: 13.5px; background: var(--surface);
+  }
+
+  /* ---------- charts ---------- */
+  .charts2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 12px; }
+  .hbar-row { display: flex; align-items: center; gap: 10px; margin: 7px 0; }
+  .hbar-row .cat { flex: 0 0 210px; font-size: 12.5px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: right; }
+  .hbar-row .track { flex: 1; display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .hbar { height: 17px; border-radius: 0 4px 4px 0; cursor: default; min-width: 2px; }
+  .hbar-row .val { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; flex: none; }
+  .col-scroll { overflow-x: auto; padding-bottom: 4px; }
+  .col-chart { position: relative; height: 190px; min-width: 100%; }
+  .col-plot { position: absolute; inset: 8px 0 26px 34px; border-bottom: 1px solid var(--baseline); display: flex; align-items: flex-end; gap: 2px; }
+  .col { flex: 1 0 9px; border-radius: 4px 4px 0 0; min-height: 0; }
+  .col:hover { opacity: 0.85; }
+  .gridline { position: absolute; left: 34px; right: 0; border-top: 1px solid var(--grid); }
+  .gl-label { position: absolute; left: 0; width: 28px; text-align: right; font-size: 11px; color: var(--muted); transform: translateY(-50%); font-variant-numeric: tabular-nums; }
+  .col-xlab { position: absolute; bottom: 4px; font-size: 11px; color: var(--muted); transform: translateX(-50%); font-variant-numeric: tabular-nums; }
+
+  /* ---------- recientes ---------- */
+  .reciente { display: flex; gap: 12px; padding: 9px 0; border-top: 1px solid var(--grid); }
+  .reciente:first-child { border-top: none; }
+  .reciente .fecha { flex: 0 0 84px; font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 12.5px; padding-top: 1px; }
+  .reciente .cuerpo { min-width: 0; }
+  .reciente .norma { font-weight: 600; font-size: 13px; }
+  .reciente .norma .cat { font-weight: 400; color: var(--muted); }
+  .reciente .d { color: var(--ink-2); font-size: 13px; margin-top: 1px; }
+
+  /* ---------- tabla ---------- */
+  .filtros { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+  .filtros input, .filtros select {
+    font: inherit; font-size: 13px; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 7px 10px;
+  }
+  .filtros input { flex: 1 1 220px; min-width: 180px; }
+  .filtros input::placeholder { color: var(--muted); }
+  .tbl-wrap { overflow: auto; max-height: 520px; border: 1px solid var(--border); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  thead th {
+    position: sticky; top: 0; background: var(--surface); color: var(--muted);
+    text-align: left; font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+    padding: 9px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; z-index: 1;
+  }
+  tbody td { padding: 8px 12px; border-top: 1px solid var(--grid); vertical-align: top; }
+  tbody tr:first-child td { border-top: none; }
+  td.num, td.fch { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.mod { color: var(--ink-2); white-space: nowrap; }
+  .conteo { color: var(--muted); font-size: 12.5px; margin: 8px 2px 0; }
+
+  /* ---------- historial ---------- */
+  .hist td, .hist th { white-space: nowrap; }
+  .hist .delta { font-variant-numeric: tabular-nums; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--border); }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* ---------- tooltip ---------- */
+  #tip {
+    position: fixed; pointer-events: none; z-index: 50; display: none;
+    background: var(--surface); color: var(--ink); border: 1px solid var(--border);
+    border-radius: 8px; padding: 7px 11px; font-size: 12.5px; box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    max-width: 340px;
+  }
+  #tip .t-title { font-weight: 600; }
+  #tip .t-sub { color: var(--ink-2); }
+
+  footer { margin-top: 34px; color: var(--muted); font-size: 12.5px; border-top: 1px solid var(--grid); padding-top: 14px; }
+  footer code { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="titles">
+      <h1>Vigilancia Normativa ISP · ANAMED</h1>
+      <div class="sub">
+        Monitoreo de <a href="https://www.ispch.gob.cl/normativa-anamed/" target="_blank" rel="noopener">ispch.gob.cl/normativa-anamed</a>
+        · <span id="subFechas"></span>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="badge" id="estadoBadge"></span>
+      <button id="themeBtn" title="Cambiar tema"></button>
+    </div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section id="secCambios">
+    <div class="sec-title">Cambios detectados</div>
+    <div class="sec-sub" id="cambiosSub"></div>
+    <div id="cambiosBody"></div>
+  </section>
+
+  <section>
+    <div class="charts2">
+      <div class="card">
+        <div class="sec-title">Normas por categoría</div>
+        <div class="sec-sub">Cantidad de normas vigentes listadas en cada sección de la página del ISP</div>
+        <div id="chartCategorias"></div>
+      </div>
+      <div class="card">
+        <div class="sec-title">Normas por tipo</div>
+        <div class="sec-sub">Tipos de norma más frecuentes (el resto se agrupa en «Otros»)</div>
+        <div id="chartTipos"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <div class="sec-title">Publicaciones por año</div>
+      <div class="sec-sub">Normas según su fecha de publicación en el Diario Oficial o de dictación</div>
+      <div class="col-scroll"><div class="col-chart" id="chartAnios"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <div class="sec-title">Publicadas en los últimos 12 meses</div>
+      <div class="sec-sub" id="recientesSub"></div>
+      <div id="recientes"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Explorador de normas</div>
+    <div class="sec-sub">Listado completo tal como aparece publicado por el ISP</div>
+    <div class="filtros">
+      <input type="search" id="fBuscar" placeholder="Buscar por descripción, número o materia…">
+      <select id="fCategoria"></select>
+      <select id="fTipo"></select>
+    </div>
+    <div class="tbl-wrap">
+      <table id="tabla">
+        <thead><tr>
+          <th>Categoría</th><th>Tipo</th><th>N°</th><th>Descripción</th><th>Fecha</th><th>Modificaciones</th><th>Enlace</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="conteo" id="conteo"></div>
+  </section>
+
+  <section>
+    <div class="sec-title">Historial de revisiones</div>
+    <div class="sec-sub">Cada ejecución del monitoreo queda registrada aquí</div>
+    <div class="tbl-wrap" style="max-height:300px">
+      <table class="hist">
+        <thead><tr><th>Fecha de revisión</th><th>Total normas</th><th>Nuevas</th><th>Modificadas</th><th>Eliminadas</th><th>Resultado</th></tr></thead>
+        <tbody id="histBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    Fuente: Instituto de Salud Pública de Chile — Normativa Agencia Nacional de Medicamentos.
+    Para actualizar los datos y detectar cambios ejecuta <code>node check-normativa.js</code> en esta carpeta.
+  </footer>
+</div>
+
+<div id="tip"></div>
+
+<script>
+const DATA = /*__DATA__*/null;
+
+// ---------- helpers ----------
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmtFecha = (iso) => iso ? new Date(iso).toLocaleString('es-CL', { dateStyle: 'medium', timeStyle: 'short' }) : '—';
+
+function parseFecha(s) {
+  if (!s) return null;
+  const dmy = s.match(/(\d{1,2})[\/-](\d{1,2})[\/-](\d{4,5})/);
+  if (dmy) {
+    let y = dmy[3];
+    if (y.length === 5) y = y[0] + y.slice(2); // typo del sitio: "20003" → 2003
+    const d = new Date(Number(y), Number(dmy[2]) - 1, Number(dmy[1]));
+    return isNaN(d) ? null : d;
+  }
+  const yr = s.match(/(19|20)\d{2}/);
+  return yr ? new Date(Number(yr[0]), 0, 1) : null;
+}
+const anioDe = (s) => { const d = parseFecha(s); return d ? d.getFullYear() : null; };
+
+// ---------- tooltip ----------
+const tip = $('#tip');
+function bindTip(el, html) {
+  el.addEventListener('mouseenter', () => { tip.innerHTML = html; tip.style.display = 'block'; });
+  el.addEventListener('mousemove', (e) => {
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = e.clientX + 14, y = e.clientY + 14;
+    if (x + w > innerWidth - 8) x = e.clientX - w - 14;
+    if (y + h > innerHeight - 8) y = e.clientY - h - 14;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  el.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+}
+
+// ---------- tema ----------
+(function themeSetup() {
+  const btn = $('#themeBtn');
+  const modes = ['auto', 'light', 'dark'];
+  const labels = { auto: '◐ Auto', light: '○ Claro', dark: '● Oscuro' };
+  let mode = localStorage.getItem('isp-theme') || 'auto';
+  function apply() {
+    if (mode === 'auto') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', mode);
+    btn.textContent = labels[mode];
+  }
+  btn.addEventListener('click', () => {
+    mode = modes[(modes.indexOf(mode) + 1) % modes.length];
+    localStorage.setItem('isp-theme', mode);
+    apply();
+  });
+  apply();
+})();
+
+// ---------- estado / header ----------
+const nCambios = DATA.diff.nuevas.length + DATA.diff.modificadas.length + DATA.diff.eliminadas.length;
+$('#subFechas').textContent =
+  'Última revisión: ' + fmtFecha(DATA.generadoEl) +
+  (DATA.prevFetchedAt ? ' · Revisión anterior: ' + fmtFecha(DATA.prevFetchedAt) : '');
+
+(function estado() {
+  const b = $('#estadoBadge');
+  if (DATA.baseline) {
+    b.innerHTML = '<span class="dot" style="background:var(--blue)"></span> Línea base establecida';
+  } else if (nCambios > 0) {
+    b.innerHTML = '<span class="dot" style="background:var(--warning)"></span> ' + nCambios +
+      (nCambios === 1 ? ' cambio detectado' : ' cambios detectados');
+  } else {
+    b.innerHTML = '<span class="dot" style="background:var(--good)"></span> Sin cambios';
+  }
+})();
+
+// ---------- KPIs ----------
+(function kpis() {
+  const cats = new Set(DATA.registros.map((r) => r.categoria));
+  const notaBase = DATA.baseline ? 'se detectan desde la próxima revisión' : 'vs revisión anterior';
+  const tiles = [
+    { label: 'Total de normas vigiladas', value: DATA.registros.length, note: 'en ' + cats.size + ' categorías' },
+    { label: 'Nuevas', value: DATA.diff.nuevas.length, dot: 'var(--good)', icon: '+', note: notaBase },
+    { label: 'Modificadas', value: DATA.diff.modificadas.length, dot: 'var(--warning)', icon: '~', note: notaBase },
+    { label: 'Eliminadas', value: DATA.diff.eliminadas.length, dot: 'var(--critical)', icon: '−', note: notaBase },
+  ];
+  $('#kpis').innerHTML = tiles.map((t) => `
+    <div class="card tile ${t.dot ? 'status' : ''}">
+      <div class="label">${t.label}</div>
+      <div class="value">${t.dot ? `<span class="dot" style="background:${t.dot}"></span>` : ''}${t.value}${t.icon ? `<span class="mini">${t.icon}</span>` : ''}</div>
+      <div class="note">${t.note}</div>
+    </div>`).join('');
+})();
+
+// ---------- cambios ----------
+(function cambios() {
+  const body = $('#cambiosBody');
+  const sub = $('#cambiosSub');
+  const NOMBRES = { descripcion: 'Descripción', fecha: 'Fecha', enlace: 'Enlace', modificaciones: 'Modificaciones' };
+  const linkCorto = (u) => { try { return decodeURIComponent(u.split('/').pop()); } catch { return u; } };
+
+  if (DATA.baseline) {
+    sub.textContent = '';
+    body.innerHTML = '<div class="aviso">Primera captura: se estableció la línea base con ' + DATA.registros.length +
+      ' normas el ' + fmtFecha(DATA.generadoEl) + '. Los cambios se detectarán a partir de la próxima ejecución del monitoreo.</div>';
+    return;
+  }
+  if (nCambios === 0) {
+    sub.textContent = '';
+    body.innerHTML = '<div class="aviso">✓ Sin cambios: la página del ISP está idéntica a la revisión del ' + fmtFecha(DATA.prevFetchedAt) + '.</div>';
+    return;
+  }
+  sub.textContent = 'Comparación contra la revisión del ' + fmtFecha(DATA.prevFetchedAt);
+
+  const fila = (r) => `<div class="meta">${esc(r.categoria)} · ${esc(r.tipo)} N° ${esc(r.numero)} · ${esc(r.fecha)}</div>
+    <div class="desc">${esc(r.descripcion)}${r.enlace ? ` — <a href="${esc(r.enlace)}" target="_blank" rel="noopener">documento</a>` : ''}</div>`;
+
+  let html = '';
+  if (DATA.diff.nuevas.length) {
+    html += `<div class="cambio-grupo"><h3><span class="dot" style="background:var(--good)"></span>Nuevas (${DATA.diff.nuevas.length})</h3>` +
+      DATA.diff.nuevas.map((r) => `<div class="cambio" style="border-left-color:var(--good)">${fila(r)}</div>`).join('') + '</div>';
+  }
+  if (DATA.diff.modificadas.length) {
+    html += `<div class="cambio-grupo"><h3><span class="dot" style="background:var(--warning)"></span>Modificadas (${DATA.diff.modificadas.length})</h3>` +
+      DATA.diff.modificadas.map((m) => {
+        const campos = m.campos.map((c) => {
+          const a = c === 'enlace' ? linkCorto(m.antes[c]) : m.antes[c];
+          const d = c === 'enlace' ? linkCorto(m.despues[c]) : m.despues[c];
+          return `<div class="campo"><span class="tag">${NOMBRES[c]}:</span> <span class="antes">${esc(a) || '∅'}</span><span class="flecha">→</span>${esc(d) || '∅'}</div>`;
+        }).join('');
+        return `<div class="cambio" style="border-left-color:var(--warning)">${fila(m.despues)}${campos}</div>`;
+      }).join('') + '</div>';
+  }
+  if (DATA.diff.eliminadas.length) {
+    html += `<div class="cambio-grupo"><h3><span class="dot" style="background:var(--critical)"></span>Eliminadas (${DATA.diff.eliminadas.length})</h3>` +
+      DATA.diff.eliminadas.map((r) => `<div class="cambio" style="border-left-color:var(--critical)">${fila(r)}</div>`).join('') + '</div>';
+  }
+  body.innerHTML = html;
+})();
+
+// ---------- barras horizontales ----------
+function hbars(el, pares, color) {
+  const max = Math.max(...pares.map(([, v]) => v));
+  el.innerHTML = pares.map(([k, v]) => `
+    <div class="hbar-row">
+      <div class="cat" title="${esc(k)}">${esc(k)}</div>
+      <div class="track"><div class="hbar" data-k="${esc(k)}" data-v="${v}" style="width:${(v / max) * 100}%;background:${color}"></div><span class="val">${v}</span></div>
+    </div>`).join('');
+  el.querySelectorAll('.hbar').forEach((b) => {
+    const pct = ((Number(b.dataset.v) / DATA.registros.length) * 100).toFixed(1);
+    bindTip(b, `<div class="t-title">${esc(b.dataset.k)}</div><div class="t-sub">${b.dataset.v} normas · ${pct}% del total</div>`);
+  });
+}
+
+(function charts() {
+  const cuenta = (fn) => {
+    const m = new Map();
+    for (const r of DATA.registros) { const k = fn(r); m.set(k, (m.get(k) || 0) + 1); }
+    return [...m.entries()].sort((a, b) => b[1] - a[1]);
+  };
+  hbars($('#chartCategorias'), cuenta((r) => r.categoria), 'var(--blue)');
+
+  const tipos = cuenta((r) => r.tipo || '(sin tipo)');
+  const top = tipos.slice(0, 8);
+  const resto = tipos.slice(8).reduce((s, [, v]) => s + v, 0);
+  if (resto) top.push(['Otros', resto]);
+  hbars($('#chartTipos'), top, 'var(--aqua)');
+})();
+
+// ---------- columnas por año ----------
+(function anios() {
+  const m = new Map();
+  for (const r of DATA.registros) { const y = anioDe(r.fecha); if (y) m.set(y, (m.get(y) || 0) + 1); }
+  const years = [...m.keys()];
+  const y0 = Math.min(...years), y1 = Math.max(...years);
+  const max = Math.max(...m.values());
+  const el = $('#chartAnios');
+  const n = y1 - y0 + 1;
+  el.style.minWidth = Math.max(680, n * 14 + 40) + 'px';
+
+  let html = '';
+  // gridlines: max y mitad
+  [max, Math.round(max / 2)].filter((v, i, a) => v > 0 && a.indexOf(v) === i).forEach((v) => {
+    const topPct = (1 - v / max) * 100;
+    html += `<div class="gridline" style="top:calc(8px + (100% - 34px) * ${topPct / 100})"></div>
+             <div class="gl-label" style="top:calc(8px + (100% - 34px) * ${topPct / 100})">${v}</div>`;
+  });
+  html += '<div class="col-plot">';
+  for (let y = y0; y <= y1; y++) {
+    const v = m.get(y) || 0;
+    html += `<div class="col" data-y="${y}" data-v="${v}" style="height:${(v / max) * 100}%;background:${v ? 'var(--blue)' : 'transparent'}"></div>`;
+  }
+  html += '</div>';
+  el.innerHTML = html;
+
+  // etiquetas de década bajo el eje
+  const plot = el.querySelector('.col-plot');
+  requestAnimationFrame(() => {
+    const pw = plot.offsetWidth;
+    let labs = '';
+    for (let y = Math.ceil(y0 / 10) * 10; y <= y1; y += 10) {
+      const x = 34 + ((y - y0 + 0.5) / n) * pw;
+      labs += `<div class="col-xlab" style="left:${x}px">${y}</div>`;
+    }
+    el.insertAdjacentHTML('beforeend', labs);
+  });
+
+  el.querySelectorAll('.col').forEach((c) => {
+    if (Number(c.dataset.v) > 0) bindTip(c, `<div class="t-title">${c.dataset.y}</div><div class="t-sub">${c.dataset.v} norma${c.dataset.v === '1' ? '' : 's'}</div>`);
+  });
+})();
+
+// ---------- recientes ----------
+(function recientes() {
+  const ahora = new Date(DATA.generadoEl);
+  const hace12m = new Date(ahora); hace12m.setFullYear(ahora.getFullYear() - 1);
+  const rec = DATA.registros
+    .map((r) => ({ r, d: parseFecha(r.fecha) }))
+    .filter((x) => x.d && x.d >= hace12m && x.d <= new Date(ahora.getTime() + 90 * 864e5))
+    .sort((a, b) => b.d - a.d);
+  $('#recientesSub').textContent = rec.length
+    ? rec.length + ' normas con fecha de publicación/dictación en los últimos 12 meses'
+    : 'Ninguna norma con fecha en los últimos 12 meses';
+  $('#recientes').innerHTML = rec.slice(0, 15).map(({ r, d }) => `
+    <div class="reciente">
+      <div class="fecha">${d.toLocaleDateString('es-CL')}</div>
+      <div class="cuerpo">
+        <div class="norma">${esc(r.tipo)} N° ${esc(r.numero)} <span class="cat">· ${esc(r.categoria)}</span></div>
+        <div class="d">${esc(r.descripcion)}${r.enlace ? ` — <a href="${esc(r.enlace)}" target="_blank" rel="noopener">documento</a>` : ''}</div>
+      </div>
+    </div>`).join('');
+})();
+
+// ---------- tabla ----------
+(function tabla() {
+  const tbody = $('#tabla tbody');
+  const selCat = $('#fCategoria'), selTipo = $('#fTipo'), buscar = $('#fBuscar');
+  const opts = (vals, todo) => `<option value="">${todo}</option>` +
+    vals.map((v) => `<option value="${esc(v)}">${esc(v)}</option>`).join('');
+  selCat.innerHTML = opts([...new Set(DATA.registros.map((r) => r.categoria))], 'Todas las categorías');
+  selTipo.innerHTML = opts([...new Set(DATA.registros.map((r) => r.tipo))].sort(), 'Todos los tipos');
+
+  function render() {
+    const q = buscar.value.trim().toLowerCase();
+    const fc = selCat.value, ft = selTipo.value;
+    const rows = DATA.registros.filter((r) =>
+      (!fc || r.categoria === fc) && (!ft || r.tipo === ft) &&
+      (!q || (r.descripcion + ' ' + r.numero + ' ' + r.materia + ' ' + r.tipo).toLowerCase().includes(q)));
+    tbody.innerHTML = rows.map((r) => `<tr>
+      <td>${esc(r.categoria)}</td><td>${esc(r.tipo)}</td><td class="num">${esc(r.numero)}</td>
+      <td>${esc(r.descripcion)}</td><td class="fch">${esc(r.fecha)}</td><td class="mod">${esc(r.modificaciones) || '—'}</td>
+      <td>${r.enlace ? `<a href="${esc(r.enlace)}" target="_blank" rel="noopener">Abrir</a>` : '—'}</td>
+    </tr>`).join('');
+    $('#conteo').textContent = rows.length + ' de ' + DATA.registros.length + ' normas';
+  }
+  [buscar, selCat, selTipo].forEach((el) => el.addEventListener('input', render));
+  render();
+})();
+
+// ---------- historial ----------
+(function historial() {
+  const rows = [...DATA.historial].reverse();
+  $('#histBody').innerHTML = rows.map((h) => {
+    const cambios = h.nuevas + h.modificadas + h.eliminadas;
+    const pill = h.baseline
+      ? '<span class="pill"><span class="dot" style="background:var(--blue)"></span>Línea base</span>'
+      : cambios > 0
+        ? '<span class="pill"><span class="dot" style="background:var(--warning)"></span>Cambios</span>'
+        : '<span class="pill"><span class="dot" style="background:var(--good)"></span>Sin cambios</span>';
+    return `<tr>
+      <td class="fch">${fmtFecha(h.timestamp)}</td>
+      <td class="delta">${h.total}</td>
+      <td class="delta">${h.baseline ? '—' : '+' + h.nuevas}</td>
+      <td class="delta">${h.baseline ? '—' : '~' + h.modificadas}</td>
+      <td class="delta">${h.baseline ? '—' : '−' + h.eliminadas}</td>
+      <td>${pill}</td>
+    </tr>`;
+  }).join('');
+})();
+</script>
+</body>
+</html>

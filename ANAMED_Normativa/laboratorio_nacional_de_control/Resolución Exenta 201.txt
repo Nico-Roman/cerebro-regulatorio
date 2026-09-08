@@ -1,0 +1,145 @@
+[Texto reconocido por OCR (Tesseract 5, es) — primeras páginas — generado 2026-07-17. Puede contener errores de reconocimiento.]
+
+ESTABLECE GUÍA TÉCNICA PARA LA REALIZACIÓN
+DE LA VALIDACIÓN DE MÉTODOS DE ENSAYO.
+
+72n ENE "C
+RESOLUCIÓN EXENTA N* 5 0.ENE. 2015»
+
+SANTIAGO,
+
+VISTOS: Providencia Interna N* 2325 de la Jefa de
+la Asesoría Jurídica; y TENIENDO PRESENTE: lo dispuesto en la Ley Orgánica Constitucional N*
+18.575 de “Bases Generales de la Administración del Estado”; en la Ley N * 19.880 de “Base de los
+Procedimientos Administrativos que rigen los Actos de los Órganos de la Administración del
+Estado”; Código Sanitario; Decreto Supremo N* 3 de 2010, del Ministerio de Salud, que aprueba el
+“Reglamento del Sistema Nacional de Control de Productos Farmacéuticos de Uso Humano”; en
+los artículos 59 letra a) y b), 60 y 61 letra b) del Decreto con Fuerza de Ley N* 1 de 2005, que fija el
+texto refundido, coordinado y sistematizado del Decreto Ley N* 2763 de 1979 y de las Leyes N*
+18.933 y N* 18.469”; Resolución Exenta N* 607 del 2014 del Ministerio de Salud; así como lo
+establecido en la Resolución N” 1.600 de 2008, de la Contraloría General de la República; Decreto
+Exento N2 27 de 2012 del Ministerio de Salud “Norma Técnica N* 131 que define los criterios
+destinados a establecer la equivalencia terapéutica en productos farmacéuticos en Chile”, Decreto
+Exento N2 28 de 2012 Ministerio de Salud “Norma Técnica N* 127 sobre Buenas Prácticas de
+Manufactura (BPM)” y Decreto Exento N% 543 de 2013 Ministerio de Salud, “Norma Técnica N*
+139 sobre Buenas Prácticas de Laboratorio (BPL)” ; dicto la siguiente:
+
+CONSIDERANDO:
+
+1.- La importancia de la validación de los métodos
+de ensayo, es que a través de ésta, es posible establecer el procedimiento y las condiciones en las
+que deben realizarse, confiando así, que los datos obtenidos cumplen con la calidad deseada,
+brindando seguridad y respaldo.
+
+2.- De acuerdo a las Buenas Prácticas de
+Manufactura (BPM) y de Laboratorio (BPL), la validación debe aplicarse en todas las etapas de
+fabricación y control de un producto farmacéutico, esto es: manufactura, control de procesos
+control y aseguramiento de la calidad.
+
+RESOLUCIÓN
+
+1.- APRUÉBESE como “GUÍA TÉCNICA PARA
+REALIZACIÓN DE LA VALIDACIÓN DE MÉTODOS DE ENSAYO” el siguiente documento que se
+reproduce íntegramente.
+
+“GUÍA TÉCNICA PARA REALIZACIÓN DE LA VALIDACIÓN DE MÉTODOS DE ENSAYO”
+
+1) INTRODUCCION:
+
+La validación de los métodos de ensayo se entiende como una acción o un procedimiento
+destinado a establecer pruebas documentales que demuestren científicamente que un método
+analítico tiene las características de desempeño adecuadas para cumplir los requerimientos de las
+aplicaciones analíticas pretendidas, esencialmente en términos de su exactitud y precisión.
+
+[ s)
+
+2) REQUISITOS
+
+Validación de la Metodología Analítica de los ensayos realizados a los medicamentos
+(materias primas y productos terminados) se encuentra exigido según lo establecido en:
+
+1. Reglamento del Sistema Nacional de Control de Productos Farmacéuticos, Decreto Supremo
+
+MINSAL N? 03 del año 2010:
+
+Título !I del Registro Sanitario de las Especialidades Farmacéuticas y otros productos
+
+farmacéuticos:
+Art. 32* y 40*
+
+Párrafo segundo: De los requisitos del Registro Sanitario,
+
+Título VI Laboratorios Farmacéuticos:
+
+Art. 145%
+Art. 1559
+Art. 1872
+
+Párrafo quinto: los procedimientos y registros;
+Párrafo sexto: del personal y las responsabilidades;
+Párrafo cuarto: de la exención de control de calidad y del control de serie
+
+2. Norma Técnica N* 131, nominada “Norma que define los criterios destinados a establecer la
+equivalencia terapéutica en productos farmacéuticos en Chile (EQT)” — Decreto Exento MINSAL
+
+Ne 27 de 2012.
+
+3. Norma Técnica N* 127 de Buenas Prácticas de Manufactura (BPM) — Decreto Exento MINSAL N?
+
+28 de 2012.
+
+4. Norma Técnica N* 139 de Buenas Prácticas de Laboratorio (BPL) — Decreto Exento MINSAL N2
+
+543 de 2013.
+3) ALCANCE
+
+Los conceptos y términos utilizados en esta guía son de aplicación general y están dirigidos
+principalmente para ser aplicados sobre los métodos analíticos para el adecuado control de
+
+calidad en:
+- Materias primas
+- Materiales de envase
+
+- Productos en estadios de producción intermedios o terminados
+
+- Estudios de estabilidad
+
+- Estudios de investigación y desarrollo galénico.
+- Estudios de Equivalencia Terapéutica In Vitro.
+
+Los Métodos Analíticos (MA) o Método de Ensayo (ME) para estudios de metabolismo,
+farmacocinética, biodisponibilidad, valoraciones microbiológicas y biológicas pueden requerir
+otras exigencias no contempladas en esta Guía.
+
+4) CONCEPTOS GENERALES:
+
+Laboratorio (BPL)
+
+Ánali4tg — — Principio activo o componente medido por el ME. |
+| Blanco ; Matriz en la cual se mide el analito sin éste. _
+Buenas Prácticas de | Conjunto de reglas, procedimientos operativos y prácticas que
+
+garantizan que los datos generados por un sistema de control de
+calidad son reproducibles y representativos, asegurando la
+validez y confiabilidad de los resultados.
+
+“Buenas Prácticas de
+Manufactura (BPM)
+
+Normas técnicas mínimas establecidas para todos los
+procedimientos destinados a garantizar la calidad uniforme y
+satisfactoria de los productos farmacéuticos, dentro de los límites
+aceptados y vigentes para cada uno de ellos.
+
+Calificación del diseño (DQ,
+por sus siglas en inglés)
+
+Colección documentada de  actividades que definen las
+especificaciones operacionales y funcionales del instrumento y
+criterios para la selección del vendedor, basándose en el uso
+previsto del instrumento.
+
+_an ífjíca'cA¡ó;_d'e instalación (1Q,
+
+La ejecución de pruebas para asegurar que los equipos analíticos
+

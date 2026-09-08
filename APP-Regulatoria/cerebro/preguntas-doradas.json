@@ -1,0 +1,103 @@
+{
+  "descripcion": "Set de preguntas doradas para evaluar la recuperación del Cerebro Regulatorio. Cada pregunta tiene una o más fuentes ACEPTABLES: si el motor recupera cualquiera de ellas en el top-k, cuenta como acierto. Gate de Fase 1 del PRD: >= 90% de aciertos. Ampliar y validar con un QF antes del lanzamiento.",
+  "version": "0.1",
+  "fecha": "2026-07-22",
+  "preguntas": [
+    {
+      "id": "fv-plazo-ram",
+      "pregunta": "¿En qué plazo debe un titular de registro notificar al ISP las sospechas de reacciones adversas?",
+      "categoria": "farmacovigilancia",
+      "fuentes_aceptables": [{"tipo": "Resolución Exenta", "numero": "1287"}, {"tipo": "Resolución Exenta", "numero": "1651"}]
+    },
+    {
+      "id": "reglamento-control-pf",
+      "pregunta": "¿Cuál es el reglamento que regula el sistema nacional de control de los productos farmacéuticos de uso humano?",
+      "categoria": "medicamentos",
+      "fuentes_aceptables": [{"tipo": "Decreto Supremo", "numero": "3"}]
+    },
+    {
+      "id": "bpm-nt127",
+      "pregunta": "¿Qué norma técnica establece las Buenas Prácticas de Manufactura para la industria de productos farmacéuticos?",
+      "categoria": "establecimientos",
+      "fuentes_aceptables": [{"tipo": "Norma Técnica", "numero": "127"}, {"tipo": "Decreto Exento", "numero": "159"}, {"tipo": "Decreto Exento", "numero": "28"}]
+    },
+    {
+      "id": "bpm-esteriles",
+      "pregunta": "¿Qué requisitos aplican a la fabricación de productos farmacéuticos estériles?",
+      "categoria": "establecimientos",
+      "fuentes_aceptables": [{"doc_contains": "BPM-esteriles"}, {"tipo": "Norma Técnica", "numero": "127"}]
+    },
+    {
+      "id": "bpc-guia",
+      "pregunta": "¿Existe una guía de buenas prácticas clínicas aprobada por el ISP para ensayos clínicos?",
+      "categoria": "ensayos_clinicos",
+      "fuentes_aceptables": [{"tipo": "Resolución Exenta", "numero": "460"}]
+    },
+    {
+      "id": "fv-ips",
+      "pregunta": "¿Cómo se elaboran los informes periódicos de seguridad en farmacovigilancia?",
+      "categoria": "farmacovigilancia",
+      "fuentes_aceptables": [{"tipo": "Resolución Exenta", "numero": "108"}, {"tipo": "Resolución Exenta", "numero": "2741"}]
+    },
+    {
+      "id": "fv-pmr",
+      "pregunta": "¿Qué instructivo regula los planes de manejo de riesgos de un producto farmacéutico?",
+      "categoria": "farmacovigilancia",
+      "fuentes_aceptables": [{"tipo": "Resolución Exenta", "numero": "3496"}]
+    },
+    {
+      "id": "estupefacientes",
+      "pregunta": "¿Cuál es el reglamento de estupefacientes vigente en Chile?",
+      "categoria": "medicamentos",
+      "fuentes_aceptables": [{"tipo": "Decreto Supremo", "numero": "404"}]
+    },
+    {
+      "id": "reglamento-farmacias",
+      "pregunta": "¿Qué reglamento regula el funcionamiento de farmacias y droguerías?",
+      "categoria": "establecimientos",
+      "fuentes_aceptables": [{"tipo": "Decreto Supremo", "numero": "466"}]
+    },
+    {
+      "id": "bpa-nt147",
+      "pregunta": "¿Qué norma técnica regula las buenas prácticas de almacenamiento y distribución de productos farmacéuticos?",
+      "categoria": "establecimientos",
+      "fuentes_aceptables": [{"tipo": "Decreto Exento", "numero": "57"}, {"tipo": "Norma Técnica", "numero": "147"}]
+    },
+    {
+      "id": "bioequivalencia-referencia",
+      "pregunta": "¿Cómo se seleccionan los productos de referencia para estudios de bioequivalencia?",
+      "categoria": "medicamentos",
+      "fuentes_aceptables": [{"doc_contains": "1645"}, {"doc_contains": "PRODUCTOS-DE-REFERENCIA"}]
+    },
+    {
+      "id": "bpl-nt180",
+      "pregunta": "¿Qué norma establece las buenas prácticas de laboratorio para análisis microbiológico?",
+      "categoria": "laboratorio",
+      "fuentes_aceptables": [{"tipo": "Norma Técnica", "numero": "180"}, {"tipo": "Decreto Exento", "numero": "919"}]
+    },
+    {
+      "id": "fv-vacunas-equipo",
+      "pregunta": "¿Existe un equipo de farmacovigilancia dedicado a vacunas en el ISP?",
+      "categoria": "farmacovigilancia",
+      "fuentes_aceptables": [{"tipo": "Resolución Exenta", "numero": "504"}, {"tipo": "Resolución Exenta", "numero": "2644"}, {"tipo": "Resolución Exenta", "numero": "1777"}]
+    },
+    {
+      "id": "reglamento-cosmeticos",
+      "pregunta": "¿Cuál es el reglamento del sistema nacional de control de cosméticos?",
+      "categoria": "cosmeticos",
+      "fuentes_aceptables": [{"tipo": "Decreto Supremo", "numero": "239"}]
+    },
+    {
+      "id": "productos-investigacion",
+      "pregunta": "¿Qué se necesita para autorizar el uso de productos farmacéuticos en investigación científica?",
+      "categoria": "ensayos_clinicos",
+      "fuentes_aceptables": [{"tipo": "Resolución Exenta", "numero": "5161"}]
+    },
+    {
+      "id": "ley-20000-reglamento",
+      "pregunta": "¿Cuál es el reglamento de la Ley N° 20.000 sobre tráfico ilícito de estupefacientes?",
+      "categoria": "importacion",
+      "fuentes_aceptables": [{"tipo": "Decreto Exento", "numero": "867"}]
+    }
+  ]
+}

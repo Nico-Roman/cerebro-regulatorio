@@ -1,0 +1,114 @@
+[Texto reconocido por OCR (Tesseract 5, es) — primeras páginas — generado 2026-07-17. Puede contener errores de reconocimiento.]
+
+imndode ENTREGA DIRECTRICES EN RELACIÓN A LA
+mtena de o FISCALIZACIÓN DE LA REALIZACIÓN DE APTITUD DE
+MÉTODOS MICROBIOLÓGICOS DE PRODUCTOS
+FARMACÉUTICOS AL DEPARTAMENTO AGENCIA
+NACIONAL DE MEDICAMENTOS DEL INSTITUTO DE
+As£|sonl¡uunlmm SALUD PÚBLICA.
+
+Es
+
+RESOLUCIÓN EXENTA N* /
+
+0262 ?1.01.2019
+
+SANTIAGO,
+
+VISTOS: Providencia interna número 2927 de 2018 de la
+jefa(S) de la Unidad de Asesoría Jurídica; providencia número 3019 de 2018 de Dirección;
+memorándum número 1401 de 2018 de la Jefa del Departamento Agencia Nacional de
+Medicamentos; documento denominado “Guía para realizar la aptitud de métodos microbiológicos”;
+y TENIENDO PRESENTE: lo dispuesto en la Ley Orgánica Constitucional de Bases Generales de la
+Administración del Estado; en la Ley Núm. 19.880, que establece bases de los procedimientos
+administrativos que rigen los actos de los órganos de la Administración del Estado; en los artículos 60
+y 61 letra a) del Decreto con Fuerza de Ley Núm. 1, de 2005, del Ministerio de Salud; en el artículo 10
+letra a) del Decreto Supremo Núm. 1.222, de 1996, de la misma Secretaría de Estado, que aprueba el
+Reglamento del Instituto de Salud Pública de Chile; en el Decreto Núm. 54 de 2018, del Ministerio de
+Salud; Resolución Núm. 1.600, de 2008, de la Contraloría General de la República; y
+
+CONSIDERANDO:
+
+PRIMERO: Que, la Norma Técnica número 180 de Buenas
+Prácticas de Laboratorio para Laboratorios de Microbiología Farmacéutica en el punto 3.1, en relación
+a la validación de métodos de ensayo, dispone: “Los métodos de ensayo estándares (farmacopeicos)
+se consideran validados. Sin embargo, se necesita demostrar que el método de ensayo específico a ser
+utilizado por un determinado laboratorio para el análisis de un producto dado es adecuado para su
+uso en la recuperación de bacterias, levaduras y hongos filamentosos en presencia del producto
+específico. El laboratorio debe demostrar que los criterios de -desempeño del método de ensayo
+estándar puede ser satisfechos por el laboratorio antes de introducir el ensayo como ensayo de rutina
+(verificación del método) y que el método de ensayo específico para un producto dado es adecuado
+(aptitud del método de ensayo incluyendo controles positivos y negativos)”.
+
+SEGUNDO: Que, así las cosas, el objetivo de demostrar la
+aptitud de los métodos microbiológicos de productos farmacéuticos es confirmar que el método
+elegido para cuantificar o estimar la presencia de microorganismos es adecuado y confiable.
+
+TERCERO: Que, en este sentido, resulta imperioso
+
+homogenizar los criterios con los que el Subdepartamento de Fiscalización de este Institut
+
+o revisará
+estos métodos de ensayo.
+
+CUARTO: Que, las letras a) y b) del artículo 64 del
+
+Estatuto Administrativo -en armonía con lo dispuesto en el artículo 11 de la ley N*18.575, Orgánica
+
+Página 1 de 16
+
+Constitucional de Bases Generales de la Administración del Estado-, establece como una de las
+obligaciones especiales de las autoridades, el ejercer un control jerárquico permanente del
+funcionamiento de los órganos y de las actuaciones del personal de su dependencia, en contrapartida
+el artículo el artículo 61 letra f) del cuerpo legal ya citado dispone que los funcionarios deben cumplir
+con las órdenes impartidas por el superior jerárquico.
+
+QUINTO: Que, en este contexto, por medio de este acto
+administrativo se dicta la Guía para evaluar la aptitud de métodos microbiológicos, por lo que dicto lo
+siguiente:
+
+RESOLUCION:
+
+1% APRUÉBASE la denominada GUÍA PARA REALIZAR LA
+APTITUD DE MÉTODOS MICROBIOLÓGICOS, cuyo tenor es el siguiente:
+
+Guía para realizar la aptitud de métodos microbiológicos
+
+La presente guía ha sido redactada para
+complementar la Norma Técnica N* 180 de Buenas Prácticas de Laboratorio para laboratorios de
+microbiología farmacéutica (punto 3.1).
+
+El objetivo de demostrar la aptitud de los métodos
+microbiológicos de productos farmacéuticos, es confirmar que el método elegido para cuantificar o
+estimar la presencia de microorganismos es adecuado y confiable. Sin esta demostración, un ensayo
+de esterilidad negativo, una placa de recuento con o sin colonias, o la determinación de la ausencia
+de un microorganismo objetable, no aseguran que el resultado que se obtiene representa la
+verdadera estimación de la población microbiana existente en la muestra en análisis. Esto puede
+deberse a que la muestra a analizar inhibe el crecimiento microbiano o a que el método empleado
+interfiere o que no sea el óptimo para asegurar la recuperación de los microorganismos presentes en
+la muestra. Es importante remarcar que, si un microorganismo se encuentra presente en una
+muestra, no necesariamente significa que se lo pueda detectar, ya que:
+
+* No existe un medio de cultivo ideal de crecimiento
+para todos los microorganismos existentes en una muestra.
+
+* Los medios de cultivo y las condiciones de incubación
+no siempre son apropiados para todos los microorganismos que puedan estar presentes.
+
+*  Muchos principios activos y formulaciones con
+presencia de inhibidores generan daño y bacteriostasis que no permiten recuperar los
+microorganismos por los métodos comúnmente utilizados en el laboratorio.
+
+e Existen microorganismos viables no cultivables
+(VNC)(1,2) que incluyen tanto a microorganismos que no pueden crecer en los medios de cultivo
+habituales en el laboratorio de microbiología, como a microorganismos que pueden ser detectados
+habitualmente en el laboratorio, pero circunstancialmente son expuestos a una situación de estrés
+(Ej.: estrés térmico).
+
+Es necesario recordar que la validación de un método de
+ensayo involucra la determinación de parámetros como exactitud, precisión, especificidad, límite de
+detección, límite de cuantificación, linealidad, rango, robustez y repetibilidad, y que para los métodos
+de ensayo en los que no se puedan determinar todos estos parámetros, se aplica el término "aptitud"
+o "adecuabilidad".
+
+Página 2 de 16

@@ -1,42 +1,44 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ── Raíz del repo RegulaMED / Cerebro Regulatorio ───────────────────────────
+# La raíz es la carpeta del proyecto completo: la app web, el motor Python, el
+# scraper y la bitácora. Antes la raíz era `APP-Regulatoria/web/`, así que el
+# pipeline que mantiene el corpus vivía fuera de git: sin historial, sin
+# revisión y sin CI. Eso es lo que se corrigió.
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# --- Los PDF de la normativa NO van a git ----------------------------------
+# 306 MB que se pueden volver a bajar del listado oficial del ISP en cualquier
+# momento (el pipeline lo hace solo, paso 2b). No tiene sentido versionarlos.
+ANAMED_Normativa/**/*.pdf
 
-# testing
-/coverage
+# --- Los sidecars OCR SÍ van a git -----------------------------------------
+# Estos .txt son el texto reconocido de los PDF escaneados. NO se pueden
+# rebajar del ISP: son trabajo hecho una vez y existían en un solo disco.
+# Perderlos significa re-OCR completo. Son 488 KB. Se versionan.
+!ANAMED_Normativa/**/*.txt
 
-# next.js
-/.next/
-/out/
+# --- Trabajo no relacionado con el producto --------------------------------
+graphify-out/
+logs/
+scripts-transcripcion/
+*.tgz
 
-# production
-/build
-
-# misc
+# --- Sistema ---------------------------------------------------------------
 .DS_Store
-*.pem
+Thumbs.db
+desktop.ini
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# --- Artefactos generados por el pipeline ----------------------------------
+# El corpus se reconstruye entero en cada corrida. Versionar indice.pkl y
+# corpus.jsonl acá significaría ~13 MB de binario nuevo CADA DÍA: el repo se
+# hincha en semanas. La copia publicada vive en APP-Regulatoria/web/data/,
+# que sí se versiona porque es lo que despliega Railway.
+APP-Regulatoria/cerebro/corpus/*
+!APP-Regulatoria/cerebro/corpus/audit-report.md
+APP-Regulatoria/cerebro/__pycache__/
+**/__pycache__/
+*.pyc
 
-# env files (can opt-in for committing if needed)
-.env*
-!.env.example
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# --- Snapshots históricos del listado --------------------------------------
+# latest.json y last-diff.json sí se versionan (son el estado actual).
+# Los snapshot-*.json con timestamp son acumulativos y ya quedan reflejados
+# en registro-cambios/cambios.jsonl, que es la bitácora buena.
+vigilancia-isp/snapshots/snapshot-*.json

@@ -1,0 +1,121 @@
+[Texto reconocido por OCR (Tesseract 5, es) — primeras páginas — generado 2026-07-17. Puede contener errores de reconocimiento.]
+
+¡I I£:£;u;g &¡eca APRUEBA “GUÍA DE CONSIDERACIONES
+DEFDR — miniseio de Sd GENERALES PARA ESTUDIOS CLÍNICOS”.
+
+Gobierno de Chile
+
+¡GABINETE DIRECTORA.
+RARTAMENTO Y
+DE%ART¡ÚQIENTO AGENCIA
+
+INAL DE MEDICAMENTOS 00173
+
+29.01.2024
+
+Fsi /IH/GE TTA/3C¡S la
+14 / __ RESOLUCIÓN EXENTA N* /
+
+«
+
+SANTIAGO,
+
+VISTOS estos antecedentes; la providencia 50, de
+fecha 9 de enero de 2024, de la Jefa (S) del Departamento Jurídico; la providencia 32, de fecha 8 de
+enero de 2024, del Jefe de Gabinete de la Directora (S); el memorándum 17, de fecha 5 de enero de
+2024, del Jefe del Departamento Agencia Nacional de Medicamentos, y
+
+CONSIDERANDO
+
+PRIMERO: Que, el inciso primero del artículo 96 del
+Código Sanitario establece que “El Instituto de Salud Pública de Chile será la autoridad encargada
+en todo el territorio nacional del control sanitario de los productos farmacéuticos, de los
+establecimientos del área y de fiscalizar el cumplimiento de las disposiciones que sobre esta materia
+se contienen en este Código y sus reglamentos”.
+
+A su turno, el artículo 111 A del mismo Código
+determina en sus dos primeros incisos que “Los productos farmacéuticos y los elementos de uso
+médico para ser utilizados en investigaciones científicas en seres humanos deberán contar con una
+autorización especial para su uso provisional, otorgada por el Instituto de Salud Pública conforme al
+presente Libro. La autorización especial para uso provisional con fines de investigación se requerirá
+para todo producto farmacéutico o dispositivo médico, sea porque no cuenten con el respectivo
+registro sanitario o bien, contando con éste, se pretenda su utilización de manera distinta a la
+registrada. Con todo, el Ministerio de Salud podrá establecer, mediante decreto supremo, la
+exención de esta exigencia a los elementos de uso médico cuya utilización no conlleve un riesgo
+relevante para las personas”.
+
+SEGUNDO: Que, la investigación científica, en lo
+pertinente a estos autos, se encuentra regulada primigeniamente en la Ley N* 20.120 que “tiene por
+finalidad proteger la vida de los seres humanos, desde el momento de la concepción, su integridad
+física y psíquica, así como su diversidad e identidad genética, en relación con la investigación
+científica biomédica y sus aplicaciones clínicas”, acorde al inciso primero de su artículo de igual
+numeración. Sin perjuicio de aquello, dicho cuerpo normativo no contiene toda la regulación
+aplicable a este campo científico, motivo por el cual su artículo 21 dispone que “corresponderá al
+Ministerio de Salud establecer, mediante reglamento, las normas que complementen o desarrollen
+los contenidos de esta ley”.
+
+Así las cosas, en cumplimiento del mandato
+previamente referido, necesario es entender la exigibilidad de los preceptos del reglamento de esta
+ley, aprobado por el Decreto Supremo 114, de 2011, del Ministerio de Salud, el que en su artículo
+26 dispone que “al investigador responsable le corresponderá garantizar la seguridad y el bienestar
+de los participantes durante el transcurso de la investigación, así como de la justificación científica y
+ética del proyecto, de la integridad de los datos recogidos y de su respectivo análisis y conclusión. Si
+además el investigador tiene el carácter de investigador principal en una investigación multicéntrica
+
+Página 1 de 27
+
+deberá realizar las gestiones para mantener la coordinación y vigilancia de las actuaciones que se
+realicen en los diferentes establecimientos involucrados en la investigación”.
+
+De esta forma, queda determinado por el inciso
+segundo del artículo 111 D del Código Sanitario que el Instituto “será competente para la
+fiscalización del cumplimiento de los protocolos de investigación, de los consentimientos informados,
+de las buenas prácticas clínicas, de las notificaciones de reacciones adversas y de eventos adversos
+y, en general, del cumplimiento de la normativa relacionada con esta materia”.
+
+En este orden de cosas, toca al Instituto de Salud
+Pública de Chile, entre otros, el controlar aquellos aspectos descritos en las normas que pueden
+leerse en los párrafos precedentes, habilitando el Código Sanitario en su artículo 111 D a que esta
+autoridad fiscalice, entre otros, las Buenas Prácticas Clínicas y el cumplimiento, en general, de las
+materias atingentes a esta clase de investigaciones y cuyo control no corresponda a otros órganos.
+
+TERCERO: Que, en dicha labor, el Instituto ha
+podido detectar brechas que estima deben ser abordadas, como lo es la ausencia, actualmente, de
+lineamientos y consideraciones generales para aquellas entidades que participan de esta clase de
+estudios. En particular, se ha estimado como pertinente orientar de forma clara y detallada a las
+diferentes entidades que realizan estudios clínicos con productos farmacéuticos en tópicos tales
+como el ciclo de vida del desarrollo clínico, incluyendo el diseño de calidad en los estudios clínicos
+teniendo en cuenta la amplia gama de diseños de los mismos y las fuentes de datos utilizadas
+
+Lo anterior abarca los principios generales y una
+profundización sobre el diseño de calidad en estudios clínicos; una descripción amplia de la
+planificación del desarrollo de fármacos y la información proporcionada por diferentes tipos de
+estudios necesarios para avanzar en el desarrollo a través del ciclo de vida del fármaco. Además,
+conileva describir los elementos relevantes de la gama de datos y fuentes disponibles, pasando por
+la realización del estudio y garantizando la seguridad de los participantes y el informe del mismo.
+
+Lo anterior recibe explicación en que los estudios
+clínicos de productos farmacéuticos se llevan a cabo para proporcionar información que, entre otros
+objetivos, puede mejorar el acceso a productos seguros y efectivos, con un impacto significativo en
+los pacientes.
+
+CUARTO: Que, por tanto, en uso de las facultades
+legales conferidas al efecto, se ha estimado como necesario por esta autoridad aprobar una guía
+técnica que aborde aquellas brechas, a fin de esclarecer el tratamiento que debe darse a estos
+estudios desde variadas perspectivas, sus componentes y etapas, así como la información que los
+mismos generan.
+
+QUINTO: Que, a fin de cumplir con los objetivos que
+se han expuesto en las consideraciones que anteceden, se hace necesaria la aprobación de la “Guía
+de consideraciones generales para estudios clínicos”, por lo que
+
+TENIENDO PRESENTE lo dispuesto en la Ley N*
+18.575; en la Ley N* 19.880; en el Código Sanitario; en la Ley N* 20.120; en el Decreto 114, del 2010,
+del Ministerio de Salud; la Ley N* 20.584; lo señalado en los artículos 59 letra b), 60 y 61 del D.F.L.
+N* 1, de 2005, del Ministerio de Salud; lo prescrito en los artículos 8 y 10 letra a) del Decreto
+Supremo N* 1222, de 1996, del Ministerio de Salud; en el Decreto Supremo 3, de 2010, del
+Ministerio de Salud; lo previsto en la Resolución Exenta N* 7, de 2019, de la Contraloría General de
+la República; y las facultades que me confiere el Decreto 32, de 2023, del Ministerio de Salud, dicto
+la siguiente
+
+Página 2 de 27
