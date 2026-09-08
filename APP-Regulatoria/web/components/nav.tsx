@@ -8,6 +8,7 @@ const ENLACES = [
   { href: "/#servicios", label: "Servicios" },
   { href: "/#areas", label: "Áreas" },
   { href: "/normativa", label: "Buscador" },
+  { href: "/agenda", label: "Agenda" },
   { href: "/#contacto", label: "Contacto" },
 ];
 

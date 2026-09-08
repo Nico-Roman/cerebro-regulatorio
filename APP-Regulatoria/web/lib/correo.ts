@@ -3,11 +3,20 @@
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
+export interface AdjuntoCorreo {
+  /** Nombre con el que se ve en el cliente de correo, p. ej. "cita.ics". */
+  filename: string;
+  /** Contenido ya en base64: es lo que espera la API de Resend. */
+  content: string;
+  contentType?: string;
+}
+
 export interface CorreoParams {
   to: string;
   subject: string;
   html: string;
   replyTo?: string;
+  attachments?: AdjuntoCorreo[];
 }
 
 export class CorreoNoConfigurado extends Error {
@@ -17,7 +26,13 @@ export class CorreoNoConfigurado extends Error {
   }
 }
 
-export async function enviarCorreo({ to, subject, html, replyTo }: CorreoParams) {
+export async function enviarCorreo({
+  to,
+  subject,
+  html,
+  replyTo,
+  attachments,
+}: CorreoParams) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) throw new CorreoNoConfigurado();
 
@@ -32,6 +47,7 @@ export async function enviarCorreo({ to, subject, html, replyTo }: CorreoParams)
         "RegulaMED <onboarding@resend.dev>",
       to: [to],
       ...(replyTo ? { reply_to: replyTo } : {}),
+      ...(attachments?.length ? { attachments } : {}),
       subject,
       html,
     }),

@@ -153,6 +153,61 @@ export const feedback = pgTable(
   ]
 );
 
+/**
+ * Configuración de la agenda. Una sola fila (id = 'default'): es configuración,
+ * no historial. Vive en la base y no en variables de entorno porque cambiar el
+ * horario de atención no debería requerir un despliegue.
+ */
+export const agendaConfig = pgTable("agenda_config", {
+  id: text("id").primaryKey().default("default"),
+  duracionMin: integer("duracion_min").notNull().default(30),
+  bufferMin: integer("buffer_min").notNull().default(15),
+  // 1 = lunes … 7 = domingo (ISO). Por defecto, de lunes a viernes.
+  diaInicio: integer("dia_inicio").notNull().default(1),
+  diaFin: integer("dia_fin").notNull().default(5),
+  horaInicio: text("hora_inicio").notNull().default("19:00"),
+  horaFin: text("hora_fin").notNull().default("22:00"),
+  zona: text("zona").notNull().default("America/Santiago"),
+  // Nadie puede reservar para dentro de dos horas: la antelación mínima es lo
+  // que evita que la agenda interrumpa algo que ya estaba en curso.
+  antelacionHoras: integer("antelacion_horas").notNull().default(24),
+  horizonteDias: integer("horizonte_dias").notNull().default(21),
+  // Calendarios de Google que se consultan para saber si estás ocupado. El
+  // evento siempre se crea en el primero.
+  calendarios: jsonb("calendarios").notNull().default(["primary"]),
+  activa: boolean("activa").notNull().default(true),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+/**
+ * Una reserva confirmada. `googleEventId` es lo que permite cancelar de verdad
+ * en el calendario y no solo en nuestra base; `tokenGestion` es el secreto que
+ * viaja en el enlace del correo para cancelar sin cuenta.
+ */
+export const reservas = pgTable(
+  "reservas",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id").references(() => user.id, { onDelete: "set null" }),
+    nombre: text("nombre").notNull(),
+    email: text("email").notNull(),
+    empresa: text("empresa"),
+    motivo: text("motivo"),
+    inicio: timestamp("inicio", { withTimezone: true }).notNull(),
+    fin: timestamp("fin", { withTimezone: true }).notNull(),
+    googleEventId: text("google_event_id"),
+    meetUrl: text("meet_url"),
+    // confirmada | cancelada
+    estado: text("estado").notNull().default("confirmada"),
+    tokenGestion: text("token_gestion").notNull().unique(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("reservas_inicio_idx").on(t.inicio),
+    index("reservas_estado_idx").on(t.estado),
+  ]
+);
+
 /** Ventana deslizante en base de datos: evita depender de un Redis extra. */
 export const rateLimit = pgTable(
   "rate_limit",
