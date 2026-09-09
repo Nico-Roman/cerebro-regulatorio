@@ -1,0 +1,75 @@
+# Respaldo de Postgres a un artefacto de GitHub.
+#
+# Existe porque los backups automáticos de Railway son del plan de pago, y la
+# base ya tiene datos reales: cuentas, perfiles, consultas y reservas. Un
+# respaldo semanal cifrado es la red mínima aceptable mientras tanto.
+#
+# Necesita dos secretos en Settings → Secrets and variables → Actions:
+#   DATABASE_PUBLIC_URL  la URL pública de Postgres en Railway (la privada
+#                        .railway.internal no es alcanzable desde GitHub).
+#   BACKUP_PASSPHRASE    una frase larga al azar. Sin ella el volcado viajaría
+#                        en claro dentro del artefacto, y un artefacto no es un
+#                        lugar donde dejar una base de datos legible.
+#
+# Para restaurar:
+#   openssl enc -d -aes-256-cbc -pbkdf2 -in respaldo.sql.gz.enc -pass pass:LA_FRASE | gunzip > respaldo.sql
+#   psql "$DATABASE_PUBLIC_URL" -f respaldo.sql
+
+name: Respaldo de Postgres
+
+on:
+  schedule:
+    # Domingos 07:00 UTC = 04:00 en Chile, fuera de toda hora de uso.
+    - cron: "0 7 * * 0"
+  workflow_dispatch:
+
+jobs:
+  respaldar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar que los secretos existan
+        env:
+          URL: ${{ secrets.DATABASE_PUBLIC_URL }}
+          FRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          faltan=""
+          [ -n "$URL" ]   || faltan="$faltan DATABASE_PUBLIC_URL"
+          [ -n "$FRASE" ] || faltan="$faltan BACKUP_PASSPHRASE"
+          if [ -n "$faltan" ]; then
+            echo "Faltan secretos:$faltan. Ver el encabezado de este workflow."
+            exit 1
+          fi
+
+      - name: Volcar la base
+        env:
+          URL: ${{ secrets.DATABASE_PUBLIC_URL }}
+        run: |
+          # pg_dump corre dentro de la imagen oficial para que la versión del
+          # cliente no quede atrás de la del servidor: un pg_dump más viejo se
+          # niega a volcar y el job fallaría con un error poco obvio.
+          docker run --rm -e PGURL="$URL" postgres:17-alpine \
+            sh -c 'pg_dump --no-owner --no-privileges "$PGURL"' > respaldo.sql
+          bytes=$(stat -c%s respaldo.sql)
+          echo "Volcado: $bytes bytes"
+          # Un dump de una base con esquema aplicado no baja de unos pocos KB.
+          # Si sale minúsculo, algo falló sin devolver error y no queremos
+          # guardar un archivo vacío creyendo que hay respaldo.
+          [ "$bytes" -gt 4096 ] || { echo "El volcado salió sospechosamente chico. Aborta."; exit 1; }
+
+      - name: Comprimir y cifrar
+        env:
+          FRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          gzip -9 respaldo.sql
+          openssl enc -aes-256-cbc -pbkdf2 -salt \
+            -in respaldo.sql.gz -out respaldo.sql.gz.enc -pass env:FRASE
+          rm -f respaldo.sql.gz
+          ls -la respaldo.sql.gz.enc
+
+      - name: Guardar el artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: respaldo-postgres-${{ github.run_id }}
+          path: respaldo.sql.gz.enc
+          retention-days: 90
+          if-no-files-found: error
