@@ -225,19 +225,38 @@ Confirmado que está apagada: `/api/agenda/huecos` responde
 3. Sin `LLM_API_KEY` el botón no aparece y el buscador funciona igual, así que
    no hay apuro.
 
-## Paso 9 · Decidir el ejecutor del corpus `[depende de la corrida en curso]`
+## Paso 9 · Ejecutor del corpus `[RESUELTO]`
 
-Si la corrida de `corpus-diario.yml` con los dos arreglos pasa la compuerta:
+**El corpus ya se mantiene solo en la nube.** No hace falta que hagas nada, y
+el runner self-hosted quedó sin motivo.
 
-1. Descomenta el bloque `schedule` en `.github/workflows/corpus-diario.yml`
-   (`0 11 * * *` = 08:00 Chile).
-2. Da de baja `corpus-diario-local.yml` y no registres el runner self-hosted:
-   deja de hacer falta.
-3. Apaga la tarea del Programador de tareas de Windows, o córrela después de
-   las 08:00 para que no compitan por el mismo commit.
+Corrida verde del 2026-09-08 en un runner GitHub-hosted: **121 documentos,
+2 584 chunks, recall@5 16/16 = 100%, abstención 5/5 = 100%** — las mismas
+cifras que producía el PC. Se publicó sola, Railway la desplegó, y
+`/api/estado` ahora responde `"publicado_por": "github-actions"` en vez de
+`"pc-local"`.
 
-Si no pasa, ahí sí el runner self-hosted es el camino, y este documento se
-actualiza con el motivo real.
+Hizo falta un cuarto arreglo además de los tres de la sección 4: los 31 PDF de
+`ANAMED_Normativa/otros/` (116 MB) no están en el listado del ISP, así que el
+paso de reconciliación no puede bajarlos y el corpus salía incompleto fuera de
+tu PC. Ahora van en el repo por **Git LFS**, con el mismo criterio por el que
+ya se versionaban los sidecars OCR: un documento irrecuperable no puede vivir
+en un solo disco.
+
+`checkout` se dejó **sin** `lfs: true` a propósito: 116 MB por corrida diaria
+revientan la cuota gratuita de 1 GB de ancho de banda LFS en una semana. Un
+paso posterior al caché materializa los punteros solo cuando el caché no los
+trajo, y **aborta si queda alguno sin materializar** en vez de armar un corpus
+mutilado en silencio — que es exactamente el modo de falla del 7 de septiembre.
+
+Lo que sí te queda por hacer, cuando quieras:
+
+- **Apagar la tarea del Programador de tareas de Windows.** Ya no hace falta y
+  compite por el mismo commit. Puede quedar como respaldo silencioso si le
+  cambias la hora a después de las 08:00 Chile.
+- `corpus-diario-local.yml` **fue eliminado**: tenía el mismo cron que el
+  workflow de la nube y los dos habrían competido si registrabas el runner. Se
+  recupera con `git revert ee21fd1` si alguna vez hiciera falta.
 
 ---
 
