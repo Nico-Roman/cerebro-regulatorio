@@ -54,6 +54,22 @@ export function Footer() {
             </div>
 
             <div>
+              <h3 className="label-micro text-muted">Legal</h3>
+              <ul className="mt-3 flex flex-col gap-2 text-sm">
+                <li>
+                  <Link href="/privacidad" className="text-muted hover:text-foreground">
+                    Política de Privacidad
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terminos" className="text-muted hover:text-foreground">
+                    Términos del Servicio
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
               <h3 className="label-micro text-muted">Contacto</h3>
               <ul className="mt-3 flex flex-col gap-2 text-sm">
                 <li>
