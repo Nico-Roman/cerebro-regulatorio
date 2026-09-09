@@ -33,15 +33,19 @@ jobs:
   frescura:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    # La variable ESTADO_URL está definida en este entorno, no a nivel de
+    # repositorio. Sin esta línea `vars.ESTADO_URL` llega vacía y el workflow
+    # cae al valor por defecto de abajo sin avisar.
+    environment: Production
 
     env:
-      # Apunta a donde la app vive DE VERDAD. Al 2026-09-08 regulamed.cl
-      # todavía resuelve a Vercel (deploy viejo, /api/estado da 404), así que
-      # el valor por defecto es el dominio de Railway. Cuando el DNS apunte a
-      # Railway, define la variable de repo ESTADO_URL como
-      # https://regulamed.cl/api/estado (Settings → Secrets and variables →
-      # Actions → Variables) y este workflow la toma sin necesidad de commit.
-      ENDPOINT: ${{ vars.ESTADO_URL || 'https://cerebro-regulatorio-production.up.railway.app/api/estado' }}
+      # Desde el 2026-09-09 regulamed.cl resuelve a Railway y sirve la app, así
+      # que el valor por defecto ya es el dominio real: vigilar el dominio y no
+      # el subdominio de Railway cubre además el DNS y el certificado, que son
+      # dos formas de caerse que el subdominio no detecta. Para apuntar a otro
+      # lado basta editar la variable ESTADO_URL del entorno Production
+      # (Settings → Environments → Production), sin tocar este archivo.
+      ENDPOINT: ${{ vars.ESTADO_URL || 'https://regulamed.cl/api/estado' }}
       # Días de atraso tolerados antes de fallar. El pipeline corre a diario:
       # 3 días significa que falló tres veces seguidas.
       MAX_DIAS: "3"
