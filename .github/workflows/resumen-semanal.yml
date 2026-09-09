@@ -4,9 +4,16 @@
 # dos cosas configuradas a mano, una vez:
 #   - Variable CRON_SECRET en Railway (cualquier cadena larga al azar).
 #   - Secret CRON_SECRET en GitHub con ese mismo valor.
-# Mientras no existan, el job falla con 404 a propósito: la app no acepta el
-# disparo sin secreto. También puedes generar el resumen entrando a
-# /api/cron/resumen-semanal con tu sesión de administrador.
+#
+# Ese secret vive en el ENTORNO "Production", no a nivel de repositorio, que es
+# donde quedo al crearlo. Por eso el job declara `environment: Production`: sin
+# esa linea `secrets.CRON_SECRET` llega vacio y el job aborta diciendo que
+# falta el secret, aunque el secret exista. Fue exactamente lo que paso el
+# 2026-09-09 en las corridas #1 y #2.
+#
+# Mientras no exista, el job falla a proposito: la app no acepta el disparo sin
+# secreto. Tambien puedes generar el resumen entrando a
+# /api/cron/resumen-semanal con tu sesion de administrador.
 
 name: Resumen semanal
 
@@ -19,6 +26,8 @@ on:
 jobs:
   enviar:
     runs-on: ubuntu-latest
+    # Da acceso a los secretos y variables definidos en ese entorno.
+    environment: Production
     steps:
       - name: Pedir el resumen a la app
         env:
@@ -26,7 +35,7 @@ jobs:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
           if [ -z "$CRON_SECRET" ]; then
-            echo "Falta el secret CRON_SECRET en GitHub. Ver el encabezado de este workflow."
+            echo "Falta el secret CRON_SECRET en el entorno Production. Ver el encabezado de este workflow."
             exit 1
           fi
           codigo=$(curl -sS -o /tmp/respuesta.json -w "%{http_code}" \
