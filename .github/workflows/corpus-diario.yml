@@ -11,41 +11,40 @@
 # se publica nada.
 #
 # ─────────────────────────────────────────────────────────────────────────────
-# EN PRUEBA (2026-09-08, revisión del diagnóstico anterior).
+# DESBLOQUEADO (2026-09-08). Corrida verde en runner GitHub-hosted:
+# 121 documentos, 2.584 chunks, recall@5 16/16 = 100%, abstencion 5/5 = 100%
+# — las mismas cifras que producia el PC.
 #
-# www.ispch.gob.cl falla desde un runner GitHub-hosted en dos capas:
-#   1. TLS: el servidor omite el intermedio "GlobalSign GCC R6 AlphaSSL CA
-#      2025"; OpenSSL no arma la cadena. Resuelto por el paso "Confiar el
-#      intermedio TLS…" más abajo.
-#   2. Corte de conexión sin respuesta (curl 52, "Empty reply").
+# El bloqueo se habia diagnosticado como "el WAF del ISP rechaza IPs de
+# datacenter". Eran tres bugs distintos, todos de la misma clase: codigo que
+# funciona en Windows y falla en silencio en Linux.
 #
-# La causa (2) se atribuyó a un WAF que rechaza IPs de datacenter o de fuera de
-# Chile, y por eso el `schedule` quedó desactivado y se creó
-# corpus-diario-local.yml para un runner self-hosted.
+#   1. El paso de verificacion TLS mandaba un curl sin User-Agent. El ISP corta
+#      la conexion (curl 52) ante cualquier UA que no sea de navegador —
+#      reproducible desde una IP residencial chilena, asi que la IP nunca fue
+#      el problema. El scraper si mandaba UA; moria el paso previo.
+#   2. Los enlaces del listado traen espacios y acentos sin escapar. curl los
+#      rechazaba con exit 3 y 132 normas quedaban "pendientes" para siempre.
+#      Ver urlSegura() en actualizar-diario.js.
+#   3. Los PDF se bajan con el nombre en minusculas y los sidecars OCR
+#      conservan la capitalizacion original. En Windows pareaban solos; en
+#      Linux no, y 59 escaneos salian vacios. Ver buscar_sidecar() en
+#      build_corpus.py.
 #
-# Ese diagnóstico estaba incompleto. El 2026-09-08, desde una IP residencial
-# chilena, se reprodujo el MISMO curl 52 sin User-Agent de navegador, y 200 OK
-# con él, tres veces seguidas. Es decir: al menos una causa del corte es el
-# User-Agent, no la IP — y el paso de verificación de arriba no mandaba ninguno,
-# así que abortaba el job antes de que el scraper (que sí manda UA de Chrome)
-# llegara a intentarlo.
+# Faltaba ademas que ANAMED_Normativa/otros/ (31 PDF que no estan en el listado
+# del ISP) viviera en el repo: ahora va por Git LFS.
 #
-# El paso de verificación ya manda el UA. Falta el experimento decisivo: correr
-# este workflow a mano y ver si pasa.
-#   · Si pasa  → la IP nunca fue el problema. Reactivar el `schedule` de abajo y
-#                dar de baja corpus-diario-local.yml y su runner self-hosted.
-#   · Si falla → ahí sí queda confirmado el bloqueo por IP; seguir con el runner
-#                self-hosted y dejar este archivo desactivado.
-# Ver APP-Regulatoria/PLAN-migracion-railway.md.
+# corpus-diario-local.yml y su runner self-hosted quedan sin motivo. La
+# compuerta de calidad freno las tres corridas malas sin publicar nada: hizo
+# exactamente su trabajo.
 # ─────────────────────────────────────────────────────────────────────────────
 
 name: Corpus diario
 
 on:
-  # schedule:
-  #   # 11:00 UTC = 08:00 en Chile (UTC-3). Reactivar cuando el ejecutor tenga
-  #   # IP chilena (ver nota de bloqueo arriba).
-  #   - cron: "0 11 * * *"
+  schedule:
+    # 11:00 UTC = 08:00 en Chile (UTC-3).
+    - cron: "0 11 * * *"
   workflow_dispatch:
 
 concurrency:
