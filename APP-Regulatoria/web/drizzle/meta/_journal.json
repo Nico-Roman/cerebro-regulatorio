@@ -8,6 +8,27 @@
       "when": 1788523378253,
       "tag": "0000_illegal_unus",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1788600000000,
+      "tag": "0001_feedback",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788700000000,
+      "tag": "0002_agenda",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1788800000000,
+      "tag": "0003_ia",
+      "breakpoints": true
     }
   ]
 }
