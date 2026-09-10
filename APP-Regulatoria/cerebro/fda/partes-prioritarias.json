@@ -1,0 +1,260 @@
+{
+  "_doc": "Partes del 21 CFR seleccionadas para la sección FDA. NO es el título completo: el título 21 tiene 275 partes y 8.408 secciones, y la mayoría —aditivos alimentarios, tabaco, salud radiológica, medicamentos veterinarios— no toca el trabajo regulatorio farmacéutico, cosmético ni de dispositivos que hace este proyecto. Cada entrada dice por qué está. Los títulos son los oficiales del eCFR, no redactados a mano.",
+  "titulo": 21,
+  "fuente_estructura": "https://www.ecfr.gov/api/versioner/v1/structure/{fecha}/title-21.json",
+  "curado": "2026-09-09",
+  "partes": [
+    {
+      "parte": "11",
+      "titulo": "Electronic Records; Electronic Signatures",
+      "subcapitulo": "A",
+      "categoria": "calidad_y_datos",
+      "motivo": "Registros y firmas electrónicas. Es la referencia que piden las auditorías cuando se valida un sistema computarizado; el Anexo 11 europeo y las expectativas del ISP se leen contra esta parte."
+    },
+    {
+      "parte": "50",
+      "titulo": "Protection of Human Subjects",
+      "subcapitulo": "A",
+      "categoria": "ensayos_clinicos",
+      "motivo": "Protección de sujetos humanos y consentimiento informado. Base de comparación con el DS 114 chileno."
+    },
+    {
+      "parte": "54",
+      "titulo": "Financial Disclosure by Clinical Investigators",
+      "subcapitulo": "A",
+      "categoria": "ensayos_clinicos",
+      "motivo": "Declaración de intereses financieros del investigador. Se exige en sometimientos que usen data de estudios con sitios en EE.UU."
+    },
+    {
+      "parte": "56",
+      "titulo": "Institutional Review Boards",
+      "subcapitulo": "A",
+      "categoria": "ensayos_clinicos",
+      "motivo": "Comités de ética (IRB). Equivalente funcional de los CEC chilenos."
+    },
+    {
+      "parte": "58",
+      "titulo": "Good Laboratory Practice for Nonclinical Laboratory Studies",
+      "subcapitulo": "A",
+      "categoria": "calidad_y_datos",
+      "motivo": "Buenas Prácticas de Laboratorio para estudios no clínicos. Referencia directa de la NT 180."
+    },
+    {
+      "parte": "201",
+      "titulo": "Labeling",
+      "subcapitulo": "C",
+      "categoria": "etiquetado",
+      "motivo": "Etiquetado de medicamentos, incluida la regla de la ficha técnica (PLR). Es la fuente cuando se compara un inserto chileno con el de EE.UU."
+    },
+    {
+      "parte": "202",
+      "titulo": "Prescription Drug Advertising",
+      "subcapitulo": "C",
+      "categoria": "etiquetado",
+      "motivo": "Publicidad de medicamentos de receta. El estándar más citado del mundo en promoción farmacéutica."
+    },
+    {
+      "parte": "203",
+      "titulo": "Prescription Drug Marketing",
+      "subcapitulo": "C",
+      "categoria": "distribucion",
+      "motivo": "Prescription Drug Marketing Act: muestras médicas y cadena de distribución."
+    },
+    {
+      "parte": "206",
+      "titulo": "Imprinting of Solid Oral Dosage Form Drug Products for Human Use",
+      "subcapitulo": "C",
+      "categoria": "etiquetado",
+      "motivo": "Grabado/identificación de formas sólidas orales."
+    },
+    {
+      "parte": "207",
+      "titulo": "Requirements for Foreign and Domestic Establishment Registration and Listing for Human Drugs, Including Drugs That Are Regulated Under a Biologics License Application, and Animal Drugs, and the National Drug Code",
+      "subcapitulo": "C",
+      "categoria": "establecimientos",
+      "motivo": "Registro de establecimientos y listado de productos, nacionales y extranjeros. Lo que debe cumplir un fabricante chileno que exporte a EE.UU."
+    },
+    {
+      "parte": "210",
+      "titulo": "Current Good Manufacturing Practice in Manufacturing, Processing, Packing, or Holding of Drugs; General",
+      "subcapitulo": "C",
+      "categoria": "gmp",
+      "motivo": "Alcance de las CGMP. Se lee siempre junto con la 211."
+    },
+    {
+      "parte": "211",
+      "titulo": "Current Good Manufacturing Practice for Finished Pharmaceuticals",
+      "subcapitulo": "C",
+      "categoria": "gmp",
+      "motivo": "CGMP de productos farmacéuticos terminados. La referencia GMP más citada; el DS 3 y la NT 127 chilenas se comparan contra esta parte."
+    },
+    {
+      "parte": "212",
+      "titulo": "Current Good Manufacturing Practice for Positron Emission Tomography Drugs",
+      "subcapitulo": "C",
+      "categoria": "gmp",
+      "motivo": "CGMP de radiofármacos PET."
+    },
+    {
+      "parte": "310",
+      "titulo": "New Drugs",
+      "subcapitulo": "D",
+      "categoria": "medicamentos",
+      "motivo": "Disposiciones generales sobre medicamentos nuevos."
+    },
+    {
+      "parte": "312",
+      "titulo": "Investigational New Drug Application",
+      "subcapitulo": "D",
+      "categoria": "ensayos_clinicos",
+      "motivo": "IND: autorización de producto en investigación. Comparable al permiso de uso en investigación del ISP."
+    },
+    {
+      "parte": "314",
+      "titulo": "Applications for FDA Approval to Market a New Drug",
+      "subcapitulo": "D",
+      "categoria": "registro",
+      "motivo": "NDA y ANDA: la solicitud de registro. Núcleo del trabajo de asuntos regulatorios."
+    },
+    {
+      "parte": "316",
+      "titulo": "Orphan Drugs",
+      "subcapitulo": "D",
+      "categoria": "registro",
+      "motivo": "Medicamentos huérfanos."
+    },
+    {
+      "parte": "320",
+      "titulo": "Bioavailability and Bioequivalence Requirements",
+      "subcapitulo": "D",
+      "categoria": "bioequivalencia",
+      "motivo": "Biodisponibilidad y bioequivalencia. Referencia de la guía chilena de productos de referencia."
+    },
+    {
+      "parte": "330",
+      "titulo": "Over-the-Counter (OTC) Human Drugs Which Are Generally Recognized as Safe and Effective and Not Misbranded",
+      "subcapitulo": "D",
+      "categoria": "medicamentos",
+      "motivo": "Medicamentos OTC reconocidos como seguros y eficaces (monografías)."
+    },
+    {
+      "parte": "600",
+      "titulo": "Biological Products: General",
+      "subcapitulo": "F",
+      "categoria": "biologicos",
+      "motivo": "Productos biológicos: general."
+    },
+    {
+      "parte": "601",
+      "titulo": "Licensing",
+      "subcapitulo": "F",
+      "categoria": "biologicos",
+      "motivo": "Licenciamiento de biológicos (BLA)."
+    },
+    {
+      "parte": "610",
+      "titulo": "General Biological Products Standards",
+      "subcapitulo": "F",
+      "categoria": "biologicos",
+      "motivo": "Estándares generales de productos biológicos, incluido el control de lotes."
+    },
+    {
+      "parte": "700",
+      "titulo": "General",
+      "subcapitulo": "G",
+      "categoria": "cosmeticos",
+      "motivo": "Cosméticos: disposiciones generales. Punto de comparación con el DS 239."
+    },
+    {
+      "parte": "701",
+      "titulo": "Cosmetic Labeling",
+      "subcapitulo": "G",
+      "categoria": "cosmeticos",
+      "motivo": "Etiquetado de cosméticos."
+    },
+    {
+      "parte": "740",
+      "titulo": "Cosmetic Product Warning Statements",
+      "subcapitulo": "G",
+      "categoria": "cosmeticos",
+      "motivo": "Advertencias obligatorias en cosméticos."
+    },
+    {
+      "parte": "801",
+      "titulo": "Labeling",
+      "subcapitulo": "H",
+      "categoria": "dispositivos",
+      "motivo": "Etiquetado de dispositivos médicos."
+    },
+    {
+      "parte": "803",
+      "titulo": "Medical Device Reporting",
+      "subcapitulo": "H",
+      "categoria": "dispositivos",
+      "motivo": "Medical Device Reporting: notificación de eventos adversos de dispositivos."
+    },
+    {
+      "parte": "806",
+      "titulo": "Medical Devices; Reports of Corrections and Removals",
+      "subcapitulo": "H",
+      "categoria": "dispositivos",
+      "motivo": "Correcciones y retiros de dispositivos."
+    },
+    {
+      "parte": "807",
+      "titulo": "Establishment Registration and Device Listing for Manufacturers and Initial Importers of Devices",
+      "subcapitulo": "H",
+      "categoria": "dispositivos",
+      "motivo": "Registro de establecimientos y notificación previa a la comercialización (510(k))."
+    },
+    {
+      "parte": "809",
+      "titulo": "In Vitro Diagnostic Products for Human Use",
+      "subcapitulo": "H",
+      "categoria": "dispositivos",
+      "motivo": "Diagnóstico in vitro."
+    },
+    {
+      "parte": "812",
+      "titulo": "Investigational Device Exemptions",
+      "subcapitulo": "H",
+      "categoria": "dispositivos",
+      "motivo": "Investigational Device Exemption: investigación clínica con dispositivos."
+    },
+    {
+      "parte": "814",
+      "titulo": "Premarket Approval of Medical Devices",
+      "subcapitulo": "H",
+      "categoria": "dispositivos",
+      "motivo": "Aprobación previa a la comercialización (PMA)."
+    },
+    {
+      "parte": "820",
+      "titulo": "Quality Management System Regulation",
+      "subcapitulo": "H",
+      "categoria": "dispositivos",
+      "motivo": "QMSR. Desde el 89 FR 7523 (2024) esta parte YA NO es la vieja QSR: incorpora ISO 13485 por referencia, y por eso bajó de decenas de secciones a nueve. Quien cite la 820 de memoria va a citar un texto que ya no existe."
+    },
+    {
+      "parte": "822",
+      "titulo": "Postmarket Surveillance",
+      "subcapitulo": "H",
+      "categoria": "dispositivos",
+      "motivo": "Vigilancia poscomercialización de dispositivos."
+    },
+    {
+      "parte": "830",
+      "titulo": "Unique Device Identification",
+      "subcapitulo": "H",
+      "categoria": "dispositivos",
+      "motivo": "Identificación única de dispositivos (UDI)."
+    },
+    {
+      "parte": "1271",
+      "titulo": "Human Cells, Tissues, and Cellular and Tissue-Based Products",
+      "subcapitulo": "L",
+      "categoria": "biologicos",
+      "motivo": "Células, tejidos y productos derivados (HCT/P). Comparable al Libro IX del Código Sanitario."
+    }
+  ]
+}

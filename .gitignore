@@ -51,3 +51,11 @@ APP-Regulatoria/cerebro/__pycache__/
 # Los snapshot-*.json con timestamp son acumulativos y ya quedan reflejados
 # en registro-cambios/cambios.jsonl, que es la bitácora buena.
 vigilancia-isp/snapshots/snapshot-*.json
+
+# Sección FDA (en preparación, no en vivo).
+# Las fuentes del eCFR y el corpus que sale de ellas se rebajan y se rearman con
+# dos comandos, así que no se versionan: son 8 MB de espejo de una API pública.
+# Lo que SÍ se versiona es fda/estado-vigilancia.json, que es la línea base de
+# la comparación: sin él no hay contra qué diffear el próximo cambio del CFR.
+APP-Regulatoria/cerebro/fda/fuentes/
+APP-Regulatoria/cerebro/fda/corpus/
