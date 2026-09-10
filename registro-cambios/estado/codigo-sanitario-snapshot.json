@@ -1,0 +1,1567 @@
+{
+  "norma_id": "5595",
+  "tipo": "Decreto con Fuerza de Ley",
+  "numero": "725",
+  "titulo": "Código Sanitario",
+  "fuente": "https://www.bcn.cl/leychile/consulta/obtxml?opt=7&idNorma=5595",
+  "capturado": "2026-09-09T23:12:32-03:00",
+  "fecha_version": "2025-09-29",
+  "derogado": false,
+  "n_articulos": 222,
+  "articulos": {
+    "1": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655736",
+      "resumen": "Artículo 1°.- El Código Sanitario rige todas las cuestiones relacionadas con el fomento, protección y recuperación de la salud de los habitantes de la República"
+    },
+    "2": {
+      "fecha_version": "1968-02-06",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655739",
+      "resumen": "Artículo 2°.- El Presidente de la República dictará, previo informe del Director General de Salud, los Reglamentos necesarios para la aplicación de las normas c"
+    },
+    "3": {
+      "fecha_version": "1980-10-24",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655740",
+      "resumen": "Artículo 3°.- Corresponde al Servicio Nacional de Salud, sin perjuicio de las facultades del Ministerio de Salud Pública, atender todas las materias relacionada"
+    },
+    "4": {
+      "fecha_version": "1992-08-27",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655741",
+      "resumen": "Artículo 4°.- A las Municipalidades corresponde atender los asuntos de orden sanitario que le entregan el artículo 105° de la Constitución Política del Estado y"
+    },
+    "5": {
+      "fecha_version": "2005-01-01",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655742",
+      "resumen": "Artículo 5º.- Cada vez que el presente Código, la ley o el reglamento aluda a la autoridad sanitaria, deberá entenderse por ella al Ministro de Salud, en las ma"
+    },
+    "6": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655743",
+      "resumen": "Artículo 6°.- Las definiciones que se contienen en los preceptos siguientes, valdrán para el solo efecto de la aplicación de este Código y de sus reglamentos."
+    },
+    "7": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655744",
+      "resumen": "Artículo 7°.- Las autorizaciones o permisos concedidos por los Servicios de Salud, de acuerdo con las atribuciones de este Código, tendrán la duración que para "
+    },
+    "7 bis": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "10563446",
+      "resumen": "Artículo 7 bis.- Para los casos señalados en el inciso final del artículo 7°, el titular deberá presentar a la autoridad respectiva una declaración jurada que d"
+    },
+    "8": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655745",
+      "resumen": "Artículo 8°.- Para el cumplimiento de las órdenes que expida en conformidad a las facultades que le concede el presente Código y sus reglamentos, el Director Ge"
+    },
+    "9": {
+      "fecha_version": "1997-03-22",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655746",
+      "resumen": "Artículo 9º.- Sin perjuicio de las atribuciones del Ministerio de Salud y del Instituto de Salud Pública de Chile, así como de las demás facultades que les conf"
+    },
+    "10": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655748",
+      "resumen": "Artículo 10°.- Para el cumplimiento de campañas sanitarias o en casos de emergencia, el Servicio Nacional de Salud podrá contratar, por períodos transitorios, p"
+    },
+    "11": {
+      "fecha_version": "1979-08-03",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655749",
+      "resumen": "Artículo 11°.- Sin perjuicio de las atribuciones que competen al Servicio Nacional de Salud, corresponde, en el orden sanitario, a las Municipalidades: a) prove"
+    },
+    "12": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655751",
+      "resumen": "Artículo 12°.- El Presidente de la República, por intermedio de los Ministerios del Interior y Salud Pública, y a propuesta del Director General de Salud, deber"
+    },
+    "13": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655752",
+      "resumen": "Artículo 13°.- En caso de negligencia grave de una Municipalidad en el cumplimiento de sus obligaciones sanitarias específicas, sin perjuicio de lo establecido "
+    },
+    "14": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655753",
+      "resumen": "Artículo 14°.- Corresponderá al Servicio Nacional de Salud la supresión de cualquier factor que, originado en un territorio municipal, ponga en peligro la salud"
+    },
+    "15": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Título Preliminar",
+      "id_parte": "8655754",
+      "resumen": "Artículo 15°.- Las Municipalidades de la República no podrán otorgar patentes ni permisos definitivos para el funcionamiento de locales o para el ejercicio de d"
+    },
+    "16": {
+      "fecha_version": "1968-02-06",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655755",
+      "resumen": "Artículo 16°.- Toda mujer, durante el embarazo y hasta el sexto mes del nacimiento del hijo, y el niño, tendrán derecho a la protección y vigilancia del Estado "
+    },
+    "17": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655758",
+      "resumen": "Artículo 17°.- La atención de la mujer y del niño durante los períodos a que se refiere el artículo anterior será gratuita para los indigentes en todos los esta"
+    },
+    "18": {
+      "fecha_version": "2019-05-02",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655759",
+      "resumen": "Artículo 18.- Es derecho preferente del hijo ser amamantado directamente por su madre, salvo que por indicación médica o decisión de la madre se resuelva lo con"
+    },
+    "19": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655760",
+      "resumen": "Artículo 19°.- El control de la atención médico-preventiva y dental de los alumnos de los establecimientos fiscales de educación, será efectuada por el Servicio"
+    },
+    "20": {
+      "fecha_version": "1968-11-29",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655761",
+      "resumen": "Artículo 20°.- Todo médico-cirujano que asista a persona que padezca de una enfermedad transmisible sujeta a declaración obligatoria, comunicará por escrito el "
+    },
+    "21": {
+      "fecha_version": "2020-04-23",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655764",
+      "resumen": "Artículo 21°.- Un reglamento determinará las enfermedades transmisibles que deben ser comunicadas obligatoriamente a las autoridades sanitarias, así como la for"
+    },
+    "22": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655765",
+      "resumen": "Artículo 22°.- Será responsabilidad de la autoridad sanitaria al aislamiento de toda persona que padezca una enfermedad de declaración obligatoria, la cual de p"
+    },
+    "23": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655766",
+      "resumen": "Artículo 23°.- La autoridad sanitaria deberá proveer al médico-cirujano particular que lo solicite, siempre que ello sea posible, de los medios adecuados de dia"
+    },
+    "24": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655767",
+      "resumen": "Artículo 24°.- El Servicio Nacional de Salud podrá inspeccionar y visitar todos los establecimientos e instituciones públicas o particulares que alberguen a gru"
+    },
+    "25": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655768",
+      "resumen": "Artículo 25°.- Los Directores de los establecimientos educacionales estarán obligados a prohibir temporalmente la asistencia a clase de aquellos alumnos que a j"
+    },
+    "26": {
+      "fecha_version": "1968-02-06",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655769",
+      "resumen": "Artículo 26°.- Toda persona que hubiere estado en contacto con paciente de enfermedad transmisible, podrá ser sometida por la autoridad sanitaria a observación,"
+    },
+    "27": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655770",
+      "resumen": "Artículo 27°.- El Servicio Nacional de Salud determinará el período mínimo de aislamiento a que deben someterse los enfermos contagiosos, así como las restricci"
+    },
+    "28": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655771",
+      "resumen": "Artículo 28°.- Todo profesional que trate a una persona que padezca de una enfermedad transmisible deberá ordenar la adecuada desinfección de las excreciones, r"
+    },
+    "29": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655772",
+      "resumen": "Artículo 29°.- El Servicio Nacional de Salud determinará la forma y condiciones en que se efectuará la desinfección, desinsectación o desratización: a) de las h"
+    },
+    "30": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655773",
+      "resumen": "Artículo 30°.- Se prohibe a los laboratorios bacteriológicos privados sin autorización expresa de la autoridad sanitaria, cultivar los microorganismos específic"
+    },
+    "31": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655774",
+      "resumen": "Artículo 31°.- En caso de peligro de epidemia o cuando ésta se hubiere declarado en cualquier lugar del territorio, el Servicio Nacional de Salud podrá disponer"
+    },
+    "32": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655775",
+      "resumen": "Artículo 32°.- El Servicio Nacional de Salud tendrá a su cargo la vacunación de los habitantes contra las enfermedades transmisibles. El Presidente de la Repúbl"
+    },
+    "33": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655776",
+      "resumen": "Artículo 33°.- La vacunación y revacunación antivariólica son obligatorias para todos los habitantes de la República, con las excepciones que el Servicio Nacion"
+    },
+    "34": {
+      "fecha_version": "2003-01-08",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655777",
+      "resumen": "Artículo 34°.- Toda persona mordida, rasguñada o que hubiere podido ser infectada por un animal enfermo o sospechoso de tener rabia, deberá someterse al tratami"
+    },
+    "35": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655778",
+      "resumen": "Artículo 35°.- Un reglamento especial fijará los requisitos sanitarios que deben cumplir los ferrocarriles, naves, aeronaves o cualquier otro medio de transport"
+    },
+    "36": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655779",
+      "resumen": "Artículo 36°.- Cuando una parte del territorio se viere amenazada o invadida por una epidemia o por un aumento notable de alguna enfermedad, o cuando se produje"
+    },
+    "37": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655780",
+      "resumen": "Artículo 37°.- Un Reglamento determinará las profesiones u ocupaciones que no podrán desempeñar los pacientes o portadores de gérmenes de enfermedades transmisi"
+    },
+    "38": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655781",
+      "resumen": "Artículo 38°.- El Servicio Nacional de Salud tendrá a su cargo la lucha contra las enfermedades venéreas y procurará evitar su propagación por todos los medios "
+    },
+    "39": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655783",
+      "resumen": "Artículo 39°.- Un Reglamento establecerá la forma y condiciones en que deba realizarse la educación sexual y antivenérea en los establecimientos educacionales, "
+    },
+    "40": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655784",
+      "resumen": "Artículo 40°.- Será obligatoria la denuncia al Servicio Nacional de Salud de los casos de enfermedades venéreas que determine el reglamento y también la de los "
+    },
+    "41": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655785",
+      "resumen": "Artículo 41°.- Para las personas que se dedican al comercio sexual, se llevará una estadística sanitaria, no permitiéndose su agrupación en prostíbulos cerrados"
+    },
+    "42": {
+      "fecha_version": "1997-08-26",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655786",
+      "resumen": "Artículo 42°.- El Servicio Nacional de Salud establecerá en los puntos del territorio de la República que sea necesario, los laboratorios indispensables para re"
+    },
+    "43": {
+      "fecha_version": "1989-05-24",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655788",
+      "resumen": "Artículo 43°.- El Instituto Bacteriológico será el Laboratorio Central del Servicio Nacional de Salud y prestará ayuda técnica, asesoramiento y supervigilancia "
+    },
+    "44": {
+      "fecha_version": "1989-05-24",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655789",
+      "resumen": "Artículo 44°.- Además de las actividades señaladas en el artículo anterior y las previstas en su ley orgánica, el Instituto podrá, en caso de ausencia o insufic"
+    },
+    "45": {
+      "fecha_version": "1989-05-24",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655790",
+      "resumen": "Artículo 45°.- Las reclamaciones que pudieren deducirse contra los resultados de exámenes o análisis que practiquen en materia sanitaria los laboratorios de los"
+    },
+    "46": {
+      "fecha_version": "1989-05-24",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655791",
+      "resumen": "Artículo 46°.- Corresponderá a los Servicios de Salud la la fiscalización de los laboratorios destinados al diagnóstico de las enfermedades del hombre y al cont"
+    },
+    "47": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655792",
+      "resumen": "Artículo 47°.- Sin perjuicio de las atribuciones de la Dirección de Estadística y Censo y del Consejo Nacional Consultivo de Salud, el Servicio Nacional de Salu"
+    },
+    "48": {
+      "fecha_version": "1968-02-06",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655794",
+      "resumen": "Artículo 48°.- Los Oficiales del Registro Civil estarán obligados a proporcionar semanalmente a la autoridad local del Servicio Nacional de Salud, los datos nec"
+    },
+    "49": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655795",
+      "resumen": "Artículo 49°.- El Presidente de la República podrá establecer la notificación obligatoria a la autoridad Sanitaria, por las personas señaladas en el artículo 20"
+    },
+    "50": {
+      "fecha_version": "1968-02-06",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655796",
+      "resumen": "Artículo 50°.- Los Oficiales del Registro Civil deberán dar a conocer de inmediato a la autoridad sanitaria local las defunciones causadas por enfermedades de d"
+    },
+    "51": {
+      "fecha_version": "2001-09-13",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655797",
+      "resumen": "Artículo 51°.- El Servicio Nacional de Salud deberá capacitar al individuo y a los grupos sociales mediante acciones educativas, tendientes a compenetrarlos de "
+    },
+    "52": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655799",
+      "resumen": "Artículo 52°.- Las instituciones educacionales y las empresas informativas del Estado o particulares, deberán coordinar los programas que digan relación con sal"
+    },
+    "53": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655800",
+      "resumen": "Artículo 53°.- Queda prohibida cualquiera forma de publicación o propaganda referente a higiene, medicina preventiva o curativa y ramas semejantes que, a juicio"
+    },
+    "54": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro I",
+      "id_parte": "8655801",
+      "resumen": "Artículo 54°.- Se considerará que desde el punto de vista sanitario se engaña al público y se perjudican los intereses de la población, cuando por medio de publ"
+    },
+    "55": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655802",
+      "resumen": "Artículo 55°.- Para la aplicación del presente Libro y sus Reglamentos, se entenderá por: \"Aislamiento\": la medida consistente en separar una persona o grupo de"
+    },
+    "56": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655805",
+      "resumen": "Artículo 56°.- Corresponde al Servicio Nacional de Salud en materia de protección sanitaria internacional: a) adoptar en los puertos, fronteras y sitios de trán"
+    },
+    "57": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655807",
+      "resumen": "Artículo 57°.- Cuando el país está amenazado o invadido por peste, cólera, fiebre amarilla, viruela, tifo exantemático o cualquiera otra enfermedad transmisible"
+    },
+    "58": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655808",
+      "resumen": "Artículo 58°.- El Servicio Nacional de Salud en las circunstancias mencionadas en el artículo anterior, publicará las medidas preventivas que los buques u otros"
+    },
+    "59": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655809",
+      "resumen": "Artículo 59°.- El Servicio Nacional de Salud dará a conocer a las naciones extranjeras, la nómina de los puertos del territorio nacional, dotados de útiles y pe"
+    },
+    "60": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655810",
+      "resumen": "Artículo 60°.- El Servicio Nacional de Salud informará al Organismo Internacional correspondiente, cuando un área local infectada que no pertenezca a una zona e"
+    },
+    "61": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655811",
+      "resumen": "Artículo 61°.- Antes de arribar al primer puerto de escala del territorio nacional, el capitán del buque informará sobre el estado de salud a bordo y, el arribo"
+    },
+    "62": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655812",
+      "resumen": "Artículo 62°.- Siempre que sea posible, las autoridades locales del Servicio Nacional de Salud deberán otorgar libre plática por radio a todo buque o aeronave c"
+    },
+    "63": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655813",
+      "resumen": "Artículo 63°.- El período de detención de las naves, aeronaves, trenes y vehículos de carreteras, para los fines de la inspección o tratamiento, será el más bre"
+    },
+    "64": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655814",
+      "resumen": "Artículo 64°.- Un Reglamento determinará la suma que los buques deberán pagar por los servicios de cuarentena y fumigación, la que en ningún caso excederá del c"
+    },
+    "65": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655815",
+      "resumen": "Artículo 65°.- El Servicio Nacional de Salud notificará al Organismo Internacional que corresponda, por telegrama, dentro de las veinticuatro horas de haber sid"
+    },
+    "66": {
+      "fecha_version": "1986-02-24",
+      "derogado": false,
+      "libro": "Libro II",
+      "id_parte": "8655816",
+      "resumen": "Artículo 66°.- Un Reglamento de Sanidad Marítima, Aérea y de Frontera establecerá la forma en que se cumplirán las disposiciones de este Libro y en especial las"
+    },
+    "67": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655817",
+      "resumen": "Artículo 67°.- Corresponde al Servicio Nacional de Salud velar porque se eliminen o controlen todos los factores, elementos o agentes del medio ambiente que afe"
+    },
+    "68": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655820",
+      "resumen": "Artículo 68°.- Un Reglamento contendrá las normas sobre condiciones de saneamiento y seguridad de las ciudades, balnearios, campos y territorios mineros, así co"
+    },
+    "69": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655821",
+      "resumen": "Artículo 69°.- No podrá iniciarse la construcción o remodelación de una población, sin que el Servicio Nacional de Salud haya aprobado previamente los servicios"
+    },
+    "70": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655824",
+      "resumen": "Artículo 70°.- Las instalaciones sanitarias de viviendas, industrias o locales de cualquier naturaleza, serán materia de reglamentos especiales que dicte el Pre"
+    },
+    "71": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655825",
+      "resumen": "Artículo 71°.- Corresponde al Servicio Nacional de Salud aprobar los proyectos relativos a la construcción, reparación, modificación y ampliación de cualquier o"
+    },
+    "72": {
+      "fecha_version": "1969-12-19",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655826",
+      "resumen": "Artículo 72°.- El Servicio Nacional de Salud ejercerá la vigilancia sanitaria sobre provisiones o plantas de agua destinadas al uso del hombre, como asimismo de"
+    },
+    "73": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655827",
+      "resumen": "Artículo 73°.- Prohíbese descargar las aguas servidas y los residuos industriales o mineros en ríos o lagunas, o en cualquier otra fuente o masa de agua que sir"
+    },
+    "74": {
+      "fecha_version": "1983-12-13",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655956",
+      "resumen": "Artículo 74°.- No se podrá ejecutar labores mineras en sitios donde se han alumbrado aguas subterráneas en terrenos particulares ni en aquellos lugares cuya exp"
+    },
+    "75": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655829",
+      "resumen": "Artículo 75°.- Prohíbese usar las aguas de alcantarillado, desagües, acequias u otras aguas declaradas contaminadas por la autoridad sanitaria, para la crianza "
+    },
+    "76": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655830",
+      "resumen": "Artículo 76°.- Corresponderá a la autoridad sanitaria autorizar la instalación, ampliación y modificación de los balnearios, baños y piscinas destinados al uso "
+    },
+    "77": {
+      "fecha_version": "2009-10-03",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655831",
+      "resumen": "Artículo 77°.- El reglamento comprenderá normas como las que se refieren a: a) las condiciones de saneamiento previo de los terrenos que se destinarán a nuevas "
+    },
+    "78": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655833",
+      "resumen": "Artículo 78°.- El Reglamento fijará las condiciones de saneamiento y seguridad relativas a la acumulación, selección, industrialización, comercio o disposición "
+    },
+    "79": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655835",
+      "resumen": "Artículo 79°.- Para proceder a la construcción, reparación, modificación y ampliación de cualquier planta de tratamiento de basuras y desperdicios de cualquier "
+    },
+    "80": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655836",
+      "resumen": "Artículo 80°.- Corresponde al Servicio Nacional de Salud autorizar la instalación y vigilar el funcionamiento de todo lugar destinado a la acumulación, selecció"
+    },
+    "81": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655837",
+      "resumen": "Artículo 81°.- Los vehículos y sistemas de transporte de materiales que, a juicio del Servicio Nacional de Salud, puedan significar un peligro o molestia a la p"
+    },
+    "82": {
+      "fecha_version": "2000-04-29",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655838",
+      "resumen": "Artículo 82.- El reglamento comprenderá normas como las que se refieren a: a) las condiciones de higiene y seguridad que deben reunir los lugares de trabajo, lo"
+    },
+    "83": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655840",
+      "resumen": "Artículo 83°.- Las Municipalidades no podrán otorgar patentes definitivas para la instalación, ampliación o traslado de industrias, sin informe previo de la aut"
+    },
+    "84": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655841",
+      "resumen": "Artículo 84°.- El Servicio Nacional de Salud podrá disponer el traslado de aquellas industrias o depósitos de materiales que, a su juicio, representen un peligr"
+    },
+    "85": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655842",
+      "resumen": "Artículo 85°.- Los planos reguladores comunales o intercomunales no podrán ser aprobados sin previo informe favorable del Servicio Nacional de Salud, respecto a"
+    },
+    "86": {
+      "fecha_version": "1985-04-25",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655843",
+      "resumen": "Artículo 86.- Corresponderá a los Servicios de Salud, dentro del territorio de su competencia, otorgar la autorización previa para que puedan funcionar en él, i"
+    },
+    "87": {
+      "fecha_version": "2008-12-27",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655844",
+      "resumen": "Artículo 87°.- El Servicio Nacional de Salud tendrá a su cargo la recopilación y análisis de los datos estadísticos referentes a los accidentes y enfermedades p"
+    },
+    "88": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655845",
+      "resumen": "Artículo 88°.- Corresponde exclusivamente al Servicio Nacional de Salud determinar en cada caso las incapacidades permanentes debidas a accidentes del trabajo o"
+    },
+    "89": {
+      "fecha_version": "2008-11-19",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655846",
+      "resumen": "Artículo 89°.- El Reglamento comprenderá normas como las que se refieren a: a) la conservación y pureza del aire y evitar en él la presencia de materias u olore"
+    },
+    "90": {
+      "fecha_version": "1984-05-04",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655849",
+      "resumen": "Artículo 90°.- El Reglamento fijará las condiciones en que podrá realizarse la producción, importación, expendio, tenencia, transporte, distribución, utilizació"
+    },
+    "91": {
+      "fecha_version": "2008-12-27",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655947",
+      "resumen": "Artículo 91°.- Sin perjuicio de lo dispuesto en el artículo anterior, un reglamento establecerá las condiciones en que se podrá realizar la fabricación, importa"
+    },
+    "92": {
+      "fecha_version": "2008-12-27",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655950",
+      "resumen": "Artículo 92°.- Todo producto destinado a ser aplicado en el medio ambiente con el objeto de combatir organismos capaces de producir daños en el hombre, animales"
+    },
+    "93": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro III",
+      "id_parte": "8655958",
+      "resumen": "Artículo 93°.- Ningún pesticida podrá ser importado o fabricado en el país sin autorización del Director General de Salud, debiendo obtenerse para su venta y di"
+    },
+    "94": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "8655854",
+      "resumen": "Artículo 94.- Corresponderá al Ministerio de Salud velar por el acceso de la población a medicamentos o productos farmacéuticos de calidad, seguridad y eficacia"
+    },
+    "95": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "8655857",
+      "resumen": "Artículo 95.- Se entenderá por producto farmacéutico o medicamento cualquier substancia natural, biológica, sintética o las mezclas de ellas, originada mediante"
+    },
+    "96": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "8655858",
+      "resumen": "Artículo 96.- El Instituto de Salud Pública de Chile será la autoridad encargada en todo el territorio nacional del control sanitario de los productos farmacéut"
+    },
+    "97": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9407775",
+      "resumen": "Artículo 97.- El Instituto de Salud Pública de Chile llevará un registro de todos los productos farmacéuticos evaluados favorablemente en cuanto a su eficacia, "
+    },
+    "98": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9407776",
+      "resumen": "Artículo 98.- Los productos estupefacientes, psicotrópicos y demás substancias que produzcan efectos análogos se regirán por los reglamentos específicos que al "
+    },
+    "99": {
+      "fecha_version": "2020-01-08",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9407777",
+      "resumen": "Artículo 99.- Sin perjuicio de lo dispuesto en el artículo 97, el Instituto de Salud Pública de Chile podrá autorizar provisionalmente la distribución, venta o "
+    },
+    "100": {
+      "fecha_version": "2016-01-26",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9407778",
+      "resumen": "Artículo 100.- La venta al público de productos farmacéuticos sólo podrá efectuarse previa presentación de la receta del profesional habilitado que los prescrib"
+    },
+    "100 BIS": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9407779",
+      "resumen": "Artículo 100 bis.- Los medicamentos de venta directa deberán presentarse en envases que contengan en su exterior la indicación terapéutica necesaria para adopta"
+    },
+    "101": {
+      "fecha_version": "2020-09-22",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9407780",
+      "resumen": "Artículo 101.- La receta es el instrumento privado mediante el cual el profesional habilitado para prescribir indica a una persona identificada y previamente ev"
+    },
+    "102": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066431",
+      "resumen": "Artículo 102.- Se entenderá por alimentos o productos alimenticios cualquier substancia o mezcla de substancias destinadas al consumo humano, incluyendo las beb"
+    },
+    "103": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066432",
+      "resumen": "Artículo 103.- Corresponderá a la Secretaría Regional Ministerial de Salud autorizar y fiscalizar, dentro de su territorio de competencia, la instalación de los"
+    },
+    "104": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066433",
+      "resumen": "Artículo 104.- Los productos alimenticios deberán responder a sus caracteres organolépticos y, en su composición química y características microbiológicas, a su"
+    },
+    "105": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066434",
+      "resumen": "Artículo 105.- El reglamento determinará las características que deberán reunir los alimentos o productos alimenticios destinados al consumo humano, las condici"
+    },
+    "105 bis": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066436",
+      "resumen": "Artículo 105 bis.- Leche es la secreción mamaria normal exenta de calostro de animales lecheros, obtenida mediante una o más ordeñas, sin ningún tipo de adición"
+    },
+    "105 ter": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066437",
+      "resumen": "Artículo 105 ter.- La expresión \"leche\", sin otra denominación, es el producto de la ordeña de la vaca. Las leches de otros animales deberán denominarse según l"
+    },
+    "105 quáter": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066438",
+      "resumen": "Artículo 105 quáter.- Las botellas o envases de leche líquida y en polvo que se vendan al público deberán contener una etiqueta o rótulo en su parte frontal y c"
+    },
+    "105 quinquies": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066439",
+      "resumen": "Artículo 105 quinquies.- Producto lácteo es aquel obtenido mediante cualquier elaboración de la leche, que puede contener aditivos alimentarios y otros ingredie"
+    },
+    "105 sexies": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066440",
+      "resumen": "Artículo 105 sexies.- Las botellas o envases de productos que se enmarquen en la definición del inciso primero del artículo 105 quinquies deberán contener una e"
+    },
+    "105 septies": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066441",
+      "resumen": "Artículo 105 septies.- Los procesadores de leche deberán contar con un registro del origen y cantidad de leche reconstituida, recombinada, procesada y comercial"
+    },
+    "105 octies": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066442",
+      "resumen": "Artículo 105 octies.- Las plantas elaboradoras de leche reconstituida o mezcla de leche reconstituida, leche recombinada y leche natural, así como sus correspon"
+    },
+    "105 nonies": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066443",
+      "resumen": "Artículo 105 nonies.- Las infracciones al presente párrafo serán sancionadas de acuerdo a lo establecido en el Libro X de este Código."
+    },
+    "105 decies": {
+      "fecha_version": "2019-11-02",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10066444",
+      "resumen": "Artículo 105 decies.- Los casos que no estén expresamente regulados en este párrafo, se regirán por las normas del presente Código y por las contenidas en el Re"
+    },
+    "105 undecies": {
+      "fecha_version": "2024-05-17",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10500842",
+      "resumen": "Artículo 105 undecies.- Con la denominación de carne se entiende la parte comestible de los músculos de los animales de abasto como bovinos, ovinos, porcinos, e"
+    },
+    "105 duodecies": {
+      "fecha_version": "2024-05-17",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10500843",
+      "resumen": "Artículo 105 duodecies.- La carne comprende todos los tejidos blandos que rodean el esqueleto, incluyendo su cobertura grasa, tendones, vasos, nervios, aponeuro"
+    },
+    "105 terdecies": {
+      "fecha_version": "2024-05-17",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "10500844",
+      "resumen": "Artículo 105 terdecies.- Se prohíbe catalogar como carne a un producto que no sea de origen animal y que no cumpla con lo dispuesto en los artículos 105 undecie"
+    },
+    "106": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9407781",
+      "resumen": "Artículo 106.- Producto cosmético es cualquier preparado que se destine a ser aplicado externamente al cuerpo humano, con fines de embellecimiento, modificación"
+    },
+    "107": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9407782",
+      "resumen": "Artículo 107.- Para su distribución en el territorio nacional, todo producto cosmético deberá contar con registro sanitario otorgado por el Instituto de Salud P"
+    },
+    "108": {
+      "fecha_version": "2024-01-26",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "8655871",
+      "resumen": "Artículo 108.- La internación y la producción en el país de productos de higiene y odorización personal deberán ser notificadas al Instituto para que éste ejerz"
+    },
+    "109": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "8655873",
+      "resumen": "Artículo 109.- Mediante uno o más reglamentos expedidos por el Presidente de la República a través del Ministerio de Salud, se determinarán las normas sanitaria"
+    },
+    "110": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "8655874",
+      "resumen": "Artículo 110.- Corresponderá al Instituto de Salud Pública de Chile autorizar la instalación de los laboratorios que fabriquen cosméticos y fiscalizar su funcio"
+    },
+    "111": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9407784",
+      "resumen": "Artículo 111.- Los instrumentos, aparatos, dispositivos y otros artículos o elementos destinados al diagnóstico, prevención y tratamiento de enfermedades de ser"
+    },
+    "111 A": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605133",
+      "resumen": "Artículo 111 A.- Los productos farmacéuticos y los elementos de uso médico para ser utilizados en investigaciones científicas en seres humanos deberán contar co"
+    },
+    "111 B": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605134",
+      "resumen": "Artículo 111 B.- El titular de la autorización, la entidad patrocinante, el investigador principal y el respectivo centro donde se realice la investigación será"
+    },
+    "111 C": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605135",
+      "resumen": "Artículo 111 C.- El paciente sujeto de ensayo clínico tendrá derecho a que, una vez terminado éste, el titular de la autorización especial para uso provisional "
+    },
+    "111 D": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605136",
+      "resumen": "Artículo 111 D.- Todo centro donde se realice investigación de productos farmacéuticos y elementos de uso médico en seres humanos deberá estar acreditado por el"
+    },
+    "111 E": {
+      "fecha_version": "2020-11-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605137",
+      "resumen": "Artículo 111 E.- Los titulares de las autorizaciones para uso provisional con fines de investigación serán responsables por los daños que causen con ocasión de "
+    },
+    "111 F": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605138",
+      "resumen": "Artículo 111 F.- Será obligación de los titulares de las autorizaciones especiales para uso provisional para fines de investigación de productos farmacéuticos y"
+    },
+    "111 G": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605139",
+      "resumen": "Artículo 111 G.- Las infracciones de lo dispuesto en el presente Título serán sancionadas conforme a las normas del Libro Décimo de este Código y a las contenid"
+    },
+    "111 H": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605141",
+      "resumen": "Artículo 111 H.- Se entenderá por productos sanitarios los regulados en los Títulos I, II y IV de este Libro. Se entenderá por producto sanitario defectuoso aqu"
+    },
+    "111 I": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605142",
+      "resumen": "Artículo 111 I.- Todo daño causado por el uso de un producto sanitario defectuoso dará lugar a las responsabilidades civiles y penales, según corresponda. Serán"
+    },
+    "111 J": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605143",
+      "resumen": "Artículo 111 J.- El perjudicado que pretenda obtener la reparación de los daños causados tendrá que probar el defecto, el daño y la relación de causalidad entre"
+    },
+    "111 K": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605144",
+      "resumen": "Artículo 111 K.- El demandado no podrá eximirse de responsabilidad alegando que los daños ocasionados por un producto sanitario defectuoso se originan de hechos"
+    },
+    "111 L": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605145",
+      "resumen": "Artículo 111 L.- La acción de reparación de los daños y perjuicios previstos en este Título prescribirá a los cinco años contados desde la manifestación del dañ"
+    },
+    "111 M": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605146",
+      "resumen": "Artículo 111 M.- Los fabricantes e importadores de los productos sanitarios deberán contar con un seguro, aval o garantía financiera equivalente, para responder"
+    },
+    "111 N": {
+      "fecha_version": "2015-06-06",
+      "derogado": false,
+      "libro": "Libro IV",
+      "id_parte": "9605147",
+      "resumen": "Artículo 111 N.- El ejercicio de las acciones jurisdiccionales para la reparación de los daños de que trata este Título se regirá por lo dispuesto en el Párrafo"
+    },
+    "112": {
+      "fecha_version": "1994-12-03",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "8655876",
+      "resumen": "Artículo 112°.- Sólo podrán desempeñar actividades propias de la medicina, odontología, química y farmacia u otras relacionadas con la conservación y restableci"
+    },
+    "113": {
+      "fecha_version": "1997-12-16",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "8655878",
+      "resumen": "Artículo 113°.- Se considera ejercicio ilegal de la profesión de médico-cirujano todo acto realizado con el propósito de formular diagnóstico, pronóstico o trat"
+    },
+    "113 BIS": {
+      "fecha_version": "2010-12-17",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "9080566",
+      "resumen": "Artículo 113 bis.- Sin perjuicio de lo establecido en el artículo anterior, el tecnólogo médico con mención en oftalmología podrá detectar los vicios de refracc"
+    },
+    "114": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "8655879",
+      "resumen": "Artículo 114°.- Prohíbese a una misma persona ejercer conjuntamente las profesiones de médico-cirujano y las de farmacéutico, químico-farmacéutico o bío-químico"
+    },
+    "115": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "8655880",
+      "resumen": "Artículo 115°.- Los cirujano-dentistas sólo podrán prestar atenciones odonto-estomatológicas. Podrán, asimismo, adquirir o prescribir los medicamentos necesario"
+    },
+    "116": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "8655881",
+      "resumen": "Artículo 116°.- Los laboratoristas dentales sólo podrán ejercer sus actividades a indicación de cirujano-dentistas, quedándoles prohibido ejecutar trabajos en l"
+    },
+    "117": {
+      "fecha_version": "2011-09-13",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "8655882",
+      "resumen": "Artículo 117°.- Los servicios profesionales de la matrona comprenden la atención del embarazo, parto y puerperio normales y la atención del recién nacido, como,"
+    },
+    "118": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "8655883",
+      "resumen": "Artículo 118°.- Los consultorios de matronas podrán ser destinados al control de la evolución del embarazo y quedarán incluidas en la reglamentación sobre mater"
+    },
+    "119": {
+      "fecha_version": "2017-09-23",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "8655884",
+      "resumen": "Artículo 119. Mediando la voluntad de la mujer, se autoriza la interrupción de su embarazo por un médico cirujano, en los términos regulados en los artículos si"
+    },
+    "119 BIS": {
+      "fecha_version": "2017-09-23",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "9835434",
+      "resumen": "Artículo 119 bis. Para realizar la intervención contemplada en el número 1) del inciso primero del artículo anterior, se deberá contar con el respectivo diagnós"
+    },
+    "119 TER": {
+      "fecha_version": "2017-09-23",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "9835435",
+      "resumen": "Artículo 119 ter. El médico cirujano requerido para interrumpir el embarazo por alguna de las causales descritas en el inciso primero del artículo 119 podrá abs"
+    },
+    "119 QUÁTER": {
+      "fecha_version": "2017-09-23",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "9835436",
+      "resumen": "Artículo 119 quáter. Queda estrictamente prohibida la publicidad sobre la oferta de centros, establecimientos o servicios, o de medios, prestaciones técnicas o "
+    },
+    "120": {
+      "fecha_version": "2010-12-17",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "8655885",
+      "resumen": "Artículo 120.- Los profesionales señalados en los artículos 112 y 113 bis de este Código no podrán ejercer su profesión y tener intereses comerciales que digan "
+    },
+    "120 BIS": {
+      "fecha_version": "2023-03-17",
+      "derogado": false,
+      "libro": "Libro V",
+      "id_parte": "10415409",
+      "resumen": "Artículo 120 bis.- Los profesionales a que se refiere este Libro podrán otorgar prestaciones a distancia mediante tecnologías de la información y comunicaciones"
+    },
+    "121": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407786",
+      "resumen": "Artículo 121.- Son establecimientos del área de la salud aquellas entidades públicas o privadas que realizan o contribuyen a la ejecución de acciones de promoci"
+    },
+    "122": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407788",
+      "resumen": "Artículo 122.- Los establecimientos asistenciales que realicen acciones de salud a las personas requerirán de autorización expresa de la Secretaría Regional Min"
+    },
+    "123": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407789",
+      "resumen": "Artículo 123.- Requerirán asimismo autorización sanitaria los establecimientos de atención abierta o ambulatoria en los cuales se realicen procedimientos especi"
+    },
+    "124": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407790",
+      "resumen": "Artículo 124.- Los establecimientos que realicen actividades dirigidas al cuidado y embellecimiento estético corporal serán fiscalizados por la autoridad sanita"
+    },
+    "125": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407792",
+      "resumen": "Artículo 125.- Los establecimientos que fabriquen los elementos de uso médico aludidos en el artículo 111 requerirán de la autorización sanitaria de la Secretar"
+    },
+    "126": {
+      "fecha_version": "2019-11-18",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407793",
+      "resumen": "Artículo 126.- Sólo en los establecimientos de óptica podrán fabricarse lentes con fuerza dióptrica de acuerdo con las prescripciones que se ordenen en la recet"
+    },
+    "127": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407795",
+      "resumen": "Artículo 127.- La producción de medicamentos sólo podrá efectuarse en laboratorios farmacéuticos especialmente autorizados al efecto por el Instituto de Salud P"
+    },
+    "128": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407796",
+      "resumen": "Artículo 128.- La importación, internación, almacenamiento, transporte y distribución a cualquier título de medicamentos y de materias primas necesarias para su"
+    },
+    "129": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407797",
+      "resumen": "Artículo 129.- Las farmacias y almacenes farmacéuticos podrán instalarse de manera independiente, con acceso a vías de uso público, o como un espacio circunscri"
+    },
+    "129 A": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407798",
+      "resumen": "Artículo 129 A.- Las farmacias deberán ser dirigidas técnicamente por un químico farmacéutico que deberá estar presente durante todo el horario de funcionamient"
+    },
+    "129 B": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407799",
+      "resumen": "Artículo 129 B.- Los medicamentos de venta directa podrán estar disponibles en farmacias y almacenes farmacéuticos en repisas, estanterías, góndolas, anaqueles,"
+    },
+    "129 C": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407800",
+      "resumen": "Artículo 129 C.- También podrán venderse medicamentos al público en almacenes farmacéuticos, los cuales deberán ser autorizados conforme a las normas reglamenta"
+    },
+    "129 D": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407801",
+      "resumen": "Artículo 129 D.- Los establecimientos asistenciales de atención cerrada y los de atención ambulatoria que cuenten con salas de procedimiento o pabellones de cir"
+    },
+    "129 E": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro VI",
+      "id_parte": "9407802",
+      "resumen": "Artículo 129 E.- La responsabilidad sanitaria por la infracción de las normas establecidas en esta ley se hará efectiva de conformidad al Libro Décimo."
+    },
+    "130": {
+      "fecha_version": "1982-11-19",
+      "derogado": false,
+      "libro": "Libro VII",
+      "id_parte": "8655896",
+      "resumen": "Artículo 130°.- El Director General de Salud, resolverá sobre la observación de los enfermos mentales, de los que presentan dependencias de drogas u otras subst"
+    },
+    "131": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro VII",
+      "id_parte": "8655898",
+      "resumen": "Artículo 131°.- La internación de las personas a que se refiere el artículo anterior, puede ser voluntaria, administrativa, judicial o de urgencia. El Reglament"
+    },
+    "132": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro VII",
+      "id_parte": "8655899",
+      "resumen": "Artículo 132°.- En los casos de ingreso voluntario la salida del establecimiento se efectuará por indicación médica o a pedido del enfermo, siempre que, la auto"
+    },
+    "133": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro VII",
+      "id_parte": "8655900",
+      "resumen": "Artículo 133°.- Los Directores de establecimientos especializados de atención psiquiátrica serán curadores provisorios de los bienes de los enfermos hospitaliza"
+    },
+    "134": {
+      "fecha_version": "2002-05-31",
+      "derogado": false,
+      "libro": "Libro VII",
+      "id_parte": "8655901",
+      "resumen": "Artículo 134°.- Los registros, libros, fichas clínicas y documentos de los establecimientos mencionados en el artículo 130° tendrán el carácter de reservado, sa"
+    },
+    "135": {
+      "fecha_version": "1982-01-25",
+      "derogado": false,
+      "libro": "Libro VIII",
+      "id_parte": "8655902",
+      "resumen": "Artículo 135°.- Sólo en cementerios legalmente autorizados podrá efectuarse la inhumación de cadáveres o restos humanos. Sin embargo, el Director General de Sal"
+    },
+    "136": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro VIII",
+      "id_parte": "8655904",
+      "resumen": "Artículo 136°.- Sólo el Servicio Nacional de Salud podrá autorizar la instalación y funcionamiento de cementerios, crematorios, casas funerarias y demás estable"
+    },
+    "137": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro VIII",
+      "id_parte": "8655905",
+      "resumen": "Artículo 137°.- No podrá rechazarse en un Cementerio la inhumación de un cadáver, sin una justa causa calificada por el Servicio Nacional de Salud."
+    },
+    "138": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro VIII",
+      "id_parte": "8655906",
+      "resumen": "Artículo 138°.- Corresponderá a las Municipalidades de la República instalar cementerios, previa aprobación del Servicio Nacional de Salud, en los lugares en qu"
+    },
+    "139": {
+      "fecha_version": "2002-05-31",
+      "derogado": false,
+      "libro": "Libro VIII",
+      "id_parte": "8655907",
+      "resumen": "Artículo 139°.- Ningún cadáver podrá permanecer insepulto por más de cuarenta y ocho horas, a menos que el Servicio Nacional de Salud lo autorice, o cuando haya"
+    },
+    "140": {
+      "fecha_version": "2015-04-21",
+      "derogado": false,
+      "libro": "Libro VIII",
+      "id_parte": "8655908",
+      "resumen": "Artículo 140.- La obligación de dar sepultura a un cadáver recaerá sobre el cónyuge sobreviviente o sobre el pariente más próximo que estuviere en condición de "
+    },
+    "141": {
+      "fecha_version": "1970-07-18",
+      "derogado": false,
+      "libro": "Libro VIII",
+      "id_parte": "8655909",
+      "resumen": "Artículo 141°.- Prohíbese inscribir en el Registro Civil las defunciones e inhumaciones de cadáveres si no se justifican previamente las causas del fallecimient"
+    },
+    "142": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro VIII",
+      "id_parte": "8655910",
+      "resumen": "Artículo 142°.- A falta de certificación médica establecida en el artículo anterior, la verificación del fallecimiento se establecerá mediante la declaración de"
+    },
+    "143": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro VIII",
+      "id_parte": "8655911",
+      "resumen": "Artículo 143°.- Los fallecimientos deberán ser inscritos en el Registro Civil de acuerdo con la clasificación internacional de las causas de muerte."
+    },
+    "144": {
+      "fecha_version": "1968-01-31",
+      "derogado": false,
+      "libro": "Libro VIII",
+      "id_parte": "8655912",
+      "resumen": "Artículo 144°.- La exhumación, transporte internacional, internación y traslado de una localidad a otra del territorio nacional de cadáveres o restos humanos, s"
+    },
+    "145": {
+      "fecha_version": "1996-07-09",
+      "derogado": false,
+      "libro": "Libro IX",
+      "id_parte": "8655968",
+      "resumen": "Artículo 145°.- El aprovechamiento de tejidos o partes del cuerpo de un donante vivo, para su injerto en otra persona, sólo se permitirá cuando fuere a título g"
+    },
+    "146": {
+      "fecha_version": "1996-07-09",
+      "derogado": false,
+      "libro": "Libro IX",
+      "id_parte": "8656007",
+      "resumen": "Artículo 146°.- Toda persona plenamente capaz podrá disponer de su cadáver, o de partes de él, con el objeto de que sea utilizado en fines de investigación cien"
+    },
+    "147": {
+      "fecha_version": "2015-04-21",
+      "derogado": false,
+      "libro": "Libro IX",
+      "id_parte": "8655970",
+      "resumen": "Artículo 147°.- Los cadáveres de personas fallecidas en establecimientos hospitalarios públicos o privados, o que se encuentren en establecimientos del Servicio"
+    },
+    "148": {
+      "fecha_version": "2015-04-21",
+      "derogado": false,
+      "libro": "Libro IX",
+      "id_parte": "8656008",
+      "resumen": "Artículo 148°.- Podrán también destinarse a injertos con fines terapéuticos los tejidos de cadáveres de personas cuyo cónyuge o, a falta de éste, los parientes "
+    },
+    "149": {
+      "fecha_version": "1996-07-09",
+      "derogado": false,
+      "libro": "Libro IX",
+      "id_parte": "8656009",
+      "resumen": "Artículo 149°.- Derogado."
+    },
+    "150": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro IX",
+      "id_parte": "8655971",
+      "resumen": "Artículo 150°.- No será aplicable a las donaciones de que trata este Libro lo dispuesto en los artículos 1137 a 1146 del Código Civil."
+    },
+    "151": {
+      "fecha_version": "1996-07-09",
+      "derogado": false,
+      "libro": "Libro IX",
+      "id_parte": "8656010",
+      "resumen": "Artículo 151°.- Cuando una persona hubiere fallecido en alguno de los casos indicados en el artículo 121 del Código de Procedimiento Penal o cuando su muerte hu"
+    },
+    "152": {
+      "fecha_version": "1996-07-09",
+      "derogado": false,
+      "libro": "Libro IX",
+      "id_parte": "8656011",
+      "resumen": "Artículo 152°.- Será nulo y sin ningún valor el acto o contrato que, a título oneroso, contenga la promesa o entrega de un tejido o parte del cuerpo humano para"
+    },
+    "153": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro IX",
+      "id_parte": "8655972",
+      "resumen": "Artículo 153°.- Las placentas y otros órganos y tejidos que determine el reglamento podrán destinarse a la elaboración de productos terapéuticos y a otros usos "
+    },
+    "154": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro IX",
+      "id_parte": "8655973",
+      "resumen": "Artículo 154°.- Las disposiciones de este Libro no se aplicarán a las donaciones de sangre ni a las de otros tejidos que señale el reglamento."
+    },
+    "155": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655974",
+      "resumen": "Artículo 155° (146).- Para la debida aplicación del presente Código y de sus reglamentos, decretos y resoluciones del Director General de Salud, la autoridad sa"
+    },
+    "156": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655976",
+      "resumen": "Artículo 156° (147).- Estas actuaciones serán realizadas por funcionarios del Servicio Nacional de Salud. Cuando con ocasión de ellas se constatare una infracci"
+    },
+    "157": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655977",
+      "resumen": "Artículo 157° (148).- En los casos de allanamiento, se notificará al dueño o arrendatario del lugar o edificio en que hubiere de practicarse la diligencia, o al"
+    },
+    "158": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655978",
+      "resumen": "Artículo 158° (149).- Practicadas las diligencias prescritas en el artículo anterior se procederá a la entrada y registro, para cuyo efecto se invitará al dueño"
+    },
+    "159": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655979",
+      "resumen": "Artículo 159° (150).- Si durante la inspección o registro o allanamiento se comprobara una infracción a la ley o reglamentos y se encontraren los elementos que "
+    },
+    "160": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655980",
+      "resumen": "Artículo 160° (151).- A fin de comprobar el correcto cumplimiento de las disposiciones del presente Código y sus reglamentos, el Servicio Nacional de Salud podr"
+    },
+    "161": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655981",
+      "resumen": "Artículo 161° (152).- Los sumarios que se instruyan por infracciones al presente Código y a sus reglamentos, decretos o resoluciones del Director General de Sal"
+    },
+    "162": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655982",
+      "resumen": "Artículo 162° (153).- La autoridad sanitaria, tendrá autoridad suficiente, para investigar y tomar declaraciones necesarias en el esclarecimiento de los hechos "
+    },
+    "163": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655983",
+      "resumen": "Artículo 163° (154).- Cuando se trate de sumarios iniciados de oficio, deberá citarse al infractor después de levantada el acta respectiva. La persona citada de"
+    },
+    "164": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655984",
+      "resumen": "Artículo 164° (155).- Cuando se trate de sumarios iniciados por denuncia de particulares, la autoridad sanitaria citará al posible infractor, así como al denunc"
+    },
+    "165": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655985",
+      "resumen": "Artículo 165° (156).- Las notificaciones que sea menester practicar se harán por funcionarios del Servicio Nacional de Salud o de Carabineros, quienes procederá"
+    },
+    "166": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655986",
+      "resumen": "Artículo 166° (157).- Bastará para dar por establecido la existencia de una infracción a las leyes y reglamentos sanitarios el testimonio de dos personas contes"
+    },
+    "167": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655987",
+      "resumen": "Artículo 167° (158).- Establecida la infracción, la autoridad sanitaria dictará sentencia sin más trámite."
+    },
+    "168": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655988",
+      "resumen": "Artículo 168° (159).- Los infractores a quienes se les aplicare multa deberán acreditar su pago ante la autoridad sanitaria que los sancionó, dentro del plazo d"
+    },
+    "169": {
+      "fecha_version": "2014-02-14",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655951",
+      "resumen": "Artículo 169° (160).- Derogado."
+    },
+    "170": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655989",
+      "resumen": "Artículo 170° (161).- La clausura y demás medidas sanitarias ordenadas en la sentencia, no podrán dejarse sin efecto o suspenderse a menos que el Director Gener"
+    },
+    "171": {
+      "fecha_version": "2009-05-28",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655990",
+      "resumen": "Artículo 171° (162).- De las sanciones aplicadas por el Servicio Nacional de Salud podrá reclamarse ante la justicia ordinaria civil, dentro de los cinco días h"
+    },
+    "172": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655991",
+      "resumen": "Artículo 172° (163).- Las sentencias que dicte la autoridad sanitaria podrán cumplirse no obstante encontrarse pendiente la reclamación a que se refiere el artí"
+    },
+    "173": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655992",
+      "resumen": "Artículo 173° (164).- En todos los procedimientos judiciales a que diere lugar la aplicación del presente Código, el Servicio Nacional de Salud gozará de privil"
+    },
+    "174": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8656014",
+      "resumen": "Artículo 174° (165).- La infracción de cualquiera de las disposiciones de este Código o de sus reglamentos y de las resoluciones que dicten los Directores de lo"
+    },
+    "174 BIS": {
+      "fecha_version": "2021-10-28",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "10279762",
+      "resumen": "Artículo 174 bis.- Las resoluciones que establezcan las infracciones y determinen las multas tendrán mérito ejecutivo y se harán exigibles por la Tesorería Gene"
+    },
+    "175": {
+      "fecha_version": "2025-09-29",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655993",
+      "resumen": "Artículo 175° (166).- En los casos en que la sanción consista en la cancelación de la autorización de funcionamiento, de la habilitación referida en el artículo"
+    },
+    "176": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655995",
+      "resumen": "Artículo 176° (167).- Los auxilios en especie, tales como medicamentos, alimentos terapéuticos o suplementarios, que el Servicio Nacional de Salud entregue a la"
+    },
+    "177": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655996",
+      "resumen": "Artículo 177° (168).- El Director General de Salud podrá, cuando se trate de una primera infracción y aparecieren antecedentes que lo justifiquen, apercibir y a"
+    },
+    "178": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655997",
+      "resumen": "Artículo 178° (169).- La autoridad podrá también, como medida sanitaria, ordenar en casos justificados la clausura, prohibición de funcionamiento de casas, loca"
+    },
+    "179": {
+      "fecha_version": "2021-10-28",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655998",
+      "resumen": "Artículo 179.- Las multas que se impongan por infracción a las disposiciones de este Código y sus reglamentos o a las resoluciones de la autoridad sanitaria ser"
+    },
+    "180": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8655999",
+      "resumen": "Artículo 180° (171).- Todos los objetos decomisados por el Servicio Nacional de Salud en virtud de las facultades que le confiere el presente Código, se destina"
+    },
+    "181": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8656000",
+      "resumen": "Artículo 181° (172).- Las especies decomisadas con ocasión de un delito contra la salud pública se destinarán también al Servicio Nacional de Salud, el que disp"
+    },
+    "182": {
+      "fecha_version": "1982-11-15",
+      "derogado": false,
+      "libro": "Libro X",
+      "id_parte": "8656001",
+      "resumen": "Artículo 182° (173).- Derógase el decreto con fuerza de ley N° 226, de 15 de mayo de 1931, y sus modificaciones posteriores. Los reglamentos preexistentes que v"
+    },
+    "TRANSITORIO": {
+      "fecha_version": "1968-11-29",
+      "derogado": false,
+      "libro": "Disposiciones finales",
+      "id_parte": "8655965",
+      "resumen": "Artículo Transitorio. Las personas que a la vigencia del presente Código Sanitario se encontraban autorizadas para dirigir sus propias farmacias en su calidad d"
+    }
+  }
+}

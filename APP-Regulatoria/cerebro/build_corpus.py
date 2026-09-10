@@ -36,6 +36,7 @@ from urllib.parse import unquote
 
 import fitz  # PyMuPDF
 
+import codigo_sanitario as CS
 import indice as IX
 import modificaciones as MOD
 from norma_registry import NormaRegistry, norm_key, norm_numero, parse_tipo_numero
@@ -508,9 +509,10 @@ def main():
           + str(len(reg.normas)) + " normas únicas  |  snapshot: " + (reg.fetched_at or "?"))
 
     stats = {"pdfs": 0, "docs_indexados": 0, "duplicados_colapsados": 0, "chunks": 0,
-             "nativo": 0, "ocr": 0, "vacio": 0, "match_oficial": 0, "sin_match": 0,
+             "nativo": 0, "ocr": 0, "vacio": 0, "xml": 0, "match_oficial": 0, "sin_match": 0,
              "sin_metadata_vault": 0, "chunks_con_alerta_ocr": 0,
-             "chunks_disposicion_modificada": 0, "docs_modificados": 0}
+             "chunks_disposicion_modificada": 0, "docs_modificados": 0,
+             "docs_ley": 0, "chunks_ley": 0}
 
     # -- Paso 1: extraer y trocear todos los PDFs ------------------------------
     documentos = []
@@ -758,6 +760,54 @@ def main():
                            d["metodo"], titulo_fuente, n_alertas_doc,
                            len(d.get("copias", [])), modificada))
 
+    # -- Paso 4b: leyes de rango superior (XML refundido de la BCN) -----------
+    # El corpus ANAMED es la capa reglamentaria. La ley que la habilita —hoy el
+    # Código Sanitario— entra por otra puerta: no es un PDF del ISP, es el texto
+    # refundido estructurado de la BCN, con vigencia certificada en la fuente y
+    # troceado por artículo sin heurística. Ver codigo_sanitario.py.
+    if CS.CACHE.exists():
+        cs = CS.cargar()
+        arts_por_doc, chunks_por_doc = Counter(), Counter()
+        primer_reg = {}
+        for rec in CS.registros(cs):
+            corpus_fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            chunks_por_doc[rec["doc_id"]] += 1
+            primer_reg.setdefault(rec["doc_id"], rec)
+            stats["chunks"] += 1
+            stats["chunks_ley"] += 1
+            stats["xml"] += 1
+        for lb in cs.libros:
+            arts_por_doc[lb.doc_id] = len(lb.articulos)
+
+        for doc_id, n_chunks in chunks_por_doc.items():
+            r = primer_reg[doc_id]
+            stats["docs_indexados"] += 1
+            stats["docs_ley"] += 1
+            docs_meta.append({
+                "doc_id": doc_id, "norma_id": r["norma_id"], "categoria": r["categoria"],
+                "categorias": r["categorias"], "tipo": r["tipo"], "numero": r["numero"],
+                "titulo": r["titulo"], "titulo_fuente": r["titulo_fuente"],
+                "fecha": r["fecha"], "ult_mod": cs.fecha_version,
+                "vigencia": r["vigencia"], "vigencia_fuente": r["vigencia_fuente"],
+                "modificada": r["modificada"], "modificada_por": [],
+                "metadata_metodo": "xml_bcn", "metadata_confianza": "alta",
+                "fuente_texto": "xml", "chunks_con_alerta_ocr": 0,
+                "fuente_url": CS.URL_HUMANA, "pdf_path": "",
+                "copias_colapsadas": [], "n_chunks": n_chunks,
+                "articulos": arts_por_doc.get(doc_id, 0),
+            })
+            audit_rows.append((doc_id, r["tipo"], r["numero"], "xml", r["vigencia"],
+                               "no", n_chunks, "xml_bcn", r["titulo_fuente"], 0, 0,
+                               r["modificada"]))
+        print("[info] Código Sanitario: " + str(stats["docs_ley"]) + " documentos, "
+              + str(stats["chunks_ley"]) + " pasajes, versión refundida " + cs.fecha_version)
+    else:
+        # No se aborta: el corpus ANAMED sigue siendo válido sin la ley. Pero se
+        # grita, porque un corpus sin Código Sanitario contesta peor y nada más
+        # abajo lo notaría.
+        print("[warn] no está " + str(CS.CACHE) + ": el corpus queda SIN Código Sanitario. "
+              "Corre: python codigo_sanitario.py --descargar")
+
     corpus_fh.close()
 
     (OUT_DIR / "metadata.json").write_text(json.dumps({
@@ -765,6 +815,8 @@ def main():
         "snapshot_fetched_at": reg.fetched_at,
         "vigencia_fuente": vig_fuente,
         "normas_listado_oficial": len(reg.normas),
+        "codigo_sanitario": ({"version_refundida": CS.cargar().fecha_version,
+                              "fuente": CS.URL_HUMANA} if CS.CACHE.exists() else None),
         "documentos": docs_meta,
     }, ensure_ascii=False, indent=2), encoding="utf-8")
 

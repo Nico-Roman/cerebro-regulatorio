@@ -17,6 +17,10 @@ export type EstadoCorpus = {
   documentos: number | null;
   normasListadoOficial: number | null;
   publicadoPor: string | null;
+  // Versión del texto refundido del Código Sanitario que trae este corpus.
+  // Es una frescura distinta de la del corpus: el corpus puede regenerarse hoy
+  // y aun así traer una ley vieja si la descarga de la BCN vino de caché.
+  codigoSanitarioVersion: string | null;
   diasDesdeGeneracion: number | null;
   fresco: boolean;
   vencido: boolean;
@@ -56,11 +60,18 @@ export function estadoCorpus(): EstadoCorpus {
     normasListadoOficial:
       typeof datos.normas_listado_oficial === "number" ? datos.normas_listado_oficial : null,
     publicadoPor: typeof datos.publicado_por === "string" ? datos.publicado_por : null,
+    codigoSanitarioVersion: leerVersionLey(datos.codigo_sanitario),
     diasDesdeGeneracion: dias,
     fresco: dias !== null && dias <= DIAS_AVISO,
     vencido: dias === null || dias > DIAS_VENCIDO,
   };
   return cache;
+}
+
+function leerVersionLey(v: unknown): string | null {
+  if (!v || typeof v !== "object") return null;
+  const ver = (v as Record<string, unknown>).version_refundida;
+  return typeof ver === "string" ? ver : null;
 }
 
 function diasDesde(fecha: string): number | null {

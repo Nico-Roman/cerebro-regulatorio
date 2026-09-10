@@ -266,13 +266,13 @@ function main() {
 
   say("=== Pipeline diario Cerebro Regulatorio ===");
 
-  say("Paso 1/6: vigilancia ISP (scrape + diff)…");
+  say("Paso 1/7: vigilancia ISP (scrape + diff)…");
   const { run } = require(path.join(VIGILANCIA_DIR, "check-normativa.js"));
   const { baseline, diff, total } = run();
   const nCambios = diff.nuevas.length + diff.modificadas.length + diff.eliminadas.length;
   say(`  total normas: ${total} · nuevas: ${diff.nuevas.length} · modificadas: ${diff.modificadas.length} · eliminadas: ${diff.eliminadas.length}`);
 
-  say("Paso 2/6: descarga de PDF nuevos/modificados…");
+  say("Paso 2/7: descarga de PDF nuevos/modificados…");
   const existing = buildExistingIndex();
   const candidatos = [...diff.nuevas, ...diff.modificadas.map((m) => m.despues)];
   let descargados = 0;
@@ -308,7 +308,7 @@ function main() {
   // Nunca aborta el pipeline: si algo falla se registra y se sigue. El
   // resultado queda en registro-cambios/estado/reintentos.json, que es lo que
   // lee la revisión semanal para reportar la normativa pendiente.
-  say("Paso 2b/6: reintento de normas del listado que faltan en disco…");
+  say("Paso 2b/7: reintento de normas del listado que faltan en disco…");
   try {
     const snapshot = JSON.parse(
       fs.readFileSync(path.join(VIGILANCIA_DIR, "snapshots", "latest.json"), "utf-8")
@@ -385,7 +385,7 @@ function main() {
     say(`  [warn] el reintento de faltantes no se pudo completar: ${e.message}`);
   }
 
-  say("Paso 3/6: resumen del día con Ollama local…");
+  say("Paso 3/7: resumen del día con Ollama local…");
   const resumen = nCambios > 0 && !EN_CI ? ollamaResumen(diff) : null;
   if (resumen) {
     const resumenPath = path.join(LOG_DIR, `resumen-${stamp}.md`);
@@ -395,10 +395,29 @@ function main() {
     say("  sin cambios que resumir (o Ollama no disponible).");
   }
 
-  say("Paso 4/6: reconstrucción del corpus…");
+  // Las leyes de rango superior no vienen del ISP: el Código Sanitario se baja
+  // de la BCN como texto refundido y se compara con la versión que vimos la
+  // vez anterior, artículo por artículo. Va ANTES de reconstruir el corpus
+  // porque build_corpus.py lee el XML que este paso deja en disco: al revés,
+  // el corpus del día se armaría con la ley de ayer.
+  //
+  // No aborta el pipeline si falla: el XML en caché sigue sirviendo y el corpus
+  // ANAMED es válido igual. `--vigilar` ya atrapa sus propios errores y los
+  // reporta como [warn].
+  say("Paso 4/7: Código Sanitario (BCN) — descarga y vigilancia de cambios…");
+  try {
+    execFileSync("python", ["codigo_sanitario.py", "--vigilar"], {
+      cwd: CEREBRO_DIR,
+      stdio: "inherit",
+    });
+  } catch (e) {
+    say(`  [warn] la vigilancia del Código Sanitario falló: ${e.message}`);
+  }
+
+  say("Paso 5/7: reconstrucción del corpus…");
   execFileSync("python", ["build_corpus.py"], { cwd: CEREBRO_DIR, stdio: "inherit" });
 
-  say("Paso 5/6: compuerta de calidad (recall + abstención)…");
+  say("Paso 6/7: compuerta de calidad (recall + abstención)…");
   const evalRes = correrEvaluacion();
   if (evalRes) {
     say(
@@ -422,7 +441,7 @@ function main() {
     say("  compuerta aprobada.");
   }
 
-  say("Paso 6/6: publicación (copia + commit + push, redeploy en Railway)…");
+  say("Paso 7/7: publicación (copia + commit + push, redeploy en Railway)…");
   const corpusSrc = path.join(CEREBRO_DIR, "corpus", "corpus.jsonl");
   const corpusDest = path.join(WEB_DIR, "data", "corpus.jsonl");
   fs.mkdirSync(path.dirname(corpusDest), { recursive: true });
@@ -444,6 +463,7 @@ function main() {
           snapshot_fetched_at: meta.snapshot_fetched_at,
           documentos: (meta.documentos || []).length,
           normas_listado_oficial: meta.normas_listado_oficial,
+          codigo_sanitario: meta.codigo_sanitario || null,
           publicado_por: EN_CI ? "github-actions" : "pc-local",
         },
         null,

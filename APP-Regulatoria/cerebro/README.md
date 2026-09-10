@@ -16,19 +16,40 @@ de infraestructura: todo corre local con Python.
 
 | | |
 |---|---|
-| PDFs en `ANAMED_Normativa/` | 163 |
-| Documentos indexados (tras colapsar copias) | **120** |
+| PDFs en `ANAMED_Normativa/` | 164 |
+| Documentos indexados (tras colapsar copias) | **133** (121 del ISP + 12 del Código Sanitario) |
 | Copias duplicadas colapsadas | 43 |
-| Pasajes (chunks) | **2.578** |
-| Texto nativo / OCR / sin texto | 62 / 57 / 1 |
-| Con vigencia verificada contra el listado oficial | **119 de 120** |
-| Normas únicas en el listado oficial del ISP | 124 (snapshot 2026-08-24) |
-| **recall@5** (16 preguntas doradas) | **100%** |
+| Pasajes (chunks) | **2.823** (2.584 del ISP + 239 de la ley) |
+| Texto nativo / OCR / sin texto / XML | 60 / 59 / 2 / 239 |
+| Con vigencia verificada contra el listado oficial | **120 de 121** |
+| Normas únicas en el listado oficial del ISP | 124 (snapshot 2026-09-09) |
+| Código Sanitario (DFL 725) | 222 artículos · texto refundido 2025-09-29 |
+| **recall@5** (24 preguntas doradas) | **100%** |
 | **Abstención** (5 consultas fuera del corpus) | **100%** |
 
 El único documento sin match es `otros/CODIGO-ETICA-ISP`, que **no es** una norma
 del listado ANAMED: su metadata está curada a mano en `overrides.json` y queda
 marcado `⚠️ vigencia no verificada` a propósito.
+
+## Dos fuentes, dos caminos
+
+El corpus ANAMED es la capa **reglamentaria**: resoluciones, decretos y normas
+técnicas del ISP, que entran por PDF porque el ISP no publica otra cosa. Debajo
+de todas ellas está la **ley** que las habilita, y desde el 2026-09-09 el
+Código Sanitario (DFL 725) entra por su propia puerta —`codigo_sanitario.py`—
+desde el XML refundido de la BCN. Eso da vigencia certificada en la fuente,
+troceado por artículo sin heurística y enlace profundo al artículo citado. El
+detalle de por qué, en el encabezado de ese archivo.
+
+La ley se vigila aparte y con más precisión que el listado del ISP: el XML trae
+`fechaVersion` **por artículo**, así que el pipeline detecta exactamente qué
+artículos se movieron, no solo que el archivo cambió. El rastro queda en
+`registro-cambios/` (bitácora `cambios.jsonl` + informe legible).
+
+```bash
+python codigo_sanitario.py --resumen   # estructura y conteos
+python codigo_sanitario.py --vigilar   # baja, compara y registra los cambios
+```
 
 ## Arquitectura
 

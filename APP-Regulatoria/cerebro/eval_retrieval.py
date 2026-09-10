@@ -39,6 +39,12 @@ if hasattr(sys.stdout, "reconfigure"):
 
 
 def matches(result, fuente):
+    # `doc_id` es igualdad exacta; `doc_contains` es subcadena. La distinción
+    # importa: los doc_id del Código Sanitario son prefijos unos de otros
+    # ("Libro V" es subcadena de "Libro VI", "VII" y "VIII"), así que con
+    # `doc_contains` una pregunta sobre el Libro V pasaría recuperando el VIII.
+    if "doc_id" in fuente:
+        return result["doc_id"].lower() == fuente["doc_id"].lower()
     if "doc_contains" in fuente:
         return fuente["doc_contains"].lower() in result["doc_id"].lower()
     tipo_ok = result.get("tipo", "").lower() == fuente.get("tipo", "").lower()

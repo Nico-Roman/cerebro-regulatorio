@@ -1,7 +1,11 @@
 {
   "generado": "2026-09-09",
   "snapshot_fetched_at": "2026-09-09",
-  "documentos": 121,
+  "documentos": 133,
   "normas_listado_oficial": 124,
-  "publicado_por": "github-actions"
+  "codigo_sanitario": {
+    "version_refundida": "2025-09-29",
+    "fuente": "https://www.bcn.cl/leychile/navegar?idNorma=5595"
+  },
+  "publicado_por": "pc-local"
 }

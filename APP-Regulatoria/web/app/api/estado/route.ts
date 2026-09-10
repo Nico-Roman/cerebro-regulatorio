@@ -46,6 +46,13 @@ export async function GET() {
       publicado_por: estado.publicadoPor,
       chunks,
     },
+    // Las leyes de rango superior tienen su propia frescura: la BCN publica un
+    // texto refundido con fecha de versión, y esa fecha es lo que dice si el
+    // Código Sanitario que se está sirviendo es el vigente.
+    codigo_sanitario: {
+      version_refundida: estado.codigoSanitarioVersion,
+      fuente: "https://www.bcn.cl/leychile/navegar?idNorma=5595",
+    },
     motivo: estado.vencido
       ? estado.generado
         ? `El corpus se generó hace ${estado.diasDesdeGeneracion} días. El pipeline diario no está corriendo.`

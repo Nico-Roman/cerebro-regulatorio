@@ -258,7 +258,10 @@ def cite(r):
     tn = " ".join(x for x in [r.get("tipo", ""), r.get("numero", "")] if x) or r.get("doc_id", "")
     art = " · " + r["articulo"] if r.get("articulo") else ""
     ocr = " · ⚠ texto OCR" if r.get("fuente_texto") == "ocr" else ""
-    return tn + " · pág. " + str(r.get("pagina", "")) + art + " · " + marca_vigencia(r) + ocr
+    # Página 0 = fuente sin paginación (el XML refundido de la BCN). Ver la
+    # nota equivalente en web/lib/search.ts: "pág. 0" sería una cita falsa.
+    pag = (" · pág. " + str(r.get("pagina"))) if r.get("pagina") else ""
+    return tn + pag + art + " · " + marca_vigencia(r) + ocr
 
 
 def main():
@@ -320,7 +323,10 @@ def main():
             print("    ⚠ OCR: " + a)
         snippet = re.sub(r"\s+", " ", r.get("texto", "")).strip()
         print("    “" + snippet[:320] + "…”")
-        print("    ↳ " + r.get("pdf_path", ""))
+        # El Código Sanitario no viene de un PDF local: sin esta guarda quedaba
+        # una flecha apuntando a la nada debajo de cada uno de sus pasajes.
+        if r.get("pdf_path"):
+            print("    ↳ " + r["pdf_path"])
         if r.get("fuente_url"):
             print("    ↳ fuente: " + r["fuente_url"])
         print()

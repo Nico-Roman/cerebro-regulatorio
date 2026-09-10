@@ -348,9 +348,14 @@ export function marcaVigencia(r: CorpusChunk): string {
 
 export function cite(r: CorpusChunk): string {
   const tn = [r.tipo, r.numero].filter(Boolean).join(" ") || r.doc_id;
+  // Página 0 significa "esta fuente no tiene paginación", no "página cero".
+  // El texto refundido del Código Sanitario viene del XML de la BCN, que no
+  // tiene páginas: ahí la cita se ancla en el artículo, que además es más
+  // preciso. Escribir "pág. 0" sería una cita falsa.
+  const pag = r.pagina ? ` · pág. ${r.pagina}` : "";
   const art = r.articulo ? ` · ${r.articulo}` : "";
   const ocr = r.fuente_texto === "ocr" ? " · ⚠ texto OCR" : "";
-  return `${tn} · pág. ${r.pagina}${art} · ${marcaVigencia(r)}${ocr}`;
+  return `${tn}${pag}${art} · ${marcaVigencia(r)}${ocr}`;
 }
 
 function enCategoria(r: CorpusChunk, categoria: string): boolean {
