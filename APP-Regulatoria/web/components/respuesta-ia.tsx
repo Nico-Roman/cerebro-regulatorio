@@ -3,7 +3,7 @@
 // Botón para redactar la respuesta con IA. No se dispara solo: la mayoría de
 // las consultas se resuelven leyendo los pasajes, y cada llamada cuesta.
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type Estado = "inicial" | "cargando" | "listo" | "ausencia" | "error";
 
@@ -11,12 +11,6 @@ export function RespuestaIa({ consultaId }: { consultaId: string }) {
   const [estado, setEstado] = useState<Estado>("inicial");
   const [texto, setTexto] = useState<string | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
-
-  useEffect(() => {
-    setEstado("inicial");
-    setTexto(null);
-    setAviso(null);
-  }, [consultaId]);
 
   async function pedir() {
     setEstado("cargando");

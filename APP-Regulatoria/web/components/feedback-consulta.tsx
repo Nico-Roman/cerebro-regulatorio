@@ -5,7 +5,7 @@
 // Ese texto es la parte valiosa — dice qué norma buscaba la persona cuando el
 // corpus no la tenía.
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type Estado = "inicial" | "enviando" | "listo" | "error";
 
@@ -13,13 +13,6 @@ export function FeedbackConsulta({ consultaId }: { consultaId: string }) {
   const [voto, setVoto] = useState<boolean | null>(null);
   const [comentario, setComentario] = useState("");
   const [estado, setEstado] = useState<Estado>("inicial");
-
-  // Cada búsqueda nueva trae un id nuevo: el widget vuelve a cero solo.
-  useEffect(() => {
-    setVoto(null);
-    setComentario("");
-    setEstado("inicial");
-  }, [consultaId]);
 
   async function enviar(util: boolean, texto?: string) {
     setEstado("enviando");

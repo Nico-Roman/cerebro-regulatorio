@@ -3,6 +3,7 @@
 // Elegir día, elegir hora, dejar los datos. Tres pasos visibles a la vez para
 // que se entienda de un vistazo cuánto falta.
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 interface Slot {
@@ -133,9 +134,9 @@ export function AgendaReserva() {
       <div className="border border-line p-5 text-sm text-muted">
         <p>
           Por ahora no hay horas publicadas. Escríbeme a{" "}
-          <a href="/#contacto" className="underline">
+          <Link href="/#contacto" className="underline">
             el formulario de contacto
-          </a>{" "}
+          </Link>{" "}
           y coordinamos por correo.
         </p>
       </div>

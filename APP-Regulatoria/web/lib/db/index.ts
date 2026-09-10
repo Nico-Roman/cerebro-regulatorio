@@ -7,7 +7,8 @@ import { Pool } from "pg";
 import * as schema from "./schema";
 
 declare global {
-  // eslint-disable-next-line no-var
+  // `var` y no `let`: en un `declare global` el binding tiene que colgar
+  // de globalThis, que es justo lo que hace el hot reload de desarrollo.
   var __regulamedPool: Pool | undefined;
 }
 

@@ -5,7 +5,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
-import { and, eq, gte } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { invalidarCacheHuecos } from "@/lib/agenda/cache";
 import { leerConfig } from "@/lib/agenda/config";
 import { agendaConfigurada, crearEvento, ocupados } from "@/lib/agenda/google";

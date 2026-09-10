@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import type { NormaReciente, PlazoDetectado } from "@/lib/normativa";
 import { FeedbackConsulta } from "@/components/feedback-consulta";
 import { RespuestaIa } from "@/components/respuesta-ia";
@@ -135,7 +135,22 @@ const EJEMPLOS = [
   "requisitos GCP ensayos clínicos",
 ];
 
+// Las categorías son los nombres de carpeta del corpus
+// ("establecimientos_autorizacion_y_fiscalizacion"), que es lo correcto como
+// clave y lo ilegible como etiqueta. Solo cambia lo que se muestra: el valor
+// que viaja al API sigue siendo el slug.
+const ETIQUETAS_CATEGORIA: Record<string, string> = {
+  codigo_sanitario: "Código Sanitario (ley)",
+};
+
+function etiquetaCategoria(c: string): string {
+  if (ETIQUETAS_CATEGORIA[c]) return ETIQUETAS_CATEGORIA[c];
+  const texto = c.replace(/_/g, " ");
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
 export function BuscadorNormativa() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   // La home manda la consulta por querystring (?q=), así que es el valor
   // inicial del campo, no algo que se asigne después con un efecto.
@@ -169,13 +184,22 @@ export function BuscadorNormativa() {
         // vería como "sin resultados", que es exactamente la conclusión
         // equivocada para un buscador que promete declarar ausencia de fuente.
         if (res.status === 401) {
+          // Navegación dura a propósito, y no router.push(): la sesión acaba de
+          // morir. Una navegación blanda conserva el layout ya renderizado en
+          // el servidor con la sesión anterior, así que la pantalla de ingreso
+          // podría seguir mostrando el encabezado de sesión iniciada. Recargar
+          // entero es lo único que garantiza que no sobreviva estado de la
+          // sesión muerta.
+          // eslint-disable-next-line @next/next/no-location-assign-relative-destination
           window.location.href = `/ingresar?next=${encodeURIComponent(
             `/normativa?q=${query}`
           )}`;
           return;
         }
         if (res.status === 403) {
-          window.location.href = "/perfil";
+          // Acá la sesión es válida: solo falta completar el perfil. Es una
+          // navegación interna común y corriente.
+          router.push("/perfil");
           return;
         }
         if (!res.ok) {
@@ -199,7 +223,7 @@ export function BuscadorNormativa() {
         setLoading(false);
       }
     },
-    [vigente, categoria]
+    [vigente, categoria, router]
   );
 
   useEffect(() => {
@@ -288,7 +312,7 @@ export function BuscadorNormativa() {
                 <option value="">todas las categorías</option>
                 {categorias.map((c) => (
                   <option key={c} value={c}>
-                    {c}
+                    {etiquetaCategoria(c)}
                   </option>
                 ))}
               </select>
@@ -418,12 +442,18 @@ export function BuscadorNormativa() {
             ))}
           </div>
 
+          {/* `key={consultaId}`: cada búsqueda trae un id nuevo, y con la key
+              React desmonta y vuelve a montar los dos widgets, que nacen en su
+              estado inicial. Antes cada uno se resetaba a sí mismo con un
+              useEffect sobre consultaId, lo que provoca un render en cascada
+              (el widget alcanza a pintarse con el estado de la búsqueda
+              anterior y recién después se corrige). */}
           {searched && !loading && !aviso && consultaId && results && results.length > 0 && (
-            <RespuestaIa consultaId={consultaId} />
+            <RespuestaIa key={consultaId} consultaId={consultaId} />
           )}
 
           {searched && !loading && !aviso && consultaId && (
-            <FeedbackConsulta consultaId={consultaId} />
+            <FeedbackConsulta key={consultaId} consultaId={consultaId} />
           )}
         </main>
 
