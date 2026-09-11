@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 
 import indice as IX
-from query import search, analizar
+from respuesta import responder
 
 DIR = Path(__file__).resolve().parent
 GOLDEN = DIR / "preguntas-doradas.json"
@@ -66,8 +66,10 @@ def main():
     hits, fallos, falsas_abstenciones = 0, [], []
     filas = []
     for p in preguntas:
-        res, conf = analizar(p["pregunta"], k=args.k, idx=idx)
-        results = [r for _, r in res]
+        resp = responder(p["pregunta"], idx=idx)
+        # Lo que el buscador muestra, en orden: la principal y las relacionadas.
+        mostradas = ([resp["principal"]] if resp["principal"] else []) + resp["relacionadas"]
+        results = [{"doc_id": m["_doc_id"], "tipo": m["_tipo"], "numero": m["_numero"]} for m in mostradas[:args.k]]
         hit = next((r for r in results if any(matches(r, f) for f in p["fuentes_aceptables"])), None)
         if hit:
             hits += 1
@@ -75,9 +77,10 @@ def main():
         else:
             fallos.append(p["id"])
             fuente = "—"
-        if conf["confianza"] == "baja":
+        conf = {"encontrado": "alta", "parcial": "media", "ausente": "baja"}[resp["estado"]]
+        if resp["estado"] == "ausente":
             falsas_abstenciones.append(p["id"])
-        filas.append((p["id"], bool(hit), fuente, conf["confianza"],
+        filas.append((p["id"], bool(hit), fuente, conf,
                       results[0].get("tipo", "") + " " + results[0].get("numero", "") if results else "—"))
 
     recall = 100.0 * hits / len(preguntas) if preguntas else 0.0
@@ -86,10 +89,12 @@ def main():
     fuera_ok, fuera_filas = 0, []
     fuera_data = json.loads(FUERA.read_text(encoding="utf-8"))["preguntas"] if FUERA.exists() else []
     for p in fuera_data:
-        _, conf = analizar(p["pregunta"], k=args.k, idx=idx)
-        ok = conf["recomendacion"] == "declarar_ausencia"
+        resp = responder(p["pregunta"], idx=idx)
+        ok = resp["estado"] == "ausente"
         fuera_ok += 1 if ok else 0
-        fuera_filas.append((p["id"], ok, conf["confianza"], round(conf["cobertura_top"], 2)))
+        top = resp["principal"] or (resp["relacionadas"][0] if resp["relacionadas"] else None)
+        fuera_filas.append((p["id"], ok, {"encontrado": "alta", "parcial": "media", "ausente": "baja"}[resp["estado"]],
+                            round(top["_cobertura_frase"], 2) if top else 0.0))
     abstencion = 100.0 * fuera_ok / len(fuera_data) if fuera_data else 100.0
 
     pasa = recall >= args.gate and abstencion >= 100.0 and not falsas_abstenciones

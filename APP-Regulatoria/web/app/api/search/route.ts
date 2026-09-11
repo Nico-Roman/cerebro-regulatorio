@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
-import { analizar } from "@/lib/search";
+import { legado, responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
+import { iaConfigurada } from "@/lib/ia/proveedor";
 import { consumirCupo } from "@/lib/rate-limit";
 import { usuarioActual } from "@/lib/sesion";
 
@@ -14,6 +15,14 @@ const MAX_BUSQUEDAS_HORA = 60;
 // Registro paralelo opcional en n8n → Google Sheets. Postgres es la fuente de
 // verdad; esto solo sigue vivo si la variable está puesta.
 const LOG_WEBHOOK = process.env.CEREBRO_LOG_WEBHOOK;
+
+// Pasajes que devuelve el motor: una respuesta principal y hasta cinco fuentes
+// relacionadas. Un `k` que no sea número entero se ignora en vez de propagar
+// NaN: antes `?k=abc` devolvía cero resultados y la consulta no se registraba.
+function leerK(valor: string | null): number {
+  const n = Number.parseInt(valor ?? "", 10);
+  return Number.isFinite(n) ? Math.min(Math.max(n, 1), 10) : 6;
+}
 
 export async function GET(req: NextRequest) {
   // La redirección del proxy no protege esta ruta: acá se valida la sesión
@@ -44,24 +53,18 @@ export async function GET(req: NextRequest) {
   }
 
   const { searchParams } = new URL(req.url);
-  const q = searchParams.get("q")?.trim() || "";
-  const k = Number(searchParams.get("k") || "8");
+  const q = (searchParams.get("q") || "").trim().slice(0, 500);
+  const k = leerK(searchParams.get("k"));
   const vigente = searchParams.get("vigente") === "1";
   const categoria = searchParams.get("categoria") || undefined;
   const sinOcr = searchParams.get("sin_ocr") === "1";
 
   if (!q) {
-    return NextResponse.json({ query: q, resultados: [], confianza: null });
+    return NextResponse.json({ error: "consulta_vacia", mensaje: "Escribe una pregunta." }, { status: 400 });
   }
 
-  const { resultados, confianza } = analizar(q, {
-    k: Math.min(Math.max(k, 1), 20),
-    vigente,
-    categoria,
-    sinOcr,
-  });
-
-  const top = resultados[0];
+  const respuesta = responder(q, { k, vigente, categoria, sinOcr });
+  const resumen = legado(respuesta);
 
   // El id se genera acá y viaja en la respuesta: es lo que le permite al
   // navegador votar sobre ESTA búsqueda (tabla feedback) sin exponer nada más.
@@ -74,20 +77,16 @@ export async function GET(req: NextRequest) {
     await db.insert(consultas).values({
       id: consultaId,
       userId: usuario.id,
-      pregunta: q.slice(0, 2000),
-      filtros: {
-        vigente,
-        categoria: categoria ?? null,
-        sinOcr,
-      },
+      pregunta: q,
+      filtros: { vigente, categoria: categoria ?? null, sinOcr },
       k,
-      recomendacion: confianza?.recomendacion ?? null,
-      confianza: confianza?.confianza ?? null,
-      coberturaTop: confianza?.cobertura_top ?? null,
-      margen: confianza?.margen ?? null,
-      conceptosFuera: confianza?.conceptos_fuera_del_corpus ?? [],
-      topCita: top?.cita ?? null,
-      topScore: top?.score ?? null,
+      recomendacion: resumen.recomendacion,
+      confianza: resumen.confianza,
+      coberturaTop: resumen.cobertura_top,
+      margen: null,
+      conceptosFuera: resumen.conceptos_fuera_del_corpus,
+      topCita: resumen.top_cita,
+      topScore: null,
     });
     consultaRegistrada = true;
   } catch (e) {
@@ -101,9 +100,10 @@ export async function GET(req: NextRequest) {
       body: JSON.stringify({
         pregunta: q,
         usuario_email: usuario.email,
-        recomendacion: confianza?.recomendacion ?? "",
-        confianza: confianza?.confianza ?? "",
-        top_cita: top?.cita ?? "",
+        estado: respuesta.estado,
+        recomendacion: resumen.recomendacion,
+        confianza: resumen.confianza,
+        top_cita: resumen.top_cita ?? "",
         origen: "web",
       }),
       signal: AbortSignal.timeout(4000),
@@ -113,12 +113,12 @@ export async function GET(req: NextRequest) {
   }
 
   return NextResponse.json({
-    query: q,
-    confianza,
-    resultados,
+    ...respuesta,
     // null cuando la consulta no se pudo registrar: sin fila en `consultas` no
     // hay a qué colgar el voto, y es mejor no mostrar el widget que ofrecer un
     // botón que va a fallar.
     consultaId: consultaRegistrada ? consultaId : null,
+    // El botón de redacción con IA solo aparece si la IA está configurada.
+    iaDisponible: iaConfigurada(),
   });
 }

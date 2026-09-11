@@ -9,7 +9,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { and, eq } from "drizzle-orm";
 import { iaConfigurada } from "@/lib/ia/proveedor";
 import { redactarRespuesta } from "@/lib/ia/redactar";
-import { analizar } from "@/lib/search";
+import { responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
 import { consumirCupo } from "@/lib/rate-limit";
@@ -80,35 +80,31 @@ export async function POST(req: NextRequest) {
     sinOcr?: boolean;
   };
 
-  const { resultados, confianza } = analizar(consulta.pregunta, {
+  const respuesta = responder(consulta.pregunta, {
     k: PASAJES_AL_MODELO,
     vigente: Boolean(filtros.vigente),
     categoria: filtros.categoria ?? undefined,
     sinOcr: Boolean(filtros.sinOcr),
   });
+  const pasajes = (respuesta.principal ? [respuesta.principal] : []).concat(respuesta.relacionadas);
 
-  // Compuerta de confianza: si el motor ya concluyó que la evidencia no
-  // alcanza, no se llama al modelo. Ahorra tokens, pero sobre todo evita la
-  // respuesta segura de sí misma construida sobre pasajes que no vienen al caso.
-  if (!resultados.length || confianza?.recomendacion === "declarar_ausencia") {
-    return NextResponse.json({
-      respuesta: null,
-      ausencia: true,
-      motivo:
-        confianza?.motivo ||
-        "El corpus no tiene pasajes suficientes para responder esta pregunta.",
-    });
+  // Compuerta: si el motor ya concluyó que la materia no está en la base, no se
+  // llama al modelo. Ahorra tokens, pero sobre todo evita la respuesta segura
+  // de sí misma construida sobre pasajes que no vienen al caso.
+  if (respuesta.estado === "ausente" || !pasajes.length) {
+    return NextResponse.json({ respuesta: null, ausencia: true, motivo: respuesta.motivo });
   }
 
   try {
     const salida = await redactarRespuesta(
       consulta.pregunta,
-      resultados.map((r) => ({
-        cita: r.cita,
+      pasajes.map((r) => ({
+        // La cita corta ("DS 3 · art. 217") más el nombre completo de la norma:
+        // el modelo la copia tal cual, y así la cita se entiende sola.
+        cita: `${r.cita} (${r.norma})`,
         titulo: r.titulo,
         texto: r.texto,
-        vigencia: r.vigencia,
-        alertaVigencia: r.alerta_vigencia || undefined,
+        vigencia: r.avisos.length ? r.avisos.join(" ") : "vigente según el listado oficial del ISP",
       }))
     );
 

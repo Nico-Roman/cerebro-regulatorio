@@ -19,13 +19,14 @@
  *      ni redacta metadatos: el listado oficial del ISP ya trae categoría,
  *      tipo, número, descripción y fecha estructurados).
  *   4. Reconstruye el corpus (build_corpus.py).
- *   5. COMPUERTA DE CALIDAD: corre eval_retrieval.py. Si el recall cae bajo el
+ *   5. COMPUERTA DE CALIDAD: corre eval_retrieval.py y eval_respuestas.py (lo que
+ *      ve el QF y la paridad Python/TypeScript). Si el recall cae bajo el
  *      gate o el motor deja de abstenerse en consultas fuera del corpus, se
  *      aborta ANTES de copiar y publicar. Sin esta compuerta el pipeline podía
  *      degradar la recuperación y desplegarla igual: fue exactamente así como
  *      el recall bajó de 100% a 94% sin que nadie se enterara.
- *   6. Copia a web/data/corpus.jsonl + git add/commit/push en web/ — dispara el
- *      redeploy automático de Vercel vía su integración con GitHub.
+ *   6. Copia a web/data/corpus.jsonl + git add/commit/push (en CI lo hace el
+ *      workflow) — dispara el redeploy automático de Railway.
  *
  * Todo el proceso queda registrado en logs/actualizacion-YYYY-MM-DD.log.
  * Un fallo duro (scrape abortado, build_corpus roto, compuerta reprobada)
@@ -191,11 +192,27 @@ function downloadPdf(record) {
   // El listado del ISP a veces publica el enlace con espacios al principio o al
   // final (p. ej. Resolución Exenta 873 de Farmacovigilancia). curl los toma
   // como parte de la URL y devuelve 404; con la URL recortada el PDF baja bien.
-  execFileSync("curl", ["-sL", "--max-time", "60", "-A", UA, "-o", dest, urlSegura((record.enlace || "").trim())]);
+  // -f: un 404 o un 500 hace fallar a curl en vez de guardar la página de error
+  // con extensión .pdf. Antes solo se miraba el tamaño, y una página de error de
+  // más de 1 KB entraba al corpus como si fuera la norma.
+  execFileSync("curl", ["-sSfL", "--max-time", "60", "-A", UA, "-o", dest, urlSegura((record.enlace || "").trim())]);
   const size = fs.existsSync(dest) ? fs.statSync(dest).size : 0;
   if (size < 1024) {
     fs.rmSync(dest, { force: true });
     throw new Error(`descarga sospechosamente pequeña (${size} bytes): ${record.enlace}`);
+  }
+  // Un PDF empieza con "%PDF". Un portal caído, un WAF o una redirección a una
+  // página HTML no.
+  const cabecera = Buffer.alloc(5);
+  const fd = fs.openSync(dest, "r");
+  try {
+    fs.readSync(fd, cabecera, 0, 5, 0);
+  } finally {
+    fs.closeSync(fd);
+  }
+  if (!cabecera.toString("latin1").startsWith("%PDF")) {
+    fs.rmSync(dest, { force: true });
+    throw new Error(`lo descargado no es un PDF (empieza con ${JSON.stringify(cabecera.toString("latin1"))}): ${record.enlace}`);
   }
   return dest;
 }
@@ -237,25 +254,40 @@ function runGit(args, cwd) {
   return execFileSync("git", args, { cwd, encoding: "utf-8" }).trim();
 }
 
-// La evaluación devuelve exit code 1 cuando reprueba, así que execFileSync
-// lanza; el JSON viene igual por stdout y es lo que interesa registrar.
+// Las evaluaciones devuelven exit code 1 cuando reprueban, así que
+// execFileSync lanza; el JSON viene igual por stdout y es lo que interesa
+// registrar.
 function correrEvaluacion() {
-  const args = ["eval_retrieval.py", "--k", "5", "--gate", String(GATE_RECALL), "--json"];
-  const opts = { cwd: CEREBRO_DIR, encoding: "utf-8", env: { ...process.env, PYTHONIOENCODING: "utf-8" } };
+  return correrScriptJson(["eval_retrieval.py", "--k", "5", "--gate", String(GATE_RECALL), "--json"], "eval_retrieval.py");
+}
+
+// Segunda compuerta: lo que ve el químico farmacéutico (frase visible, cero
+// verdes falsos, abstención) y la paridad entre el motor Python y el de la web.
+function correrEvaluacionRespuestas() {
+  return correrScriptJson(["eval_respuestas.py", "--json"], "eval_respuestas.py");
+}
+
+function correrScriptJson(args, nombre) {
+  const opts = {
+    cwd: CEREBRO_DIR,
+    encoding: "utf-8",
+    env: { ...process.env, PYTHONIOENCODING: "utf-8" },
+    maxBuffer: 16 * 1024 * 1024,
+  };
   let salida;
   try {
     salida = execFileSync("python", args, opts);
   } catch (e) {
     salida = (e.stdout || "").toString();
     if (!salida.trim()) {
-      say(`  [error] no se pudo correr eval_retrieval.py: ${e.message}`);
+      say(`  [error] no se pudo correr ${nombre}: ${e.message}`);
       return null;
     }
   }
   try {
     return JSON.parse(salida.trim().split("\n").pop());
   } catch (e) {
-    say(`  [error] salida de eval_retrieval.py ilegible: ${e.message}`);
+    say(`  [error] salida de ${nombre} ilegible: ${e.message}`);
     return null;
   }
 }
@@ -417,7 +449,11 @@ function main() {
   say("Paso 5/7: reconstrucción del corpus…");
   execFileSync("python", ["build_corpus.py"], { cwd: CEREBRO_DIR, stdio: "inherit" });
 
-  say("Paso 6/7: compuerta de calidad (recall + abstención)…");
+  say("Paso 6/7: compuerta de calidad (recall + abstención + lo que ve el QF + paridad)…");
+  // El vocabulario de consulta va a la web antes de evaluar: la paridad compara
+  // el motor Python con el TypeScript, y el TypeScript lo lee de web/data.
+  fs.mkdirSync(path.join(WEB_DIR, "data"), { recursive: true });
+  fs.copyFileSync(path.join(CEREBRO_DIR, "vocabulario.json"), path.join(WEB_DIR, "data", "vocabulario.json"));
   const evalRes = correrEvaluacion();
   if (evalRes) {
     say(
@@ -429,7 +465,19 @@ function main() {
       say(`  falsas abstenciones: ${evalRes.falsas_abstenciones.join(", ")}`);
     }
   }
-  if (!evalRes || !evalRes.pasa) {
+  const evalResp = correrEvaluacionRespuestas();
+  if (evalResp) {
+    for (const [nombre, st] of Object.entries(evalResp.stats || {})) {
+      say(
+        `  ${nombre}: visible@3 ${st.visible3}/${st.resp} · verdes falsos ${st.verdes_falsos}` +
+          ` · abstención ${st.fuera_ok}/${st.fuera} · sin texto en verde ${st.sin_texto_verde}`
+      );
+    }
+    say(`  paridad: ${evalResp.paridad}`);
+    if (evalResp.motivos && evalResp.motivos.length) say(`  motivos: ${evalResp.motivos.join("; ")}`);
+  }
+  const aprobada = Boolean(evalRes && evalRes.pasa && evalResp && evalResp.pasa);
+  if (!aprobada) {
     if (FORZAR) {
       say("  [warn] compuerta REPROBADA — se publica igual por --forzar-publicacion.");
     } else {

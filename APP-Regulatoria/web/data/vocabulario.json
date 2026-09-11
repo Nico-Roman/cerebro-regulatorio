@@ -1,0 +1,729 @@
+{
+  "version": "1.0",
+  "actualizado": "2026-09-11",
+  "proposito": "Puente entre cómo pregunta un químico farmacéutico en el mostrador y cómo escribe el legislador. Se usa en query-time, nunca para indexar ni para reescribir texto legal. La web lee una copia exacta en web/data/vocabulario.json (la copia el pipeline y la compuerta verifica que sean idénticas).",
+  "notas": [
+    "Todo va sin tildes y en minúsculas: se compara contra la consulta normalizada.",
+    "'si' son palabras o frases de la pregunta; 'agregar' son términos de la norma que se suman a la búsqueda con peso reducido. Una expansión nunca reemplaza la palabra original.",
+    "Agregar entradas por clases de lenguaje, no para arreglar una pregunta puntual del set de evaluación: el set 'holdout' de preguntas-reales.json existe para detectar ese sobreajuste."
+  ],
+  "palabras_de_pregunta": [
+    "debo",
+    "debe",
+    "deben",
+    "debemos",
+    "tengo",
+    "tiene",
+    "tienen",
+    "tenemos",
+    "puedo",
+    "puede",
+    "pueden",
+    "podemos",
+    "necesito",
+    "necesita",
+    "necesitan",
+    "quiero",
+    "quisiera",
+    "hay",
+    "hace",
+    "hacer",
+    "hago",
+    "cual",
+    "cuales",
+    "cuanto",
+    "cuanta",
+    "cuantos",
+    "cuantas",
+    "como",
+    "donde",
+    "quien",
+    "quienes",
+    "cuando",
+    "saber",
+    "dice",
+    "dicen",
+    "existe",
+    "existen",
+    "segun",
+    "chile",
+    "chilena",
+    "chileno",
+    "exactamente",
+    "favor",
+    "ayuda",
+    "consulta",
+    "pregunta",
+    "correcto",
+    "correcta",
+    "algun",
+    "alguna",
+    "cosa",
+    "cosas",
+    "manera",
+    "mi",
+    "nuestro",
+    "nuestra",
+    "ser",
+    "estar",
+    "esta",
+    "estan",
+    "son",
+    "es",
+    "fue",
+    "era",
+    "haber",
+    "sido",
+    "tanto",
+    "dado",
+    "dada",
+    "contener",
+    "incluir",
+    "llevar",
+    "cumplir",
+    "mantenerse",
+    "durante",
+    "regula",
+    "regulan",
+    "rige",
+    "rigen"
+  ],
+  "expansiones": [
+    {
+      "si": [
+        "grave",
+        "graves",
+        "gravedad"
+      ],
+      "agregar": [
+        "seria",
+        "serias",
+        "serio",
+        "seriedad"
+      ]
+    },
+    {
+      "si": [
+        "notificar",
+        "notifico",
+        "notificacion",
+        "avisar",
+        "aviso",
+        "reportar",
+        "reporte",
+        "informar",
+        "denunciar"
+      ],
+      "agregar": [
+        "comunicar",
+        "comunicacion",
+        "notificar",
+        "notificadas",
+        "notificacion"
+      ]
+    },
+    {
+      "si": [
+        "ram"
+      ],
+      "agregar": [
+        "reaccion",
+        "adversa",
+        "reacciones",
+        "adversas"
+      ]
+    },
+    {
+      "si": [
+        "guardar",
+        "guarda",
+        "guardarse",
+        "archivo",
+        "respaldar"
+      ],
+      "agregar": [
+        "archivar",
+        "archivaran",
+        "archivo",
+        "conservar",
+        "destruirse"
+      ]
+    },
+    {
+      "si": [
+        "internet",
+        "online",
+        "web",
+        "linea",
+        "delivery",
+        "domicilio",
+        "digital",
+        "electronica",
+        "app"
+      ],
+      "agregar": [
+        "expendio electronico",
+        "electronico",
+        "distancia"
+      ]
+    },
+    {
+      "si": [
+        "vender",
+        "venta",
+        "vende",
+        "venden",
+        "comprar",
+        "compra",
+        "comercializar"
+      ],
+      "agregar": [
+        "expendio",
+        "expender",
+        "expenderse",
+        "venta"
+      ]
+    },
+    {
+      "si": [
+        "dura",
+        "duracion",
+        "durar",
+        "vigencia",
+        "valida",
+        "valido",
+        "validez",
+        "caduca",
+        "caducidad",
+        "vence",
+        "vencimiento",
+        "renovar",
+        "renovacion"
+      ],
+      "agregar": [
+        "vigencia",
+        "validez",
+        "renovado",
+        "contados desde"
+      ]
+    },
+    {
+      "si": [
+        "abrir",
+        "instalar",
+        "montar",
+        "poner",
+        "apertura",
+        "inaugurar"
+      ],
+      "agregar": [
+        "instalacion y funcionamiento",
+        "instalacion",
+        "funcionamiento",
+        "autorizacion"
+      ]
+    },
+    {
+      "si": [
+        "requisito",
+        "requisitos",
+        "exigencias",
+        "exige",
+        "piden"
+      ],
+      "agregar": [
+        "requisitos",
+        "documentos",
+        "presentar",
+        "deberan"
+      ]
+    },
+    {
+      "si": [
+        "multa",
+        "multas",
+        "monto",
+        "cobran",
+        "castigo",
+        "sancion",
+        "sanciones",
+        "sancionan"
+      ],
+      "agregar": [
+        "multa",
+        "sancion",
+        "sancionada",
+        "castigada",
+        "unidades tributarias",
+        "unidad tributaria"
+      ]
+    },
+    {
+      "si": [
+        "pena",
+        "penas",
+        "carcel",
+        "delito",
+        "penal"
+      ],
+      "agregar": [
+        "pena",
+        "presidio",
+        "castigados",
+        "sancionado"
+      ]
+    },
+    {
+      "si": [
+        "rotulo",
+        "rotulos",
+        "etiqueta",
+        "etiquetas",
+        "etiquetado",
+        "caja",
+        "estuche"
+      ],
+      "agregar": [
+        "rotulo",
+        "rotulos",
+        "rotulado",
+        "rotulacion",
+        "envase"
+      ]
+    },
+    {
+      "si": [
+        "bioequivalente",
+        "bioequivalentes",
+        "bioequivalencia",
+        "generico",
+        "genericos",
+        "intercambiable"
+      ],
+      "agregar": [
+        "equivalente terapeutico",
+        "equivalentes terapeuticos",
+        "equivalencia terapeutica",
+        "bioequivalencia"
+      ]
+    },
+    {
+      "si": [
+        "qf",
+        "quimico",
+        "quimicos",
+        "farmaceutico",
+        "farmaceutica"
+      ],
+      "agregar": [
+        "quimico farmaceutico"
+      ]
+    },
+    {
+      "si": [
+        "dt"
+      ],
+      "agregar": [
+        "director tecnico"
+      ]
+    },
+    {
+      "si": [
+        "recetar",
+        "receten",
+        "recetan",
+        "prescribir",
+        "prescriben"
+      ],
+      "agregar": [
+        "prescribir",
+        "prescripcion",
+        "receta"
+      ]
+    },
+    {
+      "si": [
+        "remedio",
+        "remedios",
+        "farmaco",
+        "farmacos",
+        "medicina",
+        "medicinas"
+      ],
+      "agregar": [
+        "medicamento",
+        "medicamentos",
+        "producto farmaceutico",
+        "productos farmaceuticos"
+      ]
+    },
+    {
+      "si": [
+        "psicotropico",
+        "psicotropicos",
+        "benzodiacepina",
+        "benzodiacepinas",
+        "clonazepam",
+        "alprazolam",
+        "diazepam"
+      ],
+      "agregar": [
+        "psicotropicos",
+        "receta retenida",
+        "lista iv"
+      ]
+    },
+    {
+      "si": [
+        "estupefaciente",
+        "estupefacientes",
+        "opioide",
+        "opioides",
+        "morfina",
+        "fentanilo",
+        "metadona"
+      ],
+      "agregar": [
+        "estupefacientes",
+        "receta cheque"
+      ]
+    },
+    {
+      "si": [
+        "dispensar",
+        "dispensa",
+        "dispensan",
+        "entregar",
+        "despachar",
+        "despacha",
+        "atender"
+      ],
+      "agregar": [
+        "despachar",
+        "despacho",
+        "dispensacion",
+        "dispensar",
+        "expendio"
+      ]
+    },
+    {
+      "si": [
+        "auxiliar",
+        "auxiliares",
+        "vendedor",
+        "vendedores",
+        "tecnico en farmacia",
+        "tecnicos en farmacia",
+        "tecnico de farmacia"
+      ],
+      "agregar": [
+        "auxiliar de farmacia",
+        "auxiliar"
+      ]
+    },
+    {
+      "si": [
+        "temperatura",
+        "temperaturas",
+        "refrigerado",
+        "refrigerados",
+        "frio",
+        "refrigerador",
+        "congelado"
+      ],
+      "agregar": [
+        "temperatura",
+        "refrigerados",
+        "cadena de frio",
+        "c"
+      ]
+    },
+    {
+      "si": [
+        "vacuna",
+        "vacunas",
+        "vacunacion",
+        "vacunatorio"
+      ],
+      "agregar": [
+        "vacunacion",
+        "inmunizacion",
+        "esavi",
+        "vacunas"
+      ]
+    },
+    {
+      "si": [
+        "marihuana",
+        "cannabis",
+        "cbd",
+        "thc"
+      ],
+      "agregar": [
+        "cannabis"
+      ]
+    },
+    {
+      "si": [
+        "cultivar",
+        "autocultivo",
+        "autocultivar",
+        "plantar",
+        "sembrar",
+        "cultivo"
+      ],
+      "agregar": [
+        "cultive",
+        "siembre",
+        "plante",
+        "coseche"
+      ]
+    },
+    {
+      "si": [
+        "importar",
+        "importacion",
+        "traer",
+        "extranjero",
+        "internar"
+      ],
+      "agregar": [
+        "importacion",
+        "internacion",
+        "importados"
+      ]
+    },
+    {
+      "si": [
+        "registrar",
+        "inscribir",
+        "inscripcion"
+      ],
+      "agregar": [
+        "registro sanitario"
+      ]
+    },
+    {
+      "si": [
+        "estudio clinico",
+        "estudios clinicos",
+        "investigacion clinica",
+        "ensayos"
+      ],
+      "agregar": [
+        "ensayo clinico",
+        "ensayos clinicos",
+        "investigacion"
+      ]
+    },
+    {
+      "si": [
+        "publicidad",
+        "propaganda",
+        "anuncio",
+        "anuncios",
+        "promocion",
+        "publicitar"
+      ],
+      "agregar": [
+        "publicidad",
+        "anunciarse"
+      ]
+    },
+    {
+      "si": [
+        "fraccionar",
+        "fraccionado",
+        "fraccionamiento",
+        "granel"
+      ],
+      "agregar": [
+        "fraccionamiento",
+        "fraccionados",
+        "envase clinico"
+      ]
+    },
+    {
+      "si": [
+        "falsificado",
+        "falsificados",
+        "falso",
+        "falsos",
+        "pirata",
+        "adulterado"
+      ],
+      "agregar": [
+        "falsificado",
+        "falsificados",
+        "adulterado"
+      ]
+    },
+    {
+      "si": [
+        "horario",
+        "jornada",
+        "presente",
+        "presencia"
+      ],
+      "agregar": [
+        "horario",
+        "horas diarias",
+        "presente",
+        "funcionamiento"
+      ]
+    },
+    {
+      "si": [
+        "laboratorio",
+        "laboratorios",
+        "fabrica",
+        "planta"
+      ],
+      "agregar": [
+        "laboratorio farmaceutico",
+        "laboratorios farmaceuticos",
+        "produccion"
+      ]
+    },
+    {
+      "si": [
+        "definicion",
+        "significa",
+        "concepto",
+        "entiende"
+      ],
+      "agregar": [
+        "se entendera por",
+        "es todo",
+        "es el"
+      ]
+    },
+    {
+      "si": [
+        "trafico",
+        "traficar",
+        "narcotrafico",
+        "microtrafico"
+      ],
+      "agregar": [
+        "trafiquen",
+        "trafico",
+        "estupefacientes"
+      ]
+    },
+    {
+      "si": [
+        "retiro",
+        "recall",
+        "retirar"
+      ],
+      "agregar": [
+        "retiro de mercado",
+        "retiro del mercado"
+      ]
+    },
+    {
+      "si": [
+        "titular",
+        "titulares",
+        "laboratorio titular"
+      ],
+      "agregar": [
+        "titular de registro",
+        "titulares de registros"
+      ]
+    },
+    {
+      "si": [
+        "isp",
+        "instituto"
+      ],
+      "agregar": [
+        "instituto de salud publica",
+        "instituto"
+      ]
+    },
+    {
+      "si": [
+        "seremi"
+      ],
+      "agregar": [
+        "secretaria regional ministerial"
+      ]
+    },
+    {
+      "si": [
+        "obligacion",
+        "obligaciones",
+        "deberes",
+        "responsabilidades",
+        "funciones"
+      ],
+      "agregar": [
+        "deberan",
+        "debera",
+        "responsable",
+        "funciones"
+      ]
+    },
+    {
+      "si": [
+        "medicamento",
+        "medicamentos"
+      ],
+      "agregar": [
+        "especialidad farmaceutica",
+        "especialidades farmaceuticas",
+        "producto farmaceutico",
+        "productos farmaceuticos"
+      ]
+    },
+    {
+      "si": [
+        "infringir",
+        "infringe",
+        "infracciones",
+        "incumplir",
+        "incumplimiento",
+        "vulnerar"
+      ],
+      "agregar": [
+        "infraccion",
+        "infracciones",
+        "infringe"
+      ]
+    }
+  ],
+  "fuera_de_alcance": [
+    {
+      "patron": "\\bdispositivos? medicos?\\b|\\bclase (i|ii|iii|iv|1|2|3|4)\\b.{0,40}dispositivo|marcapasos|protesis|implantes?\\b|glucometro",
+      "excepto": "ensayo|investigacion|estudio clinico|uso provisional",
+      "materia": "el registro y control de dispositivos médicos"
+    },
+    {
+      "patron": "rotulado nutricional|etiquetado nutricional|sellos? de advertencia|ley de etiquetado",
+      "excepto": "",
+      "materia": "el rotulado nutricional de alimentos (Reglamento Sanitario de los Alimentos)"
+    },
+    {
+      "patron": "veterinari|\\bsag\\b|bovinos?|ganado|mascotas?",
+      "excepto": "deposito veterinario|depositos veterinarios",
+      "materia": "los medicamentos veterinarios, que regula el SAG"
+    },
+    {
+      "patron": "\\bimpuestos?\\b|\\biva\\b|tributos?\\b|aranceles? aduaner|derechos de aduana",
+      "excepto": "",
+      "materia": "materias tributarias o aduaneras"
+    },
+    {
+      "patron": "\\bfda\\b|\\bema\\b|\\beuropea\\b|estados unidos",
+      "excepto": "",
+      "materia": "normativa de agencias extranjeras (FDA, EMA)"
+    },
+    {
+      "patron": "bebidas alcoholicas|tabaco|cigarrillos",
+      "excepto": "",
+      "materia": "la publicidad de alcohol y tabaco"
+    }
+  ]
+}
