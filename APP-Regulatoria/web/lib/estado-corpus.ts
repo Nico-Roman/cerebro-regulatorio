@@ -31,11 +31,21 @@ export type EstadoCorpus = {
 export const DIAS_AVISO = 3;
 export const DIAS_VENCIDO = 7;
 
-let cache: EstadoCorpus | null = null;
+// Solo se guarda en caché lo que el archivo DICE (fecha, conteos). La edad se
+// calcula en cada llamada.
+//
+// Antes se cacheaba el objeto completo, días incluidos, al primer request. Si el
+// pipeline dejaba de correr no había commit, ni redeploy, ni proceso nuevo: el
+// contenedor seguía respondiendo "fresco" para siempre y ni /api/estado ni el
+// aviso del buscador podían detectar el atraso. Se comprobó en producción el
+// 11-09-2026: 26 horas después de generado el corpus, /api/estado decía 0 días.
+type DatosArchivo = Omit<EstadoCorpus, "diasDesdeGeneracion" | "fresco" | "vencido">;
 
-export function estadoCorpus(): EstadoCorpus {
-  // Sin caché entre peticiones el disco se lee en cada request; el archivo solo
-  // cambia con un despliegue nuevo, así que cachear es correcto.
+let cache: DatosArchivo | null = null;
+
+function leerArchivo(): DatosArchivo {
+  // El archivo solo cambia con un despliegue nuevo, así que leerlo una vez por
+  // proceso es correcto.
   if (cache) return cache;
 
   let datos: Record<string, unknown> = {};
@@ -49,11 +59,8 @@ export function estadoCorpus(): EstadoCorpus {
     datos = {};
   }
 
-  const generado = typeof datos.generado === "string" ? datos.generado : null;
-  const dias = generado ? diasDesde(generado) : null;
-
   cache = {
-    generado,
+    generado: typeof datos.generado === "string" ? datos.generado : null,
     snapshotFetchedAt:
       typeof datos.snapshot_fetched_at === "string" ? datos.snapshot_fetched_at : null,
     documentos: typeof datos.documentos === "number" ? datos.documentos : null,
@@ -61,11 +68,19 @@ export function estadoCorpus(): EstadoCorpus {
       typeof datos.normas_listado_oficial === "number" ? datos.normas_listado_oficial : null,
     publicadoPor: typeof datos.publicado_por === "string" ? datos.publicado_por : null,
     codigoSanitarioVersion: leerVersionLey(datos.codigo_sanitario),
+  };
+  return cache;
+}
+
+export function estadoCorpus(ahora: number = Date.now()): EstadoCorpus {
+  const datos = leerArchivo();
+  const dias = datos.generado ? diasDesde(datos.generado, ahora) : null;
+  return {
+    ...datos,
     diasDesdeGeneracion: dias,
     fresco: dias !== null && dias <= DIAS_AVISO,
     vencido: dias === null || dias > DIAS_VENCIDO,
   };
-  return cache;
 }
 
 function leerVersionLey(v: unknown): string | null {
@@ -74,10 +89,10 @@ function leerVersionLey(v: unknown): string | null {
   return typeof ver === "string" ? ver : null;
 }
 
-function diasDesde(fecha: string): number | null {
+function diasDesde(fecha: string, ahora: number): number | null {
   const d = new Date(fecha);
   if (Number.isNaN(d.getTime())) return null;
-  return Math.floor((Date.now() - d.getTime()) / 86_400_000);
+  return Math.floor((ahora - d.getTime()) / 86_400_000);
 }
 
 /** "30-08-2026" a partir de "2026-08-30", sin depender de la zona del servidor. */

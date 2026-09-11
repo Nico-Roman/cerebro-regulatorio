@@ -24,6 +24,17 @@ export function modeloActual(): string {
   return process.env.LLM_MODEL || "openai/gpt-oss-120b";
 }
 
+/**
+ * Esfuerzo de razonamiento bajo para los modelos que lo aceptan. Se envía solo
+ * a gpt-oss (o si LLM_REASONING_EFFORT está definida): otros proveedores
+ * rechazan parámetros que no conocen.
+ */
+function parametrosRazonamiento(modelo: string): Record<string, string> {
+  const esfuerzo = process.env.LLM_REASONING_EFFORT;
+  if (esfuerzo) return { reasoning_effort: esfuerzo };
+  return /gpt-oss/i.test(modelo) ? { reasoning_effort: "low" } : {};
+}
+
 export async function completar(params: {
   sistema: string;
   usuario: string;
@@ -44,7 +55,11 @@ export async function completar(params: {
       model: modelo,
       // Temperatura 0: en normativa, la creatividad es el defecto, no la virtud.
       temperature: 0,
-      max_tokens: params.maxTokens ?? 700,
+      // gpt-oss y otros modelos de razonamiento gastan tokens "pensando" antes
+      // de escribir, y esos tokens cuentan contra el tope. Con 700 el texto
+      // podía llegar vacío; 1.500 deja margen para 200 palabras.
+      max_tokens: params.maxTokens ?? 1500,
+      ...parametrosRazonamiento(modelo),
       messages: [
         { role: "system", content: params.sistema },
         { role: "user", content: params.usuario },
