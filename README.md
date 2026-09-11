@@ -24,11 +24,20 @@ El corpus se reconstruye a diario en GitHub Actions
 oficial → descarga de lo que falte → reconstrucción del índice → **compuerta de
 calidad** → commit → redeploy automático en Railway.
 
-La compuerta (`eval_retrieval.py`) mide dos cosas y bloquea la publicación si
-alguna reprueba: recall ≥ 90% contra el set de preguntas doradas, y 100% de
-abstención en consultas fuera del corpus. Un buscador legal falla de dos maneras
-distintas, y subir el recall a costa de responder siempre pasaría media
-evaluación mientras empeora la herramienta.
+La compuerta bloquea la publicación si alguna de sus dos partes reprueba:
+
+- `eval_retrieval.py`: recall ≥ 90% contra el set de preguntas doradas y 100%
+  de abstención en consultas fuera del corpus. Un buscador legal falla de dos
+  maneras distintas, y subir el recall a costa de responder siempre pasaría
+  media evaluación mientras empeora la herramienta.
+- `eval_respuestas.py`: mide **lo que ve el químico farmacéutico** — si la
+  respuesta aparece arriba, si algo sale en verde sin contener el dato, si se
+  abstiene cuando debe — y exige que la web (TypeScript) y el motor Python den
+  exactamente la misma respuesta. Detalle en el
+  [README del cerebro](APP-Regulatoria/cerebro/README.md#compuerta-de-calidad).
+
+Desde 2026-09-11 la respuesta de la web no usa IA: una frase textual de la
+norma, su cita corta y un estado (*encontrado*, *parcial*, *ausente*).
 
 ### Salud vs. frescura
 

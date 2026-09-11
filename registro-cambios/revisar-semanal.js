@@ -148,8 +148,49 @@ function pdfsEnDisco() {
   return set;
 }
 
+// Lo que el corpus ya tiene indexado, visto desde el propio corpus.jsonl.
+//
+// Antes esta revisión solo miraba los PDF en disco, así que toda norma que el
+// ISP enlaza a BCN/LeyChile quedaba "pendiente" para siempre, aunque el
+// pipeline ya la hubiera incorporado por otra vía (el Código Sanitario desde el
+// XML de BCN, el DS 3 y el DE 945 desde su ficha). pendientes.md decía que el
+// cerebro no podía responder sobre normas que sí respondía.
+//
+// Se identifica la norma por el idNorma de LeyChile (estable, no depende de si
+// el listado dice "Decreto Exento" y el texto "DFL") y los PDF por nombre de
+// archivo. Solo se leen metadatos de cada fila, nunca el texto legal.
+function idNormaBCN(u) {
+  const m = String(u || "").match(/[?&]idNorma=([0-9]+)/i);
+  return m ? m[1] : null;
+}
+
+function coberturaCorpus() {
+  const idNormas = new Set();
+  const pdfs = new Set();
+  const archivo = path.join(CORPUS, "corpus.jsonl");
+  if (!fs.existsSync(archivo)) return { idNormas, pdfs, disponible: false };
+  const lineas = fs.readFileSync(archivo, "utf-8").split("\n");
+  for (const linea of lineas) {
+    if (!linea.trim()) continue;
+    let fila;
+    try {
+      fila = JSON.parse(linea);
+    } catch (e) {
+      continue;
+    }
+    const id = idNormaBCN(fila.fuente_url);
+    if (id) idNormas.add(id);
+    for (const u of [fila.fuente_url, fila.pdf_path]) {
+      const base = urlBasename(u);
+      if (base.endsWith(".pdf")) pdfs.add(base);
+    }
+  }
+  return { idNormas, pdfs, disponible: true };
+}
+
 function detectarFaltantes(records) {
   const disco = pdfsEnDisco();
+  const corpus = coberturaCorpus();
   const vistos = new Set();
   const faltantes = [];
 
@@ -160,7 +201,7 @@ function detectarFaltantes(records) {
 
     const base = urlBasename(r.enlace);
     if (base.endsWith(".pdf")) {
-      if (disco.has(base)) continue;
+      if (disco.has(base) || corpus.pdfs.has(base)) continue;
       faltantes.push({
         clave: k,
         tipo: r.tipo,
@@ -173,6 +214,8 @@ function detectarFaltantes(records) {
         recuperable: true,
       });
     } else {
+      const id = idNormaBCN(r.enlace);
+      if (id && corpus.idNormas.has(id)) continue;
       faltantes.push({
         clave: k,
         tipo: r.tipo,
@@ -181,7 +224,7 @@ function detectarFaltantes(records) {
         descripcion: r.descripcion,
         enlace: r.enlace,
         archivo_esperado: null,
-        motivo: "El ISP enlaza a BCN/LeyChile (página web), no publica PDF: no hay archivo que descargar",
+        motivo: "El ISP enlaza a BCN/LeyChile (página web), no publica PDF, y el texto aún no está en el corpus",
         recuperable: false,
       });
     }

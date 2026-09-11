@@ -22,7 +22,7 @@ Nada de lo que hay acá entra al corpus del Cerebro Regulatorio, **por diseño**
   listado), nunca texto legal citable.
 
 Si alguna vez necesitas citar una norma, la fuente sigue siendo el PDF en
-`ANAMED_Normativa/` y la respuesta sale de `cerebro/query.py`. **Nunca de acá.**
+`ANAMED_Normativa/` y la respuesta sale de `cerebro/respuesta.py` (y de su copia en la web, `web/lib/search.ts`). **Nunca de acá.**
 Este registro sirve para responder «¿qué cambió y cuándo?», no «¿qué dice la
 norma?».
 
