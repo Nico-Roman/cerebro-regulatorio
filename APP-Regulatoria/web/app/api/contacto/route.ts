@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { SITE } from "@/lib/site";
+import { escaparHtml as escapar } from "@/lib/html";
 
 export const runtime = "nodejs";
 
@@ -19,14 +20,6 @@ interface Payload {
 
 function limpiar(v: unknown, max: number): string {
   return typeof v === "string" ? v.trim().slice(0, max) : "";
-}
-
-function escapar(s: string): string {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
 }
 
 export async function POST(req: Request) {
@@ -90,7 +83,7 @@ export async function POST(req: Request) {
       from: process.env.CONTACTO_FROM || "RegulaMED <onboarding@resend.dev>",
       to: [process.env.CONTACTO_TO || SITE.email],
       reply_to: email,
-      subject: `Consulta regulatoria — ${nombre}${empresa ? ` (${empresa})` : ""}`,
+      subject: `Consulta regulatoria — ${nombre}${empresa ? ` (${empresa})` : ""}`.replace(/[\r\n]+/g, " "),
       html,
     }),
   });

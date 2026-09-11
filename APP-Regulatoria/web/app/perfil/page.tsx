@@ -5,6 +5,7 @@ import { FormularioPerfil } from "@/components/formulario-perfil";
 import { db } from "@/lib/db";
 import { perfil } from "@/lib/db/schema";
 import { usuarioActual } from "@/lib/sesion";
+import { destinoSeguro } from "@/lib/destino";
 
 export const metadata: Metadata = {
   title: "Completa tu perfil",
@@ -74,9 +75,4 @@ function primerNombre(nombre: string): string {
 
 function primerValor(v: string | string[] | undefined): string | undefined {
   return Array.isArray(v) ? v[0] : v;
-}
-
-function destinoSeguro(next?: string): string {
-  if (!next || !next.startsWith("/") || next.startsWith("//")) return "/normativa";
-  return next;
 }

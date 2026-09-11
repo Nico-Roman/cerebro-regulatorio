@@ -12,6 +12,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { consultasRecientes, huecosDelCorpus, resumen, usuarios } from "@/lib/admin";
 import { enviarCorreo } from "@/lib/correo";
+import { escaparHtml as e } from "@/lib/html";
 import { esAdmin, usuarioActual } from "@/lib/sesion";
 
 export const runtime = "nodejs";
@@ -75,17 +76,17 @@ export async function GET(req: NextRequest) {
     ${li(
       nuevos.map(
         (u) =>
-          `${u.nombre} &lt;${u.email}&gt;${u.empresa ? ` — ${u.empresa}` : ""}${
-            u.tipoPerfil ? ` (${u.tipoPerfil})` : ""
+          `${e(u.nombre)} &lt;${e(u.email)}&gt;${u.empresa ? ` — ${e(u.empresa)}` : ""}${
+            u.tipoPerfil ? ` (${e(u.tipoPerfil)})` : ""
           }`
       )
     )}
 
     <h3>Preguntas de la semana</h3>
-    ${li(ultimaSemana.slice(0, 25).map((c) => `${c.pregunta} — ${c.confianza || "sin señal"}`))}
+    ${li(ultimaSemana.slice(0, 25).map((c) => `${e(c.pregunta)} — ${e(c.confianza || "sin señal")}`))}
 
     <h3>Lo que el corpus no cubrió</h3>
-    ${li(huecos.map((h) => `<strong>${h.concepto}</strong> (${h.veces}×) — ej: ${h.ejemplo}`))}
+    ${li(huecos.map((h) => `<strong>${e(h.concepto)}</strong> (${e(h.veces)}×) — ej: ${e(h.ejemplo)}`))}
 
     <p style="color:#666;font-size:12px">
       Generado por /api/cron/resumen-semanal. Los datos salen de Postgres, no de analítica externa.

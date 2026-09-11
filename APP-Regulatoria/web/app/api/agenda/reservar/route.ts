@@ -8,11 +8,13 @@ import { randomUUID } from "node:crypto";
 import { and, eq } from "drizzle-orm";
 import { invalidarCacheHuecos } from "@/lib/agenda/cache";
 import { leerConfig } from "@/lib/agenda/config";
-import { agendaConfigurada, crearEvento, ocupados } from "@/lib/agenda/google";
+import { agendaConfigurada, cancelarEvento, crearEvento, ocupados } from "@/lib/agenda/google";
 import { construirIcs } from "@/lib/agenda/ics";
 import { generarSlots } from "@/lib/agenda/slots";
 import { fechaLargaEnZona, horaEnZona } from "@/lib/agenda/tiempo";
 import { enviarCorreo } from "@/lib/correo";
+import { escaparHtml, urlSegura } from "@/lib/html";
+import { ipCliente } from "@/lib/ip";
 import { db } from "@/lib/db";
 import { reservas } from "@/lib/db/schema";
 import { consumirCupo } from "@/lib/rate-limit";
@@ -56,10 +58,18 @@ export async function POST(req: NextRequest) {
   const fin = new Date(inicio.getTime() + config.duracionMin * 60_000);
 
   // Tope por IP: 5 reservas por hora. Alguien agendando para su equipo cabe;
-  // un script llenando la agenda, no.
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "sin-ip";
+  // un script llenando la agenda, no. La IP es la que agrega Railway, no la
+  // que declara el cliente.
+  const ip = ipCliente(req.headers);
   const cupo = await consumirCupo(`reservar:${ip}`, 5, 3600);
   if (!cupo.permitido) {
+    return NextResponse.json({ error: "demasiadas_reservas" }, { status: 429 });
+  }
+  // Y tope por destinatario: la reserva manda un correo y una invitación de
+  // calendario a la dirección que se escribió. Sin este límite, cualquiera
+  // podía usar la agenda para mandar correos desde regulamed.cl a un tercero.
+  const cupoCorreo = await consumirCupo(`reservar-correo:${email.toLowerCase()}`, 3, 86_400);
+  if (!cupoCorreo.permitido) {
     return NextResponse.json({ error: "demasiadas_reservas" }, { status: 429 });
   }
 
@@ -117,19 +127,36 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "calendario_no_disponible" }, { status: 502 });
   }
 
-  await db.insert(reservas).values({
-    id,
-    userId: usuario?.id ?? null,
-    nombre,
-    email,
-    empresa: empresa || null,
-    motivo: motivo || null,
-    inicio,
-    fin,
-    googleEventId: eventoId,
-    meetUrl,
-    tokenGestion,
-  });
+  try {
+    await db.insert(reservas).values({
+      id,
+      userId: usuario?.id ?? null,
+      nombre,
+      email,
+      empresa: empresa || null,
+      motivo: motivo || null,
+      inicio,
+      fin,
+      googleEventId: eventoId,
+      meetUrl,
+      tokenGestion,
+    });
+  } catch (e) {
+    // El índice único de la migración 0004 impide dos reservas confirmadas en
+    // el mismo horario. Si dos personas apretaron a la vez, la segunda pierde:
+    // se borra su evento de Google para no dejar una reunión fantasma.
+    // drizzle envuelve el error de pg: el código puede venir en `cause`.
+    const err = e as { code?: string; cause?: { code?: string } };
+    if ((err?.code ?? err?.cause?.code) === "23505") {
+      if (eventoId) {
+        await cancelarEvento(config.calendarios[0], eventoId).catch((err) =>
+          console.error("[agenda] no se pudo borrar el evento duplicado:", err)
+        );
+      }
+      return NextResponse.json({ error: "hueco_tomado" }, { status: 409 });
+    }
+    throw e;
+  }
 
   invalidarCacheHuecos();
 
@@ -149,16 +176,18 @@ export async function POST(req: NextRequest) {
     url: meetUrl,
   });
 
+  const meetSeguro = urlSegura(meetUrl);
+
   // El correo no debe poder tumbar una reserva que ya está en el calendario.
   try {
     await enviarCorreo({
       to: email,
       subject: `Reunión confirmada · ${cuando}`,
       html: `
-        <p>Hola ${nombre},</p>
-        <p>Tu reunión de ${config.duracionMin} minutos quedó agendada para <strong>${cuando}</strong>.</p>
-        ${meetUrl ? `<p>Enlace de la videollamada: <a href="${meetUrl}">${meetUrl}</a></p>` : ""}
-        <p>Si necesitas cancelar, usa este enlace: <a href="${enlaceGestion}">${enlaceGestion}</a></p>
+        <p>Hola ${escaparHtml(nombre)},</p>
+        <p>Tu reunión de ${config.duracionMin} minutos quedó agendada para <strong>${escaparHtml(cuando)}</strong>.</p>
+        ${meetSeguro ? `<p>Enlace de la videollamada: <a href="${escaparHtml(meetSeguro)}">${escaparHtml(meetSeguro)}</a></p>` : ""}
+        <p>Si necesitas cancelar, usa este enlace: <a href="${escaparHtml(enlaceGestion)}">${escaparHtml(enlaceGestion)}</a></p>
         <p style="color:#666;font-size:12px">Adjuntamos el archivo .ics por si quieres agregarla a otro calendario.</p>
       `,
       attachments: [

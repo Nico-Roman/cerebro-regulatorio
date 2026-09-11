@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { FormularioIngreso } from "@/components/formulario-ingreso";
 import { MAGIC_LINK_ACTIVO } from "@/lib/auth";
 import { usuarioActual } from "@/lib/sesion";
+import { destinoSeguro } from "@/lib/destino";
 
 export const metadata: Metadata = {
   title: "Entrar al buscador normativo",
@@ -54,10 +55,4 @@ export default async function IngresarPage({
       </div>
     </main>
   );
-}
-
-/** Solo aceptamos rutas internas: un `next` a otro dominio es un open redirect. */
-function destinoSeguro(next?: string): string {
-  if (!next || !next.startsWith("/") || next.startsWith("//")) return "/normativa";
-  return next;
 }

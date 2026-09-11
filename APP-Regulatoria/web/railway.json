@@ -8,6 +8,8 @@
       "components/**",
       "lib/**",
       "data/**",
+      "drizzle/**",
+      "scripts/migrate.mjs",
       "public/**",
       "package.json",
       "package-lock.json",

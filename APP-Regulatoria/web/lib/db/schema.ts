@@ -19,6 +19,7 @@ import {
   timestamp,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 // ─── Better Auth ────────────────────────────────────────────────────────────
 
@@ -212,6 +213,12 @@ export const reservas = pgTable(
   (t) => [
     index("reservas_inicio_idx").on(t.inicio),
     index("reservas_estado_idx").on(t.estado),
+    // Dos reservas confirmadas no pueden compartir horario. La revalidación
+    // contra Google y la base no alcanza si dos personas aprietan a la vez; el
+    // índice sí (migración 0004).
+    uniqueIndex("reservas_inicio_confirmada_idx")
+      .on(t.inicio)
+      .where(sql`${t.estado} = 'confirmada'`),
   ]
 );
 
