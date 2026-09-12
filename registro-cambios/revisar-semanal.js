@@ -39,11 +39,20 @@ const REG_DIR = path.resolve(AQUI, "..");                       // Asuntos-Regul
 const VIGILANCIA = path.join(REG_DIR, "vigilancia-isp");
 const ANAMED = path.join(REG_DIR, "ANAMED_Normativa");
 const CORPUS = path.join(REG_DIR, "APP-Regulatoria", "cerebro", "corpus");
+const WEB_DATA = path.join(REG_DIR, "APP-Regulatoria", "web", "data");
 
 const F = {
   snapshotISP: path.join(VIGILANCIA, "snapshots", "latest.json"),
   historial: path.join(VIGILANCIA, "historial.json"),
   logs: path.join(VIGILANCIA, "logs"),
+  // Desde que el pipeline corre en GitHub Actions, `corpus/metadata.json` y
+  // `corpus/corpus.jsonl` NO se versionan: en cualquier PC que no reconstruya
+  // el corpus a mano quedan congelados en la última vez que se hizo. Los que
+  // el pipeline sí publica son estos dos, en web/data/, y son la fuente de
+  // verdad de esta revisión. La metadata local se sigue leyendo, pero solo
+  // para el detalle por documento y solo si corresponde a la misma corrida.
+  estadoCorpus: path.join(WEB_DATA, "estado-corpus.json"),
+  corpusWeb: path.join(WEB_DATA, "corpus.jsonl"),
   metadata: path.join(CORPUS, "metadata.json"),
   referencia: path.join(AQUI, "estado", "snapshot-referencia.json"),
   reintentos: path.join(AQUI, "estado", "reintentos.json"),
@@ -167,8 +176,8 @@ function idNormaBCN(u) {
 function coberturaCorpus() {
   const idNormas = new Set();
   const pdfs = new Set();
-  const archivo = path.join(CORPUS, "corpus.jsonl");
-  if (!fs.existsSync(archivo)) return { idNormas, pdfs, disponible: false };
+  const archivo = [F.corpusWeb, path.join(CORPUS, "corpus.jsonl")].find((f) => fs.existsSync(f));
+  if (!archivo) return { idNormas, pdfs, disponible: false };
   const lineas = fs.readFileSync(archivo, "utf-8").split("\n");
   for (const linea of lineas) {
     if (!linea.trim()) continue;
@@ -235,7 +244,13 @@ function detectarFaltantes(records) {
 // --- 3. Salud del corpus y del pipeline ---------------------------------------
 
 function saludCorpus(records) {
+  const estado = leerJSON(F.estadoCorpus);
   const meta = leerJSON(F.metadata);
+  // El detalle por documento (vigencia, alertas de OCR) solo existe en la
+  // metadata local. Si es de otra corrida que la publicada, no se reporta:
+  // una cifra vieja presentada como actual es peor que un guion.
+  const generado = (estado && estado.generado) || (meta && meta.generado) || null;
+  const detalleAlDia = !!(meta && generado && meta.generado === generado);
   const historial = leerJSON(F.historial, []);
   const ultimaCorrida = historial.length ? historial[historial.length - 1] : null;
 
@@ -245,8 +260,11 @@ function saludCorpus(records) {
     ultimoLog = logs.length ? logs[logs.length - 1] : null;
   } catch (e) {}
 
+  // El log del pipeline tampoco se versiona: en un PC que ya no construye el
+  // corpus, el último log local puede ser de hace semanas. Si es anterior a la
+  // corrida publicada, no dice nada sobre ella y no se reporta.
   let gate = null;
-  if (ultimoLog) {
+  if (ultimoLog && (!generado || ultimoLog.slice(-14, -4) >= generado)) {
     const txt = fs.readFileSync(path.join(F.logs, ultimoLog), "utf-8");
     const m = txt.match(/recall@5:\s*([^\n]+)/);
     gate = {
@@ -257,20 +275,21 @@ function saludCorpus(records) {
     };
   }
 
-  const docs = (meta && meta.documentos) || [];
-  const noVerificada = docs.filter((d) => d.vigencia !== "vigente").map((d) => ({
-    doc_id: d.doc_id,
-    vigencia: d.vigencia,
-  }));
-  const conAlertasOCR = docs.filter((d) => (d.chunks_con_alerta_ocr || 0) > 0).length;
+  const docs = detalleAlDia ? (meta.documentos || []) : [];
+  const noVerificada = detalleAlDia
+    ? docs.filter((d) => d.vigencia !== "vigente").map((d) => ({ doc_id: d.doc_id, vigencia: d.vigencia }))
+    : null;
+  const conAlertasOCR = detalleAlDia ? docs.filter((d) => (d.chunks_con_alerta_ocr || 0) > 0).length : null;
 
   return {
     snapshot_fetched_at: (leerJSON(F.snapshotISP) || {}).fetchedAt || null,
     dias_desde_snapshot: diasDesde((leerJSON(F.snapshotISP) || {}).fetchedAt),
-    corpus_generado: meta ? meta.generado : null,
-    dias_desde_corpus: diasDesde(meta ? meta.generado : null),
-    documentos_indexados: docs.length,
-    normas_listado_oficial: meta ? meta.normas_listado_oficial : null,
+    corpus_generado: generado,
+    dias_desde_corpus: diasDesde(generado),
+    documentos_indexados: (estado && estado.documentos) ?? docs.length,
+    normas_listado_oficial: (estado && estado.normas_listado_oficial) ?? (meta ? meta.normas_listado_oficial : null),
+    publicado_por: (estado && estado.publicado_por) || null,
+    detalle_por_documento: detalleAlDia,
     normas_en_snapshot: records.length,
     vigencia_no_verificada: noVerificada,
     documentos_con_alertas_ocr: conAlertasOCR,
@@ -309,7 +328,7 @@ function alertas(salud, faltantes) {
     });
   }
 
-  if (salud.vigencia_no_verificada.length) {
+  if (salud.vigencia_no_verificada && salud.vigencia_no_verificada.length) {
     out.push({
       nivel: "info",
       texto: `${salud.vigencia_no_verificada.length} documento(s) indexado(s) sin vigencia certificada por el listado oficial.`,
@@ -446,11 +465,12 @@ function escribirInforme(diff, faltantes, salud, avisos, esBaseline, desde) {
   md += `| Normas únicas del listado | ${salud.normas_listado_oficial ?? "—"} |\n`;
   md += `| Documentos indexados | ${salud.documentos_indexados} |\n`;
   md += `| Normativa pendiente (sin indexar) | ${faltantes.length} — ${faltantes.filter((f) => f.recuperable).length} recuperable(s) |\n`;
-  md += `| Sin vigencia certificada | ${salud.vigencia_no_verificada.length} |\n`;
-  md += `| Documentos con alertas de OCR | ${salud.documentos_con_alertas_ocr} |\n`;
+  md += `| Sin vigencia certificada | ${salud.vigencia_no_verificada ? salud.vigencia_no_verificada.length : "— (detalle solo en el PC que construye el corpus)"} |\n`;
+  md += `| Documentos con alertas de OCR | ${salud.documentos_con_alertas_ocr ?? "—"} |\n`;
   md += `| Corpus reconstruido | ${salud.corpus_generado || "—"} (hace ${salud.dias_desde_corpus ?? "—"} días) |\n`;
   md += `| Último scrape del ISP | ${(salud.snapshot_fetched_at || "—").slice(0, 10)} (hace ${salud.dias_desde_snapshot ?? "—"} días) |\n`;
-  md += `| Compuerta de calidad | ${salud.gate ? (salud.gate.linea || (salud.gate.aprobada ? "aprobada" : "—")) : "—"} |\n\n`;
+  md += `| Compuerta de calidad | ${salud.gate ? `${salud.gate.linea || (salud.gate.aprobada ? "aprobada" : "—")} (log ${salud.gate.log.slice(-14, -4)})` : "— (el log de la corrida vive en GitHub Actions)"} |\n`;
+  md += `| Publicado por | ${salud.publicado_por || "—"} |\n\n`;
 
   if (faltantes.length) {
     md += `## Normativa pendiente\n\nDetalle completo y antigüedad en [pendientes.md](../pendientes.md).\n\n`;
