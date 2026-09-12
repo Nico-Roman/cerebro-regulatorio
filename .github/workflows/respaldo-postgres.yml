@@ -54,11 +54,21 @@ jobs:
         env:
           URL: ${{ secrets.DATABASE_PUBLIC_URL }}
         run: |
-          # pg_dump corre dentro de la imagen oficial para que la versión del
-          # cliente no quede atrás de la del servidor: un pg_dump más viejo se
-          # niega a volcar y el job fallaría con un error poco obvio.
-          docker run --rm -e PGURL="$URL" postgres:17-alpine \
-            sh -c 'pg_dump --no-owner --no-privileges "$PGURL"' > respaldo.sql
+          # pg_dump corre dentro de la imagen oficial porque el cliente NUNCA
+          # puede quedar atrás del servidor: pg_dump se niega a volcar una base
+          # de una versión mayor que la suya. Esto no es teórico — la imagen
+          # estaba fijada en 17 y Railway ya sirve PostgreSQL 18.6, y por eso
+          # este paso falló con exit 1 el 11-09.
+          #
+          # Por eso la imagen NO va fijada a un major: Railway sube de versión
+          # sin avisar, y un respaldo que se rompe en silencio cuando eso pasa
+          # es justamente el tipo de falla que este repo trata de evitar. La
+          # última estable siempre sabe volcar una base más vieja; al revés no.
+          # La versión real del servidor queda en el log para poder diagnosticar.
+          docker run --rm -e PGURL="$URL" postgres:alpine sh -c '
+            psql "$PGURL" -tAc "select version()" >&2
+            pg_dump --no-owner --no-privileges "$PGURL"
+          ' > respaldo.sql
           bytes=$(stat -c%s respaldo.sql)
           echo "Volcado: $bytes bytes"
           # Un dump de una base con esquema aplicado no baja de unos pocos KB.
