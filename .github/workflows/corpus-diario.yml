@@ -62,13 +62,13 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "22"
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
@@ -114,7 +114,7 @@ jobs:
       # rebaja lo que falte. Lo que NO se puede perder son los sidecars OCR, y
       # por eso están versionados en el repo, no en la caché.
       - name: Restaurar caché de PDFs
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ANAMED_Normativa
           key: anamed-pdfs-${{ hashFiles('vigilancia-isp/snapshots/latest.json') }}
@@ -174,7 +174,7 @@ jobs:
       # compuerta reprueba, el log es justamente lo que hay que leer.
       - name: Guardar el log de la corrida
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: log-${{ github.run_id }}
           path: vigilancia-isp/logs/

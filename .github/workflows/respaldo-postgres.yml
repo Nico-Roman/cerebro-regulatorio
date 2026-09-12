@@ -87,7 +87,7 @@ jobs:
           ls -la respaldo.sql.gz.enc
 
       - name: Guardar el artefacto
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: respaldo-postgres-${{ github.run_id }}
           path: respaldo.sql.gz.enc
