@@ -78,6 +78,8 @@ const EJEMPLOS = [
   "¿Qué es la farmacovigilancia?",
 ];
 
+const CLAVE_MODO_IA = "regulamed:modo-ia";
+
 const ESTILO_ESTADO: Record<Estado, { borde: string; punto: string; texto: string }> = {
   encontrado: { borde: "border-emerald-500/70", punto: "bg-emerald-400", texto: "text-emerald-300" },
   parcial: { borde: "border-amber-500/70", punto: "bg-amber-400", texto: "text-amber-300" },
@@ -244,7 +246,7 @@ function NormasRecientesPanel({ normas }: { normas: NormaReciente[] | null }) {
   );
 }
 
-export function BuscadorNormativa() {
+export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boolean }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   // La home manda la consulta por querystring (?q=), así que es el valor
@@ -260,6 +262,22 @@ export function BuscadorNormativa() {
   const [normasRecientes, setNormasRecientes] = useState<NormaReciente[] | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
   const [verTodas, setVerTodas] = useState(false);
+  // Modo IA: pide el borrador redactado apenas termina cada búsqueda. Es una
+  // preferencia del navegador, no de la cuenta; si el almacenamiento está
+  // bloqueado simplemente arranca apagado.
+  const [modoIa, setModoIa] = useState(false);
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage no existe en el render del servidor
+      setModoIa(window.localStorage.getItem(CLAVE_MODO_IA) === "1");
+    } catch {}
+  }, []);
+  const cambiarModoIa = (activo: boolean) => {
+    setModoIa(activo);
+    try {
+      window.localStorage.setItem(CLAVE_MODO_IA, activo ? "1" : "0");
+    } catch {}
+  };
 
   const runSearch = useCallback(
     async (query: string) => {
@@ -380,6 +398,21 @@ export function BuscadorNormativa() {
                 {loading ? "Buscando…" : "Preguntar"}
               </button>
             </div>
+            {iaDisponible && (
+              <label className="flex items-start gap-2 text-xs text-muted">
+                <input
+                  id="modo-ia"
+                  type="checkbox"
+                  checked={modoIa}
+                  onChange={(e) => cambiarModoIa(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-sky-400"
+                />
+                <span>
+                  <span className="font-medium text-foreground">Modo IA</span> — además de la frase de la norma,
+                  redacta un borrador de respuesta con los pasajes encontrados, citando cada uno.
+                </span>
+              </label>
+            )}
             <details className="text-xs text-muted">
               <summary className="cursor-pointer select-none hover:text-foreground">Filtros</summary>
               <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -491,7 +524,7 @@ export function BuscadorNormativa() {
               {/* `key={consultaId}`: cada búsqueda trae un id nuevo y los widgets
                   nacen en su estado inicial. */}
               {respuesta.iaDisponible && respuesta.consultaId && respuesta.estado !== "ausente" && (
-                <RespuestaIa key={respuesta.consultaId} consultaId={respuesta.consultaId} />
+                <RespuestaIa key={respuesta.consultaId} consultaId={respuesta.consultaId} automatico={modoIa} />
               )}
               {respuesta.consultaId && (
                 <FeedbackConsulta key={`fb-${respuesta.consultaId}`} consultaId={respuesta.consultaId} />

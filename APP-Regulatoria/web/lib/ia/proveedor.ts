@@ -11,7 +11,24 @@ export interface RespuestaModelo {
   modelo: string;
   tokensEntrada: number;
   tokensSalida: number;
+  /** Parte de tokensSalida gastada en razonar; 0 si el proveedor no la informa. */
+  tokensRazonamiento: number;
   latenciaMs: number;
+}
+
+/**
+ * Error del proveedor con su código HTTP. El 429 del tier gratuito de Groq
+ * (8.000 tokens por minuto, unas tres respuestas) no es una caída: se informa
+ * como "ocupado, reintenta en N segundos" y no como "no disponible".
+ */
+export class ErrorProveedor extends Error {
+  status: number;
+  reintentarEnSeg: number | null;
+  constructor(status: number, detalle: string, reintentarEnSeg: number | null) {
+    super(`El proveedor respondió ${status}: ${detalle}`);
+    this.status = status;
+    this.reintentarEnSeg = reintentarEnSeg;
+  }
 }
 
 export function iaConfigurada(): boolean {
@@ -69,12 +86,21 @@ export async function completar(params: {
   });
 
   if (!res.ok) {
-    throw new Error(`El proveedor respondió ${res.status}: ${await res.text()}`);
+    const espera = Number.parseFloat(res.headers.get("retry-after") ?? "");
+    throw new ErrorProveedor(
+      res.status,
+      (await res.text()).slice(0, 500),
+      Number.isFinite(espera) ? Math.ceil(espera) : null
+    );
   }
 
   const datos = (await res.json()) as {
     choices?: { message?: { content?: string } }[];
-    usage?: { prompt_tokens?: number; completion_tokens?: number };
+    usage?: {
+      prompt_tokens?: number;
+      completion_tokens?: number;
+      completion_tokens_details?: { reasoning_tokens?: number };
+    };
   };
 
   return {
@@ -82,6 +108,7 @@ export async function completar(params: {
     modelo,
     tokensEntrada: datos.usage?.prompt_tokens ?? 0,
     tokensSalida: datos.usage?.completion_tokens ?? 0,
+    tokensRazonamiento: datos.usage?.completion_tokens_details?.reasoning_tokens ?? 0,
     latenciaMs: Date.now() - inicio,
   };
 }

@@ -6,9 +6,15 @@
 // una norma inventada.
 
 import { NextRequest, NextResponse } from "next/server";
-import { and, eq } from "drizzle-orm";
-import { iaConfigurada } from "@/lib/ia/proveedor";
-import { redactarRespuesta } from "@/lib/ia/redactar";
+import { and, eq, isNotNull } from "drizzle-orm";
+import { ErrorProveedor, iaConfigurada, modeloActual } from "@/lib/ia/proveedor";
+import {
+  claveCache,
+  esAbstencion,
+  pasajesDesdeRespuesta,
+  redactarRespuesta,
+  type FuenteCitada,
+} from "@/lib/ia/redactar";
 import { responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
@@ -18,12 +24,33 @@ import { usuarioActual } from "@/lib/sesion";
 export const runtime = "nodejs";
 
 // Cuota diaria por persona. Los pasajes siguen siendo ilimitados dentro del
-// límite normal de búsqueda: lo que se raciona es el gasto en tokens.
-const MAX_RESPUESTAS_DIA = 20;
+// límite normal de búsqueda: lo que se raciona es el gasto en tokens. Una
+// respuesta servida desde la caché no descuenta cuota.
+const MAX_RESPUESTAS_DIA = Number.parseInt(process.env.LLM_CUOTA_DIARIA ?? "", 10) || 20;
 
 // Cuántos pasajes entran al prompt. Más de seis no mejora la respuesta y
 // multiplica el costo por consulta.
 const PASAJES_AL_MODELO = 6;
+
+function cuerpoRespuesta(p: {
+  texto: string;
+  fuentes: FuenteCitada[];
+  modelo: string | null;
+  cacheada: boolean;
+}) {
+  // La verificación se rehace sobre el texto ya resuelto: una cita inválida
+  // quedó escrita como "cita no verificable" y se vuelve a detectar acá.
+  const abstuvo = esAbstencion(p.texto);
+  return {
+    respuesta: p.texto,
+    fuentes: p.fuentes,
+    modelo: p.modelo,
+    cacheada: p.cacheada,
+    abstuvo,
+    citasInvalidas: /cita no verificable/.test(p.texto),
+    sinCitas: !abstuvo && !p.fuentes.length,
+  };
+}
 
 export async function POST(req: NextRequest) {
   const usuario = await usuarioActual();
@@ -56,21 +83,13 @@ export async function POST(req: NextRequest) {
   // Si ya se redactó antes, se devuelve lo guardado: repetir la llamada solo
   // gastaría tokens para obtener casi lo mismo (temperatura 0).
   if (consulta.respuestaLlm) {
-    return NextResponse.json({
-      respuesta: consulta.respuestaLlm,
-      modelo: consulta.modelo,
-      cacheada: true,
-    });
-  }
-
-  const cupo = await consumirCupo(`ia:${usuario.id}`, MAX_RESPUESTAS_DIA, 86_400);
-  if (!cupo.permitido) {
     return NextResponse.json(
-      {
-        error: "cuota_diaria",
-        mensaje: `Llegaste a las ${MAX_RESPUESTAS_DIA} respuestas redactadas de hoy. Los pasajes siguen disponibles.`,
-      },
-      { status: 429 }
+      cuerpoRespuesta({
+        texto: consulta.respuestaLlm,
+        fuentes: (consulta.fuentesLlm ?? []) as FuenteCitada[],
+        modelo: consulta.modelo,
+        cacheada: true,
+      })
     );
   }
 
@@ -86,7 +105,7 @@ export async function POST(req: NextRequest) {
     categoria: filtros.categoria ?? undefined,
     sinOcr: Boolean(filtros.sinOcr),
   });
-  const pasajes = (respuesta.principal ? [respuesta.principal] : []).concat(respuesta.relacionadas);
+  const pasajes = pasajesDesdeRespuesta(respuesta);
 
   // Compuerta: si el motor ya concluyó que la materia no está en la base, no se
   // llama al modelo. Ahorra tokens, pero sobre todo evita la respuesta segura
@@ -95,28 +114,71 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ respuesta: null, ausencia: true, motivo: respuesta.motivo });
   }
 
-  try {
-    const salida = await redactarRespuesta(
-      consulta.pregunta,
-      pasajes.map((r) => ({
-        // La cita corta ("DS 3 · art. 217") más el nombre completo de la norma:
-        // el modelo la copia tal cual, y así la cita se entiende sola.
-        cita: `${r.cita} (${r.norma})`,
-        titulo: r.titulo,
-        texto: r.texto,
-        vigencia: r.avisos.length ? r.avisos.join(" ") : "vigente según el listado oficial del ISP",
-      }))
-    );
+  // Caché compartida: otra persona ya hizo esta pregunta y el motor le entregó
+  // exactamente los mismos pasajes. No descuenta cuota ni llama al modelo.
+  const clave = claveCache(consulta.pregunta, pasajes, modeloActual());
+  const [previa] = await db
+    .select({ texto: consultas.respuestaLlm, fuentes: consultas.fuentesLlm, modelo: consultas.modelo })
+    .from(consultas)
+    .where(and(eq(consultas.claveIa, clave), isNotNull(consultas.respuestaLlm)))
+    .limit(1);
 
-    if (!salida.texto) {
+  if (previa?.texto) {
+    await db
+      .update(consultas)
+      .set({
+        respuestaLlm: previa.texto,
+        fuentesLlm: previa.fuentes,
+        modelo: previa.modelo,
+        claveIa: clave,
+        tokensIn: 0,
+        tokensOut: 0,
+        latenciaMs: 0,
+      })
+      .where(eq(consultas.id, consulta.id));
+    return NextResponse.json(
+      cuerpoRespuesta({
+        texto: previa.texto,
+        fuentes: (previa.fuentes ?? []) as FuenteCitada[],
+        modelo: previa.modelo,
+        cacheada: true,
+      })
+    );
+  }
+
+  const cupo = await consumirCupo(`ia:${usuario.id}`, MAX_RESPUESTAS_DIA, 86_400);
+  if (!cupo.permitido) {
+    return NextResponse.json(
+      {
+        error: "cuota_diaria",
+        mensaje: `Llegaste a las ${MAX_RESPUESTAS_DIA} respuestas redactadas de hoy. Los pasajes siguen disponibles.`,
+      },
+      { status: 429 }
+    );
+  }
+
+  try {
+    const salida = await redactarRespuesta(consulta.pregunta, pasajes);
+    const r = salida.redaccion;
+
+    if (!r.texto) {
       return NextResponse.json({ error: "respuesta_vacia" }, { status: 502 });
+    }
+
+    // Una redacción con citas a pasajes inexistentes no se guarda en la caché:
+    // se muestra con su advertencia a quien la pidió, pero no se reparte.
+    const cacheable = r.citasInvalidas.length === 0;
+    if (!cacheable) {
+      console.warn("[ia] cita a pasaje inexistente:", consulta.id, r.citasInvalidas);
     }
 
     await db
       .update(consultas)
       .set({
-        respuestaLlm: salida.texto,
+        respuestaLlm: r.texto,
+        fuentesLlm: r.fuentes,
         modelo: salida.modelo,
+        claveIa: cacheable ? clave : null,
         tokensIn: salida.tokensEntrada,
         tokensOut: salida.tokensSalida,
         latenciaMs: salida.latenciaMs,
@@ -124,12 +186,38 @@ export async function POST(req: NextRequest) {
       .where(eq(consultas.id, consulta.id));
 
     return NextResponse.json({
-      respuesta: salida.texto,
-      modelo: salida.modelo,
+      ...cuerpoRespuesta({ texto: r.texto, fuentes: r.fuentes, modelo: salida.modelo, cacheada: false }),
       latenciaMs: salida.latenciaMs,
-      cacheada: false,
     });
   } catch (e) {
+    if (e instanceof ErrorProveedor && e.status === 429) {
+      // Tope del proveedor, no una caída. La cuota ya descontada se pierde para
+      // esta persona: es un caso raro y devolverla exigiría otra escritura
+      // concurrente sobre rate_limit.
+      const espera = e.reintentarEnSeg ?? 20;
+      // Una espera de minutos es el tope DIARIO de tokens del tier gratuito
+      // (medido el 13-09-2026: pedía 8 a 27 minutos). Decirle a alguien
+      // "reintenta en 1.089 segundos" no sirve; se informa como agotado.
+      if (espera > 120) {
+        console.warn("[ia] tope diario del proveedor alcanzado; espera pedida:", espera);
+        return NextResponse.json(
+          {
+            error: "proveedor_agotado",
+            mensaje:
+              "La redacción con IA alcanzó su límite por ahora. Los pasajes de arriba siguen disponibles; vuelve a intentarlo más tarde.",
+          },
+          { status: 503 }
+        );
+      }
+      return NextResponse.json(
+        {
+          error: "proveedor_ocupado",
+          mensaje: `El redactor está atendiendo otras consultas. Reintenta en ${espera} segundos.`,
+          reintentarEnSeg: espera,
+        },
+        { status: 503, headers: { "Retry-After": String(espera) } }
+      );
+    }
     console.error("[ia] falló la redacción:", e);
     return NextResponse.json({ error: "proveedor_no_disponible" }, { status: 502 });
   }

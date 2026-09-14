@@ -115,9 +115,10 @@ export default function PrivacidadPage() {
               correos transaccionales (enlace de acceso, confirmación de reunión, avisos).
             </>,
             <>
-              <strong className="text-foreground">Proveedor del modelo de lenguaje</strong>: solo si
-              usas el botón que redacta una respuesta, se envía tu pregunta junto con los pasajes
-              normativos recuperados. No se envía tu nombre, tu correo ni tu historial.
+              <strong className="text-foreground">Groq</strong> (Estados Unidos), proveedor del
+              modelo de lenguaje: solo si pides un borrador redactado o activas el modo IA, se envía
+              tu pregunta junto con los pasajes normativos recuperados. No se envía tu nombre, tu
+              correo ni tu historial.
             </>,
           ]}
         />

@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { BuscadorNormativa } from "@/components/buscador-normativa";
 import { usuarioActual } from "@/lib/sesion";
+import { iaConfigurada } from "@/lib/ia/proveedor";
 import { DIAS_VENCIDO, estadoCorpus, fechaLegible } from "@/lib/estado-corpus";
 
 export const metadata: Metadata = {
@@ -67,7 +68,7 @@ export default async function NormativaPage({
         )}
       </div>
       <Suspense fallback={<div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8" />}>
-        <BuscadorNormativa />
+        <BuscadorNormativa iaDisponible={iaConfigurada()} />
       </Suspense>
     </>
   );

@@ -51,11 +51,17 @@ export default function TerminosPage() {
 
       <Seccion n="03" titulo="Respuestas redactadas con inteligencia artificial">
         <p>
-          Algunas consultas permiten pedir una respuesta redactada por un modelo de lenguaje. Esa
-          redacción se construye únicamente a partir de los pasajes normativos recuperados y debe
-          citarlos, pero puede contener errores de interpretación, omisiones o citas mal
-          atribuidas. Es un borrador de trabajo: la cita y el texto oficial mandan por sobre el
-          resumen.
+          Algunas consultas permiten pedir una respuesta redactada por un modelo de lenguaje, a
+          pedido o de forma automática con el modo IA. Esa redacción se construye únicamente a
+          partir de los pasajes normativos recuperados y debe citarlos, pero puede contener
+          errores de interpretación, omisiones o citas mal atribuidas. Es un borrador de trabajo:
+          la cita y el texto oficial mandan por sobre el resumen.
+        </p>
+        <p>
+          Para redactarla, la pregunta y los pasajes recuperados se envían a un proveedor externo
+          de modelos de lenguaje. No se envía tu nombre, tu correo ni ningún otro dato de tu
+          cuenta. Una redacción puede reutilizarse para otra persona que haga la misma pregunta
+          y reciba los mismos pasajes.
         </p>
       </Seccion>
 

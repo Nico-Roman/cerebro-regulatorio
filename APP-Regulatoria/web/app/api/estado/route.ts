@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { loadCorpus } from "@/lib/search";
 import { DIAS_VENCIDO, estadoCorpus } from "@/lib/estado-corpus";
+import { iaConfigurada, modeloActual } from "@/lib/ia/proveedor";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -52,6 +53,13 @@ export async function GET() {
     codigo_sanitario: {
       version_refundida: estado.codigoSanitarioVersion,
       fuente: "https://www.bcn.cl/leychile/navegar?idNorma=5595",
+    },
+    // No entra en `ok`: sin IA el buscador sirve igual. Está acá para poder
+    // confirmar desde fuera que la variable de Railway quedó aplicada después
+    // del deploy, sin tener que iniciar sesión y hacer una búsqueda.
+    ia: {
+      configurada: iaConfigurada(),
+      modelo: iaConfigurada() ? modeloActual() : null,
     },
     motivo: estado.vencido
       ? estado.generado

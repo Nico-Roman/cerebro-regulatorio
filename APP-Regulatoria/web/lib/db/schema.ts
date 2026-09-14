@@ -125,11 +125,19 @@ export const consultas = pgTable(
     tokensIn: integer("tokens_in"),
     tokensOut: integer("tokens_out"),
     latenciaMs: integer("latencia_ms"),
+    // Caché compartida (0005): misma pregunta normalizada + mismos pasajes +
+    // mismo modelo y prompt = misma clave. Las filas servidas desde caché
+    // guardan tokens 0, así que sumar tokens_in/out sigue dando el gasto real.
+    claveIa: text("clave_ia"),
+    fuentesLlm: jsonb("fuentes_llm"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     index("consultas_user_created_idx").on(t.userId, t.createdAt),
     index("consultas_created_idx").on(t.createdAt),
+    index("consultas_clave_ia_idx")
+      .on(t.claveIa)
+      .where(sql`${t.respuestaLlm} IS NOT NULL`),
   ]
 );
 

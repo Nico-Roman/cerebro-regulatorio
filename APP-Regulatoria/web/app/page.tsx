@@ -45,8 +45,9 @@ export default function Home() {
 
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
           Devuelve el pasaje legal exacto de decretos, resoluciones y normas técnicas del
-          ISP/ANAMED, con la cita y el enlace a la fuente oficial. No genera respuestas con
-          inteligencia artificial: recupera el texto tal como está publicado.
+          ISP/ANAMED, con la cita y el enlace a la fuente oficial. Con el modo IA, además
+          redacta un borrador de respuesta que usa solo esos pasajes y cita cada uno: la frase
+          de la norma va siempre primero, y el borrador se verifica contra ella.
         </p>
 
         <div className="mt-9 max-w-3xl">
@@ -86,16 +87,16 @@ export default function Home() {
 
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
-              href="#contacto"
+              href="/asesoria"
               className="bg-foreground px-7 py-3.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
             >
-              Agenda una evaluación
+              Ver la presentación en video
             </Link>
             <Link
-              href="#servicios"
+              href="#contacto"
               className="border border-line px-7 py-3.5 text-sm transition-colors hover:border-foreground"
             >
-              Ver servicios
+              Agenda una evaluación
             </Link>
           </div>
         </div>
