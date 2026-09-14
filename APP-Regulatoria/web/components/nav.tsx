@@ -5,7 +5,7 @@ import { sesionLigera } from "@/lib/sesion";
 import { BotonSalir } from "@/components/boton-salir";
 
 const ENLACES = [
-  { href: "/#servicios", label: "Servicios" },
+  { href: "/asesoria", label: "Asesoría" },
   { href: "/#areas", label: "Áreas" },
   { href: "/normativa", label: "Buscador" },
   { href: "/agenda", label: "Agenda" },
