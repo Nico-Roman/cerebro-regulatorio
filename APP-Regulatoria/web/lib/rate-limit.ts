@@ -4,11 +4,29 @@
 
 import { sql } from "drizzle-orm";
 import { db } from "@/lib/db";
+import { desfaseZona } from "@/lib/agenda/tiempo";
 
 export interface ResultadoLimite {
   permitido: boolean;
   restantes: number;
   reinicioEn: number;
+}
+
+// Las ventanas se alinean a la hora de Chile, no a UTC. Con UTC la cuota
+// "diaria" se reiniciaba a las 21:00 (o 20:00 en invierno): quien la agotaba en
+// la tarde la recuperaba esa misma noche. Para ventanas de una hora o menos da
+// igual, porque el desfase chileno es de horas enteras; importa en las de un día.
+const ZONA_CUOTAS = "America/Santiago";
+
+/**
+ * Inicio de la ventana que contiene a `ahora`, contado en hora chilena. El
+ * desfase se calcula para este instante, así que sigue los cambios de horario;
+ * el día del cambio la ventana dura 23 o 25 horas, que es lo que dura ese día.
+ */
+export function inicioDeVentana(ahora: Date, ventanaSegundos: number): Date {
+  const ventanaMs = ventanaSegundos * 1000;
+  const desfaseMs = desfaseZona(ahora, ZONA_CUOTAS) * 60_000;
+  return new Date(Math.floor((ahora.getTime() + desfaseMs) / ventanaMs) * ventanaMs - desfaseMs);
 }
 
 export async function consumirCupo(
@@ -17,9 +35,7 @@ export async function consumirCupo(
   ventanaSegundos: number
 ): Promise<ResultadoLimite> {
   const ahora = new Date();
-  const inicioVentana = new Date(
-    Math.floor(ahora.getTime() / (ventanaSegundos * 1000)) * ventanaSegundos * 1000
-  );
+  const inicioVentana = inicioDeVentana(ahora, ventanaSegundos);
 
   // Un solo round-trip: inserta la ventana o incrementa el contador si la fila
   // ya pertenece a esta ventana; si es de una ventana vieja, la reinicia.
@@ -40,8 +56,9 @@ export async function consumirCupo(
   return {
     permitido: contador <= maximo,
     restantes: Math.max(0, maximo - contador),
-    reinicioEn: Math.ceil(
-      (inicioVentana.getTime() + ventanaSegundos * 1000 - ahora.getTime()) / 1000
+    reinicioEn: Math.max(
+      1,
+      Math.ceil((inicioVentana.getTime() + ventanaSegundos * 1000 - ahora.getTime()) / 1000)
     ),
   };
 }

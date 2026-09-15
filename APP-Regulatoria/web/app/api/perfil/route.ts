@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
-import { perfil } from "@/lib/db/schema";
+import { perfil, user } from "@/lib/db/schema";
 import { usuarioActual } from "@/lib/sesion";
 
 export const runtime = "nodejs";
@@ -24,10 +24,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, mensaje: "Solicitud inválida." }, { status: 400 });
   }
 
-  const tipoPerfil = limpiar(body.tipoPerfil, 80);
-  if (!tipoPerfil) {
+  // Lo único obligatorio del registro. El correo no se valida acá porque no
+  // llega en el cuerpo: viene de la sesión y no es editable en el formulario.
+  const nombre = limpiar(body.nombre, 80);
+  const apellido = limpiar(body.apellido, 80);
+  if (!nombre || !apellido) {
     return NextResponse.json(
-      { ok: false, mensaje: "Falta indicar desde dónde consultas." },
+      { ok: false, mensaje: "Necesitamos tu nombre y tu apellido." },
       { status: 400 }
     );
   }
@@ -54,9 +57,9 @@ export async function POST(req: Request) {
   }
 
   const valores = {
+    nombre,
+    apellido,
     empresa: limpiar(body.empresa, 160),
-    cargo: limpiar(body.cargo, 120),
-    tipoPerfil,
     telefono: limpiar(body.telefono, 40),
     aceptaPrivacidadAt,
     aceptaNovedades: Boolean(body.aceptaNovedades),
@@ -70,6 +73,18 @@ export async function POST(req: Request) {
     .insert(perfil)
     .values({ userId: usuario.id, ...valores })
     .onConflictDoUpdate({ target: perfil.userId, set: valores });
+
+  // El nombre declarado manda sobre el que trajo Google: es el que la persona
+  // corrigió a mano. Se copia a `user.name` para que la barra superior, los
+  // correos y el panel sigan leyendo un solo campo y no tengan que saber que
+  // ahora el nombre puede venir de dos lados.
+  const completo = `${nombre} ${apellido}`.trim();
+  if (completo && completo !== usuario.nombre) {
+    await db
+      .update(user)
+      .set({ name: completo, updatedAt: ahora })
+      .where(eq(user.id, usuario.id));
+  }
 
   return NextResponse.json({ ok: true });
 }

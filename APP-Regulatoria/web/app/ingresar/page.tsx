@@ -9,7 +9,7 @@ import { destinoSeguro } from "@/lib/destino";
 export const metadata: Metadata = {
   title: "Entrar al buscador normativo",
   description:
-    "Crea tu cuenta gratuita para consultar la normativa del ISP/ANAMED con cita trazable a la fuente oficial.",
+    "Crea tu cuenta gratuita y busca la normativa del ISP/ANAMED con el enlace al documento oficial.",
   robots: { index: false, follow: false },
 };
 
@@ -35,9 +35,8 @@ export default async function IngresarPage({
           Entra al buscador normativo
         </h1>
         <p className="mt-4 text-muted">
-          El buscador es gratis y seguirá siéndolo. Pedimos cuenta para saber qué
-          normativa hace falta en el corpus y poder avisarte cuando cambia algo
-          que te afecta.
+          El buscador es gratis y va a seguir siéndolo. Solo tienes que
+          registrarte.
         </p>
 
         <div className="mt-8">
@@ -47,9 +46,8 @@ export default async function IngresarPage({
         </div>
 
         <p className="mt-8 text-xs leading-relaxed text-muted">
-          Al entrar aceptas que guardemos tu nombre, correo y las consultas que
-          hagas, para mejorar el corpus normativo y contactarte si lo pides. No
-          compartimos tus consultas con terceros y puedes pedir la eliminación de
+          Al entrar aceptas que guardemos tus datos y tus búsquedas para operar
+          el buscador. No los compartimos con nadie y puedes pedir que borremos
           tu cuenta cuando quieras.
         </p>
       </div>

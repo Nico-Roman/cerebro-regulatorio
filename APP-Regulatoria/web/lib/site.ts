@@ -36,75 +36,75 @@ export interface Servicio {
 export const SERVICIOS: Servicio[] = [
   {
     n: "01",
-    titulo: "Registro sanitario de productos farmacéuticos",
+    titulo: "Registro de medicamentos",
     descripcion:
-      "Preparación y presentación del expediente completo ante el ISP, según el DS N°3/2010. Desde la evaluación de factibilidad hasta la resolución de registro.",
+      "Armamos y presentamos el expediente completo ante el ISP: desde ver si el producto es viable hasta que sale la resolución.",
   },
   {
     n: "02",
     titulo: "Inscripción de cosméticos",
     descripcion:
-      "Registro e inscripción de productos cosméticos ante ANAMED bajo el DS N°239/2002, incluyendo fórmula cuali-cuantitativa, rotulación y claims permitidos.",
+      "Inscribimos tu cosmético ante el ISP: fórmula, rotulado y qué se puede y qué no se puede prometer en el envase.",
   },
   {
     n: "03",
     titulo: "Registro de dispositivos médicos",
     descripcion:
-      "Clasificación de riesgo, control sanitario obligatorio y registro de dispositivos médicos y productos de diagnóstico in vitro ante el ISP.",
+      "Definimos en qué clase de riesgo cae tu dispositivo, si necesita registro y armamos la presentación ante el ISP.",
   },
   {
     n: "04",
     titulo: "Farmacovigilancia",
     descripcion:
-      "Diseño e implementación del sistema de farmacovigilancia: notificación de sospechas de RAM, informes periódicos de seguridad y planes de gestión de riesgos.",
+      "Montamos el sistema para detectar y reportar las reacciones adversas de tus productos, dentro de los plazos que exige el ISP.",
   },
   {
     n: "05",
     titulo: "Tecnovigilancia",
     descripcion:
-      "Vigilancia post-comercialización de dispositivos médicos: reporte de incidentes adversos, acciones correctivas de seguridad en terreno y trazabilidad.",
+      "Lo mismo para dispositivos médicos: reportar incidentes, hacer los avisos de seguridad y dejar todo trazable.",
   },
   {
     n: "06",
     titulo: "Cambios post-registro",
     descripcion:
-      "Gestión de modificaciones al registro sanitario: cambios de fórmula, de sitio de fabricación, de titular, de rotulado y renovaciones antes del vencimiento.",
+      "Cambiaste la fórmula, la planta, el titular o el envase: gestionamos la modificación y la renovación antes de que se venza.",
   },
   {
     n: "07",
     titulo: "Buenas prácticas y auditorías",
     descripcion:
-      "Preparación para inspecciones del ISP en BPM, BPA y BPD. Diagnóstico de brechas, planes de acción correctiva y acompañamiento durante la fiscalización.",
+      "Te preparamos para la inspección del ISP: vemos qué falta, lo ordenamos por urgencia y te acompañamos el día que llegan.",
   },
   {
     n: "08",
     titulo: "Rotulación y publicidad",
     descripcion:
-      "Revisión regulatoria de envases, folletos de información al profesional y material promocional para que cumplan la normativa vigente antes de salir al mercado.",
+      "Revisamos envases, folletos y material promocional antes de que salgan, para que no te los objeten después.",
   },
   {
     n: "09",
     titulo: "Importación y uso provisional",
     descripcion:
-      "Autorizaciones de importación, internación de productos sin registro para uso provisional y gestión de destinaciones aduaneras con el ISP.",
+      "Permisos de importación, ingreso de productos sin registro para uso provisional y los trámites de aduana con el ISP.",
   },
   {
     n: "10",
     titulo: "Vigilancia normativa continua",
     descripcion:
-      "Monitoreo permanente de la normativa del ISP/ANAMED con alertas de cambios que afectan tus productos, para que ningún plazo de cumplimiento te tome por sorpresa.",
+      "Revisamos la normativa del ISP todas las semanas y te avisamos cuando cambia algo que afecta a tus productos.",
   },
   {
     n: "11",
-    titulo: "Documentación y SOPs",
+    titulo: "Procedimientos y documentación",
     descripcion:
-      "Redacción y estandarización de procedimientos operativos estándar, manuales de calidad y documentación exigida en procesos de certificación.",
+      "Escribimos los procedimientos, manuales de calidad y documentos que te van a pedir en una certificación.",
   },
   {
     n: "12",
-    titulo: "Capacitación regulatoria",
+    titulo: "Capacitación",
     descripcion:
-      "Formación a equipos técnicos, comerciales y de calidad en normativa sanitaria chilena aplicada al día a día de tu operación.",
+      "Formamos a tu equipo técnico, comercial y de calidad en la normativa que usan en el día a día.",
   },
 ];
 
@@ -118,39 +118,43 @@ export interface Area {
   parrafoB: string;
 }
 
+// Los tres bloques están escritos para alguien que conoce el rubro pero no se
+// dedica a lo regulatorio: dueño de una marca, gerente comercial, jefe de
+// operaciones. Por eso no llevan número de decreto ni sigla sin explicar — el
+// que quiere la referencia exacta la busca en el buscador, que está arriba.
 export const AREAS: Area[] = [
   {
     clave: "registro",
     etiqueta: "Registro",
-    items: ["Farmacéuticos", "Cosméticos", "Dispositivos médicos", "Diagnóstico in vitro"],
+    items: ["Medicamentos", "Cosméticos", "Dispositivos médicos", "Diagnóstico in vitro"],
     titular:
-      "Llevamos tu producto desde el expediente hasta la resolución de registro del ISP.",
+      "Llevamos tu producto desde el papeleo hasta la resolución del ISP.",
     parrafoA:
-      "El registro sanitario es la puerta de entrada al mercado chileno y también donde más tiempo se pierde. Un expediente incompleto, una monografía mal referenciada o una clasificación de riesgo equivocada pueden significar meses de observaciones y respuestas que se podían haber evitado desde el primer envío.",
+      "El registro es la puerta de entrada al mercado chileno y también donde más tiempo se pierde. Un expediente incompleto o un producto mal clasificado se traduce en meses de idas y vueltas con el ISP que se podían haber evitado en el primer envío.",
     parrafoB:
-      "Armamos el expediente con la normativa en la mano: DS N°3/2010 para productos farmacéuticos, DS N°239/2002 para cosméticos y el marco de control sanitario para dispositivos médicos. Revisamos cada requisito antes de presentar y respondemos las observaciones de ANAMED contigo, no después de que llegan.",
+      "Armamos el expediente con la norma en la mano, revisamos cada requisito antes de presentar y, cuando llegan observaciones, las respondemos contigo dentro del plazo en vez de avisarte cuando ya se venció.",
   },
   {
     clave: "vigilancia",
     etiqueta: "Vigilancia",
     items: ["Farmacovigilancia", "Tecnovigilancia", "Cosmetovigilancia", "Gestión de riesgos"],
     titular:
-      "El registro no termina cuando sale la resolución: ahí empieza tu obligación de vigilancia.",
+      "El registro no termina cuando sale la resolución: ahí parte tu obligación de vigilar el producto.",
     parrafoA:
-      "Todo titular de registro tiene la obligación permanente de detectar, evaluar y notificar los eventos adversos asociados a sus productos. La ausencia de un sistema de vigilancia funcional es uno de los hallazgos más frecuentes en fiscalización, y también uno de los más caros de corregir a contrarreloj.",
+      "Si tienes un registro, estás obligado a detectar, evaluar y avisarle al ISP de los efectos adversos de tus productos. No tener ese sistema andando es uno de los hallazgos más comunes en fiscalización, y uno de los más caros de arreglar a última hora.",
     parrafoB:
-      "Diseñamos el sistema completo: procedimientos de notificación, plazos de reporte, informes periódicos de seguridad, plan de gestión de riesgos y el rol del profesional responsable. Si ya tienes uno, lo auditamos contra la normativa vigente y te entregamos el plan de cierre de brechas.",
+      "Te montamos el sistema completo: cómo se notifica, en qué plazos, qué informes hay que mandar y quién es el responsable. Si ya tienes uno, lo revisamos contra la norma vigente y te entregamos la lista de lo que falta.",
   },
   {
     clave: "cumplimiento",
     etiqueta: "Cumplimiento",
-    items: ["BPM · BPA · BPD", "Auditorías", "SOPs y calidad", "Inspecciones ISP"],
+    items: ["Buenas prácticas", "Auditorías", "Procedimientos", "Inspecciones ISP"],
     titular:
       "Preparamos tu operación para que la inspección del ISP no sea una emergencia.",
     parrafoA:
-      "Las buenas prácticas de manufactura, almacenamiento y distribución no se improvisan la semana antes de que llegue el fiscalizador. Se sostienen en documentación viva, procedimientos que la gente efectivamente usa y evidencia trazable de que el sistema funciona.",
+      "Las buenas prácticas de fabricación, almacenamiento y distribución no se improvisan la semana antes de que llegue el fiscalizador. Se sostienen en procedimientos que la gente de verdad usa y en evidencia de que el sistema funciona.",
     parrafoB:
-      "Hacemos el diagnóstico de brechas contra la norma aplicable, priorizamos los hallazgos por riesgo real y acompañamos la implementación. Redactamos los procedimientos que faltan y te acompañamos durante la inspección y en la respuesta al acta.",
+      "Vemos qué te falta frente a la norma que te aplica, ordenamos los hallazgos por riesgo real y te acompañamos a cerrarlos. Escribimos los procedimientos que faltan y estamos contigo el día de la inspección y en la respuesta al acta.",
   },
 ];
 
@@ -158,22 +162,22 @@ export const AREAS: Area[] = [
 export const FAQS = [
   {
     p: "¿Cuánto demora un registro sanitario en Chile?",
-    r: "Depende del tipo de producto y de la calidad del expediente presentado. Los plazos legales de tramitación se cuentan desde que el expediente está completo, por lo que la variable que más influye en el tiempo total es cuántas rondas de observaciones se generan. Un expediente bien armado desde el inicio es la única forma real de acortar el proceso.",
+    r: "Depende del producto y, sobre todo, de cómo llegue el expediente. El plazo legal empieza a correr recién cuando está completo, así que lo que más alarga el total son las rondas de observaciones. Presentar bien a la primera es la única forma real de acortarlo.",
   },
   {
     p: "¿Los cosméticos necesitan registro sanitario?",
-    r: "Los productos cosméticos están sujetos a control sanitario en Chile y deben inscribirse ante el Instituto de Salud Pública conforme al reglamento vigente. El tipo de trámite y los antecedentes exigidos varían según la categoría del producto y los claims que se declaren en el rotulado.",
+    r: "Sí: los cosméticos se controlan en Chile y hay que inscribirlos en el Instituto de Salud Pública. Qué trámite corresponde y qué antecedentes piden depende del tipo de producto y de lo que prometa el envase.",
   },
   {
     p: "¿Cómo se clasifica un dispositivo médico?",
-    r: "La clasificación depende del riesgo asociado al uso previsto del dispositivo. Esa clasificación determina si el producto queda sujeto a control sanitario obligatorio y qué antecedentes técnicos hay que presentar. Clasificar mal al inicio es el error más costoso del proceso, porque obliga a rehacer el expediente completo.",
+    r: "Según el riesgo del uso que se le va a dar. Esa clase decide si el producto necesita registro y qué antecedentes técnicos hay que presentar. Clasificarlo mal al principio es el error más caro del proceso: obliga a rehacer el expediente entero.",
   },
   {
     p: "¿Qué es la farmacovigilancia y quién está obligado?",
-    r: "Es el conjunto de actividades destinadas a detectar, evaluar y prevenir reacciones adversas a los medicamentos. Los titulares de registro sanitario tienen la obligación de mantener un sistema de farmacovigilancia y de notificar al ISP dentro de los plazos que fija la normativa.",
+    r: "Es vigilar los efectos adversos de los medicamentos una vez que ya están en el mercado. Le toca a todo el que tiene un registro sanitario: hay que mantener el sistema funcionando y avisarle al ISP dentro de los plazos que fija la norma.",
   },
   {
     p: "¿Atienden empresas fuera de Santiago?",
-    r: "Sí. El trabajo regulatorio es documental y se coordina de forma remota en todo Chile. Las visitas presenciales se acuerdan cuando el proyecto lo requiere, como en auditorías de planta o acompañamiento en inspecciones.",
+    r: "Sí. El trabajo regulatorio es de documentos y se coordina a distancia en todo Chile. Vamos presencialmente cuando el proyecto lo pide, como en una auditoría de planta o el día de una inspección.",
   },
 ] as const;

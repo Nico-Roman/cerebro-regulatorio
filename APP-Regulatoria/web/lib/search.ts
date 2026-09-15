@@ -547,6 +547,22 @@ function nucleo(conceptos: Concepto[]): Concepto[] {
   return orden.slice(0, 2).concat(orden.slice(2).filter((c) => c.peso >= NUCLEO_FRACCION * tope));
 }
 
+/**
+ * Conceptos centrales de la pregunta (el núcleo, con sus sinónimos del
+ * vocabulario) que no aparecen en ninguno de los textos dados. Lo usa la capa
+ * de IA para saber si los pasajes que citó un borrador tratan el caso concreto
+ * que se preguntó o solo el tema general. No interviene en responder(): el
+ * estado del motor no cambia, así que la paridad con respuesta.py se mantiene.
+ */
+export function conceptosSinCubrir(pregunta: string, textos: string[], idxExterno?: Indice): string[] {
+  const idx = idxExterno || getIndice();
+  const pq = analizarPregunta(pregunta, idx);
+  const rs = new Set(textos.flatMap((t) => [...raices(t)]));
+  return nucleo(pq.conceptos)
+    .filter((c) => credito(c, rs) === 0)
+    .map((c) => c.termino);
+}
+
 function nucleoCubierto(conceptos: Concepto[], raicesTexto: Set<string>): boolean {
   const n = nucleo(conceptos);
   return n.length > 0 && n.every((c) => credito(c, raicesTexto) > 0);

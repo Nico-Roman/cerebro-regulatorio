@@ -81,10 +81,18 @@ export const perfil = pgTable("perfil", {
   userId: text("user_id")
     .primaryKey()
     .references(() => user.id, { onDelete: "cascade" }),
+  // Nombre y apellido declarados. Existen aparte de `user.name` porque ese
+  // campo lo escribe Better Auth con lo que venga del proveedor —un nombre
+  // completo sin partir, o el trozo antes de la arroba si entró por enlace
+  // mágico— y acá hace falta el apellido por separado para escribirle a alguien
+  // por su nombre. `user.name` se mantiene sincronizado como "nombre apellido".
+  nombre: text("nombre"),
+  apellido: text("apellido"),
   empresa: text("empresa"),
+  // `cargo` y `tipo_perfil` ya no se piden: el registro se acortó a nombre,
+  // apellido, correo y teléfono (2026-09-15). Las columnas quedan porque
+  // guardan lo que declararon los registrados anteriores y el panel las lee.
   cargo: text("cargo"),
-  // QF regulatorio, QA, consultor, importador, estudiante, otro. Texto libre
-  // acotado en la interfaz: agregar una categoría no debe requerir migración.
   tipoPerfil: text("tipo_perfil"),
   telefono: text("telefono"),
   // Consentimientos separados: usar el servicio es obligatorio, recibir
@@ -130,6 +138,18 @@ export const consultas = pgTable(
     // guardan tokens 0, así que sumar tokens_in/out sigue dando el gasto real.
     claveIa: text("clave_ia"),
     fuentesLlm: jsonb("fuentes_llm"),
+    // Señales de calidad del borrador. Sin esto, una degradación de la IA en
+    // producción es invisible hasta que alguien reclama.
+    abstuvo: boolean("abstuvo"),
+    sinCitas: boolean("sin_citas"),
+    citasInvalidas: boolean("citas_invalidas"),
+    datosNoVerificados: text("datos_no_verificados"),
+    // Conceptos de la pregunta que los pasajes citados no tratan y el borrador
+    // no advirtió: presenta la regla de otro caso como la respuesta.
+    casoNoCubierto: text("caso_no_cubierto"),
+    // Motivo por el que la compuerta de propósito no dejó llegar la consulta
+    // al modelo: tarea | rol | formato | clinico.
+    bloqueado: text("bloqueado"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
@@ -138,6 +158,9 @@ export const consultas = pgTable(
     index("consultas_clave_ia_idx")
       .on(t.claveIa)
       .where(sql`${t.respuestaLlm} IS NOT NULL`),
+    index("consultas_bloqueado_idx")
+      .on(t.bloqueado)
+      .where(sql`${t.bloqueado} IS NOT NULL`),
   ]
 );
 

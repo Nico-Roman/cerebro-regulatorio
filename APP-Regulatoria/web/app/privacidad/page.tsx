@@ -16,7 +16,7 @@ export default function PrivacidadPage() {
       etiqueta="Legal"
       titulo="Política de Privacidad"
       bajada="Este documento describe qué datos personales trata RegulaMED, para qué, con quién se comparten y cómo puedes ejercer tus derechos. Está escrito para que se entienda leyéndolo una vez."
-      actualizado="9 de septiembre de 2026"
+      actualizado="14 de septiembre de 2026"
     >
       <Seccion n="01" titulo="Quién trata tus datos">
         <p>
@@ -82,6 +82,7 @@ export default function PrivacidadPage() {
           items={[
             "Darte acceso al buscador de normativa y mantener tu sesión iniciada.",
             "Detectar qué normativa falta en el corpus, priorizar su incorporación y medir si los resultados sirven.",
+            "Llevar un registro de las preguntas que se hacen, con el único fin de mejorar el modelo.",
             "Avisarte por correo cuando cambie una norma relevante o cuando actualicemos el corpus, solo si aceptaste recibir novedades.",
             "Agendar, confirmar y cancelar reuniones de asesoría.",
             "Responder tus mensajes de contacto y, si lo pediste, hacerte una propuesta de servicios.",

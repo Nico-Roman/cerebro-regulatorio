@@ -3,21 +3,25 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const TIPOS = [
-  "QF de Asuntos Regulatorios",
-  "QA / Calidad",
-  "Consultor regulatorio independiente",
-  "Importador / distribuidor",
-  "Dirección técnica",
-  "Estudiante o académico",
-  "Otro",
-];
+/**
+ * Registro corto.
+ *
+ * Antes este formulario pedía empresa, cargo, "desde dónde consultas" (un select
+ * obligatorio de siete opciones) y teléfono. Eran cuatro decisiones entre la
+ * persona y el buscador, y la del select obligaba a autoclasificarse antes de
+ * haber visto si la herramienta sirve: el peor momento posible para pedirlo.
+ *
+ * Quedan cuatro datos y solo dos obligatorios —nombre y apellido—. El correo ya
+ * viene de la cuenta y se muestra sin poder editarse, para que se vea que no hay
+ * un dato escondido. Teléfono y empresa son opcionales y lo dicen en la etiqueta.
+ */
 
 export interface PerfilInicial {
-  empresa: string;
-  cargo: string;
-  tipoPerfil: string;
+  nombre: string;
+  apellido: string;
+  email: string;
   telefono: string;
+  empresa: string;
   aceptaNovedades: boolean;
   yaAcepto: boolean;
 }
@@ -49,38 +53,44 @@ export function FormularioPerfil({
       });
       if (!res.ok) {
         const json = await res.json().catch(() => ({}));
-        throw new Error(json.mensaje || "No se pudo guardar el perfil.");
+        throw new Error(json.mensaje || "No se pudo guardar el registro.");
       }
       router.push(next);
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "No se pudo guardar el perfil.");
+      setError(err instanceof Error ? err.message : "No se pudo guardar el registro.");
       setGuardando(false);
     }
   }
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-5">
-      <Campo etiqueta="Empresa u organización" nombre="empresa" valor={inicial.empresa} />
-      <Campo etiqueta="Tu cargo" nombre="cargo" valor={inicial.cargo} />
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Campo
+          etiqueta="Nombre"
+          nombre="nombre"
+          valor={inicial.nombre}
+          requerido
+          autoComplete="given-name"
+        />
+        <Campo
+          etiqueta="Apellido"
+          nombre="apellido"
+          valor={inicial.apellido}
+          requerido
+          autoComplete="family-name"
+        />
+      </div>
 
       <label className="flex flex-col gap-2">
-        <span className="label-micro text-muted">Desde dónde consultas</span>
-        <select
-          name="tipoPerfil"
-          defaultValue={inicial.tipoPerfil}
-          required
-          className="border border-line bg-transparent px-4 py-3 text-base outline-none transition-colors focus:border-foreground"
-        >
-          <option value="" disabled>
-            Elige una opción
-          </option>
-          {TIPOS.map((t) => (
-            <option key={t} value={t} className="bg-surface">
-              {t}
-            </option>
-          ))}
-        </select>
+        <span className="label-micro text-muted">Correo</span>
+        <input
+          type="email"
+          value={inicial.email}
+          readOnly
+          disabled
+          className="border border-line bg-surface px-4 py-3 text-base text-muted outline-none"
+        />
       </label>
 
       <Campo
@@ -88,6 +98,15 @@ export function FormularioPerfil({
         nombre="telefono"
         valor={inicial.telefono}
         tipo="tel"
+        autoComplete="tel"
+        marcador="+56 9 ..."
+      />
+
+      <Campo
+        etiqueta="Empresa (opcional)"
+        nombre="empresa"
+        valor={inicial.empresa}
+        autoComplete="organization"
       />
 
       {!inicial.yaAcepto && (
@@ -99,8 +118,8 @@ export function FormularioPerfil({
             className="mt-1 size-4 shrink-0 accent-white"
           />
           <span className="text-muted">
-            Acepto que RegulaMED guarde mis datos y mis consultas para operar el
-            buscador y mejorar el corpus normativo.
+            Acepto que RegulaMED guarde mis datos y mis búsquedas para operar el
+            buscador.
           </span>
         </label>
       )}
@@ -113,8 +132,8 @@ export function FormularioPerfil({
           className="mt-1 size-4 shrink-0 accent-white"
         />
         <span className="text-muted">
-          Quiero recibir avisos cuando cambie normativa relevante para mi área.
-          (Opcional, y puedes darte de baja cuando quieras.)
+          Avísenme cuando cambie una norma importante. (Opcional, te puedes dar de
+          baja cuando quieras.)
         </span>
       </label>
 
@@ -140,11 +159,17 @@ function Campo({
   nombre,
   valor,
   tipo = "text",
+  requerido = false,
+  autoComplete,
+  marcador,
 }: {
   etiqueta: string;
   nombre: string;
   valor: string;
   tipo?: string;
+  requerido?: boolean;
+  autoComplete?: string;
+  marcador?: string;
 }) {
   return (
     <label className="flex flex-col gap-2">
@@ -153,6 +178,9 @@ function Campo({
         type={tipo}
         name={nombre}
         defaultValue={valor}
+        required={requerido}
+        autoComplete={autoComplete}
+        placeholder={marcador}
         className="border border-line bg-transparent px-4 py-3 text-base outline-none transition-colors placeholder:text-neutral-600 focus:border-foreground"
       />
     </label>

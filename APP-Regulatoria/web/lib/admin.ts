@@ -59,15 +59,24 @@ export interface Resumen {
 
 /**
  * "Lead caliente" = 3 o más consultas en los últimos 7 días, o un perfil que
- * declara empresa/importador. No es una puntuación sofisticada: es el corte que
- * separa a quien probó el buscador una vez de quien lo está usando para
- * trabajar, que es exactamente a quién vale la pena escribirle.
+ * declara empresa. No es una puntuación sofisticada: es el corte que separa a
+ * quien probó el buscador una vez de quien lo está usando para trabajar, que es
+ * exactamente a quién vale la pena escribirle.
+ *
+ * Antes la segunda mitad del corte miraba `tipo_perfil` ('importador',
+ * 'empresa', 'consultor'). Ese campo dejó de pedirse al acortar el registro
+ * (2026-09-15), así que quedaría en null para todo registrado nuevo y el corte
+ * se apagaría solo sin que nadie lo note. Ahora mira la empresa declarada, que
+ * es el dato equivalente que sí se sigue pidiendo.
  */
 export async function usuarios(limite = 500): Promise<FilaUsuario[]> {
   const { rows } = await db.execute<FilaUsuario>(sql`
     SELECT
       u.id,
-      u.name AS "nombre",
+      COALESCE(
+        NULLIF(TRIM(CONCAT_WS(' ', p.nombre, p.apellido)), ''),
+        u.name
+      ) AS "nombre",
       u.email,
       p.empresa,
       p.cargo,
@@ -77,8 +86,7 @@ export async function usuarios(limite = 500): Promise<FilaUsuario[]> {
       to_char(u.created_at, 'YYYY-MM-DD') AS "registradoEn",
       COALESCE(c.total, 0)::int AS "consultas",
       to_char(c.ultima, 'YYYY-MM-DD HH24:MI') AS "ultimaActividad",
-      (COALESCE(c.recientes, 0) >= 3
-        OR p.tipo_perfil IN ('importador', 'empresa', 'consultor')) AS "caliente"
+      (COALESCE(c.recientes, 0) >= 3 OR p.empresa IS NOT NULL) AS "caliente"
     FROM "user" u
     LEFT JOIN perfil p ON p.user_id = u.id
     LEFT JOIN (

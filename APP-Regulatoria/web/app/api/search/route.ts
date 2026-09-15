@@ -13,7 +13,9 @@ export const runtime = "nodejs";
 const MAX_BUSQUEDAS_HORA = 60;
 
 // Registro paralelo opcional en n8n → Google Sheets. Postgres es la fuente de
-// verdad; esto solo sigue vivo si la variable está puesta.
+// verdad; esto solo sigue vivo si la variable está puesta. Lleva la pregunta y
+// las señales del motor, nunca quién la hizo: su único fin declarado es mejorar
+// el modelo, y para eso la identidad de la persona no aporta nada.
 const LOG_WEBHOOK = process.env.CEREBRO_LOG_WEBHOOK;
 
 // Pasajes que devuelve el motor: una respuesta principal y hasta cinco fuentes
@@ -99,7 +101,6 @@ export async function GET(req: NextRequest) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         pregunta: q,
-        usuario_email: usuario.email,
         estado: respuesta.estado,
         recomendacion: resumen.recomendacion,
         confianza: resumen.confianza,

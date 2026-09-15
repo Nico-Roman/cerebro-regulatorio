@@ -26,6 +26,8 @@ interface Borrador {
   abstuvo: boolean;
   citasInvalidas: boolean;
   sinCitas: boolean;
+  datosNoVerificados: string[];
+  casoNoCubierto: string[];
   cacheada: boolean;
 }
 
@@ -67,7 +69,7 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
         setEstado("error");
         return;
       }
-      if (res.status === 503 && datos.error === "proveedor_agotado") {
+      if (res.status === 503 && (datos.error === "proveedor_agotado" || datos.error === "techo_sitio")) {
         setAviso(datos.mensaje);
         setEstado("error");
         return;
@@ -75,6 +77,11 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
       if (res.status === 503) {
         setAviso("La redacción con IA todavía no está habilitada.");
         setEstado("error");
+        return;
+      }
+      if (res.status === 422 && datos.error === "fuera_de_proposito") {
+        setAviso(datos.mensaje);
+        setEstado("ausencia");
         return;
       }
       if (res.status === 429) {
@@ -99,6 +106,8 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
         abstuvo: Boolean(datos.abstuvo),
         citasInvalidas: Boolean(datos.citasInvalidas),
         sinCitas: Boolean(datos.sinCitas),
+        datosNoVerificados: datos.datosNoVerificados ?? [],
+        casoNoCubierto: datos.casoNoCubierto ?? [],
         cacheada: Boolean(datos.cacheada),
       });
       setEstado("listo");
@@ -147,11 +156,18 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
 
       {estado === "listo" && borrador && !borrador.abstuvo && (
         <>
-          {(borrador.citasInvalidas || borrador.sinCitas) && (
+          {(borrador.citasInvalidas || borrador.sinCitas || borrador.datosNoVerificados.length > 0) && (
             <p className="border-l-2 border-red-500/70 pl-3 text-xs leading-relaxed text-red-200">
               {borrador.citasInvalidas
                 ? "Este borrador cita un pasaje que no existe. No lo uses sin revisar cada afirmación contra los pasajes de arriba."
-                : "Este borrador no citó ningún pasaje. Trátalo como no verificado."}
+                : borrador.sinCitas
+                  ? "Este borrador no citó ningún pasaje. Trátalo como no verificado."
+                  : `Este borrador menciona cifras o normas que no aparecen en los pasajes (${borrador.datosNoVerificados.join(", ")}). Verifícalas en la fuente antes de usarlas.`}
+            </p>
+          )}
+          {borrador.casoNoCubierto.length > 0 && (
+            <p className="border-l-2 border-amber-500/70 pl-3 text-xs leading-relaxed text-amber-200">
+              {`Los pasajes que citó no mencionan ${borrador.casoNoCubierto.map((c) => `«${c}»`).join(", ")}: puede estar respondiendo con la regla de otro caso. Revisa si aplica a tu situación.`}
             </p>
           )}
           <div className="whitespace-pre-wrap text-sm leading-relaxed text-neutral-200">

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AREAS, FAQS, SERVICIOS, SITE, WHATSAPP_URL } from "@/lib/site";
 import { BuscadorHome } from "@/components/buscador-home";
 import { FormularioContacto } from "@/components/formulario-contacto";
+import { VideoVsl } from "@/components/video-vsl";
 
 const RUBROS = [
   "Farmacéuticos",
@@ -36,18 +37,21 @@ export default function Home() {
         id="buscador"
         className="mx-auto w-full max-w-6xl px-5 pt-16 pb-16 sm:px-8 sm:pt-20 sm:pb-20"
       >
-        <span className="label-micro text-muted">Buscador gratuito · ISP / ANAMED</span>
+        <span className="label-micro text-muted">Buscador con IA · ISP / ANAMED</span>
 
         <h2 className="font-display mt-5 max-w-4xl text-[2rem] leading-[1.1] font-medium tracking-tight sm:text-5xl lg:text-6xl">
-          Encuentra la regulación
+          Encuentra la norma
           <br className="hidden sm:block" /> que estás buscando.
         </h2>
 
+        {/* El texto de esta sección es el primero que lee alguien que llega de
+            LinkedIn o WhatsApp: se explica qué hace el buscador en una frase, en
+            palabras de todos los días. El detalle técnico (cómo se cita, cómo se
+            verifica el borrador) vive en la página del buscador, donde ya está
+            usándolo, y no acá antes de que apriete la primera tecla. */}
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          Devuelve el pasaje legal exacto de decretos, resoluciones y normas técnicas del
-          ISP/ANAMED, con la cita y el enlace a la fuente oficial. Con el modo IA, además
-          redacta un borrador de respuesta que usa solo esos pasajes y cita cada uno: la frase
-          de la norma va siempre primero, y el borrador se verifica contra ella.
+          Escribe tu pregunta como se te ocurra. El motor de IA encuentra la norma que
+          la responde y te muestra el párrafo exacto, con el enlace al documento oficial.
         </p>
 
         <div className="mt-9 max-w-3xl">
@@ -55,8 +59,7 @@ export default function Home() {
         </div>
 
         <p className="mt-7 max-w-2xl text-sm leading-relaxed text-muted">
-          Es gratuito y seguirá siéndolo. Solo pedimos una cuenta para saber qué
-          normativa falta en el corpus y poder avisarte cuando cambie algo que te afecta.
+          Es gratuito y va a seguir siéndolo. Solo tienes que registrarte.
         </p>
       </section>
 
@@ -67,14 +70,14 @@ export default function Home() {
 
           <h1 className="font-display mt-5 max-w-4xl text-[2.25rem] leading-[1.08] font-medium tracking-tight sm:text-6xl lg:text-7xl">
             Te asesoramos en tus
-            <br className="hidden sm:block" /> asuntos regulatorios.
+            <br className="hidden sm:block" /> trámites regulatorios.
           </h1>
 
           <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-            {SITE.nombre} acompaña a laboratorios, importadores y marcas en el registro
-            sanitario, la vigilancia post-comercialización y el cumplimiento normativo de
-            productos farmacéuticos, cosméticos y dispositivos médicos ante el Instituto de
-            Salud Pública de Chile.
+            {SITE.nombre} se hace cargo del trámite ante el ISP: registrar tu producto,
+            mantenerlo vigente y responder lo que la autoridad pida. Trabajamos con
+            laboratorios, importadores y marcas de productos farmacéuticos, cosméticos y
+            dispositivos médicos.
           </p>
 
           <ul className="mt-9 flex flex-wrap gap-2">
@@ -85,19 +88,24 @@ export default function Home() {
             ))}
           </ul>
 
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link
-              href="/asesoria"
-              className="bg-foreground px-7 py-3.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
-            >
-              Ver la presentación en video
-            </Link>
+          {/* El video va acá mismo en vez de detrás de un botón a /asesoria: el
+              que llega a esta sección ya está evaluando si contratar, y mandarlo
+              a otra página para eso es un clic que muchos no dan. /asesoria sigue
+              existiendo como landing para mandar por WhatsApp y LinkedIn.
+              El reproductor es diferido (ver components/video-vsl.tsx), así que
+              sumarlo a la portada no le cuesta nada a quien no le da play. */}
+          <div className="mt-12 max-w-3xl">
+            <VideoVsl />
+
             <Link
               href="#contacto"
-              className="border border-line px-7 py-3.5 text-sm transition-colors hover:border-foreground"
+              className="mt-8 block bg-foreground px-8 py-5 text-center text-base font-medium text-background transition-opacity hover:opacity-90"
             >
               Agenda una evaluación
             </Link>
+            <p className="mt-3 text-center text-xs text-muted">
+              La primera evaluación no tiene costo.
+            </p>
           </div>
         </div>
       </section>
