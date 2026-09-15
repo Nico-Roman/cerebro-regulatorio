@@ -16,8 +16,16 @@ export interface CorreoParams {
   subject: string;
   html: string;
   replyTo?: string;
+  /** Remitente. Si falta, el de acceso o el de contacto, en ese orden. */
+  from?: string;
   attachments?: AdjuntoCorreo[];
 }
+
+// Resend responde en menos de un segundo. Sin tope, un fetch colgado deja
+// tomada la petición (y su conexión de Postgres) hasta que el contenedor la
+// mate: el formulario de contacto y la confirmación de reserva esperan este
+// envío dentro del request.
+const TIMEOUT_MS = 10_000;
 
 export class CorreoNoConfigurado extends Error {
   constructor() {
@@ -31,6 +39,7 @@ export async function enviarCorreo({
   subject,
   html,
   replyTo,
+  from,
   attachments,
 }: CorreoParams) {
   const apiKey = process.env.RESEND_API_KEY;
@@ -43,14 +52,17 @@ export async function enviarCorreo({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: process.env.AUTH_EMAIL_FROM || process.env.CONTACTO_FROM ||
+      from: from || process.env.AUTH_EMAIL_FROM || process.env.CONTACTO_FROM ||
         "RegulaMED <onboarding@resend.dev>",
       to: [to],
       ...(replyTo ? { reply_to: replyTo } : {}),
       ...(attachments?.length ? { attachments } : {}),
-      subject,
+      // Un asunto con salto de línea permite inyectar cabeceras en algunos
+      // transportes. Acá se corta en el único punto por donde sale el correo.
+      subject: subject.replace(/[\r\n]+/g, " "),
       html,
     }),
+    signal: AbortSignal.timeout(TIMEOUT_MS),
   });
 
   if (!res.ok) {

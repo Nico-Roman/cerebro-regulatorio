@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { jsonParaScript } from "@/lib/html";
 import { SERVICIOS, SITE, WHATSAPP_URL } from "@/lib/site";
 import { LIMITES, PROCESO, TRAYECTORIA } from "@/lib/asesoria";
 import { VSL, miniaturaUrl, vslConfigurado } from "@/lib/vsl";
@@ -51,7 +52,7 @@ export default function Asesoria() {
       {jsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonParaScript(jsonLd) }}
         />
       )}
 

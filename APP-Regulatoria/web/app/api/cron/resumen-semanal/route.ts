@@ -10,6 +10,7 @@
 //      abierta.
 
 import { NextRequest, NextResponse } from "next/server";
+import { timingSafeEqual } from "node:crypto";
 import { consultasRecientes, huecosDelCorpus, resumen, usuarios } from "@/lib/admin";
 import { enviarCorreo } from "@/lib/correo";
 import { escaparHtml as e } from "@/lib/html";
@@ -17,11 +18,24 @@ import { esAdmin, usuarioActual } from "@/lib/sesion";
 
 export const runtime = "nodejs";
 
+/**
+ * Comparación en tiempo constante. Con `===` el tiempo de respuesta depende de
+ * cuántos caracteres del secreto acertó quien llama, que es lo que permite
+ * adivinarlo carácter por carácter; acá dos cadenas del mismo largo siempre
+ * cuestan lo mismo. El largo sí se filtra, y da igual: saber cuántos caracteres
+ * tiene el secreto no acerca a nadie a adivinarlo.
+ */
+function igualSeguro(a: string, b: string): boolean {
+  const ba = Buffer.from(a, "utf-8");
+  const bb = Buffer.from(b, "utf-8");
+  if (ba.length !== bb.length) return false;
+  return timingSafeEqual(ba, bb);
+}
+
 function autorizadoPorSecreto(req: NextRequest): boolean {
   const secreto = process.env.CRON_SECRET;
   if (!secreto) return false;
-  const cabecera = req.headers.get("authorization") || "";
-  return cabecera === `Bearer ${secreto}`;
+  return igualSeguro(req.headers.get("authorization") || "", `Bearer ${secreto}`);
 }
 
 export async function GET(req: NextRequest) {
@@ -99,5 +113,8 @@ export async function GET(req: NextRequest) {
     html,
   });
 
-  return NextResponse.json({ ok: true, enviadoA: destino, metricas });
+  // Sin el destinatario ni las métricas en el cuerpo: el workflow que dispara
+  // esto corre en un repo público y su log queda a la vista de cualquiera. El
+  // contenido del resumen viaja por correo, que es donde corresponde.
+  return NextResponse.json({ ok: true });
 }

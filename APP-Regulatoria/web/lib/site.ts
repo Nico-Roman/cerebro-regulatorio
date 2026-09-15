@@ -8,11 +8,15 @@ export const SITE = {
     "Asesoría en asuntos regulatorios para productos farmacéuticos, cosméticos y dispositivos médicos en Chile. Registro sanitario ISP/ANAMED, farmacovigilancia, tecnovigilancia y cumplimiento normativo.",
   // La URL canónica vive en NEXT_PUBLIC_SITE_URL para que cambiar de dominio
   // sea una variable de entorno y no un commit. El valor por defecto es el
-  // sitio actual, para que un entorno sin la variable no quede sin canónica.
+  // dominio real: si el build de Docker se hace sin el ARG, las canónicas, el
+  // sitemap y los enlaces de los correos igual apuntan a donde vive el sitio.
+  // Apuntaba al viejo despliegue de Vercel, que ya no existe: un enlace de
+  // cancelación de reunión hacia ese dominio no lleva a ninguna parte.
+  //
   // Ojo con `||` en vez de `??`: en un build de Docker un ARG no pasado deja la
   // variable como cadena vacía, no como undefined, y `new URL("")` revienta el
   // build entero. `||` trata la cadena vacía como ausente.
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://cerebro-regulatorio.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://regulamed.cl",
   email: "contacto@regulamed.cl",
   // E.164 sin signos para el link de wa.me, y una versión legible para mostrar.
   whatsapp: "56975892545",

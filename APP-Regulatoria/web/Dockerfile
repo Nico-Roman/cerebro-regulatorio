@@ -45,8 +45,12 @@ COPY --from=builder --chown=nextjs:nodejs /app/data ./data
 
 # Migraciones y su aplicador. Corren al arrancar el contenedor, no en el build:
 # la base de datos no es alcanzable durante el build.
+#
+# Del directorio scripts/ va SOLO migrate.mjs: los demás son herramientas de
+# desarrollo (evaluaciones del modelo, el flujo OAuth de Google) que no tienen
+# nada que hacer dentro de la imagen que sirve el sitio.
 COPY --from=builder --chown=nextjs:nodejs /app/drizzle ./drizzle
-COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/migrate.mjs ./scripts/migrate.mjs
 
 USER nextjs
 EXPOSE 3000

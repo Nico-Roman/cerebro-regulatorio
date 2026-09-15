@@ -14,6 +14,22 @@ export function escaparHtml(valor: unknown): string {
     .replace(/'/g, "&#39;");
 }
 
+/**
+ * JSON listo para ir dentro de un `<script type="application/ld+json">`.
+ *
+ * JSON.stringify no escapa `<`, así que un valor que contenga `</script>`
+ * cierra la etiqueta y lo que siga se ejecuta como HTML. Hoy los datos de
+ * ld+json son constantes del propio sitio, pero eso es una propiedad del
+ * contenido de hoy, no de la función: escapar acá hace que agregar un dato
+ * dinámico mañana no abra un XSS.
+ */
+export function jsonParaScript(valor: unknown): string {
+  return JSON.stringify(valor)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026");
+}
+
 /** Solo URL http(s) van dentro de un href; cualquier otra cosa se descarta. */
 export function urlSegura(valor: unknown): string | null {
   try {

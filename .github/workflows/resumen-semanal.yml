@@ -23,9 +23,14 @@ on:
     - cron: "0 12 * * 1"
   workflow_dispatch:
 
+# Este job solo hace una llamada HTTP: no necesita escribir en el repositorio.
+permissions:
+  contents: read
+
 jobs:
   enviar:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     # Da acceso a los secretos y variables definidos en ese entorno.
     environment: Production
     steps:

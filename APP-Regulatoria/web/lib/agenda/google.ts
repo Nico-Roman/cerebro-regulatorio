@@ -11,6 +11,13 @@
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
 const CAL_API = "https://www.googleapis.com/calendar/v3";
 
+// Toda llamada a Google se hace dentro de una petición HTTP de la web (ver los
+// huecos de la agenda y la reserva). Sin tope, un Google que acepta la conexión
+// y no responde deja la petición viva indefinidamente, con su conexión de
+// Postgres tomada. Diez segundos es mucho más de lo que tarda cualquiera de las
+// tres llamadas y menos que el tiempo que alguien espera mirando la pantalla.
+const TIMEOUT_MS = 10_000;
+
 export interface Ocupado {
   inicio: Date;
   fin: Date;
@@ -40,6 +47,7 @@ async function accessToken(): Promise<string> {
       refresh_token: process.env.GOOGLE_REFRESH_TOKEN!,
       grant_type: "refresh_token",
     }),
+    signal: AbortSignal.timeout(TIMEOUT_MS),
   });
 
   if (!res.ok) {
@@ -67,6 +75,7 @@ export async function ocupados(
       timeMax: hasta.toISOString(),
       items: calendarios.map((id) => ({ id })),
     }),
+    signal: AbortSignal.timeout(TIMEOUT_MS),
   });
 
   if (!res.ok) {
@@ -127,6 +136,7 @@ export async function crearEvento(params: {
           ],
         },
       }),
+      signal: AbortSignal.timeout(TIMEOUT_MS),
     }
   );
 
@@ -153,7 +163,11 @@ export async function cancelarEvento(calendarioId: string, eventoId: string): Pr
     `${CAL_API}/calendars/${encodeURIComponent(calendarioId)}/events/${encodeURIComponent(
       eventoId
     )}?sendUpdates=all`,
-    { method: "DELETE", headers: { Authorization: `Bearer ${await accessToken()}` } }
+    {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${await accessToken()}` },
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    }
   );
   // 410 = ya estaba borrado en Google. No es un error para nosotros: el estado
   // final es el que queríamos.

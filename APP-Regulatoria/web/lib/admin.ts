@@ -181,17 +181,3 @@ export async function resumen(): Promise<Resumen> {
   `);
   return rows[0];
 }
-
-/** CSV con comillas dobles escapadas. Excel en español abre esto sin pelear. */
-export function aCsv(filas: Record<string, unknown>[]): string {
-  if (!filas.length) return "";
-  const columnas = Object.keys(filas[0]);
-  const celda = (v: unknown) => {
-    const texto = v === null || v === undefined ? "" : String(v);
-    return `"${texto.replace(/"/g, '""')}"`;
-  };
-  return [
-    columnas.join(";"),
-    ...filas.map((f) => columnas.map((c) => celda(f[c])).join(";")),
-  ].join("\r\n");
-}

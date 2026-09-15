@@ -10,6 +10,7 @@ import { fechaLargaEnZona, horaEnZona } from "@/lib/agenda/tiempo";
 import { enviarCorreo } from "@/lib/correo";
 import { db } from "@/lib/db";
 import { reservas } from "@/lib/db/schema";
+import { SITE } from "@/lib/site";
 
 export const runtime = "nodejs";
 
@@ -65,7 +66,7 @@ export async function POST(req: NextRequest) {
         subject: `Reunión cancelada · ${cuando}`,
         html: `<p>La reunión del ${cuando} quedó cancelada.</p>
                <p>Si fue un error, puedes agendar otra hora en
-               <a href="https://regulamed.cl/agenda">regulamed.cl/agenda</a>.</p>`,
+               <a href="${SITE.url}/agenda">${SITE.url}/agenda</a>.</p>`,
       });
     } catch (e) {
       console.error("[agenda] no se pudo avisar la cancelación:", e);

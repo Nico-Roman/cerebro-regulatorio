@@ -57,9 +57,13 @@ export async function leerConfig(): Promise<ConfigAgenda> {
       calendarios: calendarios.length ? calendarios : CONFIG_POR_DEFECTO.calendarios,
       activa: fila.activa,
     };
-  } catch {
+  } catch (e) {
     // Si la tabla todavía no existe (despliegue a mitad de migración), la
-    // agenda usa los valores por defecto en vez de tirar un 500.
+    // agenda usa los valores por defecto en vez de tirar un 500. Se registra:
+    // este catch también atrapa una base caída, y una agenda que se comporta
+    // "normal" con la base abajo es exactamente el tipo de falla muda que este
+    // proyecto trata de no tener.
+    console.error("[agenda] no se pudo leer la configuración; uso los valores por defecto:", e);
     return CONFIG_POR_DEFECTO;
   }
 }

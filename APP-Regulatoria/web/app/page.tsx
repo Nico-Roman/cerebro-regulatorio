@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { jsonParaScript } from "@/lib/html";
 import { AREAS, FAQS, SERVICIOS, SITE, WHATSAPP_URL } from "@/lib/site";
 import { BuscadorHome } from "@/components/buscador-home";
 import { FormularioContacto } from "@/components/formulario-contacto";
@@ -29,7 +30,7 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonParaScript(faqJsonLd) }}
       />
 
       {/* ── Buscador gratuito: abre la página ─────────────────────────── */}

@@ -1,0 +1,77 @@
+# Verificación de la app web antes de que Railway la despliegue.
+#
+# Railway reconstruye y publica en cuanto entra un commit a `main`: hasta ahora
+# nada miraba el código antes de eso, así que el primer lugar donde se notaba un
+# error de tipos o de lint era producción. Este workflow no puede detener el
+# deploy (Railway escucha a GitHub, no a Actions), pero sí deja el commit en
+# rojo de inmediato y con el motivo escrito, que es la diferencia entre
+# enterarse en un minuto y enterarse cuando alguien no puede buscar.
+#
+# El build corre SIN DATABASE_URL a propósito: es exactamente la condición del
+# build de Docker, y lib/db la contempla. Si alguien agrega código que consulta
+# la base al compilar, este job falla acá y no en el despliegue.
+
+name: Web CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "APP-Regulatoria/web/**"
+      - ".github/workflows/web-ci.yml"
+  pull_request:
+    paths:
+      - "APP-Regulatoria/web/**"
+      - ".github/workflows/web-ci.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: web-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# Solo lee el repositorio: este job no publica nada.
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: APP-Regulatoria/web
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: APP-Regulatoria/web/package-lock.json
+
+      # `npm ci` y no `npm install`: instala exactamente el package-lock.json
+      # que se va a desplegar. Si el lock no cuadra con package.json, falla acá.
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Tipos
+        run: npm run typecheck
+
+      - name: Pruebas
+        run: npm test
+
+      - name: Build de producción
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+
+      # Las vulnerabilidades críticas de una dependencia de producción no pueden
+      # esperar a que alguien se acuerde de mirar. Solo mira lo que llega al
+      # contenedor: --omit=dev deja fuera las herramientas de desarrollo, que no
+      # se despliegan. Un aviso nuevo pone el repo en rojo, que es el punto.
+      - name: Auditoría de dependencias de producción
+        run: npm audit --omit=dev --audit-level=critical

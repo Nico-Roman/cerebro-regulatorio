@@ -3,7 +3,8 @@
 // de un cliente.
 
 import { NextRequest, NextResponse } from "next/server";
-import { aCsv, consultasRecientes, huecosDelCorpus, usuarios } from "@/lib/admin";
+import { consultasRecientes, huecosDelCorpus, usuarios } from "@/lib/admin";
+import { aCsv } from "@/lib/csv";
 import { esAdmin, usuarioActual } from "@/lib/sesion";
 
 export const runtime = "nodejs";

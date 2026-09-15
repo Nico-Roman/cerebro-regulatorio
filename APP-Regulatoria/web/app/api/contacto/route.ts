@@ -1,13 +1,23 @@
-import { NextResponse } from "next/server";
-import { SITE } from "@/lib/site";
+// Formulario de contacto público.
+//
+// El envío sale por lib/correo (Resend): es el único punto de salida de correo
+// del proyecto, y tenerlo repetido acá significaba que el timeout, el remitente
+// y el saneado del asunto se arreglaban en un lado y no en el otro.
+
+import { NextRequest, NextResponse } from "next/server";
+import { CorreoNoConfigurado, enviarCorreo } from "@/lib/correo";
 import { escaparHtml as escapar } from "@/lib/html";
+import { ipCliente } from "@/lib/ip";
+import { consumirCupo } from "@/lib/rate-limit";
+import { SITE } from "@/lib/site";
 
 export const runtime = "nodejs";
 
-// El envío real se hace con Resend porque no requiere servidor SMTP propio.
-// Sin RESEND_API_KEY configurada el formulario no puede entregar el mensaje;
-// en ese caso lo decimos explícitamente en vez de fingir un envío exitoso.
-const RESEND_ENDPOINT = "https://api.resend.com/emails";
+// Sin sesión ni captcha, el honeypot era lo único entre el formulario y la
+// casilla de contacto: un script podía dejarla inservible y gastar la cuota de
+// Resend. Cinco mensajes por hora cubre a quien escribe dos veces porque se le
+// olvidó un dato, y corta el envío masivo.
+const MAX_MENSAJES_HORA = 5;
 
 interface Payload {
   nombre?: string;
@@ -22,7 +32,7 @@ function limpiar(v: unknown, max: number): string {
   return typeof v === "string" ? v.trim().slice(0, max) : "";
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   let body: Payload;
   try {
     body = await req.json();
@@ -51,15 +61,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, mensaje: "El correo no es válido." }, { status: 400 });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.error("[contacto] RESEND_API_KEY no configurada. Consulta recibida de:", email);
+  // La IP es la que agrega Railway, no la que declara el cliente (ver lib/ip).
+  const cupo = await consumirCupo(
+    `contacto:${ipCliente(req.headers)}`,
+    MAX_MENSAJES_HORA,
+    3600
+  );
+  if (!cupo.permitido) {
     return NextResponse.json(
-      {
-        ok: false,
-        mensaje: "El envío por formulario aún no está habilitado.",
-      },
-      { status: 503 }
+      { ok: false, mensaje: "Recibimos varios mensajes tuyos. Intenta más tarde." },
+      { status: 429, headers: { "Retry-After": String(cupo.reinicioEn) } }
     );
   }
 
@@ -73,24 +84,25 @@ export async function POST(req: Request) {
     <p style="white-space:pre-wrap">${escapar(mensaje)}</p>
   `;
 
-  const res = await fetch(RESEND_ENDPOINT, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: process.env.CONTACTO_FROM || "RegulaMED <onboarding@resend.dev>",
-      to: [process.env.CONTACTO_TO || SITE.email],
-      reply_to: email,
-      subject: `Consulta regulatoria — ${nombre}${empresa ? ` (${empresa})` : ""}`.replace(/[\r\n]+/g, " "),
+  try {
+    await enviarCorreo({
+      to: process.env.CONTACTO_TO || SITE.email,
+      from: process.env.CONTACTO_FROM,
+      replyTo: email,
+      subject: `Consulta regulatoria — ${nombre}${empresa ? ` (${empresa})` : ""}`,
       html,
-    }),
-  });
-
-  if (!res.ok) {
-    const detalle = await res.text();
-    console.error("[contacto] Resend respondió", res.status, detalle);
+    });
+  } catch (e) {
+    if (e instanceof CorreoNoConfigurado) {
+      // Sin credencial no hay entrega posible: se dice, en vez de fingir un
+      // envío exitoso y perder la consulta en silencio.
+      console.error("[contacto] RESEND_API_KEY no configurada. Consulta recibida de:", email);
+      return NextResponse.json(
+        { ok: false, mensaje: "El envío por formulario aún no está habilitado." },
+        { status: 503 }
+      );
+    }
+    console.error("[contacto] no se pudo entregar el mensaje:", e);
     return NextResponse.json(
       { ok: false, mensaje: "No pudimos entregar el mensaje." },
       { status: 502 }

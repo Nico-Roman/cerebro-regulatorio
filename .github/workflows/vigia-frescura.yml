@@ -29,6 +29,10 @@ concurrency:
   group: vigia-frescura
   cancel-in-progress: true
 
+# Solo consulta un endpoint público: no escribe nada en el repositorio.
+permissions:
+  contents: read
+
 jobs:
   frescura:
     runs-on: ubuntu-latest

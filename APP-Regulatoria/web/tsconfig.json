@@ -11,6 +11,10 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    // Las pruebas corren con `node --test` sobre los .ts directamente (Node
+    // quita los tipos), así que importan con la extensión escrita. Solo se
+    // permite porque este proyecto no emite JS con tsc: compila Next.
+    "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
     "incremental": true,
     "plugins": [

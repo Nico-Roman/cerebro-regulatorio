@@ -30,9 +30,14 @@ on:
     - cron: "0 7 * * 0"
   workflow_dispatch:
 
+# El volcado sale como artefacto cifrado: este job no escribe en el repositorio.
+permissions:
+  contents: read
+
 jobs:
   respaldar:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     # Da acceso a DATABASE_PUBLIC_URL y BACKUP_PASSPHRASE, que viven en el
     # entorno y no a nivel de repositorio.
     environment: Production
