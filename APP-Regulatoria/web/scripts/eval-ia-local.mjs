@@ -13,12 +13,16 @@
 //                cuenta sobre las preguntas donde la evidencia llegó a los
 //                pasajes: el modelo no puede citar lo que el motor no le dio.
 //   fuera        ¿se abstiene? (la compuerta del motor ya corta las "ausente")
-//   sin_texto    ¿se abstiene en vez de rellenar?
-//   todas        citas a pasajes inexistentes y redacciones sin ninguna cita.
-//                Ambas deben ser cero.
+//   sin_texto    ¿se abstiene, o al menos dice que los pasajes no tratan el caso
+//                etiquetado («uso personal»)? Si presenta la regla de otra
+//                materia como la respuesta, «responde otra cosa» (d15, d26).
+//   todas        citas a pasajes inexistentes, redacciones sin ninguna cita,
+//                cifras o normas que no están en los pasajes, y borradores cuyo
+//                caso los pasajes citados no tratan sin advertirlo.
 //
 // Exit 1 si no aprueba: cita con evidencia >= 90 %, abstención fuera 100 %,
-// cero citas inválidas y cero redacciones sin cita.
+// cero que responden otra cosa, cero citas inválidas, cero redacciones sin
+// cita y cero datos sin respaldo. Los casos no cubiertos se informan.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -64,6 +68,7 @@ if (!process.env.LLM_API_KEY) {
 const { crearIndice, loadCorpus, responder } = await import("../lib/search.ts");
 const { pasajesDesdeRespuesta, redactarRespuesta } = await import("../lib/ia/redactar.ts");
 const { ErrorProveedor, modeloActual } = await import("../lib/ia/proveedor.ts");
+const { casoSinSalvedad } = await import("../lib/ia/verificar.ts");
 
 // Mismos valores que app/api/responder/route.ts.
 const PASAJES_AL_MODELO = 6;
@@ -128,7 +133,13 @@ for (const p of preguntas) {
     const r = s.redaccion;
     const citaConEvidencia = r.fuentes.some((f) => evidenciaEn(crudas[f.n - 1], p.evidencia));
     const datoEnTexto = p.evidencia.some((ev) => new RegExp(ev.contiene, "i").test(r.texto));
+    // Contra la etiqueta humana del caso, no contra la señal automática: esto es
+    // lo que dice si la señal de producción (casoNoCubierto) sirve.
+    const respondeOtraCosa =
+      p.tipo === "sin_texto" && !r.abstuvo && Boolean(p.caso) && casoSinSalvedad(r.texto, [p.caso]).length > 0;
     Object.assign(fila, {
+      respondeOtraCosa,
+      casoNoCubierto: r.casoNoCubierto,
       llamada: true,
       alcanzable,
       abstuvo: r.abstuvo,
@@ -136,6 +147,7 @@ for (const p of preguntas) {
       datoEnTexto,
       citasInvalidas: r.citasInvalidas,
       sinCitas: r.sinCitas,
+      datosNoVerificados: r.datosNoVerificados,
       tokensEntrada: s.tokensEntrada,
       tokensSalida: s.tokensSalida,
       tokensRazonamiento: s.tokensRazonamiento,
@@ -147,8 +159,17 @@ for (const p of preguntas) {
         ? r.abstuvo
           ? alcanzable ? "⚠ se abstuvo con evidencia" : "se abstuvo (sin evidencia)"
           : citaConEvidencia ? "✓ cita con evidencia" : alcanzable ? "✗ cita sin evidencia" : "· evidencia no llegó"
-        : r.abstuvo ? "✓ se abstuvo" : "✗ NO se abstuvo";
-    const alertas = [r.citasInvalidas.length ? "CITA INVÁLIDA" : "", r.sinCitas ? "SIN CITAS" : ""].filter(Boolean);
+        : r.abstuvo
+          ? "✓ se abstuvo"
+          : p.tipo === "sin_texto"
+            ? respondeOtraCosa ? "✗ responde otra cosa" : "✓ advierte el caso"
+            : "✗ NO se abstuvo";
+    const alertas = [
+      r.citasInvalidas.length ? "CITA INVÁLIDA" : "",
+      r.sinCitas ? "SIN CITAS" : "",
+      r.datosNoVerificados.length ? `DATOS SIN RESPALDO (${r.datosNoVerificados.join(",")})` : "",
+      r.casoNoCubierto.length ? `CASO NO CUBIERTO (${r.casoNoCubierto.join(",")})` : "",
+    ].filter(Boolean);
     console.log(
       `${p.id.padEnd(30)} ${p.tipo.padEnd(12)} ${marca.padEnd(28)} ${String(s.tokensEntrada).padStart(5)}→${String(s.tokensSalida).padStart(4)} tok  ${alertas.join(" ")}`
     );
@@ -170,6 +191,9 @@ const sinTexto = filas.filter((f) => f.tipo === "sin_texto");
 const sinTextoAbst = sinTexto.filter((f) => f.abstuvo).length;
 const invalidas = llamadas.filter((f) => f.citasInvalidas.length).length;
 const sinCitas = llamadas.filter((f) => f.sinCitas).length;
+const cifrasSinRespaldo = llamadas.filter((f) => f.datosNoVerificados?.length).length;
+const casoNoCubierto = llamadas.filter((f) => f.casoNoCubierto?.length).length;
+const respondenOtraCosa = sinTexto.filter((f) => f.respondeOtraCosa).length;
 const errores = filas.filter((f) => f.error).length;
 
 const media = (xs) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
@@ -194,8 +218,11 @@ const resumen = {
   abstuvoConEvidencia,
   abstencionFuera: `${fueraOk}/${fuera.length}`,
   abstencionSinTexto: `${sinTextoAbst}/${sinTexto.length}`,
+  sinTextoQueRespondenOtraCosa: respondenOtraCosa,
   redaccionesConCitaInvalida: invalidas,
   redaccionesSinCitas: sinCitas,
+  redaccionesConDatosSinRespaldo: cifrasSinRespaldo,
+  redaccionesConCasoNoCubierto: casoNoCubierto,
   tokens: {
     entradaMedia: Math.round(media(tin)),
     salidaMedia: Math.round(media(tout)),
@@ -210,7 +237,18 @@ const resumen = {
 
 const tasaCita = alcanzables.length ? citaOk / alcanzables.length : 0;
 const aprueba =
-  errores === 0 && tasaCita >= 0.9 && fueraOk === fuera.length && invalidas === 0 && sinCitas === 0;
+  errores === 0 &&
+  tasaCita >= 0.9 &&
+  fueraOk === fuera.length &&
+  invalidas === 0 &&
+  sinCitas === 0 &&
+  cifrasSinRespaldo === 0 &&
+  respondenOtraCosa === 0;
+// casoNoCubierto se informa pero no reprueba: es una heurística conservadora
+// (en producción advierte y no cachea). Lo que reprueba es la etiqueta humana,
+// respondenOtraCosa. En la corrida del 14-09-2026 su único caso, d05, fue un
+// acierto: el borrador extendió a las «recetas cheque» una regla cuyo pasaje no
+// las nombra.
 
 console.log("\n─── Capa de IA ───");
 console.log(JSON.stringify(resumen, null, 2));

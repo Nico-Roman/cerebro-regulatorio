@@ -4,7 +4,8 @@
   "proposito": "Evalúa lo que ve el químico farmacéutico, no solo si la norma correcta salió entre las primeras. Las preguntas están escritas en lenguaje de mostrador, no con el vocabulario de la norma. Una pregunta 'respondible' cuenta como respondida cuando la frase clave visible de uno de los tres primeros resultados contiene el dato. 'sin_texto' son preguntas del ámbito cuya respuesta NO está en el corpus: nunca pueden salir como 'encontrado'. 'fuera' son materias ajenas a la base: deben salir 'ausente'.",
   "reglas": {
     "evidencia": "Cada alternativa exige que el resultado sea de esa norma (numero, expresión regular anclada) y que la frase clave visible contenga la expresión `contiene` (sin distinguir mayúsculas).",
-    "holdout": "Las preguntas del set 'holdout' se escribieron y verificaron contra el corpus ANTES de modificar el motor, y no se usaron para ajustar el vocabulario ni los umbrales. Son la medida honesta de generalización."
+    "holdout": "Las preguntas del set 'holdout' se escribieron y verificaron contra el corpus ANTES de modificar el motor, y no se usaron para ajustar el vocabulario ni los umbrales. Son la medida honesta de generalización.",
+    "caso": "Solo en 'sin_texto' (desde 2026-09-14). El caso concreto que la pregunta hace y el corpus no trata. Si la capa de IA no se abstiene, tiene que decir que los pasajes no tratan ese caso (una frase negativa que lo nombre); si presenta la regla de otra materia como la respuesta, cuenta como 'responde otra cosa'."
   },
   "preguntas": [
     {"id": "d01-ram-grave", "set": "dev", "tipo": "respondible", "pregunta": "¿Cuántos días tengo para notificar una reacción adversa grave al ISP?",
@@ -35,8 +36,8 @@
      "evidencia": [{"numero": "3", "contiene": "Equivalentes farmac[eé]uticos que cumplen"}, {"contiene": "equivalen(te|cia)s? terap[eé]utic[oa]s?.{0,10}(:|es aquel|se entender)"}]},
     {"id": "d14-receta", "set": "dev", "tipo": "respondible", "pregunta": "¿Qué es una receta médica?",
      "evidencia": [{"numero": "725", "contiene": "La receta es el instrumento privado"}, {"numero": "3", "contiene": "Receta m[eé]dica: Orden suscrita"}]},
-    {"id": "d15-importar-personal", "set": "dev", "tipo": "sin_texto", "pregunta": "¿Qué necesito para importar un medicamento sin registro sanitario para uso personal?", "evidencia": []},
-    {"id": "d16-precio-maximo", "set": "dev", "tipo": "sin_texto", "pregunta": "¿Cuál es el precio máximo de venta de un medicamento en farmacias?", "evidencia": []},
+    {"id": "d15-importar-personal", "set": "dev", "tipo": "sin_texto", "pregunta": "¿Qué necesito para importar un medicamento sin registro sanitario para uso personal?", "evidencia": [], "caso": "uso personal"},
+    {"id": "d16-precio-maximo", "set": "dev", "tipo": "sin_texto", "pregunta": "¿Cuál es el precio máximo de venta de un medicamento en farmacias?", "evidencia": [], "caso": "precio"},
     {"id": "d17-dispositivo-clase2", "set": "dev", "tipo": "fuera", "pregunta": "¿Cómo registro un dispositivo médico clase II ante el ISP?", "evidencia": []},
     {"id": "d18-impuesto", "set": "dev", "tipo": "fuera", "pregunta": "¿Qué impuesto pagan los medicamentos importados?", "evidencia": []},
     {"id": "d19-fda-generico", "set": "dev", "tipo": "fuera", "pregunta": "¿Qué requisitos pide la FDA para aprobar un medicamento genérico?", "evidencia": []},
@@ -52,7 +53,7 @@
      "evidencia": [{"numero": "5161", "contiene": "vigencia de 1 año"}]},
     {"id": "d25-ricarte-soto", "set": "dev", "tipo": "respondible", "pregunta": "¿Qué es la Ley Ricarte Soto?",
      "evidencia": [{"numero": "20850", "contiene": "protecci[oó]n financiera"}]},
-    {"id": "d26-falsificados-sancion", "set": "dev", "tipo": "sin_texto", "pregunta": "¿Qué sanción tiene vender medicamentos falsificados?", "evidencia": []},
+    {"id": "d26-falsificados-sancion", "set": "dev", "tipo": "sin_texto", "pregunta": "¿Qué sanción tiene vender medicamentos falsificados?", "evidencia": [], "caso": "falsificados"},
     {"id": "d27-fraccionamiento", "set": "dev", "tipo": "respondible", "pregunta": "fraccionamiento de medicamentos en farmacias",
      "evidencia": [{"contiene": "fraccionamiento de envases de medicamentos|el proceso por el cual el Director T[eé]cnico"}]},
     {"id": "d28-dt-laboratorio", "set": "dev", "tipo": "respondible", "pregunta": "¿Quién puede ser director técnico de un laboratorio farmacéutico?",
@@ -92,7 +93,7 @@
      "evidencia": [{"numero": "466", "contiene": "Farmacia es todo establecimiento"}]},
     {"id": "h20-gondolas", "set": "holdout", "tipo": "respondible", "pregunta": "¿Qué dice la norma sobre exhibir medicamentos de venta directa en góndolas?",
      "evidencia": [{"numero": "466", "contiene": "repisas, estanter[ií]as, g[oó]ndolas"}]},
-    {"id": "h22-arancel", "set": "holdout", "tipo": "sin_texto", "pregunta": "¿Cuánto cuesta el arancel del registro sanitario?", "evidencia": []},
+    {"id": "h22-arancel", "set": "holdout", "tipo": "sin_texto", "pregunta": "¿Cuánto cuesta el arancel del registro sanitario?", "evidencia": [], "caso": "arancel"},
     {"id": "h23-paracetamol", "set": "holdout", "tipo": "fuera", "pregunta": "¿Cuál es la dosis máxima de paracetamol en adultos?", "evidencia": []},
     {"id": "h24-equivalente-farmaceutico", "set": "holdout", "tipo": "respondible", "pregunta": "¿Qué es un equivalente farmacéutico?",
      "evidencia": [{"numero": "3", "contiene": "Equivalentes farmac[eé]uticos: Productos farmac[eé]uticos que contienen"}]}
