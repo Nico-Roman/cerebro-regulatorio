@@ -719,8 +719,13 @@ def responder(pregunta, idx=None, vigente=False, categoria=None, sin_ocr=False, 
     # que TODAS las palabras de la pregunta estén literalmente en la frase: una
     # frase que solo calza por sinónimos es "parcial", no "encontrado".
     literal = exige_dato or all(c["raiz"] in raices(p["frase"]) for c in pq["conceptos"])
+    # Alta confianza no puede salir solo de contar palabras: si el núcleo de la
+    # pregunta son puros términos genéricos, calzan por casualidad en cualquier
+    # pasaje sin que haya una respuesta real detrás. Mismo umbral que ya se usa
+    # para las alternativas de una palabra (IDF_GENERICO).
+    nucleo_especifico = any(c["peso"] >= IDF_GENERICO for c in nucleo(pq["conceptos"]))
     if p["cobertura_frase"] >= umbral and p["cobertura_pasaje"] >= UMBRAL_PASAJE_ENCONTRADO and dato_ok \
-            and p["nucleo"] and literal:
+            and p["nucleo"] and literal and nucleo_especifico:
         estado, titular = "encontrado", "Encontrado en la norma"
         motivo = "La frase destacada responde la pregunta."
     elif (p["cobertura_pasaje"] >= UMBRAL_PARCIAL or p["cobertura_frase"] >= UMBRAL_PARCIAL) and \

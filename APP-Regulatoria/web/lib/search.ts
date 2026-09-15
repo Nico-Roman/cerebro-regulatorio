@@ -984,11 +984,17 @@ export function responder(pregunta: string, opts: OpcionesBusqueda = {}, idxExte
   const umbral = exigeDato && p.tieneDato ? UMBRAL_ENCONTRADO : UMBRAL_ENCONTRADO_SIN_DATO;
   const raicesFrase = raices(p.frase);
   const literal = exigeDato || pq.conceptos.every((c) => raicesFrase.has(c.raiz));
+  // Alta confianza no puede salir solo de contar palabras: si el núcleo de la
+  // pregunta son puros términos genéricos ("debo", "guardar", "abrir"), calzan
+  // por casualidad en cualquier pasaje sin que haya una respuesta real detrás.
+  // Se exige que al menos un concepto del núcleo sea específico (mismo umbral
+  // de IDF_GENERICO que ya se usa para las alternativas de una palabra).
+  const nucleoEspecifico = nucleo(pq.conceptos).some((c) => c.peso >= IDF_GENERICO);
 
   let estado: Estado;
   let titular: string;
   let motivo: string;
-  if (p.coberturaFrase >= umbral && p.coberturaPasaje >= UMBRAL_PASAJE_ENCONTRADO && datoOk && p.nucleo && literal) {
+  if (p.coberturaFrase >= umbral && p.coberturaPasaje >= UMBRAL_PASAJE_ENCONTRADO && datoOk && p.nucleo && literal && nucleoEspecifico) {
     estado = "encontrado";
     titular = "Encontrado en la norma";
     motivo = "La frase destacada responde la pregunta.";
