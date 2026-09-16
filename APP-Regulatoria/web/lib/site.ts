@@ -163,25 +163,91 @@ export const AREAS: Area[] = [
 ];
 
 /** Preguntas frecuentes: contenido real para el usuario y datos para el schema FAQ. */
-export const FAQS = [
+export interface Faq {
+  p: string;
+  r: string;
+  /**
+   * Slug de la guía que desarrolla la respuesta, o null. El enlace interno
+   * desde la FAQ es lo que hace que una guía nueva se descubra sin depender
+   * de que alguien llegue al índice de /guias.
+   */
+  guia: string | null;
+}
+
+export const FAQS: Faq[] = [
   {
     p: "¿Cuánto demora un registro sanitario en Chile?",
+    guia: "vence-registro-sanitario-isp",
     r: "Depende del producto y, sobre todo, de cómo llegue el expediente. El plazo legal empieza a correr recién cuando está completo, así que lo que más alarga el total son las rondas de observaciones. Presentar bien a la primera es la única forma real de acortarlo.",
   },
   {
     p: "¿Los cosméticos necesitan registro sanitario?",
+    guia: "registrar-cosmetico-isp-chile",
     r: "Sí: los cosméticos se controlan en Chile y hay que inscribirlos en el Instituto de Salud Pública. Qué trámite corresponde y qué antecedentes piden depende del tipo de producto y de lo que prometa el envase.",
   },
   {
     p: "¿Cómo se clasifica un dispositivo médico?",
+    guia: "registro-dispositivos-medicos-isp",
     r: "Según el riesgo del uso que se le va a dar. Esa clase decide si el producto necesita registro y qué antecedentes técnicos hay que presentar. Clasificarlo mal al principio es el error más caro del proceso: obliga a rehacer el expediente entero.",
   },
   {
     p: "¿Qué es la farmacovigilancia y quién está obligado?",
+    guia: null,
     r: "Es vigilar los efectos adversos de los medicamentos una vez que ya están en el mercado. Le toca a todo el que tiene un registro sanitario: hay que mantener el sistema funcionando y avisarle al ISP dentro de los plazos que fija la norma.",
   },
   {
     p: "¿Atienden empresas fuera de Santiago?",
+    guia: null,
     r: "Sí. El trabajo regulatorio es de documentos y se coordina a distancia en todo Chile. Vamos presencialmente cuando el proyecto lo pide, como en una auditoría de planta o el día de una inspección.",
   },
-] as const;
+];
+
+/**
+ * Cifras propias que se muestran sobre el video de la home y de /asesoria.
+ *
+ * VACÍO A PROPÓSITO. El bloque no se renderiza mientras esta lista esté vacía,
+ * así que el sitio funciona igual sin ella. Cinco de los nueve competidores
+ * chilenos revisados el 15-09-2026 publican las suyas (Regula 138 proyectos /
+ * 15 años / 30 clientes; AFC 7+ años / 500+ productos; MJB 18+ años / 100+
+ * registros), y no publicar ninguna es lo que hace que un sitio se lea como
+ * recién llegado.
+ *
+ * Tres es el número correcto: con dos se ve pobre y con cuatro nadie las lee.
+ * No las infles — una cifra que no puedes respaldar frente a un cliente vale
+ * menos que no tener ninguna.
+ */
+export interface Cifra {
+  valor: string;
+  etiqueta: string;
+}
+
+export const CIFRAS: Cifra[] = [
+  // { valor: "8", etiqueta: "años en la industria farmacéutica" },
+  // { valor: "40+", etiqueta: "trámites acompañados ante el ISP" },
+  // { valor: "15", etiqueta: "empresas asesoradas" },
+];
+
+/**
+ * Testimonios de clientes. También vacío a propósito: el bloque desaparece
+ * mientras no haya ninguno.
+ *
+ * Con nombre y empresa siempre que se pueda: es lo que los hace verificables y
+ * lo que separa a Regula y LegalPharma del resto del mercado. Si el cliente
+ * pide reserva, `empresa` puede ser el rubro ("laboratorio cosmético, RM") en
+ * vez del nombre — pero nunca un testimonio anónimo entero, que no convence a
+ * nadie y ocupa el mejor espacio de la página.
+ */
+export interface Testimonio {
+  texto: string;
+  nombre: string;
+  empresa: string;
+}
+
+export const TESTIMONIOS: Testimonio[] = [
+  // {
+  //   texto:
+  //     "Llevábamos meses dando vueltas con las observaciones del ISP. Nicolás ordenó el expediente y la resolución salió en la siguiente presentación.",
+  //   nombre: "Nombre Apellido",
+  //   empresa: "Empresa",
+  // },
+];

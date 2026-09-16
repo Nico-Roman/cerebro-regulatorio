@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { jsonParaScript } from "@/lib/html";
 import { AREAS, FAQS, SERVICIOS, SITE, WHATSAPP_URL } from "@/lib/site";
+import { guiasPublicadas } from "@/lib/guias";
 import { BuscadorHome } from "@/components/buscador-home";
 import { FormularioContacto } from "@/components/formulario-contacto";
 import { VideoVsl } from "@/components/video-vsl";
+import { BandaCredenciales, BloquePerfil, Cifras, Testimonios } from "@/components/prueba-social";
 
 const RUBROS = [
   "Farmacéuticos",
@@ -26,6 +28,8 @@ const faqJsonLd = {
 };
 
 export default function Home() {
+  const guias = guiasPublicadas();
+
   return (
     <>
       <script
@@ -38,7 +42,7 @@ export default function Home() {
         id="buscador"
         className="mx-auto w-full max-w-6xl px-5 pt-16 pb-16 sm:px-8 sm:pt-20 sm:pb-20"
       >
-        <span className="label-micro text-muted">Buscador con IA · ISP / ANAMED</span>
+        <span className="label-micro text-muted">Buscador de normativa · ISP / ANAMED</span>
 
         <h2 className="font-display mt-5 max-w-4xl text-[2rem] leading-[1.1] font-medium tracking-tight sm:text-5xl lg:text-6xl">
           Encuentra la norma
@@ -49,10 +53,18 @@ export default function Home() {
             LinkedIn o WhatsApp: se explica qué hace el buscador en una frase, en
             palabras de todos los días. El detalle técnico (cómo se cita, cómo se
             verifica el borrador) vive en la página del buscador, donde ya está
-            usándolo, y no acá antes de que apriete la primera tecla. */}
+            usándolo, y no acá antes de que apriete la primera tecla.
+
+            Lo que esta frase NO hace, desde el 16-09-2026, es apoyarse en la
+            palabra "IA". En el mercado chileno ya hay competencia vendiendo
+            registros ISP "con agentes de IA", así que decirlo iguala en vez de
+            separar. Lo que no hace nadie más es devolver el párrafo literal de
+            la norma con su enlace oficial, sin resumirlo: eso es lo que se
+            promete acá. */}
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          Escribe tu pregunta como se te ocurra. El motor de IA encuentra la norma que
-          la responde y te muestra el párrafo exacto, con el enlace al documento oficial.
+          Escribe tu pregunta como se te ocurra. Te devuelve el párrafo exacto de la
+          norma que la responde, con el enlace al documento oficial del ISP. No lo
+          resume ni lo interpreta: te muestra el texto tal como está.
         </p>
 
         <div className="mt-9 max-w-3xl">
@@ -62,6 +74,16 @@ export default function Home() {
         <p className="mt-7 max-w-2xl text-sm leading-relaxed text-muted">
           Es gratuito y va a seguir siéndolo. Solo tienes que registrarte.
         </p>
+      </section>
+
+      {/* ── Credenciales ──────────────────────────────────────────────────
+          Franja delgada entre el buscador y la asesoría. Es la primera señal
+          de que detrás de la herramienta hay un químico farmacéutico con
+          nombre, y no un software anónimo. */}
+      <section className="border-t border-line">
+        <div className="mx-auto w-full max-w-6xl px-5 py-6 sm:px-8">
+          <BandaCredenciales />
+        </div>
       </section>
 
       {/* ── Asesoría ─────────────────────────────────────────────────── */}
@@ -80,6 +102,10 @@ export default function Home() {
             laboratorios, importadores y marcas de productos farmacéuticos, cosméticos y
             dispositivos médicos.
           </p>
+
+          {/* Las cifras van entre el titular y el video, que es donde más se
+              miran. Desaparecen solas mientras CIFRAS esté vacío en site.ts. */}
+          <Cifras className="mt-12" />
 
           <ul className="mt-9 flex flex-wrap gap-2">
             {RUBROS.map((r) => (
@@ -107,6 +133,29 @@ export default function Home() {
             <p className="mt-3 text-center text-xs text-muted">
               La primera evaluación no tiene costo.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Quién te va a atender ─────────────────────────────────────────
+          Sube a la portada lo que hasta ahora vivía solo en /asesoria. En este
+          mercado el que contrata no le compra a una marca: le compra a un
+          químico farmacéutico identificable que responde con su título. */}
+      <section id="quien" className="border-t border-line">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+          <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
+            <div className="lg:w-64 lg:shrink-0">
+              <span className="label-micro text-muted">Quién te va a atender</span>
+            </div>
+            <div className="min-w-0 flex-1">
+              <BloquePerfil />
+              <Link
+                href="/asesoria"
+                className="label-micro mt-8 inline-block border border-line px-4 py-2.5 transition-colors hover:border-foreground"
+              >
+                Cómo trabajo contigo
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -193,6 +242,51 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Guías de trámites ─────────────────────────────────────────────
+          El único contenido del sitio escrito para una búsqueda concreta y no
+          para alguien que ya conoce la marca. Aparece cuando hay al menos una
+          guía publicada (ver lib/guias.ts). */}
+      {guias.length > 0 && (
+        <section id="guias" className="border-t border-line">
+          <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+            <span className="label-micro text-muted">Guías de trámites</span>
+            <h2 className="font-display mt-5 max-w-3xl text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
+              Cómo se hace cada trámite, explicado completo.
+            </h2>
+            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted">
+              Lo mismo que te explicaríamos en una reunión, escrito y con el enlace a la
+              fuente oficial.
+            </p>
+
+            <div className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2">
+              {guias.slice(0, 4).map((g) => (
+                <article key={g.slug} className="bg-background transition-colors hover:bg-surface">
+                  <Link href={`/guias/${g.slug}`} className="flex h-full flex-col gap-3 p-7">
+                    <h3 className="font-display text-base leading-snug font-medium tracking-tight sm:text-lg">
+                      {g.titulo}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-muted">{g.resumen}</p>
+                  </Link>
+                </article>
+              ))}
+            </div>
+
+            {guias.length > 4 && (
+              <p className="mt-8 text-sm text-muted">
+                <Link href="/guias" className="text-foreground underline">
+                  Ver todas las guías
+                </Link>
+              </p>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* ── Testimonios ───────────────────────────────────────────────────
+          Último bloque antes de las preguntas y el formulario: es el punto
+          donde la persona decide si escribe o se va. */}
+      <Testimonios />
+
       {/* ── Preguntas frecuentes ─────────────────────────────────────── */}
       <section id="faq" className="border-t border-line">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
@@ -202,16 +296,34 @@ export default function Home() {
             </div>
             <div className="min-w-0 flex-1">
               <dl className="flex flex-col">
-                {FAQS.map((f, i) => (
-                  <div key={f.p} className={`py-6 ${i > 0 ? "border-t border-line" : ""}`}>
-                    <dt className="font-display text-base leading-snug font-medium sm:text-lg">
-                      {f.p}
-                    </dt>
-                    <dd className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
-                      {f.r}
-                    </dd>
-                  </div>
-                ))}
+                {FAQS.map((f, i) => {
+                  // El enlace solo aparece si esa guía está publicada: una FAQ
+                  // que apunta a un 404 es peor que una FAQ sin enlace.
+                  const guia = f.guia ? guias.find((g) => g.slug === f.guia) : undefined;
+
+                  return (
+                    <div key={f.p} className={`py-6 ${i > 0 ? "border-t border-line" : ""}`}>
+                      <dt className="font-display text-base leading-snug font-medium sm:text-lg">
+                        {f.p}
+                      </dt>
+                      <dd className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
+                        {f.r}
+                        {guia && (
+                          <>
+                            {" "}
+                            <Link
+                              href={`/guias/${guia.slug}`}
+                              className="text-foreground underline underline-offset-4"
+                            >
+                              Ver la guía completa
+                            </Link>
+                            .
+                          </>
+                        )}
+                      </dd>
+                    </div>
+                  );
+                })}
               </dl>
             </div>
           </div>
@@ -230,9 +342,19 @@ export default function Home() {
               <p className="mt-5 text-sm leading-relaxed text-muted">
                 Revisamos tu situación y te decimos con claridad qué trámite corresponde,
                 qué antecedentes necesitas y en qué orden conviene hacerlo. La primera
-                evaluación no tiene costo.
+                evaluación no tiene costo y va a seguir sin tenerlo.
               </p>
-              <div className="mt-7 flex flex-col gap-2 text-sm">
+
+              {/* Una acción dominante y dos alternativas, en vez de tres
+                  canales compitiendo con el mismo peso visual. */}
+              <Link
+                href="/agenda"
+                className="mt-7 block bg-foreground px-7 py-4 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
+              >
+                Reservar hora
+              </Link>
+
+              <div className="mt-6 flex flex-col gap-2 text-sm">
                 <a href={`mailto:${SITE.email}`} className="text-muted hover:text-foreground">
                   {SITE.email}
                 </a>

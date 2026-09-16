@@ -16,7 +16,9 @@
 // respuestas se leyeran confusas.
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { WHATSAPP_URL } from "@/lib/site";
 import type { NormaReciente, PlazoDetectado } from "@/lib/normativa";
 import { FeedbackConsulta } from "@/components/feedback-consulta";
 import { RespuestaIa } from "@/components/respuesta-ia";
@@ -529,6 +531,38 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
               {respuesta.consultaId && (
                 <FeedbackConsulta key={`fb-${respuesta.consultaId}`} consultaId={respuesta.consultaId} />
               )}
+
+              {/* Puente del buscador a la asesoría. Es el modelo que usan las
+                  consultoras grandes con sus recursos gratuitos: la herramienta
+                  resuelve algo real y, en ese mismo momento, ofrece hacerse
+                  cargo del trámite. Va al final para no estorbar la lectura de
+                  la norma, que es a lo que la persona vino. */}
+              <div className="mt-2 flex flex-col gap-4 border border-line p-6 sm:flex-row sm:items-center sm:justify-between">
+                <div className="min-w-0">
+                  <p className="text-sm leading-snug font-medium">
+                    ¿Tienes que cumplir con esto y no sabes por dónde partir?
+                  </p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                    Revisamos tu caso en 30 minutos, sin costo.
+                  </p>
+                </div>
+                <div className="flex shrink-0 flex-col gap-2 sm:items-end">
+                  <Link
+                    href="/agenda"
+                    className="bg-foreground px-6 py-3 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
+                  >
+                    Agenda una evaluación
+                  </Link>
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-6 py-1 text-center text-xs text-muted transition-colors hover:text-foreground"
+                  >
+                    O escríbenos por WhatsApp
+                  </a>
+                </div>
+              </div>
             </section>
           )}
         </main>

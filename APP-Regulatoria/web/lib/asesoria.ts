@@ -69,7 +69,7 @@ export const PROCESO: Paso[] = [
     n: "02",
     titulo: "Diagnóstico y propuesta escrita",
     detalle:
-      "Te hago llegaar una propuesta de acuerdo a tus necesidades, totalmente personalizada a tu caso.",
+      "Te hago llegar una propuesta de acuerdo a tus necesidades, totalmente personalizada a tu caso.",
   },
   {
     n: "03",
@@ -94,3 +94,58 @@ export const LIMITES = [
   "No garantizo la aprobación de un registro. Nadie puede: la resuelve el ISP.",
   "No acelero plazos por vías que no sean un expediente bien armado.",
 ];
+
+/**
+ * Credenciales en una línea, para la franja que va justo debajo del buscador
+ * en la home.
+ *
+ * Es la primera señal de que detrás del buscador hay un profesional
+ * verificable y no un software anónimo. Se lee en dos segundos, antes de que
+ * nadie baje a la sección de asesoría.
+ */
+export const CREDENCIALES: string[] = [
+  "Químico Farmacéutico",
+  "Diplomado en Asuntos Regulatorios, U. de Chile",
+  "Docente Técnico en Farmacia, INACAP",
+  "Operaciones logísticas farmacéuticas bajo GDP",
+];
+
+/**
+ * Número de registro profesional en la Superintendencia de Salud.
+ *
+ * Vacío por ahora: si se llena, entra como una credencial más al final de la
+ * franja. Es el dato que un cliente puede ir a verificar por su cuenta, así
+ * que vale más que las otras cuatro juntas.
+ */
+export const REGISTRO_PROFESIONAL = "";
+
+/**
+ * Quién atiende. Sube a la home lo que hasta ahora vivía solo en /asesoria.
+ *
+ * En este mercado nadie le compra a una marca: le compra a un químico
+ * farmacéutico identificable que responde con su título. Los cuatro
+ * competidores chilenos que muestran dueño con nombre y cara (Regula, Clara
+ * Valenzuela, Ma Asesorías, Alquimia) son también los que se leen como más
+ * establecidos.
+ */
+export interface Perfil {
+  nombre: string;
+  rol: string;
+  /**
+   * Ruta de la foto dentro de /public. Vacía mientras no exista: el bloque se
+   * renderiza igual, solo que sin imagen. Una foto de trabajo, mirando a la
+   * cámara, sirve más que un retrato de estudio.
+   */
+  foto: string;
+  parrafos: string[];
+}
+
+export const PERFIL: Perfil = {
+  nombre: "Nicolás Román",
+  rol: "Químico Farmacéutico",
+  foto: "",
+  parrafos: [
+    "Trabajo en operaciones logísticas farmacéuticas, hago clases de Técnico en Farmacia en INACAP y curso el Diplomado en Asuntos Regulatorios de la Universidad de Chile. Los expedientes que preparo salen de los dos lados del problema: lo que exige la norma y lo que después hay que sostener en la operación.",
+    "No soy abogado y no garantizo aprobaciones, porque las resuelve el ISP. Lo que hago es armar el expediente con la norma en la mano y acompañarte después de que salga la resolución.",
+  ],
+};

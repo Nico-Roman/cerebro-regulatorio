@@ -1,8 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SITE, WHATSAPP_URL } from "@/lib/site";
+import { guiasPublicadas } from "@/lib/guias";
 
 export function Footer() {
+  // El footer es lo que deja cada guía enlazada desde todas las páginas del
+  // sitio, que es la mitad del trabajo para que lleguen a indexarse.
+  const guias = guiasPublicadas();
+
   return (
     <footer className="border-t border-line">
       <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
@@ -45,6 +50,13 @@ export function Footer() {
                     Buscador de normativa
                   </Link>
                 </li>
+                {guias.length > 0 && (
+                  <li>
+                    <Link href="/guias" className="text-muted hover:text-foreground">
+                      Guías de trámites
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <Link href="/#contacto" className="text-muted hover:text-foreground">
                     Contacto
@@ -52,6 +64,24 @@ export function Footer() {
                 </li>
               </ul>
             </div>
+
+            {guias.length > 0 && (
+              <div>
+                <h3 className="label-micro text-muted">Guías</h3>
+                <ul className="mt-3 flex max-w-[16rem] flex-col gap-2 text-sm">
+                  {guias.map((g) => (
+                    <li key={g.slug}>
+                      <Link
+                        href={`/guias/${g.slug}`}
+                        className="text-muted hover:text-foreground"
+                      >
+                        {g.titulo}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <div>
               <h3 className="label-micro text-muted">Legal</h3>

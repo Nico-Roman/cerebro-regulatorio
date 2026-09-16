@@ -2,18 +2,34 @@ import Image from "next/image";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { sesionLigera } from "@/lib/sesion";
+import { guiasPublicadas } from "@/lib/guias";
 import { BotonSalir } from "@/components/boton-salir";
 
+// "Agenda" salió de los enlaces de texto: ahora es el botón sólido de la
+// derecha. La regla es una sola llamada a la acción dominante por pantalla, y
+// tres enlaces compitiendo al mismo peso visual —agenda, WhatsApp y
+// formulario— era exactamente lo que la auditoría del 15-09-2026 marcó como
+// causa de que nadie tome ninguno.
 const ENLACES = [
   { href: "/asesoria", label: "Asesoría" },
   { href: "/#areas", label: "Áreas" },
   { href: "/normativa", label: "Buscador" },
-  { href: "/agenda", label: "Agenda" },
   { href: "/#contacto", label: "Contacto" },
 ];
 
 export async function Nav() {
   const usuario = await sesionLigera();
+  const hayGuias = guiasPublicadas().length > 0;
+
+  // Las guías entran al menú solo cuando existe al menos una publicada, para
+  // que el menú nunca lleve a una sección vacía.
+  const enlaces = hayGuias
+    ? [
+        ...ENLACES.slice(0, 3),
+        { href: "/guias", label: "Guías" },
+        ...ENLACES.slice(3),
+      ]
+    : ENLACES;
 
   return (
     <header className="border-b border-line">
@@ -33,7 +49,7 @@ export async function Nav() {
         </Link>
 
         <ul className="hidden items-center gap-7 md:flex">
-          {ENLACES.map((e) => (
+          {enlaces.map((e) => (
             <li key={e.href}>
               <Link
                 href={e.href}
@@ -45,25 +61,36 @@ export async function Nav() {
           ))}
         </ul>
 
-        {usuario ? (
-          <div className="flex shrink-0 items-center gap-3">
+        <div className="flex shrink-0 items-center gap-4">
+          {usuario ? (
+            <>
+              <Link
+                href="/perfil"
+                className="label-micro hidden text-muted transition-colors hover:text-foreground sm:block"
+                title={usuario.email}
+              >
+                {usuario.email}
+              </Link>
+              <BotonSalir />
+            </>
+          ) : (
             <Link
-              href="/perfil"
-              className="label-micro hidden text-muted transition-colors hover:text-foreground sm:block"
-              title={usuario.email}
+              href="/ingresar"
+              className="label-micro text-muted transition-colors hover:text-foreground"
             >
-              {usuario.email}
+              Entrar
             </Link>
-            <BotonSalir />
-          </div>
-        ) : (
+          )}
+
+          {/* La acción dominante, visible en todo el scroll de todas las páginas. */}
           <Link
-            href="/ingresar"
-            className="label-micro shrink-0 border border-line px-3.5 py-2 transition-colors hover:border-foreground"
+            href="/agenda"
+            className="label-micro bg-foreground px-4 py-2.5 text-background transition-opacity hover:opacity-90"
           >
-            Entrar
+            Agenda
+            <span className="hidden sm:inline"> una evaluación</span>
           </Link>
-        )}
+        </div>
       </nav>
     </header>
   );

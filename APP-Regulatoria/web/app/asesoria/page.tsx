@@ -6,6 +6,7 @@ import { LIMITES, PROCESO, TRAYECTORIA } from "@/lib/asesoria";
 import { VSL, miniaturaUrl, vslConfigurado } from "@/lib/vsl";
 import { FormularioContacto } from "@/components/formulario-contacto";
 import { VideoVsl } from "@/components/video-vsl";
+import { BloquePerfil, Cifras, Testimonios } from "@/components/prueba-social";
 
 export const metadata: Metadata = {
   title: "Asesoría regulatoria — cómo trabajo contigo",
@@ -112,6 +113,11 @@ export default function Asesoria() {
               </a>
             </div>
           </div>
+
+          {/* Las mismas cifras de la home. Esta es la página que se manda por
+              WhatsApp y LinkedIn, así que la prueba social tiene que estar acá
+              igual o más que en la portada. */}
+          <Cifras className="mt-16" />
         </div>
       </section>
 
@@ -165,7 +171,9 @@ export default function Asesoria() {
             </div>
 
             <div className="min-w-0 flex-1">
-              <ol className="flex flex-col">
+              <BloquePerfil />
+
+              <ol className="mt-14 flex flex-col border-t border-line">
                 {TRAYECTORIA.map((h, i) => (
                   <li
                     key={`${h.rol}-${h.lugar}`}
@@ -216,6 +224,9 @@ export default function Asesoria() {
         </div>
       </section>
 
+      {/* ── Testimonios ──────────────────────────────────────────────── */}
+      <Testimonios borde="border-b" />
+
       {/* ── Contacto ─────────────────────────────────────────────────── */}
       <section id="contacto">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
@@ -230,7 +241,14 @@ export default function Asesoria() {
                 corresponde, qué antecedentes necesitas y en qué orden conviene
                 hacerlo. La primera evaluación no tiene costo.
               </p>
-              <div className="mt-7 flex flex-col gap-2 text-sm">
+              <Link
+                href="/agenda"
+                className="mt-7 block bg-foreground px-7 py-4 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
+              >
+                Reservar hora
+              </Link>
+
+              <div className="mt-6 flex flex-col gap-2 text-sm">
                 <a href={`mailto:${SITE.email}`} className="text-muted hover:text-foreground">
                   {SITE.email}
                 </a>
@@ -242,9 +260,6 @@ export default function Asesoria() {
                 >
                   {SITE.whatsappVisible}
                 </a>
-                <Link href="/agenda" className="text-muted hover:text-foreground">
-                  Reservar hora directamente
-                </Link>
               </div>
             </div>
 
