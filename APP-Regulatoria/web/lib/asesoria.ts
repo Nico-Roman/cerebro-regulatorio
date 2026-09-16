@@ -46,7 +46,7 @@ export const TRAYECTORIA: Hito[] = [
   {
     periodo: "Base",
     rol: "Químico Farmacéutico",
-    lugar: "Santiago, Chile",
+    lugar: "Pontificia Universidad Católica de Chile",
     detalle:
       "Título profesional habilitante. Es el requisito legal para firmar como director técnico y para responder ante el ISP por un producto registrado.",
   },
@@ -96,26 +96,48 @@ export const LIMITES = [
 ];
 
 /**
- * Credenciales en una línea, para la franja que va justo debajo del buscador
- * en la home.
+ * Formación acreditable: título profesional, diplomas y cursos de norma
+ * técnica.
  *
- * Es la primera señal de que detrás del buscador hay un profesional
- * verificable y no un software anónimo. Se lee en dos segundos, antes de que
- * nadie baje a la sección de asesoría.
+ * Va debajo del bloque de perfil, en "Quién te va a atender". Antes vivía como
+ * una franja delgada de viñetas entre el buscador y la asesoría, pero estos son
+ * nombres largos —"Diploma Asuntos Regulatorios Farmacéuticos, Cosméticos y
+ * Dispositivos Médicos"— y en línea se leían como un amontonamiento. Debajo del
+ * perfil además quedan donde sirven: respaldan a la persona que la sección
+ * acaba de presentar, en vez de aparecer antes de que nadie sepa quién es.
+ *
+ * `detalle` es la casa que la otorga cuando existe —la universidad— y la sigla
+ * de la práctica cuando se trata de un curso de norma técnica.
  */
-export const CREDENCIALES: string[] = [
-  "Químico Farmacéutico",
-  "Diplomado en Asuntos Regulatorios, U. de Chile",
-  "Docente Técnico en Farmacia, INACAP",
-  "Operaciones logísticas farmacéuticas bajo GDP",
+export interface Credencial {
+  titulo: string;
+  detalle: string;
+}
+
+export const CREDENCIALES: Credencial[] = [
+  {
+    titulo: "Químico Farmacéutico",
+    detalle: "Pontificia Universidad Católica de Chile",
+  },
+  {
+    titulo:
+      "Diploma Asuntos Regulatorios Farmacéuticos, Cosméticos y Dispositivos Médicos",
+    detalle: "Universidad de Chile",
+  },
+  {
+    titulo: "Diploma Ventas y Marketing Farmacéutico y Dispositivos Médicos",
+    detalle: "Pontificia Universidad Católica de Chile",
+  },
+  { titulo: "Curso Norma Técnica 147", detalle: "GSDP" },
+  { titulo: "Curso Norma Técnica 127", detalle: "GMP" },
 ];
 
 /**
  * Número de registro profesional en la Superintendencia de Salud.
  *
  * Vacío por ahora: si se llena, entra como una credencial más al final de la
- * franja. Es el dato que un cliente puede ir a verificar por su cuenta, así
- * que vale más que las otras cuatro juntas.
+ * lista. Es el dato que un cliente puede ir a verificar por su cuenta, así
+ * que vale más que todas las otras juntas.
  */
 export const REGISTRO_PROFESIONAL = "";
 

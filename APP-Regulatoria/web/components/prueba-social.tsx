@@ -11,27 +11,41 @@
 
 import Image from "next/image";
 import { CIFRAS, TESTIMONIOS } from "@/lib/site";
+import type { Credencial } from "@/lib/asesoria";
 import { CREDENCIALES, PERFIL, REGISTRO_PROFESIONAL } from "@/lib/asesoria";
 
 /**
- * Franja de credenciales. Va justo debajo del buscador, antes de que nadie
- * baje: es la primera señal de que detrás de la herramienta hay un profesional
- * verificable.
+ * Credenciales: título, diplomas y cursos de norma técnica.
+ *
+ * Va debajo del bloque de perfil, dentro de "Quién te va a atender". Cada
+ * línea repite la forma de la trayectoria en /asesoria —nombre arriba, casa
+ * que lo otorga abajo en minúscula— para que las dos secciones se lean como
+ * una sola ficha y no como dos listas distintas.
+ *
+ * Dos columnas desde sm: en una sola quedan cinco renglones apilados debajo del
+ * perfil, que es mucha altura para datos que se escanean de un vistazo.
  */
-export function BandaCredenciales() {
-  const items = REGISTRO_PROFESIONAL
-    ? [...CREDENCIALES, `Registro profesional N° ${REGISTRO_PROFESIONAL}`]
+export function Credenciales({ className = "" }: { className?: string }) {
+  const items: Credencial[] = REGISTRO_PROFESIONAL
+    ? [
+        ...CREDENCIALES,
+        { titulo: "Registro profesional", detalle: `N° ${REGISTRO_PROFESIONAL}` },
+      ]
     : CREDENCIALES;
 
   return (
-    <ul className="flex flex-wrap items-center gap-x-6 gap-y-3">
-      {items.map((c) => (
-        <li key={c} className="label-micro flex items-center gap-2.5 text-muted">
-          <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-muted" />
-          {c}
-        </li>
-      ))}
-    </ul>
+    <div className={className}>
+      <span className="label-micro text-muted">Formación</span>
+
+      <ul className="mt-5 grid border-t border-line sm:grid-cols-2 sm:gap-x-10">
+        {items.map((c) => (
+          <li key={c.titulo} className="border-b border-line py-4">
+            <p className="text-sm leading-snug">{c.titulo}</p>
+            <p className="label-micro mt-1.5 text-muted">{c.detalle}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

@@ -5,7 +5,7 @@ import { guiasPublicadas } from "@/lib/guias";
 import { BuscadorHome } from "@/components/buscador-home";
 import { FormularioContacto } from "@/components/formulario-contacto";
 import { VideoVsl } from "@/components/video-vsl";
-import { BandaCredenciales, BloquePerfil, Cifras, Testimonios } from "@/components/prueba-social";
+import { BloquePerfil, Cifras, Credenciales, Testimonios } from "@/components/prueba-social";
 
 const RUBROS = [
   "Farmacéuticos",
@@ -76,16 +76,6 @@ export default function Home() {
         </p>
       </section>
 
-      {/* ── Credenciales ──────────────────────────────────────────────────
-          Franja delgada entre el buscador y la asesoría. Es la primera señal
-          de que detrás de la herramienta hay un químico farmacéutico con
-          nombre, y no un software anónimo. */}
-      <section className="border-t border-line">
-        <div className="mx-auto w-full max-w-6xl px-5 py-6 sm:px-8">
-          <BandaCredenciales />
-        </div>
-      </section>
-
       {/* ── Asesoría ─────────────────────────────────────────────────── */}
       <section className="border-t border-line">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
@@ -149,6 +139,13 @@ export default function Home() {
             </div>
             <div className="min-w-0 flex-1">
               <BloquePerfil />
+
+              {/* Las credenciales cierran la presentación: primero quién es,
+                  después con qué lo respalda. Al revés —como estaban, en una
+                  franja sobre el buscador— son cinco nombres de diplomas sin
+                  una cara a la que pegarse. */}
+              <Credenciales className="mt-12" />
+
               <Link
                 href="/asesoria"
                 className="label-micro mt-8 inline-block border border-line px-4 py-2.5 transition-colors hover:border-foreground"
