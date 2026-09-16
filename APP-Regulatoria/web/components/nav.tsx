@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
-import { sesionLigera } from "@/lib/sesion";
 import { guiasPublicadas } from "@/lib/guias";
-import { BotonSalir } from "@/components/boton-salir";
+import { NavSesion } from "@/components/nav-sesion";
 
 // "Agenda" salió de los enlaces de texto: ahora es el botón sólido de la
 // derecha. La regla es una sola llamada a la acción dominante por pantalla, y
@@ -17,8 +16,7 @@ const ENLACES = [
   { href: "/#contacto", label: "Contacto" },
 ];
 
-export async function Nav() {
-  const usuario = await sesionLigera();
+export function Nav() {
   const hayGuias = guiasPublicadas().length > 0;
 
   // Las guías entran al menú solo cuando existe al menos una publicada, para
@@ -62,25 +60,7 @@ export async function Nav() {
         </ul>
 
         <div className="flex shrink-0 items-center gap-4">
-          {usuario ? (
-            <>
-              <Link
-                href="/perfil"
-                className="label-micro hidden text-muted transition-colors hover:text-foreground sm:block"
-                title={usuario.email}
-              >
-                {usuario.email}
-              </Link>
-              <BotonSalir />
-            </>
-          ) : (
-            <Link
-              href="/ingresar"
-              className="label-micro text-muted transition-colors hover:text-foreground"
-            >
-              Entrar
-            </Link>
-          )}
+          <NavSesion />
 
           {/* La acción dominante, visible en todo el scroll de todas las páginas. */}
           <Link
