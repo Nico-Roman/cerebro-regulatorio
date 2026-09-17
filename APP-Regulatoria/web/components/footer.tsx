@@ -15,7 +15,7 @@ export function Footer() {
           <div className="max-w-xs">
             <div className="flex items-center gap-2.5">
               <Image
-                src="/logo-regulamed.png"
+                src="/logo-regulamed-asuntos%20regulatorios%20farmaceuticos%20gicona%20safis%20isp%20seremi%20salud%20regulacion%20medicamentos%20cosmeticos%20dispositivos%20medicos.png"
                 alt={`${SITE.nombre} — ${SITE.claim}`}
                 width={577}
                 height={577}

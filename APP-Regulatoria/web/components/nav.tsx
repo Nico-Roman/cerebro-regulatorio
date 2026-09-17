@@ -34,7 +34,7 @@ export function Nav() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
         <Link href="/" className="flex items-center gap-2.5" aria-label={`${SITE.nombre} — inicio`}>
           <Image
-            src="/logo-regulamed.png"
+            src="/logo-regulamed-asuntos%20regulatorios%20farmaceuticos%20gicona%20safis%20isp%20seremi%20salud%20regulacion%20medicamentos%20cosmeticos%20dispositivos%20medicos.png"
             alt={`${SITE.nombre} — ${SITE.claim}`}
             width={577}
             height={577}
