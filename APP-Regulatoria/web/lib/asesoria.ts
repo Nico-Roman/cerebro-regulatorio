@@ -174,7 +174,7 @@ export const PERFIL: Perfil = {
   rol: "Químico Farmacéutico",
   foto: "/Foto%20retrato.png",
   parrafos: [
-    "Trabajo en operaciones logísticas farmacéuticas, hago clases de Técnico en Farmacia en INACAP y curso el Diplomado en Asuntos Regulatorios de la Universidad de Chile. Los expedientes que preparo salen de los dos lados del problema: lo que exige la norma y lo que después hay que sostener en la operación.",
+    "Con más de tres años en la industria farmacéutica, he trabajado en el registro y la vigilancia regulatoria de medicamentos, cosméticos y dispositivos médicos ante el ISP. Sé lo que revisa un fiscalizador y lo que un expediente necesita para sostenerse en el tiempo, no solo para aprobarse.",
     "No soy abogado y no garantizo aprobaciones, porque las resuelve el ISP. Lo que hago es armar el expediente con la norma en la mano y acompañarte después de que salga la resolución.",
   ],
 };
