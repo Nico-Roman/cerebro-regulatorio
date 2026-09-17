@@ -296,18 +296,29 @@ export default function Home() {
               <span className="label-micro text-muted">Preguntas frecuentes</span>
             </div>
             <div className="min-w-0 flex-1">
-              <dl className="flex flex-col">
+              <div className="flex flex-col">
                 {FAQS.map((f, i) => {
                   // El enlace solo aparece si esa guía está publicada: una FAQ
                   // que apunta a un 404 es peor que una FAQ sin enlace.
                   const guia = f.guia ? guias.find((g) => g.slug === f.guia) : undefined;
 
                   return (
-                    <div key={f.p} className={`py-6 ${i > 0 ? "border-t border-line" : ""}`}>
-                      <dt className="font-display text-base leading-snug font-medium sm:text-lg">
-                        {f.p}
-                      </dt>
-                      <dd className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
+                    <details
+                      key={f.p}
+                      className={`group py-6 ${i > 0 ? "border-t border-line" : ""}`}
+                    >
+                      <summary className="flex cursor-pointer list-none items-start justify-between gap-4 [&::-webkit-details-marker]:hidden">
+                        <span className="font-display text-base leading-snug font-medium sm:text-lg">
+                          {f.p}
+                        </span>
+                        <span
+                          aria-hidden
+                          className="label-micro mt-0.5 shrink-0 text-muted transition-transform duration-200 group-open:rotate-45"
+                        >
+                          +
+                        </span>
+                      </summary>
+                      <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
                         {f.r}
                         {guia && (
                           <>
@@ -321,11 +332,11 @@ export default function Home() {
                             .
                           </>
                         )}
-                      </dd>
-                    </div>
+                      </p>
+                    </details>
                   );
                 })}
-              </dl>
+              </div>
             </div>
           </div>
         </div>
