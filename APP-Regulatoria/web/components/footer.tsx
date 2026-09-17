@@ -15,7 +15,7 @@ export function Footer() {
           <div className="max-w-xs">
             <div className="flex items-center gap-2.5">
               <Image
-                src="/logo-regulamed-asuntos-regulatorios.jpg"
+                src="/logo-regulamed.png"
                 alt={`${SITE.nombre} — ${SITE.claim}`}
                 width={577}
                 height={577}
