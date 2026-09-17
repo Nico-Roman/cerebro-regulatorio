@@ -39,7 +39,7 @@ export function Nav() {
             width={577}
             height={577}
             priority
-            className="block h-7 w-7"
+            className="block h-[35px] w-[35px]"
           />
           <span className="font-display text-base font-medium tracking-tight">
             {SITE.nombre}

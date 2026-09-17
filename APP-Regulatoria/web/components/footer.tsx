@@ -19,7 +19,7 @@ export function Footer() {
                 alt={`${SITE.nombre} — ${SITE.claim}`}
                 width={577}
                 height={577}
-                className="block h-6 w-6"
+                className="block h-[30px] w-[30px]"
               />
               <span className="font-display text-base font-medium tracking-tight">
                 {SITE.nombre}
