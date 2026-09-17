@@ -163,8 +163,7 @@ export interface Perfil {
   rol: string;
   /**
    * Ruta de la foto dentro de /public. Vacía mientras no exista: el bloque se
-   * renderiza igual, solo que sin imagen. Una foto de trabajo, mirando a la
-   * cámara, sirve más que un retrato de estudio.
+   * renderiza igual, solo que sin imagen.
    */
   foto: string;
   parrafos: string[];
@@ -173,7 +172,7 @@ export interface Perfil {
 export const PERFIL: Perfil = {
   nombre: "Nicolás Román",
   rol: "Químico Farmacéutico",
-  foto: "",
+  foto: "/Foto%20retrato.png",
   parrafos: [
     "Trabajo en operaciones logísticas farmacéuticas, hago clases de Técnico en Farmacia en INACAP y curso el Diplomado en Asuntos Regulatorios de la Universidad de Chile. Los expedientes que preparo salen de los dos lados del problema: lo que exige la norma y lo que después hay que sostener en la operación.",
     "No soy abogado y no garantizo aprobaciones, porque las resuelve el ISP. Lo que hago es armar el expediente con la norma en la mano y acompañarte después de que salga la resolución.",

@@ -80,7 +80,7 @@ export function BloquePerfil() {
           alt={`${PERFIL.nombre} — ${PERFIL.rol}`}
           width={320}
           height={320}
-          className="h-28 w-28 shrink-0 object-cover sm:h-36 sm:w-36"
+          className="h-28 w-28 shrink-0 rounded-full object-cover sm:h-36 sm:w-36"
         />
       )}
 
