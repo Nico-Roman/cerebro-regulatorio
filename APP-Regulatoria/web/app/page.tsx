@@ -130,29 +130,33 @@ export default function Home() {
       {/* ── Quién te va a atender ─────────────────────────────────────────
           Sube a la portada lo que hasta ahora vivía solo en /asesoria. En este
           mercado el que contrata no le compra a una marca: le compra a un
-          químico farmacéutico identificable que responde con su título. */}
+          químico farmacéutico identificable que responde con su título.
+
+          Centrado en vez del layout de etiqueta-a-la-izquierda que usan
+          Servicios/Áreas/FAQ: esta sección presenta a una persona, no una
+          lista, así que funciona más como una portada de "conoce a quién te
+          atiende" que como una fila de contenido más. */}
       <section id="quien" className="border-t border-line">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
-            <div className="lg:w-64 lg:shrink-0">
-              <span className="label-micro text-muted">Quién te va a atender</span>
-            </div>
-            <div className="min-w-0 flex-1">
-              <BloquePerfil />
+        <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-16">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="label-micro text-muted">Quién te va a atender</span>
+          </div>
 
-              {/* Las credenciales cierran la presentación: primero quién es,
-                  después con qué lo respalda. Al revés —como estaban, en una
-                  franja sobre el buscador— son cinco nombres de diplomas sin
-                  una cara a la que pegarse. */}
-              <Credenciales className="mt-12" />
+          <div className="mx-auto mt-8 max-w-2xl text-left">
+            <BloquePerfil />
 
-              <Link
-                href="/asesoria"
-                className="label-micro mt-8 inline-block border border-line px-4 py-2.5 transition-colors hover:border-foreground"
-              >
-                Cómo trabajo contigo
-              </Link>
-            </div>
+            {/* Las credenciales cierran la presentación: primero quién es,
+                después con qué lo respalda. Al revés —como estaban, en una
+                franja sobre el buscador— son cinco nombres de diplomas sin
+                una cara a la que pegarse. */}
+            <Credenciales className="mt-12" />
+
+            <Link
+              href="/asesoria"
+              className="label-micro mt-8 inline-block border border-line px-4 py-2.5 transition-colors hover:border-foreground"
+            >
+              Cómo trabajo contigo
+            </Link>
           </div>
         </div>
       </section>
