@@ -106,8 +106,10 @@ export const LIMITES = [
  * perfil además quedan donde sirven: respaldan a la persona que la sección
  * acaba de presentar, en vez de aparecer antes de que nadie sepa quién es.
  *
- * `detalle` es la casa que la otorga cuando existe —la universidad— y la sigla
- * de la práctica cuando se trata de un curso de norma técnica.
+ * `detalle` es la casa que la otorga cuando existe —la universidad— y el
+ * nombre completo de la práctica con su sigla entre paréntesis cuando se
+ * trata de un curso de norma técnica: nadie fuera del rubro sabe qué es GSDP
+ * a secas.
  */
 export interface Credencial {
   titulo: string;
@@ -128,8 +130,14 @@ export const CREDENCIALES: Credencial[] = [
     titulo: "Diploma Ventas y Marketing Farmacéutico y Dispositivos Médicos",
     detalle: "Pontificia Universidad Católica de Chile",
   },
-  { titulo: "Curso Norma Técnica 147", detalle: "GSDP" },
-  { titulo: "Curso Norma Técnica 127", detalle: "GMP" },
+  {
+    titulo: "Curso Norma Técnica 147",
+    detalle: "Buenas Prácticas de Almacenamiento y Distribución (GSDP)",
+  },
+  {
+    titulo: "Curso Norma Técnica 127",
+    detalle: "Buenas Prácticas de Manufactura (GMP)",
+  },
 ];
 
 /**
