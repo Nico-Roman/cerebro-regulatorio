@@ -14,6 +14,7 @@ import {
   integer,
   jsonb,
   pgTable,
+  primaryKey,
   real,
   text,
   timestamp,
@@ -133,6 +134,11 @@ export const consultas = pgTable(
     tokensIn: integer("tokens_in"),
     tokensOut: integer("tokens_out"),
     latenciaMs: integer("latencia_ms"),
+    // (0009) Quién respondió y cuánto costó, con los precios de ESE modelo en
+    // ese momento. Sin esto, cambiar de proveedor reescribiría el pasado: los
+    // márgenes de meses anteriores se recalcularían con el precio nuevo.
+    proveedor: text("proveedor"),
+    costoUsd: real("costo_usd"),
     // Caché compartida (0005): misma pregunta normalizada + mismos pasajes +
     // mismo modelo y prompt = misma clave. Las filas servidas desde caché
     // guardan tokens 0, así que sumar tokens_in/out sigue dando el gasto real.
@@ -262,4 +268,161 @@ export const rateLimit = pgTable(
     contador: integer("contador").notNull().default(0),
   },
   (t) => [uniqueIndex("rate_limit_clave_idx").on(t.clave)]
+);
+
+// ─── Planes y créditos de IA (0008) ─────────────────────────────────────────
+//
+// Las reglas (cupos, precios, conversión tokens → créditos) viven en
+// lib/planes.ts; acá solo se guarda quién tiene qué y qué gastó.
+
+/**
+ * Un plan pagado vigente. El plan gratis no tiene fila: es lo que tiene quien
+ * no pertenece a ninguna suscripción activa. El ciclo mensual se cuenta desde
+ * `vigente_desde` (si pagó el 28, su mes va del 28 al 28).
+ */
+export const suscripciones = pgTable(
+  "suscripciones",
+  {
+    id: text("id").primaryKey(),
+    // profesional | director_tecnico
+    plan: text("plan").notNull(),
+    titularUserId: text("titular_user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    vigenteDesde: timestamp("vigente_desde", { withTimezone: true }).notNull().defaultNow(),
+    venceEn: timestamp("vence_en", { withTimezone: true }).notNull(),
+    // activa | cancelada
+    estado: text("estado").notNull().default("activa"),
+    // (0009) Cuándo y por qué terminó antes de vencer. "reemplazada" (cambio de
+    // plan) no es una baja: el churn solo cuenta "cancelada" y los vencimientos.
+    canceladaEn: timestamp("cancelada_en", { withTimezone: true }),
+    // cancelada | reemplazada
+    motivoFin: text("motivo_fin"),
+    // De dónde salió: "manual:<admin>", o el id del pago cuando haya pasarela.
+    origen: text("origen"),
+    nota: text("nota"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("suscripciones_titular_idx").on(t.titularUserId),
+    index("suscripciones_vence_idx").on(t.venceEn),
+  ]
+);
+
+/** Quiénes comparten el cupo de una suscripción. El titular también es miembro. */
+export const suscripcionMiembros = pgTable(
+  "suscripcion_miembros",
+  {
+    suscripcionId: text("suscripcion_id")
+      .notNull()
+      .references(() => suscripciones.id, { onDelete: "cascade" }),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.suscripcionId, t.userId] }),
+    index("suscripcion_miembros_user_idx").on(t.userId),
+  ]
+);
+
+/**
+ * Libro de créditos, append-only: nunca se edita ni se borra una fila, se
+ * agrega otra que corrige (reembolso, ajuste). El saldo de pack y el uso del
+ * plan son sumas sobre esta tabla, así que siempre se puede reconstruir qué
+ * pasó y cuándo.
+ *
+ * `creditos` lleva signo: una compra suma, un consumo resta.
+ */
+export const movimientosCreditos = pgTable(
+  "movimientos_creditos",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    // Solo para consumos del plan de una suscripción: el cupo es del equipo.
+    suscripcionId: text("suscripcion_id").references(() => suscripciones.id, { onDelete: "set null" }),
+    // plan | pack
+    fuente: text("fuente").notNull(),
+    // consumo | ajuste_consumo | reembolso | compra | ajuste
+    tipo: text("tipo").notNull(),
+    creditos: integer("creditos").notNull(),
+    consultaId: text("consulta_id").references(() => consultas.id, { onDelete: "set null" }),
+    tokensEntrada: integer("tokens_entrada"),
+    tokensSalida: integer("tokens_salida"),
+    // Pack comprado, id del pago o quién hizo el ajuste.
+    referencia: text("referencia"),
+    nota: text("nota"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("movimientos_user_fuente_idx").on(t.userId, t.fuente, t.createdAt),
+    index("movimientos_suscripcion_idx").on(t.suscripcionId, t.createdAt),
+    index("movimientos_created_idx").on(t.createdAt),
+  ]
+);
+
+// ─── Proveedores de IA y pagos (0009) ───────────────────────────────────────
+
+/**
+ * Catálogo de modelos de IA. Cambiar de proveedor es activar otra fila desde
+ * el panel: sin deploy. La clave de API NO se guarda acá: `env_clave` es el
+ * NOMBRE de la variable de entorno que la tiene (p. ej. OPENAI_API_KEY). Los
+ * secretos siguen viviendo solo en Railway.
+ *
+ * Como mucho una fila activa (índice único parcial). Sin fila activa, se usan
+ * las variables LLM_* de siempre.
+ */
+export const modelosIa = pgTable(
+  "modelos_ia",
+  {
+    id: text("id").primaryKey(),
+    nombre: text("nombre").notNull(),
+    proveedor: text("proveedor").notNull(),
+    baseUrl: text("base_url").notNull(),
+    modelo: text("modelo").notNull(),
+    envClave: text("env_clave").notNull(),
+    usdMillonEntrada: real("usd_millon_entrada").notNull(),
+    usdMillonSalida: real("usd_millon_salida").notNull(),
+    activo: boolean("activo").notNull().default(false),
+    notas: text("notas"),
+    // Resultado de la última prueba desde el panel: latencia, tokens, costo,
+    // créditos y un extracto (o el error). Se prueba antes de activar.
+    ultimaPrueba: jsonb("ultima_prueba"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex("modelos_ia_un_activo_idx").on(t.activo).where(sql`${t.activo} = true`)]
+);
+
+/**
+ * Plata que entró, una fila por pago. Es la base del LTV, el ARPU y los
+ * márgenes: lo que se cobró de verdad (con descuentos o cortesías), no el
+ * precio de lista. Append-only igual que el libro de créditos.
+ */
+export const pagos = pgTable(
+  "pagos",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    suscripcionId: text("suscripcion_id").references(() => suscripciones.id, { onDelete: "set null" }),
+    // plan | pack | otro
+    concepto: text("concepto").notNull(),
+    // profesional | director_tecnico | pack_250 | …
+    detalle: text("detalle"),
+    // Bruto, IVA incluido, en pesos. Puede ser negativo (devolución).
+    montoClp: integer("monto_clp").notNull(),
+    meses: integer("meses"),
+    // transferencia | flow | mercadopago | cortesia | …
+    medio: text("medio"),
+    referencia: text("referencia"),
+    fechaPago: timestamp("fecha_pago", { withTimezone: true }).notNull().defaultNow(),
+    registradoPor: text("registrado_por"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("pagos_user_fecha_idx").on(t.userId, t.fechaPago), index("pagos_fecha_idx").on(t.fechaPago)]
 );

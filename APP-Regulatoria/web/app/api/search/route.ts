@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import { legado, responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
-import { iaConfigurada } from "@/lib/ia/proveedor";
+import { iaDisponible } from "@/lib/ia/config";
 import { consumirCupo } from "@/lib/rate-limit";
 import { usuarioActual } from "@/lib/sesion";
 
@@ -120,6 +120,6 @@ export async function GET(req: NextRequest) {
     // botón que va a fallar.
     consultaId: consultaRegistrada ? consultaId : null,
     // El botón de redacción con IA solo aparece si la IA está configurada.
-    iaDisponible: iaConfigurada(),
+    iaDisponible: await iaDisponible(),
   });
 }

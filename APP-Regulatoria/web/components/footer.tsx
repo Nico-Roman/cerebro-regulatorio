@@ -50,6 +50,11 @@ export function Footer() {
                     Buscador de normativa
                   </Link>
                 </li>
+                <li>
+                  <Link href="/planes" className="text-muted hover:text-foreground">
+                    Planes de IA
+                  </Link>
+                </li>
                 {guias.length > 0 && (
                   <li>
                     <Link href="/guias" className="text-muted hover:text-foreground">

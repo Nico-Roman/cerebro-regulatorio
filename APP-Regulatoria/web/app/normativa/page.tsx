@@ -3,8 +3,10 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { BuscadorNormativa } from "@/components/buscador-normativa";
 import { usuarioActual } from "@/lib/sesion";
-import { iaConfigurada } from "@/lib/ia/proveedor";
+import { iaDisponible } from "@/lib/ia/config";
 import { DIAS_VENCIDO, estadoCorpus, fechaLegible } from "@/lib/estado-corpus";
+import { estadoCreditos } from "@/lib/creditos";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Buscador de normativa farmacéutica y sanitaria chilena",
@@ -44,6 +46,11 @@ export default async function NormativaPage({
   // quien va a citar una norma tiene derecho a saber cuándo se verificó.
   const estado = estadoCorpus();
 
+  // Saldo de créditos de IA. Si la base falla, el buscador sigue: el saldo es
+  // información, no una condición para buscar.
+  const ia = await iaDisponible();
+  const creditos = ia ? await estadoCreditos(usuario.id).catch(() => null) : null;
+
   return (
     <>
       <div className="mx-auto w-full max-w-6xl px-5 pt-6 sm:px-8">
@@ -66,9 +73,23 @@ export default async function NormativaPage({
             según el listado oficial del ISP
           </p>
         )}
+        {creditos && (
+          <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+            Respuestas con IA · plan {creditos.plan.nombre}: te quedan{" "}
+            {creditos.restantes.mes.toLocaleString("es-CL")} este mes ({creditos.restantes.hoy.toLocaleString("es-CL")}{" "}
+            hoy)
+            {creditos.restantes.pack > 0
+              ? ` · ${creditos.restantes.pack.toLocaleString("es-CL")} créditos de pack`
+              : ""}{" "}
+            ·{" "}
+            <Link href="/planes" className="underline underline-offset-4 hover:text-foreground">
+              Ver planes
+            </Link>
+          </p>
+        )}
       </div>
       <Suspense fallback={<div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8" />}>
-        <BuscadorNormativa iaDisponible={iaConfigurada()} />
+        <BuscadorNormativa iaDisponible={ia} />
       </Suspense>
     </>
   );

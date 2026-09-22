@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { loadCorpus } from "@/lib/search";
 import { DIAS_VENCIDO, estadoCorpus } from "@/lib/estado-corpus";
-import { iaConfigurada, modeloActual } from "@/lib/ia/proveedor";
+import { configIaActiva } from "@/lib/ia/config";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -57,10 +57,14 @@ export async function GET() {
     // No entra en `ok`: sin IA el buscador sirve igual. Está acá para poder
     // confirmar desde fuera que la variable de Railway quedó aplicada después
     // del deploy, sin tener que iniciar sesión y hacer una búsqueda.
-    ia: {
-      configurada: iaConfigurada(),
-      modelo: iaConfigurada() ? modeloActual() : null,
-    },
+    ia: await configIaActiva()
+      .then((c) => ({
+        configurada: Boolean(c),
+        modelo: c?.modelo ?? null,
+        proveedor: c?.proveedor ?? null,
+        origen: c?.origen ?? null,
+      }))
+      .catch(() => ({ configurada: false, modelo: null, proveedor: null, origen: null })),
     motivo: estado.vencido
       ? estado.generado
         ? `El corpus se generó hace ${estado.diasDesdeGeneracion} días. El pipeline diario no está corriendo.`

@@ -15,7 +15,7 @@
 // llegar a la pantalla con apariencia de fuente.
 
 import { createHash } from "node:crypto";
-import { completar, type RespuestaModelo } from "@/lib/ia/proveedor";
+import { completar, type ConfigIa, type RespuestaModelo } from "@/lib/ia/proveedor";
 import { sanearPregunta } from "@/lib/ia/proposito";
 import { casoSinSalvedad, verificarDatos } from "@/lib/ia/verificar";
 import { conceptosSinCubrir, normalizar, type Respuesta } from "@/lib/search";
@@ -234,11 +234,13 @@ export function claveCache(pregunta: string, pasajes: PasajeParaModelo[], modelo
 
 export async function redactarRespuesta(
   pregunta: string,
-  pasajes: PasajeParaModelo[]
+  pasajes: PasajeParaModelo[],
+  config?: ConfigIa
 ): Promise<RespuestaModelo & { redaccion: Redaccion }> {
   const salida = await completar({
     sistema: SISTEMA,
     usuario: armarMensaje(pregunta, pasajes),
+    config,
   });
   return { ...salida, redaccion: resolverCitas(salida.texto, pasajes, pregunta) };
 }

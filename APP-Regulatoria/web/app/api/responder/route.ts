@@ -7,7 +7,8 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { and, eq, isNotNull } from "drizzle-orm";
-import { ErrorProveedor, iaConfigurada, modeloActual } from "@/lib/ia/proveedor";
+import { ErrorProveedor } from "@/lib/ia/proveedor";
+import { configIaActiva } from "@/lib/ia/config";
 import { clasificarPeticion } from "@/lib/ia/proposito";
 import {
   claveCache,
@@ -20,22 +21,24 @@ import { responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
 import { consumirCupo } from "@/lib/rate-limit";
+import { estadoCreditos, liquidarCredito, reembolsarCredito, reservarCredito, type Reserva } from "@/lib/creditos";
 import { usuarioActual } from "@/lib/sesion";
 
 export const runtime = "nodejs";
 
-// Cuota diaria por persona. Los pasajes siguen siendo ilimitados dentro del
-// límite normal de búsqueda: lo que se raciona es el gasto en tokens. Una
-// respuesta servida desde la caché no descuenta cuota.
-const MAX_RESPUESTAS_DIA = Number.parseInt(process.env.LLM_CUOTA_DIARIA ?? "", 10) || 20;
+// Cuánto puede redactar cada persona lo deciden sus créditos (lib/planes.ts y
+// lib/creditos.ts): cupo mensual y diario del plan, y packs sin vencimiento. Una
+// respuesta servida desde la caché no cobra crédito: no costó tokens.
 
 // Ráfaga por persona. El tier gratuito de Groq corta a 8.000 tokens por minuto
 // (~3 respuestas); esto lo respeta antes de que lo haga el proveedor.
 const MAX_RESPUESTAS_MINUTO = Number.parseInt(process.env.LLM_CUOTA_MINUTO ?? "", 10) || 3;
 
-// Techo del SITIO, no de la persona. Sin esto, la cuota diaria no acota el
-// gasto: son 20 respuestas por cuenta de Google, y las cuentas de Google no
-// escasean. Es el único freno que hay entre un tier pago y una factura.
+// Techo del SITIO para el plan GRATIS. Sin esto, el cupo gratis no acota el
+// gasto: son 10 respuestas diarias por cuenta de Google, y las cuentas de
+// Google no escasean. Los planes pagados y los packs no pasan por este techo:
+// cada crédito que gastan ya está pagado, y cortarle el servicio a quien paga
+// porque las cuentas gratis agotaron el día sería castigar al que no toca.
 const MAX_RESPUESTAS_DIA_SITIO = Number.parseInt(process.env.LLM_CUOTA_DIARIA_SITIO ?? "", 10) || 400;
 
 // Cuántos pasajes entran al prompt. Más de seis no mejora la respuesta y
@@ -110,7 +113,10 @@ export async function POST(req: NextRequest) {
   if (!usuario.perfilCompleto) {
     return NextResponse.json({ error: "perfil_incompleto" }, { status: 403 });
   }
-  if (!iaConfigurada()) {
+  // El modelo que esté activo en el panel (o LLM_* si no hay ninguno). Se lee
+  // una vez por petición: todo lo de abajo —caché, cobro, costo— usa el mismo.
+  const config = await configIaActiva();
+  if (!config) {
     return NextResponse.json({ error: "ia_no_configurada" }, { status: 503 });
   }
 
@@ -185,7 +191,7 @@ export async function POST(req: NextRequest) {
 
   // Caché compartida: otra persona ya hizo esta pregunta y el motor le entregó
   // exactamente los mismos pasajes. No descuenta cuota ni llama al modelo.
-  const clave = claveCache(consulta.pregunta, pasajes, modeloActual());
+  const clave = claveCache(consulta.pregunta, pasajes, config.modelo);
   const [previa] = await db
     .select({
       texto: consultas.respuestaLlm,
@@ -216,6 +222,8 @@ export async function POST(req: NextRequest) {
         tokensIn: 0,
         tokensOut: 0,
         latenciaMs: 0,
+        proveedor: "cache",
+        costoUsd: 0,
         ...columnasSenales(senales),
       })
       .where(eq(consultas.id, consulta.id));
@@ -232,38 +240,47 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // El techo del sitio se consume antes que la cuota personal: si el sitio ya
-  // llegó a su tope, no tiene sentido gastarle una respuesta del día a nadie.
-  const techo = await consumirCupo("ia:sitio", MAX_RESPUESTAS_DIA_SITIO, 86_400);
-  if (!techo.permitido) {
-    console.warn("[ia] techo diario del sitio alcanzado");
+  // Cobro: se reserva 1 crédito antes de llamar al modelo (candado por persona
+  // y equipo, así dos pestañas no gastan dos veces el último). Si la redacción
+  // no llega a entregarse, se devuelve.
+  const cobro = await reservarCredito(usuario.id, consulta.id);
+  if (!cobro.ok) {
     return NextResponse.json(
-      {
-        error: "techo_sitio",
-        mensaje: "La redacción con IA alcanzó el tope del día. Los pasajes de arriba siguen disponibles.",
-      },
-      { status: 503 }
-    );
-  }
-
-  const cupo = await consumirCupo(`ia:${usuario.id}`, MAX_RESPUESTAS_DIA, 86_400);
-  if (!cupo.permitido) {
-    return NextResponse.json(
-      {
-        error: "cuota_diaria",
-        mensaje: `Llegaste a las ${MAX_RESPUESTAS_DIA} respuestas redactadas de hoy. Los pasajes siguen disponibles.`,
-      },
+      { error: cobro.motivo, mensaje: cobro.mensaje, plan: cobro.plan, planesUrl: "/planes" },
       { status: 429 }
     );
   }
+  const reserva: Reserva = cobro.reserva;
+
+  if (reserva.plan === "gratis" && reserva.fuente === "plan") {
+    const techo = await consumirCupo("ia:sitio:gratis", MAX_RESPUESTAS_DIA_SITIO, 86_400);
+    if (!techo.permitido) {
+      console.warn("[ia] techo diario del plan gratis alcanzado");
+      await reembolsarCredito(reserva, "techo_sitio");
+      return NextResponse.json(
+        {
+          error: "techo_sitio",
+          mensaje:
+            "La redacción con IA gratuita alcanzó el tope de hoy. Los pasajes de arriba siguen disponibles; con un plan pagado no hay este tope.",
+          planesUrl: "/planes",
+        },
+        { status: 503 }
+      );
+    }
+  }
 
   try {
-    const salida = await redactarRespuesta(consulta.pregunta, pasajes);
+    const salida = await redactarRespuesta(consulta.pregunta, pasajes, config);
     const r = salida.redaccion;
 
     if (!r.texto) {
+      await reembolsarCredito(reserva, "respuesta_vacia");
       return NextResponse.json({ error: "respuesta_vacia" }, { status: 502 });
     }
+
+    // Un crédito cubre hasta USD_POR_CREDITO de costo: con un modelo caro, o una
+    // consulta muy larga, se cobra la diferencia.
+    const cobrados = await liquidarCredito(reserva, salida);
 
     const senales: Senales = {
       abstuvo: r.abstuvo,
@@ -300,19 +317,25 @@ export async function POST(req: NextRequest) {
         tokensIn: salida.tokensEntrada,
         tokensOut: salida.tokensSalida,
         latenciaMs: salida.latenciaMs,
+        proveedor: salida.proveedor,
+        costoUsd: salida.costoUsd,
         ...columnasSenales(senales),
       })
       .where(eq(consultas.id, consulta.id));
 
+    const creditos = await estadoCreditos(usuario.id).catch(() => null);
     return NextResponse.json({
       ...cuerpoRespuesta({ texto: r.texto, fuentes: r.fuentes, modelo: salida.modelo, cacheada: false, senales }),
       latenciaMs: salida.latenciaMs,
+      creditosCobrados: cobrados,
+      creditos,
     });
   } catch (e) {
+    // Nada llegó a la persona: el crédito vuelve. (Antes, con la cuota por
+    // contador, un 429 del proveedor le costaba una respuesta del día.)
+    await reembolsarCredito(reserva, e instanceof ErrorProveedor ? `proveedor_${e.status}` : "error");
     if (e instanceof ErrorProveedor && e.status === 429) {
-      // Tope del proveedor, no una caída. La cuota ya descontada se pierde para
-      // esta persona: es un caso raro y devolverla exigiría otra escritura
-      // concurrente sobre rate_limit.
+      // Tope del proveedor, no una caída. El crédito ya se devolvió arriba.
       const espera = e.reintentarEnSeg ?? 20;
       // Una espera de minutos es el tope DIARIO de tokens del tier gratuito
       // (medido el 13-09-2026: pedía 8 a 27 minutos). Decirle a alguien

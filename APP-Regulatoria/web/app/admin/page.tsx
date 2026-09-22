@@ -90,6 +90,18 @@ export default async function AdminPage({
         >
           Agenda
         </Link>
+        <Link
+          href="/admin/clientes"
+          className="border border-line px-3 py-1.5 text-muted transition-colors hover:border-foreground hover:text-foreground"
+        >
+          Clientes y suscripciones
+        </Link>
+        <Link
+          href="/admin/planes"
+          className="border border-line px-3 py-1.5 text-muted transition-colors hover:border-foreground hover:text-foreground"
+        >
+          Planes e IA
+        </Link>
         <span className="ml-auto flex gap-3">
           <a href="/api/admin/export?tipo=usuarios" className="text-muted underline hover:text-foreground">
             CSV usuarios

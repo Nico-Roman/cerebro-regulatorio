@@ -4,6 +4,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { consultasRecientes, huecosDelCorpus, usuarios } from "@/lib/admin";
+import { listaClientes } from "@/lib/clientes";
 import { aCsv } from "@/lib/csv";
 import { esAdmin, usuarioActual } from "@/lib/sesion";
 
@@ -15,11 +16,18 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "no_autorizado" }, { status: 404 });
   }
 
-  const tipo = new URL(req.url).searchParams.get("tipo") || "usuarios";
+  const url = new URL(req.url);
+  const tipo = url.searchParams.get("tipo") || "usuarios";
   const hoy = new Date().toISOString().slice(0, 10);
 
   const filas =
-    tipo === "consultas"
+    tipo === "clientes"
+      ? await listaClientes({
+          q: url.searchParams.get("q") ?? undefined,
+          filtro: url.searchParams.get("filtro") ?? undefined,
+          limite: 10_000,
+        })
+      : tipo === "consultas"
       ? await consultasRecientes(5000)
       : tipo === "huecos"
         ? await huecosDelCorpus(365, 500)

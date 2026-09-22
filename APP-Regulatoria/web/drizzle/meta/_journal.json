@@ -57,6 +57,20 @@
       "when": 1789500000000,
       "tag": "0007_registro_simple",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1790116052832,
+      "tag": "0008_planes_creditos",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1790116785807,
+      "tag": "0009_trazabilidad_proveedores",
+      "breakpoints": true
     }
   ]
 }

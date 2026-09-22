@@ -9,6 +9,7 @@
 // Se presenta siempre como borrador y debajo de la frase de la norma, nunca en
 // su lugar: la cita y el texto oficial mandan por sobre el resumen.
 
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 
 type Estado = "inicial" | "cargando" | "listo" | "ausencia" | "error";
@@ -18,6 +19,21 @@ interface Fuente {
   cita: string;
   norma: string;
   fuenteUrl: string;
+}
+
+interface Saldo {
+  plan: { nombre: string };
+  restantes: { mes: number; hoy: number; pack: number };
+}
+
+const miles = (n: number) => n.toLocaleString("es-CL");
+
+/** "Te quedan 1.850 este mes (148 hoy) · 250 de pack". */
+function textoSaldo(s: Saldo): string {
+  const r = s.restantes;
+  const partes = [`Plan ${s.plan.nombre}: te quedan ${miles(r.mes)} este mes (${miles(r.hoy)} hoy)`];
+  if (r.pack > 0) partes.push(`${miles(r.pack)} créditos de pack`);
+  return partes.join(" · ");
 }
 
 interface Borrador {
@@ -50,11 +66,15 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
   const [borrador, setBorrador] = useState<Borrador | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
   const [reintentable, setReintentable] = useState(false);
+  // Sin créditos o sin tope: el aviso lleva a /planes.
+  const [verPlanes, setVerPlanes] = useState(false);
+  const [saldo, setSaldo] = useState<Saldo | null>(null);
 
   const pedir = useCallback(async () => {
     setEstado("cargando");
     setAviso(null);
     setReintentable(false);
+    setVerPlanes(false);
     try {
       const res = await fetch("/api/responder", {
         method: "POST",
@@ -71,6 +91,7 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
       }
       if (res.status === 503 && (datos.error === "proveedor_agotado" || datos.error === "techo_sitio")) {
         setAviso(datos.mensaje);
+        setVerPlanes(Boolean(datos.planesUrl));
         setEstado("error");
         return;
       }
@@ -86,6 +107,7 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
       }
       if (res.status === 429) {
         setAviso(datos.mensaje || "Llegaste a la cuota diaria de respuestas redactadas.");
+        setVerPlanes(datos.error === "sin_creditos" || datos.error === "limite_diario");
         setEstado("error");
         return;
       }
@@ -110,6 +132,7 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
         casoNoCubierto: datos.casoNoCubierto ?? [],
         cacheada: Boolean(datos.cacheada),
       });
+      if (datos.creditos) setSaldo(datos.creditos as Saldo);
       setEstado("listo");
     } catch {
       setAviso("No pudimos redactar la respuesta. Los pasajes de arriba siguen sirviendo.");
@@ -205,12 +228,22 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
           Redactado por un modelo de lenguaje solo con los pasajes de esta búsqueda, con temperatura cero. Puede
           equivocarse al interpretar o resumir: antes de decidir, lee la frase de la norma y la fuente oficial. Es
           apoyo a la consulta, no asesoría regulatoria ni legal.
-          {borrador?.cacheada ? " Reutilizado de una consulta idéntica." : ""}
+          {borrador?.cacheada ? " Reutilizado de una consulta idéntica, sin costo de créditos." : ""}
         </p>
       )}
 
+      {estado === "listo" && saldo && <p className="text-xs text-muted">{textoSaldo(saldo)}</p>}
+
       {(estado === "ausencia" || estado === "error") && aviso && (
         <p className={estado === "ausencia" ? "text-sm text-amber-200" : "text-sm text-muted"}>{aviso}</p>
+      )}
+      {estado === "error" && verPlanes && (
+        <Link
+          href="/planes"
+          className="self-start border border-sky-700 px-4 py-2 text-xs text-sky-200 transition-colors hover:border-sky-400 hover:text-foreground"
+        >
+          Ver planes y packs
+        </Link>
       )}
       {estado === "error" && reintentable && (
         <button
