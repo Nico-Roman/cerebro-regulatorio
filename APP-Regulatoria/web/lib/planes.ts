@@ -207,7 +207,7 @@ export function decidirFuente(e: EstadoUso): Decision {
     return {
       permitido: false,
       motivo: "sin_creditos",
-      mensaje: `Usaste los ${formatoMiles(e.plan.creditosMes)} créditos de tu plan ${e.plan.nombre} de este mes. Puedes cambiar de plan o comprar un pack; los pasajes siguen disponibles.`,
+      mensaje: `Usaste las ${formatoMiles(e.plan.creditosMes)} respuestas con IA de tu plan ${e.plan.nombre} de este mes. Los pasajes siguen disponibles.`,
     };
   }
   return {

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SITE, WHATSAPP_URL } from "@/lib/site";
 import { guiasPublicadas } from "@/lib/guias";
+import { EnlacePlanesFooter } from "@/components/enlace-planes-footer";
 
 export function Footer() {
   // El footer es lo que deja cada guía enlazada desde todas las páginas del
@@ -50,11 +51,7 @@ export function Footer() {
                     Buscador de normativa
                   </Link>
                 </li>
-                <li>
-                  <Link href="/planes" className="text-muted hover:text-foreground">
-                    Planes de IA
-                  </Link>
-                </li>
+                <EnlacePlanesFooter />
                 {guias.length > 0 && (
                   <li>
                     <Link href="/guias" className="text-muted hover:text-foreground">

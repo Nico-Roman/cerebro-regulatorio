@@ -5,8 +5,8 @@ import { BuscadorNormativa } from "@/components/buscador-normativa";
 import { usuarioActual } from "@/lib/sesion";
 import { iaDisponible } from "@/lib/ia/config";
 import { DIAS_VENCIDO, estadoCorpus, fechaLegible } from "@/lib/estado-corpus";
-import { estadoCreditos } from "@/lib/creditos";
-import Link from "next/link";
+import { debeVerOfertaInicial, estadoCreditos } from "@/lib/creditos";
+import { OfertaInicial } from "@/components/oferta-inicial";
 
 export const metadata: Metadata = {
   title: "Buscador de normativa farmacéutica y sanitaria chilena",
@@ -50,6 +50,10 @@ export default async function NormativaPage({
   // información, no una condición para buscar.
   const ia = await iaDisponible();
   const creditos = ia ? await estadoCreditos(usuario.id).catch(() => null) : null;
+  // La oferta única de planes, al entrar por primera vez después de
+  // registrarse. Fuera de esto, en el buscador no se ofrece nada: ni enlaces a
+  // planes ni recordatorios, salvo al llegar al límite (respuesta-ia).
+  const ofrecer = creditos ? await debeVerOfertaInicial(usuario.id, creditos.plan.id).catch(() => false) : false;
 
   return (
     <>
@@ -79,15 +83,12 @@ export default async function NormativaPage({
             {creditos.restantes.mes.toLocaleString("es-CL")} este mes ({creditos.restantes.hoy.toLocaleString("es-CL")}{" "}
             hoy)
             {creditos.restantes.pack > 0
-              ? ` · ${creditos.restantes.pack.toLocaleString("es-CL")} créditos de pack`
-              : ""}{" "}
-            ·{" "}
-            <Link href="/planes" className="underline underline-offset-4 hover:text-foreground">
-              Ver planes
-            </Link>
+              ? ` · ${creditos.restantes.pack.toLocaleString("es-CL")} créditos adicionales`
+              : ""}
           </p>
         )}
       </div>
+      {ofrecer && <OfertaInicial />}
       <Suspense fallback={<div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8" />}>
         <BuscadorNormativa iaDisponible={ia} />
       </Suspense>

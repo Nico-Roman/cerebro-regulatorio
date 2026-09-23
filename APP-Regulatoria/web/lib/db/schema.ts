@@ -100,6 +100,10 @@ export const perfil = pgTable("perfil", {
   // novedades no. Se guarda la fecha, que es lo que sirve como evidencia.
   aceptaPrivacidadAt: timestamp("acepta_privacidad_at", { withTimezone: true }),
   aceptaNovedades: boolean("acepta_novedades").notNull().default(false),
+  // (0010) Cuándo se le mostraron los planes por única vez, al terminar el
+  // registro. Después de eso no se le vuelve a ofrecer nada salvo que llegue al
+  // límite de su plan. Nulo = todavía no se le ofrecieron.
+  planesOfrecidosAt: timestamp("planes_ofrecidos_at", { withTimezone: true }),
   utmSource: text("utm_source"),
   utmMedium: text("utm_medium"),
   utmCampaign: text("utm_campaign"),

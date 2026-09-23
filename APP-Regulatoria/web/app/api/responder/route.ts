@@ -246,7 +246,9 @@ export async function POST(req: NextRequest) {
   const cobro = await reservarCredito(usuario.id, consulta.id);
   if (!cobro.ok) {
     return NextResponse.json(
-      { error: cobro.motivo, mensaje: cobro.mensaje, plan: cobro.plan, planesUrl: "/planes" },
+      // `plan` le permite a la pantalla ofrecer solo los planes superiores en el
+      // aviso de límite (components/modal-planes.tsx).
+      { error: cobro.motivo, mensaje: cobro.mensaje, plan: cobro.plan },
       { status: 429 }
     );
   }
@@ -260,9 +262,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           error: "techo_sitio",
+          // Es un tope del sitio, no de la persona: no se le ofrecen planes.
           mensaje:
-            "La redacción con IA gratuita alcanzó el tope de hoy. Los pasajes de arriba siguen disponibles; con un plan pagado no hay este tope.",
-          planesUrl: "/planes",
+            "La redacción con IA alcanzó su tope por hoy. Los pasajes de arriba siguen disponibles; vuelve a intentarlo mañana.",
         },
         { status: 503 }
       );

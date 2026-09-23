@@ -159,3 +159,35 @@ Probado: 10 reservas simultáneas con 1 crédito de saldo → solo 1 pasa.
   ficha y serie mensual.
 - Capturas de `/admin/clientes`, la ficha y `/admin/planes` con datos de
   prueba (sesión de admin real contra el build de producción).
+
+---
+
+# Tercera parte: no venderle a quien ya se registró
+
+Regla de Nico: a una persona registrada se le ofrecen los planes **una sola
+vez** (al terminar el registro) y después **solo** si llega al límite de su plan.
+
+- **Oferta única** (`components/oferta-inicial.tsx`): la primera vez que entra
+  a `/normativa` después de registrarse, y solo si está en el plan gratis, ve un
+  modal "Tu cuenta está lista" con los dos planes y "Seguir con el plan gratis".
+  Se marca como mostrada apenas aparece (`perfil.planes_ofrecidos_at`, migración
+  0010), así que no vuelve a salir aunque cierre la pestaña.
+- **Usuarios existentes**: 0010 los marca como ya ofrecidos, porque su registro
+  ya pasó. Para anunciarles los planes una vez:
+  `UPDATE perfil SET planes_ofrecidos_at = NULL`.
+- **Aviso de límite** (`components/modal-planes.tsx`): al chocar con el cupo
+  del mes o del día aparece un modal con los planes superiores al suyo y los
+  packs. En el tope diario los packs van primero, porque son lo que sirve hoy.
+  Quien ya está en Director Técnico solo ve packs. Se abre solo la primera vez
+  por límite y día; después queda el mensaje con un botón "Ver opciones para
+  seguir".
+- **Se quitó** todo lo demás que ofrecía planes con sesión iniciada: el enlace
+  "Ver planes" de la línea de saldo del buscador, el botón a `/planes` en los
+  avisos de la IA, el "con un plan pagado no hay este tope" del techo del
+  sitio (ese es un tope global, no de la persona) y el enlace "Planes de IA"
+  del pie de página (sigue visible para quien no tiene sesión). La página
+  `/planes` sigue existiendo para visitantes.
+- Verificado con el build de producción, Postgres y sesiones reales: modal en la
+  1ª visita y no en la 2ª, Esc cierra, marca en la base, pie sin enlace con
+  sesión y con enlace sin ella, modal de límite al chocar el tope diario y sin
+  reabrirse en el segundo choque del día.

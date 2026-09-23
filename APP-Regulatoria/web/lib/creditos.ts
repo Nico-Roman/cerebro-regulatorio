@@ -180,6 +180,27 @@ export async function estadoCreditos(userId: string): Promise<EstadoCreditos> {
   };
 }
 
+/** La oferta única de planes ya se mostró. Solo escribe la primera vez. */
+export async function marcarPlanesOfrecidos(userId: string): Promise<void> {
+  await db.execute(sql`
+    UPDATE perfil SET planes_ofrecidos_at = now()
+    WHERE user_id = ${userId} AND planes_ofrecidos_at IS NULL
+  `);
+}
+
+/**
+ * ¿Hay que mostrarle la oferta única? Solo si terminó el registro, nunca se le
+ * ofreció y está en el plan gratis (a quien ya paga no se le ofrece nada).
+ */
+export async function debeVerOfertaInicial(userId: string, plan: IdPlan): Promise<boolean> {
+  if (plan !== "gratis") return false;
+  const { rows } = await db.execute<{ pendiente: boolean }>(sql`
+    SELECT (acepta_privacidad_at IS NOT NULL AND planes_ofrecidos_at IS NULL) AS pendiente
+    FROM perfil WHERE user_id = ${userId}
+  `);
+  return Boolean(rows[0]?.pendiente);
+}
+
 // ─── Cobro de una redacción ─────────────────────────────────────────────────
 
 export interface Reserva {
