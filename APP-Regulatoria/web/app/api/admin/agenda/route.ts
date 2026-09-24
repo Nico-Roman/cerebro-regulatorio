@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { invalidarCacheHuecos } from "@/lib/agenda/cache";
 import { CONFIG_POR_DEFECTO, leerConfig } from "@/lib/agenda/config";
 import { guardarConfig, validar } from "@/lib/agenda/guardar";
+import { redirigir } from "@/lib/redirigir";
 import { esAdmin, usuarioActual } from "@/lib/sesion";
 
 export const runtime = "nodejs";
@@ -44,12 +45,12 @@ export async function POST(req: NextRequest) {
   const errores = validar(nueva);
   if (errores.length) {
     const params = new URLSearchParams({ error: errores[0].mensaje });
-    return NextResponse.redirect(new URL(`/admin/agenda?${params}`, req.url), 303);
+    return redirigir(`/admin/agenda?${params}`);
   }
 
   await guardarConfig(nueva);
   // La disponibilidad publicada se calculó con la configuración vieja.
   invalidarCacheHuecos();
 
-  return NextResponse.redirect(new URL("/admin/agenda?guardado=1", req.url), 303);
+  return redirigir("/admin/agenda?guardado=1");
 }

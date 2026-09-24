@@ -90,3 +90,13 @@ test("aCsv arma encabezado y filas con separador de punto y coma", () => {
   );
   assert.equal(aCsv([]), "");
 });
+
+test("redirigir usa Location relativo y solo rutas internas", async () => {
+  const { redirigir } = await import("../lib/redirigir.ts");
+  const r = redirigir("/admin/agenda?guardado=1");
+  assert.equal(r.status, 303);
+  // Relativo: nunca la dirección interna del contenedor (0.0.0.0:8080).
+  assert.equal(r.headers.get("location"), "/admin/agenda?guardado=1");
+  assert.equal(redirigir("//evil.com").headers.get("location"), "/");
+  assert.equal(redirigir("https://evil.com").headers.get("location"), "/");
+});

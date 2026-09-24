@@ -26,6 +26,7 @@ import {
   probarModelo,
 } from "@/lib/ia/config";
 import { esIdPack, esIdPlan } from "@/lib/planes";
+import { redirigir } from "@/lib/redirigir";
 import { esAdmin, usuarioActual } from "@/lib/sesion";
 
 export const runtime = "nodejs";
@@ -53,7 +54,7 @@ export async function POST(req: NextRequest) {
   // Solo rutas del panel: un `volver` externo sería un open redirect.
   const destino = /^\/admin(\/[\w\-/]*)?$/.test(campo("volver")) ? campo("volver") : "/admin/planes";
   const volver = (params: Record<string, string>) =>
-    NextResponse.redirect(new URL(`${destino}?${new URLSearchParams(params)}`, req.url), 303);
+    redirigir(`${destino}?${new URLSearchParams(params)}`);
   const pago = () => ({
     montoClp: numero(campo("monto")),
     medio: campo("medio"),
