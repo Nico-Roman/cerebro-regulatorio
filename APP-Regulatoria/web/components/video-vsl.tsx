@@ -20,7 +20,8 @@ import { VSL, embedUrl, miniaturaUrl, vslConfigurado } from "@/lib/vsl";
 export function VideoVsl() {
   const [reproduciendo, setReproduciendo] = useState(false);
 
-  if (!vslConfigurado()) return <MarcadorPendiente />;
+  // Sin video no se muestra nada: la página que lo incluye decide qué poner.
+  if (!vslConfigurado()) return null;
 
   const id = VSL.youtubeId;
 
@@ -71,36 +72,6 @@ export function VideoVsl() {
         de Google es la imagen de portada.
       </figcaption>
     </figure>
-  );
-}
-
-/**
- * Estado sin video configurado.
- *
- * Deliberadamente visible y con instrucciones en vez de un bloque vacío: así la
- * página se puede publicar antes de tener el video grabado, y el hueco no se
- * olvida. En cuanto NEXT_PUBLIC_VSL_YOUTUBE_ID tenga un id válido, este bloque
- * desaparece solo.
- */
-function MarcadorPendiente() {
-  return (
-    <div className="flex aspect-video w-full flex-col items-center justify-center gap-4 border border-dashed border-line bg-surface p-8 text-center">
-      <span className="flex h-14 w-14 items-center justify-center rounded-full border border-line">
-        <Triangulo />
-      </span>
-      <p className="font-display text-base font-medium sm:text-lg">
-        Video pendiente de publicación
-      </p>
-      <p className="max-w-sm text-xs leading-relaxed text-muted">
-        Sube el video a YouTube como <strong className="text-foreground">No listado</strong> y
-        define la variable{" "}
-        <code className="font-mono text-[0.7rem] text-foreground">
-          NEXT_PUBLIC_VSL_YOUTUBE_ID
-        </code>{" "}
-        con los 11 caracteres del enlace. El reproductor aparece en el siguiente
-        despliegue, sin tocar código.
-      </p>
-    </div>
   );
 }
 

@@ -14,6 +14,11 @@
 // Criterio para agregar un patrón: que el falso positivo sea raro y barato
 // (la persona reformula) y el falso negativo, caro (el sitio funciona como
 // asistente general y deja de ser un buscador normativo).
+//
+// Desde el 23-09-2026 (rumbo tipo Harvey) la compuerta es por MATERIA, no por
+// verbo: redactar se permite cuando el objeto es trabajo regulatorio (una
+// respuesta al ISP, un rótulo, un aviso de retiro de lote) y sigue bloqueado
+// para todo lo demás: CV, posts, código, descargos de sumarios.
 
 import { normalizar } from "@/lib/search";
 
@@ -24,11 +29,13 @@ export interface Veredicto {
   motivo: MotivoBloqueo | null;
   /** Lo que se le muestra a la persona. Siempre dice qué SÍ se puede hacer. */
   mensaje: string | null;
+  /** Qué se le pide al modelo cuando la petición pasa; null si se bloqueó. */
+  modo: "responder" | "redactar" | null;
 }
 
 const MENSAJES: Record<MotivoBloqueo, string> = {
   tarea:
-    "Este buscador solo responde preguntas sobre las normas que tiene cargadas (ISP/ANAMED y Código Sanitario). No redacta correos, textos ni documentos. Pregúntalo como consulta: «¿qué exige la norma sobre…?».",
+    "Redacto documentos regulatorios: respuestas al ISP, rótulos, procedimientos, avisos de retiro. Para otros textos usa otra herramienta.",
   rol: "Este buscador solo responde preguntas sobre las normas cargadas. No cambia de rol ni de instrucciones.",
   formato:
     "La pregunta contiene texto con formato de pasaje o de instrucción. Escríbela como una pregunta en lenguaje normal.",
@@ -75,18 +82,29 @@ const RX_FORMATO =
 const RX_CLINICO =
   /\b(?:que me tomo|que puedo tomar|me puedo tomar|puedo tomar(?:me)?|dosis para (?:mi|un nino|una nina|mi hijo)|para mi (?:hijo|hija|mama|papa|pareja|abuel)|estoy embarazada|estoy tomando|tengo (?:dolor|fiebre|covid|gripe|alergia|diabetes|presion)|me duele|es malo (?:tomar|mezclar)|puedo mezclar|receta para mi|me recetaron|sirve para (?:mi|el dolor de))\b/;
 
+// (5) Objetos que convierten una tarea de redacción en trabajo regulatorio.
+const RX_OBJETO_REGULATORIO =
+  /\b(?:isp|anamed|seremi|registro sanitario|observacion\w*|requerimiento\w*|expediente|rotul\w*|folleto\w*|estuche|envase|farmacovigilancia|tecnovigilancia|cosmetovigilancia|reaccion\w* adversa\w*|informe periodico|plan de manejo de riesgo\w*|retiro del mercado|retiro de (?:un )?lote|poe|procedimiento\w*|bpm|bpa|bpad|norma tecnica|decreto|resolucion|codigo sanitario|director tecnico|drogueria\w*|importacion|control de serie|bioequivalen\w*|estabilidad|cosmetic\w*|autorizacion sanitaria|inspeccion|modificacion del registro|renovacion)\b/;
+
+// (6) Trabajo ajeno aunque nombre una norma. Los sumarios quedan fuera: no son
+// el servicio del sitio.
+const RX_OBJETO_AJENO =
+  /\b(?:curriculum|cv|post|publicacion|linkedin|instagram|tiktok|codigo fuente|programacion|script|python|javascript|macro|discurso|poema|chiste|cancion|descargos|sumario\w*)\b/;
+
+function bloqueo(motivo: MotivoBloqueo): Veredicto {
+  return { bloqueada: true, motivo, mensaje: MENSAJES[motivo], modo: null };
+}
+
 export function clasificarPeticion(pregunta: string): Veredicto {
   const q = normalizar(pregunta);
-  const orden: Array<[MotivoBloqueo, RegExp]> = [
-    ["formato", RX_FORMATO],
-    ["rol", RX_ROL],
-    ["tarea", RX_TAREA],
-    ["clinico", RX_CLINICO],
-  ];
-  for (const [motivo, rx] of orden) {
-    if (rx.test(q)) return { bloqueada: true, motivo, mensaje: MENSAJES[motivo] };
+  if (RX_FORMATO.test(q)) return bloqueo("formato");
+  if (RX_ROL.test(q)) return bloqueo("rol");
+  if (RX_CLINICO.test(q)) return bloqueo("clinico");
+  if (RX_TAREA.test(q)) {
+    if (RX_OBJETO_AJENO.test(q) || !RX_OBJETO_REGULATORIO.test(q)) return bloqueo("tarea");
+    return { bloqueada: false, motivo: null, mensaje: null, modo: "redactar" };
   }
-  return { bloqueada: false, motivo: null, mensaje: null };
+  return { bloqueada: false, motivo: null, mensaje: null, modo: "responder" };
 }
 
 /**

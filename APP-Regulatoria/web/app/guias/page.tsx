@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SITE } from "@/lib/site";
+import { OG_IMAGEN, SITE } from "@/lib/site";
 import { guiasPublicadas } from "@/lib/guias";
 
 export const metadata: Metadata = {
@@ -16,7 +16,11 @@ export const metadata: Metadata = {
     siteName: SITE.nombre,
     title: `Guías de trámites ante el ISP · ${SITE.nombre}`,
     description: "Cada trámite sanitario chileno explicado paso a paso, con la fuente oficial a la vista.",
+    images: [OG_IMAGEN],
   },
+  // Mientras no haya guías la página responde 404: que no se indexe con los
+  // metadatos de un índice que no existe.
+  ...(guiasPublicadas().length === 0 && { robots: { index: false } }),
 };
 
 export default function Guias() {

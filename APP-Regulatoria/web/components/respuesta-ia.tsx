@@ -6,11 +6,12 @@
 // leyendo los pasajes y cada llamada cuesta. Con el modo IA encendido se pide
 // solo al terminar la búsqueda.
 //
-// Se presenta siempre como borrador y debajo de la frase de la norma, nunca en
-// su lugar: la cita y el texto oficial mandan por sobre el resumen.
+// Se presenta siempre como borrador, junto a la frase de la norma y nunca en su
+// lugar: la cita y el texto oficial mandan por sobre el resumen. Va arriba del
+// pasaje porque en las pruebas en vivo acertó donde el pasaje no.
 
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { ModalPlanes } from "@/components/modal-planes";
 
 type Estado = "inicial" | "cargando" | "listo" | "ausencia" | "error";
 
@@ -19,54 +20,6 @@ interface Fuente {
   cita: string;
   norma: string;
   fuenteUrl: string;
-}
-
-interface Saldo {
-  plan: { nombre: string };
-  restantes: { mes: number; hoy: number; pack: number };
-}
-
-const miles = (n: number) => n.toLocaleString("es-CL");
-
-type MotivoLimite = "sin_creditos" | "limite_diario";
-
-// El aviso de límite se abre solo la primera vez que se choca con cada límite
-// en el día; después queda el mensaje con un botón para volver a verlo. Con el
-// modo IA encendido cada búsqueda pide una respuesta, y un modal en cada
-// búsqueda sería exactamente la venta insistente que no queremos.
-const avisosMostrados = new Set<string>();
-
-function claveAviso(motivo: MotivoLimite): string {
-  const d = new Date();
-  return `regulamed:aviso-limite:${motivo}:${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-}
-
-function yaSeAviso(motivo: MotivoLimite): boolean {
-  const clave = claveAviso(motivo);
-  if (avisosMostrados.has(clave)) return true;
-  try {
-    return sessionStorage.getItem(clave) === "1";
-  } catch {
-    return false;
-  }
-}
-
-function marcarAviso(motivo: MotivoLimite) {
-  const clave = claveAviso(motivo);
-  avisosMostrados.add(clave);
-  try {
-    sessionStorage.setItem(clave, "1");
-  } catch {
-    // Sin almacenamiento (modo privado): queda el Set en memoria.
-  }
-}
-
-/** "Te quedan 1.850 este mes (148 hoy) · 250 de pack". */
-function textoSaldo(s: Saldo): string {
-  const r = s.restantes;
-  const partes = [`Plan ${s.plan.nombre}: te quedan ${miles(r.mes)} este mes (${miles(r.hoy)} hoy)`];
-  if (r.pack > 0) partes.push(`${miles(r.pack)} créditos de pack`);
-  return partes.join(" · ");
 }
 
 interface Borrador {
@@ -99,19 +52,16 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
   const [borrador, setBorrador] = useState<Borrador | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
   const [reintentable, setReintentable] = useState(false);
-  // Límite de la persona alcanzado: se ofrece mejorar el plan o comprar
-  // créditos, en un modal. `limite` guarda el motivo para el botón que lo reabre.
-  const [limite, setLimite] = useState<{ motivo: MotivoLimite; plan: string } | null>(null);
-  const [modalAbierto, setModalAbierto] = useState(false);
-  const [saldo, setSaldo] = useState<Saldo | null>(null);
-
-  const cerrarModal = useCallback(() => setModalAbierto(false), []);
+  // Llegó a sus preguntas del día: no se vende nada, se ofrece la asesoría.
+  const [limite, setLimite] = useState(false);
+  // Preguntas con IA que le quedan hoy; null para el administrador (sin tope).
+  const [restantesHoy, setRestantesHoy] = useState<number | null>(null);
 
   const pedir = useCallback(async () => {
     setEstado("cargando");
     setAviso(null);
     setReintentable(false);
-    setLimite(null);
+    setLimite(false);
     try {
       const res = await fetch("/api/responder", {
         method: "POST",
@@ -143,14 +93,7 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
       }
       if (res.status === 429) {
         setAviso(datos.mensaje || "Llegaste a la cuota diaria de respuestas redactadas.");
-        if (datos.error === "sin_creditos" || datos.error === "limite_diario") {
-          const motivo = datos.error as MotivoLimite;
-          setLimite({ motivo, plan: typeof datos.plan === "string" ? datos.plan : "gratis" });
-          if (!yaSeAviso(motivo)) {
-            marcarAviso(motivo);
-            setModalAbierto(true);
-          }
-        }
+        setLimite(datos.error === "limite_diario");
         setEstado("error");
         return;
       }
@@ -175,7 +118,7 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
         casoNoCubierto: datos.casoNoCubierto ?? [],
         cacheada: Boolean(datos.cacheada),
       });
-      if (datos.creditos) setSaldo(datos.creditos as Saldo);
+      if (typeof datos.restantesHoy === "number") setRestantesHoy(datos.restantesHoy);
       setEstado("listo");
     } catch {
       setAviso("No pudimos redactar la respuesta. Los pasajes de arriba siguen sirviendo.");
@@ -271,26 +214,27 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
           Redactado por un modelo de lenguaje solo con los pasajes de esta búsqueda, con temperatura cero. Puede
           equivocarse al interpretar o resumir: antes de decidir, lee la frase de la norma y la fuente oficial. Es
           apoyo a la consulta, no asesoría regulatoria ni legal.
-          {borrador?.cacheada ? " Reutilizado de una consulta idéntica, sin costo de créditos." : ""}
+          {borrador?.cacheada ? " Reutilizado de una consulta idéntica: no cuenta en tus preguntas del día." : ""}
         </p>
       )}
 
-      {estado === "listo" && saldo && <p className="text-xs text-muted">{textoSaldo(saldo)}</p>}
+      {estado === "listo" && restantesHoy !== null && (
+        <p className="text-xs text-muted">
+          Te {restantesHoy === 1 ? "queda" : "quedan"} {restantesHoy}{" "}
+          {restantesHoy === 1 ? "pregunta" : "preguntas"} con IA hoy.
+        </p>
+      )}
 
       {(estado === "ausencia" || estado === "error") && aviso && (
         <p className={estado === "ausencia" ? "text-sm text-amber-200" : "text-sm text-muted"}>{aviso}</p>
       )}
       {estado === "error" && limite && (
-        <button
-          type="button"
-          onClick={() => setModalAbierto(true)}
+        <Link
+          href="/agenda"
           className="self-start border border-sky-700 px-4 py-2 text-xs text-sky-200 transition-colors hover:border-sky-400 hover:text-foreground"
         >
-          Ver opciones para seguir
-        </button>
-      )}
-      {modalAbierto && limite && (
-        <ModalPlanes motivo={limite.motivo} planActual={limite.plan} onCerrar={cerrarModal} />
+          ¿Es urgente? Agenda una evaluación
+        </Link>
       )}
       {estado === "error" && reintentable && (
         <button

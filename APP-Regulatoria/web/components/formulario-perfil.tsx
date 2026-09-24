@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -118,8 +119,15 @@ export function FormularioPerfil({
             className="mt-1 size-4 shrink-0 accent-white"
           />
           <span className="text-muted">
-            Acepto que RegulaMED guarde mis datos y mis búsquedas para operar el
-            buscador.
+            Acepto la{" "}
+            <Link href="/privacidad" target="_blank" className="underline">
+              Política de Privacidad
+            </Link>{" "}
+            y los{" "}
+            <Link href="/terminos" target="_blank" className="underline">
+              Términos
+            </Link>
+            .
           </span>
         </label>
       )}
