@@ -1,6 +1,6 @@
 # Normativa pendiente — no disponible en el corpus
 
-> Regenerado el 2026-09-15 por `revisar-semanal.js`. **No es fuente normativa.**
+> Regenerado el 2026-09-22 por `revisar-semanal.js`. **No es fuente normativa.**
 
 El Cerebro Regulatorio **no puede responder** sobre estas normas: están en el
 listado oficial del ISP pero su texto no está indexado. Si una consulta toca
