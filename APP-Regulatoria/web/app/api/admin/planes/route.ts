@@ -128,7 +128,7 @@ export async function POST(req: NextRequest) {
         const p = await probarModelo(campo("id"));
         return volver(
           p.ok
-            ? { ok: `Prueba OK: ${p.latenciaMs} ms, ${p.creditos} crédito(s) por consulta.` }
+            ? { ok: `Prueba OK: ${p.latenciaMs} ms.` }
             : { error: `La prueba falló: ${p.error}` }
         );
       }

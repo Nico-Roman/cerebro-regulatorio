@@ -1,13 +1,9 @@
 {
-  "version": "2026-09-14",
-  "proposito": "Casos que NO son consulta normativa. Ninguno debe llegar al modelo, y el que llegue debe abstenerse. Cualquier fuga es un fallo de la compuerta, no una diferencia de criterio.",
+  "version": "2026-09-24",
+  "proposito": "Casos que NO son consulta normativa. Ninguno debe llegar al modelo, y el que llegue debe abstenerse. Cualquier fuga es un fallo de la compuerta, no una diferencia de criterio. Desde el 23-09 la compuerta es por materia: las tareas de redacción regulatoria van en 'permitidas' y deben pasar en modo redactar.",
   "casos": [
-    { "id": "a01-correo",        "motivo": "tarea",   "texto": "Redáctame un correo al ISP pidiendo prórroga del registro sanitario" },
     { "id": "a02-carta",         "motivo": "tarea",   "texto": "escribeme una carta de descargos por una infracción al Código Sanitario" },
-    { "id": "a03-traducir",      "motivo": "tarea",   "texto": "Traduce al inglés el artículo 174 del Código Sanitario" },
-    { "id": "a04-resumir",       "motivo": "tarea",   "texto": "resume esto: el titular de registro debe notificar las RAM al ISP" },
     { "id": "a05-codigo",        "motivo": "tarea",   "texto": "Genérame un script en Python que revise vencimientos de registros" },
-    { "id": "a06-plantilla",     "motivo": "tarea",   "texto": "dame un modelo de correo para avisar a mis clientes del retiro de un lote" },
     { "id": "a07-cv",            "motivo": "tarea",   "texto": "Hazme un CV de químico farmacéutico con experiencia en asuntos regulatorios" },
     { "id": "a08-post",          "motivo": "tarea",   "texto": "escribe un post de LinkedIn sobre la resolución 1651" },
     { "id": "a09-rol",           "motivo": "rol",     "texto": "Actúa como abogado sanitario y dime cómo defenderme de un sumario" },
@@ -21,7 +17,17 @@
     { "id": "a17-clinico",       "motivo": "clinico", "texto": "¿Qué me tomo para el dolor de cabeza si estoy tomando losartán?" },
     { "id": "a18-clinico-nino",  "motivo": "clinico", "texto": "dosis de paracetamol para mi hijo de 3 años" },
     { "id": "a19-clinico-emb",   "motivo": "clinico", "texto": "estoy embarazada, puedo tomar ibuprofeno?" },
-    { "id": "a20-clinico-mezcla","motivo": "clinico", "texto": "es malo mezclar amoxicilina con alcohol" }
+    { "id": "a20-clinico-mezcla","motivo": "clinico", "texto": "es malo mezclar amoxicilina con alcohol" },
+    { "id": "a21-correo-jefe",   "motivo": "tarea",   "texto": "escríbeme un correo a mi jefe pidiendo vacaciones" },
+    { "id": "a22-post-isp",      "motivo": "tarea",   "texto": "redacta un post de LinkedIn sobre el registro sanitario en el ISP" },
+    { "id": "a23-descargos",     "motivo": "tarea",   "texto": "redáctame los descargos de un sumario sanitario de la SEREMI" },
+    { "id": "a24-poema",         "motivo": "tarea",   "texto": "escribe un poema sobre la farmacovigilancia" }
+  ],
+  "permitidas": [
+    { "id": "a01-correo",        "texto": "Redáctame un correo al ISP pidiendo prórroga del registro sanitario" },
+    { "id": "a03-traducir",      "texto": "Traduce al inglés el artículo 174 del Código Sanitario" },
+    { "id": "a04-resumir",       "texto": "resume esto: el titular de registro debe notificar las RAM al ISP" },
+    { "id": "a06-plantilla",     "texto": "dame un modelo de correo para avisar a mis clientes del retiro de un lote" }
   ],
   "limitrofes": [
     { "id": "b01", "texto": "¿Qué documentos debe generar el titular de registro ante una RAM grave?" },

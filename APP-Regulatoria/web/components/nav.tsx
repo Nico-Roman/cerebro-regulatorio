@@ -32,12 +32,15 @@ export function Nav() {
   return (
     <header className="border-b border-line">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
-        <Link href="/" className="flex items-center gap-2.5" aria-label={`${SITE.nombre} — inicio`}>
+        <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label={`${SITE.nombre} — inicio`}>
           <Image
-            src="/logo-regulamed-asuntos%20regulatorios%20farmaceuticos%20gicona%20safis%20isp%20seremi%20salud%20regulacion%20medicamentos%20cosmeticos%20dispositivos%20medicos.png"
+            src="/logo-regulamed.png"
             alt={`${SITE.nombre} — ${SITE.claim}`}
-            width={577}
-            height={577}
+            // Se muestra a 44 px: pedir el doble basta para pantallas retina,
+            // en vez de bajar el original de 577 px en cada página.
+            width={88}
+            height={88}
+            sizes="44px"
             priority
             className="block h-[44px] w-[44px]"
           />
@@ -46,7 +49,10 @@ export function Nav() {
           </span>
         </Link>
 
-        <ul className="hidden items-center gap-7 md:flex">
+        {/* Desde lg: a 768 px, y con sesión iniciada, los enlaces se montaban
+            sobre el logo. Con las guías publicadas (quinto enlace) no cabe a
+            1.024 px con sesión: ahí pasa a xl:flex. */}
+        <ul className="hidden items-center gap-7 lg:flex">
           {enlaces.map((e) => (
             <li key={e.href}>
               <Link

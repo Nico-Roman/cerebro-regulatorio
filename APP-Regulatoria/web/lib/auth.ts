@@ -16,6 +16,7 @@ import { magicLink } from "better-auth/plugins/magic-link";
 import { db, schema } from "@/lib/db";
 import { SITE } from "@/lib/site";
 import { enviarCorreo } from "@/lib/correo";
+import { consumirCupo } from "@/lib/rate-limit";
 
 export const MAGIC_LINK_ACTIVO = process.env.AUTH_MAGIC_LINK === "1";
 
@@ -25,6 +26,17 @@ const plugins = [
         magicLink({
           expiresIn: 60 * 15,
           sendMagicLink: async ({ email, url }) => {
+            // El tope por IP de Better Auth no impide mandar cientos de enlaces a
+            // direcciones de terceros: 3 por hora por destinatario y 300 al día en
+            // total. Si se pasa, no se envía ni se avisa, para no confirmar nada.
+            const destinatario = await consumirCupo(`magic:${email.toLowerCase()}`, 3, 3600);
+            const sitio = destinatario.permitido
+              ? await consumirCupo("magic:sitio", 300, 86_400)
+              : destinatario;
+            if (!sitio.permitido) {
+              console.warn("[auth] tope de enlaces alcanzado");
+              return;
+            }
             await enviarCorreo({
               to: email,
               subject: `Tu acceso a ${SITE.nombre}`,

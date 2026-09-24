@@ -62,3 +62,21 @@ export async function consumirCupo(
     ),
   };
 }
+
+/** Devuelve una unidad al cupo de la ventana actual (p. ej., una pregunta que no se entregó). */
+export async function devolverCupo(clave: string, ventanaSegundos: number): Promise<void> {
+  const inicio = inicioDeVentana(new Date(), ventanaSegundos).toISOString();
+  await db.execute(sql`
+    UPDATE rate_limit SET contador = contador - 1
+    WHERE clave = ${clave} AND ventana_inicio = ${inicio} AND contador > 0
+  `);
+}
+
+/** Cuánto se usó en la ventana actual, sin consumir. */
+export async function cupoUsado(clave: string, ventanaSegundos: number): Promise<number> {
+  const inicio = inicioDeVentana(new Date(), ventanaSegundos).toISOString();
+  const { rows } = await db.execute<{ contador: number }>(sql`
+    SELECT contador FROM rate_limit WHERE clave = ${clave} AND ventana_inicio = ${inicio}
+  `);
+  return Number(rows[0]?.contador ?? 0);
+}
