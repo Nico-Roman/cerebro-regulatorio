@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { SITE, WHATSAPP_URL } from "@/lib/site";
 import { guiasPublicadas } from "@/lib/guias";
-import { EnlacePlanesFooter } from "@/components/enlace-planes-footer";
 
 export function Footer() {
   // El footer es lo que deja cada guía enlazada desde todas las páginas del
@@ -16,10 +15,11 @@ export function Footer() {
           <div className="max-w-xs">
             <div className="flex items-center gap-2.5">
               <Image
-                src="/logo-regulamed-asuntos%20regulatorios%20farmaceuticos%20gicona%20safis%20isp%20seremi%20salud%20regulacion%20medicamentos%20cosmeticos%20dispositivos%20medicos.png"
+                src="/logo-regulamed.png"
                 alt={`${SITE.nombre} — ${SITE.claim}`}
-                width={577}
-                height={577}
+                width={88}
+                height={88}
+                sizes="38px"
                 className="block h-[38px] w-[38px]"
               />
               <span className="font-display text-base font-medium tracking-tight">
@@ -51,7 +51,6 @@ export function Footer() {
                     Buscador de normativa
                   </Link>
                 </li>
-                <EnlacePlanesFooter />
                 {guias.length > 0 && (
                   <li>
                     <Link href="/guias" className="text-muted hover:text-foreground">

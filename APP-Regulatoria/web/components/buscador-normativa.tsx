@@ -3,7 +3,7 @@
 // Buscador de normativa para químicos farmacéuticos.
 //
 // La pantalla responde en tres niveles, en este orden:
-//   1. Un estado en palabras de persona: "Encontrado en la norma", "Respuesta
+//   1. Un estado en palabras de persona: "Pasaje más cercano", "Respuesta
 //      parcial" o "Esto no está en nuestra base".
 //   2. La frase exacta de la norma que responde, con su artículo y el dato
 //      destacado. El texto completo del artículo está a un clic.
@@ -75,7 +75,7 @@ function etiquetaCategoria(c: string): string {
 const EJEMPLOS = [
   "¿En qué plazo se notifica una reacción adversa seria a un medicamento?",
   "¿Cuál es la validez de una receta retenida?",
-  "¿Cuánto dura el registro sanitario de un medicamento?",
+  "¿Cuánto dura la vigencia de un registro sanitario?",
   "¿Qué es una droguería?",
   "¿Qué es la farmacovigilancia?",
 ];
@@ -178,16 +178,13 @@ function TarjetaRelacionada({ r }: { r: Resultado }) {
 }
 
 function PlazosPanel({ plazos }: { plazos: PlazoDetectado[] | null }) {
+  // Vacío parece roto: sin plazos vigentes, el panel no se muestra.
+  if (plazos !== null && plazos.length === 0) return null;
   return (
     <section>
       <h2 className="label-micro mb-4 text-muted">Plazos con fecha límite</h2>
       {plazos === null ? (
         <p className="text-xs text-muted">Cargando…</p>
-      ) : plazos.length === 0 ? (
-        <p className="text-xs leading-relaxed text-muted">
-          No hay plazos con fecha límite vigente en la normativa indexada. Este panel se actualiza con la
-          vigilancia diaria del ISP.
-        </p>
       ) : (
         <ul className="flex flex-col gap-3">
           {plazos.map((p, i) => (
@@ -265,13 +262,14 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
   const [aviso, setAviso] = useState<string | null>(null);
   const [verTodas, setVerTodas] = useState(false);
   // Modo IA: pide el borrador redactado apenas termina cada búsqueda. Es una
-  // preferencia del navegador, no de la cuenta; si el almacenamiento está
-  // bloqueado simplemente arranca apagado.
+  // preferencia del navegador, no de la cuenta. Arranca encendido: en las
+  // pruebas en vivo el borrador acertó donde el pasaje de arriba no.
   const [modoIa, setModoIa] = useState(false);
   useEffect(() => {
     try {
+      const guardado = window.localStorage.getItem(CLAVE_MODO_IA);
       // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage no existe en el render del servidor
-      setModoIa(window.localStorage.getItem(CLAVE_MODO_IA) === "1");
+      setModoIa(guardado === null ? true : guardado === "1");
     } catch {}
   }, []);
   const cambiarModoIa = (activo: boolean) => {
@@ -485,6 +483,13 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
 
               <Avisos avisos={respuesta.avisos} />
 
+              {/* El borrador va antes del pasaje: en las pruebas en vivo acertó
+                  donde la tarjeta de la norma no. `key={consultaId}`: cada
+                  búsqueda trae un id nuevo y el widget nace en su estado inicial. */}
+              {respuesta.iaDisponible && respuesta.consultaId && respuesta.estado !== "ausente" && (
+                <RespuestaIa key={respuesta.consultaId} consultaId={respuesta.consultaId} automatico={modoIa} />
+              )}
+
               {respuesta.principal && <TarjetaPrincipal r={respuesta.principal} />}
 
               {visibles.length > 0 && (
@@ -523,11 +528,6 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
                 oficial y revisa si hay modificaciones posteriores.
               </p>
 
-              {/* `key={consultaId}`: cada búsqueda trae un id nuevo y los widgets
-                  nacen en su estado inicial. */}
-              {respuesta.iaDisponible && respuesta.consultaId && respuesta.estado !== "ausente" && (
-                <RespuestaIa key={respuesta.consultaId} consultaId={respuesta.consultaId} automatico={modoIa} />
-              )}
               {respuesta.consultaId && (
                 <FeedbackConsulta key={`fb-${respuesta.consultaId}`} consultaId={respuesta.consultaId} />
               )}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { jsonParaScript } from "@/lib/html";
-import { SERVICIOS, SITE, WHATSAPP_URL } from "@/lib/site";
+import { OG_IMAGEN, SERVICIOS, SITE, WHATSAPP_URL } from "@/lib/site";
 import { LIMITES, PROCESO, TRAYECTORIA } from "@/lib/asesoria";
 import { VSL, miniaturaUrl, vslConfigurado } from "@/lib/vsl";
 import { FormularioContacto } from "@/components/formulario-contacto";
@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     title: `Asesoría regulatoria · ${SITE.nombre}`,
     description:
       "Cómo trabajo el registro sanitario, la farmacovigilancia y el cumplimiento normativo ante el ISP de Chile.",
+    images: [OG_IMAGEN],
   },
 };
 
@@ -47,6 +48,7 @@ function videoJsonLd() {
 
 export default function Asesoria() {
   const jsonLd = videoJsonLd();
+  const hayVideo = vslConfigurado();
 
   return (
     <>
@@ -63,43 +65,60 @@ export default function Asesoria() {
           <span className="label-micro text-muted">Asesoría regulatoria</span>
 
           <h1 className="font-display mt-5 max-w-4xl text-[2.25rem] leading-[1.08] font-medium tracking-tight sm:text-6xl">
-            Antes de que me escribas,
-            <br className="hidden sm:block" /> escúchame {VSL.duracion}.
+            {hayVideo ? (
+              <>
+                Antes de que me escribas,
+                <br className="hidden sm:block" /> escúchame {VSL.duracion}.
+              </>
+            ) : (
+              <>
+                Registro sanitario ante el ISP,
+                <br className="hidden sm:block" /> con un químico farmacéutico a cargo.
+              </>
+            )}
           </h1>
 
-          <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-            Contratar una asesoría regulatoria a ciegas es caro. En este video te
-            cuento qué hago exactamente, cómo es el proceso y qué puedes esperar,
-            para que la primera reunión empiece en la pregunta que te importa y
-            no en la presentación.
-          </p>
+          {hayVideo && (
+            <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+              Contratar una asesoría regulatoria a ciegas es caro. En este video te
+              cuento qué hago exactamente, cómo es el proceso y qué puedes esperar,
+              para que la primera reunión empiece en la pregunta que te importa y
+              no en la presentación.
+            </p>
+          )}
 
           <div className="mt-12 flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-14">
-            <div className="min-w-0 flex-1">
-              <VideoVsl />
-            </div>
+            {hayVideo && (
+              <div className="min-w-0 flex-1">
+                <VideoVsl />
+              </div>
+            )}
 
             <div className="lg:w-80 lg:shrink-0">
-              <span className="label-micro text-muted">En el video</span>
-              <ul className="mt-6 flex flex-col">
-                {VSL.puntos.map((p, i) => (
-                  <li
-                    key={p}
-                    className={`flex gap-4 py-4 text-sm leading-relaxed ${
-                      i > 0 ? "border-t border-line" : ""
-                    }`}
-                  >
-                    <span className="label-micro shrink-0 pt-0.5 text-muted">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span>{p}</span>
-                  </li>
-                ))}
-              </ul>
+              {hayVideo && (
+                <>
+                  <span className="label-micro text-muted">En el video</span>
+                  <ul className="mt-6 mb-8 flex flex-col">
+                    {VSL.puntos.map((p, i) => (
+                      <li
+                        key={p}
+                        className={`flex gap-4 py-4 text-sm leading-relaxed ${
+                          i > 0 ? "border-t border-line" : ""
+                        }`}
+                      >
+                        <span className="label-micro shrink-0 pt-0.5 text-muted">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
 
               <Link
                 href="#contacto"
-                className="mt-8 block bg-foreground px-7 py-3.5 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
+                className="block bg-foreground px-7 py-3.5 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
               >
                 Agenda una evaluación
               </Link>

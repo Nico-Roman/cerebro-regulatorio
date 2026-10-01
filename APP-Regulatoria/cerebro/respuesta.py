@@ -726,8 +726,8 @@ def responder(pregunta, idx=None, vigente=False, categoria=None, sin_ocr=False, 
     nucleo_especifico = any(c["peso"] >= IDF_GENERICO for c in nucleo(pq["conceptos"]))
     if p["cobertura_frase"] >= umbral and p["cobertura_pasaje"] >= UMBRAL_PASAJE_ENCONTRADO and dato_ok \
             and p["nucleo"] and literal and nucleo_especifico:
-        estado, titular = "encontrado", "Encontrado en la norma"
-        motivo = "La frase destacada responde la pregunta."
+        estado, titular = "encontrado", "Pasaje más cercano a tu pregunta"
+        motivo = "Confirma que trate tu caso exacto (quién, qué producto, qué trámite) antes de usarlo."
     elif (p["cobertura_pasaje"] >= UMBRAL_PARCIAL or p["cobertura_frase"] >= UMBRAL_PARCIAL) and \
             principal_en(p, pq):
         estado, titular = "parcial", "Respuesta parcial: revisa si aplica a tu caso"
