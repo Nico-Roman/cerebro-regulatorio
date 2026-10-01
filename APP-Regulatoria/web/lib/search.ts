@@ -311,7 +311,9 @@ function recortar(texto: string, largo = LARGO_FRASE): string {
 interface Vocabulario {
   palabras_de_pregunta: string[];
   expansiones: Array<{ si: string[]; agregar: string[] }>;
-  fuera_de_alcance: Array<{ patron: string; excepto: string; materia: string }>;
+  // `salvo_categoria`: la regla deja de aplicar cuando el corpus ya trae esa
+  // categoría (dispositivos médicos: encargo B). Paridad con respuesta.py.
+  fuera_de_alcance: Array<{ patron: string; excepto: string; materia: string; salvo_categoria?: string }>;
 }
 
 let vocabularioCache: Vocabulario | null = null;
@@ -336,6 +338,20 @@ class Indice {
   stemIdf: Map<string, number>;
   idfMax: number;
   private normalizadosCache: string[] | null = null;
+  private categoriasCache: Set<string> | null = null;
+
+  /** ¿Alguna fila del corpus pertenece a esta categoría? */
+  tieneCategoria(c: string): boolean {
+    if (!this.categoriasCache) {
+      this.categoriasCache = new Set();
+      for (const r of this.rows) {
+        for (const x of r.categorias && r.categorias.length ? r.categorias : [r.categoria]) {
+          if (x) this.categoriasCache.add(x);
+        }
+      }
+    }
+    return this.categoriasCache.has(c);
+  }
 
   constructor(rows: CorpusChunk[]) {
     this.rows = rows;
@@ -446,6 +462,7 @@ function analizarPregunta(pregunta: string, idx: Indice): Pregunta {
 
   let fuera: string | null = null;
   for (const regla of voc.fuera_de_alcance || []) {
+    if (regla.salvo_categoria && idx.tieneCategoria(regla.salvo_categoria)) continue;
     if (new RegExp(regla.patron).test(norm) && !(regla.excepto && new RegExp(regla.excepto).test(norm))) {
       fuera = regla.materia;
       break;
@@ -838,6 +855,7 @@ const ETIQUETAS_CATEGORIA: Record<string, string> = {
   laboratorio_nacional_de_control: "Laboratorio Nacional de Control",
   medicamentos: "Medicamentos",
   codigo_sanitario: "Código Sanitario",
+  dispositivos_medicos: "Dispositivos médicos",
   otros: "Otras normas ISP",
 };
 
@@ -864,6 +882,9 @@ function avisosDe(c: Candidato): string[] {
     avisos.push("Texto escaneado (OCR): confirma las cifras en el documento oficial.");
   }
   if (r.vigencia !== "vigente") avisos.push("Vigencia no verificada contra el listado oficial del ISP.");
+  // Vigencia diferida declarada en la fuente (encargo B: Decreto Exento 25/2026).
+  const alerta = r.alerta_vigencia || "";
+  if (alerta.startsWith("⏳")) avisos.push(alerta.slice(1).trim());
   return avisos;
 }
 

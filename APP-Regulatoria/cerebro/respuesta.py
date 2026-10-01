@@ -220,6 +220,35 @@ def recortar(texto, largo=LARGO_FRASE):
 
 # --- Pregunta -----------------------------------------------------------------
 
+def tiene_categoria(idx, c):
+    """¿Alguna fila del corpus pertenece a esta categoría?"""
+    cache = getattr(idx, "_categorias", None)
+    if cache is None:
+        cache = set()
+        for r in idx.rows:
+            for x in (r.get("categorias") or [r.get("categoria", "")]):
+                if x:
+                    cache.add(x)
+        idx._categorias = cache
+    return c in cache
+
+
+def pregunta_aplica(p, idx):
+    """¿Esta pregunta de evaluación aplica al corpus de hoy?
+
+    Las preguntas de dispositivos médicos (encargo B) dependen de que el corpus
+    ya traiga esa categoría: `requiere_categoria` la cuenta solo entonces, y
+    `solo_sin_categoria` (la abstención que se esperaba antes) solo mientras
+    falte. Así la compuerta mide lo correcto antes y después de que el
+    pipeline baje las normas, sin que nadie tenga que editar los sets.
+    """
+    if p.get("requiere_categoria") and not tiene_categoria(idx, p["requiere_categoria"]):
+        return False
+    if p.get("solo_sin_categoria") and tiene_categoria(idx, p["solo_sin_categoria"]):
+        return False
+    return True
+
+
 def analizar_pregunta(pregunta, idx):
     voc = vocabulario()
     norm = normalizar(pregunta)
@@ -227,6 +256,10 @@ def analizar_pregunta(pregunta, idx):
 
     fuera = None
     for regla in voc.get("fuera_de_alcance", []):
+        # `salvo_categoria`: la regla deja de aplicar cuando el corpus ya trae
+        # esa categoría (dispositivos médicos, encargo B). Paridad con search.ts.
+        if regla.get("salvo_categoria") and tiene_categoria(idx, regla["salvo_categoria"]):
+            continue
         if re.search(regla["patron"], norm) and not (regla.get("excepto") and re.search(regla["excepto"], norm)):
             fuera = regla["materia"]
             break
@@ -596,7 +629,8 @@ ETIQUETAS_CATEGORIA = {
     "farmacovigilancia": "Farmacovigilancia",
     "importacion_y_exportacion_control_y_vigilancia": "Importación y exportación",
     "laboratorio_nacional_de_control": "Laboratorio Nacional de Control",
-    "medicamentos": "Medicamentos", "codigo_sanitario": "Código Sanitario", "otros": "Otras normas ISP",
+    "medicamentos": "Medicamentos", "codigo_sanitario": "Código Sanitario",
+    "dispositivos_medicos": "Dispositivos médicos", "otros": "Otras normas ISP",
 }
 
 
@@ -616,6 +650,10 @@ def avisos_de(c):
         avisos.append("Texto escaneado (OCR): confirma las cifras en el documento oficial.")
     if r.get("vigencia") != "vigente":
         avisos.append("Vigencia no verificada contra el listado oficial del ISP.")
+    # Vigencia diferida declarada en la fuente (encargo B: Decreto Exento 25/2026).
+    alerta = r.get("alerta_vigencia") or ""
+    if alerta.startswith("⏳"):
+        avisos.append(alerta[1:].strip())
     return avisos
 
 

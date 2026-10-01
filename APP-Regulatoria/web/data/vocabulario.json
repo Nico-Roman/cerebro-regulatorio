@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "actualizado": "2026-09-11",
+  "actualizado": "2026-10-01",
   "proposito": "Puente entre cómo pregunta un químico farmacéutico en el mostrador y cómo escribe el legislador. Se usa en query-time, nunca para indexar ni para reescribir texto legal. La web lee una copia exacta en web/data/vocabulario.json (la copia el pipeline y la compuerta verifica que sean idénticas).",
   "notas": [
     "Todo va sin tildes y en minúsculas: se compara contra la consulta normalizada.",
@@ -692,13 +692,91 @@
         "infracciones",
         "infringe"
       ]
+    },
+    {
+      "si": [
+        "dispositivo medico",
+        "dispositivos medicos",
+        "dm",
+        "elementos de uso medico",
+        "productos de uso medico"
+      ],
+      "agregar": [
+        "elementos de uso medico",
+        "dispositivos medicos",
+        "productos de uso medico"
+      ]
+    },
+    {
+      "si": [
+        "dmdiv",
+        "diagnostico in vitro",
+        "dispositivo de diagnostico in vitro",
+        "dispositivos de diagnostico in vitro"
+      ],
+      "agregar": [
+        "diagnostico in vitro",
+        "dispositivos medicos de diagnostico in vitro",
+        "reactivos de diagnostico in vitro"
+      ]
+    },
+    {
+      "si": [
+        "tecnovigilancia",
+        "incidente adverso",
+        "incidentes adversos"
+      ],
+      "agregar": [
+        "tecnovigilancia",
+        "incidentes adversos",
+        "eventos adversos"
+      ]
+    },
+    {
+      "si": [
+        "clase de riesgo",
+        "clases de riesgo",
+        "clasificacion de riesgo",
+        "clase iii",
+        "clase iv"
+      ],
+      "agregar": [
+        "clase de riesgo",
+        "clasificacion segun riesgo",
+        "riesgo sanitario"
+      ]
+    },
+    {
+      "si": [
+        "verificacion de conformidad",
+        "certificacion de conformidad",
+        "certificado de conformidad"
+      ],
+      "agregar": [
+        "verificacion de conformidad",
+        "certificacion",
+        "normas de calidad"
+      ]
+    },
+    {
+      "si": [
+        "control obligatorio",
+        "control sanitario obligatorio",
+        "regimen de control"
+      ],
+      "agregar": [
+        "regimen de control sanitario",
+        "control obligatorio",
+        "articulo 111"
+      ]
     }
   ],
   "fuera_de_alcance": [
     {
       "patron": "\\bdispositivos? medicos?\\b|\\bclase (i|ii|iii|iv|1|2|3|4)\\b.{0,40}dispositivo|marcapasos|protesis|implantes?\\b|glucometro",
       "excepto": "ensayo|investigacion|estudio clinico|uso provisional",
-      "materia": "el registro y control de dispositivos médicos"
+      "materia": "el registro y control de dispositivos médicos",
+      "salvo_categoria": "dispositivos_medicos"
     },
     {
       "patron": "rotulado nutricional|etiquetado nutricional|sellos? de advertencia|ley de etiquetado",

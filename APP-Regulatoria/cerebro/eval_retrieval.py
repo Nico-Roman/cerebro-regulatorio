@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 
 import indice as IX
-from respuesta import responder
+from respuesta import pregunta_aplica, responder
 
 DIR = Path(__file__).resolve().parent
 GOLDEN = DIR / "preguntas-doradas.json"
@@ -45,11 +45,17 @@ def matches(result, fuente):
     # `doc_contains` una pregunta sobre el Libro V pasaría recuperando el VIII.
     if "doc_id" in fuente:
         return result["doc_id"].lower() == fuente["doc_id"].lower()
+    # `doc_contains` junto con {tipo, numero} exige las dos cosas: el número de
+    # un decreto exento se repite entre materias (hay un Decreto Exento 25 de
+    # medicamentos y otro de dispositivos médicos).
+    ok = True
     if "doc_contains" in fuente:
-        return fuente["doc_contains"].lower() in result["doc_id"].lower()
-    tipo_ok = result.get("tipo", "").lower() == fuente.get("tipo", "").lower()
-    num_ok = result.get("numero", "").lstrip("0") == str(fuente.get("numero", "")).lstrip("0")
-    return tipo_ok and num_ok
+        ok = fuente["doc_contains"].lower() in result["doc_id"].lower()
+    if "tipo" in fuente or "numero" in fuente:
+        tipo_ok = result.get("tipo", "").lower() == fuente.get("tipo", "").lower()
+        num_ok = result.get("numero", "").lstrip("0") == str(fuente.get("numero", "")).lstrip("0")
+        ok = ok and tipo_ok and num_ok
+    return ok
 
 
 def main():
@@ -61,7 +67,8 @@ def main():
 
     idx = IX.load()
     data = json.loads(GOLDEN.read_text(encoding="utf-8"))
-    preguntas = data["preguntas"]
+    preguntas = [p for p in data["preguntas"] if pregunta_aplica(p, idx)]
+    pendientes_corpus = [p["id"] for p in data["preguntas"] if not pregunta_aplica(p, idx)]
 
     hits, fallos, falsas_abstenciones = 0, [], []
     filas = []
@@ -88,6 +95,7 @@ def main():
     # --- Abstención ---------------------------------------------------------
     fuera_ok, fuera_filas = 0, []
     fuera_data = json.loads(FUERA.read_text(encoding="utf-8"))["preguntas"] if FUERA.exists() else []
+    fuera_data = [p for p in fuera_data if pregunta_aplica(p, idx)]
     for p in fuera_data:
         resp = responder(p["pregunta"], idx=idx)
         ok = resp["estado"] == "ausente"
@@ -105,6 +113,7 @@ def main():
             "recall": round(recall, 1), "hits": hits, "total": len(preguntas), "fallos": fallos,
             "abstencion": round(abstencion, 1), "fuera_ok": fuera_ok, "fuera_total": len(fuera_data),
             "falsas_abstenciones": falsas_abstenciones,
+            "pendientes_corpus": pendientes_corpus,
             "pasa": pasa,
         }, ensure_ascii=False))
         sys.exit(0 if pasa else 1)
@@ -124,6 +133,8 @@ def main():
              else "⚠️ BAJO EL GATE (>=" + ("%.0f" % args.gate) + "%)"))
     if fallos:
         print("Fallos: " + ", ".join(fallos))
+    if pendientes_corpus:
+        print("Sin evaluar (su categoría aún no está en el corpus): " + ", ".join(pendientes_corpus))
     if falsas_abstenciones:
         print("⚠️ Preguntas doradas con confianza BAJA (falsa abstención): "
               + ", ".join(falsas_abstenciones))

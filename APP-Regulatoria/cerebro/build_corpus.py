@@ -37,6 +37,7 @@ from urllib.parse import unquote
 import fitz  # PyMuPDF
 
 import codigo_sanitario as CS
+import decretos_bcn as DBCN
 import indice as IX
 import modificaciones as MOD
 from norma_registry import NormaRegistry, norm_key, norm_numero, parse_tipo_numero
@@ -570,6 +571,14 @@ def main():
         stats["duplicados_colapsados"] += len(grupo) - 1
         canonicos.append(canon)
 
+    # Decretos que entran por el XML de la BCN (decretos_bcn.py): su PDF, si
+    # también se bajó, no se indexa. Mismo texto dos veces = IDF devaluado.
+    bcn_en_cache = {DBCN.norma_id_de(f) for f in DBCN.fuentes() if DBCN.cache(f["bcn_id_norma"]).exists()}
+    if bcn_en_cache:
+        antes = len(canonicos)
+        canonicos = [d for d in canonicos if not (d["norma"] and d["norma"]["norma_id"] in bcn_en_cache)]
+        stats["duplicados_colapsados"] += antes - len(canonicos)
+
     canonicos.sort(key=lambda d: (d["categoria"], d["stem"]))
 
     # -- Paso 3: grafo de modificaciones (hallazgo 01) -------------------------
@@ -624,7 +633,7 @@ def main():
             tipo = n["tipo"]
             numero = n["numero_norm"]
             vigencia = "no_verificada"
-            vigencia_fuente = "metadata curada a mano (overrides.json); fuera del listado oficial"
+            vigencia_fuente = n.get("vigencia_fuente_manual") or "metadata curada a mano (overrides.json); fuera del listado oficial"
             titulo = n["descripcion"]
             titulo_fuente = "override"
             fecha = n["fecha"] or vault.get("fecha") or ""
@@ -712,6 +721,10 @@ def main():
                           + " (norma modificatoria no identificada). Verifica la disposición.")
             else:
                 alerta = ""
+            # Vigencia diferida u otro aviso declarado en la fuente (p. ej. el
+            # Decreto Exento 25/2026: rige a 24 o 36 meses según la categoría).
+            if n and n.get("aviso"):
+                alerta = ("⏳ " + n["aviso"]) + ((" " + alerta) if alerta else "")
 
             rec = {
                 "doc_id": doc_id,
@@ -807,6 +820,40 @@ def main():
         # abajo lo notaría.
         print("[warn] no está " + str(CS.CACHE) + ": el corpus queda SIN Código Sanitario. "
               "Corre: python codigo_sanitario.py --descargar")
+
+    # -- Paso 4c: decretos de dispositivos médicos desde la BCN ---------------
+    for f in DBCN.fuentes():
+        if not DBCN.cache(f["bcn_id_norma"]).exists():
+            print("[warn] falta el XML BCN de " + f.get("tipo", "") + " " + f.get("numero", "")
+                  + ". Corre: python decretos_bcn.py --descargar")
+            continue
+        dec = DBCN.cargar(f["bcn_id_norma"])
+        n_chunks, primero = 0, None
+        for rec in DBCN.registros(f, dec):
+            corpus_fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            primero = primero or rec
+            n_chunks += 1
+        if not primero:
+            continue
+        stats["chunks"] += n_chunks
+        stats["chunks_ley"] += n_chunks
+        stats["xml"] += n_chunks
+        stats["docs_indexados"] += 1
+        docs_meta.append({
+            "doc_id": primero["doc_id"], "norma_id": primero["norma_id"], "categoria": primero["categoria"],
+            "categorias": primero["categorias"], "tipo": primero["tipo"], "numero": primero["numero"],
+            "titulo": primero["titulo"], "titulo_fuente": primero["titulo_fuente"],
+            "fecha": primero["fecha"], "ult_mod": dec.fecha_version,
+            "vigencia": primero["vigencia"], "vigencia_fuente": primero["vigencia_fuente"],
+            "modificada": False, "modificada_por": [],
+            "metadata_metodo": "xml_bcn", "metadata_confianza": "alta",
+            "fuente_texto": "xml", "chunks_con_alerta_ocr": 0,
+            "fuente_url": DBCN.url_humana(f["bcn_id_norma"]), "pdf_path": "",
+            "copias_colapsadas": [], "n_chunks": n_chunks, "articulos": len(dec.articulos),
+        })
+        audit_rows.append((primero["doc_id"], primero["tipo"], primero["numero"], "xml", primero["vigencia"],
+                           "no", n_chunks, "xml_bcn", primero["titulo_fuente"], 0, 0, False))
+        print("[info] " + f.get("tipo", "") + " " + f.get("numero", "") + " (BCN): " + str(n_chunks) + " pasajes")
 
     corpus_fh.close()
 

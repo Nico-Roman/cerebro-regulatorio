@@ -64,6 +64,7 @@ const ETIQUETAS_CATEGORIA: Record<string, string> = {
   importacion_y_exportacion_control_y_vigilancia: "Importación y exportación",
   laboratorio_nacional_de_control: "Laboratorio Nacional de Control",
   medicamentos: "Medicamentos",
+  dispositivos_medicos: "Dispositivos médicos",
   otros: "Otras normas del ISP",
 };
 

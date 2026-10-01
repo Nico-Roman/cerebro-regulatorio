@@ -117,7 +117,7 @@ jobs:
         uses: actions/cache@v6
         with:
           path: ANAMED_Normativa
-          key: anamed-pdfs-${{ hashFiles('vigilancia-isp/snapshots/latest.json') }}
+          key: anamed-pdfs-${{ hashFiles('vigilancia-isp/snapshots/latest.json', 'vigilancia-isp/snapshots/andid-latest.json', 'APP-Regulatoria/cerebro/fuentes-dispositivos.json') }}
           restore-keys: |
             anamed-pdfs-
 
@@ -168,7 +168,9 @@ jobs:
             exit 0
           fi
           git commit -m "chore(corpus): actualización automática $(date -u +%Y-%m-%d)"
-          git push
+          # Corrido a mano sobre una rama (Run workflow), publica en esa misma
+          # rama: así un PR del corpus trae su corpus regenerado.
+          git push origin "HEAD:${GITHUB_REF_NAME}"
 
       # Sube el log de la corrida aunque el job haya fallado: cuando la
       # compuerta reprueba, el log es justamente lo que hay que leer.

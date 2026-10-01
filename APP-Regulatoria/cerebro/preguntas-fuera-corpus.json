@@ -1,17 +1,19 @@
 {
   "version": "1.0",
-  "actualizado": "2026-08-26",
+  "actualizado": "2026-10-01",
   "proposito": "Contra-set del set dorado. Estas consultas NO tienen respuesta en el corpus ANAMED: el motor debe declarar confianza `baja` y recomendar `declarar_ausencia`. Sin este set, la señal de confianza puede degradarse a 'siempre responder' sin que nadie lo note — que es exactamente el defecto que la introdujo (hallazgo 02 de la auditoría).",
   "preguntas": [
     {
       "id": "dm-glucometro",
       "pregunta": "¿Cómo obtengo el registro sanitario de un dispositivo médico glucómetro en Chile?",
-      "motivo": "El corpus MVP no cubre dispositivos médicos. La Ley 20.850 art. 111 A menciona «dispositivo médico» pero regula su uso en investigación, no el registro: es un señuelo temático perfecto."
+      "motivo": "El corpus MVP no cubre dispositivos médicos. La Ley 20.850 art. 111 A menciona «dispositivo médico» pero regula su uso en investigación, no el registro: es un señuelo temático perfecto. Desde el encargo B (24-09-2026) solo se espera abstención mientras el corpus no tenga la categoría dispositivos_medicos; con ella, la pregunta pasa a las doradas (dm-*).",
+      "solo_sin_categoria": "dispositivos_medicos"
     },
     {
       "id": "dm-implantes",
       "pregunta": "¿Cómo registrar un marcapasos o una prótesis de cadera ante el ISP?",
-      "motivo": "Dispositivos médicos implantables, fuera del corpus."
+      "motivo": "Dispositivos médicos implantables, fuera del corpus. Desde el encargo B (24-09-2026) solo se espera abstención mientras el corpus no tenga la categoría dispositivos_medicos; con ella, la pregunta pasa a las doradas (dm-*).",
+      "solo_sin_categoria": "dispositivos_medicos"
     },
     {
       "id": "alimentos-rotulado",
