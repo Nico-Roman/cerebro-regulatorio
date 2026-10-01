@@ -29,6 +29,7 @@ interface Borrador {
   sinCitas: boolean;
   datosNoVerificados: string[];
   casoNoCubierto: string[];
+  afirmacionesSinCita: string[];
   cacheada: boolean;
 }
 
@@ -44,6 +45,41 @@ function TextoConNegritas({ texto }: { texto: string }) {
     )
   );
   return <>{partes}</>;
+}
+
+/**
+ * El borrador con las oraciones que imponen algo sin cita subrayadas. Las
+ * oraciones vienen del servidor tal como aparecen en el texto (subcadenas
+ * exactas), así que basta con ubicarlas.
+ */
+function TextoBorrador({ texto, sinCita }: { texto: string; sinCita: string[] }) {
+  if (!sinCita.length) return <TextoConNegritas texto={texto} />;
+  const trozos: ReactNode[] = [];
+  let resto = texto;
+  let i = 0;
+  while (resto) {
+    let primera: { pos: number; oracion: string } | null = null;
+    for (const o of sinCita) {
+      const pos = resto.indexOf(o);
+      if (pos >= 0 && (!primera || pos < primera.pos)) primera = { pos, oracion: o };
+    }
+    if (!primera) {
+      trozos.push(<TextoConNegritas key={i++} texto={resto} />);
+      break;
+    }
+    if (primera.pos > 0) trozos.push(<TextoConNegritas key={i++} texto={resto.slice(0, primera.pos)} />);
+    trozos.push(
+      <span
+        key={i++}
+        title="Afirmación sin cita"
+        className="underline decoration-red-400 decoration-wavy underline-offset-4"
+      >
+        <TextoConNegritas texto={primera.oracion} />
+      </span>
+    );
+    resto = resto.slice(primera.pos + primera.oracion.length);
+  }
+  return <>{trozos}</>;
 }
 
 export function RespuestaIa({ consultaId, automatico = false }: { consultaId: string; automatico?: boolean }) {
@@ -111,6 +147,7 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
         sinCitas: Boolean(datos.sinCitas),
         datosNoVerificados: datos.datosNoVerificados ?? [],
         casoNoCubierto: datos.casoNoCubierto ?? [],
+        afirmacionesSinCita: datos.afirmacionesSinCita ?? [],
         cacheada: Boolean(datos.cacheada),
       });
       setEstado("listo");
@@ -173,8 +210,17 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
               {`Los pasajes que citó no mencionan ${borrador.casoNoCubierto.map((c) => `«${c}»`).join(", ")}: puede estar respondiendo con la regla de otro caso. Revisa si aplica a tu situación.`}
             </p>
           )}
+          {borrador.afirmacionesSinCita.length > 0 && (
+            <p className="border-l-2 border-red-500/70 pl-3 text-xs leading-relaxed text-red-200">
+              Afirmación sin cita:{" "}
+              {borrador.afirmacionesSinCita.length === 1
+                ? "la oración subrayada impone una obligación o un plazo sin un pasaje que la respalde."
+                : `${borrador.afirmacionesSinCita.length} oraciones subrayadas imponen obligaciones o plazos sin un pasaje que las respalde.`}{" "}
+              No las uses sin verificarlas en la fuente.
+            </p>
+          )}
           <div className="whitespace-pre-wrap text-sm leading-relaxed text-neutral-200">
-            <TextoConNegritas texto={borrador.texto} />
+            <TextoBorrador texto={borrador.texto} sinCita={borrador.afirmacionesSinCita} />
           </div>
           {borrador.fuentes.length > 0 && (
             <div className="flex flex-col gap-1.5">

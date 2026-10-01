@@ -80,6 +80,10 @@ export interface ResultadoPublico {
   _doc_id: string;
   _numero: string;
   _tipo: string;
+  /** Puntaje final del candidato y su pasaje: los usa la planificación del
+   *  asistente (lib/ia/planificar.ts) para unir búsquedas. */
+  _puntaje: number;
+  _chunk_id: string;
 }
 
 export interface Respuesta {
@@ -92,6 +96,10 @@ export interface Respuesta {
   relacionadas: ResultadoPublico[];
   avisos: string[];
   conceptos_fuera: string[];
+  /** Materia fuera del ámbito de la base, si la regla del vocabulario aplicó.
+   *  Solo TypeScript: el asistente no rescata con búsquedas planificadas una
+   *  pregunta que la base excluye por materia. */
+  fuera_de_alcance?: string;
 }
 
 export interface OpcionesBusqueda {
@@ -939,6 +947,8 @@ function resultadoPublico(c: Candidato, pq: Pregunta): ResultadoPublico {
     _doc_id: r.doc_id || "",
     _numero: r.numero || "",
     _tipo: r.tipo || "",
+    _puntaje: redondear3(c.puntaje),
+    _chunk_id: r.chunk_id || "",
   };
 }
 
@@ -970,6 +980,7 @@ export function responder(pregunta: string, opts: OpcionesBusqueda = {}, idxExte
       titular: "Esto no está en nuestra base.",
       motivo: "La base cubre la normativa del ISP/ANAMED y el Código Sanitario; no incluye " + pq.fueraDeAlcance + ".",
       conceptos_fuera: [],
+      fuera_de_alcance: pq.fueraDeAlcance,
     };
   }
 

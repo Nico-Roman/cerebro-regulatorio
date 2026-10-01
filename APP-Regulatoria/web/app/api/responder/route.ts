@@ -13,10 +13,12 @@ import { clasificarPeticion } from "@/lib/ia/proposito";
 import {
   claveCache,
   esAbstencion,
-  pasajesDesdeRespuesta,
+  pasajesDesdeResultados,
   redactarRespuesta,
   type FuenteCitada,
 } from "@/lib/ia/redactar";
+import { MAX_PASAJES, admitePlanificacion, planificarBusquedas, unirPasajes } from "@/lib/ia/planificar";
+import { afirmacionesSinCitaResueltas } from "@/lib/ia/verificar";
 import { responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
@@ -37,9 +39,11 @@ const MAX_RESPUESTAS_MINUTO = Number.parseInt(process.env.LLM_CUOTA_MINUTO ?? ""
 // respuestas diarias por cuenta de Google, y las cuentas de Google no escasean.
 const MAX_RESPUESTAS_DIA_SITIO = Number.parseInt(process.env.LLM_CUOTA_DIARIA_SITIO ?? "", 10) || 1000;
 
-// Cuántos pasajes entran al prompt. Más de seis no mejora la respuesta y
-// multiplica el costo por consulta.
-const PASAJES_AL_MODELO = 6;
+// Pasajes por búsqueda. La planificación corre hasta cinco búsquedas (la
+// pregunta y hasta cuatro reescrituras) y al redactor llegan como máximo
+// MAX_PASAJES (8) después de unirlas: más no mejora la respuesta y multiplica
+// el costo por consulta.
+const PASAJES_POR_BUSQUEDA = 6;
 
 interface Senales {
   abstuvo: boolean;
@@ -47,6 +51,8 @@ interface Senales {
   citasInvalidas: boolean;
   datosNoVerificados: string[];
   casoNoCubierto: string[];
+  /** Oraciones que imponen algo sin cita, tal como aparecen en el texto. */
+  afirmacionesSinCita: string[];
 }
 
 /** Las señales como columnas de `consultas`. Las listas van separadas por coma. */
@@ -57,6 +63,7 @@ function columnasSenales(s: Senales) {
     citasInvalidas: s.citasInvalidas,
     datosNoVerificados: s.datosNoVerificados.length ? s.datosNoVerificados.join(",") : null,
     casoNoCubierto: s.casoNoCubierto.length ? s.casoNoCubierto.join(",") : null,
+    afirmacionesSinCita: s.afirmacionesSinCita.length,
   };
 }
 
@@ -84,6 +91,9 @@ function senalesDeFila(fila: {
     citasInvalidas: fila.citasInvalidas ?? /cita no verificable/.test(fila.texto),
     datosNoVerificados: fila.datosNoVerificados ? fila.datosNoVerificados.split(",") : [],
     casoNoCubierto: fila.casoNoCubierto ? fila.casoNoCubierto.split(",") : [],
+    // La fila guarda solo cuántas; las oraciones se recuperan del texto ya
+    // resuelto. Las de caché tienen cero por invariante (no se cachean).
+    afirmacionesSinCita: abstuvo ? [] : afirmacionesSinCitaResueltas(fila.texto),
   };
 }
 
@@ -170,23 +180,59 @@ export async function POST(req: NextRequest) {
     sinOcr?: boolean;
   };
 
-  const respuesta = responder(consulta.pregunta, {
-    k: PASAJES_AL_MODELO,
+  const opcionesBusqueda = {
+    k: PASAJES_POR_BUSQUEDA,
     vigente: Boolean(filtros.vigente),
     categoria: filtros.categoria ?? undefined,
     sinOcr: Boolean(filtros.sinOcr),
-  });
-  const pasajes = pasajesDesdeRespuesta(respuesta);
+  };
+  const original = responder(consulta.pregunta, opcionesBusqueda);
 
-  // Compuerta: si el motor ya concluyó que la materia no está en la base, no se
-  // llama al modelo. Ahorra tokens, pero sobre todo evita la respuesta segura
-  // de sí misma construida sobre pasajes que no vienen al caso.
-  if (respuesta.estado === "ausente" || !pasajes.length) {
-    return NextResponse.json({ respuesta: null, ausencia: true, motivo: respuesta.motivo });
+  // Una materia que la base excluye (por regla o porque la palabra central no
+  // está en ninguna norma) no se rescata con búsquedas reescritas.
+  if (!admitePlanificacion(original)) {
+    return NextResponse.json({ respuesta: null, ausencia: true, motivo: original.motivo });
+  }
+
+  const rafaga = await consumirCupo(`ia:min:${usuario.id}`, MAX_RESPUESTAS_MINUTO, 60);
+  if (!rafaga.permitido) {
+    return NextResponse.json(
+      { error: "demasiado_rapido", mensaje: "Vas muy rápido para el redactor. Espera unos segundos." },
+      { status: 429, headers: { "Retry-After": String(rafaga.reinicioEn) } }
+    );
+  }
+
+  const techo = await consumirCupo("ia:sitio", MAX_RESPUESTAS_DIA_SITIO, DIA);
+  if (!techo.permitido) {
+    console.warn("[ia] techo diario del sitio alcanzado");
+    return NextResponse.json(
+      {
+        error: "techo_sitio",
+        mensaje: "El asistente alcanzó su tope de hoy. Los pasajes de arriba siguen disponibles.",
+      },
+      { status: 503 }
+    );
+  }
+
+  // Planificación (lib/ia/planificar.ts): 2 a 4 búsquedas con el vocabulario de
+  // la norma, además de la pregunta original. Nunca lanza: ante cualquier
+  // falla se busca solo con la pregunta, como antes.
+  const plan = await planificarBusquedas(consulta.pregunta, { config });
+  const respuestas = [original, ...plan.busquedas.slice(1).map((b) => responder(b, opcionesBusqueda))];
+  const pasajes = pasajesDesdeResultados(unirPasajes(respuestas, MAX_PASAJES));
+  const busquedasPlanificadas = plan.planificado ? plan.busquedas.slice(1) : null;
+
+  // Compuerta: si ninguna búsqueda trajo pasajes, no se llama al redactor.
+  if (!pasajes.length) {
+    await db
+      .update(consultas)
+      .set({ busquedasPlanificadas, costoUsd: plan.costoUsd })
+      .where(eq(consultas.id, consulta.id));
+    return NextResponse.json({ respuesta: null, ausencia: true, motivo: original.motivo });
   }
 
   // Caché compartida: otra persona ya hizo esta pregunta y el motor le entregó
-  // exactamente los mismos pasajes. No descuenta cuota ni llama al modelo.
+  // exactamente los mismos pasajes. No llama al redactor.
   const clave = claveCache(consulta.pregunta, pasajes, config.modelo);
   const [previa] = await db
     .select({
@@ -215,36 +261,17 @@ export async function POST(req: NextRequest) {
         fuentesLlm: previa.fuentes,
         modelo: previa.modelo,
         claveIa: clave,
-        tokensIn: 0,
-        tokensOut: 0,
-        latenciaMs: 0,
+        tokensIn: plan.tokensEntrada,
+        tokensOut: plan.tokensSalida,
+        latenciaMs: plan.latenciaMs,
         proveedor: "cache",
-        costoUsd: 0,
+        costoUsd: plan.costoUsd,
+        busquedasPlanificadas,
         ...columnasSenales(senales),
       })
       .where(eq(consultas.id, consulta.id));
     return NextResponse.json(
       cuerpoRespuesta({ texto: previa.texto, fuentes, modelo: previa.modelo, cacheada: true, senales })
-    );
-  }
-
-  const rafaga = await consumirCupo(`ia:min:${usuario.id}`, MAX_RESPUESTAS_MINUTO, 60);
-  if (!rafaga.permitido) {
-    return NextResponse.json(
-      { error: "demasiado_rapido", mensaje: "Vas muy rápido para el redactor. Espera unos segundos." },
-      { status: 429, headers: { "Retry-After": String(rafaga.reinicioEn) } }
-    );
-  }
-
-  const techo = await consumirCupo("ia:sitio", MAX_RESPUESTAS_DIA_SITIO, DIA);
-  if (!techo.permitido) {
-    console.warn("[ia] techo diario del sitio alcanzado");
-    return NextResponse.json(
-      {
-        error: "techo_sitio",
-        mensaje: "El asistente alcanzó su tope de hoy. Los pasajes de arriba siguen disponibles.",
-      },
-      { status: 503 }
     );
   }
 
@@ -262,22 +289,27 @@ export async function POST(req: NextRequest) {
       citasInvalidas: r.citasInvalidas.length > 0,
       datosNoVerificados: r.datosNoVerificados,
       casoNoCubierto: r.casoNoCubierto,
+      afirmacionesSinCita: r.afirmacionesSinCita,
     };
 
     // Un borrador que no pasa la verificación (cita a un pasaje inexistente,
     // cifra o norma que no está en los pasajes, caso preguntado que los pasajes
-    // citados no tratan) no se guarda en la caché: se muestra con su advertencia
+    // citados no tratan, obligación o plazo sin cita) no se guarda en la caché: se muestra con su advertencia
     // a quien lo pidió, pero no se reparte. Invariante: lo que está en la caché
     // ya pasó todas las verificaciones, así que un acierto no se revisa de nuevo.
     const cacheable =
-      r.citasInvalidas.length === 0 && r.datosNoVerificados.length === 0 && r.casoNoCubierto.length === 0;
+      r.citasInvalidas.length === 0 &&
+      r.datosNoVerificados.length === 0 &&
+      r.casoNoCubierto.length === 0 &&
+      r.afirmacionesSinCita.length === 0;
     if (!cacheable) {
       console.warn(
         "[ia] borrador no verificado:",
         consulta.id,
         r.citasInvalidas,
         r.datosNoVerificados,
-        r.casoNoCubierto
+        r.casoNoCubierto,
+        r.afirmacionesSinCita.length
       );
     }
 
@@ -288,11 +320,13 @@ export async function POST(req: NextRequest) {
         fuentesLlm: r.fuentes,
         modelo: salida.modelo,
         claveIa: cacheable ? clave : null,
-        tokensIn: salida.tokensEntrada,
-        tokensOut: salida.tokensSalida,
-        latenciaMs: salida.latenciaMs,
+        // Planificación + redacción: lo que costó de verdad esta consulta.
+        tokensIn: salida.tokensEntrada + plan.tokensEntrada,
+        tokensOut: salida.tokensSalida + plan.tokensSalida,
+        latenciaMs: salida.latenciaMs + plan.latenciaMs,
         proveedor: salida.proveedor,
-        costoUsd: salida.costoUsd,
+        costoUsd: salida.costoUsd + plan.costoUsd,
+        busquedasPlanificadas,
         ...columnasSenales(senales),
       })
       .where(eq(consultas.id, consulta.id));

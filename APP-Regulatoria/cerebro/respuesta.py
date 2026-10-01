@@ -677,6 +677,8 @@ def resultado_publico(c, pq):
         "_doc_id": r.get("doc_id", ""),
         "_numero": r.get("numero", ""),
         "_tipo": r.get("tipo", ""),
+        "_puntaje": round(c["puntaje"], 3),
+        "_chunk_id": r.get("chunk_id", ""),
     }
 
 

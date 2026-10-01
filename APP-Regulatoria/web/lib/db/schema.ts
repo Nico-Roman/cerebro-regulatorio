@@ -160,6 +160,11 @@ export const consultas = pgTable(
     // Motivo por el que la compuerta de propósito no dejó llegar la consulta
     // al modelo: tarea | rol | formato | clinico.
     bloqueado: text("bloqueado"),
+    // Asistente, fase 1 (0012): las búsquedas que propuso la planificación
+    // (null si se buscó solo con la pregunta) y cuántas oraciones del borrador
+    // imponen algo sin cita.
+    busquedasPlanificadas: jsonb("busquedas_planificadas"),
+    afirmacionesSinCita: integer("afirmaciones_sin_cita"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [

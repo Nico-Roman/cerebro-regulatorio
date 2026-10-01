@@ -17,12 +17,12 @@
 import { createHash } from "node:crypto";
 import { completar, type ConfigIa, type RespuestaModelo } from "@/lib/ia/proveedor";
 import { sanearPregunta } from "@/lib/ia/proposito";
-import { casoSinSalvedad, verificarDatos } from "@/lib/ia/verificar";
-import { conceptosSinCubrir, normalizar, type Respuesta } from "@/lib/search";
+import { afirmacionesSinCita, casoSinSalvedad, verificarDatos } from "@/lib/ia/verificar";
+import { conceptosSinCubrir, normalizar, type Respuesta, type ResultadoPublico } from "@/lib/search";
 
 // Súbelo cuando cambie el prompt: forma parte de la clave de caché, así que las
 // respuestas redactadas con reglas viejas dejan de reutilizarse solas.
-export const VERSION_PROMPT = "2026-09-14b";
+export const VERSION_PROMPT = "2026-10-01a";
 
 // Frase fija de abstención. Fija para que la pantalla y la evaluación puedan
 // reconocerla sin interpretar prosa.
@@ -100,11 +100,22 @@ export interface Redaccion {
    * la regla de otro caso como la respuesta. Vacío si no se pasó la pregunta.
    */
   casoNoCubierto: string[];
+  /**
+   * Oraciones que imponen una obligación, prohibición o plazo sin citar un
+   * pasaje existente, tal como aparecen en `texto` (para subrayarlas). Un
+   * borrador con alguna no entra a la caché. Encargo C, punto 4.
+   */
+  afirmacionesSinCita: string[];
 }
 
 /** Los pasajes que el motor muestra, en el orden en que los muestra. */
 export function pasajesDesdeRespuesta(respuesta: Respuesta): PasajeParaModelo[] {
-  const filas = (respuesta.principal ? [respuesta.principal] : []).concat(respuesta.relacionadas);
+  return pasajesDesdeResultados((respuesta.principal ? [respuesta.principal] : []).concat(respuesta.relacionadas));
+}
+
+/** Pasajes para el modelo a partir de resultados del motor (p. ej. ya unidos
+ *  de varias búsquedas por lib/ia/planificar.ts). */
+export function pasajesDesdeResultados(filas: ResultadoPublico[]): PasajeParaModelo[] {
   return filas.map((r) => ({
     cita: r.cita,
     norma: r.norma,
@@ -168,18 +179,20 @@ export function resolverCitas(textoModelo: string, pasajes: PasajeParaModelo[], 
   const citados = new Set<number>();
   const invalidas = new Set<number>();
 
-  const texto = textoModelo.replace(MARCA_CITA, (marca) => {
-    const partes = numerosDeMarca(marca).map((n) => {
-      const p = pasajes[n - 1];
-      if (!p) {
-        invalidas.add(n);
-        return "cita no verificable";
-      }
-      citados.add(n);
-      return p.cita;
+  const resolver = (t: string) =>
+    t.replace(MARCA_CITA, (marca) => {
+      const partes = numerosDeMarca(marca).map((n) => {
+        const p = pasajes[n - 1];
+        if (!p) {
+          invalidas.add(n);
+          return "cita no verificable";
+        }
+        citados.add(n);
+        return p.cita;
+      });
+      return `[${[...new Set(partes)].join("; ")}]`;
     });
-    return `[${[...new Set(partes)].join("; ")}]`;
-  });
+  const texto = resolver(textoModelo);
 
   const fuentes = [...citados]
     .sort((a, b) => a - b)
@@ -212,6 +225,10 @@ export function resolverCitas(textoModelo: string, pasajes: PasajeParaModelo[], 
     sinCitas: !abstuvo && fuentes.length === 0,
     datosNoVerificados: [...datos.noVerificados, ...datos.normasNoVerificadas],
     casoNoCubierto,
+    // Se detectan sobre el texto crudo (las [Pn] dicen si la cita es válida) y
+    // se devuelven resueltas: así son subcadenas exactas de `texto`. Resolver
+    // marcas no cruza oraciones, por eso la correspondencia es exacta.
+    afirmacionesSinCita: abstuvo ? [] : afirmacionesSinCita(textoModelo, pasajes.length).map(resolver),
   };
 }
 
