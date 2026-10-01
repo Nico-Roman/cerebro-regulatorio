@@ -10,7 +10,6 @@
 // lugar: la cita y el texto oficial mandan por sobre el resumen. Va arriba del
 // pasaje porque en las pruebas en vivo acertó donde el pasaje no.
 
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 
 type Estado = "inicial" | "cargando" | "listo" | "ausencia" | "error";
@@ -52,16 +51,11 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
   const [borrador, setBorrador] = useState<Borrador | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
   const [reintentable, setReintentable] = useState(false);
-  // Llegó a sus preguntas del día: no se vende nada, se ofrece la asesoría.
-  const [limite, setLimite] = useState(false);
-  // Preguntas con IA que le quedan hoy; null para el administrador (sin tope).
-  const [restantesHoy, setRestantesHoy] = useState<number | null>(null);
 
   const pedir = useCallback(async () => {
     setEstado("cargando");
     setAviso(null);
     setReintentable(false);
-    setLimite(false);
     try {
       const res = await fetch("/api/responder", {
         method: "POST",
@@ -92,8 +86,9 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
         return;
       }
       if (res.status === 429) {
-        setAviso(datos.mensaje || "Llegaste a la cuota diaria de respuestas redactadas.");
-        setLimite(datos.error === "limite_diario");
+        // Ráfaga: el cupo diario ya se descontó al enviar la pregunta.
+        setAviso(datos.mensaje || "Vas muy rápido para el redactor. Espera unos segundos.");
+        setReintentable(true);
         setEstado("error");
         return;
       }
@@ -118,7 +113,6 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
         casoNoCubierto: datos.casoNoCubierto ?? [],
         cacheada: Boolean(datos.cacheada),
       });
-      if (typeof datos.restantesHoy === "number") setRestantesHoy(datos.restantesHoy);
       setEstado("listo");
     } catch {
       setAviso("No pudimos redactar la respuesta. Los pasajes de arriba siguen sirviendo.");
@@ -214,27 +208,12 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
           Redactado por un modelo de lenguaje solo con los pasajes de esta búsqueda, con temperatura cero. Puede
           equivocarse al interpretar o resumir: antes de decidir, lee la frase de la norma y la fuente oficial. Es
           apoyo a la consulta, no asesoría regulatoria ni legal.
-          {borrador?.cacheada ? " Reutilizado de una consulta idéntica: no cuenta en tus preguntas del día." : ""}
-        </p>
-      )}
-
-      {estado === "listo" && restantesHoy !== null && (
-        <p className="text-xs text-muted">
-          Te {restantesHoy === 1 ? "queda" : "quedan"} {restantesHoy}{" "}
-          {restantesHoy === 1 ? "pregunta" : "preguntas"} con IA hoy.
+          {borrador?.cacheada ? " Reutilizado de una consulta idéntica." : ""}
         </p>
       )}
 
       {(estado === "ausencia" || estado === "error") && aviso && (
         <p className={estado === "ausencia" ? "text-sm text-amber-200" : "text-sm text-muted"}>{aviso}</p>
-      )}
-      {estado === "error" && limite && (
-        <Link
-          href="/agenda"
-          className="self-start border border-sky-700 px-4 py-2 text-xs text-sky-200 transition-colors hover:border-sky-400 hover:text-foreground"
-        >
-          ¿Es urgente? Agenda una evaluación
-        </Link>
       )}
       {estado === "error" && reintentable && (
         <button

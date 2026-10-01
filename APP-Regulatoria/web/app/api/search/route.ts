@@ -4,8 +4,9 @@ import { legado, responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
 import { iaDisponible } from "@/lib/ia/config";
+import { DIA, MENSAJE_LIMITE_DIARIO, PREGUNTAS_DIARIAS, claveCupoDiario, decidirCupo } from "@/lib/ia/cupo";
 import { consumirCupo } from "@/lib/rate-limit";
-import { usuarioActual } from "@/lib/sesion";
+import { esAdmin, usuarioActual } from "@/lib/sesion";
 
 export const runtime = "nodejs";
 
@@ -65,6 +66,18 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "consulta_vacia", mensaje: "Escribe una pregunta." }, { status: 400 });
   }
 
+  // Cupo diario (lib/ia/cupo.ts): cada pregunta enviada cuenta 1 al llegar,
+  // antes de buscar, pase lo que pase después. Sin devoluciones.
+  const sinLimite = esAdmin(usuario.email);
+  const usadasHoy = sinLimite ? 0 : (await consumirCupo(claveCupoDiario(usuario.id), PREGUNTAS_DIARIAS, DIA)).contador;
+  const diario = decidirCupo(usadasHoy, sinLimite);
+  if (!diario.permitido) {
+    return NextResponse.json(
+      { error: "limite_diario", mensaje: MENSAJE_LIMITE_DIARIO, restantesHoy: 0 },
+      { status: 429 }
+    );
+  }
+
   const respuesta = responder(q, { k, vigente, categoria, sinOcr });
   const resumen = legado(respuesta);
 
@@ -121,5 +134,7 @@ export async function GET(req: NextRequest) {
     consultaId: consultaRegistrada ? consultaId : null,
     // El botón de redacción con IA solo aparece si la IA está configurada.
     iaDisponible: await iaDisponible(),
+    // Lo que queda hoy, ya descontada esta pregunta; null sin tope (admin).
+    restantesHoy: diario.restantesHoy,
   });
 }

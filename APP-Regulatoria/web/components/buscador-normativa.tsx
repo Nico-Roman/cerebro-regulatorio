@@ -50,6 +50,7 @@ interface RespuestaApi {
   avisos: string[];
   consultaId: string | null;
   iaDisponible: boolean;
+  restantesHoy: number | null;
 }
 
 // Las categorías viajan al API como nombre de carpeta; acá se muestran como
@@ -245,7 +246,16 @@ function NormasRecientesPanel({ normas }: { normas: NormaReciente[] | null }) {
   );
 }
 
-export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boolean }) {
+export function BuscadorNormativa({
+  iaDisponible = false,
+  restantesIniciales = null,
+  maximoDiario = 10,
+}: {
+  iaDisponible?: boolean;
+  /** Preguntas que quedan hoy; null sin tope (administrador) o si no se pudo leer. */
+  restantesIniciales?: number | null;
+  maximoDiario?: number;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   // La home manda la consulta por querystring (?q=), así que es el valor
@@ -261,6 +271,9 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
   const [normasRecientes, setNormasRecientes] = useState<NormaReciente[] | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
   const [verTodas, setVerTodas] = useState(false);
+  // Cada mensaje enviado cuenta 1 del día; el API devuelve el saldo actualizado.
+  const [restantesHoy, setRestantesHoy] = useState<number | null>(restantesIniciales);
+  const [limiteDiario, setLimiteDiario] = useState(false);
   // Modo IA: pide el borrador redactado apenas termina cada búsqueda. Es una
   // preferencia del navegador, no de la cuenta. Arranca encendido: en las
   // pruebas en vivo el borrador acertó donde el pasaje de arriba no.
@@ -309,12 +322,18 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
         }
         if (!res.ok) {
           const err = await res.json().catch(() => ({}));
+          const agotado = res.status === 429 && err.error === "limite_diario";
+          setLimiteDiario(agotado);
+          if (agotado) setRestantesHoy(0);
           setAviso(err.mensaje || "No pudimos completar la búsqueda. Vuelve a intentar en unos segundos.");
           setRespuesta(null);
           return;
         }
         setAviso(null);
-        setRespuesta((await res.json()) as RespuestaApi);
+        setLimiteDiario(false);
+        const datos = (await res.json()) as RespuestaApi;
+        if (typeof datos.restantesHoy === "number") setRestantesHoy(datos.restantesHoy);
+        setRespuesta(datos);
       } catch {
         setAviso("No pudimos completar la búsqueda. Revisa tu conexión y vuelve a intentar.");
         setRespuesta(null);
@@ -465,10 +484,25 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
             </div>
           )}
 
-          {aviso && (
-            <p role="alert" className="border-l-2 border-amber-500/60 bg-amber-500/5 px-4 py-3 text-sm text-amber-200">
-              {aviso}
+          {restantesHoy !== null && (
+            <p className="-mt-3 text-xs text-muted" aria-live="polite">
+              Te {restantesHoy === 1 ? "queda" : "quedan"} {restantesHoy} de {maximoDiario} preguntas hoy. Se
+              renuevan a medianoche, hora de Chile.
             </p>
+          )}
+
+          {aviso && (
+            <div role="alert" className="flex flex-col gap-3 border-l-2 border-amber-500/60 bg-amber-500/5 px-4 py-3">
+              <p className="text-sm text-amber-200">{aviso}</p>
+              {limiteDiario && (
+                <Link
+                  href="/agenda"
+                  className="self-start text-sm font-medium text-foreground underline underline-offset-4"
+                >
+                  ¿Es urgente? Agenda una evaluación
+                </Link>
+              )}
+            </div>
           )}
 
           {respuesta && estilo && !loading && (

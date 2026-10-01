@@ -72,7 +72,7 @@ export default function Home() {
         </div>
 
         <p className="mt-7 max-w-2xl text-sm leading-relaxed text-muted">
-          Es gratuito y va a seguir siéndolo. Solo tienes que registrarte.
+          Es gratuito. Solo tienes que registrarte.
         </p>
       </section>
 
@@ -155,7 +155,7 @@ export default function Home() {
               href="/asesoria"
               className="label-micro mt-8 inline-block border border-line px-4 py-2.5 transition-colors hover:border-foreground"
             >
-              Cómo trabajo contigo
+              Cómo trabajamos contigo
             </Link>
           </div>
         </div>
@@ -354,7 +354,7 @@ export default function Home() {
               <p className="mt-5 text-sm leading-relaxed text-muted">
                 Revisamos tu situación y te decimos con claridad qué trámite corresponde,
                 qué antecedentes necesitas y en qué orden conviene hacerlo. La primera
-                evaluación no tiene costo y va a seguir sin tenerlo.
+                evaluación es breve y sin costo.
               </p>
 
               {/* Una acción dominante y dos alternativas, en vez de tres

@@ -20,15 +20,14 @@ import {
 import { responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
-import { consumirCupo, cupoUsado, devolverCupo } from "@/lib/rate-limit";
-import { esAdmin, usuarioActual } from "@/lib/sesion";
-import { DIA, PREGUNTAS_DIARIAS, claveCupoDiario as claveDia } from "@/lib/ia/cupo";
+import { consumirCupo } from "@/lib/rate-limit";
+import { usuarioActual } from "@/lib/sesion";
+import { DIA } from "@/lib/ia/cupo";
 
 export const runtime = "nodejs";
 
-// Cuántas respuestas con IA puede pedir cada persona al día: lib/ia/cupo.ts.
-// El cupo se consume después de la caché, así que una respuesta repetida no
-// cuenta.
+// El cupo diario por persona ya se descontó en /api/search, al enviar la
+// pregunta (lib/ia/cupo.ts). Acá solo quedan la ráfaga y el techo del sitio.
 
 // Ráfaga por persona. El tier gratuito de Groq corta a 8.000 tokens por minuto
 // (~3 respuestas); esto lo respeta antes de que lo haga el proveedor.
@@ -237,27 +236,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Cupo diario: se consume antes de llamar al modelo y se devuelve si la
-  // redacción no llega a entregarse.
-  const sinLimite = esAdmin(usuario.email);
-  if (!sinLimite) {
-    const cupo = await consumirCupo(claveDia(usuario.id), PREGUNTAS_DIARIAS, DIA);
-    if (!cupo.permitido) {
-      return NextResponse.json(
-        {
-          error: "limite_diario",
-          mensaje: `Usaste tus ${PREGUNTAS_DIARIAS} preguntas de hoy. Se renuevan a medianoche, hora de Chile.`,
-        },
-        { status: 429 }
-      );
-    }
-  }
-  const devolver = () => (sinLimite ? Promise.resolve() : devolverCupo(claveDia(usuario.id), DIA));
-
   const techo = await consumirCupo("ia:sitio", MAX_RESPUESTAS_DIA_SITIO, DIA);
   if (!techo.permitido) {
     console.warn("[ia] techo diario del sitio alcanzado");
-    await devolver();
     return NextResponse.json(
       {
         error: "techo_sitio",
@@ -272,7 +253,6 @@ export async function POST(req: NextRequest) {
     const r = salida.redaccion;
 
     if (!r.texto) {
-      await devolver();
       return NextResponse.json({ error: "respuesta_vacia" }, { status: 502 });
     }
 
@@ -317,21 +297,13 @@ export async function POST(req: NextRequest) {
       })
       .where(eq(consultas.id, consulta.id));
 
-    const restantesHoy = sinLimite
-      ? null
-      : await cupoUsado(claveDia(usuario.id), DIA)
-          .then((usadas) => Math.max(0, PREGUNTAS_DIARIAS - usadas))
-          .catch(() => null);
     return NextResponse.json({
       ...cuerpoRespuesta({ texto: r.texto, fuentes: r.fuentes, modelo: salida.modelo, cacheada: false, senales }),
       latenciaMs: salida.latenciaMs,
-      restantesHoy,
     });
   } catch (e) {
-    // Nada llegó a la persona: la pregunta vuelve a su cupo del día.
-    await devolver().catch(() => {});
     if (e instanceof ErrorProveedor && e.status === 429) {
-      // Tope del proveedor, no una caída. La pregunta ya se devolvió arriba.
+      // Tope del proveedor, no una caída.
       const espera = e.reintentarEnSeg ?? 20;
       // Una espera de minutos es el tope DIARIO de tokens del tier gratuito
       // (medido el 13-09-2026: pedía 8 a 27 minutos). Decirle a alguien

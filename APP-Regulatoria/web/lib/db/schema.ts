@@ -242,6 +242,10 @@ export const reservas = pgTable(
     email: text("email").notNull(),
     empresa: text("empresa"),
     motivo: text("motivo"),
+    // Calificación de la evaluación (0011): lib/calificacion.ts. Nulos en las
+    // reservas anteriores al 24-09-2026.
+    producto: text("producto"),
+    etapa: text("etapa"),
     inicio: timestamp("inicio", { withTimezone: true }).notNull(),
     fin: timestamp("fin", { withTimezone: true }).notNull(),
     googleEventId: text("google_event_id"),

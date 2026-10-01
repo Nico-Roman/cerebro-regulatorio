@@ -15,6 +15,7 @@ import { fechaLargaEnZona, horaEnZona } from "@/lib/agenda/tiempo";
 import { enviarCorreo } from "@/lib/correo";
 import { escaparHtml, urlSegura } from "@/lib/html";
 import { ipCliente } from "@/lib/ip";
+import { etapaValida, productoValido } from "@/lib/calificacion";
 import { db } from "@/lib/db";
 import { reservas } from "@/lib/db/schema";
 import { consumirCupo } from "@/lib/rate-limit";
@@ -43,11 +44,14 @@ export async function POST(req: NextRequest) {
   const email = typeof cuerpo.email === "string" ? cuerpo.email.trim().slice(0, 200) : "";
   const empresa = typeof cuerpo.empresa === "string" ? cuerpo.empresa.trim().slice(0, 160) : "";
   const motivo = typeof cuerpo.motivo === "string" ? cuerpo.motivo.trim().slice(0, 1000) : "";
+  // Obligatorios desde el 24-09-2026: califican la evaluación antes de la reunión.
+  const producto = productoValido(cuerpo.producto);
+  const etapa = etapaValida(cuerpo.etapa);
   // Trampa para bots: un campo que una persona nunca ve ni llena.
   const trampa = typeof cuerpo.web === "string" ? cuerpo.web : "";
 
   if (trampa) return NextResponse.json({ ok: true });
-  if (!inicioIso || !nombre || !EMAIL_VALIDO.test(email)) {
+  if (!inicioIso || !nombre || !EMAIL_VALIDO.test(email) || !producto || !etapa) {
     return NextResponse.json({ error: "datos_incompletos" }, { status: 400 });
   }
 
@@ -110,6 +114,8 @@ export async function POST(req: NextRequest) {
       calendarioId: config.calendarios[0],
       titulo: `RegulaMED · ${nombre}${empresa ? ` (${empresa})` : ""}`,
       descripcion: [
+        `Producto: ${producto}`,
+        `Etapa: ${etapa}`,
         motivo ? `Motivo: ${motivo}` : "Sin motivo declarado.",
         `Correo: ${email}`,
         usuario ? `Usuario registrado: ${usuario.email}` : "No tiene cuenta en el buscador.",
@@ -135,6 +141,8 @@ export async function POST(req: NextRequest) {
       email,
       empresa: empresa || null,
       motivo: motivo || null,
+      producto,
+      etapa,
       inicio,
       fin,
       googleEventId: eventoId,
@@ -186,6 +194,7 @@ export async function POST(req: NextRequest) {
       html: `
         <p>Hola ${escaparHtml(nombre)},</p>
         <p>Tu reunión de ${config.duracionMin} minutos quedó agendada para <strong>${escaparHtml(cuando)}</strong>.</p>
+        <p>Producto: ${escaparHtml(producto)}<br />Etapa: ${escaparHtml(etapa)}</p>
         ${meetSeguro ? `<p>Enlace de la videollamada: <a href="${escaparHtml(meetSeguro)}">${escaparHtml(meetSeguro)}</a></p>` : ""}
         <p>Si necesitas cancelar, usa este enlace: <a href="${escaparHtml(enlaceGestion)}">${escaparHtml(enlaceGestion)}</a></p>
         <p style="color:#666;font-size:12px">Adjuntamos el archivo .ics por si quieres agregarla a otro calendario.</p>
