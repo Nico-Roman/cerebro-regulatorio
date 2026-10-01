@@ -76,7 +76,20 @@ const CATEGORIA_MAP = {
   "farmacovigilancia": "farmacovigilancia",
   "ensayos clinicos": "ensayos_clinicos",
   "codigo sanitario": "codigo_sanitario",
+  // Listado ANDID y fuentes mínimas de dispositivos (encargo B).
+  "dispositivos medicos": "dispositivos_medicos",
 };
+
+// Fuentes mínimas de dispositivos médicos: entran aunque el listado ANDID no
+// responda (ver vigilancia-isp/check-normativa.js, runAndid).
+function fuentesDispositivos() {
+  try {
+    const f = JSON.parse(fs.readFileSync(path.join(CEREBRO_DIR, "fuentes-dispositivos.json"), "utf-8"));
+    return (f.normas || []).map((n) => ({ ...n, categoria: f.categoria, modificaciones: "", _semilla: true }));
+  } catch (e) {
+    return [];
+  }
+}
 
 const TIPOS = [
   "Decreto con Fuerza de Ley",
@@ -304,9 +317,26 @@ function main() {
   const nCambios = diff.nuevas.length + diff.modificadas.length + diff.eliminadas.length;
   say(`  total normas: ${total} · nuevas: ${diff.nuevas.length} · modificadas: ${diff.modificadas.length} · eliminadas: ${diff.eliminadas.length}`);
 
+  // Segundo listado: dispositivos médicos (ANDID). No aborta si no responde.
+  let andid = { encontrado: false, records: [], diff: { nuevas: [], modificadas: [], eliminadas: [] } };
+  try {
+    const { runAndid } = require(path.join(VIGILANCIA_DIR, "check-normativa.js"));
+    andid = runAndid();
+    say(andid.encontrado
+      ? `  ANDID: ${andid.total} normas · nuevas: ${andid.diff.nuevas.length} · modificadas: ${andid.diff.modificadas.length} · eliminadas: ${andid.diff.eliminadas.length}`
+      : "  [warn] ANDID: no se encontró el listado de dispositivos médicos; siguen las fuentes mínimas.");
+  } catch (e) {
+    say(`  [warn] ANDID: falló el scrape (${e.message}); siguen las fuentes mínimas.`);
+  }
+
   say("Paso 2/7: descarga de PDF nuevos/modificados…");
   const existing = buildExistingIndex();
-  const candidatos = [...diff.nuevas, ...diff.modificadas.map((m) => m.despues)];
+  const candidatos = [
+    ...diff.nuevas,
+    ...diff.modificadas.map((m) => m.despues),
+    ...andid.diff.nuevas,
+    ...andid.diff.modificadas.map((m) => m.despues),
+  ];
   let descargados = 0;
   let fallidos = 0;
   for (const r of candidatos) {
@@ -351,6 +381,12 @@ function main() {
     const claveNorma = (r) =>
       `${normKey(r.categoria)}|${normKey(r.tipo)}|${(r.numero || "").replace(/\D/g, "") || normKey(r.numero)}`;
 
+    // ANAMED + ANDID + fuentes mínimas de dispositivos: todo lo que el corpus
+    // debería tener se reconcilia con el disco, venga de donde venga.
+    const andidSnap = path.join(VIGILANCIA_DIR, "snapshots", "andid-latest.json");
+    const andidRecords = fs.existsSync(andidSnap) ? JSON.parse(fs.readFileSync(andidSnap, "utf-8")).records || [] : [];
+    snapshot.records = [...(snapshot.records || []), ...andidRecords, ...fuentesDispositivos()];
+
     const idx = buildExistingIndex();
     const resultados = {};
     const noRecuperables = [];
@@ -361,6 +397,20 @@ function main() {
       const clave = claveNorma(r);
       if (vistos.has(clave)) continue;
       vistos.add(clave);
+
+      if (r._semilla && !r.enlace) {
+        // Fuente mínima sin enlace todavía (p. ej. Decreto Exento 31/2026).
+        noRecuperables.push({
+          clave,
+          norma: `${r.tipo} ${r.numero}`,
+          categoria: r.categoria,
+          enlace: "",
+          motivo: r.pendiente || "fuente mínima sin enlace: falta la URL oficial",
+        });
+        continue;
+      }
+      // Los decretos que entran por el XML de la BCN no necesitan su PDF.
+      if (r._semilla && r.bcn_id_norma) continue;
 
       const base = urlBasename(r.enlace);
       if (!base.endsWith(".pdf")) {
@@ -445,6 +495,13 @@ function main() {
   } catch (e) {
     say(`  [warn] la vigilancia del Código Sanitario falló: ${e.message}`);
   }
+  // Mismo tratamiento para los decretos de dispositivos que vienen de la BCN
+  // (DS 825/1998): XML refundido y vigilancia por artículo.
+  try {
+    execFileSync("python", ["decretos_bcn.py", "--vigilar"], { cwd: CEREBRO_DIR, stdio: "inherit" });
+  } catch (e) {
+    say(`  [warn] la vigilancia de decretos BCN de dispositivos falló: ${e.message}`);
+  }
 
   say("Paso 5/7: reconstrucción del corpus…");
   execFileSync("python", ["build_corpus.py"], { cwd: CEREBRO_DIR, stdio: "inherit" });
@@ -512,6 +569,9 @@ function main() {
           documentos: (meta.documentos || []).length,
           normas_listado_oficial: meta.normas_listado_oficial,
           codigo_sanitario: meta.codigo_sanitario || null,
+          // Sugerencias de la home que solo aparecen si su búsqueda ya
+          // devuelve una norma de esa materia (eval_respuestas.py).
+          sugerencias_home: (evalResp && evalResp.sugerencias_home) || {},
           publicado_por: EN_CI ? "github-actions" : "pc-local",
         },
         null,

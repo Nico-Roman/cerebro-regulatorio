@@ -13,37 +13,38 @@ import { clasificarPeticion } from "@/lib/ia/proposito";
 import {
   claveCache,
   esAbstencion,
-  pasajesDesdeRespuesta,
+  pasajesDesdeResultados,
   redactarRespuesta,
   type FuenteCitada,
 } from "@/lib/ia/redactar";
+import { MAX_PASAJES, admitePlanificacion, planificarBusquedas, unirPasajes } from "@/lib/ia/planificar";
+import { afirmacionesSinCitaResueltas } from "@/lib/ia/verificar";
+import { historialDe } from "@/lib/conversaciones";
 import { responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
 import { consumirCupo } from "@/lib/rate-limit";
-import { estadoCreditos, liquidarCredito, reembolsarCredito, reservarCredito, type Reserva } from "@/lib/creditos";
 import { usuarioActual } from "@/lib/sesion";
+import { DIA } from "@/lib/ia/cupo";
 
 export const runtime = "nodejs";
 
-// Cuánto puede redactar cada persona lo deciden sus créditos (lib/planes.ts y
-// lib/creditos.ts): cupo mensual y diario del plan, y packs sin vencimiento. Una
-// respuesta servida desde la caché no cobra crédito: no costó tokens.
+// El cupo diario por persona ya se descontó en /api/search, al enviar la
+// pregunta (lib/ia/cupo.ts). Acá solo quedan la ráfaga y el techo del sitio.
 
 // Ráfaga por persona. El tier gratuito de Groq corta a 8.000 tokens por minuto
 // (~3 respuestas); esto lo respeta antes de que lo haga el proveedor.
 const MAX_RESPUESTAS_MINUTO = Number.parseInt(process.env.LLM_CUOTA_MINUTO ?? "", 10) || 3;
 
-// Techo del SITIO para el plan GRATIS. Sin esto, el cupo gratis no acota el
-// gasto: son 10 respuestas diarias por cuenta de Google, y las cuentas de
-// Google no escasean. Los planes pagados y los packs no pasan por este techo:
-// cada crédito que gastan ya está pagado, y cortarle el servicio a quien paga
-// porque las cuentas gratis agotaron el día sería castigar al que no toca.
-const MAX_RESPUESTAS_DIA_SITIO = Number.parseInt(process.env.LLM_CUOTA_DIARIA_SITIO ?? "", 10) || 400;
+// Techo del SITIO. Sin esto, el cupo por persona no acota el gasto: son 10
+// respuestas diarias por cuenta de Google, y las cuentas de Google no escasean.
+const MAX_RESPUESTAS_DIA_SITIO = Number.parseInt(process.env.LLM_CUOTA_DIARIA_SITIO ?? "", 10) || 1000;
 
-// Cuántos pasajes entran al prompt. Más de seis no mejora la respuesta y
-// multiplica el costo por consulta.
-const PASAJES_AL_MODELO = 6;
+// Pasajes por búsqueda. La planificación corre hasta cinco búsquedas (la
+// pregunta y hasta cuatro reescrituras) y al redactor llegan como máximo
+// MAX_PASAJES (8) después de unirlas: más no mejora la respuesta y multiplica
+// el costo por consulta.
+const PASAJES_POR_BUSQUEDA = 6;
 
 interface Senales {
   abstuvo: boolean;
@@ -51,6 +52,8 @@ interface Senales {
   citasInvalidas: boolean;
   datosNoVerificados: string[];
   casoNoCubierto: string[];
+  /** Oraciones que imponen algo sin cita, tal como aparecen en el texto. */
+  afirmacionesSinCita: string[];
 }
 
 /** Las señales como columnas de `consultas`. Las listas van separadas por coma. */
@@ -61,6 +64,7 @@ function columnasSenales(s: Senales) {
     citasInvalidas: s.citasInvalidas,
     datosNoVerificados: s.datosNoVerificados.length ? s.datosNoVerificados.join(",") : null,
     casoNoCubierto: s.casoNoCubierto.length ? s.casoNoCubierto.join(",") : null,
+    afirmacionesSinCita: s.afirmacionesSinCita.length,
   };
 }
 
@@ -88,6 +92,9 @@ function senalesDeFila(fila: {
     citasInvalidas: fila.citasInvalidas ?? /cita no verificable/.test(fila.texto),
     datosNoVerificados: fila.datosNoVerificados ? fila.datosNoVerificados.split(",") : [],
     casoNoCubierto: fila.casoNoCubierto ? fila.casoNoCubierto.split(",") : [],
+    // La fila guarda solo cuántas; las oraciones se recuperan del texto ya
+    // resuelto. Las de caché tienen cero por invariante (no se cachean).
+    afirmacionesSinCita: abstuvo ? [] : afirmacionesSinCitaResueltas(fila.texto),
   };
 }
 
@@ -114,7 +121,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "perfil_incompleto" }, { status: 403 });
   }
   // El modelo que esté activo en el panel (o LLM_* si no hay ninguno). Se lee
-  // una vez por petición: todo lo de abajo —caché, cobro, costo— usa el mismo.
+  // una vez por petición: todo lo de abajo —caché, costo— usa el mismo.
   const config = await configIaActiva();
   if (!config) {
     return NextResponse.json({ error: "ia_no_configurada" }, { status: 503 });
@@ -174,25 +181,66 @@ export async function POST(req: NextRequest) {
     sinOcr?: boolean;
   };
 
-  const respuesta = responder(consulta.pregunta, {
-    k: PASAJES_AL_MODELO,
+  const opcionesBusqueda = {
+    k: PASAJES_POR_BUSQUEDA,
     vigente: Boolean(filtros.vigente),
     categoria: filtros.categoria ?? undefined,
     sinOcr: Boolean(filtros.sinOcr),
-  });
-  const pasajes = pasajesDesdeRespuesta(respuesta);
+  };
+  const original = responder(consulta.pregunta, opcionesBusqueda);
+  // Las 3 preguntas anteriores del hilo, como contexto (encargo C2).
+  const historial = await historialDe(consulta).catch(() => []);
 
-  // Compuerta: si el motor ya concluyó que la materia no está en la base, no se
-  // llama al modelo. Ahorra tokens, pero sobre todo evita la respuesta segura
-  // de sí misma construida sobre pasajes que no vienen al caso.
-  if (respuesta.estado === "ausente" || !pasajes.length) {
-    return NextResponse.json({ respuesta: null, ausencia: true, motivo: respuesta.motivo });
+  // Una materia que la base excluye (por regla o porque la palabra central no
+  // está en ninguna norma) no se rescata con búsquedas reescritas. En una
+  // repregunta («¿y si no es seria?») la palabra que falta suele estar en el
+  // contexto: ahí solo corta la exclusión por materia.
+  if (historial.length ? Boolean(original.fuera_de_alcance) : !admitePlanificacion(original)) {
+    return NextResponse.json({ respuesta: null, ausencia: true, motivo: original.motivo });
+  }
+
+  const rafaga = await consumirCupo(`ia:min:${usuario.id}`, MAX_RESPUESTAS_MINUTO, 60);
+  if (!rafaga.permitido) {
+    return NextResponse.json(
+      { error: "demasiado_rapido", mensaje: "Vas muy rápido para el redactor. Espera unos segundos." },
+      { status: 429, headers: { "Retry-After": String(rafaga.reinicioEn) } }
+    );
+  }
+
+  const techo = await consumirCupo("ia:sitio", MAX_RESPUESTAS_DIA_SITIO, DIA);
+  if (!techo.permitido) {
+    console.warn("[ia] techo diario del sitio alcanzado");
+    return NextResponse.json(
+      {
+        error: "techo_sitio",
+        mensaje: "El asistente alcanzó su tope de hoy. Los pasajes de arriba siguen disponibles.",
+      },
+      { status: 503 }
+    );
+  }
+
+  // Planificación (lib/ia/planificar.ts): 2 a 4 búsquedas con el vocabulario de
+  // la norma, además de la pregunta original. Nunca lanza: ante cualquier
+  // falla se busca solo con la pregunta, como antes.
+  const plan = await planificarBusquedas(consulta.pregunta, { config, historial });
+  const respuestas = [original, ...plan.busquedas.slice(1).map((b) => responder(b, opcionesBusqueda))];
+  const pasajes = pasajesDesdeResultados(unirPasajes(respuestas, MAX_PASAJES));
+  const busquedasPlanificadas = plan.planificado ? plan.busquedas.slice(1) : null;
+
+  // Compuerta: si ninguna búsqueda trajo pasajes, no se llama al redactor.
+  if (!pasajes.length) {
+    await db
+      .update(consultas)
+      .set({ busquedasPlanificadas, costoUsd: plan.costoUsd })
+      .where(eq(consultas.id, consulta.id));
+    return NextResponse.json({ respuesta: null, ausencia: true, motivo: original.motivo });
   }
 
   // Caché compartida: otra persona ya hizo esta pregunta y el motor le entregó
-  // exactamente los mismos pasajes. No descuenta cuota ni llama al modelo.
-  const clave = claveCache(consulta.pregunta, pasajes, config.modelo);
-  const [previa] = await db
+  // exactamente los mismos pasajes. No llama al redactor. Una repregunta no se
+  // comparte: su respuesta depende del hilo, que es de una sola persona.
+  const clave = historial.length ? null : claveCache(consulta.pregunta, pasajes, config.modelo);
+  const [previa] = !clave ? [] : await db
     .select({
       texto: consultas.respuestaLlm,
       fuentes: consultas.fuentesLlm,
@@ -219,11 +267,12 @@ export async function POST(req: NextRequest) {
         fuentesLlm: previa.fuentes,
         modelo: previa.modelo,
         claveIa: clave,
-        tokensIn: 0,
-        tokensOut: 0,
-        latenciaMs: 0,
+        tokensIn: plan.tokensEntrada,
+        tokensOut: plan.tokensSalida,
+        latenciaMs: plan.latenciaMs,
         proveedor: "cache",
-        costoUsd: 0,
+        costoUsd: plan.costoUsd,
+        busquedasPlanificadas,
         ...columnasSenales(senales),
       })
       .where(eq(consultas.id, consulta.id));
@@ -232,57 +281,13 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const rafaga = await consumirCupo(`ia:min:${usuario.id}`, MAX_RESPUESTAS_MINUTO, 60);
-  if (!rafaga.permitido) {
-    return NextResponse.json(
-      { error: "demasiado_rapido", mensaje: "Vas muy rápido para el redactor. Espera unos segundos." },
-      { status: 429, headers: { "Retry-After": String(rafaga.reinicioEn) } }
-    );
-  }
-
-  // Cobro: se reserva 1 crédito antes de llamar al modelo (candado por persona
-  // y equipo, así dos pestañas no gastan dos veces el último). Si la redacción
-  // no llega a entregarse, se devuelve.
-  const cobro = await reservarCredito(usuario.id, consulta.id);
-  if (!cobro.ok) {
-    return NextResponse.json(
-      // `plan` le permite a la pantalla ofrecer solo los planes superiores en el
-      // aviso de límite (components/modal-planes.tsx).
-      { error: cobro.motivo, mensaje: cobro.mensaje, plan: cobro.plan },
-      { status: 429 }
-    );
-  }
-  const reserva: Reserva = cobro.reserva;
-
-  if (reserva.plan === "gratis" && reserva.fuente === "plan") {
-    const techo = await consumirCupo("ia:sitio:gratis", MAX_RESPUESTAS_DIA_SITIO, 86_400);
-    if (!techo.permitido) {
-      console.warn("[ia] techo diario del plan gratis alcanzado");
-      await reembolsarCredito(reserva, "techo_sitio");
-      return NextResponse.json(
-        {
-          error: "techo_sitio",
-          // Es un tope del sitio, no de la persona: no se le ofrecen planes.
-          mensaje:
-            "La redacción con IA alcanzó su tope por hoy. Los pasajes de arriba siguen disponibles; vuelve a intentarlo mañana.",
-        },
-        { status: 503 }
-      );
-    }
-  }
-
   try {
-    const salida = await redactarRespuesta(consulta.pregunta, pasajes, config);
+    const salida = await redactarRespuesta(consulta.pregunta, pasajes, config, historial);
     const r = salida.redaccion;
 
     if (!r.texto) {
-      await reembolsarCredito(reserva, "respuesta_vacia");
       return NextResponse.json({ error: "respuesta_vacia" }, { status: 502 });
     }
-
-    // Un crédito cubre hasta USD_POR_CREDITO de costo: con un modelo caro, o una
-    // consulta muy larga, se cobra la diferencia.
-    const cobrados = await liquidarCredito(reserva, salida);
 
     const senales: Senales = {
       abstuvo: r.abstuvo,
@@ -290,22 +295,28 @@ export async function POST(req: NextRequest) {
       citasInvalidas: r.citasInvalidas.length > 0,
       datosNoVerificados: r.datosNoVerificados,
       casoNoCubierto: r.casoNoCubierto,
+      afirmacionesSinCita: r.afirmacionesSinCita,
     };
 
     // Un borrador que no pasa la verificación (cita a un pasaje inexistente,
     // cifra o norma que no está en los pasajes, caso preguntado que los pasajes
-    // citados no tratan) no se guarda en la caché: se muestra con su advertencia
+    // citados no tratan, obligación o plazo sin cita) no se guarda en la caché: se muestra con su advertencia
     // a quien lo pidió, pero no se reparte. Invariante: lo que está en la caché
     // ya pasó todas las verificaciones, así que un acierto no se revisa de nuevo.
     const cacheable =
-      r.citasInvalidas.length === 0 && r.datosNoVerificados.length === 0 && r.casoNoCubierto.length === 0;
+      clave !== null &&
+      r.citasInvalidas.length === 0 &&
+      r.datosNoVerificados.length === 0 &&
+      r.casoNoCubierto.length === 0 &&
+      r.afirmacionesSinCita.length === 0;
     if (!cacheable) {
       console.warn(
         "[ia] borrador no verificado:",
         consulta.id,
         r.citasInvalidas,
         r.datosNoVerificados,
-        r.casoNoCubierto
+        r.casoNoCubierto,
+        r.afirmacionesSinCita.length
       );
     }
 
@@ -316,28 +327,24 @@ export async function POST(req: NextRequest) {
         fuentesLlm: r.fuentes,
         modelo: salida.modelo,
         claveIa: cacheable ? clave : null,
-        tokensIn: salida.tokensEntrada,
-        tokensOut: salida.tokensSalida,
-        latenciaMs: salida.latenciaMs,
+        // Planificación + redacción: lo que costó de verdad esta consulta.
+        tokensIn: salida.tokensEntrada + plan.tokensEntrada,
+        tokensOut: salida.tokensSalida + plan.tokensSalida,
+        latenciaMs: salida.latenciaMs + plan.latenciaMs,
         proveedor: salida.proveedor,
-        costoUsd: salida.costoUsd,
+        costoUsd: salida.costoUsd + plan.costoUsd,
+        busquedasPlanificadas,
         ...columnasSenales(senales),
       })
       .where(eq(consultas.id, consulta.id));
 
-    const creditos = await estadoCreditos(usuario.id).catch(() => null);
     return NextResponse.json({
       ...cuerpoRespuesta({ texto: r.texto, fuentes: r.fuentes, modelo: salida.modelo, cacheada: false, senales }),
       latenciaMs: salida.latenciaMs,
-      creditosCobrados: cobrados,
-      creditos,
     });
   } catch (e) {
-    // Nada llegó a la persona: el crédito vuelve. (Antes, con la cuota por
-    // contador, un 429 del proveedor le costaba una respuesta del día.)
-    await reembolsarCredito(reserva, e instanceof ErrorProveedor ? `proveedor_${e.status}` : "error");
     if (e instanceof ErrorProveedor && e.status === 429) {
-      // Tope del proveedor, no una caída. El crédito ya se devolvió arriba.
+      // Tope del proveedor, no una caída.
       const espera = e.reintentarEnSeg ?? 20;
       // Una espera de minutos es el tope DIARIO de tokens del tier gratuito
       // (medido el 13-09-2026: pedía 8 a 27 minutos). Decirle a alguien

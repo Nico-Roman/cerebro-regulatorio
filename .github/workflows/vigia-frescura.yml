@@ -55,6 +55,20 @@ jobs:
       MAX_DIAS: "3"
 
     steps:
+      # Latido simple (encargo E): el sitio responde 200 con corpus cargado.
+      # Va primero y por separado para que el correo de la falla diga cuál de
+      # las dos cosas se cayó: el sitio o la frescura de los datos.
+      - name: Consultar /api/salud
+        env:
+          SALUD: ${{ vars.SALUD_URL || 'https://regulamed.cl/api/salud' }}
+        run: |
+          codigo=$(curl -sS --max-time 30 --retry 2 --retry-delay 5 -o /tmp/salud.json -w '%{http_code}' "$SALUD") || codigo=000
+          echo "=== HTTP $codigo — $SALUD ==="; cat /tmp/salud.json 2>/dev/null; echo
+          if [ "$codigo" != "200" ]; then
+            echo "::error::/api/salud respondió HTTP $codigo (se esperaba 200): el sitio está caído o sin corpus."
+            exit 1
+          fi
+
       - name: Consultar /api/estado y verificar la frescura del corpus
         run: |
           set -uo pipefail

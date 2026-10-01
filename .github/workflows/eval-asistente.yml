@@ -1,0 +1,83 @@
+# Evaluación del asistente (encargo C) con el modelo real.
+#
+# Las sesiones de Claude Code no tienen la clave del modelo ni la base de datos,
+# así que la evaluación corre acá, con la clave guardada como secreto, y deja el
+# informe en dos lugares: el resumen del job y un archivo commiteado en la misma
+# rama (cerebro/informes/eval-asistente.md), que la sesión lee con git pull.
+#
+# Configuración (una vez): Settings → Secrets and variables → Actions →
+#   secreto  LLM_API_KEY
+#   variables LLM_BASE_URL y LLM_MODEL (los mismos valores que en Railway)
+#
+# No bloquea nada: informa. La meta del fin de semana (0 «encontrado» falsos,
+# 80 % en el top 3 con las preguntas revisadas por Nico) se lee en el informe.
+
+name: Evaluación del asistente
+
+on:
+  pull_request:
+    paths:
+      - "APP-Regulatoria/web/lib/ia/**"
+      - "APP-Regulatoria/web/lib/search.ts"
+      - "APP-Regulatoria/web/data/**"
+      - "APP-Regulatoria/cerebro/preguntas-reales-100.json"
+      - "APP-Regulatoria/web/scripts/eval-asistente.mjs"
+      - ".github/workflows/eval-asistente.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: eval-asistente-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+# Escribe el informe en la rama.
+permissions:
+  contents: write
+
+jobs:
+  evaluar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    # Un PR desde un fork no recibe secretos: sin clave no hay nada que medir.
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # En un PR, la rama misma (no el merge de prueba): el informe se
+          # commitea ahí.
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: APP-Regulatoria/web/package-lock.json
+
+      - run: npm ci
+        working-directory: APP-Regulatoria/web
+
+      - name: Correr la evaluación
+        working-directory: APP-Regulatoria/web
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
+        run: |
+          if [ -z "$LLM_API_KEY" ]; then
+            echo "::warning::Falta el secreto LLM_API_KEY: no se evalúa." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          node --experimental-strip-types --no-warnings scripts/eval-asistente.mjs \
+            --salida ../cerebro/informes/eval-asistente.md
+
+      - name: Commitear el informe en la rama
+        run: |
+          f=APP-Regulatoria/cerebro/informes/eval-asistente.md
+          [ -f "$f" ] || exit 0
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$f"
+          git diff --cached --quiet && exit 0
+          git commit -m "eval: informe del asistente $(date -u +%Y-%m-%d)"
+          # Un push con GITHUB_TOKEN no dispara otros workflows: no hay bucle.
+          git push origin "HEAD:${{ github.head_ref || github.ref_name }}"

@@ -18,6 +18,20 @@ const nextConfig: NextConfig = {
     remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" }],
   },
 
+  async redirects() {
+    return [
+      // Un solo dominio: www respondía 200 y duplicaba el sitio para Google.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.regulamed.cl" }],
+        destination: "https://regulamed.cl/:path*",
+        permanent: true,
+      },
+      // /planes deja de existir con el cobro por uso.
+      { source: "/planes", destination: "/normativa", permanent: true },
+    ];
+  },
+
   async headers() {
     return [
       {

@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { BuscadorNormativa } from "@/components/buscador-normativa";
-import { usuarioActual } from "@/lib/sesion";
-import { iaDisponible } from "@/lib/ia/config";
+import { QueQuieresHacer } from "@/components/que-quieres-hacer";
+import { flujoTramiteActivo } from "@/lib/flujos/tramite";
+import { esAdmin, usuarioActual } from "@/lib/sesion";
 import { DIAS_VENCIDO, estadoCorpus, fechaLegible } from "@/lib/estado-corpus";
-import { debeVerOfertaInicial, estadoCreditos } from "@/lib/creditos";
-import { OfertaInicial } from "@/components/oferta-inicial";
+import { cupoUsado } from "@/lib/rate-limit";
+import { DIA, PREGUNTAS_DIARIAS, claveCupoDiario } from "@/lib/ia/cupo";
 
 export const metadata: Metadata = {
   title: "Buscador de normativa farmacéutica y sanitaria chilena",
@@ -46,14 +47,13 @@ export default async function NormativaPage({
   // quien va a citar una norma tiene derecho a saber cuándo se verificó.
   const estado = estadoCorpus();
 
-  // Saldo de créditos de IA. Si la base falla, el buscador sigue: el saldo es
-  // información, no una condición para buscar.
-  const ia = await iaDisponible();
-  const creditos = ia ? await estadoCreditos(usuario.id).catch(() => null) : null;
-  // La oferta única de planes, al entrar por primera vez después de
-  // registrarse. Fuera de esto, en el buscador no se ofrece nada: ni enlaces a
-  // planes ni recordatorios, salvo al llegar al límite (respuesta-ia).
-  const ofrecer = creditos ? await debeVerOfertaInicial(usuario.id, creditos.plan.id).catch(() => false) : false;
+  // Preguntas que quedan hoy: cada mensaje enviado cuenta (lib/ia/cupo.ts). Si
+  // la base falla, el buscador sigue: el saldo es información, no una
+  // condición para buscar. El buscador lo actualiza después de cada pregunta.
+  const usadas = esAdmin(usuario.email)
+    ? null
+    : await cupoUsado(claveCupoDiario(usuario.id), DIA).catch(() => null);
+  const restantesHoy = usadas === null ? null : Math.max(0, PREGUNTAS_DIARIAS - usadas);
 
   return (
     <>
@@ -77,20 +77,12 @@ export default async function NormativaPage({
             según el listado oficial del ISP
           </p>
         )}
-        {creditos && (
-          <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
-            Respuestas con IA · plan {creditos.plan.nombre}: te quedan{" "}
-            {creditos.restantes.mes.toLocaleString("es-CL")} este mes ({creditos.restantes.hoy.toLocaleString("es-CL")}{" "}
-            hoy)
-            {creditos.restantes.pack > 0
-              ? ` · ${creditos.restantes.pack.toLocaleString("es-CL")} créditos adicionales`
-              : ""}
-          </p>
-        )}
       </div>
-      {ofrecer && <OfertaInicial />}
+      <div className="mx-auto w-full max-w-6xl px-5 pt-6 sm:px-8">
+        <QueQuieresHacer actual="preguntar" tramite={flujoTramiteActivo()} />
+      </div>
       <Suspense fallback={<div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8" />}>
-        <BuscadorNormativa iaDisponible={ia} />
+        <BuscadorNormativa restantesIniciales={restantesHoy} maximoDiario={PREGUNTAS_DIARIAS} />
       </Suspense>
     </>
   );

@@ -1,10 +1,23 @@
 import type { Metadata } from "next";
 import { AgendaReserva } from "@/components/agenda-reserva";
+import { OG_IMAGEN, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Agendar una reunión",
   description:
     "Reserva 30 minutos para revisar un tema regulatorio concreto: registro sanitario, GMP/GDP, importación o farmacovigilancia.",
+  // Sin esto hereda el canonical y el og:url de la home, y al compartir el
+  // enlace de la agenda LinkedIn y WhatsApp muestran la portada.
+  alternates: { canonical: "/agenda" },
+  openGraph: {
+    type: "website",
+    locale: "es_CL",
+    url: "/agenda",
+    siteName: SITE.nombre,
+    title: `Agenda una evaluación · ${SITE.nombre}`,
+    description: "30 minutos para revisar tu caso regulatorio, por Google Meet.",
+    images: [OG_IMAGEN],
+  },
 };
 
 export const dynamic = "force-dynamic";
@@ -18,7 +31,7 @@ export default function AgendaPage() {
           Reserva 30 minutos
         </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
-          Los horarios que ves son huecos reales de mi calendario: si aparece, está libre. La
+          Los horarios que ves son huecos reales de nuestro calendario: si aparece, está libre. La
           reunión es por Google Meet y el enlace llega al confirmar.
         </p>
       </header>

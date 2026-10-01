@@ -1,5 +1,5 @@
 {
-  "descripcion": "Set de preguntas doradas para evaluar la recuperación del Cerebro Regulatorio. Cada pregunta tiene una o más fuentes ACEPTABLES: si el motor recupera cualquiera de ellas en el top-k, cuenta como acierto. Una fuente se declara por {tipo, numero} (normas del listado ISP), por {doc_id} (igualdad exacta, que es como se apuntan los Libros del Código Sanitario, cuyos identificadores son prefijos unos de otros) o por {doc_contains} (subcadena). Gate de Fase 1 del PRD: >= 90% de aciertos. Las 8 preguntas cs-* cubren el Código Sanitario, incorporado el 2026-09-09: sin ellas una regresión en su ingesta no se notaría, porque el resto del set se contesta con el corpus ANAMED. Ampliar y validar con un QF antes del lanzamiento.",
+  "descripcion": "Set de preguntas doradas para evaluar la recuperación del Cerebro Regulatorio. Cada pregunta tiene una o más fuentes ACEPTABLES: si el motor recupera cualquiera de ellas en el top-k, cuenta como acierto. Una fuente se declara por {tipo, numero} (normas del listado ISP), por {doc_id} (igualdad exacta, que es como se apuntan los Libros del Código Sanitario, cuyos identificadores son prefijos unos de otros) o por {doc_contains} (subcadena). Gate de Fase 1 del PRD: >= 90% de aciertos. Las 8 preguntas cs-* cubren el Código Sanitario, incorporado el 2026-09-09: sin ellas una regresión en su ingesta no se notaría, porque el resto del set se contesta con el corpus ANAMED. Ampliar y validar con un QF antes del lanzamiento. Las 12 preguntas dm-* (encargo B, 24-09-2026) cubren dispositivos médicos y solo se cuentan cuando el corpus ya trae la categoría dispositivos_medicos (`requiere_categoria`); las marcadas revisar_nico tienen una cita esperada que no se pudo contrastar con el texto oficial.",
   "version": "0.2",
   "fecha": "2026-09-09",
   "preguntas": [
@@ -295,6 +295,215 @@
           "doc_id": "codigo_sanitario/Libro X"
         }
       ]
+    },
+    {
+      "id": "dm-registro",
+      "pregunta": "¿Un dispositivo médico necesita registro sanitario en Chile?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Supremo",
+          "numero": "825"
+        },
+        {
+          "tipo": "Decreto Exento",
+          "numero": "25",
+          "doc_contains": "dispositivos_medicos"
+        }
+      ],
+      "cita_esperada": "DS 825 art. 1: solo pueden fabricarse, importarse, comercializarse o distribuirse con la certificación de cumplimiento de normas de calidad.",
+      "revisar_nico": false
+    },
+    {
+      "id": "dm-glucometro",
+      "pregunta": "¿Cómo obtengo el registro sanitario de un dispositivo médico glucómetro en Chile?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Supremo",
+          "numero": "825"
+        },
+        {
+          "tipo": "Decreto Exento",
+          "numero": "25",
+          "doc_contains": "dispositivos_medicos"
+        }
+      ],
+      "cita_esperada": "Movida desde el contra-set. No se verificó si los glucómetros están entre las 39 categorías del Decreto Exento 25/2026.",
+      "revisar_nico": true
+    },
+    {
+      "id": "dm-implantes",
+      "pregunta": "¿Cómo registrar un marcapasos o una prótesis de cadera ante el ISP?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Supremo",
+          "numero": "825"
+        },
+        {
+          "tipo": "Decreto Exento",
+          "numero": "25",
+          "doc_contains": "dispositivos_medicos"
+        }
+      ],
+      "cita_esperada": "Movida desde el contra-set. Implantables de alto riesgo: plazo de 24 meses del Decreto Exento 25/2026 (fuente secundaria).",
+      "revisar_nico": true
+    },
+    {
+      "id": "dm-clases-riesgo",
+      "pregunta": "¿Cuáles son las clases de riesgo de los dispositivos médicos?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Supremo",
+          "numero": "825"
+        },
+        {
+          "tipo": "Decreto Exento",
+          "numero": "25",
+          "doc_contains": "dispositivos_medicos"
+        }
+      ],
+      "cita_esperada": "El DE 25/2026 prioriza clases III y IV (y C y D en DMDIV) según fuentes secundarias; no verificado si el DS 825 define las clases.",
+      "revisar_nico": true
+    },
+    {
+      "id": "dm-de25-vigencia",
+      "pregunta": "¿Desde cuándo rige el control obligatorio del Decreto Exento 25 de 2026 sobre dispositivos médicos?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Exento",
+          "numero": "25",
+          "doc_contains": "dispositivos_medicos"
+        }
+      ],
+      "cita_esperada": "24 meses para implantables de alto riesgo y críticos, 36 para el resto (fuentes secundarias: AZ, Cuatrecasas).",
+      "revisar_nico": true
+    },
+    {
+      "id": "dm-dmdiv",
+      "pregunta": "¿Qué es un dispositivo médico de diagnóstico in vitro?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Exento",
+          "numero": "25",
+          "doc_contains": "dispositivos_medicos"
+        },
+        {
+          "tipo": "Decreto Supremo",
+          "numero": "825"
+        },
+        {
+          "tipo": "Decreto Exento",
+          "numero": "31",
+          "doc_contains": "dispositivos_medicos"
+        }
+      ],
+      "cita_esperada": "Cita esperada no verificada contra el texto oficial.",
+      "revisar_nico": true
+    },
+    {
+      "id": "dm-tecnovigilancia",
+      "pregunta": "¿Qué obligaciones de tecnovigilancia tiene el titular de un dispositivo médico?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Supremo",
+          "numero": "825"
+        },
+        {
+          "doc_contains": "dispositivos_medicos"
+        }
+      ],
+      "cita_esperada": "La normativa de tecnovigilancia debe venir del listado ANDID; no verificada.",
+      "revisar_nico": true
+    },
+    {
+      "id": "dm-certificacion",
+      "pregunta": "¿Qué certificación necesita un dispositivo médico para comercializarse en Chile?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Supremo",
+          "numero": "825"
+        }
+      ],
+      "cita_esperada": "DS 825 art. 1 (certificación de cumplimiento de normas de calidad), citado por fuente secundaria.",
+      "revisar_nico": true
+    },
+    {
+      "id": "dm-importar",
+      "pregunta": "¿Qué necesito para importar un dispositivo médico?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Supremo",
+          "numero": "825"
+        },
+        {
+          "tipo": "Decreto Exento",
+          "numero": "25",
+          "doc_contains": "dispositivos_medicos"
+        }
+      ],
+      "cita_esperada": "Cita esperada no verificada contra el texto oficial.",
+      "revisar_nico": true
+    },
+    {
+      "id": "dm-categorias-2026",
+      "pregunta": "¿Qué dispositivos médicos se incorporaron al control sanitario obligatorio en 2026?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Exento",
+          "numero": "25",
+          "doc_contains": "dispositivos_medicos"
+        }
+      ],
+      "cita_esperada": "Decreto Exento 25/2026: 39 categorías, incluidos 2 software como dispositivo médico y 5 DMDIV (fuente secundaria).",
+      "revisar_nico": true
+    },
+    {
+      "id": "dm-reactivos-donantes",
+      "pregunta": "¿Los reactivos para el tamizaje de donantes de sangre están sometidos a control sanitario?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Exento",
+          "numero": "31",
+          "doc_contains": "dispositivos_medicos"
+        }
+      ],
+      "cita_esperada": "Decreto Exento 31/2026; su PDF aún no tiene enlace en fuentes-dispositivos.json.",
+      "revisar_nico": true
+    },
+    {
+      "id": "dm-elementos-uso-medico",
+      "pregunta": "¿Qué son los elementos de uso médico según el reglamento de control?",
+      "categoria": "dispositivos_medicos",
+      "requiere_categoria": "dispositivos_medicos",
+      "fuentes_aceptables": [
+        {
+          "tipo": "Decreto Supremo",
+          "numero": "825"
+        }
+      ],
+      "cita_esperada": "DS 825/1998, Reglamento de Control de Productos y Elementos de Uso Médico.",
+      "revisar_nico": true
     }
   ]
 }

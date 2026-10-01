@@ -26,6 +26,16 @@ export const SITE = {
   pais: "CL",
 } as const;
 
+// La imagen de app/opengraph-image.tsx. Next la hereda solo a las páginas sin
+// `openGraph` propio: las que lo definen tienen que nombrarla, o se comparten
+// sin vista previa.
+export const OG_IMAGEN = {
+  url: "/opengraph-image",
+  width: 1200,
+  height: 630,
+  alt: `${SITE.nombre} — asuntos regulatorios farmacéuticos en Chile`,
+};
+
 export const WHATSAPP_URL = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
   "Hola RegulaMED, necesito asesoría en asuntos regulatorios."
 )}`;

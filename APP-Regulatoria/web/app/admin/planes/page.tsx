@@ -1,42 +1,25 @@
-// Planes e IA: qué modelo responde (y cambiarlo sin deploy), márgenes
-// presupuestados, activar planes y packs, y las suscripciones vigentes.
-// Las cifras reales por cliente y del negocio están en /admin/clientes.
+// Modelos de IA: qué modelo responde, cambiarlo sin deploy y cuánto cuesta
+// cada consulta. Sin cobro por uso (23-09-2026) ya no hay planes, packs ni
+// suscripciones que administrar; las tablas siguen en la base.
 //
 // Formularios HTML normales que postean a /api/admin/planes, como la agenda.
 
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { BOTON, FormAjuste, FormAsignarPlan, FormCargarPack, FormPago, INPUT } from "@/components/admin-formularios";
-import { suscripcionesActivas } from "@/lib/creditos";
+import { BOTON, INPUT } from "@/components/admin-formularios";
 import { PRESETS, configIaActiva, consultaMedia, listarModelos, type ModeloIa } from "@/lib/ia/config";
-import {
-  ECONOMIA,
-  PACKS,
-  PLANES,
-  USD_POR_CREDITO,
-  costoCreditoClp,
-  costoUsd,
-  creditosPorCosto,
-  formatoClp,
-  formatoMiles,
-  margenPeorCaso,
-  type IdPlan,
-} from "@/lib/planes";
+import { costoUsd, formatoMiles } from "@/lib/planes";
 import { esAdmin, usuarioActual } from "@/lib/sesion";
 
 export const metadata: Metadata = {
-  title: "Planes e IA",
+  title: "Modelos de IA",
   robots: { index: false, follow: false },
 };
 
 export const dynamic = "force-dynamic";
 
 const VOLVER = "/admin/planes";
-
-function pct(x: number | null): string {
-  return x === null ? "—" : `${Math.round(x * 100)} %`;
-}
 
 function usd(n: number): string {
   return `US$${n < 0.01 ? n.toFixed(5) : n.toFixed(2)}`;
@@ -101,16 +84,14 @@ export default async function PlanesAdminPage({
   if (!usuario) redirect("/ingresar?next=/admin/planes");
   if (!esAdmin(usuario.email)) redirect("/");
 
-  const [params, subs, modelos, activa, media] = await Promise.all([
+  const [params, modelos, activa, media] = await Promise.all([
     searchParams,
-    suscripcionesActivas(),
     listarModelos(),
     configIaActiva(),
     consultaMedia(),
   ]);
-  const costoCredito = costoCreditoClp();
-  const creditosEstimados = (m: { usdMillonEntrada: number; usdMillonSalida: number }) =>
-    creditosPorCosto(costoUsd(media.entrada, media.salida, m));
+  const costoConsulta = (m: { usdMillonEntrada: number; usdMillonSalida: number }) =>
+    costoUsd(media.entrada, media.salida, m);
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-12 px-5 py-10 sm:px-8">
@@ -132,14 +113,7 @@ export default async function PlanesAdminPage({
         <Link href="/admin" className="label-micro text-muted underline">
           ← Panel
         </Link>
-        <h1 className="font-display text-3xl tracking-tight">Planes e IA</h1>
-        <p className="text-sm text-muted">
-          Clientes, pagos, LTV y márgenes reales:{" "}
-          <Link href="/admin/clientes" className="underline hover:text-foreground">
-            Clientes
-          </Link>
-          .
-        </p>
+        <h1 className="font-display text-3xl tracking-tight">Modelos de IA</h1>
         {params.ok && <p className="text-sm text-emerald-300">{params.ok}</p>}
         {params.error && <p className="text-sm text-red-300">{params.error}</p>}
       </header>
@@ -158,9 +132,7 @@ export default async function PlanesAdminPage({
               <p className="mt-1 text-xs text-muted">
                 Consulta media (30 días, {media.n ? `${formatoMiles(media.n)} redacciones` : "sin datos: referencia"}):{" "}
                 {formatoMiles(media.entrada)} tokens de entrada + {formatoMiles(media.salida)} de salida ={" "}
-                {usd(costoUsd(media.entrada, media.salida, activa))} → cobra {creditosEstimados(activa)} crédito(s). Un
-                crédito cubre hasta {usd(USD_POR_CREDITO)} ({formatoClp(costoCredito)} con el dólar a{" "}
-                {formatoClp(ECONOMIA.dolarClp)}).
+                {usd(costoConsulta(activa))} por consulta.
               </p>
             </>
           ) : (
@@ -174,7 +146,7 @@ export default async function PlanesAdminPage({
               <tr>
                 <th className="py-2 pr-4">Modelo</th>
                 <th className="py-2 pr-4">Precio / millón</th>
-                <th className="py-2 pr-4">Créditos / consulta</th>
+                <th className="py-2 pr-4">Costo / consulta</th>
                 <th className="py-2 pr-4">Clave</th>
                 <th className="py-2 pr-4">Última prueba</th>
                 <th className="py-2">Acciones</th>
@@ -201,13 +173,7 @@ export default async function PlanesAdminPage({
                     {usd(m.usdMillonSalida)} salida
                   </td>
                   <td className="py-3 pr-4">
-                    {creditosEstimados(m)}
-                    {creditosEstimados(m) > 1 && (
-                      <div className="max-w-40 text-xs text-amber-200">
-                        Con este modelo cada plan rinde {creditosEstimados(m)} veces menos consultas que lo publicado en
-                        /planes.
-                      </div>
-                    )}
+                    {usd(costoConsulta(m))}
                   </td>
                   <td className="py-3 pr-4 text-xs">
                     <span className={m.claveCargada ? "text-emerald-300" : "text-amber-200"}>
@@ -224,7 +190,7 @@ export default async function PlanesAdminPage({
                         <span className="text-muted">{m.ultimaPrueba.fecha.slice(0, 16).replace("T", " ")}</span>
                         {m.ultimaPrueba.ok ? (
                           <div className="text-muted">
-                            {formatoMiles(m.ultimaPrueba.latenciaMs ?? 0)} ms · {m.ultimaPrueba.creditos} crédito(s)
+                            {formatoMiles(m.ultimaPrueba.latenciaMs ?? 0)} ms
                           </div>
                         ) : (
                           <div className="max-w-xs text-red-200">{m.ultimaPrueba.error}</div>
@@ -270,90 +236,12 @@ export default async function PlanesAdminPage({
             <li>
               Apreta <em>Probar</em>: corre una consulta real con la misma búsqueda, prompt y verificación de citas.
             </li>
-            <li>Si la prueba sale bien, <em>Activar</em>. El cobro en créditos se ajusta solo al nuevo precio.</li>
+            <li>Si la prueba sale bien, <em>Activar</em>. El costo de cada consulta queda registrado con su precio.</li>
           </ol>
           <FormModelo />
         </details>
       </section>
 
-      {/* ── Márgenes presupuestados ───────────────────────────────────── */}
-      <section className="flex flex-col gap-3">
-        <h2 className="label-micro text-muted">
-          Presupuesto · peor caso (todo el cupo gastado, crédito al tope de {formatoClp(costoCredito)})
-        </h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="label-micro text-muted">
-              <tr>
-                <th className="py-2 pr-4">Producto</th>
-                <th className="py-2 pr-4">Precio</th>
-                <th className="py-2 pr-4">Créditos</th>
-                <th className="py-2 pr-4">Diario</th>
-                <th className="py-2 pr-4">Costo IA máx.</th>
-                <th className="py-2">Margen</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.values(PLANES).map((p) => (
-                <tr key={p.id} className="border-t border-line">
-                  <td className="py-2 pr-4">{p.nombre}</td>
-                  <td className="py-2 pr-4">{formatoClp(p.precioMensualClp)}</td>
-                  <td className="py-2 pr-4">{formatoMiles(p.creditosMes)}</td>
-                  <td className="py-2 pr-4">{formatoMiles(p.limiteDiario)}</td>
-                  <td className="py-2 pr-4">{formatoClp(p.creditosMes * costoCredito)}</td>
-                  <td className="py-2">
-                    {p.precioMensualClp ? pct(margenPeorCaso(p.precioMensualClp, p.creditosMes)) : "costo"}
-                  </td>
-                </tr>
-              ))}
-              {Object.values(PACKS).map((p) => (
-                <tr key={p.id} className="border-t border-line">
-                  <td className="py-2 pr-4">{p.nombre}</td>
-                  <td className="py-2 pr-4">{formatoClp(p.precioClp)}</td>
-                  <td className="py-2 pr-4">{formatoMiles(p.creditos)}</td>
-                  <td className="py-2 pr-4">—</td>
-                  <td className="py-2 pr-4">{formatoClp(p.creditos * costoCredito)}</td>
-                  <td className="py-2">{pct(margenPeorCaso(p.precioClp, p.creditos))}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* ── Acciones rápidas por correo ───────────────────────────────── */}
-      <section className="flex flex-col gap-3">
-        <h2 className="font-display text-2xl tracking-tight">Activar planes y packs</h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <FormAsignarPlan volver={VOLVER} />
-          <FormCargarPack volver={VOLVER} />
-          <FormAjuste volver={VOLVER} />
-          <FormPago volver={VOLVER} />
-        </div>
-      </section>
-
-      {/* ── Suscripciones vigentes ────────────────────────────────────── */}
-      <section className="flex flex-col gap-3">
-        <h2 className="label-micro text-muted">Suscripciones vigentes ({subs.length})</h2>
-        {subs.length === 0 && <p className="text-sm text-muted">Todavía ninguna.</p>}
-        <ul className="flex flex-col gap-3">
-          {subs.map((s) => {
-            const plan = PLANES[s.plan as IdPlan];
-            return (
-              <li key={s.id} className="flex flex-wrap items-baseline justify-between gap-2 border border-line p-4 text-sm">
-                <Link href={`/admin/clientes/${s.titularId}`} className="hover:underline">
-                  <strong className="font-medium">{plan.nombre}</strong> · {s.titular}
-                  {s.miembros.length > 1 ? ` (+${s.miembros.length - 1})` : ""}
-                </Link>
-                <span className="text-xs text-muted">
-                  desde {s.vigenteDesde} · vence {s.venceEn} · ciclo {formatoMiles(s.usadosCiclo)} /{" "}
-                  {formatoMiles(plan.creditosMes)}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
     </main>
   );
 }

@@ -35,7 +35,7 @@ import sys
 from pathlib import Path
 
 import indice as IX
-from respuesta import responder, VOCABULARIO
+from respuesta import pregunta_aplica, responder, VOCABULARIO
 
 DIR = Path(__file__).resolve().parent
 PREGUNTAS = DIR / "preguntas-reales.json"
@@ -146,14 +146,18 @@ def firma(resp):
             "filas": [[f["cita"], f["frase"], f["resaltar"], f["avisos"]] for f in filas]}
 
 
+SUGERENCIAS_CONDICIONADAS = {"dispositivos médicos": "dispositivos_medicos"}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--sin-paridad", action="store_true")
     args = ap.parse_args()
 
-    preguntas = json.loads(PREGUNTAS.read_text(encoding="utf-8"))["preguntas"]
     idx = IX.load()
+    preguntas = [p for p in json.loads(PREGUNTAS.read_text(encoding="utf-8"))["preguntas"]
+                 if pregunta_aplica(p, idx)]
     filas, stats = evaluar(idx, preguntas)
 
     motivos = []
@@ -173,8 +177,17 @@ def main():
         motivos.append(par_msg)
     pasa = not motivos
 
+    # Sugerencias de la home que dependen del corpus (encargo B): solo se
+    # muestran si su búsqueda devuelve como principal una norma de esa materia.
+    # El pipeline lo copia a web/data/estado-corpus.json.
+    sugerencias_home = {}
+    for sugerencia, categoria in SUGERENCIAS_CONDICIONADAS.items():
+        principal = responder(sugerencia, idx=idx)["principal"]
+        sugerencias_home[sugerencia] = bool(principal and principal["_doc_id"].startswith(categoria + "/"))
+
     if args.json:
-        print(json.dumps({"stats": stats, "paridad": par_msg, "pasa": pasa, "motivos": motivos}, ensure_ascii=False))
+        print(json.dumps({"stats": stats, "paridad": par_msg, "pasa": pasa, "motivos": motivos,
+                          "sugerencias_home": sugerencias_home}, ensure_ascii=False))
         sys.exit(0 if pasa else 1)
 
     print("\nPreguntas reales · lo que ve el químico farmacéutico\n")

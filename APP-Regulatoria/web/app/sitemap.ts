@@ -34,17 +34,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    // /normativa pide sesión (redirige a /ingresar, que es noindex) y /planes
+    // ya no existe: ninguna de las dos va al sitemap.
     {
-      url: `${SITE.url}/normativa`,
+      url: `${SITE.url}/cobertura`,
       lastModified: ahora,
-      changeFrequency: "daily",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE.url}/planes`,
-      lastModified: ahora,
-      changeFrequency: "monthly",
-      priority: 0.6,
+      changeFrequency: "weekly",
+      priority: 0.7,
     },
     {
       url: `${SITE.url}/agenda`,

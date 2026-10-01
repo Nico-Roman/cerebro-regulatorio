@@ -3,6 +3,7 @@ import { jsonParaScript } from "@/lib/html";
 import { AREAS, FAQS, SERVICIOS, SITE, WHATSAPP_URL } from "@/lib/site";
 import { guiasPublicadas } from "@/lib/guias";
 import { BuscadorHome } from "@/components/buscador-home";
+import { estadoCorpus } from "@/lib/estado-corpus";
 import { FormularioContacto } from "@/components/formulario-contacto";
 import { VideoVsl } from "@/components/video-vsl";
 import { BloquePerfil, Cifras, Credenciales, Testimonios } from "@/components/prueba-social";
@@ -59,20 +60,20 @@ export default function Home() {
             palabra "IA". En el mercado chileno ya hay competencia vendiendo
             registros ISP "con agentes de IA", así que decirlo iguala en vez de
             separar. Lo que no hace nadie más es devolver el párrafo literal de
-            la norma con su enlace oficial, sin resumirlo: eso es lo que se
-            promete acá. */}
+            la norma con su enlace oficial. Desde el 23-09 ya no promete "no lo
+            resume": el asistente redacta un borrador, y la frase lo dice. */}
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          Escribe tu pregunta como se te ocurra. Te devuelve el párrafo exacto de la
-          norma que la responde, con el enlace al documento oficial del ISP. No lo
-          resume ni lo interpreta: te muestra el texto tal como está.
+          Escribe tu pregunta como se te ocurra. Te muestra los artículos que la
+          responden, con el enlace oficial del ISP, y un borrador con IA que cita
+          cada frase.
         </p>
 
         <div className="mt-9 max-w-3xl">
-          <BuscadorHome />
+          <BuscadorHome extra={estadoCorpus().sugerenciasHome} />
         </div>
 
         <p className="mt-7 max-w-2xl text-sm leading-relaxed text-muted">
-          Es gratuito y va a seguir siéndolo. Solo tienes que registrarte.
+          Es gratuito. Solo tienes que registrarte.
         </p>
       </section>
 
@@ -155,7 +156,7 @@ export default function Home() {
               href="/asesoria"
               className="label-micro mt-8 inline-block border border-line px-4 py-2.5 transition-colors hover:border-foreground"
             >
-              Cómo trabajo contigo
+              Cómo trabajamos contigo
             </Link>
           </div>
         </div>
@@ -354,7 +355,7 @@ export default function Home() {
               <p className="mt-5 text-sm leading-relaxed text-muted">
                 Revisamos tu situación y te decimos con claridad qué trámite corresponde,
                 qué antecedentes necesitas y en qué orden conviene hacerlo. La primera
-                evaluación no tiene costo y va a seguir sin tenerlo.
+                evaluación es breve y sin costo.
               </p>
 
               {/* Una acción dominante y dos alternativas, en vez de tres
