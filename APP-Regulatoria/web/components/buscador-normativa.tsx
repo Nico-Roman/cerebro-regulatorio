@@ -383,7 +383,10 @@ export function BuscadorNormativa({
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
           Escribe tu pregunta como la harías en el mesón. Te mostramos la frase exacta de la norma que la
           responde, con su artículo y el enlace a la fuente oficial. Si la respuesta no está en la base, te lo
-          decimos.
+          decimos.{" "}
+          <Link href="/cobertura" className="underline underline-offset-4 hover:text-foreground">
+            Qué normas incluye
+          </Link>
         </p>
       </header>
 

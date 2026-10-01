@@ -825,7 +825,7 @@ const ABREV_TIPO: Record<string, string> = {
   Circular: "Circular",
 };
 
-function formatoNumero(n: string): string {
+export function formatoNumero(n: string): string {
   const s = (n || "").trim();
   if (/^[0-9]+$/.test(s) && s.length >= 4) {
     return String(parseInt(s, 10)).replace(/\B(?=([0-9]{3})+(?![0-9]))/g, ".");
