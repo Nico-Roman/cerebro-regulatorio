@@ -1,16 +1,57 @@
 "use client";
 
-// Borrador redactado con IA a partir de los pasajes de la búsqueda.
+// Respuesta del asistente, redactada solo con los pasajes del corpus.
 //
-// Con el modo IA apagado es un botón: la mayoría de las consultas se resuelven
-// leyendo los pasajes y cada llamada cuesta. Con el modo IA encendido se pide
-// solo al terminar la búsqueda.
+// Se pide sola al terminar cada búsqueda: desde el encargo C2 no hay
+// interruptor «Modo IA». Va arriba y los pasajes debajo, como evidencia; la
+// cita y el texto oficial mandan por sobre el resumen.
 //
-// Se presenta siempre como borrador, junto a la frase de la norma y nunca en su
-// lugar: la cita y el texto oficial mandan por sobre el resumen. Va arriba del
-// pasaje porque en las pruebas en vivo acertó donde el pasaje no.
+// Cuando el asistente se abstiene, ofrece «Te respondo yo en 24 horas
+// hábiles»: la pregunta y el correo de la persona van a contacto@regulamed.cl.
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+
+/** «Te respondo yo en 24 horas hábiles»: manda la pregunta a contacto@ por correo. */
+function RespuestaHumana({ consultaId }: { consultaId: string }) {
+  const [estado, setEstado] = useState<"inicial" | "enviando" | "ok" | "error">("inicial");
+  const [mensaje, setMensaje] = useState<string | null>(null);
+  async function pedir() {
+    setEstado("enviando");
+    try {
+      const res = await fetch("/api/conversaciones/respuesta-humana", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ consultaId }),
+      });
+      const datos = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setMensaje(datos.mensaje || "No pudimos enviarla. Escríbenos por correo.");
+        setEstado("error");
+        return;
+      }
+      setEstado("ok");
+    } catch {
+      setMensaje("No pudimos enviarla. Revisa tu conexión.");
+      setEstado("error");
+    }
+  }
+  if (estado === "ok") {
+    return <p className="text-sm text-emerald-300">Listo: un químico farmacéutico te responde a tu correo en 24 horas hábiles.</p>;
+  }
+  return (
+    <div className="flex flex-col gap-2">
+      <button
+        type="button"
+        onClick={pedir}
+        disabled={estado === "enviando"}
+        className="self-start border border-sky-700 px-4 py-2 text-xs text-sky-200 transition-colors hover:border-sky-400 hover:text-foreground disabled:opacity-50"
+      >
+        {estado === "enviando" ? "Enviando…" : "Te respondo yo en 24 horas hábiles"}
+      </button>
+      {estado === "error" && mensaje && <p className="text-xs text-muted">{mensaje}</p>}
+    </div>
+  );
+}
 
 type Estado = "inicial" | "cargando" | "listo" | "ausencia" | "error";
 
@@ -82,7 +123,7 @@ function TextoBorrador({ texto, sinCita }: { texto: string; sinCita: string[] })
   return <>{trozos}</>;
 }
 
-export function RespuestaIa({ consultaId, automatico = false }: { consultaId: string; automatico?: boolean }) {
+export function RespuestaIa({ consultaId, automatico = true }: { consultaId: string; automatico?: boolean }) {
   const [estado, setEstado] = useState<Estado>("inicial");
   const [borrador, setBorrador] = useState<Borrador | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
@@ -174,7 +215,7 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
         onClick={pedir}
         className="self-start border border-line px-4 py-2 text-xs text-muted transition-colors hover:border-foreground hover:text-foreground"
       >
-        Redactar borrador con IA a partir de estos pasajes
+        Redactar la respuesta a partir de estos pasajes
       </button>
     );
   }
@@ -184,7 +225,7 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
       aria-live="polite"
       className="flex flex-col gap-3 border border-dashed border-sky-800/70 bg-sky-950/10 px-4 py-4"
     >
-      <span className="label-micro text-sky-300">Borrador IA · verifica contra la cita</span>
+      <span className="label-micro text-sky-300">Respuesta del asistente · verifica contra la cita</span>
 
       {estado === "cargando" && <p className="text-sm text-muted">Leyendo los pasajes y redactando…</p>}
 
@@ -251,15 +292,18 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
 
       {estado === "listo" && (
         <p className="text-xs leading-relaxed text-muted">
-          Redactado por un modelo de lenguaje solo con los pasajes de esta búsqueda, con temperatura cero. Puede
-          equivocarse al interpretar o resumir: antes de decidir, lee la frase de la norma y la fuente oficial. Es
-          apoyo a la consulta, no asesoría regulatoria ni legal.
+          Redactado por un modelo de lenguaje solo con los pasajes de abajo. Puede equivocarse al interpretar o
+          resumir: antes de decidir, lee la frase de la norma y la fuente oficial. No reemplaza la revisión de un
+          químico farmacéutico.
           {borrador?.cacheada ? " Reutilizado de una consulta idéntica." : ""}
         </p>
       )}
 
       {(estado === "ausencia" || estado === "error") && aviso && (
         <p className={estado === "ausencia" ? "text-sm text-amber-200" : "text-sm text-muted"}>{aviso}</p>
+      )}
+      {(estado === "ausencia" || (estado === "listo" && borrador?.abstuvo)) && (
+        <RespuestaHumana consultaId={consultaId} />
       )}
       {estado === "error" && reintentable && (
         <button

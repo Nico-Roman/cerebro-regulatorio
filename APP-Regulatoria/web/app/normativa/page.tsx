@@ -5,7 +5,6 @@ import { BuscadorNormativa } from "@/components/buscador-normativa";
 import { QueQuieresHacer } from "@/components/que-quieres-hacer";
 import { flujoTramiteActivo } from "@/lib/flujos/tramite";
 import { esAdmin, usuarioActual } from "@/lib/sesion";
-import { iaDisponible } from "@/lib/ia/config";
 import { DIAS_VENCIDO, estadoCorpus, fechaLegible } from "@/lib/estado-corpus";
 import { cupoUsado } from "@/lib/rate-limit";
 import { DIA, PREGUNTAS_DIARIAS, claveCupoDiario } from "@/lib/ia/cupo";
@@ -51,7 +50,6 @@ export default async function NormativaPage({
   // Preguntas que quedan hoy: cada mensaje enviado cuenta (lib/ia/cupo.ts). Si
   // la base falla, el buscador sigue: el saldo es información, no una
   // condición para buscar. El buscador lo actualiza después de cada pregunta.
-  const ia = await iaDisponible();
   const usadas = esAdmin(usuario.email)
     ? null
     : await cupoUsado(claveCupoDiario(usuario.id), DIA).catch(() => null);
@@ -84,7 +82,7 @@ export default async function NormativaPage({
         <QueQuieresHacer actual="preguntar" tramite={flujoTramiteActivo()} />
       </div>
       <Suspense fallback={<div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8" />}>
-        <BuscadorNormativa iaDisponible={ia} restantesIniciales={restantesHoy} maximoDiario={PREGUNTAS_DIARIAS} />
+        <BuscadorNormativa restantesIniciales={restantesHoy} maximoDiario={PREGUNTAS_DIARIAS} />
       </Suspense>
     </>
   );

@@ -19,6 +19,7 @@ import {
 } from "@/lib/ia/redactar";
 import { MAX_PASAJES, admitePlanificacion, planificarBusquedas, unirPasajes } from "@/lib/ia/planificar";
 import { afirmacionesSinCitaResueltas } from "@/lib/ia/verificar";
+import { historialDe } from "@/lib/conversaciones";
 import { responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
@@ -187,10 +188,14 @@ export async function POST(req: NextRequest) {
     sinOcr: Boolean(filtros.sinOcr),
   };
   const original = responder(consulta.pregunta, opcionesBusqueda);
+  // Las 3 preguntas anteriores del hilo, como contexto (encargo C2).
+  const historial = await historialDe(consulta).catch(() => []);
 
   // Una materia que la base excluye (por regla o porque la palabra central no
-  // está en ninguna norma) no se rescata con búsquedas reescritas.
-  if (!admitePlanificacion(original)) {
+  // está en ninguna norma) no se rescata con búsquedas reescritas. En una
+  // repregunta («¿y si no es seria?») la palabra que falta suele estar en el
+  // contexto: ahí solo corta la exclusión por materia.
+  if (historial.length ? Boolean(original.fuera_de_alcance) : !admitePlanificacion(original)) {
     return NextResponse.json({ respuesta: null, ausencia: true, motivo: original.motivo });
   }
 
@@ -217,7 +222,7 @@ export async function POST(req: NextRequest) {
   // Planificación (lib/ia/planificar.ts): 2 a 4 búsquedas con el vocabulario de
   // la norma, además de la pregunta original. Nunca lanza: ante cualquier
   // falla se busca solo con la pregunta, como antes.
-  const plan = await planificarBusquedas(consulta.pregunta, { config });
+  const plan = await planificarBusquedas(consulta.pregunta, { config, historial });
   const respuestas = [original, ...plan.busquedas.slice(1).map((b) => responder(b, opcionesBusqueda))];
   const pasajes = pasajesDesdeResultados(unirPasajes(respuestas, MAX_PASAJES));
   const busquedasPlanificadas = plan.planificado ? plan.busquedas.slice(1) : null;
@@ -232,9 +237,10 @@ export async function POST(req: NextRequest) {
   }
 
   // Caché compartida: otra persona ya hizo esta pregunta y el motor le entregó
-  // exactamente los mismos pasajes. No llama al redactor.
-  const clave = claveCache(consulta.pregunta, pasajes, config.modelo);
-  const [previa] = await db
+  // exactamente los mismos pasajes. No llama al redactor. Una repregunta no se
+  // comparte: su respuesta depende del hilo, que es de una sola persona.
+  const clave = historial.length ? null : claveCache(consulta.pregunta, pasajes, config.modelo);
+  const [previa] = !clave ? [] : await db
     .select({
       texto: consultas.respuestaLlm,
       fuentes: consultas.fuentesLlm,
@@ -276,7 +282,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const salida = await redactarRespuesta(consulta.pregunta, pasajes, config);
+    const salida = await redactarRespuesta(consulta.pregunta, pasajes, config, historial);
     const r = salida.redaccion;
 
     if (!r.texto) {
@@ -298,6 +304,7 @@ export async function POST(req: NextRequest) {
     // a quien lo pidió, pero no se reparte. Invariante: lo que está en la caché
     // ya pasó todas las verificaciones, así que un acierto no se revisa de nuevo.
     const cacheable =
+      clave !== null &&
       r.citasInvalidas.length === 0 &&
       r.datosNoVerificados.length === 0 &&
       r.casoNoCubierto.length === 0 &&

@@ -6,6 +6,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import { PREGUNTAS_DIARIAS, decidirCupo } from "../lib/ia/cupo.ts";
+import { desfaseZona } from "../lib/agenda/tiempo.ts";
 import { inicioDeVentana } from "../lib/ventana.ts";
 
 const DIA = 86_400;
@@ -50,4 +51,13 @@ test("las preguntas de la tarde chilena y las de la noche caen en la misma venta
   const tarde = new Date("2026-09-24T22:00:00Z"); // 19:00 en Santiago (UTC-3)
   const noche = new Date("2026-09-25T02:30:00Z"); // 23:30 en Santiago
   assert.equal(inicioDeVentana(tarde, DIA).getTime(), inicioDeVentana(noche, DIA).getTime());
+});
+
+test("los milisegundos del reloj no cambian la ventana (si cambiaran, el cupo nunca se agotaría)", () => {
+  const a = new Date("2026-10-01T19:25:31.651Z");
+  const b = new Date("2026-10-01T19:25:32.004Z");
+  assert.equal(inicioDeVentana(a, DIA).toISOString(), "2026-10-01T03:00:00.000Z");
+  assert.equal(inicioDeVentana(a, DIA).getTime(), inicioDeVentana(b, DIA).getTime());
+  assert.equal(inicioDeVentana(a, 3600).toISOString(), "2026-10-01T19:00:00.000Z");
+  assert.equal(desfaseZona(a, "America/Santiago"), -180);
 });

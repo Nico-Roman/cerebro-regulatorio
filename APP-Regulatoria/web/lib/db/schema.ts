@@ -111,6 +111,23 @@ export const perfil = pgTable("perfil", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+/**
+ * Una conversación del asistente (encargo C, fase 2): agrupa las preguntas de
+ * un hilo de /normativa. Las tres anteriores viajan como contexto al
+ * planificador y al redactor. «Nueva conversación» crea otra.
+ */
+export const conversaciones = pgTable(
+  "conversaciones",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("conversaciones_user_created_idx").on(t.userId, t.createdAt)]
+);
+
 /** Una fila por búsqueda. Es a la vez registro de uso y backlog del corpus. */
 export const consultas = pgTable(
   "consultas",
@@ -165,11 +182,14 @@ export const consultas = pgTable(
     // imponen algo sin cita.
     busquedasPlanificadas: jsonb("busquedas_planificadas"),
     afirmacionesSinCita: integer("afirmaciones_sin_cita"),
+    // Hilo al que pertenece la pregunta (0013). Nulo en las anteriores.
+    conversacionId: text("conversacion_id").references(() => conversaciones.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     index("consultas_user_created_idx").on(t.userId, t.createdAt),
     index("consultas_created_idx").on(t.createdAt),
+    index("consultas_conversacion_idx").on(t.conversacionId, t.createdAt),
     index("consultas_clave_ia_idx")
       .on(t.claveIa)
       .where(sql`${t.respuestaLlm} IS NOT NULL`),

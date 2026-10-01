@@ -92,6 +92,13 @@
       "when": 1790881166335,
       "tag": "0012_asistente_planificacion",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1790882331723,
+      "tag": "0013_conversaciones",
+      "breakpoints": true
     }
   ]
 }
