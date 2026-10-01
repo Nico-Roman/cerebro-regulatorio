@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { BuscadorNormativa } from "@/components/buscador-normativa";
+import { QueQuieresHacer } from "@/components/que-quieres-hacer";
+import { flujoTramiteActivo } from "@/lib/flujos/tramite";
 import { esAdmin, usuarioActual } from "@/lib/sesion";
 import { iaDisponible } from "@/lib/ia/config";
 import { DIAS_VENCIDO, estadoCorpus, fechaLegible } from "@/lib/estado-corpus";
@@ -77,6 +79,9 @@ export default async function NormativaPage({
             según el listado oficial del ISP
           </p>
         )}
+      </div>
+      <div className="mx-auto w-full max-w-6xl px-5 pt-6 sm:px-8">
+        <QueQuieresHacer actual="preguntar" tramite={flujoTramiteActivo()} />
       </div>
       <Suspense fallback={<div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8" />}>
         <BuscadorNormativa iaDisponible={ia} restantesIniciales={restantesHoy} maximoDiario={PREGUNTAS_DIARIAS} />

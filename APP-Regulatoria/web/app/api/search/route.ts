@@ -4,9 +4,9 @@ import { legado, responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
 import { iaDisponible } from "@/lib/ia/config";
-import { DIA, MENSAJE_LIMITE_DIARIO, PREGUNTAS_DIARIAS, claveCupoDiario, decidirCupo } from "@/lib/ia/cupo";
+import { consumirPreguntaDiaria, respuestaLimiteDiario } from "@/lib/ia/cupo-servidor";
 import { consumirCupo } from "@/lib/rate-limit";
-import { esAdmin, usuarioActual } from "@/lib/sesion";
+import { usuarioActual } from "@/lib/sesion";
 
 export const runtime = "nodejs";
 
@@ -68,15 +68,8 @@ export async function GET(req: NextRequest) {
 
   // Cupo diario (lib/ia/cupo.ts): cada pregunta enviada cuenta 1 al llegar,
   // antes de buscar, pase lo que pase después. Sin devoluciones.
-  const sinLimite = esAdmin(usuario.email);
-  const usadasHoy = sinLimite ? 0 : (await consumirCupo(claveCupoDiario(usuario.id), PREGUNTAS_DIARIAS, DIA)).contador;
-  const diario = decidirCupo(usadasHoy, sinLimite);
-  if (!diario.permitido) {
-    return NextResponse.json(
-      { error: "limite_diario", mensaje: MENSAJE_LIMITE_DIARIO, restantesHoy: 0 },
-      { status: 429 }
-    );
-  }
+  const diario = await consumirPreguntaDiaria(usuario);
+  if (!diario.permitido) return respuestaLimiteDiario();
 
   const respuesta = responder(q, { k, vigente, categoria, sinOcr });
   const resumen = legado(respuesta);
