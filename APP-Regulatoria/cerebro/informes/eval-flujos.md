@@ -1,4 +1,4 @@
-# Evaluación de los flujos — 2026-10-01
+# Evaluación de los flujos — 2026-10-05
 
 Sin modelo (falta LLM_API_KEY o --sin-modelo): solo la parte determinista.
 
