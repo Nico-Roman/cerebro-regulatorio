@@ -18,7 +18,7 @@ export const TRAYECTORIA: Hito[] = [
   {
     periodo: "Hoy",
     rol: "Coordinador de Operaciones Logísticas",
-    lugar: "World Courier",
+    lugar: "Operador logístico farmacéutico multinacional",
     detalle:
       "Coordinación de la cadena de frío y del transporte de productos farmacéuticos y muestras clínicas bajo GDP. Es el lado que casi ningún asesor regulatorio conoce de primera mano: cómo se rompe en la práctica lo que el expediente promete en el papel.",
   },
