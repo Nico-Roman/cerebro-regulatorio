@@ -101,7 +101,13 @@ jobs:
           # 2026-09-08 desde una IP residencial chilena: sin UA, o con el UA
           # por defecto de curl, falla; con UA de Chrome responde 200 de forma
           # reproducible. Es el mismo UA que ya usa actualizar-diario.js.
+          #
+          # Con reintentos: un solo timeout de 30 s botaba la corrida del día
+          # entero (curl 28). Hasta 5 intentos con 30 s de espera entre uno y
+          # otro, unos 4 minutos y medio en el peor caso. Si el ISP sigue sin
+          # responder después de eso, el job falla igual y avisa.
           curl -sSf -o /dev/null -w 'ISP TLS OK (HTTP %{http_code})\n' --max-time 30 \
+            --retry 4 --retry-delay 30 --retry-all-errors \
             -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36' \
             https://www.ispch.gob.cl/normativa-anamed/
 
