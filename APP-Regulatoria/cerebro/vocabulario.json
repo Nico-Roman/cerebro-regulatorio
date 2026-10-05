@@ -743,6 +743,16 @@
     },
     {
       "si": [
+        "protesis"
+      ],
+      "agregar": [
+        "dispositivo medico",
+        "dispositivos medicos",
+        "elementos de uso medico"
+      ]
+    },
+    {
+      "si": [
         "cadera",
         "rodilla"
       ],
