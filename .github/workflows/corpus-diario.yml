@@ -162,6 +162,14 @@ jobs:
           CI: "true"
         run: node APP-Regulatoria/cerebro/actualizar-diario.js
 
+      # Si la compuerta reprobó, el corpus reconstruido muere con el runner y
+      # el resumen solo trae ids. Esto deja en el log, por cada pregunta dorada
+      # que falla, su estado, el motivo y los pasajes que el motor encontró.
+      - name: Detalle de la compuerta si reprobó
+        if: failure()
+        working-directory: APP-Regulatoria/cerebro
+        run: python eval_retrieval.py --k 5 --detalle || true
+
       # Solo llega acá si la compuerta aprobó: actualizar-diario.js sale con
       # error si reprueba, y eso corta el job antes de commitear.
       - name: Publicar el corpus si cambió

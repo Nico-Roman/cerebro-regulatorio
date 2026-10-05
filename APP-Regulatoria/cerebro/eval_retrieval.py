@@ -20,6 +20,7 @@ ignorando, que es peor que no tenerla.
 Uso:
   python eval_retrieval.py --k 5
   python eval_retrieval.py --k 5 --gate 90 --json   # para el pipeline diario
+  python eval_retrieval.py --k 5 --detalle           # por qué falló cada pregunta
 """
 
 import argparse
@@ -63,6 +64,9 @@ def main():
     ap.add_argument("--k", type=int, default=5)
     ap.add_argument("--gate", type=float, default=90.0, help="recall mínimo aceptable (%%)")
     ap.add_argument("--json", action="store_true", help="salida JSON (para el pipeline)")
+    ap.add_argument("--detalle", action="store_true",
+                    help="estado, motivo y pasajes de cada pregunta dorada que falla (la corrida de CI "
+                         "no deja el corpus a mano: esto es lo único que queda en el log)")
     args = ap.parse_args()
 
     idx = IX.load()
@@ -71,7 +75,7 @@ def main():
     pendientes_corpus = [p["id"] for p in data["preguntas"] if not pregunta_aplica(p, idx)]
 
     hits, fallos, falsas_abstenciones = 0, [], []
-    filas = []
+    filas, detalles = [], []
     for p in preguntas:
         resp = responder(p["pregunta"], idx=idx)
         # Lo que el buscador muestra, en orden: la principal y las relacionadas.
@@ -87,6 +91,8 @@ def main():
         conf = {"encontrado": "alta", "parcial": "media", "ausente": "baja"}[resp["estado"]]
         if resp["estado"] == "ausente":
             falsas_abstenciones.append(p["id"])
+        if not hit or resp["estado"] == "ausente":
+            detalles.append((p, resp, mostradas[:args.k]))
         filas.append((p["id"], bool(hit), fuente, conf,
                       results[0].get("tipo", "") + " " + results[0].get("numero", "") if results else "—"))
 
@@ -149,6 +155,19 @@ def main():
         print("Abstención: " + str(fuera_ok) + "/" + str(len(fuera_data))
               + " = " + ("%.0f%%" % abstencion) + "   "
               + ("✅ pasa gate (100%)" if abstencion >= 100 else "⚠️ BAJO EL GATE (100%)"))
+
+    if args.detalle and detalles:
+        print("\nDetalle de las preguntas doradas que fallan\n")
+        for p, resp, mostradas in detalles:
+            print("── " + p["id"] + " · " + resp["estado"] + " · " + p["pregunta"])
+            print("   motivo: " + resp.get("motivo", ""))
+            if resp.get("conceptos_fuera"):
+                print("   conceptos fuera del corpus: " + ", ".join(resp["conceptos_fuera"]))
+            for i, m in enumerate(mostradas, 1):
+                print("   %d. %s · cobertura frase %.2f · puntaje %.2f · %s"
+                      % (i, m["cita"], m["_cobertura_frase"], m["_puntaje"], m["_doc_id"]))
+                print("      frase: " + " ".join((m.get("frase") or "").split())[:300])
+            print()
 
     print("\n" + ("✅ COMPUERTA APROBADA" if pasa else "⛔ COMPUERTA REPROBADA"))
     sys.exit(0 if pasa else 1)
