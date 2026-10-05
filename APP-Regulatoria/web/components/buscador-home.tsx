@@ -3,12 +3,14 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+// Cada una devuelve la norma correcta con el corpus actual (probado el 23-09).
+// Antes de agregar otra, búscala: una sugerencia que falla es peor que ninguna.
 const SUGERENCIAS = [
-  "registro sanitario",
-  "farmacovigilancia",
-  "cosméticos",
-  "dispositivos médicos",
-  "buenas prácticas de manufactura",
+  "vigencia del registro sanitario",
+  "validez de la receta retenida",
+  "rotulado de cosméticos",
+  "qué es una droguería",
+  "publicidad de medicamentos con receta",
 ];
 
 /** Caja de búsqueda de la portada: no resuelve la consulta acá, la delega a

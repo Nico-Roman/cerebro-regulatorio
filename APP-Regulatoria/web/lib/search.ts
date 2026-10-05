@@ -996,8 +996,8 @@ export function responder(pregunta: string, opts: OpcionesBusqueda = {}, idxExte
   let motivo: string;
   if (p.coberturaFrase >= umbral && p.coberturaPasaje >= UMBRAL_PASAJE_ENCONTRADO && datoOk && p.nucleo && literal && nucleoEspecifico) {
     estado = "encontrado";
-    titular = "Encontrado en la norma";
-    motivo = "La frase destacada responde la pregunta.";
+    titular = "Pasaje más cercano a tu pregunta";
+    motivo = "Confirma que trate tu caso exacto (quién, qué producto, qué trámite) antes de usarlo.";
   } else if ((p.coberturaPasaje >= UMBRAL_PARCIAL || p.coberturaFrase >= UMBRAL_PARCIAL) && principalEn(p, pq)) {
     estado = "parcial";
     titular = "Respuesta parcial: revisa si aplica a tu caso";

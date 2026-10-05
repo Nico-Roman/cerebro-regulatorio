@@ -59,12 +59,12 @@ export default function Home() {
             palabra "IA". En el mercado chileno ya hay competencia vendiendo
             registros ISP "con agentes de IA", así que decirlo iguala en vez de
             separar. Lo que no hace nadie más es devolver el párrafo literal de
-            la norma con su enlace oficial, sin resumirlo: eso es lo que se
-            promete acá. */}
+            la norma con su enlace oficial. Desde el 23-09 ya no promete "no lo
+            resume": el asistente redacta un borrador, y la frase lo dice. */}
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          Escribe tu pregunta como se te ocurra. Te devuelve el párrafo exacto de la
-          norma que la responde, con el enlace al documento oficial del ISP. No lo
-          resume ni lo interpreta: te muestra el texto tal como está.
+          Escribe tu pregunta como se te ocurra. Te muestra los artículos que la
+          responden, con el enlace oficial del ISP, y un borrador con IA que cita
+          cada frase.
         </p>
 
         <div className="mt-9 max-w-3xl">

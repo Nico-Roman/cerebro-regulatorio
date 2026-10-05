@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { FormularioIngreso } from "@/components/formulario-ingreso";
@@ -46,9 +47,12 @@ export default async function IngresarPage({
         </div>
 
         <p className="mt-8 text-xs leading-relaxed text-muted">
-          Al entrar aceptas que guardemos tus datos y tus búsquedas para operar
-          el buscador. No los compartimos con nadie y puedes pedir que borremos
-          tu cuenta cuando quieras.
+          Al entrar aceptas los{" "}
+          <Link href="/terminos" className="underline">Términos</Link> y que
+          tratemos tus datos y búsquedas como explica la{" "}
+          <Link href="/privacidad" className="underline">Política de Privacidad</Link>.
+          Solo los ven los proveedores que hacen funcionar el sitio; no los
+          vendemos. Puedes pedir que borremos tu cuenta cuando quieras.
         </p>
       </div>
     </main>

@@ -55,7 +55,8 @@ export function NavSesion() {
         className="label-micro hidden text-muted transition-colors hover:text-foreground sm:block"
         title={sesion.user.email}
       >
-        {sesion.user.email}
+        {/* El correo completo empujaba la barra; queda en el title. */}
+        Mi cuenta
       </Link>
       <BotonSalir />
     </>

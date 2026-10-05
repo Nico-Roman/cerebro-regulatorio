@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { jsonParaScript } from "@/lib/html";
-import { SITE, WHATSAPP_URL } from "@/lib/site";
+import { OG_IMAGEN, SITE, WHATSAPP_URL } from "@/lib/site";
 import { guiaPorSlug, guiasPublicadas } from "@/lib/guias";
 
 // Solo se generan las guías publicadas. Una guía con `publicada: false` no
@@ -30,6 +30,7 @@ export async function generateMetadata({
       title: `${guia.titulo} · ${SITE.nombre}`,
       description: guia.resumen,
       publishedTime: guia.actualizada,
+      images: [OG_IMAGEN],
     },
   };
 }

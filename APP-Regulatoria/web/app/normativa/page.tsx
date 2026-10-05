@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { BuscadorNormativa } from "@/components/buscador-normativa";
-import { usuarioActual } from "@/lib/sesion";
+import { esAdmin, usuarioActual } from "@/lib/sesion";
 import { iaDisponible } from "@/lib/ia/config";
 import { DIAS_VENCIDO, estadoCorpus, fechaLegible } from "@/lib/estado-corpus";
-import { debeVerOfertaInicial, estadoCreditos } from "@/lib/creditos";
-import { OfertaInicial } from "@/components/oferta-inicial";
+import { cupoUsado } from "@/lib/rate-limit";
+import { DIA, PREGUNTAS_DIARIAS, claveCupoDiario } from "@/lib/ia/cupo";
 
 export const metadata: Metadata = {
   title: "Buscador de normativa farmacéutica y sanitaria chilena",
@@ -46,14 +46,13 @@ export default async function NormativaPage({
   // quien va a citar una norma tiene derecho a saber cuándo se verificó.
   const estado = estadoCorpus();
 
-  // Saldo de créditos de IA. Si la base falla, el buscador sigue: el saldo es
-  // información, no una condición para buscar.
+  // Preguntas con IA que quedan hoy. Si la base falla, el buscador sigue: el
+  // saldo es información, no una condición para buscar.
   const ia = await iaDisponible();
-  const creditos = ia ? await estadoCreditos(usuario.id).catch(() => null) : null;
-  // La oferta única de planes, al entrar por primera vez después de
-  // registrarse. Fuera de esto, en el buscador no se ofrece nada: ni enlaces a
-  // planes ni recordatorios, salvo al llegar al límite (respuesta-ia).
-  const ofrecer = creditos ? await debeVerOfertaInicial(usuario.id, creditos.plan.id).catch(() => false) : false;
+  const usadas =
+    ia && !esAdmin(usuario.email)
+      ? await cupoUsado(claveCupoDiario(usuario.id), DIA).catch(() => null)
+      : null;
 
   return (
     <>
@@ -77,18 +76,13 @@ export default async function NormativaPage({
             según el listado oficial del ISP
           </p>
         )}
-        {creditos && (
+        {usadas !== null && (
           <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
-            Respuestas con IA · plan {creditos.plan.nombre}: te quedan{" "}
-            {creditos.restantes.mes.toLocaleString("es-CL")} este mes ({creditos.restantes.hoy.toLocaleString("es-CL")}{" "}
-            hoy)
-            {creditos.restantes.pack > 0
-              ? ` · ${creditos.restantes.pack.toLocaleString("es-CL")} créditos adicionales`
-              : ""}
+            Preguntas con IA: te quedan {Math.max(0, PREGUNTAS_DIARIAS - usadas)} de {PREGUNTAS_DIARIAS} hoy.
+            Se renuevan a medianoche.
           </p>
         )}
       </div>
-      {ofrecer && <OfertaInicial />}
       <Suspense fallback={<div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8" />}>
         <BuscadorNormativa iaDisponible={ia} />
       </Suspense>
