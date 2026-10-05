@@ -7,11 +7,7 @@ Modelo: `openai/gpt-oss-120b`.
 ### t01 ✅ ¿Qué tipo de producto es? Medicamento · ¿Es importado o fabricado en Chile? Importado · ¿Es de uso humano o veterinario? Humano · ¿En qué situación está? Sin registro · ¿Tiene registro sanitario en otro país? Sí
 Ruta: `medicamento-nuevo-con-registro-extranjero` (esperada `medicamento-nuevo-con-registro-extranjero`) · ISP (ANAMED)
 
-El Instituto de Salud Pública (ISP) debe registrar el medicamento importado antes de que pueda distribuirse en Chile, pues ningún producto farmacéutico puede ser comercializado sin haber sido inscrito en el registro sanitario correspondiente [Código Sanitario · art. 97].  
-Para determinar si procede el procedimiento abreviado, el ISP (a través del Departamento ANAMED) evaluará la solicitud considerando la existencia de un registro sanitario en otro país y, de ser así, aplicará el esquema abreviado previsto en el DS Nº 3/2010, siempre que el solicitante aporte los antecedentes que acrediten la necesidad del producto [Res. Ex. 411 · pág. 2].  
-En caso de que el registro sea aprobado, el titular podrá solicitar al ISP la emisión de un Certificado de Producto Farmacéutico, el cual debe entregarse dentro de los diez días siguientes a la recepción de la solicitud [DS 3 · art. 104].  
-Si el importador necesita modificar datos del registro (por ejemplo, cambios de presentación o de titularidad), deberá presentar la solicitud con los antecedentes técnico‑científicos en los formularios autorizados y el ISP resolverá la modificación en un plazo no superior a tres meses, notificando eventuales objeciones [DS 3 · art. 66][DS 3 · art. 68].  
-Los trámites de autorización de importación no están detallados en los pasajes disponibles; por lo tanto, los pasajes no detallan este trámite.
+(error del proveedor: El proveedor respondió 429: {"error":{"message":"Rate limit reached for model `openai/gpt-oss-120b` in organization `org)
 
 Nico: ☐ correcta ☐ a corregir ☐ fuera
 
@@ -32,7 +28,7 @@ Nico: ☐ correcta ☐ a corregir ☐ fuera
 ### t04 ✅ ¿Qué tipo de producto es? Medicamento · ¿Es importado o fabricado en Chile? Fabricado en Chile · ¿Es de uso humano o veterinario? Humano · ¿En qué situación está? Registrado, con cambios · ¿Tiene registro sanitario en otro país? No
 Ruta: `medicamento-cambios` (esperada `medicamento-cambios`) · ISP (ANAMED)
 
-(error del proveedor: El proveedor respondió 429: {"error":{"message":"Rate limit reached for model `openai/gpt-oss-120b` in organization `org)
+Para efectuar el cambio que desea, debe presentar ante el ISP (ANAMED) una solicitud de modificación del registro sanitario, especificando los aspectos que se pretenden alterar (por ejemplo, fórmula, presentación, rotulado, indicaciones terapéuticas, etc.) y acompañar la documentación requerida según lo establecido en el artículo 65 del DS 3, que autoriza al Instituto a aprobar dichas modificaciones mediante resolución [DS 3 · art. 65].
 
 Nico: ☐ correcta ☐ a corregir ☐ fuera
 
@@ -65,7 +61,7 @@ Nico: ☐ correcta ☐ a corregir ☐ fuera
 ### t09 ✅ ¿Qué tipo de producto es? Cosmético · ¿Es importado o fabricado en Chile? Fabricado en Chile · ¿Es de uso humano o veterinario? Humano · ¿En qué situación está? Registrado, con cambios · ¿Tiene registro sanitario en otro país? No
 Ruta: `cosmetico-cambios` (esperada `cosmetico-cambios`) · ISP
 
-El producto que usted fabrica es un producto cosmético, entendido como cualquier preparado destinado a aplicación externa al cuerpo humano con fines de embellecimiento o conservación de la piel, sin efecto sistémico [Código Sanitario · art. 106]. Como el producto ya cuenta con registro sanitario en Chile y necesita incorporar cambios, el trámite que corresponde es la **modificación del registro del producto cosmético ante el Instituto de Salud Pública (ISP)**, quien por resolución fundada puede requerir la actualización del registro conforme a lo establecido en el artículo 13 del reglamento [DS 239 · art. 36]. Los cambios deberán ser presentados con la documentación que acredite la nueva composición y las condiciones de fabricación, de modo que el ISP verifique que no se incurra en una alteración que convierta al producto en adulterado, según la definición del artículo 7 del DS 239 [DS 239 · art. 7]. Los pasajes no detallan plazos, costos ni requisitos específicos para la presentación de la solicitud.
+El producto que usted fabrica es un producto cosmético, definido como cualquier preparado destinado a aplicación externa al cuerpo humano con fines de embellecimiento o conservación de la piel, sin efecto sistémico [Código Sanitario · art. 106]. Como el producto ya cuenta con registro sanitario en Chile y necesita incorporar cambios, el trámite que corresponde es la **modificación del registro del producto cosmético ante el Instituto de Salud Pública (ISP)** [DS 239 · art. 36]. El ISP, mediante resolución fundada, podrá requerir la actualización de la información del registro conforme a lo establecido en el artículo 13 del reglamento, para reflejar las modificaciones que usted desea efectuar [DS 239 · art. 36]. Los pasajes disponibles no detallan otros trámites adicionales para este caso.
 
 Nico: ☐ correcta ☐ a corregir ☐ fuera
 
