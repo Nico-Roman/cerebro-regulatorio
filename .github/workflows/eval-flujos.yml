@@ -75,7 +75,9 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "$f"
-          git diff --cached --quiet && exit 0
+          # Solo la fecha del título cambió: no se commitea. Un commit del bot no
+          # dispara CI y dejaba el PR con el último commit sin checks.
+          git diff --cached --quiet -I "^# Evaluación" && exit 0
           git commit -m "eval: informe de los flujos $(date -u +%Y-%m-%d)"
           # Un push con GITHUB_TOKEN no dispara otros workflows: no hay bucle.
           git push origin "HEAD:${{ github.head_ref || github.ref_name }}"
