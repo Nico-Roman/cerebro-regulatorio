@@ -709,6 +709,51 @@
     },
     {
       "si": [
+        "glucometro",
+        "glucometros",
+        "marcapasos",
+        "tensiometro",
+        "tensiometros",
+        "oximetro",
+        "oximetros",
+        "stent",
+        "stents",
+        "cateter",
+        "cateteres",
+        "audifono",
+        "audifonos",
+        "desfibrilador",
+        "desfibriladores",
+        "nebulizador",
+        "nebulizadores",
+        "preservativo",
+        "preservativos",
+        "condon",
+        "condones",
+        "mascarilla",
+        "mascarillas",
+        "sutura",
+        "suturas"
+      ],
+      "agregar": [
+        "dispositivo medico",
+        "dispositivos medicos",
+        "elementos de uso medico"
+      ]
+    },
+    {
+      "si": [
+        "cadera",
+        "rodilla"
+      ],
+      "agregar": [
+        "protesis",
+        "implantable",
+        "implantables"
+      ]
+    },
+    {
+      "si": [
         "dmdiv",
         "diagnostico in vitro",
         "dispositivo de diagnostico in vitro",
