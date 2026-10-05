@@ -29,7 +29,12 @@ export function desfaseZona(fecha: Date, zona: string): number {
     Number(p.minute),
     Number(p.second)
   );
-  return (comoUtc - fecha.getTime()) / 60000;
+  // Las partes de Intl no traen milisegundos: se comparan contra el instante
+  // truncado al segundo. Sin esto el desfase arrastraba los milisegundos del
+  // reloj (-180,0108 min) y cada inicio de ventana de lib/ventana.ts salía
+  // distinto: el contador de los límites de uso volvía a 1 en cada petición y
+  // ni el cupo diario ni el tope por hora se cumplían (visto el 01-10-2026).
+  return (comoUtc - Math.floor(fecha.getTime() / 1000) * 1000) / 60000;
 }
 
 /**
