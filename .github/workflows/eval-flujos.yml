@@ -1,9 +1,11 @@
 # Evaluación de los flujos del asistente (encargo D) con el modelo real.
 #
 # Las sesiones de Claude Code no tienen la clave del modelo ni la base de datos,
-# así que la evaluación corre acá, con la clave guardada como secreto, y deja el
-# informe en dos lugares: el resumen del job y un archivo commiteado en la misma
-# rama (cerebro/informes/eval-flujos.md), que la sesión lee con git pull.
+# así que la evaluación corre acá, con la clave guardada como secreto. El informe
+# queda siempre en el resumen del job y en el log. Solo cuando se lanza a mano
+# (Run workflow) se commitea además en la rama elegida
+# (cerebro/informes/eval-flujos.md): un commit del bot en un PR deja el último
+# commit sin CI (sus corridas quedan esperando aprobación).
 #
 # Configuración (una vez): Settings → Secrets and variables → Actions →
 #   secreto  LLM_API_KEY
@@ -43,8 +45,8 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          # En un PR, la rama misma (no el merge de prueba): el informe se
-          # commitea ahí.
+          # En un PR, la rama misma (no el merge de prueba); a mano, la rama
+          # elegida, que es donde se commitea el informe.
           ref: ${{ github.head_ref || github.ref_name }}
 
       - uses: actions/setup-node@v7
@@ -69,14 +71,15 @@ jobs:
             --salida ../cerebro/informes/eval-flujos.md
 
       - name: Commitear el informe en la rama
+        # Solo a mano: ver la cabecera.
+        if: github.event_name == 'workflow_dispatch'
         run: |
           f=APP-Regulatoria/cerebro/informes/eval-flujos.md
           [ -f "$f" ] || exit 0
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "$f"
-          # Solo la fecha del título cambió: no se commitea. Un commit del bot no
-          # dispara CI y dejaba el PR con el último commit sin checks.
+          # Solo la fecha del título cambió: no hay nada nuevo que commitear.
           git diff --cached --quiet -I "^# Evaluación" && exit 0
           git commit -m "eval: informe de los flujos $(date -u +%Y-%m-%d)"
           # Un push con GITHUB_TOKEN no dispara otros workflows: no hay bucle.
