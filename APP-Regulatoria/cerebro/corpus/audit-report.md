@@ -1,17 +1,17 @@
 # Auditoría de corpus — Cerebro Regulatorio
 
-_Generado: 2026-10-02 · listado oficial ISP: snapshot 2026-10-02 (124 normas únicas)_
+_Generado: 2026-10-06 · listado oficial ISP: snapshot 2026-10-06 (127 normas únicas)_
 
 ## Resumen
 
-- **PDFs encontrados:** 128
-- **Documentos indexados (tras colapsar copias):** 133
+- **PDFs encontrados:** 130
+- **Documentos indexados (tras colapsar copias):** 136
 - **Copias duplicadas colapsadas:** 7
-- **Chunks (unidades de recuperación):** 2823
-- **Texto nativo:** 60  ·  **OCR:** 59  ·  **Sin texto extraíble:** 2
+- **Chunks (unidades de recuperación):** 2911
+- **Texto nativo:** 62  ·  **OCR:** 59  ·  **Sin texto extraíble:** 2
 - **Con match en listado oficial (→ vigente):** 120
-- **Sin match oficial (vigencia no verificada):** 1
-- **Sin metadatos del catálogo vault:** 121
+- **Sin match oficial (vigencia no verificada):** 3
+- **Sin metadatos del catálogo vault:** 123
 - **Documentos con modificación conocida:** 90
 - **Pasajes con disposición modificada (marcados ⛔):** 2
 - **Pasajes con alerta de OCR:** 224
@@ -28,6 +28,8 @@ _Generado: 2026-10-02 · listado oficial ISP: snapshot 2026-10-02 (124 normas ú
 
 | Documento | Tipo | Nº | Texto | Título desde |
 |---|---|---|---|---|
+| dispositivos_medicos/2781436 | Decreto Exento | 25 | nativo | override |
+| dispositivos_medicos/2782631 | Decreto Exento | 31 | nativo | override |
 | otros/CODIGO-ETICA-ISP |  |  | nativo | override |
 
 ## ⚠️ Documentos OCR con cifras sospechosas (candidatos a re-OCR)
@@ -107,6 +109,9 @@ Ordenados por nº de pasajes con alerta. El texto NO se corrige automáticamente
 | codigo_sanitario/Libro X | Decreto con Fuerza de Ley | 725 | xml | vigente | no | 29 | xml_bcn | bcn_leychile | 0 | 0 | sí |
 | codigo_sanitario/Título Preliminar | Decreto con Fuerza de Ley | 725 | xml | vigente | no | 16 | xml_bcn | bcn_leychile | 0 | 0 | no |
 | cosmeticos/decreto supremo 239 | Decreto Supremo | 239 | nativo | vigente | no | 121 | url | listado_oficial | 0 | 0 | sí |
+| dispositivos_medicos/2781436 | Decreto Exento | 25 | nativo | no_verificada | no | 34 | url | override | 0 | 0 | no |
+| dispositivos_medicos/2782631 | Decreto Exento | 31 | nativo | no_verificada | no | 18 | url | override | 0 | 0 | no |
+| dispositivos_medicos/Decreto Supremo 825 (BCN) | Decreto Supremo | 825 | xml | vigente | no | 36 | xml_bcn | bcn_leychile | 0 | 0 | no |
 | ensayos_clinicos/Circular A15-01  Abr.2016 Actualiza Pautas de Autoevaluacion para el proceso de Acreditacion de Comite Etico Cientificos | Circular | A15/01/2016 | ocr | vigente | no | 5 | url | listado_oficial | 3 | 0 | sí |
 | ensayos_clinicos/Res.-173-2024-GUIA-CONSIDERACIONES-GENERALES-PARA-ESTUDIOS-CLINICOS | Resolución Exenta | 173 | ocr | vigente | no | 8 | url | listado_oficial | 2 | 0 | sí |
 | ensayos_clinicos/Res.-Ex.-N°-273-2022-Aprueba-Guia-Tecnica-Lineamientos-Estudios-Clinicos-con-Biologicos | Resolución Exenta | 273 | ocr | vigente | no | 6 | url | listado_oficial | 4 | 0 | sí |

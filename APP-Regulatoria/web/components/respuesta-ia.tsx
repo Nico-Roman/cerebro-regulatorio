@@ -1,17 +1,57 @@
 "use client";
 
-// Borrador redactado con IA a partir de los pasajes de la búsqueda.
+// Respuesta del asistente, redactada solo con los pasajes del corpus.
 //
-// Con el modo IA apagado es un botón: la mayoría de las consultas se resuelven
-// leyendo los pasajes y cada llamada cuesta. Con el modo IA encendido se pide
-// solo al terminar la búsqueda.
+// Se pide sola al terminar cada búsqueda: desde el encargo C2 no hay
+// interruptor «Modo IA». Va arriba y los pasajes debajo, como evidencia; la
+// cita y el texto oficial mandan por sobre el resumen.
 //
-// Se presenta siempre como borrador, junto a la frase de la norma y nunca en su
-// lugar: la cita y el texto oficial mandan por sobre el resumen. Va arriba del
-// pasaje porque en las pruebas en vivo acertó donde el pasaje no.
+// Cuando el asistente se abstiene, ofrece «Te respondo yo en 24 horas
+// hábiles»: la pregunta y el correo de la persona van a contacto@regulamed.cl.
 
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+
+/** «Te respondo yo en 24 horas hábiles»: manda la pregunta a contacto@ por correo. */
+function RespuestaHumana({ consultaId }: { consultaId: string }) {
+  const [estado, setEstado] = useState<"inicial" | "enviando" | "ok" | "error">("inicial");
+  const [mensaje, setMensaje] = useState<string | null>(null);
+  async function pedir() {
+    setEstado("enviando");
+    try {
+      const res = await fetch("/api/conversaciones/respuesta-humana", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ consultaId }),
+      });
+      const datos = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setMensaje(datos.mensaje || "No pudimos enviarla. Escríbenos por correo.");
+        setEstado("error");
+        return;
+      }
+      setEstado("ok");
+    } catch {
+      setMensaje("No pudimos enviarla. Revisa tu conexión.");
+      setEstado("error");
+    }
+  }
+  if (estado === "ok") {
+    return <p className="text-sm text-emerald-300">Listo: un químico farmacéutico te responde a tu correo en 24 horas hábiles.</p>;
+  }
+  return (
+    <div className="flex flex-col gap-2">
+      <button
+        type="button"
+        onClick={pedir}
+        disabled={estado === "enviando"}
+        className="self-start border border-sky-700 px-4 py-2 text-xs text-sky-200 transition-colors hover:border-sky-400 hover:text-foreground disabled:opacity-50"
+      >
+        {estado === "enviando" ? "Enviando…" : "Te respondo yo en 24 horas hábiles"}
+      </button>
+      {estado === "error" && mensaje && <p className="text-xs text-muted">{mensaje}</p>}
+    </div>
+  );
+}
 
 type Estado = "inicial" | "cargando" | "listo" | "ausencia" | "error";
 
@@ -30,6 +70,7 @@ interface Borrador {
   sinCitas: boolean;
   datosNoVerificados: string[];
   casoNoCubierto: string[];
+  afirmacionesSinCita: string[];
   cacheada: boolean;
 }
 
@@ -47,21 +88,51 @@ function TextoConNegritas({ texto }: { texto: string }) {
   return <>{partes}</>;
 }
 
-export function RespuestaIa({ consultaId, automatico = false }: { consultaId: string; automatico?: boolean }) {
+/**
+ * El borrador con las oraciones que imponen algo sin cita subrayadas. Las
+ * oraciones vienen del servidor tal como aparecen en el texto (subcadenas
+ * exactas), así que basta con ubicarlas.
+ */
+function TextoBorrador({ texto, sinCita }: { texto: string; sinCita: string[] }) {
+  if (!sinCita.length) return <TextoConNegritas texto={texto} />;
+  const trozos: ReactNode[] = [];
+  let resto = texto;
+  let i = 0;
+  while (resto) {
+    let primera: { pos: number; oracion: string } | null = null;
+    for (const o of sinCita) {
+      const pos = resto.indexOf(o);
+      if (pos >= 0 && (!primera || pos < primera.pos)) primera = { pos, oracion: o };
+    }
+    if (!primera) {
+      trozos.push(<TextoConNegritas key={i++} texto={resto} />);
+      break;
+    }
+    if (primera.pos > 0) trozos.push(<TextoConNegritas key={i++} texto={resto.slice(0, primera.pos)} />);
+    trozos.push(
+      <span
+        key={i++}
+        title="Afirmación sin cita"
+        className="underline decoration-red-400 decoration-wavy underline-offset-4"
+      >
+        <TextoConNegritas texto={primera.oracion} />
+      </span>
+    );
+    resto = resto.slice(primera.pos + primera.oracion.length);
+  }
+  return <>{trozos}</>;
+}
+
+export function RespuestaIa({ consultaId, automatico = true }: { consultaId: string; automatico?: boolean }) {
   const [estado, setEstado] = useState<Estado>("inicial");
   const [borrador, setBorrador] = useState<Borrador | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
   const [reintentable, setReintentable] = useState(false);
-  // Llegó a sus preguntas del día: no se vende nada, se ofrece la asesoría.
-  const [limite, setLimite] = useState(false);
-  // Preguntas con IA que le quedan hoy; null para el administrador (sin tope).
-  const [restantesHoy, setRestantesHoy] = useState<number | null>(null);
 
   const pedir = useCallback(async () => {
     setEstado("cargando");
     setAviso(null);
     setReintentable(false);
-    setLimite(false);
     try {
       const res = await fetch("/api/responder", {
         method: "POST",
@@ -92,8 +163,9 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
         return;
       }
       if (res.status === 429) {
-        setAviso(datos.mensaje || "Llegaste a la cuota diaria de respuestas redactadas.");
-        setLimite(datos.error === "limite_diario");
+        // Ráfaga: el cupo diario ya se descontó al enviar la pregunta.
+        setAviso(datos.mensaje || "Vas muy rápido para el redactor. Espera unos segundos.");
+        setReintentable(true);
         setEstado("error");
         return;
       }
@@ -116,9 +188,9 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
         sinCitas: Boolean(datos.sinCitas),
         datosNoVerificados: datos.datosNoVerificados ?? [],
         casoNoCubierto: datos.casoNoCubierto ?? [],
+        afirmacionesSinCita: datos.afirmacionesSinCita ?? [],
         cacheada: Boolean(datos.cacheada),
       });
-      if (typeof datos.restantesHoy === "number") setRestantesHoy(datos.restantesHoy);
       setEstado("listo");
     } catch {
       setAviso("No pudimos redactar la respuesta. Los pasajes de arriba siguen sirviendo.");
@@ -143,7 +215,7 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
         onClick={pedir}
         className="self-start border border-line px-4 py-2 text-xs text-muted transition-colors hover:border-foreground hover:text-foreground"
       >
-        Redactar borrador con IA a partir de estos pasajes
+        Redactar la respuesta a partir de estos pasajes
       </button>
     );
   }
@@ -153,7 +225,7 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
       aria-live="polite"
       className="flex flex-col gap-3 border border-dashed border-sky-800/70 bg-sky-950/10 px-4 py-4"
     >
-      <span className="label-micro text-sky-300">Borrador IA · verifica contra la cita</span>
+      <span className="label-micro text-sky-300">Respuesta del asistente · verifica contra la cita</span>
 
       {estado === "cargando" && <p className="text-sm text-muted">Leyendo los pasajes y redactando…</p>}
 
@@ -179,8 +251,17 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
               {`Los pasajes que citó no mencionan ${borrador.casoNoCubierto.map((c) => `«${c}»`).join(", ")}: puede estar respondiendo con la regla de otro caso. Revisa si aplica a tu situación.`}
             </p>
           )}
+          {borrador.afirmacionesSinCita.length > 0 && (
+            <p className="border-l-2 border-red-500/70 pl-3 text-xs leading-relaxed text-red-200">
+              Afirmación sin cita:{" "}
+              {borrador.afirmacionesSinCita.length === 1
+                ? "la oración subrayada impone una obligación o un plazo sin un pasaje que la respalde."
+                : `${borrador.afirmacionesSinCita.length} oraciones subrayadas imponen obligaciones o plazos sin un pasaje que las respalde.`}{" "}
+              No las uses sin verificarlas en la fuente.
+            </p>
+          )}
           <div className="whitespace-pre-wrap text-sm leading-relaxed text-neutral-200">
-            <TextoConNegritas texto={borrador.texto} />
+            <TextoBorrador texto={borrador.texto} sinCita={borrador.afirmacionesSinCita} />
           </div>
           {borrador.fuentes.length > 0 && (
             <div className="flex flex-col gap-1.5">
@@ -211,30 +292,18 @@ export function RespuestaIa({ consultaId, automatico = false }: { consultaId: st
 
       {estado === "listo" && (
         <p className="text-xs leading-relaxed text-muted">
-          Redactado por un modelo de lenguaje solo con los pasajes de esta búsqueda, con temperatura cero. Puede
-          equivocarse al interpretar o resumir: antes de decidir, lee la frase de la norma y la fuente oficial. Es
-          apoyo a la consulta, no asesoría regulatoria ni legal.
-          {borrador?.cacheada ? " Reutilizado de una consulta idéntica: no cuenta en tus preguntas del día." : ""}
-        </p>
-      )}
-
-      {estado === "listo" && restantesHoy !== null && (
-        <p className="text-xs text-muted">
-          Te {restantesHoy === 1 ? "queda" : "quedan"} {restantesHoy}{" "}
-          {restantesHoy === 1 ? "pregunta" : "preguntas"} con IA hoy.
+          Redactado por un modelo de lenguaje solo con los pasajes de abajo. Puede equivocarse al interpretar o
+          resumir: antes de decidir, lee la frase de la norma y la fuente oficial. No reemplaza la revisión de un
+          químico farmacéutico.
+          {borrador?.cacheada ? " Reutilizado de una consulta idéntica." : ""}
         </p>
       )}
 
       {(estado === "ausencia" || estado === "error") && aviso && (
         <p className={estado === "ausencia" ? "text-sm text-amber-200" : "text-sm text-muted"}>{aviso}</p>
       )}
-      {estado === "error" && limite && (
-        <Link
-          href="/agenda"
-          className="self-start border border-sky-700 px-4 py-2 text-xs text-sky-200 transition-colors hover:border-sky-400 hover:text-foreground"
-        >
-          ¿Es urgente? Agenda una evaluación
-        </Link>
+      {(estado === "ausencia" || (estado === "listo" && borrador?.abstuvo)) && (
+        <RespuestaHumana consultaId={consultaId} />
       )}
       {estado === "error" && reintentable && (
         <button

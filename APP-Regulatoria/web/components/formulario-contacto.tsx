@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { SITE, WHATSAPP_URL } from "@/lib/site";
+import { ETAPAS, PRODUCTOS } from "@/lib/calificacion";
 
 type Estado =
   | { tipo: "inicial" }
@@ -118,6 +119,45 @@ export function FormularioContacto() {
         </label>
       </div>
 
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="flex flex-col gap-2">
+          <span className="label-micro text-muted">Producto</span>
+          <select
+            name="producto"
+            required
+            defaultValue=""
+            className="border border-line bg-background px-3 py-3 text-base outline-none transition-colors focus:border-foreground sm:text-sm"
+          >
+            <option value="" disabled>
+              Elige uno
+            </option>
+            {PRODUCTOS.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="flex flex-col gap-2">
+          <span className="label-micro text-muted">Etapa</span>
+          <select
+            name="etapa"
+            required
+            defaultValue=""
+            className="border border-line bg-background px-3 py-3 text-base outline-none transition-colors focus:border-foreground sm:text-sm"
+          >
+            <option value="" disabled>
+              Elige una
+            </option>
+            {ETAPAS.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
       <label className="flex flex-col gap-2">
         <span className="label-micro text-muted">Cuéntanos tu caso</span>
         <textarea
@@ -125,7 +165,7 @@ export function FormularioContacto() {
           required
           rows={5}
           maxLength={4000}
-          placeholder="Qué producto es, en qué etapa estás y qué necesitas resolver."
+          placeholder="Qué necesitas resolver y para cuándo."
           className="resize-y border border-line bg-transparent px-3 py-3 text-base outline-none transition-colors placeholder:text-neutral-600 focus:border-foreground sm:text-sm"
         />
       </label>

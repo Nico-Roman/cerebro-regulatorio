@@ -38,7 +38,7 @@
      "evidencia": [{"numero": "725", "contiene": "La receta es el instrumento privado"}, {"numero": "3", "contiene": "Receta m[eé]dica: Orden suscrita"}]},
     {"id": "d15-importar-personal", "set": "dev", "tipo": "sin_texto", "pregunta": "¿Qué necesito para importar un medicamento sin registro sanitario para uso personal?", "evidencia": [], "caso": "uso personal"},
     {"id": "d16-precio-maximo", "set": "dev", "tipo": "sin_texto", "pregunta": "¿Cuál es el precio máximo de venta de un medicamento en farmacias?", "evidencia": [], "caso": "precio"},
-    {"id": "d17-dispositivo-clase2", "set": "dev", "tipo": "fuera", "pregunta": "¿Cómo registro un dispositivo médico clase II ante el ISP?", "evidencia": []},
+    {"id": "d17-dispositivo-clase2", "set": "dev", "tipo": "fuera", "solo_sin_categoria": "dispositivos_medicos", "pregunta": "¿Cómo registro un dispositivo médico clase II ante el ISP?", "evidencia": []},
     {"id": "d18-impuesto", "set": "dev", "tipo": "fuera", "pregunta": "¿Qué impuesto pagan los medicamentos importados?", "evidencia": []},
     {"id": "d19-fda-generico", "set": "dev", "tipo": "fuera", "pregunta": "¿Qué requisitos pide la FDA para aprobar un medicamento genérico?", "evidencia": []},
     {"id": "d20-cannabis", "set": "dev", "tipo": "respondible", "pregunta": "¿Se puede autocultivar cannabis con fines medicinales?",

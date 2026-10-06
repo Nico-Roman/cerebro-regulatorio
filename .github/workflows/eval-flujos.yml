@@ -1,0 +1,86 @@
+# Evaluación de los flujos del asistente (encargo D) con el modelo real.
+#
+# Las sesiones de Claude Code no tienen la clave del modelo ni la base de datos,
+# así que la evaluación corre acá, con la clave guardada como secreto. El informe
+# queda siempre en el resumen del job y en el log. Solo cuando se lanza a mano
+# (Run workflow) se commitea además en la rama elegida
+# (cerebro/informes/eval-flujos.md): un commit del bot en un PR deja el último
+# commit sin CI (sus corridas quedan esperando aprobación).
+#
+# Configuración (una vez): Settings → Secrets and variables → Actions →
+#   secreto  LLM_API_KEY
+#   variables LLM_BASE_URL y LLM_MODEL (los mismos valores que en Railway)
+#
+# Falla solo si la tabla de rutas no da las rutas esperadas (determinista). Lo
+# demás —las 20 observaciones y las explicaciones— lo califica Nico a mano.
+
+name: Evaluación de los flujos
+
+on:
+  pull_request:
+    paths:
+      - "APP-Regulatoria/web/lib/flujos/**"
+      - "APP-Regulatoria/web/lib/ia/**"
+      - "APP-Regulatoria/web/app/api/asistente/**"
+      - "APP-Regulatoria/cerebro/casos-flujos/**"
+      - "APP-Regulatoria/web/scripts/eval-flujos.mjs"
+      - ".github/workflows/eval-flujos.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: eval-flujos-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+# Escribe el informe en la rama.
+permissions:
+  contents: write
+
+jobs:
+  evaluar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    # Un PR desde un fork no recibe secretos: sin clave no hay nada que medir.
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # En un PR, la rama misma (no el merge de prueba); a mano, la rama
+          # elegida, que es donde se commitea el informe.
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: APP-Regulatoria/web/package-lock.json
+
+      - run: npm ci
+        working-directory: APP-Regulatoria/web
+
+      - name: Correr la evaluación
+        working-directory: APP-Regulatoria/web
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
+        run: |
+          # Sin clave corre igual la parte determinista (rutas).
+          [ -z "$LLM_API_KEY" ] && echo "::warning::Falta el secreto LLM_API_KEY: solo se evalúan las rutas."
+          node --experimental-strip-types --no-warnings scripts/eval-flujos.mjs \
+            --salida ../cerebro/informes/eval-flujos.md
+
+      - name: Commitear el informe en la rama
+        # Solo a mano: ver la cabecera.
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          f=APP-Regulatoria/cerebro/informes/eval-flujos.md
+          [ -f "$f" ] || exit 0
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$f"
+          # Solo la fecha del título cambió: no hay nada nuevo que commitear.
+          git diff --cached --quiet -I "^# Evaluación" && exit 0
+          git commit -m "eval: informe de los flujos $(date -u +%Y-%m-%d)"
+          # Un push con GITHUB_TOKEN no dispara otros workflows: no hay bucle.
+          git push origin "HEAD:${{ github.head_ref || github.ref_name }}"

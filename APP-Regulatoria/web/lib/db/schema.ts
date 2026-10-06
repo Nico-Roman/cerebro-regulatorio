@@ -111,6 +111,23 @@ export const perfil = pgTable("perfil", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+/**
+ * Una conversación del asistente (encargo C, fase 2): agrupa las preguntas de
+ * un hilo de /normativa. Las tres anteriores viajan como contexto al
+ * planificador y al redactor. «Nueva conversación» crea otra.
+ */
+export const conversaciones = pgTable(
+  "conversaciones",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("conversaciones_user_created_idx").on(t.userId, t.createdAt)]
+);
+
 /** Una fila por búsqueda. Es a la vez registro de uso y backlog del corpus. */
 export const consultas = pgTable(
   "consultas",
@@ -160,11 +177,19 @@ export const consultas = pgTable(
     // Motivo por el que la compuerta de propósito no dejó llegar la consulta
     // al modelo: tarea | rol | formato | clinico.
     bloqueado: text("bloqueado"),
+    // Asistente, fase 1 (0012): las búsquedas que propuso la planificación
+    // (null si se buscó solo con la pregunta) y cuántas oraciones del borrador
+    // imponen algo sin cita.
+    busquedasPlanificadas: jsonb("busquedas_planificadas"),
+    afirmacionesSinCita: integer("afirmaciones_sin_cita"),
+    // Hilo al que pertenece la pregunta (0013). Nulo en las anteriores.
+    conversacionId: text("conversacion_id").references(() => conversaciones.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     index("consultas_user_created_idx").on(t.userId, t.createdAt),
     index("consultas_created_idx").on(t.createdAt),
+    index("consultas_conversacion_idx").on(t.conversacionId, t.createdAt),
     index("consultas_clave_ia_idx")
       .on(t.claveIa)
       .where(sql`${t.respuestaLlm} IS NOT NULL`),
@@ -242,6 +267,10 @@ export const reservas = pgTable(
     email: text("email").notNull(),
     empresa: text("empresa"),
     motivo: text("motivo"),
+    // Calificación de la evaluación (0011): lib/calificacion.ts. Nulos en las
+    // reservas anteriores al 24-09-2026.
+    producto: text("producto"),
+    etapa: text("etapa"),
     inicio: timestamp("inicio", { withTimezone: true }).notNull(),
     fin: timestamp("fin", { withTimezone: true }).notNull(),
     googleEventId: text("google_event_id"),

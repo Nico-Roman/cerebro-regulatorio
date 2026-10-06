@@ -1,0 +1,41 @@
+{
+  "_comentario": [
+    "Fuentes mínimas de dispositivos médicos (encargo B, 24-09-2026).",
+    "Entran al corpus aunque el listado del ISP de dispositivos (ANDID) no responda. Si la norma",
+    "también aparece en ese listado, manda el listado: su vigencia queda certificada por el ISP.",
+    "Si solo está acá, la vigencia queda como no verificada (no hay listado oficial que la respalde).",
+    "El Boletín 17.375-11 es un proyecto de ley: no entra al corpus.",
+    "revisar_nico = true: dato tomado de fuentes secundarias (estudios jurídicos, Minsal) y no",
+    "contrastado contra el texto oficial desde la sesión que lo escribió."
+  ],
+  "categoria": "Dispositivos Médicos",
+  "normas": [
+    {
+      "tipo": "Decreto Supremo",
+      "numero": "825",
+      "descripcion": "Aprueba Reglamento de Control de Productos y Elementos de Uso Médico",
+      "fecha": "30/11/1998",
+      "enlace": "https://www.ispch.cl/sites/default/files/normativa_andid/Decreto%20Supremo%20825.pdf",
+      "bcn_id_norma": "141005",
+      "revisar_nico": false
+    },
+    {
+      "tipo": "Decreto Exento",
+      "numero": "25",
+      "descripcion": "Incorpora dispositivos médicos y dispositivos médicos de diagnóstico in vitro (39 categorías) al régimen de control sanitario del artículo 111 del Código Sanitario",
+      "fecha": "19/03/2026",
+      "enlace": "https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/19/44404/01/2781436.pdf",
+      "aviso": "Vigencia diferida: el control obligatorio rige 24 meses después de la publicación (19-03-2026) para los dispositivos implantables de alto riesgo y críticos, y 36 meses para el resto. Revisa en el decreto qué plazo corresponde a tu categoría.",
+      "revisar_nico": true
+    },
+    {
+      "tipo": "Decreto Exento",
+      "numero": "31",
+      "descripcion": "Incorpora los reactivos de diagnóstico in vitro para la calificación microbiológica de las donaciones en servicios de sangre al régimen de control sanitario del artículo 111 del Código Sanitario",
+      "fecha": "06/03/2026",
+      "enlace": "https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/24/44408/01/2782631.pdf",
+      "cve_diario_oficial": "2782631",
+      "revisar_nico": true
+    }
+  ]
+}

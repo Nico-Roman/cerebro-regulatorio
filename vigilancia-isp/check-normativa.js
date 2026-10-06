@@ -221,8 +221,89 @@ function run() {
   return { baseline, diff, records, total: records.length };
 }
 
-module.exports = { run };
+// ---------- segundo listado: dispositivos médicos (ANDID) ----------
+//
+// Encargo B (24-09-2026). El ISP publica la normativa de dispositivos médicos
+// aparte de la de ANAMED: el PDF del DS 825 vive en
+// /sites/default/files/normativa_andid/, así que existe un listado
+// «normativa_andid». Recibe el mismo tratamiento que ANAMED (snapshot, diff,
+// historial y last-diff), en archivos con prefijo `andid-`.
+//
+// A diferencia de ANAMED, este listado NO aborta el pipeline si no se encuentra:
+// la URL exacta no se pudo verificar al escribir esto (el sitio del ISP no
+// respondía desde la sesión de desarrollo), así que se prueban candidatas y,
+// si ninguna trae una tabla de normas, se registra y se sigue. Las normas
+// mínimas del encargo entran igual por APP-Regulatoria/cerebro/fuentes-dispositivos.json.
+const ANDID_CATEGORIA = 'Dispositivos Médicos';
+const ANDID_URLS = (process.env.ISP_ANDID_URL || '').split(',').map((u) => u.trim()).filter(Boolean).concat([
+  'https://www.ispch.gob.cl/normativa-andid/',
+  'https://www.ispch.gob.cl/andid/normativa/',
+  'https://www.ispch.gob.cl/andid/normativa-andid/',
+]);
+const ANDID_MIN_RECORDS = 3;
+
+function fetchUrl(url) {
+  return execFileSync('curl', ['-s', '--max-time', '120', '-A', UA, url], {
+    encoding: 'utf8',
+    maxBuffer: 32 * 1024 * 1024,
+  });
+}
+
+function runAndid() {
+  const ahora = new Date().toISOString();
+  let records = [];
+  let fuente = '';
+  for (const url of ANDID_URLS) {
+    try {
+      const html = fetchUrl(url);
+      const parsed = parsePage(html);
+      if (parsed.length >= ANDID_MIN_RECORDS) {
+        // La subcategoría del sitio (tecnovigilancia, DMDIV…) se conserva como
+        // materia; la categoría es siempre la del corpus.
+        records = parsed.map((r) => ({ ...r, materia: r.categoria || r.materia, categoria: ANDID_CATEGORIA }));
+        fuente = url;
+        break;
+      }
+      console.log(`[andid] ${url}: ${parsed.length} registros, se prueba la siguiente candidata.`);
+    } catch (e) {
+      console.log(`[andid] ${url}: ${e.message}`);
+    }
+  }
+  if (!records.length) {
+    console.log('[andid] ningún listado de dispositivos médicos respondió con normas. Se sigue con las fuentes mínimas.');
+    return { encontrado: false, baseline: false, diff: { nuevas: [], modificadas: [], eliminadas: [] }, records: [], total: 0 };
+  }
+
+  const latest = path.join(SNAP_DIR, 'andid-latest.json');
+  const histPath = path.join(BASE, 'andid-historial.json');
+  const contentHash = crypto.createHash('sha256')
+    .update(JSON.stringify(records.map((r) => fullKey(r) + '|' + r.fecha + '|' + r.enlace + '|' + r.modificaciones)))
+    .digest('hex');
+  fs.mkdirSync(SNAP_DIR, { recursive: true });
+  const prev = fs.existsSync(latest) ? JSON.parse(fs.readFileSync(latest, 'utf8')) : null;
+  const baseline = !prev;
+  const diff = prev ? computeDiff(prev.records, records) : { nuevas: [], modificadas: [], eliminadas: [] };
+  const nCambios = diff.nuevas.length + diff.modificadas.length + diff.eliminadas.length;
+  const snapshot = { fetchedAt: ahora, sourceUrl: fuente, contentHash, total: records.length, records };
+  if (baseline || nCambios > 0) {
+    const stamp = ahora.replace(/[:.]/g, '-').slice(0, 19);
+    fs.writeFileSync(path.join(SNAP_DIR, `andid-snapshot-${stamp}.json`), JSON.stringify(snapshot, null, 2));
+  }
+  fs.writeFileSync(latest, JSON.stringify(snapshot, null, 2));
+  let historial = fs.existsSync(histPath) ? JSON.parse(fs.readFileSync(histPath, 'utf8')) : [];
+  historial.push({ timestamp: ahora, total: records.length, nuevas: diff.nuevas.length,
+    modificadas: diff.modificadas.length, eliminadas: diff.eliminadas.length, baseline, contentHash });
+  if (historial.length > 500) historial = historial.slice(-500);
+  fs.writeFileSync(histPath, JSON.stringify(historial, null, 2));
+  fs.writeFileSync(path.join(SNAP_DIR, 'andid-last-diff.json'), JSON.stringify({ fetchedAt: ahora, baseline, ...diff }, null, 2));
+  console.log(`[andid] ${fuente}: ${records.length} normas` +
+    (baseline ? ' (línea base).' : ` · +${diff.nuevas.length} ~${diff.modificadas.length} -${diff.eliminadas.length}`));
+  return { encontrado: true, baseline, diff, records, total: records.length };
+}
+
+module.exports = { run, runAndid, parsePage, computeDiff };
 
 if (require.main === module) {
   run();
+  runAndid();
 }

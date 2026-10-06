@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 // Cada una devuelve la norma correcta con el corpus actual (probado el 23-09).
+// `extra` trae las que dependen del corpus del día ("dispositivos médicos"): la
+// compuerta del pipeline las comprueba y las anota en estado-corpus.json.
 // Antes de agregar otra, búscala: una sugerencia que falla es peor que ninguna.
 const SUGERENCIAS = [
   "vigencia del registro sanitario",
@@ -15,7 +17,7 @@ const SUGERENCIAS = [
 
 /** Caja de búsqueda de la portada: no resuelve la consulta acá, la delega a
  *  /normativa para no cargar el corpus completo en la home. */
-export function BuscadorHome() {
+export function BuscadorHome({ extra = [] }: { extra?: string[] }) {
   const router = useRouter();
   const [q, setQ] = useState("");
 
@@ -50,7 +52,7 @@ export function BuscadorHome() {
 
       <div className="flex flex-wrap items-center gap-2">
         <span className="label-micro text-muted">Prueba</span>
-        {SUGERENCIAS.map((s) => (
+        {[...SUGERENCIAS, ...extra].map((s) => (
           <button
             key={s}
             type="button"
