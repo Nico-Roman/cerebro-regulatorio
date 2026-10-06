@@ -69,8 +69,9 @@ jobs:
             echo "::warning::Falta el secreto LLM_API_KEY: no se evalúa." | tee -a "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
+          # 38 de los 45 min del job: lo que falte sale como informe parcial.
           node --experimental-strip-types --no-warnings scripts/eval-asistente.mjs \
-            --salida ../cerebro/informes/eval-asistente.md
+            --presupuesto-min 38 --salida ../cerebro/informes/eval-asistente.md
 
       - name: Commitear el informe en la rama
         # Solo a mano: ver la cabecera.

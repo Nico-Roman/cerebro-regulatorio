@@ -3,6 +3,7 @@
 //   node --experimental-strip-types --no-warnings scripts/eval-asistente.mjs
 //   node ... scripts/eval-asistente.mjs --solo a01,a04 --salida informe.md
 //   node ... scripts/eval-asistente.mjs --sin-linea-base     # la mitad del costo
+//   node ... scripts/eval-asistente.mjs --presupuesto-min 35 # informe parcial si no alcanza
 //
 // Corre lo mismo que /api/responder —planificación, recuperación con el motor
 // TypeScript real, redacción con el prompt real y verificación— sin servidor
@@ -76,6 +77,11 @@ let preguntas = JSON.parse(fs.readFileSync(SET, "utf-8")).preguntas.filter((p) =
 if (solo) preguntas = preguntas.filter((p) => solo.includes(p.id));
 const limite = Number.parseInt(argumento("--limite") ?? "", 10);
 if (Number.isFinite(limite)) preguntas = preguntas.slice(0, limite);
+// Con el cupo del tier gratuito agotado, cada 429 espera hasta 2 min y las 100
+// preguntas no caben en el job: pasado el presupuesto se deja de preguntar y
+// el informe sale parcial, en vez de que el job muera sin informe.
+const presupuestoMin = Number.parseFloat(argumento("--presupuesto-min") ?? "");
+const plazo = Number.isFinite(presupuestoMin) ? Date.now() + presupuestoMin * 60_000 : Infinity;
 
 const esperada = (p, numero) => (p.numeros_aceptables || []).some((rx) => new RegExp(`^(?:${rx})$`).test(numero || ""));
 const debeAbstenerse = (p) =>
@@ -89,8 +95,9 @@ async function conReintento(fn) {
     try {
       return await fn();
     } catch (e) {
-      if (e instanceof ErrorProveedor && e.status === 429 && intento < 4) {
-        await espera(Math.min(120, e.reintentarEnSeg ?? 20) * 1000);
+      const ms = Math.min(120, (e instanceof ErrorProveedor && e.reintentarEnSeg) || 20) * 1000;
+      if (e instanceof ErrorProveedor && e.status === 429 && intento < 4 && Date.now() + ms < plazo) {
+        await espera(ms);
         continue;
       }
       throw e;
@@ -205,12 +212,15 @@ const gravedad = (f) => (f.encontradoFalso ? 3 : f.conNorma && !f.top3 ? 2 : f.f
 
 const conPlan = [];
 const base = [];
-for (const p of preguntas) {
+for (const [i, p] of preguntas.entries()) {
+  if (Date.now() > plazo) break;
   conPlan.push(await evaluar(p, true));
   if (conLineaBase) base.push(await evaluar(p, false));
-  process.stderr.write(".");
+  // Una línea por pregunta: en el log de Actions los puntos sin salto de línea
+  // no se ven hasta el final, y un job cortado no mostraba nada.
+  process.stderr.write(`${i + 1}/${preguntas.length} ${p.id}${conPlan.at(-1).error ? " (error del proveedor)" : ""}\n`);
 }
-process.stderr.write("\n");
+const faltantes = preguntas.length - conPlan.length;
 
 const porFuente = (filas) =>
   [...new Set(filas.map((f) => f.fuente))].map((fu) => [fu, filas.filter((f) => f.fuente === fu)]);
@@ -230,6 +240,13 @@ const informe = [
   `Modelo: \`${config.modelo}\` · preguntas con texto: ${preguntas.length} · planificación usada en ${sPlan.planificadas}/${sPlan.n}` +
     ` · errores del proveedor: ${sPlan.errores}`,
   "",
+  ...(faltantes
+    ? [
+        `**Informe parcial:** se agotó el presupuesto de ${presupuestoMin} min con ${conPlan.length} de ${preguntas.length} ` +
+          "preguntas evaluadas (casi siempre, el cupo del proveedor). Las cifras son solo de esas.",
+        "",
+      ]
+    : []),
   `**Meta (solo revisadas por Nico, ${meta.n}):** «encontrado» falsos ${meta.encontradosFalsos} (meta 0) · ` +
     `norma correcta en el top 3 ${meta.top3}/${meta.conNorma} = ${pct(meta.top3, meta.conNorma)} (meta 80 %, mínimo 60 preguntas).`,
   "",
