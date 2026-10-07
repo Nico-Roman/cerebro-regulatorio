@@ -62,7 +62,7 @@ export function FormularioContacto() {
           href={WHATSAPP_URL}
           target="_blank"
           rel="noreferrer"
-          className="label-micro mt-5 inline-block border border-line px-4 py-2.5 transition-colors hover:border-foreground"
+          className="label-micro mt-5 inline-block border border-line px-4 py-2.5 transition-colors hover:border-accent"
         >
           Abrir WhatsApp
         </a>
@@ -81,7 +81,7 @@ export function FormularioContacto() {
             name="nombre"
             required
             maxLength={120}
-            className="border border-line bg-transparent px-3 py-3 text-base outline-none transition-colors focus:border-foreground sm:text-sm"
+            className="border border-line bg-transparent px-3 py-3 text-base outline-none transition-colors focus:border-accent sm:text-sm"
           />
         </label>
         <label className="flex flex-col gap-2">
@@ -89,7 +89,7 @@ export function FormularioContacto() {
           <input
             name="empresa"
             maxLength={120}
-            className="border border-line bg-transparent px-3 py-3 text-base outline-none transition-colors focus:border-foreground sm:text-sm"
+            className="border border-line bg-transparent px-3 py-3 text-base outline-none transition-colors focus:border-accent sm:text-sm"
           />
         </label>
         <label className="flex flex-col gap-2">
@@ -99,7 +99,7 @@ export function FormularioContacto() {
             type="email"
             required
             maxLength={160}
-            className="border border-line bg-transparent px-3 py-3 text-base outline-none transition-colors focus:border-foreground sm:text-sm"
+            className="border border-line bg-transparent px-3 py-3 text-base outline-none transition-colors focus:border-accent sm:text-sm"
           />
         </label>
         <label className="flex flex-col gap-2">
@@ -107,7 +107,7 @@ export function FormularioContacto() {
           <select
             name="area"
             defaultValue={AREAS_CONSULTA[0]}
-            className="border border-line bg-background px-3 py-3 text-base outline-none transition-colors focus:border-foreground sm:text-sm"
+            className="border border-line bg-background px-3 py-3 text-base outline-none transition-colors focus:border-accent sm:text-sm"
           >
             {AREAS_CONSULTA.map((a) => (
               <option key={a} value={a}>
@@ -126,7 +126,7 @@ export function FormularioContacto() {
           rows={5}
           maxLength={4000}
           placeholder="Qué producto es, en qué etapa estás y qué necesitas resolver."
-          className="resize-y border border-line bg-transparent px-3 py-3 text-base outline-none transition-colors placeholder:text-neutral-600 focus:border-foreground sm:text-sm"
+          className="resize-y border border-line bg-transparent px-3 py-3 text-base outline-none transition-colors placeholder:text-neutral-600 focus:border-accent sm:text-sm"
         />
       </label>
 
@@ -158,7 +158,7 @@ export function FormularioContacto() {
         <button
           type="submit"
           disabled={enviando}
-          className="bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-50"
+          className="boton-neon px-6 py-3 text-sm font-medium disabled:opacity-50"
         >
           {enviando ? "Enviando…" : "Enviar consulta"}
         </button>
@@ -166,7 +166,7 @@ export function FormularioContacto() {
           href={WHATSAPP_URL}
           target="_blank"
           rel="noreferrer"
-          className="border border-line px-6 py-3 text-sm transition-colors hover:border-foreground"
+          className="border border-line px-6 py-3 text-sm transition-colors hover:border-accent"
         >
           O escríbenos por WhatsApp
         </a>

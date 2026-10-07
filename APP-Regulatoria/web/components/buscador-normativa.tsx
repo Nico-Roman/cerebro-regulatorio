@@ -80,10 +80,8 @@ const EJEMPLOS = [
   "¿Qué es la farmacovigilancia?",
 ];
 
-const CLAVE_MODO_IA = "regulamed:modo-ia";
-
 const ESTILO_ESTADO: Record<Estado, { borde: string; punto: string; texto: string }> = {
-  encontrado: { borde: "border-emerald-500/70", punto: "bg-emerald-400", texto: "text-emerald-300" },
+  encontrado: { borde: "border-accent/70", punto: "bg-neon", texto: "text-accent" },
   parcial: { borde: "border-amber-500/70", punto: "bg-amber-400", texto: "text-amber-300" },
   ausente: { borde: "border-neutral-600", punto: "bg-neutral-400", texto: "text-neutral-200" },
 };
@@ -95,7 +93,7 @@ function FraseResaltada({ frase, tramos }: { frase: string; tramos: Array<[numbe
   tramos.forEach(([a, b], i) => {
     if (a > desde) partes.push(frase.slice(desde, a));
     partes.push(
-      <mark key={i} className="rounded-sm bg-emerald-400/15 px-0.5 text-inherit">
+      <mark key={i} className="rounded-sm bg-accent/15 px-0.5 text-inherit">
         {frase.slice(a, b)}
       </mark>
     );
@@ -134,7 +132,7 @@ function TextoCompleto({ r }: { r: Resultado }) {
 function EnlaceFuente({ url }: { url: string }) {
   if (!url) return null;
   return (
-    <a href={url} target="_blank" rel="noreferrer" className="text-xs text-muted underline underline-offset-4 hover:text-foreground">
+    <a href={url} target="_blank" rel="noreferrer" className="text-xs text-muted underline decoration-accent/50 underline-offset-4 hover:text-foreground">
       Fuente oficial ↗
     </a>
   );
@@ -147,7 +145,7 @@ function TarjetaPrincipal({ r }: { r: Resultado }) {
         <span className="font-display text-lg font-medium tracking-tight">{r.cita}</span>
         <span className="text-xs leading-snug text-muted">{r.titulo}</span>
       </header>
-      <blockquote className="border-l-2 border-emerald-500/60 pl-4 text-[15px] leading-relaxed text-neutral-100">
+      <blockquote className="border-l-2 border-accent/70 pl-4 text-[15px] leading-relaxed text-neutral-100">
         «<FraseResaltada frase={r.frase} tramos={r.resaltar} />»
       </blockquote>
       <Avisos avisos={r.avisos} />
@@ -226,7 +224,7 @@ function NormasRecientesPanel({ normas }: { normas: NormaReciente[] | null }) {
                 target="_blank"
                 rel="noreferrer"
                 className={`block border border-line p-3 text-xs transition-colors ${
-                  n.fuente_url ? "hover:border-neutral-600" : "pointer-events-none opacity-70"
+                  n.fuente_url ? "hover:border-accent/50" : "pointer-events-none opacity-70"
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
@@ -245,7 +243,7 @@ function NormasRecientesPanel({ normas }: { normas: NormaReciente[] | null }) {
   );
 }
 
-export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boolean }) {
+export function BuscadorNormativa() {
   const router = useRouter();
   const searchParams = useSearchParams();
   // La home manda la consulta por querystring (?q=), así que es el valor
@@ -261,24 +259,6 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
   const [normasRecientes, setNormasRecientes] = useState<NormaReciente[] | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
   const [verTodas, setVerTodas] = useState(false);
-  // Modo IA: pide el borrador redactado apenas termina cada búsqueda. Es una
-  // preferencia del navegador, no de la cuenta. Arranca encendido: en las
-  // pruebas en vivo el borrador acertó donde el pasaje de arriba no.
-  const [modoIa, setModoIa] = useState(false);
-  useEffect(() => {
-    try {
-      const guardado = window.localStorage.getItem(CLAVE_MODO_IA);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage no existe en el render del servidor
-      setModoIa(guardado === null ? true : guardado === "1");
-    } catch {}
-  }, []);
-  const cambiarModoIa = (activo: boolean) => {
-    setModoIa(activo);
-    try {
-      window.localStorage.setItem(CLAVE_MODO_IA, activo ? "1" : "0");
-    } catch {}
-  };
-
   const runSearch = useCallback(
     async (query: string) => {
       if (!query.trim()) return;
@@ -358,7 +338,7 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-5 py-10 sm:px-8">
       <header className="flex flex-col gap-3">
-        <span className="label-micro text-muted">Herramienta gratuita para químicos farmacéuticos</span>
+        <span className="label-micro text-accent">Herramienta gratuita para químicos farmacéuticos</span>
         <h1 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">Pregúntale a la normativa</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
           Escribe tu pregunta como la harías en el mesón. Te mostramos la frase exacta de la norma que la
@@ -388,31 +368,16 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
                 placeholder="Ej: ¿cuál es la validez de una receta retenida?"
                 aria-label="Tu pregunta sobre normativa"
                 maxLength={500}
-                className="min-w-0 flex-1 border border-line bg-transparent px-3 py-2.5 text-base outline-none focus:border-foreground sm:py-2 sm:text-sm"
+                className="min-w-0 flex-1 border border-line bg-transparent px-3 py-2.5 text-base outline-none focus:border-accent sm:py-2 sm:text-sm"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="shrink-0 bg-foreground px-5 py-2.5 text-sm font-medium text-background disabled:opacity-50 sm:py-2"
+                className="shrink-0 boton-neon px-5 py-2.5 text-sm font-medium disabled:opacity-50 sm:py-2"
               >
                 {loading ? "Buscando…" : "Preguntar"}
               </button>
             </div>
-            {iaDisponible && (
-              <label className="flex items-start gap-2 text-xs text-muted">
-                <input
-                  id="modo-ia"
-                  type="checkbox"
-                  checked={modoIa}
-                  onChange={(e) => cambiarModoIa(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 shrink-0 accent-sky-400"
-                />
-                <span>
-                  <span className="font-medium text-foreground">Modo IA</span> — además de la frase de la norma,
-                  redacta un borrador de respuesta con los pasajes encontrados, citando cada uno.
-                </span>
-              </label>
-            )}
             <details className="text-xs text-muted">
               <summary className="cursor-pointer select-none hover:text-foreground">Filtros</summary>
               <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -422,7 +387,7 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
                     type="checkbox"
                     checked={vigente}
                     onChange={(e) => setVigente(e.target.checked)}
-                    className="h-4 w-4 accent-neutral-200"
+                    className="h-4 w-4"
                   />
                   solo normas con vigencia verificada
                 </label>
@@ -456,7 +421,7 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
                       setQ(ej);
                       runSearch(ej);
                     }}
-                    className="border border-line px-3 py-1.5 text-left text-xs text-muted transition-colors hover:border-foreground hover:text-foreground"
+                    className="border border-line px-3 py-1.5 text-left text-xs text-muted transition-colors hover:border-accent hover:text-foreground"
                   >
                     {ej}
                   </button>
@@ -483,11 +448,13 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
 
               <Avisos avisos={respuesta.avisos} />
 
-              {/* El borrador va antes del pasaje: en las pruebas en vivo acertó
-                  donde la tarjeta de la norma no. `key={consultaId}`: cada
-                  búsqueda trae un id nuevo y el widget nace en su estado inicial. */}
+              {/* El borrador se pide solo en cada búsqueda (desde el 07-10-2026 no
+                  hay interruptor «Modo IA») y va antes del pasaje: en las pruebas
+                  en vivo acertó donde la tarjeta de la norma no.
+                  `key={consultaId}`: cada búsqueda trae un id nuevo y el widget
+                  nace en su estado inicial. */}
               {respuesta.iaDisponible && respuesta.consultaId && respuesta.estado !== "ausente" && (
-                <RespuestaIa key={respuesta.consultaId} consultaId={respuesta.consultaId} automatico={modoIa} />
+                <RespuestaIa key={respuesta.consultaId} consultaId={respuesta.consultaId} />
               )}
 
               {respuesta.principal && <TarjetaPrincipal r={respuesta.principal} />}
@@ -537,7 +504,7 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
                   resuelve algo real y, en ese mismo momento, ofrece hacerse
                   cargo del trámite. Va al final para no estorbar la lectura de
                   la norma, que es a lo que la persona vino. */}
-              <div className="mt-2 flex flex-col gap-4 border border-line p-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="mt-2 flex flex-col gap-4 border border-accent/25 bg-accent/[0.03] p-6 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
                   <p className="text-sm leading-snug font-medium">
                     ¿Tienes que cumplir con esto y no sabes por dónde partir?
@@ -549,7 +516,7 @@ export function BuscadorNormativa({ iaDisponible = false }: { iaDisponible?: boo
                 <div className="flex shrink-0 flex-col gap-2 sm:items-end">
                   <Link
                     href="/agenda"
-                    className="bg-foreground px-6 py-3 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
+                    className="boton-neon px-6 py-3 text-center text-sm font-medium"
                   >
                     Agenda una evaluación
                   </Link>

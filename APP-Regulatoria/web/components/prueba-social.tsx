@@ -117,9 +117,9 @@ export function Testimonios({
   if (TESTIMONIOS.length === 0) return null;
 
   return (
-    <section id="testimonios" className={`${borde} border-line`}>
+    <section id="testimonios" className={borde === "border-t" ? "linea-neon" : "linea-neon-b"}>
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-        <span className="label-micro text-muted">Clientes</span>
+        <span className="label-micro text-accent">Clientes</span>
         <h2 className="font-display mt-5 max-w-3xl text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
           {titulo}
         </h2>

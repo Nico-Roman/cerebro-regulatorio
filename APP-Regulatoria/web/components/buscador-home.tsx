@@ -38,11 +38,11 @@ export function BuscadorHome() {
           onChange={(e) => setQ(e.target.value)}
           placeholder="Ej: plazo para notificar reacciones adversas al ISP"
           aria-label="Buscar en la normativa sanitaria chilena"
-          className="min-w-0 flex-1 border border-line bg-transparent px-4 py-3.5 text-base outline-none transition-colors placeholder:text-neutral-600 focus:border-foreground"
+          className="min-w-0 flex-1 border border-line bg-transparent px-4 py-3.5 text-base outline-none transition-colors placeholder:text-neutral-600 focus:border-accent"
         />
         <button
           type="submit"
-          className="shrink-0 bg-foreground px-6 py-3.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
+          className="shrink-0 boton-neon px-6 py-3.5 text-sm font-medium"
         >
           Buscar norma
         </button>
@@ -55,7 +55,7 @@ export function BuscadorHome() {
             key={s}
             type="button"
             onClick={() => ir(s)}
-            className="border border-line px-3 py-1.5 text-xs text-muted transition-colors hover:border-foreground hover:text-foreground"
+            className="border border-line px-3 py-1.5 text-xs text-muted transition-colors hover:border-accent hover:text-foreground"
           >
             {s}
           </button>

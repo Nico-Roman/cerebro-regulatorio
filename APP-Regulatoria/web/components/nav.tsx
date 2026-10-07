@@ -30,7 +30,7 @@ export function Nav() {
     : ENLACES;
 
   return (
-    <header className="border-b border-line">
+    <header className="linea-neon-b">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
         <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label={`${SITE.nombre} — inicio`}>
           <Image
@@ -71,7 +71,7 @@ export function Nav() {
           {/* La acción dominante, visible en todo el scroll de todas las páginas. */}
           <Link
             href="/agenda"
-            className="label-micro bg-foreground px-4 py-2.5 text-background transition-opacity hover:opacity-90"
+            className="label-micro boton-neon px-4 py-2.5"
           >
             Agenda
             <span className="hidden sm:inline"> una evaluación</span>

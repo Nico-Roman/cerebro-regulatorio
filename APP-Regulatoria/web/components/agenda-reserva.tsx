@@ -108,7 +108,7 @@ export function AgendaReserva() {
 
   if (confirmada) {
     return (
-      <div className="flex flex-col gap-3 border border-emerald-800 bg-emerald-950/20 p-5">
+      <div className="flex flex-col gap-3 border border-accent/40 bg-accent/5 p-5 shadow-neon-suave">
         <h2 className="font-display text-xl">Reunión confirmada</h2>
         <p className="text-sm text-muted">{confirmada.cuando}</p>
         {confirmada.meetUrl && (
@@ -158,8 +158,8 @@ export function AgendaReserva() {
               }}
               className={`border px-3 py-2 text-xs transition-colors ${
                 diaElegido === d.fecha
-                  ? "border-foreground text-foreground"
-                  : "border-line text-muted hover:border-foreground hover:text-foreground"
+                  ? "border-accent text-accent"
+                  : "border-line text-muted hover:border-accent hover:text-foreground"
               }`}
             >
               {etiquetaDia(d.fecha, zona)}
@@ -179,8 +179,8 @@ export function AgendaReserva() {
               onClick={() => setSlotElegido(s.inicio)}
               className={`border px-4 py-2 text-sm transition-colors ${
                 slotElegido === s.inicio
-                  ? "border-foreground text-foreground"
-                  : "border-line text-muted hover:border-foreground hover:text-foreground"
+                  ? "border-accent text-accent"
+                  : "border-line text-muted hover:border-accent hover:text-foreground"
               }`}
             >
               {hora(s.inicio, zona)}
@@ -198,7 +198,7 @@ export function AgendaReserva() {
             value={form.nombre}
             onChange={(e) => setForm({ ...form, nombre: e.target.value })}
             placeholder="Nombre y apellido"
-            className="border border-line bg-transparent px-3 py-2.5 text-sm outline-none focus:border-foreground"
+            className="border border-line bg-transparent px-3 py-2.5 text-sm outline-none focus:border-accent"
           />
           <input
             required
@@ -206,20 +206,20 @@ export function AgendaReserva() {
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             placeholder="Correo"
-            className="border border-line bg-transparent px-3 py-2.5 text-sm outline-none focus:border-foreground"
+            className="border border-line bg-transparent px-3 py-2.5 text-sm outline-none focus:border-accent"
           />
           <input
             value={form.empresa}
             onChange={(e) => setForm({ ...form, empresa: e.target.value })}
             placeholder="Empresa (opcional)"
-            className="border border-line bg-transparent px-3 py-2.5 text-sm outline-none focus:border-foreground"
+            className="border border-line bg-transparent px-3 py-2.5 text-sm outline-none focus:border-accent"
           />
           <textarea
             value={form.motivo}
             onChange={(e) => setForm({ ...form, motivo: e.target.value })}
             rows={3}
             placeholder="¿Qué necesitas resolver? (opcional, pero ayuda a llegar preparado)"
-            className="border border-line bg-transparent px-3 py-2.5 text-sm outline-none focus:border-foreground"
+            className="border border-line bg-transparent px-3 py-2.5 text-sm outline-none focus:border-accent"
           />
           {/* Trampa para bots: invisible para una persona. */}
           <input
@@ -238,7 +238,7 @@ export function AgendaReserva() {
           <button
             type="submit"
             disabled={!slotElegido || enviando}
-            className="self-start bg-foreground px-5 py-2.5 text-sm font-medium text-background disabled:opacity-40"
+            className="self-start boton-neon px-5 py-2.5 text-sm font-medium disabled:opacity-40"
           >
             {enviando ? "Confirmando…" : "Confirmar hora"}
           </button>

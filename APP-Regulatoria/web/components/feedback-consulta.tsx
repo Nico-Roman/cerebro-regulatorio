@@ -49,8 +49,8 @@ export function FeedbackConsulta({ consultaId }: { consultaId: string }) {
           }}
           className={`border px-3 py-1.5 transition-colors disabled:opacity-50 ${
             voto === true
-              ? "border-emerald-500 text-emerald-300"
-              : "border-line text-muted hover:border-foreground hover:text-foreground"
+              ? "border-accent text-accent"
+              : "border-line text-muted hover:border-accent hover:text-foreground"
           }`}
         >
           Sí
@@ -62,7 +62,7 @@ export function FeedbackConsulta({ consultaId }: { consultaId: string }) {
           className={`border px-3 py-1.5 transition-colors disabled:opacity-50 ${
             voto === false
               ? "border-amber-500 text-amber-300"
-              : "border-line text-muted hover:border-foreground hover:text-foreground"
+              : "border-line text-muted hover:border-accent hover:text-foreground"
           }`}
         >
           No
@@ -86,12 +86,12 @@ export function FeedbackConsulta({ consultaId }: { consultaId: string }) {
             onChange={(e) => setComentario(e.target.value)}
             rows={2}
             maxLength={1000}
-            className="w-full border border-line bg-transparent px-3 py-2 text-sm outline-none focus:border-foreground"
+            className="w-full border border-line bg-transparent px-3 py-2 text-sm outline-none focus:border-accent"
           />
           <button
             type="submit"
             disabled={estado === "enviando"}
-            className="self-start bg-foreground px-4 py-1.5 text-xs font-medium text-background disabled:opacity-50"
+            className="self-start boton-neon px-4 py-1.5 text-xs font-medium disabled:opacity-50"
           >
             {estado === "enviando" ? "Enviando…" : "Enviar"}
           </button>

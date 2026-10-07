@@ -1,14 +1,22 @@
 @import "tailwindcss";
 
-/* RegulaMED se compromete a una identidad oscura y monocroma (referencia de
-   marca), por eso no hay variante clara ni media query de prefers-color-scheme:
-   el sitio se ve igual para todos. */
+/* RegulaMED es oscuro, con un solo color de acento: un verde claro que se
+   enciende como neón. No hay variante clara ni media query de
+   prefers-color-scheme: el sitio se ve igual para todos.
+
+   El verde tiene dos tonos y cada uno hace un trabajo:
+     --verde  el color que se lee (texto, líneas, relleno de botones).
+     --neon   la luz que emite (resplandores y degradados). Nunca lleva texto.
+   El ámbar y el rojo siguen reservados para avisos: el verde nunca advierte. */
 :root {
-  --background: #0d0d0d;
-  --foreground: #fafafa;
-  --surface: #151515;
-  --border: #262626;
-  --muted: #8f8f8f;
+  --background: #0b0e0c;
+  --foreground: #f6faf7;
+  --surface: #121814;
+  --border: #223128;
+  --muted: #8d9891;
+  --verde: #8ff7b7;
+  --neon: #2dff8c;
+  --verde-tinta: #04140b;
   color-scheme: dark;
 }
 
@@ -18,13 +26,49 @@
   --color-surface: var(--surface);
   --color-line: var(--border);
   --color-muted: var(--muted);
+  --color-accent: var(--verde);
+  --color-neon: var(--neon);
+  --color-accent-ink: var(--verde-tinta);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-poppins);
+  --shadow-neon:
+    0 0 0 1px color-mix(in oklab, var(--neon) 45%, transparent),
+    0 0 22px color-mix(in oklab, var(--neon) 32%, transparent);
+  --shadow-neon-suave: 0 0 28px color-mix(in oklab, var(--neon) 12%, transparent);
+  --animate-barrido: barrido 1.6s ease-in-out infinite;
+  --animate-latido: latido 1.8s ease-in-out infinite;
 }
 
+@keyframes barrido {
+  from {
+    background-position: 130% 0;
+  }
+  to {
+    background-position: -30% 0;
+  }
+}
+
+@keyframes latido {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* La luz verde cae desde la línea del encabezado sobre el inicio de cada
+   página. Es un solo degradado fijo arriba, no un fondo animado. */
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image: radial-gradient(
+    ellipse 60rem 26rem at 14% -6rem,
+    color-mix(in oklab, var(--neon) 11%, transparent),
+    transparent 70%
+  );
+  background-repeat: no-repeat;
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
@@ -39,6 +83,192 @@ body {
 }
 
 ::selection {
-  background: var(--foreground);
-  color: var(--background);
+  background: var(--verde);
+  color: var(--verde-tinta);
+}
+
+@layer base {
+  /* Foco de teclado visible en todo el sitio, del color de la marca. */
+  :focus-visible {
+    outline: 2px solid var(--verde);
+    outline-offset: 2px;
+  }
+
+  /* Los campos ya marcan el foco con su borde (focus:border-accent); el
+     resplandor reemplaza al contorno para no dibujar dos marcos. */
+  input:not([type="checkbox"], [type="radio"]):focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none;
+    box-shadow: 0 0 18px color-mix(in oklab, var(--neon) 22%, transparent);
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: var(--verde);
+  }
+}
+
+/* Línea separadora de neón: un filo de 1 px y, detrás, su resplandor. Los dos
+   usan el mismo degradado, así la luz se apaga junto con la línea hacia los
+   bordes de la pantalla. Reemplaza a `border-t border-line` entre secciones;
+   los separadores chicos (filas, tarjetas) siguen con el borde apagado. */
+@utility linea-neon {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--verde) 18%,
+      var(--neon) 50%,
+      var(--verde) 82%,
+      transparent
+    );
+  }
+
+  &::after {
+    top: -4px;
+    height: 9px;
+    filter: blur(8px);
+    opacity: 0.7;
+  }
+}
+
+/* La misma línea, abajo (encabezado del sitio). */
+@utility linea-neon-b {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--verde) 18%,
+      var(--neon) 50%,
+      var(--verde) 82%,
+      transparent
+    );
+  }
+
+  &::after {
+    bottom: -4px;
+    height: 9px;
+    filter: blur(8px);
+    opacity: 0.7;
+  }
+}
+
+/* Botón principal: relleno verde claro que se enciende al pasar el cursor.
+   Solo color y luz: el tamaño y el texto los pone cada botón. */
+@utility boton-neon {
+  background-color: var(--verde);
+  color: var(--verde-tinta);
+  transition:
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+
+  &:hover:not(:disabled) {
+    background-color: color-mix(in oklab, var(--verde) 82%, white);
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--neon) 55%, transparent),
+      0 0 26px color-mix(in oklab, var(--neon) 42%, transparent);
+  }
+}
+
+/* Punto de luz: marca lo que está «encendido» (la respuesta del asistente). */
+@utility punto-neon {
+  display: inline-block;
+  width: 0.4375rem;
+  height: 0.4375rem;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background: var(--neon);
+  box-shadow:
+    0 0 6px var(--neon),
+    0 0 14px color-mix(in oklab, var(--neon) 60%, transparent);
+}
+
+/* El dato clave de una respuesta (lo que el modelo marca en negrita). */
+@utility dato-neon {
+  color: var(--verde);
+  font-weight: 600;
+  text-shadow: 0 0 16px color-mix(in oklab, var(--neon) 45%, transparent);
+}
+
+/* Barra de espera: una luz verde que recorre la línea mientras se redacta. */
+@utility barra-espera {
+  display: block;
+  height: 0.625rem;
+  background-color: color-mix(in oklab, var(--verde) 9%, transparent);
+  background-image: linear-gradient(
+    90deg,
+    transparent 35%,
+    color-mix(in oklab, var(--neon) 38%, transparent) 50%,
+    transparent 65%
+  );
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  animation: var(--animate-barrido);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barra-espera,
+  .animate-barrido,
+  .animate-latido {
+    animation: none;
+  }
+}
+
+/* Tarjeta de la respuesta del asistente: borde verde apagado, un velo de luz
+   que cae desde arriba y un filo de neón en el borde superior. Se reserva para
+   respuestas con sus citas en regla; las abstenciones y los errores usan la
+   tarjeta neutra, para que el verde encendido signifique algo. */
+@utility tarjeta-neon {
+  position: relative;
+  border: 1px solid color-mix(in oklab, var(--verde) 26%, transparent);
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--neon) 7%, transparent), transparent 9rem), var(--surface);
+  box-shadow: 0 0 36px color-mix(in oklab, var(--neon) 9%, transparent);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline: -1px;
+    top: -1px;
+    height: 2px;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      var(--neon),
+      var(--verde) 55%,
+      color-mix(in oklab, var(--verde) 22%, transparent)
+    );
+    box-shadow:
+      0 0 12px color-mix(in oklab, var(--neon) 70%, transparent),
+      0 0 30px color-mix(in oklab, var(--neon) 32%, transparent);
+  }
+
+  &[data-estado="cargando"]::before {
+    animation: var(--animate-latido);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tarjeta-neon::before {
+    animation: none !important;
+  }
 }

@@ -16,7 +16,7 @@ export default function PrivacidadPage() {
       etiqueta="Legal"
       titulo="Política de Privacidad"
       bajada="Este documento describe qué datos personales trata RegulaMED, para qué, con quién se comparten y cómo puedes ejercer tus derechos. Está escrito para que se entienda leyéndolo una vez."
-      actualizado="14 de septiembre de 2026"
+      actualizado="7 de octubre de 2026"
     >
       <Seccion n="01" titulo="Quién trata tus datos">
         <p>
@@ -117,9 +117,9 @@ export default function PrivacidadPage() {
             </>,
             <>
               <strong className="text-foreground">Groq</strong> (Estados Unidos), proveedor del
-              modelo de lenguaje: solo si pides un borrador redactado o activas el modo IA, se envía
-              tu pregunta junto con los pasajes normativos recuperados. No se envía tu nombre, tu
-              correo ni tu historial.
+              modelo de lenguaje: cada vez que tu consulta encuentra pasajes, se envía tu pregunta
+              junto con los pasajes normativos recuperados para redactar el borrador. No se envía tu
+              nombre, tu correo ni tu historial.
             </>,
           ]}
         />

@@ -16,7 +16,7 @@ export default function TerminosPage() {
       etiqueta="Legal"
       titulo="Términos del Servicio"
       bajada="Estas condiciones regulan el uso del buscador de normativa y de las demás herramientas de RegulaMED. Al crear una cuenta las aceptas."
-      actualizado="9 de septiembre de 2026"
+      actualizado="7 de octubre de 2026"
     >
       <Seccion n="01" titulo="Qué es RegulaMED">
         <p>
@@ -51,8 +51,8 @@ export default function TerminosPage() {
 
       <Seccion n="03" titulo="Respuestas redactadas con inteligencia artificial">
         <p>
-          Algunas consultas permiten pedir una respuesta redactada por un modelo de lenguaje, a
-          pedido o de forma automática con el modo IA. Esa redacción se construye únicamente a
+          Cuando una consulta encuentra pasajes, un modelo de lenguaje redacta automáticamente un
+          borrador de respuesta. Esa redacción se construye únicamente a
           partir de los pasajes normativos recuperados y debe citarlos, pero puede contener
           errores de interpretación, omisiones o citas mal atribuidas. Es un borrador de trabajo:
           la cita y el texto oficial mandan por sobre el resumen.

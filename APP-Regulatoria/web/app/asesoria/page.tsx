@@ -60,9 +60,9 @@ export default function Asesoria() {
       )}
 
       {/* ── Presentación en video ─────────────────────────────────────── */}
-      <section className="border-b border-line">
+      <section className="linea-neon-b">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <span className="label-micro text-muted">Asesoría regulatoria</span>
+          <span className="label-micro text-accent">Asesoría regulatoria</span>
 
           <h1 className="font-display mt-5 max-w-4xl text-[2.25rem] leading-[1.08] font-medium tracking-tight sm:text-6xl">
             {hayVideo ? (
@@ -118,7 +118,7 @@ export default function Asesoria() {
 
               <Link
                 href="#contacto"
-                className="block bg-foreground px-7 py-3.5 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
+                className="block boton-neon px-7 py-3.5 text-center text-sm font-medium"
               >
                 Agenda una evaluación
               </Link>
@@ -126,7 +126,7 @@ export default function Asesoria() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-3 block border border-line px-7 py-3.5 text-center text-sm transition-colors hover:border-foreground"
+                className="mt-3 block border border-line px-7 py-3.5 text-center text-sm transition-colors hover:border-accent"
               >
                 Escribir por WhatsApp
               </a>
@@ -141,9 +141,9 @@ export default function Asesoria() {
       </section>
 
       {/* ── Proceso ──────────────────────────────────────────────────── */}
-      <section id="proceso" className="border-b border-line">
+      <section id="proceso" className="linea-neon-b">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <span className="label-micro text-muted">Cómo trabajamos</span>
+          <span className="label-micro text-accent">Cómo trabajamos</span>
           <h2 className="font-display mt-5 max-w-3xl text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
             Cuatro etapas, y sabes en cuál estás en todo momento.
           </h2>
@@ -151,7 +151,7 @@ export default function Asesoria() {
           <div className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2">
             {PROCESO.map((p) => (
               <article key={p.n} className="flex flex-col gap-3 bg-background p-7">
-                <span className="font-display text-3xl font-medium tracking-tight text-neutral-600">
+                <span className="font-display text-3xl font-medium tracking-tight text-accent/45">
                   {p.n}
                 </span>
                 <h3 className="text-base leading-snug font-medium">{p.titulo}</h3>
@@ -174,11 +174,11 @@ export default function Asesoria() {
       </section>
 
       {/* ── Trayectoria ──────────────────────────────────────────────── */}
-      <section id="trayectoria" className="border-b border-line">
+      <section id="trayectoria" className="linea-neon-b">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
           <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
             <div className="lg:w-72 lg:shrink-0">
-              <span className="label-micro text-muted">Trayectoria</span>
+              <span className="label-micro text-accent">Trayectoria</span>
               <p className="font-display mt-5 text-2xl leading-tight font-medium tracking-tight sm:text-3xl">
                 Regulatorio, calidad y operación en la misma cabeza.
               </p>
@@ -219,9 +219,9 @@ export default function Asesoria() {
       </section>
 
       {/* ── Servicios ────────────────────────────────────────────────── */}
-      <section id="servicios" className="border-b border-line">
+      <section id="servicios" className="linea-neon-b">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <span className="label-micro text-muted">Servicios</span>
+          <span className="label-micro text-accent">Servicios</span>
           <h2 className="font-display mt-5 max-w-3xl text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
             En qué te puedo ayudar concretamente.
           </h2>
@@ -232,7 +232,7 @@ export default function Asesoria() {
                 key={s.n}
                 className="flex flex-col gap-3 bg-background p-6 transition-colors hover:bg-surface"
               >
-                <span className="font-display text-3xl font-medium tracking-tight text-neutral-600">
+                <span className="font-display text-3xl font-medium tracking-tight text-accent/45">
                   {s.n}
                 </span>
                 <h3 className="text-sm leading-snug font-medium">{s.titulo}</h3>
@@ -251,7 +251,7 @@ export default function Asesoria() {
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
           <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
             <div className="lg:w-80 lg:shrink-0">
-              <span className="label-micro text-muted">Contacto</span>
+              <span className="label-micro text-accent">Contacto</span>
               <h2 className="font-display mt-5 text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
                 Cuéntame tu caso.
               </h2>
@@ -262,7 +262,7 @@ export default function Asesoria() {
               </p>
               <Link
                 href="/agenda"
-                className="mt-7 block bg-foreground px-7 py-4 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
+                className="mt-7 block boton-neon px-7 py-4 text-center text-sm font-medium"
               >
                 Reservar hora
               </Link>
