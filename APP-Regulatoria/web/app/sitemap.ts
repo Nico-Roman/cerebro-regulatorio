@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 import { guiasPublicadas } from "@/lib/guias";
+import { ACTUALIZADAS } from "@/lib/noticias";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const ahora = new Date();
@@ -41,6 +42,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: ahora,
       changeFrequency: "weekly",
       priority: 0.7,
+    },
+    {
+      url: `${SITE.url}/noticias`,
+      lastModified: new Date(`${ACTUALIZADAS}T12:00:00`),
+      changeFrequency: "weekly",
+      priority: 0.6,
     },
     ...urlsGuias,
     {

@@ -13,6 +13,7 @@ const ENLACES = [
   { href: "/asesoria", label: "Asesoría" },
   { href: "/#areas", label: "Áreas" },
   { href: "/normativa", label: "Buscador" },
+  { href: "/noticias", label: "Noticias" },
   { href: "/#contacto", label: "Contacto" },
 ];
 
@@ -50,9 +51,11 @@ export function Nav() {
         </Link>
 
         {/* Desde lg: a 768 px, y con sesión iniciada, los enlaces se montaban
-            sobre el logo. Con las guías publicadas (quinto enlace) no cabe a
-            1.024 px con sesión: ahí pasa a xl:flex. */}
-        <ul className="hidden items-center gap-7 lg:flex">
+            sobre el logo. Con seis enlaces (noticias + guías publicadas) no
+            cabe a 1.024 px con sesión: ahí pasa a xl:flex. */}
+        <ul
+          className={`hidden items-center gap-7 ${enlaces.length > 5 ? "xl:flex" : "lg:flex"}`}
+        >
           {enlaces.map((e) => (
             <li key={e.href}>
               <Link

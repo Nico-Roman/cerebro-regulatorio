@@ -51,6 +51,11 @@ export function Footer() {
                     Buscador de normativa
                   </Link>
                 </li>
+                <li>
+                  <Link href="/noticias" className="text-muted hover:text-foreground">
+                    Noticias
+                  </Link>
+                </li>
                 {guias.length > 0 && (
                   <li>
                     <Link href="/guias" className="text-muted hover:text-foreground">
