@@ -1,6 +1,6 @@
 # Auditoría de corpus — Cerebro Regulatorio
 
-_Generado: 2026-10-06 · listado oficial ISP: snapshot 2026-10-06 (124 normas únicas)_
+_Generado: 2026-10-07 · listado oficial ISP: snapshot 2026-10-07 (124 normas únicas)_
 
 ## Resumen
 
