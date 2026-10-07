@@ -36,13 +36,13 @@ export function Nav() {
           <Image
             src="/logo-regulamed.png"
             alt={`${SITE.nombre} — ${SITE.claim}`}
-            // Se muestra a 44 px: pedir el doble basta para pantallas retina,
-            // en vez de bajar el original de 577 px en cada página.
-            width={88}
-            height={88}
-            sizes="44px"
+            // PNG transparente recortado al dibujo (sin margen): se muestra a
+            // 55×58 px y se pide el doble para pantallas retina.
+            width={110}
+            height={116}
+            sizes="55px"
             priority
-            className="block h-[44px] w-[44px]"
+            className="block h-[58px] w-[55px]"
           />
           <span className="font-display text-base font-medium tracking-tight">
             {SITE.nombre}

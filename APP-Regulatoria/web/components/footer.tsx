@@ -17,10 +17,10 @@ export function Footer() {
               <Image
                 src="/logo-regulamed.png"
                 alt={`${SITE.nombre} — ${SITE.claim}`}
-                width={88}
-                height={88}
-                sizes="38px"
-                className="block h-[38px] w-[38px]"
+                width={94}
+                height={100}
+                sizes="47px"
+                className="block h-[50px] w-[47px]"
               />
               <span className="font-display text-base font-medium tracking-tight">
                 {SITE.nombre}
