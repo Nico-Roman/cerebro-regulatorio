@@ -85,7 +85,7 @@ export function FlujoObservacion({ productos }: { productos: string[] }) {
             required
             value={producto}
             onChange={(e) => setProducto(e.target.value)}
-            className="border border-line bg-background px-3 py-2.5 text-base outline-none focus:border-foreground sm:text-sm"
+            className="border border-line bg-background px-3 py-2.5 text-base outline-none focus:border-accent sm:text-sm"
           >
             <option value="" disabled>
               Elige uno
@@ -106,7 +106,7 @@ export function FlujoObservacion({ productos }: { productos: string[] }) {
             value={texto}
             onChange={(e) => setTexto(e.target.value)}
             placeholder="Pega aquí el texto de la observación, sin datos de pacientes."
-            className="resize-y border border-line bg-transparent px-3 py-3 text-base outline-none focus:border-foreground sm:text-sm"
+            className="resize-y border border-line bg-transparent px-3 py-3 text-base outline-none focus:border-accent sm:text-sm"
           />
           <span className="text-right text-xs text-muted">
             {texto.length.toLocaleString("es-CL")} / {MAX.toLocaleString("es-CL")}
@@ -115,7 +115,7 @@ export function FlujoObservacion({ productos }: { productos: string[] }) {
         <button
           type="submit"
           disabled={cargando || !texto.trim() || !producto}
-          className="self-start bg-foreground px-5 py-2.5 text-sm font-medium text-background disabled:opacity-40"
+          className="self-start boton-neon px-5 py-2.5 text-sm font-medium disabled:opacity-40"
         >
           {cargando ? "Analizando…" : "Analizar observación"}
         </button>
@@ -177,7 +177,7 @@ export function FlujoObservacion({ productos }: { productos: string[] }) {
           )}
           <div className="flex flex-col gap-3 border border-line p-5 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm">¿Quieres que lo revisemos antes de presentarlo?</p>
-            <Link href="/agenda" className="bg-foreground px-5 py-2.5 text-center text-sm font-medium text-background">
+            <Link href="/agenda" className="boton-neon px-5 py-2.5 text-center text-sm font-medium">
               Agenda una evaluación
             </Link>
           </div>

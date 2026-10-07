@@ -154,7 +154,7 @@ export function FormularioPerfil({
       <button
         type="submit"
         disabled={guardando}
-        className="self-start bg-foreground px-6 py-3.5 text-sm font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-60"
+        className="self-start boton-neon px-6 py-3.5 text-sm font-medium disabled:opacity-60"
       >
         {guardando ? "Guardando…" : inicial.yaAcepto ? "Guardar cambios" : "Entrar al buscador"}
       </button>
@@ -189,7 +189,7 @@ function Campo({
         required={requerido}
         autoComplete={autoComplete}
         placeholder={marcador}
-        className="border border-line bg-transparent px-4 py-3 text-base outline-none transition-colors placeholder:text-neutral-600 focus:border-foreground"
+        className="border border-line bg-transparent px-4 py-3 text-base outline-none transition-colors placeholder:text-neutral-600 focus:border-accent"
       />
     </label>
   );

@@ -9,7 +9,7 @@ export function Footer() {
   const guias = guiasPublicadas();
 
   return (
-    <footer className="border-t border-line">
+    <footer className="linea-neon">
       <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div className="max-w-xs">

@@ -20,8 +20,8 @@ export function QueQuieresHacer({ actual, tramite }: { actual: "preguntar" | "ob
             aria-current={o.id === actual ? "page" : undefined}
             className={`border px-3 py-1.5 text-xs transition-colors ${
               o.id === actual
-                ? "border-foreground text-foreground"
-                : "border-line text-muted hover:border-foreground hover:text-foreground"
+                ? "border-accent text-accent"
+                : "border-line text-muted hover:border-accent hover:text-foreground"
             }`}
           >
             {o.texto}

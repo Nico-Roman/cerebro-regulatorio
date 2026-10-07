@@ -69,7 +69,7 @@ export function FlujoTramite({ preguntas }: { preguntas: Pregunta[] }) {
                 <label
                   key={valor}
                   className={`cursor-pointer border px-3 py-1.5 text-xs transition-colors ${
-                    respuestas[p.clave] === valor ? "border-foreground text-foreground" : "border-line text-muted"
+                    respuestas[p.clave] === valor ? "border-accent text-accent" : "border-line text-muted"
                   }`}
                 >
                   <input
@@ -89,7 +89,7 @@ export function FlujoTramite({ preguntas }: { preguntas: Pregunta[] }) {
         <button
           type="submit"
           disabled={!completas || cargando}
-          className="self-start bg-foreground px-5 py-2.5 text-sm font-medium text-background disabled:opacity-40"
+          className="self-start boton-neon px-5 py-2.5 text-sm font-medium disabled:opacity-40"
         >
           {cargando ? "Calculando…" : "Ver mi ruta"}
         </button>
@@ -136,7 +136,7 @@ export function FlujoTramite({ preguntas }: { preguntas: Pregunta[] }) {
           )}
           <div className="flex flex-col gap-3 border border-line p-5 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm">¿Quieres que lo revisemos contigo?</p>
-            <Link href="/agenda" className="bg-foreground px-5 py-2.5 text-center text-sm font-medium text-background">
+            <Link href="/agenda" className="boton-neon px-5 py-2.5 text-center text-sm font-medium">
               Agenda una evaluación
             </Link>
           </div>

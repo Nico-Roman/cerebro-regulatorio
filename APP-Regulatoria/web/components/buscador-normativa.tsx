@@ -98,7 +98,7 @@ const EJEMPLOS = [
 ];
 
 const ESTILO_ESTADO: Record<Estado, { borde: string; punto: string; texto: string }> = {
-  encontrado: { borde: "border-emerald-500/70", punto: "bg-emerald-400", texto: "text-emerald-300" },
+  encontrado: { borde: "border-accent/70", punto: "bg-neon", texto: "text-accent" },
   parcial: { borde: "border-amber-500/70", punto: "bg-amber-400", texto: "text-amber-300" },
   ausente: { borde: "border-neutral-600", punto: "bg-neutral-400", texto: "text-neutral-200" },
 };
@@ -110,7 +110,7 @@ function FraseResaltada({ frase, tramos }: { frase: string; tramos: Array<[numbe
   tramos.forEach(([a, b], i) => {
     if (a > desde) partes.push(frase.slice(desde, a));
     partes.push(
-      <mark key={i} className="rounded-sm bg-emerald-400/15 px-0.5 text-inherit">
+      <mark key={i} className="rounded-sm bg-accent/15 px-0.5 text-inherit">
         {frase.slice(a, b)}
       </mark>
     );
@@ -149,7 +149,7 @@ function TextoCompleto({ r }: { r: Resultado }) {
 function EnlaceFuente({ url }: { url: string }) {
   if (!url) return null;
   return (
-    <a href={url} target="_blank" rel="noreferrer" className="text-xs text-muted underline underline-offset-4 hover:text-foreground">
+    <a href={url} target="_blank" rel="noreferrer" className="text-xs text-muted underline decoration-accent/50 underline-offset-4 hover:text-foreground">
       Fuente oficial ↗
     </a>
   );
@@ -162,7 +162,7 @@ function TarjetaPrincipal({ r }: { r: Resultado }) {
         <span className="font-display text-lg font-medium tracking-tight">{r.cita}</span>
         <span className="text-xs leading-snug text-muted">{r.titulo}</span>
       </header>
-      <blockquote className="border-l-2 border-emerald-500/60 pl-4 text-[15px] leading-relaxed text-neutral-100">
+      <blockquote className="border-l-2 border-accent/70 pl-4 text-[15px] leading-relaxed text-neutral-100">
         «<FraseResaltada frase={r.frase} tramos={r.resaltar} />»
       </blockquote>
       <Avisos avisos={r.avisos} />
@@ -241,7 +241,7 @@ function NormasRecientesPanel({ normas }: { normas: NormaReciente[] | null }) {
                 target="_blank"
                 rel="noreferrer"
                 className={`block border border-line p-3 text-xs transition-colors ${
-                  n.fuente_url ? "hover:border-neutral-600" : "pointer-events-none opacity-70"
+                  n.fuente_url ? "hover:border-accent/50" : "pointer-events-none opacity-70"
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
@@ -311,9 +311,16 @@ function TurnoHilo({ t }: { t: Turno }) {
   const conAsistente = Boolean(r?.iaDisponible && r.consultaId);
   return (
     <article className="flex flex-col gap-5 border-t border-line pt-6 first:border-t-0 first:pt-0">
-      <p className="self-end max-w-[90%] bg-surface px-4 py-2.5 text-sm leading-relaxed">{t.pregunta}</p>
+      <p className="max-w-[90%] self-end border-r-2 border-accent bg-surface px-4 py-2.5 text-sm leading-relaxed">
+        {t.pregunta}
+      </p>
 
-      {t.cargando && <p className="text-sm text-muted">Buscando en la normativa…</p>}
+      {t.cargando && (
+        <p className="flex items-center gap-2.5 text-sm text-muted">
+          <span aria-hidden className="punto-neon animate-latido" />
+          Buscando en la normativa…
+        </p>
+      )}
 
       {t.aviso && (
         <div role="alert" className="flex flex-col gap-3 border-l-2 border-amber-500/60 bg-amber-500/5 px-4 py-3">
@@ -478,13 +485,13 @@ export function BuscadorNormativa({
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-5 py-10 sm:px-8">
       <header className="flex flex-col gap-3">
-        <span className="label-micro text-muted">Asistente gratuito para químicos farmacéuticos</span>
+        <span className="label-micro text-accent">Asistente gratuito para químicos farmacéuticos</span>
         <h1 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">Pregúntale a la normativa</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
           Escribe tu pregunta como la harías en el mesón y sigue preguntando en la misma conversación. Te respondemos
           solo con el texto de la norma, citando cada afirmación, y debajo te mostramos los artículos con el enlace a
           la fuente oficial. Si la respuesta no está en la base, te lo decimos.{" "}
-          <Link href="/cobertura" className="underline underline-offset-4 hover:text-foreground">
+          <Link href="/cobertura" className="underline decoration-accent/60 underline-offset-4 hover:text-foreground">
             Qué normas incluye
           </Link>
         </p>
@@ -519,12 +526,12 @@ export function BuscadorNormativa({
                 placeholder={turnos.length ? "Sigue preguntando…" : "Ej: ¿cuál es la validez de una receta retenida?"}
                 aria-label="Tu pregunta sobre normativa"
                 maxLength={500}
-                className="min-w-0 flex-1 border border-line bg-transparent px-3 py-2.5 text-base outline-none focus:border-foreground sm:py-2 sm:text-sm"
+                className="min-w-0 flex-1 border border-line bg-transparent px-3 py-2.5 text-base outline-none focus:border-accent sm:py-2 sm:text-sm"
               />
               <button
                 type="submit"
                 disabled={cargando}
-                className="shrink-0 bg-foreground px-5 py-2.5 text-sm font-medium text-background disabled:opacity-50 sm:py-2"
+                className="shrink-0 boton-neon px-5 py-2.5 text-sm font-medium disabled:opacity-50 sm:py-2"
               >
                 {cargando ? "Buscando…" : "Preguntar"}
               </button>
@@ -560,7 +567,7 @@ export function BuscadorNormativa({
                     type="checkbox"
                     checked={vigente}
                     onChange={(e) => setVigente(e.target.checked)}
-                    className="h-4 w-4 accent-neutral-200"
+                    className="h-4 w-4"
                   />
                   solo normas con vigencia verificada
                 </label>
@@ -591,7 +598,7 @@ export function BuscadorNormativa({
                     key={ej}
                     type="button"
                     onClick={() => runSearch(ej)}
-                    className="border border-line px-3 py-1.5 text-left text-xs text-muted transition-colors hover:border-foreground hover:text-foreground"
+                    className="border border-line px-3 py-1.5 text-left text-xs text-muted transition-colors hover:border-accent hover:text-foreground"
                   >
                     {ej}
                   </button>
@@ -609,7 +616,7 @@ export function BuscadorNormativa({
 
               {/* Puente del asistente a la asesoría: una vez por hilo, al final,
                   para no estorbar la lectura de la norma. */}
-              <div className="mt-2 flex flex-col gap-4 border border-line p-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="mt-2 flex flex-col gap-4 border border-accent/25 bg-accent/[0.03] p-6 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
                   <p className="text-sm leading-snug font-medium">¿Tienes que cumplir con esto y no sabes por dónde partir?</p>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted">Revisamos tu caso en 30 minutos.</p>
@@ -617,7 +624,7 @@ export function BuscadorNormativa({
                 <div className="flex shrink-0 flex-col gap-2 sm:items-end">
                   <Link
                     href="/agenda"
-                    className="bg-foreground px-6 py-3 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
+                    className="boton-neon px-6 py-3 text-center text-sm font-medium"
                   >
                     Agenda una evaluación
                   </Link>

@@ -93,12 +93,12 @@ export function FormularioIngreso({
               onChange={(e) => setEmail(e.target.value)}
               placeholder="tu@empresa.cl"
               aria-label="Tu correo"
-              className="min-w-0 flex-1 border border-line bg-transparent px-4 py-3 text-base outline-none transition-colors placeholder:text-neutral-600 focus:border-foreground"
+              className="min-w-0 flex-1 border border-line bg-transparent px-4 py-3 text-base outline-none transition-colors placeholder:text-neutral-600 focus:border-accent"
             />
             <button
               type="submit"
               disabled={estado.tipo === "enviando"}
-              className="shrink-0 border border-line px-5 py-3 text-sm transition-colors hover:border-foreground disabled:opacity-60"
+              className="shrink-0 border border-line px-5 py-3 text-sm transition-colors hover:border-accent disabled:opacity-60"
             >
               Enviar enlace
             </button>

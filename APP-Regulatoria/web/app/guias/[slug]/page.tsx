@@ -129,7 +129,7 @@ export default async function GuiaTramite({ params }: PageProps<"/guias/[slug]">
             </p>
             <Link
               href="/agenda"
-              className="mt-7 block bg-foreground px-7 py-4 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
+              className="mt-7 block boton-neon px-7 py-4 text-center text-sm font-medium"
             >
               Agenda una evaluación
             </Link>

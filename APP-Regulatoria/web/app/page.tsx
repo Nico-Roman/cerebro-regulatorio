@@ -43,7 +43,7 @@ export default function Home() {
         id="buscador"
         className="mx-auto w-full max-w-6xl px-5 pt-16 pb-16 sm:px-8 sm:pt-20 sm:pb-20"
       >
-        <span className="label-micro text-muted">Buscador de normativa · ISP / ANAMED</span>
+        <span className="label-micro text-accent">Buscador de normativa · ISP / ANAMED</span>
 
         <h2 className="font-display mt-5 max-w-4xl text-[2rem] leading-[1.1] font-medium tracking-tight sm:text-5xl lg:text-6xl">
           Encuentra la norma
@@ -78,9 +78,9 @@ export default function Home() {
       </section>
 
       {/* ── Asesoría ─────────────────────────────────────────────────── */}
-      <section className="border-t border-line">
+      <section className="linea-neon">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <span className="label-micro text-muted">Asesoría regulatoria</span>
+          <span className="label-micro text-accent">Asesoría regulatoria</span>
 
           <h1 className="font-display mt-5 max-w-4xl text-[2.25rem] leading-[1.08] font-medium tracking-tight sm:text-6xl lg:text-7xl">
             Te asesoramos en tus
@@ -117,7 +117,7 @@ export default function Home() {
 
             <Link
               href="#contacto"
-              className="mt-8 block bg-foreground px-8 py-5 text-center text-base font-medium text-background transition-opacity hover:opacity-90"
+              className="mt-8 block boton-neon px-8 py-5 text-center text-base font-medium"
             >
               Agenda una evaluación
             </Link>
@@ -137,10 +137,10 @@ export default function Home() {
           Servicios/Áreas/FAQ: esta sección presenta a una persona, no una
           lista, así que funciona más como una portada de "conoce a quién te
           atiende" que como una fila de contenido más. */}
-      <section id="quien" className="border-t border-line">
+      <section id="quien" className="linea-neon">
         <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-16">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="label-micro text-muted">Quién te va a atender</span>
+            <span className="label-micro text-accent">Quién te va a atender</span>
           </div>
 
           <div className="mx-auto mt-8 max-w-2xl text-left">
@@ -154,7 +154,7 @@ export default function Home() {
 
             <Link
               href="/asesoria"
-              className="label-micro mt-8 inline-block border border-line px-4 py-2.5 transition-colors hover:border-foreground"
+              className="label-micro mt-8 inline-block border border-line px-4 py-2.5 transition-colors hover:border-accent"
             >
               Cómo trabajamos contigo
             </Link>
@@ -163,9 +163,9 @@ export default function Home() {
       </section>
 
       {/* ── Servicios ────────────────────────────────────────────────── */}
-      <section id="servicios" className="border-t border-line">
+      <section id="servicios" className="linea-neon">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <span className="label-micro text-muted">Servicios</span>
+          <span className="label-micro text-accent">Servicios</span>
           <h2 className="font-display mt-5 max-w-3xl text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
             Todo lo que necesitas para entrar y mantenerte en el mercado sanitario chileno.
           </h2>
@@ -174,9 +174,9 @@ export default function Home() {
             {SERVICIOS.map((s) => (
               <article
                 key={s.n}
-                className="flex flex-col gap-3 bg-background p-6 transition-colors hover:bg-surface"
+                className="flex flex-col gap-3 bg-background p-6 transition-colors hover:bg-surface hover:[&>span]:text-accent"
               >
-                <span className="font-display text-3xl font-medium tracking-tight text-neutral-600">
+                <span className="font-display text-3xl font-medium tracking-tight text-accent/45">
                   {s.n}
                 </span>
                 <h3 className="text-sm leading-snug font-medium">{s.titulo}</h3>
@@ -187,7 +187,7 @@ export default function Home() {
 
           <p className="mt-8 text-sm text-muted">
             ¿Tu caso no está en la lista?{" "}
-            <Link href="#contacto" className="text-foreground underline">
+            <Link href="#contacto" className="text-foreground underline decoration-accent underline-offset-4">
               Cuéntanos qué necesitas
             </Link>
             .
@@ -196,9 +196,9 @@ export default function Home() {
       </section>
 
       {/* ── Áreas de práctica ────────────────────────────────────────── */}
-      <section id="areas" className="border-t border-line">
+      <section id="areas" className="linea-neon">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <span className="label-micro text-muted">Áreas de práctica</span>
+          <span className="label-micro text-accent">Áreas de práctica</span>
 
           <div className="mt-12 flex flex-col">
             {AREAS.map((a, i) => (
@@ -223,7 +223,7 @@ export default function Home() {
                     href={WHATSAPP_URL}
                     target="_blank"
                     rel="noreferrer"
-                    className="label-micro mt-7 inline-block border border-line px-4 py-2.5 transition-colors hover:border-foreground"
+                    className="label-micro mt-7 inline-block border border-line px-4 py-2.5 transition-colors hover:border-accent"
                   >
                     Consultar
                   </a>
@@ -249,9 +249,9 @@ export default function Home() {
           para alguien que ya conoce la marca. Aparece cuando hay al menos una
           guía publicada (ver lib/guias.ts). */}
       {guias.length > 0 && (
-        <section id="guias" className="border-t border-line">
+        <section id="guias" className="linea-neon">
           <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-            <span className="label-micro text-muted">Guías de trámites</span>
+            <span className="label-micro text-accent">Guías de trámites</span>
             <h2 className="font-display mt-5 max-w-3xl text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
               Cómo se hace cada trámite, explicado completo.
             </h2>
@@ -275,7 +275,7 @@ export default function Home() {
 
             {guias.length > 4 && (
               <p className="mt-8 text-sm text-muted">
-                <Link href="/guias" className="text-foreground underline">
+                <Link href="/guias" className="text-foreground underline decoration-accent underline-offset-4">
                   Ver todas las guías
                 </Link>
               </p>
@@ -290,11 +290,11 @@ export default function Home() {
       <Testimonios />
 
       {/* ── Preguntas frecuentes ─────────────────────────────────────── */}
-      <section id="faq" className="border-t border-line">
+      <section id="faq" className="linea-neon">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
           <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
             <div className="lg:w-64 lg:shrink-0">
-              <span className="label-micro text-muted">Preguntas frecuentes</span>
+              <span className="label-micro text-accent">Preguntas frecuentes</span>
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex flex-col">
@@ -314,7 +314,7 @@ export default function Home() {
                         </span>
                         <span
                           aria-hidden
-                          className="label-micro mt-0.5 shrink-0 text-muted transition-transform duration-200 group-open:rotate-45"
+                          className="label-micro mt-0.5 shrink-0 text-accent transition-transform duration-200 group-open:rotate-45"
                         >
                           +
                         </span>
@@ -326,7 +326,7 @@ export default function Home() {
                             {" "}
                             <Link
                               href={`/guias/${guia.slug}`}
-                              className="text-foreground underline underline-offset-4"
+                              className="text-foreground underline decoration-accent underline-offset-4"
                             >
                               Ver la guía completa
                             </Link>
@@ -344,11 +344,11 @@ export default function Home() {
       </section>
 
       {/* ── Contacto ─────────────────────────────────────────────────── */}
-      <section id="contacto" className="border-t border-line">
+      <section id="contacto" className="linea-neon">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
           <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
             <div className="lg:w-80 lg:shrink-0">
-              <span className="label-micro text-muted">Contacto</span>
+              <span className="label-micro text-accent">Contacto</span>
               <h2 className="font-display mt-5 text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
                 Cuéntanos tu caso.
               </h2>
@@ -362,7 +362,7 @@ export default function Home() {
                   canales compitiendo con el mismo peso visual. */}
               <Link
                 href="/agenda"
-                className="mt-7 block bg-foreground px-7 py-4 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
+                className="mt-7 block boton-neon px-7 py-4 text-center text-sm font-medium"
               >
                 Reservar hora
               </Link>
