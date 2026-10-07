@@ -49,8 +49,7 @@ export default function Noticias() {
       </h1>
 
       <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-        Medicamentos, cosméticos, suplementos y dispositivos médicos, en Chile y afuera.
-        Cada titular lleva a la nota original.
+        Medicamentos, cosméticos, suplementos y dispositivos médicos, en Chile y el Mundo
       </p>
 
       <p className="label-micro mt-7 text-muted">Actualizado el {fechaNoticia(ACTUALIZADAS)}</p>
