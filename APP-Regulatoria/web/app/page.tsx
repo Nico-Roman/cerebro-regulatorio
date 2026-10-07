@@ -62,9 +62,8 @@ export default function Home() {
             la norma con su enlace oficial. Desde el 23-09 ya no promete "no lo
             resume": el asistente redacta un borrador, y la frase lo dice. */}
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          Escribe tu pregunta como se te ocurra. Te muestra los artículos que la
-          responden, con el enlace oficial del ISP, y un borrador con IA que cita
-          cada frase.
+          Escribe tu duda regulatoria y obtendrás una respuesta a tu pregunta que
+          incluya la cita exacta a la norma vigente
         </p>
 
         <div className="mt-9 max-w-3xl">
@@ -72,7 +71,7 @@ export default function Home() {
         </div>
 
         <p className="mt-7 max-w-2xl text-sm leading-relaxed text-muted">
-          Es gratuito y va a seguir siéndolo. Solo tienes que registrarte.
+          Gratis 10 preguntas al día
         </p>
       </section>
 
@@ -354,7 +353,7 @@ export default function Home() {
               <p className="mt-5 text-sm leading-relaxed text-muted">
                 Revisamos tu situación y te decimos con claridad qué trámite corresponde,
                 qué antecedentes necesitas y en qué orden conviene hacerlo. La primera
-                evaluación no tiene costo y va a seguir sin tenerlo.
+                evaluación no tiene costo.
               </p>
 
               {/* Una acción dominante y dos alternativas, en vez de tres

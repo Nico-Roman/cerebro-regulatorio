@@ -120,6 +120,12 @@ export const SERVICIOS: Servicio[] = [
     descripcion:
       "Formamos a tu equipo técnico, comercial y de calidad en la normativa que usan en el día a día.",
   },
+  {
+    n: "13",
+    titulo: "Suplementos alimenticios",
+    descripcion:
+      "Asesoría regulatoria para tu suplemento: cómo se clasifica, qué debe llevar el rotulado, qué se puede declarar en el envase y qué autorizaciones necesitas para venderlo.",
+  },
 ];
 
 /** Áreas de práctica desarrolladas en profundidad (bloques largos de la home). */

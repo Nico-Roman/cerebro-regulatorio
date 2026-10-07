@@ -36,8 +36,7 @@ export default async function IngresarPage({
           Entra al buscador normativo
         </h1>
         <p className="mt-4 text-muted">
-          El buscador es gratis y va a seguir siéndolo. Solo tienes que
-          registrarte.
+          El buscador es gratis. Solo tienes que registrarte.
         </p>
 
         <div className="mt-8">
