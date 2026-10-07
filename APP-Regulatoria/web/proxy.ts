@@ -9,7 +9,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
-const PROTEGIDAS = ["/normativa", "/perfil", "/admin"];
+const PROTEGIDAS = ["/normativa", "/perfil", "/admin", "/asistente", "/historial"];
 
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
@@ -28,5 +28,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/normativa/:path*", "/perfil/:path*", "/admin/:path*"],
+  matcher: ["/normativa/:path*", "/perfil/:path*", "/admin/:path*", "/asistente/:path*", "/historial/:path*"],
 };

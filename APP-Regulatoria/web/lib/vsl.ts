@@ -19,7 +19,7 @@ export const VSL = {
   youtubeId: process.env.NEXT_PUBLIC_VSL_YOUTUBE_ID || "",
 
   /** Título accesible del reproductor. Lo leen los lectores de pantalla. */
-  titulo: "Cómo trabajo los asuntos regulatorios contigo",
+  titulo: "Cómo trabajamos los asuntos regulatorios contigo",
 
   /** Duración declarada, para que el visitante sepa a qué se compromete. */
   duracion: "6 minutos",
@@ -29,9 +29,9 @@ export const VSL = {
    * está entrando a un video de relleno, y alimenta el schema VideoObject.
    */
   puntos: [
-    "Qué problema regulatorio resuelvo y cuál no",
+    "Qué problema regulatorio resolvemos y cuál no",
     "Cómo es el proceso, paso a paso, desde la primera llamada",
-    "Mi trayectoria y por qué la operación logística importa en regulatorio",
+    "Nuestra trayectoria y por qué la operación logística importa en regulatorio",
     "Qué cuesta, cómo se cobra y qué pasa si el ISP observa el expediente",
   ],
 

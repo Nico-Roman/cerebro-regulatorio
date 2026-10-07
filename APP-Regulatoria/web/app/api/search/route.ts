@@ -3,7 +3,9 @@ import { randomUUID } from "node:crypto";
 import { legado, responder } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
+import { conversacionPara } from "@/lib/conversaciones";
 import { iaDisponible } from "@/lib/ia/config";
+import { consumirPreguntaDiaria, respuestaLimiteDiario } from "@/lib/ia/cupo-servidor";
 import { consumirCupo } from "@/lib/rate-limit";
 import { usuarioActual } from "@/lib/sesion";
 
@@ -65,6 +67,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "consulta_vacia", mensaje: "Escribe una pregunta." }, { status: 400 });
   }
 
+  // Cupo diario (lib/ia/cupo.ts): cada pregunta enviada cuenta 1 al llegar,
+  // antes de buscar, pase lo que pase después. Sin devoluciones.
+  const diario = await consumirPreguntaDiaria(usuario);
+  if (!diario.permitido) return respuestaLimiteDiario();
+
   const respuesta = responder(q, { k, vigente, categoria, sinOcr });
   const resumen = legado(respuesta);
 
@@ -72,6 +79,12 @@ export async function GET(req: NextRequest) {
   // navegador votar sobre ESTA búsqueda (tabla feedback) sin exponer nada más.
   const consultaId = randomUUID();
   let consultaRegistrada = false;
+  // El hilo de /normativa (encargo C2): el del navegador si es de esta persona;
+  // si no, uno nuevo. Sin conversación la pregunta igual se responde.
+  const conversacionId = await conversacionPara(usuario.id, searchParams.get("conversacion")).catch((e) => {
+    console.error("[search] no se pudo abrir la conversación:", e);
+    return null;
+  });
 
   // El registro no debe poder tumbar una búsqueda que ya salió bien: si falla
   // la escritura, se anota en el log del servidor y la respuesta sigue.
@@ -89,6 +102,7 @@ export async function GET(req: NextRequest) {
       conceptosFuera: resumen.conceptos_fuera_del_corpus,
       topCita: resumen.top_cita,
       topScore: null,
+      conversacionId,
     });
     consultaRegistrada = true;
   } catch (e) {
@@ -119,7 +133,10 @@ export async function GET(req: NextRequest) {
     // hay a qué colgar el voto, y es mejor no mostrar el widget que ofrecer un
     // botón que va a fallar.
     consultaId: consultaRegistrada ? consultaId : null,
+    conversacionId,
     // El botón de redacción con IA solo aparece si la IA está configurada.
     iaDisponible: await iaDisponible(),
+    // Lo que queda hoy, ya descontada esta pregunta; null sin tope (admin).
+    restantesHoy: diario.restantesHoy,
   });
 }

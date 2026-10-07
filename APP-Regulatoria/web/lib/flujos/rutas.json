@@ -1,0 +1,408 @@
+{
+  "_comentario": [
+    "Tabla determinista de rutas de trámite (encargo D). La ruta la decide esta tabla, no el modelo: el modelo solo la explica citando pasajes.",
+    "Se evalúa en orden y gana la primera regla cuyas condiciones se cumplan; una condición ausente vale para cualquier respuesta.",
+    "Cada ruta nace con validado_por_nico: false. Mientras haya alguna sin validar, el flujo muestra «Ruta en revisión profesional», y el flujo entero está apagado salvo FLUJO_TRAMITE=on.",
+    "«busqueda» es el texto con que se recuperan del corpus los pasajes que el modelo puede citar. «cita» con «por confirmar» = artículo no verificado."
+  ],
+  "version": "2026-10-01",
+  "preguntas": [
+    {
+      "clave": "producto",
+      "texto": "¿Qué tipo de producto es?",
+      "opciones": {
+        "medicamento": "Medicamento",
+        "cosmetico": "Cosmético",
+        "dispositivo": "Dispositivo médico",
+        "suplemento": "Suplemento o alimento",
+        "otro": "Otro"
+      }
+    },
+    {
+      "clave": "origen",
+      "texto": "¿Es importado o fabricado en Chile?",
+      "opciones": {
+        "importado": "Importado",
+        "nacional": "Fabricado en Chile"
+      }
+    },
+    {
+      "clave": "uso",
+      "texto": "¿Es de uso humano o veterinario?",
+      "opciones": {
+        "humano": "Humano",
+        "veterinario": "Veterinario"
+      }
+    },
+    {
+      "clave": "situacion",
+      "texto": "¿En qué situación está?",
+      "opciones": {
+        "sin_registro": "Sin registro",
+        "registrado_con_cambios": "Registrado, con cambios",
+        "registrado_vigente": "Registrado y vigente"
+      }
+    },
+    {
+      "clave": "registro_extranjero",
+      "texto": "¿Tiene registro sanitario en otro país?",
+      "opciones": {
+        "si": "Sí",
+        "no": "No"
+      }
+    }
+  ],
+  "rutas": [
+    {
+      "id": "veterinario",
+      "cuando": {
+        "uso": [
+          "veterinario"
+        ]
+      },
+      "tramites": [
+        "Registro de medicamentos o productos de uso veterinario ante el Servicio Agrícola y Ganadero (SAG)."
+      ],
+      "autoridad": "SAG",
+      "en_la_base": false,
+      "normas": [],
+      "nota": "Los productos de uso veterinario los regula el SAG. Esa normativa no está en la base del asistente.",
+      "validado_por_nico": false
+    },
+    {
+      "id": "suplemento-alimento",
+      "cuando": {
+        "producto": [
+          "suplemento"
+        ]
+      },
+      "tramites": [
+        "Autorización sanitaria y cumplimiento del Reglamento Sanitario de los Alimentos ante la SEREMI de Salud."
+      ],
+      "autoridad": "SEREMI de Salud",
+      "en_la_base": false,
+      "normas": [],
+      "nota": "Los suplementos alimenticios y los alimentos los regula la SEREMI con el Reglamento Sanitario de los Alimentos, que no está en la base. Si el producto declara propiedades terapéuticas, puede ser un medicamento: conviene revisarlo con un profesional.",
+      "validado_por_nico": false
+    },
+    {
+      "id": "otro",
+      "cuando": {
+        "producto": [
+          "otro"
+        ]
+      },
+      "tramites": [
+        "Definir primero el régimen del producto: el ISP resuelve a qué régimen de control sanitario corresponde."
+      ],
+      "autoridad": "ISP",
+      "en_la_base": true,
+      "normas": [
+        {
+          "norma": "Código Sanitario",
+          "cita": "art. 96",
+          "busqueda": "régimen de control sanitario aplicable a determinadas substancias o productos"
+        }
+      ],
+      "nota": "Sin saber qué es el producto no hay ruta segura: agenda una evaluación.",
+      "validado_por_nico": false
+    },
+    {
+      "id": "medicamento-nuevo-con-registro-extranjero",
+      "cuando": {
+        "producto": [
+          "medicamento"
+        ],
+        "situacion": [
+          "sin_registro"
+        ],
+        "registro_extranjero": [
+          "si"
+        ]
+      },
+      "tramites": [
+        "Registro sanitario de la especialidad farmacéutica ante el ISP (ANAMED).",
+        "Revisar si aplica un procedimiento abreviado por el registro en otro país.",
+        "Si es importado: las autorizaciones de importación que correspondan."
+      ],
+      "autoridad": "ISP (ANAMED)",
+      "en_la_base": true,
+      "normas": [
+        {
+          "norma": "Código Sanitario",
+          "cita": "art. 97",
+          "busqueda": "registro de productos farmacéuticos Instituto de Salud Pública"
+        },
+        {
+          "norma": "DS 3/2010",
+          "cita": "art. 51",
+          "busqueda": "registro abreviado plazos solicitud"
+        },
+        {
+          "norma": "DS 3/2010",
+          "cita": "por confirmar",
+          "busqueda": "solicitud de registro sanitario antecedentes especialidad farmacéutica"
+        }
+      ],
+      "validado_por_nico": false
+    },
+    {
+      "id": "medicamento-nuevo",
+      "cuando": {
+        "producto": [
+          "medicamento"
+        ],
+        "situacion": [
+          "sin_registro"
+        ]
+      },
+      "tramites": [
+        "Registro sanitario de la especialidad farmacéutica ante el ISP (ANAMED).",
+        "Si es importado: las autorizaciones de importación que correspondan."
+      ],
+      "autoridad": "ISP (ANAMED)",
+      "en_la_base": true,
+      "normas": [
+        {
+          "norma": "Código Sanitario",
+          "cita": "art. 97",
+          "busqueda": "registro de productos farmacéuticos Instituto de Salud Pública"
+        },
+        {
+          "norma": "DS 3/2010",
+          "cita": "art. 47",
+          "busqueda": "plazo otorgamiento registro sanitario evaluaciones"
+        },
+        {
+          "norma": "DS 3/2010",
+          "cita": "por confirmar",
+          "busqueda": "solicitud de registro sanitario antecedentes especialidad farmacéutica"
+        }
+      ],
+      "validado_por_nico": false
+    },
+    {
+      "id": "medicamento-cambios",
+      "cuando": {
+        "producto": [
+          "medicamento"
+        ],
+        "situacion": [
+          "registrado_con_cambios"
+        ]
+      },
+      "tramites": [
+        "Solicitud de modificación del registro sanitario ante el ISP antes de implementar el cambio."
+      ],
+      "autoridad": "ISP (ANAMED)",
+      "en_la_base": true,
+      "normas": [
+        {
+          "norma": "DS 3/2010",
+          "cita": "por confirmar",
+          "busqueda": "modificación del registro sanitario especialidad farmacéutica"
+        }
+      ],
+      "validado_por_nico": false
+    },
+    {
+      "id": "medicamento-vigente",
+      "cuando": {
+        "producto": [
+          "medicamento"
+        ],
+        "situacion": [
+          "registrado_vigente"
+        ]
+      },
+      "tramites": [
+        "Renovación del registro antes de su vencimiento.",
+        "Farmacovigilancia: notificación de sospechas de reacciones adversas."
+      ],
+      "autoridad": "ISP (ANAMED)",
+      "en_la_base": true,
+      "normas": [
+        {
+          "norma": "DS 3/2010",
+          "cita": "art. 55",
+          "busqueda": "vigencia registro sanitario cinco años renovado"
+        },
+        {
+          "norma": "DS 3/2010",
+          "cita": "art. 217",
+          "busqueda": "notificación sospechas reacciones adversas plazo"
+        }
+      ],
+      "validado_por_nico": false
+    },
+    {
+      "id": "cosmetico-nuevo",
+      "cuando": {
+        "producto": [
+          "cosmetico"
+        ],
+        "situacion": [
+          "sin_registro"
+        ]
+      },
+      "tramites": [
+        "Registro sanitario del producto cosmético ante el ISP.",
+        "Rotulado conforme al reglamento de cosméticos."
+      ],
+      "autoridad": "ISP",
+      "en_la_base": true,
+      "normas": [
+        {
+          "norma": "Código Sanitario",
+          "cita": "art. 107",
+          "busqueda": "producto cosmético registro sanitario distribución"
+        },
+        {
+          "norma": "DS 239/2002",
+          "cita": "art. 40",
+          "busqueda": "rotulación envases producto cosmético menciones"
+        }
+      ],
+      "validado_por_nico": false
+    },
+    {
+      "id": "cosmetico-cambios",
+      "cuando": {
+        "producto": [
+          "cosmetico"
+        ],
+        "situacion": [
+          "registrado_con_cambios"
+        ]
+      },
+      "tramites": [
+        "Modificación del registro del producto cosmético ante el ISP."
+      ],
+      "autoridad": "ISP",
+      "en_la_base": true,
+      "normas": [
+        {
+          "norma": "DS 239/2002",
+          "cita": "por confirmar",
+          "busqueda": "modificación registro producto cosmético"
+        }
+      ],
+      "validado_por_nico": false
+    },
+    {
+      "id": "cosmetico-vigente",
+      "cuando": {
+        "producto": [
+          "cosmetico"
+        ],
+        "situacion": [
+          "registrado_vigente"
+        ]
+      },
+      "tramites": [
+        "Renovación del registro antes de su vencimiento.",
+        "Cosmetovigilancia y obligaciones del titular."
+      ],
+      "autoridad": "ISP",
+      "en_la_base": true,
+      "normas": [
+        {
+          "norma": "DS 239/2002",
+          "cita": "art. 10",
+          "busqueda": "registro sanitario válido cinco años"
+        },
+        {
+          "norma": "DS 239/2002",
+          "cita": "art. 52",
+          "busqueda": "titulares registros productos cosméticos obligados presentar"
+        }
+      ],
+      "validado_por_nico": false
+    },
+    {
+      "id": "dispositivo-nuevo",
+      "cuando": {
+        "producto": [
+          "dispositivo"
+        ],
+        "situacion": [
+          "sin_registro"
+        ]
+      },
+      "tramites": [
+        "Verificar si el dispositivo está sometido a control obligatorio (DS 825 y decretos de incorporación, p. ej. el Decreto Exento 25/2026).",
+        "Si lo está: registro ante el ISP y certificación de conformidad. Si no: no requiere registro, pero sí cumplir las normas que le apliquen."
+      ],
+      "autoridad": "ISP (ANDID)",
+      "en_la_base": true,
+      "normas": [
+        {
+          "norma": "DS 825/1998",
+          "cita": "art. 1",
+          "busqueda": "dispositivos certificación cumplimiento normas de calidad"
+        },
+        {
+          "norma": "Decreto Exento 25/2026",
+          "cita": "por confirmar",
+          "busqueda": "dispositivos médicos régimen de control sanitario categorías"
+        }
+      ],
+      "nota": "Depende de que la base ya tenga las normas de dispositivos médicos (encargo B).",
+      "validado_por_nico": false
+    },
+    {
+      "id": "dispositivo-cambios",
+      "cuando": {
+        "producto": [
+          "dispositivo"
+        ],
+        "situacion": [
+          "registrado_con_cambios"
+        ]
+      },
+      "tramites": [
+        "Modificación del registro del dispositivo ante el ISP."
+      ],
+      "autoridad": "ISP (ANDID)",
+      "en_la_base": true,
+      "normas": [
+        {
+          "norma": "DS 825/1998",
+          "cita": "por confirmar",
+          "busqueda": "modificación registro dispositivo médico"
+        }
+      ],
+      "validado_por_nico": false
+    },
+    {
+      "id": "dispositivo-vigente",
+      "cuando": {
+        "producto": [
+          "dispositivo"
+        ],
+        "situacion": [
+          "registrado_vigente"
+        ]
+      },
+      "tramites": [
+        "Mantener la certificación y el registro vigentes.",
+        "Tecnovigilancia: notificar incidentes adversos."
+      ],
+      "autoridad": "ISP (ANDID)",
+      "en_la_base": true,
+      "normas": [
+        {
+          "norma": "DS 825/1998",
+          "cita": "por confirmar",
+          "busqueda": "vigencia certificación dispositivo"
+        },
+        {
+          "norma": "Tecnovigilancia (listado ANDID)",
+          "cita": "por confirmar",
+          "busqueda": "tecnovigilancia incidentes adversos dispositivos médicos"
+        }
+      ],
+      "validado_por_nico": false
+    }
+  ]
+}

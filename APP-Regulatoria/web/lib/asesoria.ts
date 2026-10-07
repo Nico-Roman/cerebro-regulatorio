@@ -29,6 +29,15 @@ export const TRAYECTORIA: Hito[] = [
     detalle:
       "Acompañamiento a laboratorios, importadores y marcas en registro sanitario, farmacovigilancia, tecnovigilancia y preparación para fiscalización del ISP.",
   },
+  // TODO(Nico): fechas y detalle del cargo. Se dejó solo lo que el rol implica
+  // por norma; no se inventaron logros ni periodos.
+  {
+    periodo: "Antes",
+    rol: "Director técnico",
+    lugar: "Laboratorio acondicionador de productos farmacéuticos",
+    detalle:
+      "Responsable técnico del laboratorio ante el ISP: quien firma y responde por que cada producto acondicionado cumpla con su registro y con las buenas prácticas.",
+  },
   {
     periodo: "Base",
     rol: "Diplomado en Asuntos Regulatorios Farmacéuticos",
@@ -61,21 +70,21 @@ export interface Paso {
 export const PROCESO: Paso[] = [
   {
     n: "01",
-    titulo: "Primera evaluación, sin costo",
+    titulo: "Primera evaluación, breve",
     detalle:
-      "En 30 minutos revisamos tu caso. Me cuentas tus ideas y tus dudas, y te digo si puedo ayudarte y cómo. Si no es mi área, te dirijo a quien sí puede.",
+      "En 30 minutos revisamos tu caso. Nos cuentas tus ideas y tus dudas, y te decimos si podemos ayudarte y cómo. Si no es nuestra área, te dirigimos a quien sí puede.",
   },
   {
     n: "02",
     titulo: "Diagnóstico y propuesta escrita",
     detalle:
-      "Te hago llegar una propuesta de acuerdo a tus necesidades, totalmente personalizada a tu caso.",
+      "Te hacemos llegar una propuesta de acuerdo a tus necesidades, totalmente personalizada a tu caso.",
   },
   {
     n: "03",
     titulo: "Armado y presentación del expediente",
     detalle:
-      "Preparo la documentación y la presento ante el ISP. Las observaciones de ANAMED las respondo yo, contigo al tanto, no después de que llegaron.",
+      "Preparamos la documentación y la presentamos ante el ISP. Las observaciones de ANAMED las respondemos nosotros, contigo al tanto, no después de que llegaron.",
   },
   {
     n: "04",
@@ -90,9 +99,9 @@ export const PROCESO: Paso[] = [
  * otra cosa y ahorra dos reuniones a todo el mundo.
  */
 export const LIMITES = [
-  "No soy abogado: no litigo ni represento en sumarios sanitarios.",
-  "No garantizo la aprobación de un registro. Nadie puede: la resuelve el ISP.",
-  "No acelero plazos por vías que no sean un expediente bien armado.",
+  "No somos abogados: no litigamos ni representamos en sumarios sanitarios.",
+  "No garantizamos la aprobación de un registro. Nadie puede: la resuelve el ISP.",
+  "No aceleramos plazos por vías que no sean un expediente bien armado.",
 ];
 
 /**
@@ -171,10 +180,10 @@ export interface Perfil {
 
 export const PERFIL: Perfil = {
   nombre: "Nicolás Román",
-  rol: "Químico Farmacéutico",
+  rol: "Químico Farmacéutico · ex director técnico de laboratorio",
   foto: "/Foto%20retrato.png",
   parrafos: [
-    "Con más de tres años en la industria farmacéutica, he trabajado en el registro y la vigilancia regulatoria de medicamentos, cosméticos y dispositivos médicos ante el ISP. Sé lo que revisa un fiscalizador y lo que un expediente necesita para sostenerse en el tiempo, no solo para aprobarse.",
+    "Fui director técnico de un laboratorio acondicionador de productos farmacéuticos: el cargo que firma y responde ante el ISP por cada producto que sale. Con más de tres años en la industria farmacéutica, he trabajado en el registro y la vigilancia regulatoria de medicamentos, cosméticos y dispositivos médicos ante el ISP. Sé lo que revisa un fiscalizador y lo que un expediente necesita para sostenerse en el tiempo, no solo para aprobarse.",
     "No soy abogado y no garantizo aprobaciones, porque las resuelve el ISP. Lo que hago es armar el expediente con la norma en la mano y acompañarte después de que salga la resolución.",
   ],
 };

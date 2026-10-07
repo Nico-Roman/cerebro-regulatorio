@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?><Norma xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.leychile.cl/esquemas" xsi:schemaLocation="http://www.leychile.cl/esquemas http://www.leychile.cl/esquemas/EsquemaIntercambioNorma-v1-0.xsd" normaId="141005" esTratado="no tratado" fechaVersion="1999-08-21" SchemaVersion="1.0" derogado="no derogado">
+  <Identificador fechaPromulgacion="1998-11-30" fechaPublicacion="1999-08-21">
+    <TiposNumeros>
+      <TipoNumero>
+        <Tipo>Decreto</Tipo>
+        <Numero>825</Numero>
+      </TipoNumero>
+    </TiposNumeros>
+    <Organismos>
+      <Organismo>MINISTERIO DE SALUD</Organismo>
+    </Organismos>
+  </Identificador>
+  <Metadatos>
+    <TituloNorma>APRUEBA REGLAMENTO DE CONTROL DE PRODUCTOS Y ELEMENTOS
+DE USO MEDICO</TituloNorma>
+    
+    
+    
+    <IdentificacionFuente>Diario Oficial</IdentificacionFuente>
+    <NumeroFuente>36445</NumeroFuente>
+  </Metadatos>
+  <Encabezado fechaVersion="1999-08-21" derogado="no derogado">
+    <Texto>APRUEBA REGLAMENTO DE CONTROL DE PRODUCTOS Y ELEMENTOS DE USO MEDICO
+
+     N&#250;m. 825.- Santiago, 30 de noviembre de 1998.- Visto: lo dispuesto en el art&#237;culo 101 del C&#243;digo Sanitario, aprobado por decreto con fuerza de ley N&#186; 725, de 1967, del Ministerio de Salud y en los art&#237;culos 4&#176;, 6&#176;, 16, 17, 35 y 357 letra b) del decreto ley N&#186; 2.763, de 1979.
+
+     Considerando:
+
+     - Que es funci&#243;n del Estado, a trav&#233;s del Ministerio de Salud y sus organismos dependientes velar por la salud de la poblaci&#243;n y cuidar su acceso a las acciones de salud que sean necesarias y adecuadas para el fomento, protecci&#243;n y recuperaci&#243;n de &#233;sta y la rehabilitaci&#243;n de las enfermedades, y
+
+     - La necesidad de regular el uso y comercializaci&#243;n en el pa&#237;s de los instrumentos, aparatos, dispositivos y dem&#225;s elementos y productos que se emplean en el diagn&#243;stico, prevenci&#243;n y tratamiento de enfermedades, de modo de resguardar la salud de los usuarios de los mismos, y
+
+     Teniendo presente, las facultades que me confiere el art&#237;culo 32 N&#186; 8 de la Constituci&#243;n Pol&#237;tica de la Rep&#250;blica,
+
+     D e c r e t o:
+
+     Apru&#233;base el siguiente Reglamento de Control de Productos y Elementos de Uso M&#233;dico:
+
+</Texto>
+  </Encabezado>
+  <EstructurasFuncionales>
+    <EstructuraFuncional transitorio="no transitorio" tipoParte="T&#237;tulo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252104">
+      <Texto>TITULO I
+
+Disposiciones generales</Texto>
+      <Metadatos>
+        <NombreParte presente="no">&#160;</NombreParte>
+        <TituloParte presente="si">TITULO I Disposiciones generales</TituloParte>
+        
+      </Metadatos>
+      <EstructurasFuncionales>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252103">
+          <Texto>     Art&#237;culo 1&#186;: Los instrumentos, aparatos, dispositivos y otros art&#237;culos o elementos destinados al diagn&#243;stico, prevenci&#243;n y tratamiento de enfermedades de seres humanos o al reemplazo o modificaci&#243;n de sus anatom&#237;as y que no corresponden a los productos farmac&#233;uticos, alimentos de uso m&#233;dico y preparados cosm&#233;ticos a que se refieren los art&#237;culos 97, 98 y 99 del C&#243;digo Sanitario, s&#243;lo podr&#225;n ser fabricados, importados, comercializados o distribuidos en el pa&#237;s si poseen la certificaci&#243;n respectiva por cumplir con las normas y exigencias de calidad que les sean aplicables seg&#250;n su naturaleza, de acuerdo con el art&#237;culo 101 de ese C&#243;digo y el presente reglamento.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">1 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252105">
+          <Texto>     Art&#237;culo 2&#186;: Para los efectos de este reglamento y su normativa complementaria, los siguientes t&#233;rminos tendr&#225;n el significado que se indica:
+
+     1. Dispositivos m&#233;dicos o art&#237;culos de uso m&#233;dico: Cualquier instrumento, aparato, aplicaci&#243;n, material o art&#237;culo, incluyendo software, usados solos o en combinaci&#243;n y definidos por el fabricante para ser usados directamente en seres humanos, siempre que su acci&#243;n principal prevista en el cuerpo humano no se alcance por medios farmacol&#243;gicos, inmunol&#243;gicos o metab&#243;licos, aunque puedan concurrir tales medios a su funci&#243;n; con el prop&#243;sito de diagn&#243;stico, prevenci&#243;n, seguimiento, tratamiento o alivio de una enfermedad, da&#241;o o discapacidad; de investigaci&#243;n o de reemplazo o modificaci&#243;n de la anatom&#237;a o de un proceso fisiol&#243;gico, o de regulaci&#243;n de la concepci&#243;n.
+
+     2. Dispositivos m&#233;dicos in vitro: Cualquier art&#237;culo de uso m&#233;dico que consista en un reactivo, producto reactivo, calibrador, material de control, equipo, instrumento, aparato, equipamiento o sistema, utilizado solo o en combinaci&#243;n con otros, destinado por el fabricante a ser utilizado in vitro para el estudio de muestras procedentes del cuerpo humano, incluidas las de donaciones de sangre o de tejidos solo o principalmente con el fin de proporcionar informaci&#243;n relativa a un estado fisiol&#243;gico, estado de salud o enfermedad o anomal&#237;a cong&#233;nita de ellas o para determinar la seguridad y compatibilidad con receptores potenciales.
+
+     3. Dispositivos m&#233;dicos de uso pasajero: Destinados normalmente a utilizarse de forma continua durante menos de sesenta minutos.
+     4. Dispositivos m&#233;dicos de uso de corto plazo: Destinados normalmente a utilizarse de forma continua durante un per&#237;odo de hasta treinta d&#237;as.
+
+     5. Dispositivos m&#233;dicos de uso prolongado: Destinados normalmente a utilizarse de forma continua durante un per&#237;odo de m&#225;s de treinta d&#237;as.
+
+     6. Dispositivos m&#233;dicos invasivos: Dispositivo que penetra parcial o completamente en el interior del cuerpo por un orificio corporal o bien a trav&#233;s de la superficie corporal.
+
+     7. Dispositivos m&#233;dicos invasivos de tipo quir&#250;rgico: Dispositivo que penetra en el interior del cuerpo por medio de una intervenci&#243;n quir&#250;rgica o en el contexto de una intervenci&#243;n quir&#250;rgica.
+
+     8. Dispositivos m&#233;dicos implantables: Cualquier dispositivo dise&#241;ado para ser implantado totalmente en el cuerpo humano o para sustituir una superficie epitelial o la superficie ocular mediante intervenci&#243;n quir&#250;rgica y destinado a permanecer all&#237; despu&#233;s de la intervenci&#243;n. Se considerar&#225; asimismo dispositivo implantable cualquier producto destinado a ser introducido parcialmente en el cuerpo humano mediante intervenci&#243;n quir&#250;rgica y a permanecer all&#237; despu&#233;s de dicha intervenci&#243;n durante un per&#237;odo de al menos treinta d&#237;as.
+
+     9. Dispositivo m&#233;dico quir&#250;rgico reutilizable: Instrumento destinado a fines quir&#250;rgicos para cortar, perforar, serrar, escarificar, raspar, pinzar, retraer, recortar u otros procedimientos similares, sin estar conectado a ning&#250;n dispositivo m&#233;dico activo, y que puede volver a utilizarse una vez efectuados todos los procedimientos pertinentes.
+
+     10. Dispositivo m&#233;dico activo: Cualquier dispositivo cuyo funcionamiento depende de energ&#237;a el&#233;ctrica o de cualquier fuente de energ&#237;a distinta a la generada directamente por el cuerpo humano o por la gravedad y que act&#250;e mediante conversi&#243;n de dicha energ&#237;a. No se consideran dispositivos m&#233;dicos activos los productos destinados a transmitir sin ninguna modificaci&#243;n significativa energ&#237;a, sustancias u otros elementos de un dispositivo m&#233;dico activo al paciente.
+
+     11. Dispositivo m&#233;dico activo terap&#233;utico: Cualquier dispositivo m&#233;dico utilizado solo o en combinaci&#243;n con otros dispositivos m&#233;dicos destinado a sostener, modificar, sustituir o restaurar funciones o estructuras biol&#243;gicas en el contexto del tratamiento o alivio de una enfermedad, lesi&#243;n o deficiencia.
+
+     12. Dispositivo m&#233;dico activo para diagn&#243;stico: Cualquier dispositivo m&#233;dico activo utilizado solo o en combinaci&#243;n con otros dispositivos m&#233;dicos destinado a proporcionar informaci&#243;n para la detecci&#243;n, diagn&#243;stico, control o tratamiento de estados fisiol&#243;gicos, estados de salud, enfermedades o malformaciones cong&#233;nitas.
+
+     13. Fabricante: Persona natural o jur&#237;dica responsable del dise&#241;o, fabricaci&#243;n, acondicionamiento y etiquetado de un dispositivo m&#233;dico con vistas a la comercializaci&#243;n de &#233;ste en su propio nombre, sea que estas operaciones se efect&#250;en por esa misma persona o por terceros por cuenta de aqu&#233;lla.
+
+     14. Finalidad o uso previsto: La utilizaci&#243;n a la que se destina el dispositivo m&#233;dico seg&#250;n las indicaciones proporcionadas por el fabricante en el etiquetado, en las instrucciones de utilizaci&#243;n y/o en el material publicitario.
+
+     15. Comercializaci&#243;n: Poner a disposici&#243;n, a t&#237;tulo oneroso o gratuito, con vistas a su distribuci&#243;n y/o utilizaci&#243;n en el mercado, un dispositivo m&#233;dico nuevo o totalmente renovado no destinado a investigaciones cl&#237;nicas.
+
+     16. Puesta en servicio: La fase en que un dispositivo m&#233;dico est&#225; listo para ser utilizado en el mercado por primera vez con arreglo a su finalidad prevista.
+
+     17. Aseguramiento de la calidad: Todas las actividades planificadas y sistem&#225;ticas implementadas dentro de un sistema de calidad y demostrado seg&#250;n se requiera, para entregar confianza adecuada que una entidad cumple con los requisitos para la calidad.
+
+     18. Lote: Conjunto de individuos de los que se debe extraer una muestra a inspeccionar para determinar su conformidad con los criterios de aceptaci&#243;n. Cada lote debe estar constituido, en lo posible, por individuos de un solo tipo, grado de calidad, clase, tama&#241;o y composici&#243;n, fabricados esencialmente bajo las mismas condiciones y en el mismo per&#237;odo de tiempo.
+
+     19. NCh-ISO 9001: Norma Chilena-International Organization for Standardization: ''Sistemas de calidad.
+-Modelo de aseguramiento de calidad en el dise&#241;o, desarrollo, producci&#243;n, instalaci&#243;n y servicio''.
+
+     20. NCh-ISO 9002: Norma Chilena-International Organization for Standardization: ''Sistemas de calidad.
+ -Modelo de aseguramiento de calidad en la producci&#243;n, instalaci&#243;n y servicio''.
+
+     21. NCh-ISO 9003: Norma Chilena-International Organization for Standardization: ''Sistemas de calidad.
+ -Modelo de aseguramiento de calidad en la inspecci&#243;n y ensayos finales''.
+
+     22. GLP: Norma de los Estados Unidos de Norteam&#233;rica sobre buenas pr&#225;cticas de Laboratorio.
+
+     23. GMP: Norma de los Estados Unidos de Norteam&#233;rica sobre buenas pr&#225;cticas de fabricaci&#243;n.
+
+     24. INN 100-607: Documento del Instituto Nacional de Normalizaci&#243;n que contiene los requisitos para la acreditaci&#243;n de organismos certificadores de productos.
+
+     25. INN R 401: Reglamento del Instituto Nacional de Normalizaci&#243;n para la acreditaci&#243;n de organismos de certificaci&#243;n y laboratorios.
+
+     26. Instituto: El Instituto de Salud P&#250;blica de Chile.
+
+     27. Verificaci&#243;n de la Conformidad: Control de calidad que se le efect&#250;a a un elemento regulado por este reglamento, destinado a establecer que cumple con los requisitos para su comercializaci&#243;n que le sean propios en conformidad con &#233;ste.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">2 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252106">
+          <Texto>     Art&#237;culo 3&#176;: Las personas naturales o jur&#237;dicas que, a cualquier t&#237;tulo, pretendan fabricar, importar, comercializar o distribuir los elementos indicados en el art&#237;culo 1&#186;, deber&#225;n obtener previamente la respectiva certificaci&#243;n de la verificaci&#243;n de la conformidad en los servicios, instituciones, laboratorios o establecimientos que cuenten con una autorizaci&#243;n sanitaria expresa para ello, otorgada por el Instituto de Salud P&#250;blica de Chile.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">3 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252107">
+          <Texto>     Art&#237;culo 4&#176;: El Director del Instituto podr&#225; autorizar la venta o uso provisional de dispositivos y elementos m&#233;dicos regidos por este reglamento sin previa verificaci&#243;n de conformidad en situaciones de emergencia nacional o en que la poblaci&#243;n requiere del producto en forma urgente.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">4 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252108">
+          <Texto>     Art&#237;culo 5&#176;: Asimismo, el Director del Instituto podr&#225; autorizar la importaci&#243;n de dispositivos m&#233;dicos destinados a su exposici&#243;n en ferias comerciales, exhibiciones o demostraciones sin someterse a verificaci&#243;n de la conformidad, siempre que una se&#241;al visible en ellos indique claramente que dichos productos no pueden comercializarse o ponerse en servicio hasta que hayan cumplido con los requisitos pertinentes. </Texto>
+          <Metadatos>
+            <NombreParte presente="si">5 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252109">
+          <Texto>     Art&#237;culo 6&#176;: Las personas naturales o jur&#237;dicas cuyos instrumentos, aparatos, dispositivos, art&#237;culos o elementos sometidos a verificaci&#243;n de conformidad de calidad ante una entidad autorizada sean rechazados por &#233;sta, podr&#225;n reclamar por escrito al Instituto en el plazo de quince d&#237;as h&#225;biles contados desde la comunicaci&#243;n de la no conformidad.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">6 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252110">
+          <Texto>     Art&#237;culo 7&#176;: Recibido un reclamo, el Instituto lo pondr&#225; en conocimiento de la entidad que objet&#243; la conformidad del elemento, la que deber&#225; informar sobre las razones de ello y remitirle todos los antecedentes que tenga en su poder, dentro del plazo de diez d&#237;as h&#225;biles contados desde la recepci&#243;n de la comunicaci&#243;n, vencido el cual, aun sin el informe y antecedentes solicitados, el Instituto podr&#225; resolver el reclamo. </Texto>
+          <Metadatos>
+            <NombreParte presente="si">7 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+      </EstructurasFuncionales>
+    </EstructuraFuncional>
+    <EstructuraFuncional transitorio="no transitorio" tipoParte="T&#237;tulo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252112">
+      <Texto>TITULO II
+
+ Del procedimiento de autorizaci&#243;n</Texto>
+      <Metadatos>
+        <NombreParte presente="no">&#160;</NombreParte>
+        <TituloParte presente="si">TITULO II Del procedimiento de autorizaci&#243;n</TituloParte>
+        
+      </Metadatos>
+      <EstructurasFuncionales>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252111">
+          <Texto>     Art&#237;culo 8&#176;: Corresponder&#225; al Instituto autorizar a los servicios, instituciones, laboratorios o establecimientos para que efect&#250;en la verificaci&#243;n de la conformidad de los elementos de que trata este reglamento, como asimismo fiscalizar su funcionamiento y el cumplimiento de las normas aplicables a esas actividades.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">8 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252113">
+          <Texto>     Art&#237;culo 9&#176;: Para la obtenci&#243;n de dicha autorizaci&#243;n, el propietario o representante legal, en caso de personas jur&#237;dicas, deber&#225; presentar al Instituto de Salud P&#250;blica una solicitud en triplicado proporcionando los siguientes datos:
+
+a) nombre o raz&#243;n social del servicio, instituci&#243;n, laboratorio o establecimiento; domicilio, Rol Unico Tributario, tel&#233;fono o fax;
+b) individualizaci&#243;n del due&#241;o o representante legal de la entidad;
+c) individualizaci&#243;n del director t&#233;cnico;
+d) indicaci&#243;n del o de los elementos cuya verificaci&#243;n de conformidad se propone llevar a cabo;
+e) acreditar conformidad con las normas INN R 401, reglamento para organismos de certificaci&#243;n de productos y laboratorios de ensayos o INN 100-607, para organismos de certificaci&#243;n de productos, seg&#250;n corresponda, y 
+f) indicaci&#243;n del personal con que contar&#225; para llevar a cabo dicha verificaci&#243;n, con sus respectivas profesiones, oficios o actividades.
+
+     La solicitud deber&#225; acompa&#241;arse de los antecedentes relacionados con la constituci&#243;n de la instituci&#243;n y su especializaci&#243;n y experiencia en materias referentes al o los elementos cuya verificaci&#243;n de la conformidad se interesa en realizar y del comprobante de pago de los derechos arancelarios respectivos.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">9 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252114">
+          <Texto>     Art&#237;culo 10&#176;: El Instituto verificar&#225; el cumplimiento de los requisitos reglamentarios mediante una visita programada, pudiendo requerir mayores antecedentes, luego de lo cual se emitir&#225; la autorizaci&#243;n en el plazo de treinta d&#237;as h&#225;biles desde que reciba la solicitud o los antecedentes adicionales requeridos.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">10 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252115">
+          <Texto>     Art&#237;culo 11: La autorizaci&#243;n para realizar la verificaci&#243;n de la conformidad y la respectiva certificaci&#243;n de los dispositivos m&#233;dicos se otorgar&#225; mediante resoluci&#243;n del Instituto, en que se identificar&#225; claramente la entidad a la que se otorga y los art&#237;culos o elementos que comprende, adem&#225;s de toda condici&#243;n, modalidad o forma de ejercerla que se le imponga para ello.
+
+     El rechazo de la solicitud deber&#225; efectuarse mediante resoluci&#243;n fundada.
+
+     Las resoluciones que concedan o rechacen la autorizaci&#243;n se notificar&#225;n al due&#241;o o representante legal de la entidad mediante correo certificado y se comunicar&#225;n a todos los Servicios de Salud del pa&#237;s. </Texto>
+          <Metadatos>
+            <NombreParte presente="si">11 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252116">
+          <Texto>     Art&#237;culo 12: Las solicitudes posteriores que presenten las entidades autorizadas para la verificaci&#243;n de la conformidad de otros elementos distintos no comprendidos en la autorizaci&#243;n inicial, se tramitar&#225;n como solicitudes nuevas y deber&#225;n someterse a todo el procedimiento establecido en este reglamento. </Texto>
+          <Metadatos>
+            <NombreParte presente="si">12 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252117">
+          <Texto>     Art&#237;culo 13: La autorizaci&#243;n otorgada por el Instituto tendr&#225; una duraci&#243;n de tres a&#241;os y se entender&#225; sucesiva y autom&#225;ticamente renovada por iguales per&#237;odos, sin perjuicio de su cancelaci&#243;n de acuerdo con el C&#243;digo Sanitario y el presente reglamento.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">13 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252118">
+          <Texto>     Art&#237;culo 14: Las entidades cuyas solicitudes sean denegadas o no contestadas dentro del plazo de treinta d&#237;as h&#225;biles, contados desde que el solicitante haya completado los antecedentes adicionales, podr&#225;n reclamar por escrito al Ministerio de Salud dentro del t&#233;rmino de quince d&#237;as h&#225;biles contados desde la recepci&#243;n de la respectiva carta certificada o del vencimiento de dicho plazo.
+
+     El Ministerio solicitar&#225; al Instituto su informe y los antecedentes sobre la materia y se pronunciar&#225; sobre la reclamaci&#243;n mediante resoluci&#243;n fundada, que notificar&#225; a la entidad interesada y a dicho Instituto. </Texto>
+          <Metadatos>
+            <NombreParte presente="si">14 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252119">
+          <Texto>     Art&#237;culo 15: El Instituto formar&#225; y mantendr&#225; un listado informativo actualizado de los servicios, instituciones, laboratorios y establecimientos autorizados para efectuar la verificaci&#243;n de la conformidad y otorgar los certificados correspondientes, con indicaci&#243;n de los elementos a que se refieren tales autorizaciones, el que tendr&#225; un car&#225;cter p&#250;blico y podr&#225; ser consultado por quien tenga inter&#233;s en ello. </Texto>
+          <Metadatos>
+            <NombreParte presente="si">15 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+      </EstructurasFuncionales>
+    </EstructuraFuncional>
+    <EstructuraFuncional transitorio="no transitorio" tipoParte="T&#237;tulo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252121">
+      <Texto>TITULO III
+
+     De las condiciones de funcionamiento</Texto>
+      <Metadatos>
+        <NombreParte presente="no">&#160;</NombreParte>
+        <TituloParte presente="si">TITULO III De las condiciones de funcionamiento</TituloParte>
+        
+      </Metadatos>
+      <EstructurasFuncionales>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252120">
+          <Texto>     Art&#237;culo 16: Los servicios, instituciones, laboratorios y establecimientos autorizados para realizar las verificaciones de conformidad deber&#225;n contar con un director t&#233;cnico, quien ser&#225; responsable de las verificaciones de la conformidad que efect&#250;en y de los certificados que emitan.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">16 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252122">
+          <Texto>     Art&#237;culo 17: Corresponder&#225; al Instituto fiscalizar y controlar las acciones de verificaci&#243;n de la conformidad que desarrollen las entidades autorizadas, las que estar&#225;n obligadas a proporcionar la informaci&#243;n necesaria que &#233;ste les pida y otorgar todas las facilidades para ejecutar dichas fiscalizaciones. </Texto>
+          <Metadatos>
+            <NombreParte presente="si">17 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252123">
+          <Texto>     Art&#237;culo 18: Sin perjuicio de las facultades fiscalizadoras del Instituto, las relaciones y controversias entre las entidades autorizadas y sus clientes se regular&#225;n conforme a la legislaci&#243;n ordinaria.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">18 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252124">
+          <Texto>     Art&#237;culo 19: La autorizaci&#243;n concedida a un servicio, instituci&#243;n, laboratorio o establecimiento para la verificaci&#243;n de la conformidad y certificaci&#243;n de los elementos de que trata este reglamento, podr&#225; cancelarse administrativamente por el Instituto a solicitud formulada por el due&#241;o o representante legal del mismo.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">19 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+      </EstructurasFuncionales>
+    </EstructuraFuncional>
+    <EstructuraFuncional transitorio="no transitorio" tipoParte="T&#237;tulo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252126">
+      <Texto>TITULO IV
+
+De la aplicaci&#243;n de la verificaci&#243;n de la conformidad
+</Texto>
+      <Metadatos>
+        <NombreParte presente="no">&#160;</NombreParte>
+        <TituloParte presente="si">TITULO IV De la aplicaci&#243;n de la verificaci&#243;n de la conformidad</TituloParte>
+        
+      </Metadatos>
+      <EstructurasFuncionales>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252125">
+          <Texto>     Art&#237;culo 20: Para el efecto de la verificaci&#243;n de conformidad y certificaci&#243;n correspondiente, los dispositivos y art&#237;culos de uso m&#233;dico regidos por este reglamento, se agrupan en las siguientes 4 clases, de acuerdo al nivel de riesgo asociado a su uso.
+
+Clase I  : incluye los dispositivos que presentan un grado muy
+           bajo de riesgo.
+Clase II : incluye los dispositivos que presentan un grado de
+           riesgo moderado.
+Clase III: incluye los dispositivos que presentan un elevado
+           potencial de riesgo.
+Clase IV : incluye los dispositivos considerados los m&#225;s cr&#237;ticos
+           en materia de riesgos.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">20 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252127">
+          <Texto>     Art&#237;culo 21: Seg&#250;n su clase, los dispositivos m&#233;dicos deber&#225;n cumplir los siguientes requisitos o controles regulatorios y acompa&#241;ar la documentaci&#243;n que se indica, en su caso, para su verificaci&#243;n de conformidad:
+
+a) Clase I:
+
+     1. Identificaci&#243;n del producto, del fabricante y del distribuidor, especificaci&#243;n de sus caracter&#237;sticas incluyendo rotulado del envase, instructivo interno y lote con n&#250;mero y c&#243;digo, y descripci&#243;n de su funcionamiento.
+     2. Declaraci&#243;n de materiales: lista de las partes y materias primas usadas en la fabricaci&#243;n, sus ensayos qu&#237;micos y evaluaci&#243;n biol&#243;gica, si corresponde.
+     3. Antecedentes de esterilizaci&#243;n y almacenaje, si corresponde m&#233;todos de esterilizaci&#243;n y controles respectivos; fecha de vencimiento y condiciones de almacenaje.
+     4. Antecedentes nacionales o extranjeros que avalen la calidad del producto y/o de su producci&#243;n.
+     5. Evaluaci&#243;n del funcionamiento, si corresponde, seg&#250;n normas oficiales de la Rep&#250;blica de Chile y a falta de ellas por las que apruebe el Ministerio de Salud, a proposici&#243;n del Instituto, sobre la base de normas de organismos internacionales o estatales extranjeros especializados.
+     6. Certificado para prop&#243;sitos de exportaci&#243;n otorgado en el pa&#237;s de origen, autorizado por la autoridad estatal correspondiente y debidamente legalizado, en el caso dispositivos m&#233;dicos que se importen a Chile.
+
+b) Clase II:
+
+     1. Todas las de la clase I, y
+     2. Certificados de fabricaci&#243;n seg&#250;n sistema de calidad: modelo de aseguramiento de calidad en la producci&#243;n, instalaci&#243;n y servicio, NCh-ISO- 9002 o GMP.
+
+c) Clase III:
+
+     1. Todas las de la clase I.
+     2. Literatura cient&#237;fica que respalde al producto.
+     3. Estudios efectuados por el fabricante que demuestren la efectividad y seguridad del producto.
+     4. Certificado de fabricaci&#243;n seg&#250;n sistema de calidad: modelo de aseguramiento de la calidad en el dise&#241;o, desarrollo, producci&#243;n, instalaci&#243;n y servicio, NCh-ISO 9001 o GMP.
+
+d) Clase IV:
+
+     1. Todas las de la clase III.
+     2. Estudios realizados en grupos de pacientes representativos.
+     3. Estudio de todos los riesgos inherentes al uso del dispositivo.
+     4. Estudios biol&#243;gicos realizados por el fabricante con relaci&#243;n al dispositivo.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">21 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252128">
+          <Texto>     Art&#237;culo 22: Mediante decretos supremos fundados, dictados a trav&#233;s del Ministerio de Salud previo informe del Instituto, se har&#225; efectiva progresivamente la aplicaci&#243;n de este reglamento a los distintos dispositivos y elementos m&#233;dicos regulados por &#233;l, en los que deber&#225; especificarse la clase a la que pertenecen y, por ende, los controles regulatorios y requisitos aplicables a su respectiva verificaci&#243;n de conformidad, seg&#250;n el caso. El informe del Instituto se elaborar&#225; con la asesor&#237;a de una comisi&#243;n de expertos, que propondr&#225; la naturaleza y r&#233;gimen aplicable al respectivo producto.
+
+     A contar de la vigencia de dicho decreto ser&#225; obligatoria la certificaci&#243;n de la verificaci&#243;n de la conformidad, otorgada por una entidad autorizada o por el Instituto a falta de ellas, de modo que estos elementos no podr&#225;n fabricarse, importarse, comercializarse o distribuirse sin contar con el correspondiente certificado.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">22 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252129">
+          <Texto>     Art&#237;culo 23: Los establecimientos autorizados llevar&#225;n a cabo la verificaci&#243;n de la conformidad de los productos que se le presenten para ello, de acuerdo a las normas que les sean aplicables seg&#250;n su especie y de la clase a que &#233;stos pertenezcan, establecidas en el respectivo decreto que los incorpore al r&#233;gimen de verificaci&#243;n de la conformidad. Si de la misma resulta que el producto cumple con ellas, se le otorgar&#225; la certificaci&#243;n correspondiente, la que constar&#225; en un certificado firmado por el responsable t&#233;cnico y el due&#241;o o representante legal de la entidad, seg&#250;n corresponda, y con el sello de la entidad, aprobado previamente por el Instituto.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">23 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252130">
+          <Texto>     Art&#237;culo 24: Una vez emitido el certificado, el establecimiento que lo otorg&#243; deber&#225; remitir copia del mismo al Instituto de Salud P&#250;blica para su inclusi&#243;n en el listado que &#233;ste llevar&#225; al efecto.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">24 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252131">
+          <Texto>     Art&#237;culo 25: En el caso de nuevas importaciones de elementos con certificaci&#243;n vigente, la verificaci&#243;n de conformidad se limitar&#225; a determinar que se trata de los mismos productos ya certificados, con excepci&#243;n de aquellos que en el decreto que los incorpore al sistema de verificaci&#243;n de conformidad se establezca que requieren de esta verificaci&#243;n lote a lote.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">25 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252132">
+          <Texto>     Art&#237;culo 26: Los art&#237;culos de uso m&#233;dico sometidos a la verificaci&#243;n de la conformidad deber&#225;n consignar en ellos mismos o en su envase, en forma claramente legible, la circunstancia de haber sido verificado y el n&#250;mero que le ha asignado el Instituto de Salud P&#250;blica. En caso de que, debido a la naturaleza, composici&#243;n o reducido tama&#241;o del producto, no sea posible incorporar en &#233;l dicha leyenda, el Instituto podr&#225;, seg&#250;n el caso, eximirlo de esta obligaci&#243;n o sustituirla por una forma distinta de indicarla, mediante resoluci&#243;n.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">26 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252133">
+          <Texto>     Art&#237;culo 27: Las destinaciones aduaneras de los referidos elementos se efectuar&#225;n con los certificados del respectivo Servicio de Salud, de acuerdo con la ley N&#186; 18.164, y su uso y disposici&#243;n deber&#225; ser autorizado por el Instituto de Salud P&#250;blica de Chile.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">27 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252134">
+          <Texto>     Art&#237;culo 28: Las instituciones p&#250;blicas o privadas de la salud que empleen en sus acciones los elementos, dispositivos y dem&#225;s productos regidos por el presente reglamento, deber&#225;n comunicar al Instituto todo comportamiento defectuoso, falla o deterioro de las caracter&#237;sticas o del funcionamiento que ellos presenten, as&#237; como la falta de informaci&#243;n en el etiquetado o en las instrucciones de empleo que, directa o indirectamente, pudieran o hubieran podido dar lugar a la muerte de un paciente o usuario o a un deterioro de su estado de salud.
+Asimismo, los importadores o fabricantes de estos elementos notificar&#225;n al Instituto de cualquier motivo t&#233;cnico o m&#233;dico en relaci&#243;n con las caracter&#237;sticas o funcionamiento del producto que, por las razones mencionadas en el inciso anterior, d&#233; lugar a una retirada sistem&#225;tica de &#233;ste o de productos del mismo tipo por el fabricante.
+     El Instituto implementar&#225; las medidas necesarias para que toda informaci&#243;n de la que se tenga conocimiento, relativa a los incidentes se&#241;alados, en que est&#233;n implicados dispositivos m&#233;dicos que tengan la certificaci&#243;n de la conformidad vigente, se tome nota de ella y se eval&#250;e, as&#237; como tambi&#233;n se notifique al fabricante o al representante legal del producto en cuesti&#243;n.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">28 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+      </EstructurasFuncionales>
+    </EstructuraFuncional>
+    <EstructuraFuncional transitorio="no transitorio" tipoParte="T&#237;tulo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252136">
+      <Texto>TITULO V
+
+De la fiscalizaci&#243;n y vigencia de este reglamento</Texto>
+      <Metadatos>
+        <NombreParte presente="no">&#160;</NombreParte>
+        <TituloParte presente="si">TITULO V De la fiscalizaci&#243;n y vigencia de este reglamento</TituloParte>
+        
+      </Metadatos>
+      <EstructurasFuncionales>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252135">
+          <Texto>     Art&#237;culo 30: Los dispositivos m&#233;dicos que se comercialicen o distribuyan a cualquier t&#237;tulo sin contar con el correspondiente certificado de verificaci&#243;n de la conformidad ser&#225;n decomisados, sin perjuicio de las dem&#225;s medidas que pueda adoptar la autoridad sanitaria.
+     Ser&#225; de competencia de los Servicios de Salud la fiscalizaci&#243;n de esta materia, la instrucci&#243;n de los correspondientes sumarios sanitarios y la aplicaci&#243;n de las sanciones a que ellos den lugar, todo ello de acuerdo con las disposiciones del Libro X del C&#243;digo Sanitario.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">30 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252137">
+          <Texto>     Art&#237;culo 31: Corresponder&#225; al Instituto de Salud P&#250;blica la fiscalizaci&#243;n de las entidades que realicen el control y certificaci&#243;n de los elementos y art&#237;culos de uso m&#233;dico.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">31 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+        <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="1999-08-21" derogado="no derogado" idParte="7252138">
+          <Texto>     Art&#237;culo 32: El presente reglamento entrar&#225; en vigencia a contar del d&#237;a 1&#186; del mes siguiente a su publicaci&#243;n en el Diario Oficial.</Texto>
+          <Metadatos>
+            <NombreParte presente="si">32 </NombreParte>
+            <TituloParte presente="no">&#160;</TituloParte>
+            
+          </Metadatos>
+        </EstructuraFuncional>
+      </EstructurasFuncionales>
+    </EstructuraFuncional>
+  </EstructurasFuncionales>
+  <Promulgacion fechaVersion="1999-08-21" derogado="no derogado">
+    <Texto>     T&#243;mese raz&#243;n, an&#243;tese, publ&#237;quese e ins&#233;rtese en la recopilaci&#243;n oficial de la Contralor&#237;a General de la Rep&#250;blica.- EDUARDO FREI RUIZ-TAGLE, Presidente de la Rep&#250;blica.- Alex Figueroa Mu&#241;oz, Ministro de Salud.
+     Lo que transcribo a Ud. para su conocimiento.- Saluda a Ud.,  Alvaro Erazo Latorre, Subsecretario de Salud.</Texto>
+  </Promulgacion>
+  
+</Norma>

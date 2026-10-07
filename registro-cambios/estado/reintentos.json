@@ -1,9 +1,22 @@
 {
-  "fecha": "2026-10-07",
+  "fecha": "2026-10-06",
   "ejecutado_por": "actualizar-diario.js (paso 2b)",
-  "recuperados": 0,
+  "recuperados": 2,
   "pendientes": 0,
-  "resultados": {},
+  "resultados": {
+    "dispositivos medicos|decreto exento|25": {
+      "norma": "Decreto Exento 25",
+      "enlace": "https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/19/44404/01/2781436.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/dispositivos_medicos/2781436.pdf"
+    },
+    "dispositivos medicos|decreto exento|31": {
+      "norma": "Decreto Exento 31",
+      "enlace": "https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/24/44408/01/2782631.pdf",
+      "ok": true,
+      "destino": "/home/runner/work/cerebro-regulatorio/cerebro-regulatorio/ANAMED_Normativa/dispositivos_medicos/2782631.pdf"
+    }
+  },
   "no_recuperables": [
     {
       "clave": "codigo sanitario|decreto exento|725",

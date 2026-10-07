@@ -37,6 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // /normativa pide sesión (redirige a /ingresar, que es noindex) y /planes
     // ya no existe: ninguna de las dos va al sitemap.
     {
+      url: `${SITE.url}/cobertura`,
+      lastModified: ahora,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
       url: `${SITE.url}/agenda`,
       lastModified: ahora,
       changeFrequency: "weekly",
