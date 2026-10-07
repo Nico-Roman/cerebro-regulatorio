@@ -88,8 +88,8 @@ export default function Home() {
           <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
             {SITE.nombre} se hace cargo del trámite ante el ISP: registrar tu producto,
             mantenerlo vigente y responder lo que la autoridad pida. Trabajamos con
-            laboratorios, importadores y marcas de productos farmacéuticos, cosméticos y
-            dispositivos médicos.
+            laboratorios, importadores y marcas de productos farmacéuticos, cosméticos,
+            dispositivos médicos y suplementos alimenticios.
           </p>
 
           {/* Las cifras van entre el titular y el video, que es donde más se
