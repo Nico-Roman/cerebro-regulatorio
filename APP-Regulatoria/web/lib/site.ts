@@ -86,42 +86,36 @@ export const SERVICIOS: Servicio[] = [
   },
   {
     n: "07",
-    titulo: "Buenas prácticas y auditorías",
-    descripcion:
-      "Te preparamos para la inspección del ISP: vemos qué falta, lo ordenamos por urgencia y te acompañamos el día que llegan.",
-  },
-  {
-    n: "08",
     titulo: "Rotulación y publicidad",
     descripcion:
       "Revisamos envases, folletos y material promocional antes de que salgan, para que no te los objeten después.",
   },
   {
-    n: "09",
+    n: "08",
     titulo: "Importación y uso provisional",
     descripcion:
       "Permisos de importación, ingreso de productos sin registro para uso provisional y los trámites de aduana con el ISP.",
   },
   {
-    n: "10",
+    n: "09",
     titulo: "Vigilancia normativa continua",
     descripcion:
       "Revisamos la normativa del ISP todas las semanas y te avisamos cuando cambia algo que afecta a tus productos.",
   },
   {
-    n: "11",
+    n: "10",
     titulo: "Procedimientos y documentación",
     descripcion:
       "Escribimos los procedimientos, manuales de calidad y documentos que te van a pedir en una certificación.",
   },
   {
-    n: "12",
+    n: "11",
     titulo: "Capacitación",
     descripcion:
       "Formamos a tu equipo técnico, comercial y de calidad en la normativa que usan en el día a día.",
   },
   {
-    n: "13",
+    n: "12",
     titulo: "Suplementos alimenticios",
     descripcion:
       "Asesoría regulatoria para tu suplemento: cómo se clasifica, qué debe llevar el rotulado, qué se puede declarar en el envase y qué autorizaciones necesitas para venderlo.",
