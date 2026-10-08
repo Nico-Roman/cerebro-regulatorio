@@ -169,7 +169,17 @@ export async function POST(req: NextRequest) {
     vigente?: boolean;
     categoria?: string | null;
     sinOcr?: boolean;
+    jurisdiccion?: string;
   };
+
+  // La redacción con IA es solo para la normativa chilena (la búsqueda FDA no
+  // ofrece el botón). Esto cierra la puerta a quien llame a la API directo.
+  if (filtros.jurisdiccion === "fda") {
+    return NextResponse.json(
+      { error: "ia_no_disponible", mensaje: "La redacción con IA no está disponible para la sección FDA." },
+      { status: 400 }
+    );
+  }
 
   const respuesta = responder(consulta.pregunta, {
     k: PASAJES_AL_MODELO,

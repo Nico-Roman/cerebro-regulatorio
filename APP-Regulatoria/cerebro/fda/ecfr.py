@@ -3,13 +3,14 @@
 """
 ecfr.py — Ingesta y vigilancia del 21 CFR (FDA) desde el eCFR.
 
-## ⚠️ ESTA SECCIÓN NO ESTÁ EN VIVO
+## En vivo desde el 2026-10-08, como sección aparte
 
-Nada de este módulo entra al corpus de producción. `build_corpus.py` NO lo
-importa, y su salida se escribe en `fda/corpus/`, que no es la carpeta que
-publica el pipeline. Es deliberado: la sección FDA se está preparando, no
-lanzando. Para conectarla algún día hay que hacer tres cosas —y las tres a
-conciencia, no por descuido— descritas al final de `fda/README.md`.
+La web la sirve en la pestaña «EE.UU. (FDA)» con su PROPIO índice: este módulo
+no se mezcla con el corpus chileno (`build_corpus.py` sigue sin importarlo).
+El pipeline diario (`actualizar-diario.js`, paso 5b) corre `--descargar
+--vigilar --construir`, la compuerta mide `preguntas-doradas-fda.json` y, si
+aprueba, copia `fda/corpus/corpus-fda.jsonl` a `web/data/`. Detalle y
+decisiones en `fda/README.md`.
 
 ## Por qué el eCFR y no fda.gov
 
@@ -236,9 +237,10 @@ def _partir(texto, limite=CHUNK_CHARS):
 def registros(fecha_version):
     """Genera registros con el MISMO esquema que el corpus chileno.
 
-    Mismo esquema a propósito: si algún día esta sección se enciende, el motor
-    de recuperación y la web no necesitan saber que la fuente es otra. Lo que
-    cambia es `categoria`, que arranca con `fda_` y permite separarlas.
+    Mismo esquema a propósito: el motor de recuperación y la web lo leen sin
+    saber que la fuente es otra. Lo que cambia es `tipo` ("21 CFR Part"), que
+    decide la cita y el aviso de jurisdicción, y `categoria`, que arranca con
+    `fda_` y pone «EE.UU. (FDA)» en cada tarjeta.
     """
     prio = {p["parte"]: p for p in cargar_prioritarias()}
     vig_fuente = ("eCFR, texto consolidado vigente del 21 CFR "
@@ -308,9 +310,9 @@ def construir():
         "fecha_version": fecha,
         "documentos": len(docs),
         "pasajes": n,
-        "en_vivo": False,
-        "nota": ("Sección en preparación. No la publica el pipeline: "
-                 "build_corpus.py no importa este módulo."),
+        "en_vivo": True,
+        "nota": ("Sección EE.UU. (FDA), índice propio. La publica el pipeline "
+                 "diario si aprueba preguntas-doradas-fda.json."),
     }, ensure_ascii=False, indent=2), encoding="utf-8")
     return len(docs), n, fecha
 
@@ -390,7 +392,7 @@ def _main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
 
-    ap = argparse.ArgumentParser(description="21 CFR (FDA) — sección EN PREPARACIÓN, no en vivo.")
+    ap = argparse.ArgumentParser(description="21 CFR (FDA) — sección EE.UU. del buscador, índice propio.")
     ap.add_argument("--inventario", action="store_true", help="qué partes se bajarían y por qué")
     ap.add_argument("--descargar", action="store_true", help="baja las partes prioritarias")
     ap.add_argument("--construir", action="store_true", help="arma el corpus FDA (aparte)")
@@ -407,7 +409,7 @@ def _main():
             print("\n  " + c + " (" + str(len(cat[c])) + ")")
             for p in cat[c]:
                 print("    " + ("Part " + p["parte"]).ljust(10) + p["titulo"][:62])
-        print("\n(sección en preparación: build_corpus.py NO importa este módulo)")
+        print("\n(sección EE.UU. en vivo con índice propio; ver fda/README.md)")
 
     if args.descargar:
         fecha, bajadas, fallidas = descargar()
@@ -416,12 +418,20 @@ def _main():
               + " (" + str(round(total / 1024)) + " KB comprimidos)")
         for p, e in fallidas:
             print("[warn] parte " + p + ": " + e)
+        if fallidas:
+            # Con partes faltantes, el corpus saldría recortado (y la compuerta
+            # reprobaría por preguntas que sí tienen respuesta) y la vigilancia
+            # reescribiría la línea base como si esas partes hubieran
+            # desaparecido. Mejor no tocar nada: se sigue sirviendo lo publicado.
+            print("[error] descarga incompleta: no se rearma el corpus ni se toca la línea base.")
+            return 1
 
     if args.construir:
         docs, n, fecha = construir()
         print("[ok] corpus FDA: " + str(docs) + " documentos, " + str(n)
               + " pasajes, versión " + str(fecha))
-        print("     -> " + str(CORPUS_DIR / "corpus-fda.jsonl") + "  (NO se publica)")
+        print("     -> " + str(CORPUS_DIR / "corpus-fda.jsonl")
+              + "  (el pipeline lo copia a web/data/ si aprueba la compuerta)")
 
     if args.vigilar:
         actual = snapshot()
