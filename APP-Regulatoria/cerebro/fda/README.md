@@ -1,16 +1,8 @@
-# Sección FDA — en preparación
+# Sección EE.UU. (FDA) — 21 CFR
 
-> ## ⚠️ NO ESTÁ EN VIVO, y no está en vivo por construcción
->
-> `build_corpus.py` **no importa** nada de esta carpeta. El corpus que publica el
-> pipeline sale de `ANAMED_Normativa/` + `codigo_sanitario.py`, y este módulo
-> escribe en `fda/corpus/`, que no es la carpeta que se copia a `web/data/`.
-> No hay una bandera que se pueda encender por accidente: para conectarla hay
-> que editar código a propósito. Los tres pasos están al final de este archivo.
-
-Estado al **2026-09-09**: fuentes investigadas y verificadas contra la red,
-21 CFR curado e ingestado en un corpus aparte, recuperación probada. Falta lo
-que aparece en «Lo que todavía no está».
+Encendida el **2026-10-08** como pestaña «EE.UU. · FDA» del buscador, con
+**índice propio**. Cómo quedó conectada y qué se decidió está en § 6; lo que
+falta, en § 5.
 
 ---
 
@@ -20,10 +12,10 @@ que aparece en «Lo que todavía no está».
 |---|---|
 | Partes del 21 CFR curadas | **36** de 275 (ver `partes-prioritarias.json`) |
 | Documentos en el corpus FDA | 36 |
-| Pasajes | **2.345** |
-| Versión del CFR | enmiendas incorporadas al **2026-09-08** |
+| Pasajes | **2.346** |
+| Versión del CFR | enmiendas incorporadas al **2026-10-06** (se actualiza a diario) |
 | Esquema | idéntico al del corpus chileno |
-| Publicado | **no** |
+| Publicado | **sí**, en `web/data/corpus-fda.jsonl` |
 
 ```bash
 python ecfr.py --inventario   # qué partes entran y por qué
@@ -170,35 +162,72 @@ procesos distintos dicen «sin cambios».
 
 La línea base vive en `estado-vigilancia.json`, y ese archivo **sí** se
 versiona. `fuentes/` y `corpus/` no: son 8 MB de espejo de una API pública que
-se rehacen con dos comandos.
+se rehacen con dos comandos. Lo que se publica es la copia en
+`web/data/corpus-fda.jsonl`.
+
+La primera corrida después de un mes (2026-09-08 → 2026-10-06) detectó 17
+secciones enmendadas en las Partes 312 (IND), 314 (NDA) y 601 (biológicos).
 
 ---
 
-## 5 · Lo que todavía no está
+## 5 · Cómo quedó encendida (2026-10-08)
 
-1. **Las guías** (§ 2.2). Es la pieza grande que falta, y hay que resolver
-   antes cómo se marca lo no vinculante.
-2. **Preguntas doradas del set FDA.** El corpus chileno tiene 24 y una compuerta
-   que corta la publicación si el recall baja de 90%. El FDA no tiene ninguna:
-   hoy no hay nada que impida que una regresión pase inadvertida.
-3. **Decidir si es un corpus o dos.** Un solo índice con `categoria` `fda_*`
-   es más simple; dos índices evitan que una consulta en español recupere
-   inglés y al revés. No está decidido, y decidirlo antes de encender importa.
-4. **Aviso de jurisdicción en la interfaz.** Un pasaje del 21 CFR contestando
-   una pregunta hecha en Chile es correcto solo si queda clarísimo que no rige
-   acá. Sin eso, la sección hace daño.
+Las cuatro decisiones que el README pedía antes de encender:
+
+1. **Dos índices, no uno.** `web/data/corpus.jsonl` (Chile) y
+   `web/data/corpus-fda.jsonl` (EE.UU.) se cargan por separado
+   (`indice.load_fda()` en Python, `responder(q, { jurisdiccion: "fda" })` en
+   la web). Un solo índice habría movido el IDF de todo el corpus chileno y
+   dejado que una pregunta en español recuperara inglés. Verificado: las 78
+   preguntas de los sets chilenos devuelven exactamente lo mismo que antes,
+   byte a byte.
+2. **Preguntas doradas FDA y su compuerta.** `preguntas-doradas-fda.json` (21
+   preguntas, los doce grupos de partes) y `preguntas-fuera-corpus-fda.json`
+   (4). `eval_retrieval.py` mide los dos corpus y `eval_respuestas.py` exige
+   paridad Python/TypeScript también en las preguntas FDA. Al encender:
+   recall@5 21/21, abstención 4/4. Si la FDA reprueba, el pipeline publica
+   igual el corpus chileno y deja servido el 21 CFR de ayer (`pasa_cl`).
+3. **Aviso de jurisdicción.** En tres lugares: un recuadro fijo en la pestaña
+   FDA, el primer aviso de cada respuesta del 21 CFR («no rige en Chile») y la
+   etiqueta «EE.UU. (FDA) · …» de cada tarjeta.
+4. **Lo no vinculante.** El 21 CFR es reglamento: obliga en EE.UU. Las guías
+   («nonbinding recommendations») siguen **fuera**; el recuadro de la pestaña
+   lo dice. Cuando entren, tienen que traer su propia marca (ver § 6).
+
+Cómo se comporta el motor sobre el 21 CFR:
+
+- **Preguntas en inglés.** El vocabulario, los tipos de pregunta y las reglas
+  de fuera de alcance son del español y no se aplican al índice FDA; sí se
+  descartan de la pregunta las palabras vacías del inglés (`STOPWORDS_EN`).
+  Sin eso, «How do I register a glucometer in Chile?» salía en verde por «How
+  do I register». Una pregunta en español se abstiene y pide inglés.
+- **Nunca en verde, por ahora.** Los umbrales del verde se calibraron con
+  preguntas en español validadas por un QF. Sin un set así para el 21 CFR,
+  «What is a combination product?» salía en verde con una sección de
+  bioequivalencia (la definición vive en la Parte 3, que no está). La sección
+  FDA llega como máximo a «parcial».
+- **Cita estadounidense:** «21 CFR § 211.22», y «21 CFR Part 1271» sin
+  separador de miles.
+- **Sin borrador con IA.** El prompt y el verificador de citas son para la
+  normativa chilena; `/api/search` devuelve `iaDisponible: false` en la FDA y
+  `/api/responder` rechaza esas consultas.
 
 ---
 
-## 6 · Para encenderla (los tres pasos, cuando se decida)
+## 6 · Lo que todavía no está
 
-1. En `build_corpus.py`, importar `fda.ecfr` y volcar sus registros al corpus,
-   igual que el bloque «Paso 4b» hace con el Código Sanitario.
-2. En `actualizar-diario.js`, agregar el paso de descarga y vigilancia antes de
-   reconstruir el corpus, igual que el paso 4/7.
-3. Agregar preguntas doradas FDA a `preguntas-doradas.json` y consultas fuera de
-   corpus al contra-set, **antes** de lo anterior. La compuerta existe para que
-   ningún corpus se publique sin medirse; encender la sección sin sus preguntas
-   sería saltarse justamente eso.
-
-Ninguno de los tres se hizo. La sección está preparada, no lanzada.
+1. **Calibrar el verde en inglés.** Un set de preguntas reales sobre el 21 CFR
+   validado por un QF que trabaje con FDA; con él se puede quitar el tope a
+   «parcial».
+2. **Preguntas en español.** Hoy hay que preguntar en inglés. Un glosario
+   español → inglés (BPM → current good manufacturing practice, firma
+   electrónica → electronic signature, …) aplicado solo al índice FDA lo
+   resolvería sin tocar el chileno.
+3. **Las guías** (§ 2.2), con la marca de no vinculante en la tarjeta y en el
+   aviso de la respuesta. Es la pieza grande.
+4. **La Parte 3** (productos combinados) y las demás que pidan las consultas
+   reales: ampliar es editar `partes-prioritarias.json` y sumar su pregunta
+   dorada.
+5. **Frescura en `/api/estado`.** `estado-corpus.json` ya trae el bloque `fda`
+   (versión, documentos, pasajes) y la pantalla muestra la fecha de las
+   enmiendas, pero `/api/estado` y el vigía de frescura todavía no lo miran.

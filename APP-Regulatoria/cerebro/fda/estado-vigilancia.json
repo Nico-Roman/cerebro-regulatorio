@@ -1,7 +1,7 @@
 {
   "titulo": 21,
-  "fecha_version": "2026-09-08",
-  "capturado": "2026-09-09T23:22:53-03:00",
+  "fecha_version": "2026-10-06",
+  "capturado": "2026-10-08T18:41:45-03:00",
   "partes": {
     "11": {
       "titulo": "ELECTRONIC RECORDS; ELECTRONIC SIGNATURES",
@@ -1894,8 +1894,8 @@
         "312.3": {
           "nombre": "Definitions and interpretations.",
           "historia": "[52 FR 8831, Mar. 19, 1987, as amended at 64 FR 401, Jan. 5, 1999; 64 FR 56449, Oct. 20, 1999; 73 FR 22815, Apr. 28, 2008]",
-          "largo": 3729,
-          "huella": "8b4e8fd2f2536ec9"
+          "largo": 3792,
+          "huella": "c6ba4444e7921015"
         },
         "312.6": {
           "nombre": "Labeling of an investigational new drug.",
@@ -1936,14 +1936,14 @@
         "312.22": {
           "nombre": "General principles of the IND submission.",
           "historia": "",
-          "largo": 2811,
-          "huella": "55fb28a63db62d8c"
+          "largo": 2874,
+          "huella": "6e7156872868a36c"
         },
         "312.23": {
           "nombre": "IND content and format.",
           "historia": "[52 FR 8831, Mar. 19, 1987, as amended at 52 FR 23031, June 17, 1987; 53 FR 1918, Jan. 25, 1988; 61 FR 51529, Oct. 2, 1996; 62 FR 40599, July 29, 1997; 63 FR 66669, Dec. 2, 1998; 65 FR 56479, Sept. 19, 2000; 67 FR 9585, Mar. 4, 2002]",
-          "largo": 19203,
-          "huella": "ae2081ded1d009a0"
+          "largo": 19266,
+          "huella": "12ae914dd3101b1a"
         },
         "312.30": {
           "nombre": "Protocol amendments.",
@@ -1960,14 +1960,14 @@
         "312.32": {
           "nombre": "IND safety reporting.",
           "historia": "[75 FR 59961, Sept. 29, 2010]",
-          "largo": 11427,
-          "huella": "c0e77f095540bba1"
+          "largo": 11490,
+          "huella": "08edeac13c62480b"
         },
         "312.33": {
           "nombre": "Annual reports.",
           "historia": "[52 FR 8831, Mar. 19, 1987, as amended at 52 FR 23031, June 17, 1987; 63 FR 6862, Feb. 11, 1998; 67 FR 9585, Mar. 4, 2002]",
-          "largo": 3117,
-          "huella": "26eedc871d3691a3"
+          "largo": 3180,
+          "huella": "94d514e8441a3df6"
         },
         "312.38": {
           "nombre": "Withdrawal of an IND.",
@@ -2134,8 +2134,8 @@
         "312.82": {
           "nombre": "Early consultation.",
           "historia": "[53 FR 41523, Oct. 21, 1988, as amended at 63 FR 66669, Dec. 2, 1998]",
-          "largo": 2072,
-          "huella": "9a83e77bd586c855"
+          "largo": 2135,
+          "huella": "3653598a3449203d"
         },
         "312.83": {
           "nombre": "Treatment protocols.",
@@ -2158,8 +2158,8 @@
         "312.86": {
           "nombre": "Focused FDA regulatory research.",
           "historia": "",
-          "largo": 462,
-          "huella": "b85fcffc426f4a3d"
+          "largo": 525,
+          "huella": "f9365a720aec82a5"
         },
         "312.87": {
           "nombre": "Active monitoring of conduct and evaluation of clinical trials.",
@@ -2170,8 +2170,8 @@
         "312.88": {
           "nombre": "Safeguards for patient safety.",
           "historia": "",
-          "largo": 794,
-          "huella": "92d8a88089b6a5f5"
+          "largo": 857,
+          "huella": "8f88279705c157d3"
         },
         "312.110": {
           "nombre": "Import and export requirements.",
@@ -2260,14 +2260,14 @@
         "314.3": {
           "nombre": "Definitions.",
           "historia": "[81 FR 69636, Oct. 6, 2016]",
-          "largo": 19095,
-          "huella": "f9c2be3a4401c0e8"
+          "largo": 19158,
+          "huella": "81896a0384aa95cb"
         },
         "314.50": {
           "nombre": "Content and format of an NDA.",
           "historia": "[50 FR 7493, Feb. 22, 1985]",
-          "largo": 46578,
-          "huella": "e055c7dea902dd11"
+          "largo": 46641,
+          "huella": "68669848f187a1f7"
         },
         "314.52": {
           "nombre": "Notice of certification of invalidity, unenforceability, or noninfringement of a patent.",
@@ -2338,8 +2338,8 @@
         "314.81": {
           "nombre": "Other postmarketing reports.",
           "historia": "[50 FR 7493, Feb. 22, 1985; 50 FR 14212, Apr. 11, 1985, as amended at 50 FR 21238, May 23, 1985; 55 FR 11580, Mar. 29, 1990; 57 FR 17983, Apr. 28, 1992; 63 FR 66670, Dec. 2, 1998; 64 FR 401, Jan. 5, 1999; 65 FR 64617, Oct. 30, 2000; 66 FR 10815, Feb. 20, 2001; 68 FR 69019, Dec. 11, 2003; 69 FR 18766, Apr. 8, 2004; 69 FR 48775, Aug. 11, 2004; 72 FR 58999, Oct. 18, 2007; 74 FR 13113, Mar. 26, 2009; 74 FR 37167, July 28, 2009; 76 FR 78539, Dec. 19, 2011; 80 FR 38938, July 8, 2015; 81 FR 60221, Aug. 31, 2016; 89 FR 105331, Dec. 26, 2024]",
-          "largo": 27684,
-          "huella": "0fce3b915438a5d8"
+          "largo": 27747,
+          "huella": "6f5aa970a33b51b7"
         },
         "314.90": {
           "nombre": "Waivers.",
@@ -2356,8 +2356,8 @@
         "314.93": {
           "nombre": "Petition to request a change from a listed drug.",
           "historia": "[57 FR 17983, Apr. 28, 1992, as amended at 81 FR 69649, Oct. 6, 2016]",
-          "largo": 6439,
-          "huella": "35557a67d8842fc6"
+          "largo": 6502,
+          "huella": "70cdb5dc99e9e9d2"
         },
         "314.94": {
           "nombre": "Content and format of an ANDA.",
@@ -2536,8 +2536,8 @@
         "314.200": {
           "nombre": "Notice of opportunity for hearing; notice of participation and request for hearing; grant or denial of hearing.",
           "historia": "[50 FR 7493, Feb. 22, 1985; 50 FR 14212, Apr. 11, 1985, as amended at 50 FR 21238, May 23, 1985; 55 FR 11580, Mar. 29, 1990; 57 FR 17996, Apr. 28, 1992; 59 FR 14364, Mar. 28, 1994; 63 FR 5252, Feb. 2, 1998; 67 FR 9586, Mar. 4, 2002; 68 FR 24879, May 9, 2003; 69 FR 48775, Aug. 11, 2004; 74 FR 13113, Mar. 26, 2009; 88 FR 45066, July 14, 2023]",
-          "largo": 22878,
-          "huella": "94e9a87f929290da"
+          "largo": 22941,
+          "huella": "be0b8be6d2ebb1bd"
         },
         "314.201": {
           "nombre": "Procedure for hearings.",
@@ -2566,8 +2566,8 @@
         "314.430": {
           "nombre": "Availability for public disclosure of data and information in an application or abbreviated application.",
           "historia": "[50 FR 7493, Feb. 22, 1985, as amended at 50 FR 21238, May 23, 1985; 55 FR 11580, Mar. 29, 1990; 57 FR 17996, Apr. 28, 1992; 61 FR 51530, Oct. 2, 1996; 64 FR 26698, May 13, 1998; 64 FR 402, Jan. 5, 1999; 66 FR 1832, Jan. 10, 2001; 68 FR 24879, May 9, 2003; 69 FR 18766, Apr. 8, 2004; 73 FR 39610, July 10, 2008; 88 FR 45066, July 14, 2023]",
-          "largo": 8238,
-          "huella": "14d5a86a59a53a66"
+          "largo": 8301,
+          "huella": "a459978586b3c0e7"
         },
         "314.440": {
           "nombre": "Addresses for applications and abbreviated applications.",
@@ -3694,8 +3694,8 @@
         "601.31": {
           "nombre": "Definition.",
           "historia": "",
-          "largo": 492,
-          "huella": "99475ca69e3a52d5"
+          "largo": 555,
+          "huella": "e56efacab3c0a16e"
         },
         "601.32": {
           "nombre": "General factors relevant to safety and effectiveness.",
@@ -3718,8 +3718,8 @@
         "601.35": {
           "nombre": "Evaluation of safety.",
           "historia": "",
-          "largo": 2577,
-          "huella": "5f0dfb8fce1dffd5"
+          "largo": 2640,
+          "huella": "e8fb57c99f62af56"
         },
         "601.40": {
           "nombre": "Scope.",
@@ -3778,8 +3778,8 @@
         "601.70": {
           "nombre": "Annual progress reports of postmarketing studies.",
           "historia": "[65 FR 64618, Oct. 30, 2000, as amended at 70 FR 14984, Mar. 24, 2005; 80 FR 18092, Apr. 3, 2015]",
-          "largo": 5389,
-          "huella": "f820c5cc644362aa"
+          "largo": 5452,
+          "huella": "b9aab2db55aa9abd"
         },
         "601.90": {
           "nombre": "Scope.",

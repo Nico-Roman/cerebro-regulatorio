@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "actualizado": "2026-10-08",
+  "proposito": "Contra-set del set dorado FDA. Estas consultas NO tienen respuesta en las partes del 21 CFR que cubre la base: el índice FDA debe dejarlas en confianza `baja`. Sin este set, la sección FDA podría degradarse a 'siempre responder' sin que nadie lo note, igual que el buscador chileno antes del hallazgo 02.",
+  "preguntas": [
+    {
+      "id": "fda-fuera-chile",
+      "pregunta": "How do I register a glucometer in Chile?",
+      "motivo": "Trámite chileno: el 21 CFR no lo cubre. Antes del filtro de palabras vacías del inglés salía en verde por «How do I register»."
+    },
+    {
+      "id": "fda-fuera-impuesto",
+      "pregunta": "tax on imported wine",
+      "motivo": "Materia tributaria y de alcoholes: fuera del título 21."
+    },
+    {
+      "id": "fda-fuera-alcohol-tv",
+      "pregunta": "requirements for selling alcoholic beverages on television",
+      "motivo": "Publicidad de alcohol: competencia de la TTB, no de la FDA."
+    },
+    {
+      "id": "fda-fuera-espanol",
+      "pregunta": "requisitos de la unidad de control de calidad",
+      "motivo": "Pregunta en español sobre un corpus en inglés: debe abstenerse y pedir que se escriba en inglés, no inventar una coincidencia."
+    }
+  ]
+}

@@ -31,6 +31,14 @@ DIR = Path(__file__).resolve().parent
 CORPUS = DIR / "corpus" / "corpus.jsonl"
 INDEX = DIR / "corpus" / "indice.pkl"
 
+# Sección EE.UU. (21 CFR, FDA): corpus e índice APARTE. Un solo índice mezclaría
+# IDF de dos idiomas y una consulta en español podría recuperar inglés; con dos,
+# el buscador chileno queda exactamente igual que antes de encender la FDA.
+# Si el pipeline no logró rearmarlo hoy, sirve la copia publicada en la web.
+CORPUS_FDA = DIR / "fda" / "corpus" / "corpus-fda.jsonl"
+CORPUS_FDA_WEB = DIR.parent / "web" / "data" / "corpus-fda.jsonl"
+INDEX_FDA = DIR / "fda" / "corpus" / "indice-fda.pkl"
+
 # Versión del formato del índice: si cambia la tokenización o la estructura,
 # subirla invalida los .pkl viejos en vez de servir un índice incoherente.
 INDEX_VERSION = 4
@@ -45,6 +53,17 @@ estos fin fue fueron ha han hasta hay la las le les lo los mas más me mi mis mu
 no nos o os otra otras otro otros para pero poco por porque que qué se sea sean segun según si sí sin
 sobre su sus tan te tiene tienen toda todas todo todos tras tu tus un una unas uno unos y ya
 articulo artículo art numero número norma
+""".split())
+
+# Palabras vacías del inglés. NO se usan al indexar (el corpus chileno no cambia
+# ni un token): solo se descartan de la PREGUNTA cuando se consulta el índice
+# del 21 CFR. Sin esto, "how do I register..." calzaba con "How do I register
+# and submit an HCT/P list?" y salía en verde por las palabras vacías.
+STOPWORDS_EN = frozenset("""
+the of and or an to in on for by with from at as is are was were be been being it its this that these
+those what which who whom whose when where why how do does did can could should would will shall must
+may might have has had we you your our my me there their they them any all about into under than then
+if not so such also per should get need needs want us
 """.split())
 
 
@@ -90,8 +109,9 @@ def stem(t):
 class Indice:
     """Índice invertido BM25 sobre el corpus completo."""
 
-    def __init__(self, rows):
+    def __init__(self, rows, idioma="es"):
         self.rows = rows
+        self.idioma = idioma
         self.N = len(rows)
         self.doc_len = [0] * self.N
         self.postings = defaultdict(list)
@@ -165,6 +185,7 @@ class Indice:
             "idf": self.idf,
             "stem_idf": self.stem_idf,
             "title_tokens": self.title_tokens,
+            "idioma": self.idioma,
         }
 
     @classmethod
@@ -178,6 +199,7 @@ class Indice:
         obj.idf = p["idf"]
         obj.stem_idf = p.get("stem_idf", {})
         obj.title_tokens = p["title_tokens"]
+        obj.idioma = p.get("idioma", "es")
         return obj
 
 
@@ -188,8 +210,8 @@ def load_rows(corpus_path=CORPUS):
         return [json.loads(l) for l in fh if l.strip()]
 
 
-def build(corpus_path=CORPUS):
-    return Indice(load_rows(corpus_path))
+def build(corpus_path=CORPUS, idioma="es"):
+    return Indice(load_rows(corpus_path), idioma)
 
 
 def save(idx, corpus_path=CORPUS, index_path=INDEX):
@@ -201,7 +223,7 @@ def save(idx, corpus_path=CORPUS, index_path=INDEX):
     return index_path
 
 
-def load(corpus_path=CORPUS, index_path=INDEX, autobuild=True):
+def load(corpus_path=CORPUS, index_path=INDEX, autobuild=True, idioma="es"):
     """Devuelve el índice, reutilizando el .pkl si sigue vigente frente al corpus."""
     if index_path.exists() and corpus_path.exists():
         try:
@@ -210,17 +232,27 @@ def load(corpus_path=CORPUS, index_path=INDEX, autobuild=True):
             st = corpus_path.stat()
             if (p.get("version") == INDEX_VERSION
                     and abs(p.get("mtime", 0) - st.st_mtime) < 1e-6
-                    and p.get("size") == st.st_size):
+                    and p.get("size") == st.st_size
+                    and p.get("idioma", "es") == idioma):
                 return Indice.from_payload(p)
         except Exception as e:  # índice corrupto o de otra versión: se rehace
             print("[warn] índice en caché ilegible (" + str(e) + "); se reconstruye", file=sys.stderr)
-    idx = build(corpus_path)
+    idx = build(corpus_path, idioma)
     if autobuild:
         try:
             save(idx, corpus_path, index_path)
         except Exception as e:
             print("[warn] no se pudo guardar el índice: " + str(e), file=sys.stderr)
     return idx
+
+
+def corpus_fda():
+    """El corpus del 21 CFR que corresponde evaluar: el recién armado, o la copia publicada."""
+    return CORPUS_FDA if CORPUS_FDA.exists() else CORPUS_FDA_WEB
+
+
+def load_fda():
+    return load(corpus_fda(), INDEX_FDA, idioma="en")
 
 
 if __name__ == "__main__":

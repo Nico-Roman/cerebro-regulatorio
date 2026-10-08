@@ -19,13 +19,15 @@
  *      ni redacta metadatos: el listado oficial del ISP ya trae categoría,
  *      tipo, número, descripción y fecha estructurados).
  *   4. Reconstruye el corpus (build_corpus.py).
+ *  4b. Baja el 21 CFR del eCFR, vigila sus cambios y rearma el corpus de la
+ *      sección EE.UU. (FDA), que tiene índice propio (fda/ecfr.py).
  *   5. COMPUERTA DE CALIDAD: corre eval_retrieval.py y eval_respuestas.py (lo que
  *      ve el QF y la paridad Python/TypeScript). Si el recall cae bajo el
  *      gate o el motor deja de abstenerse en consultas fuera del corpus, se
  *      aborta ANTES de copiar y publicar. Sin esta compuerta el pipeline podía
  *      degradar la recuperación y desplegarla igual: fue exactamente así como
  *      el recall bajó de 100% a 94% sin que nadie se enterara.
- *   6. Copia a web/data/corpus.jsonl + git add/commit/push (en CI lo hace el
+ *   6. Copia a web/data/corpus.jsonl (y corpus-fda.jsonl) + git add/commit/push (en CI lo hace el
  *      workflow) — dispara el redeploy automático de Railway.
  *
  * Todo el proceso queda registrado en logs/actualizacion-YYYY-MM-DD.log.
@@ -449,6 +451,20 @@ function main() {
   say("Paso 5/7: reconstrucción del corpus…");
   execFileSync("python", ["build_corpus.py"], { cwd: CEREBRO_DIR, stdio: "inherit" });
 
+  // Sección EE.UU. (FDA): el 21 CFR consolidado del eCFR, con corpus e índice
+  // propios. Va antes de la compuerta, que mide también su set dorado. Igual que
+  // el Código Sanitario, no aborta si falla: sin red, la compuerta evalúa la
+  // copia ya publicada en web/data y esa es la que se sigue sirviendo.
+  say("Paso 5b/7: 21 CFR (FDA) — descarga, vigilancia de cambios y corpus…");
+  try {
+    execFileSync("python", ["ecfr.py", "--descargar", "--vigilar", "--construir"], {
+      cwd: path.join(CEREBRO_DIR, "fda"),
+      stdio: "inherit",
+    });
+  } catch (e) {
+    say(`  [warn] la actualización del 21 CFR falló; se mantiene la versión publicada: ${e.message}`);
+  }
+
   say("Paso 6/7: compuerta de calidad (recall + abstención + lo que ve el QF + paridad)…");
   // El vocabulario de consulta va a la web antes de evaluar: la paridad compara
   // el motor Python con el TypeScript, y el TypeScript lo lee de web/data.
@@ -464,6 +480,17 @@ function main() {
     if (evalRes.falsas_abstenciones && evalRes.falsas_abstenciones.length) {
       say(`  falsas abstenciones: ${evalRes.falsas_abstenciones.join(", ")}`);
     }
+    const f = evalRes.fda;
+    if (f) {
+      say(
+        `  FDA · recall@${evalRes.k}: ${f.hits}/${f.total} = ${f.recall}%` +
+          ` · abstención: ${f.fuera_ok}/${f.fuera_total} = ${f.abstencion}%`
+      );
+      if (f.fallos && f.fallos.length) say(`  FDA · fallos de recall: ${f.fallos.join(", ")}`);
+      if (f.falsas_abstenciones && f.falsas_abstenciones.length) {
+        say(`  FDA · falsas abstenciones: ${f.falsas_abstenciones.join(", ")}`);
+      }
+    }
   }
   const evalResp = correrEvaluacionRespuestas();
   if (evalResp) {
@@ -476,7 +503,14 @@ function main() {
     say(`  paridad: ${evalResp.paridad}`);
     if (evalResp.motivos && evalResp.motivos.length) say(`  motivos: ${evalResp.motivos.join("; ")}`);
   }
-  const aprobada = Boolean(evalRes && evalRes.pasa && evalResp && evalResp.pasa);
+  // La sección FDA no frena la normativa chilena: si su set reprueba, se publica
+  // el corpus chileno y se sigue sirviendo el 21 CFR que ya estaba publicado.
+  // Servir normativa chilena vieja por un problema del eCFR también sería una falla.
+  const aprobada = Boolean(evalRes && evalRes.pasa_cl && evalResp && evalResp.pasa);
+  const fdaAprobada = Boolean(evalRes && evalRes.fda && evalRes.fda.pasa);
+  if (aprobada && !fdaAprobada) {
+    say("  [warn] la compuerta FDA REPROBÓ: no se publica el 21 CFR de hoy (queda el publicado).");
+  }
   if (!aprobada) {
     if (FORZAR) {
       say("  [warn] compuerta REPROBADA — se publica igual por --forzar-publicacion.");
@@ -496,6 +530,24 @@ function main() {
   fs.copyFileSync(corpusSrc, corpusDest);
   say(`  corpus copiado a ${corpusDest}`);
 
+  // Si el 21 CFR no se pudo rearmar hoy, no hay archivo nuevo y queda el publicado.
+  const fdaSrc = path.join(CEREBRO_DIR, "fda", "corpus", "corpus-fda.jsonl");
+  const publicarFda = fs.existsSync(fdaSrc) && (fdaAprobada || FORZAR);
+  if (publicarFda) {
+    fs.copyFileSync(fdaSrc, path.join(WEB_DIR, "data", "corpus-fda.jsonl"));
+    say("  corpus FDA (21 CFR) copiado.");
+  }
+  const fdaEstado = path.join(CEREBRO_DIR, "fda", "corpus", "estado-fda.json");
+  // Si hoy no se publicó un 21 CFR nuevo, el estado sigue describiendo el que se sirve.
+  const estadoWeb = path.join(WEB_DIR, "data", "estado-corpus.json");
+  let fda = null;
+  if (publicarFda && fs.existsSync(fdaEstado)) {
+    const e = JSON.parse(fs.readFileSync(fdaEstado, "utf-8"));
+    fda = { fecha_version: e.fecha_version, documentos: e.documentos, pasajes: e.pasajes, generado: e.generado };
+  } else if (fs.existsSync(estadoWeb)) {
+    fda = JSON.parse(fs.readFileSync(estadoWeb, "utf-8")).fda || null;
+  }
+
   // La web necesita saber CUÁNDO se generó el corpus, no solo qué contiene.
   // Sin esta fecha, /api/estado no puede distinguir un corpus de hoy de uno de
   // hace tres meses, y un corpus viejo pasa el healthcheck igual de sano. Es la
@@ -512,6 +564,7 @@ function main() {
           documentos: (meta.documentos || []).length,
           normas_listado_oficial: meta.normas_listado_oficial,
           codigo_sanitario: meta.codigo_sanitario || null,
+          fda,
           publicado_por: EN_CI ? "github-actions" : "pc-local",
         },
         null,
