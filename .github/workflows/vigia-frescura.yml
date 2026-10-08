@@ -53,6 +53,9 @@ jobs:
       # Días de atraso tolerados antes de fallar. El pipeline corre a diario:
       # 3 días significa que falló tres veces seguidas.
       MAX_DIAS: "3"
+      # Las noticias las publica a diario el flujo de n8n (VPS de Easypanel).
+      # 2 días = se saltó dos corridas seguidas.
+      MAX_DIAS_NOTICIAS: "2"
 
     steps:
       - name: Consultar /api/estado y verificar la frescura del corpus
@@ -97,3 +100,30 @@ jobs:
           fi
 
           echo "Frescura OK."
+
+      # Mismo testigo para las noticias de /noticias. n8n corre en otra máquina
+      # (el VPS), así que si n8n se cae, o su commit a GitHub empieza a fallar,
+      # el único síntoma sería una fecha vieja en la página. Este paso la mira.
+      - name: Verificar la frescura de las noticias (flujo n8n)
+        run: |
+          set -uo pipefail
+          cuerpo=$(mktemp)
+          curl -sS --max-time 30 --retry 2 --retry-delay 5 -o "$cuerpo" "$ENDPOINT" || true
+
+          actualizadas=$(jq -r '.noticias.actualizadas // empty' "$cuerpo" 2>/dev/null)
+          if [ -z "$actualizadas" ]; then
+            echo "El deploy actual todavía no publica .noticias en /api/estado: se omite."
+            exit 0
+          fi
+
+          # Fecha de Chile, no del runner: n8n escribe la fecha local.
+          hoy=$(TZ=America/Santiago date +%F)
+          dias=$(( ( $(date -u -d "$hoy" +%s) - $(date -u -d "$actualizadas" +%s) ) / 86400 ))
+          echo "Noticias revisadas el $actualizadas -> $dias día(s) (umbral: $MAX_DIAS_NOTICIAS)."
+          jq '.noticias.ultima_corrida' "$cuerpo"
+
+          if [ "$dias" -gt "$MAX_DIAS_NOTICIAS" ]; then
+            echo "::error::Las noticias llevan $dias días sin revisarse. El flujo de n8n no está corriendo o su commit a GitHub falla."
+            exit 1
+          fi
+          echo "Noticias OK."

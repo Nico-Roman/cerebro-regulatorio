@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { loadCorpus } from "@/lib/search";
 import { DIAS_VENCIDO, estadoCorpus } from "@/lib/estado-corpus";
 import { configIaActiva } from "@/lib/ia/config";
+import { ACTUALIZADAS, NOTICIAS, REVISION } from "@/lib/noticias";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -65,6 +66,24 @@ export async function GET() {
         origen: c?.origen ?? null,
       }))
       .catch(() => ({ configurada: false, modelo: null, proveedor: null, origen: null })),
+    // Tampoco entra en `ok`: unas noticias atrasadas no hacen falsa la
+    // normativa. La frescura la vigila .github/workflows/vigia-frescura.yml,
+    // que falla si el flujo de n8n lleva más de 2 días sin correr.
+    noticias: {
+      actualizadas: ACTUALIZADAS,
+      dias_desde_revision: Math.floor(
+        (Date.now() - new Date(`${ACTUALIZADAS}T12:00:00-03:00`).getTime()) / 86_400_000,
+      ),
+      total: NOTICIAS.length,
+      ultima_corrida: REVISION
+        ? {
+            ts: REVISION.ts,
+            agregadas: REVISION.agregadas,
+            descartadas: REVISION.descartadas,
+            fuentes_caidas: REVISION.fuentes_caidas,
+          }
+        : null,
+    },
     motivo: estado.vencido
       ? estado.generado
         ? `El corpus se generó hace ${estado.diasDesdeGeneracion} días. El pipeline diario no está corriendo.`
