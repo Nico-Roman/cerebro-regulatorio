@@ -1,9 +1,12 @@
-// Generación de huecos: horario de atención menos lo que ya está ocupado,
+// Generación de huecos: ventanas de atención menos lo que ya está ocupado,
 // menos el buffer, menos lo que cae dentro de la antelación mínima.
+//
+// Importa con ruta relativa y extensión: lo prueban con `node --test`, que no
+// entiende el alias `@/`. Los `import type` desaparecen al quitar los tipos.
 
 import type { ConfigAgenda } from "@/lib/agenda/config";
 import type { Ocupado } from "@/lib/agenda/google";
-import { horaLocalAUtc, partesEnZona, partirHora } from "@/lib/agenda/tiempo";
+import { horaLocalAUtc, partesEnZona, partirHora } from "./tiempo.ts";
 
 export interface Slot {
   inicio: string; // ISO UTC
@@ -34,14 +37,22 @@ function chocaConOcupado(
   );
 }
 
+/**
+ * Los inicios avanzan de a `pasoMin`, no de a `duracionMin`: con reuniones de
+ * 30 y paso de 15 se ofrecen 18:00, 18:15, 18:30… Al reservar una, las que se
+ * le traslapan desaparecen solas, porque la reserva pasa a ser un bloque
+ * ocupado.
+ */
 export function generarSlots(
-  config: ConfigAgenda,
+  config: Pick<
+    ConfigAgenda,
+    "duracionMin" | "bufferMin" | "pasoMin" | "ventanas" | "zona" | "antelacionHoras" | "horizonteDias"
+  >,
   ocupados: Ocupado[],
   ahora = new Date()
 ): DiaConSlots[] {
-  const [hInicio, mInicio] = partirHora(config.horaInicio);
-  const [hFin, mFin] = partirHora(config.horaFin);
   const duracionMs = config.duracionMin * 60_000;
+  const pasoMs = Math.max(5, config.pasoMin || config.duracionMin) * 60_000;
   const bufferMs = config.bufferMin * 60_000;
   const noAntesDe = ahora.getTime() + config.antelacionHoras * 3600_000;
 
@@ -51,27 +62,31 @@ export function generarSlots(
     const referencia = new Date(ahora.getTime() + i * 24 * 3600_000);
     const { anio, mes, dia, diaSemana, iso } = partesEnZona(referencia, config.zona);
 
-    // Rango de días de atención. Soporta ventanas que no cruzan el domingo,
-    // que es el caso real (lunes a viernes).
-    if (diaSemana < config.diaInicio || diaSemana > config.diaFin) continue;
-
-    const aperturaUtc = horaLocalAUtc(anio, mes, dia, hInicio, mInicio, config.zona);
-    const cierreUtc = horaLocalAUtc(anio, mes, dia, hFin, mFin, config.zona);
-
     const slots: Slot[] = [];
-    for (
-      let t = aperturaUtc.getTime();
-      t + duracionMs <= cierreUtc.getTime();
-      t += duracionMs
-    ) {
-      const inicio = new Date(t);
-      const fin = new Date(t + duracionMs);
-      if (inicio.getTime() < noAntesDe) continue;
-      if (chocaConOcupado(inicio, fin, ocupados, bufferMs)) continue;
-      slots.push({ inicio: inicio.toISOString(), fin: fin.toISOString() });
+    for (const ventana of config.ventanas) {
+      if (ventana.dia !== diaSemana) continue;
+      const [hInicio, mInicio] = partirHora(ventana.inicio);
+      const [hFin, mFin] = partirHora(ventana.fin);
+      const aperturaUtc = horaLocalAUtc(anio, mes, dia, hInicio, mInicio, config.zona);
+      const cierreUtc = horaLocalAUtc(anio, mes, dia, hFin, mFin, config.zona);
+
+      for (
+        let t = aperturaUtc.getTime();
+        t + duracionMs <= cierreUtc.getTime();
+        t += pasoMs
+      ) {
+        const inicio = new Date(t);
+        const fin = new Date(t + duracionMs);
+        if (inicio.getTime() < noAntesDe) continue;
+        if (chocaConOcupado(inicio, fin, ocupados, bufferMs)) continue;
+        slots.push({ inicio: inicio.toISOString(), fin: fin.toISOString() });
+      }
     }
 
-    if (slots.length) dias.push({ fecha: iso, slots });
+    if (slots.length) {
+      slots.sort((a, b) => a.inicio.localeCompare(b.inicio));
+      dias.push({ fecha: iso, slots });
+    }
   }
 
   return dias;

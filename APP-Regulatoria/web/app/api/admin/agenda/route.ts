@@ -2,7 +2,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { invalidarCacheHuecos } from "@/lib/agenda/cache";
-import { CONFIG_POR_DEFECTO, leerConfig } from "@/lib/agenda/config";
+import { CONFIG_POR_DEFECTO, leerConfig, type Ventana } from "@/lib/agenda/config";
 import { guardarConfig, validar } from "@/lib/agenda/guardar";
 import { redirigir } from "@/lib/redirigir";
 import { esAdmin, usuarioActual } from "@/lib/sesion";
@@ -25,13 +25,22 @@ export async function POST(req: NextRequest) {
   const texto = (campo: string, porDefecto: string) =>
     (form.get(campo)?.toString() || porDefecto).trim();
 
+  // Una fila por día en el panel: `dia6` marcado + `inicio6` y `fin6`.
+  const ventanas: Ventana[] = [];
+  for (let dia = 1; dia <= 7; dia++) {
+    if (form.get(`dia${dia}`) !== "on") continue;
+    ventanas.push({
+      dia,
+      inicio: texto(`inicio${dia}`, ""),
+      fin: texto(`fin${dia}`, ""),
+    });
+  }
+
   const nueva = {
     duracionMin: entero(form.get("duracionMin"), actual.duracionMin),
     bufferMin: entero(form.get("bufferMin"), actual.bufferMin),
-    diaInicio: entero(form.get("diaInicio"), actual.diaInicio),
-    diaFin: entero(form.get("diaFin"), actual.diaFin),
-    horaInicio: texto("horaInicio", actual.horaInicio),
-    horaFin: texto("horaFin", actual.horaFin),
+    pasoMin: entero(form.get("pasoMin"), actual.pasoMin),
+    ventanas,
     zona: texto("zona", actual.zona) || CONFIG_POR_DEFECTO.zona,
     antelacionHoras: entero(form.get("antelacionHoras"), actual.antelacionHoras),
     horizonteDias: entero(form.get("horizonteDias"), actual.horizonteDias),

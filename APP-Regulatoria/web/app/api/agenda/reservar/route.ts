@@ -5,7 +5,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
-import { and, eq } from "drizzle-orm";
+import { and, eq, gt, lt } from "drizzle-orm";
 import { invalidarCacheHuecos } from "@/lib/agenda/cache";
 import { leerConfig } from "@/lib/agenda/config";
 import { agendaConfigurada, cancelarEvento, crearEvento, ocupados } from "@/lib/agenda/google";
@@ -78,10 +78,20 @@ export async function POST(req: NextRequest) {
   const hasta = new Date(inicio.getTime() + config.duracionMin * 60_000 + 60_000);
   const [ocupadosGoogle, yaReservado] = await Promise.all([
     ocupados(new Date(Date.now() - 60_000), hasta, config.calendarios),
+    // Traslape, no solo misma hora de inicio: con inicios cada 15 minutos, una
+    // reserva de las 18:00 y otra de las 18:15 chocan aunque el índice único
+    // de la migración 0004 (que es por inicio) deje pasar las dos. El buffer
+    // cuenta igual que en los huecos publicados.
     db
       .select({ id: reservas.id })
       .from(reservas)
-      .where(and(eq(reservas.inicio, inicio), eq(reservas.estado, "confirmada")))
+      .where(
+        and(
+          eq(reservas.estado, "confirmada"),
+          lt(reservas.inicio, new Date(fin.getTime() + config.bufferMin * 60_000)),
+          gt(reservas.fin, new Date(inicio.getTime() - config.bufferMin * 60_000))
+        )
+      )
       .limit(1),
   ]);
 

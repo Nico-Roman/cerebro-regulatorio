@@ -211,11 +211,21 @@ export const agendaConfig = pgTable("agenda_config", {
   id: text("id").primaryKey().default("default"),
   duracionMin: integer("duracion_min").notNull().default(30),
   bufferMin: integer("buffer_min").notNull().default(15),
-  // 1 = lunes … 7 = domingo (ISO). Por defecto, de lunes a viernes.
+  // Formato viejo: un solo rango de días con un solo horario. Desde la
+  // migración 0011 manda `ventanas`; estas cuatro columnas solo se leen si
+  // `ventanas` está vacía. 1 = lunes … 7 = domingo (ISO).
   diaInicio: integer("dia_inicio").notNull().default(1),
   diaFin: integer("dia_fin").notNull().default(5),
   horaInicio: text("hora_inicio").notNull().default("19:00"),
   horaFin: text("hora_fin").notNull().default("22:00"),
+  // Una ventana por día de la semana: [{ dia: 6, inicio: "09:00", fin: "13:00" }].
+  // El rango único de arriba no podía decir "fin de semana en la mañana y dos
+  // tardes entre semana", que es cuando la gente puede reunirse.
+  ventanas: jsonb("ventanas"),
+  // Cada cuántos minutos puede empezar una reunión. Menor que la duración a
+  // propósito: con reuniones de 30 y paso de 15, la persona elige 18:15 si
+  // es lo que le acomoda, y la que elige su hora llega más.
+  pasoMin: integer("paso_min").notNull().default(30),
   zona: text("zona").notNull().default("America/Santiago"),
   // Nadie puede reservar para dentro de dos horas: la antelación mínima es lo
   // que evita que la agenda interrumpa algo que ya estaba en curso.
