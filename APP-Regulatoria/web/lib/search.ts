@@ -94,11 +94,25 @@ export interface Respuesta {
   conceptos_fuera: string[];
 }
 
+// Dos bases con índice propio: la chilena (ISP/ANAMED + Código Sanitario) y la
+// de EE.UU. (21 CFR, FDA). Un solo índice mezclaría IDF de dos idiomas y una
+// pregunta en español podría recuperar inglés; con dos, el buscador chileno
+// responde exactamente lo mismo que antes de encender la FDA.
+export type Jurisdiccion = "cl" | "fda";
+type Idioma = "es" | "en";
+
+export const JURISDICCIONES: readonly Jurisdiccion[] = ["cl", "fda"];
+
+export function leerJurisdiccion(valor: unknown): Jurisdiccion {
+  return valor === "fda" ? "fda" : "cl";
+}
+
 export interface OpcionesBusqueda {
   vigente?: boolean;
   categoria?: string;
   sinOcr?: boolean;
   k?: number;
+  jurisdiccion?: Jurisdiccion;
 }
 
 // --- Parámetros (espejados en respuesta.py) ----------------------------------
@@ -200,6 +214,19 @@ estos fin fue fueron ha han hasta hay la las le les lo los mas más me mi mis mu
 no nos o os otra otras otro otros para pero poco por porque que qué se sea sean segun según si sí sin
 sobre su sus tan te tiene tienen toda todas todo todos tras tu tus un una unas uno unos y ya
 articulo artículo art numero número norma`
+    .split(/\s+/)
+    .filter(Boolean)
+);
+
+// Palabras vacías del inglés. NO se usan al indexar (el corpus chileno no cambia
+// ni un token): solo se descartan de la PREGUNTA cuando se consulta el índice
+// del 21 CFR. Sin esto, "how do I register..." calzaba con "How do I register
+// and submit an HCT/P list?" y salía en verde por las palabras vacías.
+const STOPWORDS_EN = new Set(
+  `the of and or an to in on for by with from at as is are was were be been being it its this that these
+those what which who whom whose when where why how do does did can could should would will shall must
+may might have has had we you your our my me there their they them any all about into under than then
+if not so such also per should get need needs want us`
     .split(/\s+/)
     .filter(Boolean)
 );
@@ -328,6 +355,7 @@ function vocabulario(): Vocabulario {
 
 class Indice {
   rows: CorpusChunk[];
+  idioma: Idioma;
   N: number;
   docLen: number[];
   postings: Map<string, Array<[number, number]>>;
@@ -337,8 +365,9 @@ class Indice {
   idfMax: number;
   private normalizadosCache: string[] | null = null;
 
-  constructor(rows: CorpusChunk[]) {
+  constructor(rows: CorpusChunk[], idioma: Idioma = "es") {
     this.rows = rows;
+    this.idioma = idioma;
     this.N = rows.length;
     this.docLen = new Array(this.N).fill(0);
     this.postings = new Map();
@@ -381,24 +410,52 @@ class Indice {
   }
 }
 
-let corpusCache: CorpusChunk[] | null = null;
-let indiceCache: Indice | null = null;
+const ARCHIVO_CORPUS: Record<Jurisdiccion, string> = { cl: "corpus.jsonl", fda: "corpus-fda.jsonl" };
+const IDIOMA: Record<Jurisdiccion, Idioma> = { cl: "es", fda: "en" };
 
-export function loadCorpus(file?: string): CorpusChunk[] {
-  if (corpusCache) return corpusCache;
-  const ruta = file || path.join(process.cwd(), "data", "corpus.jsonl");
-  const texto: string = fs.readFileSync(ruta, "utf-8");
-  const filas: CorpusChunk[] = texto
+const corpusCache = new Map<string, CorpusChunk[]>();
+const indiceCache = new Map<Jurisdiccion, Indice>();
+
+function leerJsonl(ruta: string): CorpusChunk[] {
+  return fs
+    .readFileSync(ruta, "utf-8")
     .split("\n")
     .filter((l) => l.trim())
     .map((l) => JSON.parse(l) as CorpusChunk);
-  corpusCache = filas;
+}
+
+/** Corpus de una jurisdicción (por defecto, el chileno), o de un archivo explícito. */
+export function loadCorpus(file?: string, jurisdiccion: Jurisdiccion = "cl"): CorpusChunk[] {
+  const ruta = file || path.join(process.cwd(), "data", ARCHIVO_CORPUS[jurisdiccion]);
+  let filas = corpusCache.get(ruta);
+  if (!filas) {
+    filas = leerJsonl(ruta);
+    corpusCache.set(ruta, filas);
+  }
   return filas;
 }
 
-function getIndice(): Indice {
-  if (!indiceCache) indiceCache = new Indice(loadCorpus());
-  return indiceCache;
+function getIndice(jurisdiccion: Jurisdiccion = "cl"): Indice {
+  let idx = indiceCache.get(jurisdiccion);
+  if (!idx) {
+    idx = new Indice(loadCorpus(undefined, jurisdiccion), IDIOMA[jurisdiccion]);
+    indiceCache.set(jurisdiccion, idx);
+  }
+  return idx;
+}
+
+/** Fecha de versión del 21 CFR servido y su tamaño, para la pantalla y /api/estado. */
+export function resumenFda(): { fecha_version: string; documentos: number; pasajes: number } | null {
+  try {
+    const filas = loadCorpus(undefined, "fda");
+    return {
+      fecha_version: filas[0]?.fecha || "",
+      documentos: new Set(filas.map((r) => r.doc_id)).size,
+      pasajes: filas.length,
+    };
+  } catch {
+    return null;
+  }
 }
 
 export function listCategorias(): string[] {
@@ -440,9 +497,15 @@ function maxPorPeso(cs: Concepto[]): Concepto {
 }
 
 function analizarPregunta(pregunta: string, idx: Indice): Pregunta {
-  const voc = vocabulario();
   const norm = normalizar(pregunta);
+  // El 21 CFR está en inglés. El vocabulario, los tipos de pregunta y las reglas
+  // de fuera de alcance están escritos para el español y el corpus chileno: sobre
+  // un índice en inglés no se aplican, y las palabras vacías del inglés ("how",
+  // "the", "must") no cuentan como conceptos.
+  const ingles = idx.idioma === "en";
+  const voc: Partial<Vocabulario> = ingles ? {} : vocabulario();
   const conversacion = new Set(voc.palabras_de_pregunta || []);
+  if (ingles) for (const w of STOPWORDS_EN) conversacion.add(w);
 
   let fuera: string | null = null;
   for (const regla of voc.fuera_de_alcance || []) {
@@ -454,7 +517,7 @@ function analizarPregunta(pregunta: string, idx: Indice): Pregunta {
 
   let tipo = "general";
   const sinSignos = norm.replace(/^[\s¿¡"'(]+/, "");
-  for (const [nombre, rx] of TIPOS_PREGUNTA) {
+  for (const [nombre, rx] of ingles ? [] : TIPOS_PREGUNTA) {
     if (rx.test(sinSignos)) {
       tipo = nombre;
       break;
@@ -489,7 +552,10 @@ function analizarPregunta(pregunta: string, idx: Indice): Pregunta {
 
   // Un infinitivo que no aparece en ninguna norma ("infringir") no significa que
   // la materia falte: la norma lo dice con un sustantivo ("infracción").
-  const filtrados = conceptos.filter((c) => !/[a-z]{3,}(?:ar|er|ir)$/.test(c.termino) || conceptoEnCorpus(c, idx));
+  // En inglés esa terminación no marca infinitivos ("glucometer", "manufacturer").
+  const filtrados = conceptos.filter(
+    (c) => ingles || !/[a-z]{3,}(?:ar|er|ir)$/.test(c.termino) || conceptoEnCorpus(c, idx)
+  );
   conceptos.length = 0;
   conceptos.push(...filtrados);
 
@@ -816,7 +882,26 @@ function articuloCorto(a: string): string {
   return resto && !/^[0-9]/.test(resto) ? "art. " + resto.toLowerCase() : "art. " + resto;
 }
 
+function esCfr(r: CorpusChunk): boolean {
+  return r.tipo === "21 CFR Part";
+}
+
+// Un pasaje del 21 CFR contestando una pregunta hecha en Chile es correcto solo
+// si queda clarísimo que no rige acá. Por eso viaja en cada respuesta FDA, no
+// solo en la pantalla.
+export const AVISO_JURISDICCION_FDA =
+  "Esto es normativa de EE.UU. (21 CFR, FDA) y no rige en Chile. Sirve como " +
+  "referencia comparada; en Chile aplica la normativa del ISP.";
+
+// El número de parte del CFR no lleva separador de miles: «Part 1271», no «1.271».
+function nombreNorma(r: CorpusChunk): string {
+  if (esCfr(r)) return "21 CFR Part " + (r.numero || "");
+  return [r.tipo || "", formatoNumero(r.numero || "")].filter(Boolean).join(" ");
+}
+
 export function citaCorta(r: CorpusChunk): string {
+  // Como se cita en EE.UU.: «21 CFR § 211.22». La sección ya trae la parte.
+  if (esCfr(r)) return "21 CFR " + (r.articulo || "Part " + (r.numero || ""));
   let base: string;
   if (r.numero === "725" && r.tipo === "Decreto con Fuerza de Ley") {
     base = "Código Sanitario";
@@ -839,6 +924,19 @@ const ETIQUETAS_CATEGORIA: Record<string, string> = {
   medicamentos: "Medicamentos",
   codigo_sanitario: "Código Sanitario",
   otros: "Otras normas ISP",
+  // La jurisdicción va en la etiqueta: cada tarjeta del 21 CFR dice que es de EE.UU.
+  fda_bioequivalencia: "EE.UU. (FDA) · Bioequivalencia",
+  fda_biologicos: "EE.UU. (FDA) · Biológicos",
+  fda_calidad_y_datos: "EE.UU. (FDA) · Calidad y datos",
+  fda_cosmeticos: "EE.UU. (FDA) · Cosméticos",
+  fda_dispositivos: "EE.UU. (FDA) · Dispositivos médicos",
+  fda_distribucion: "EE.UU. (FDA) · Distribución",
+  fda_ensayos_clinicos: "EE.UU. (FDA) · Ensayos clínicos",
+  fda_establecimientos: "EE.UU. (FDA) · Establecimientos",
+  fda_etiquetado: "EE.UU. (FDA) · Etiquetado",
+  fda_gmp: "EE.UU. (FDA) · GMP",
+  fda_medicamentos: "EE.UU. (FDA) · Medicamentos",
+  fda_registro: "EE.UU. (FDA) · Registro",
 };
 
 export function etiquetaCategoria(c: string): string {
@@ -902,7 +1000,7 @@ function resultadoPublico(c: Candidato, pq: Pregunta): ResultadoPublico {
   const r = c.fila;
   return {
     cita: citaCorta(r),
-    norma: [r.tipo || "", formatoNumero(r.numero || "")].filter(Boolean).join(" "),
+    norma: nombreNorma(r),
     titulo: r.titulo || "",
     articulo: r.articulo || "",
     pagina: r.pagina || null,
@@ -928,7 +1026,8 @@ function principalEn(c: Candidato, pq: Pregunta): boolean {
 
 /** Punto de entrada: la respuesta completa que consume la web. */
 export function responder(pregunta: string, opts: OpcionesBusqueda = {}, idxExterno?: Indice): Respuesta {
-  const idx = idxExterno || getIndice();
+  const idx = idxExterno || getIndice(opts.jurisdiccion ?? "cl");
+  const ingles = idx.idioma === "en";
   const k = opts.k ?? MAX_RESULTADOS;
   const pq = analizarPregunta(pregunta, idx);
   const vacia = { pregunta, tipo: pq.tipo, principal: null, relacionadas: [], avisos: [] as string[] };
@@ -962,7 +1061,10 @@ export function responder(pregunta: string, opts: OpcionesBusqueda = {}, idxExte
       ...vacia,
       estado: "ausente",
       titular: "Esto no está en nuestra base.",
-      motivo: "No encontramos " + palabras + " en ninguna norma de la base (ISP/ANAMED y Código Sanitario).",
+      motivo: ingles
+        ? "No encontramos " + palabras + " en las partes del 21 CFR que cubre la base. " +
+          "El 21 CFR está en inglés: escribe la pregunta en inglés."
+        : "No encontramos " + palabras + " en ninguna norma de la base (ISP/ANAMED y Código Sanitario).",
       conceptos_fuera: fuera.map((c) => c.termino),
     };
   }
@@ -994,7 +1096,19 @@ export function responder(pregunta: string, opts: OpcionesBusqueda = {}, idxExte
   let estado: Estado;
   let titular: string;
   let motivo: string;
-  if (p.coberturaFrase >= umbral && p.coberturaPasaje >= UMBRAL_PASAJE_ENCONTRADO && datoOk && p.nucleo && literal && nucleoEspecifico) {
+  // Los umbrales del verde se calibraron con preguntas en español validadas por
+  // un QF. En el 21 CFR no hay todavía un set así, y sin él el verde saltaba en
+  // falso ("What is a combination product?" -> una sección de bioequivalencia).
+  // Hasta calibrarlo, la sección FDA llega como máximo a "parcial".
+  if (
+    !ingles &&
+    p.coberturaFrase >= umbral &&
+    p.coberturaPasaje >= UMBRAL_PASAJE_ENCONTRADO &&
+    datoOk &&
+    p.nucleo &&
+    literal &&
+    nucleoEspecifico
+  ) {
     estado = "encontrado";
     titular = "Pasaje más cercano a tu pregunta";
     motivo = "Confirma que trate tu caso exacto (quién, qué producto, qué trámite) antes de usarlo.";
@@ -1010,6 +1124,11 @@ export function responder(pregunta: string, opts: OpcionesBusqueda = {}, idxExte
         quien: "quién debe hacerlo",
       };
       motivo = "Encontramos la norma relacionada, pero su texto no indica " + faltante[pq.tipo] + " para lo que preguntas.";
+    } else if (ingles) {
+      titular = "Sección del 21 CFR más cercana: revisa si aplica a tu caso";
+      motivo =
+        "En la sección FDA mostramos el pasaje más cercano sin marcarlo como respuesta exacta. " +
+        "Lee el texto completo de la sección antes de usarlo.";
     } else {
       motivo = "La norma más cercana trata el tema, pero no responde toda la pregunta.";
     }
@@ -1051,6 +1170,7 @@ export function responder(pregunta: string, opts: OpcionesBusqueda = {}, idxExte
   if (estado !== "ausente" && !esLey(p.fila) && salida.slice(1, 3).some((c) => esLey(c.fila) && c.coberturaFrase >= UMBRAL_PARCIAL)) {
     avisos.push("También hay texto de ley sobre esto. Si difiere del reglamento, prima la ley.");
   }
+  if (estado !== "ausente" && esCfr(p.fila)) avisos.unshift(AVISO_JURISDICCION_FDA);
 
   return {
     pregunta,
@@ -1090,6 +1210,6 @@ export function legado(resp: Respuesta): {
 }
 
 /** Solo para la verificación de paridad con respuesta.py (scripts/paridad-motor.mjs). */
-export function crearIndice(rows: CorpusChunk[]): Indice {
-  return new Indice(rows);
+export function crearIndice(rows: CorpusChunk[], idioma: Idioma = "es"): Indice {
+  return new Indice(rows, idioma);
 }

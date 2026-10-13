@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
-import { legado, responder } from "@/lib/search";
+import { legado, leerJurisdiccion, responder, resumenFda } from "@/lib/search";
 import { db } from "@/lib/db";
 import { consultas } from "@/lib/db/schema";
 import { iaDisponible } from "@/lib/ia/config";
@@ -60,12 +60,15 @@ export async function GET(req: NextRequest) {
   const vigente = searchParams.get("vigente") === "1";
   const categoria = searchParams.get("categoria") || undefined;
   const sinOcr = searchParams.get("sin_ocr") === "1";
+  // "cl" (ISP/ANAMED + Código Sanitario) o "fda" (21 CFR, EE.UU.): cada una con
+  // su propio índice. Cualquier otro valor cae en la chilena.
+  const jurisdiccion = leerJurisdiccion(searchParams.get("j"));
 
   if (!q) {
     return NextResponse.json({ error: "consulta_vacia", mensaje: "Escribe una pregunta." }, { status: 400 });
   }
 
-  const respuesta = responder(q, { k, vigente, categoria, sinOcr });
+  const respuesta = responder(q, { k, vigente, categoria, sinOcr, jurisdiccion });
   const resumen = legado(respuesta);
 
   // El id se genera acá y viaja en la respuesta: es lo que le permite al
@@ -80,7 +83,7 @@ export async function GET(req: NextRequest) {
       id: consultaId,
       userId: usuario.id,
       pregunta: q,
-      filtros: { vigente, categoria: categoria ?? null, sinOcr },
+      filtros: { vigente, categoria: categoria ?? null, sinOcr, jurisdiccion },
       k,
       recomendacion: resumen.recomendacion,
       confianza: resumen.confianza,
@@ -105,7 +108,7 @@ export async function GET(req: NextRequest) {
         recomendacion: resumen.recomendacion,
         confianza: resumen.confianza,
         top_cita: resumen.top_cita ?? "",
-        origen: "web",
+        origen: jurisdiccion === "fda" ? "web-fda" : "web",
       }),
       signal: AbortSignal.timeout(4000),
     }).catch(() => {
@@ -119,7 +122,14 @@ export async function GET(req: NextRequest) {
     // hay a qué colgar el voto, y es mejor no mostrar el widget que ofrecer un
     // botón que va a fallar.
     consultaId: consultaRegistrada ? consultaId : null,
-    // El botón de redacción con IA solo aparece si la IA está configurada.
-    iaDisponible: await iaDisponible(),
+    // El botón de redacción con IA solo aparece si la IA está configurada, y no
+    // en la sección FDA: el prompt y el verificador de citas están hechos para
+    // la normativa chilena, y un borrador en español sobre el 21 CFR podría
+    // leerse como si rigiera en Chile.
+    iaDisponible: jurisdiccion === "fda" ? false : await iaDisponible(),
+    jurisdiccion,
+    // Versión del 21 CFR que se está sirviendo: la pantalla la muestra para que
+    // la edad del texto legal sea visible, igual que la del corpus chileno.
+    fda: jurisdiccion === "fda" ? resumenFda() : null,
   });
 }

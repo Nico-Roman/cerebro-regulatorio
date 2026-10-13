@@ -6,13 +6,14 @@
 //
 // No se usa desde la web. Lo invoca eval_respuestas.py así:
 //   node --experimental-strip-types --no-warnings scripts/paridad-motor.mjs < entrada.json
-// con entrada = {"preguntas": [...], "corpus": "ruta/a/corpus.jsonl"}.
+// con entrada = {"preguntas": [...], "corpus": "ruta/a/corpus.jsonl", "idioma": "es" | "en"}.
+// `idioma: "en"` es el índice del 21 CFR (sección FDA); sin él, el chileno.
 
 import fs from "node:fs";
 import { crearIndice, loadCorpus, responder } from "../lib/search.ts";
 
 const entrada = JSON.parse(fs.readFileSync(0, "utf-8"));
-const idx = crearIndice(loadCorpus(entrada.corpus));
+const idx = crearIndice(loadCorpus(entrada.corpus), entrada.idioma === "en" ? "en" : "es");
 
 const salida = {};
 for (const pregunta of entrada.preguntas) {

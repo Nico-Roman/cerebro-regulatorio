@@ -718,7 +718,7 @@
     {
       "patron": "\\bfda\\b|\\bema\\b|\\beuropea\\b|estados unidos",
       "excepto": "",
-      "materia": "normativa de agencias extranjeras (FDA, EMA)"
+      "materia": "normativa extranjera: el 21 CFR de la FDA está en la pestaña «EE.UU. (FDA)» y la EMA no está en la base"
     },
     {
       "patron": "bebidas alcoholicas|tabaco|cigarrillos",

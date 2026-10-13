@@ -221,9 +221,16 @@ def recortar(texto, largo=LARGO_FRASE):
 # --- Pregunta -----------------------------------------------------------------
 
 def analizar_pregunta(pregunta, idx):
-    voc = vocabulario()
     norm = normalizar(pregunta)
+    # El 21 CFR está en inglés. El vocabulario, los tipos de pregunta y las reglas
+    # de fuera de alcance están escritos para el español y para el corpus chileno:
+    # sobre un índice en inglés no se aplican, y las palabras vacías del inglés
+    # ("how", "the", "must") no cuentan como conceptos.
+    ingles = getattr(idx, "idioma", "es") == "en"
+    voc = {} if ingles else vocabulario()
     conversacion = set(voc.get("palabras_de_pregunta", []))
+    if ingles:
+        conversacion |= IX.STOPWORDS_EN
 
     fuera = None
     for regla in voc.get("fuera_de_alcance", []):
@@ -233,7 +240,7 @@ def analizar_pregunta(pregunta, idx):
 
     tipo = "general"
     sin_signos = re.sub(r"^[\s¿¡\"'(]+", "", norm)
-    for nombre, rx in TIPOS_PREGUNTA:
+    for nombre, rx in ([] if ingles else TIPOS_PREGUNTA):
         if rx.search(sin_signos):
             tipo = nombre
             break
@@ -273,8 +280,9 @@ def analizar_pregunta(pregunta, idx):
     # Un infinitivo que no aparece en ninguna norma ("infringir") no significa que
     # la materia falte: la norma lo dice con un sustantivo ("infracción"). Se
     # descarta como concepto en vez de declarar ausencia por un verbo.
+    # En inglés esa terminación no marca infinitivos ("glucometer", "manufacturer").
     conceptos = [c for c in conceptos
-                 if not re.search(r"[a-z]{3,}(?:ar|er|ir)$", c["termino"]) or concepto_en_corpus(c, idx)]
+                 if ingles or not re.search(r"[a-z]{3,}(?:ar|er|ir)$", c["termino"]) or concepto_en_corpus(c, idx)]
 
     # En "¿Qué es un equivalente farmacéutico según el reglamento?" lo que se
     # define es "equivalente farmacéutico": el primer sustantivo tras "qué es",
@@ -577,7 +585,28 @@ def articulo_corto(a):
     return "art. " + resto.lower() if resto and not resto[0].isdigit() else "art. " + resto
 
 
+def es_cfr(r):
+    return r.get("tipo") == "21 CFR Part"
+
+
+# Un pasaje del 21 CFR contestando una pregunta hecha en Chile es correcto solo
+# si queda clarísimo que no rige acá. Por eso viaja en cada respuesta FDA, no
+# solo en la pantalla.
+AVISO_JURISDICCION_FDA = ("Esto es normativa de EE.UU. (21 CFR, FDA) y no rige en Chile. Sirve como "
+                          "referencia comparada; en Chile aplica la normativa del ISP.")
+
+
+def nombre_norma(r):
+    # El número de parte del CFR no lleva separador de miles: «Part 1271», no «1.271».
+    if es_cfr(r):
+        return "21 CFR Part " + r.get("numero", "")
+    return " ".join(x for x in [r.get("tipo", ""), formato_numero(r.get("numero", ""))] if x)
+
+
 def cita_corta(r):
+    if es_cfr(r):
+        # Como se cita en EE.UU.: «21 CFR § 211.22». La sección ya trae la parte.
+        return "21 CFR " + (r.get("articulo") or "Part " + r.get("numero", ""))
     if r.get("numero") == "725" and r.get("tipo") == "Decreto con Fuerza de Ley":
         base = "Código Sanitario"
     else:
@@ -597,6 +626,13 @@ ETIQUETAS_CATEGORIA = {
     "importacion_y_exportacion_control_y_vigilancia": "Importación y exportación",
     "laboratorio_nacional_de_control": "Laboratorio Nacional de Control",
     "medicamentos": "Medicamentos", "codigo_sanitario": "Código Sanitario", "otros": "Otras normas ISP",
+    # La jurisdicción va en la etiqueta: cada tarjeta del 21 CFR dice que es de EE.UU.
+    "fda_bioequivalencia": "EE.UU. (FDA) · Bioequivalencia", "fda_biologicos": "EE.UU. (FDA) · Biológicos",
+    "fda_calidad_y_datos": "EE.UU. (FDA) · Calidad y datos", "fda_cosmeticos": "EE.UU. (FDA) · Cosméticos",
+    "fda_dispositivos": "EE.UU. (FDA) · Dispositivos médicos", "fda_distribucion": "EE.UU. (FDA) · Distribución",
+    "fda_ensayos_clinicos": "EE.UU. (FDA) · Ensayos clínicos", "fda_establecimientos": "EE.UU. (FDA) · Establecimientos",
+    "fda_etiquetado": "EE.UU. (FDA) · Etiquetado", "fda_gmp": "EE.UU. (FDA) · GMP",
+    "fda_medicamentos": "EE.UU. (FDA) · Medicamentos", "fda_registro": "EE.UU. (FDA) · Registro",
 }
 
 
@@ -623,7 +659,7 @@ def resultado_publico(c, pq):
     r = c["fila"]
     return {
         "cita": cita_corta(r),
-        "norma": " ".join(x for x in [r.get("tipo", ""), formato_numero(r.get("numero", ""))] if x),
+        "norma": nombre_norma(r),
         "titulo": r.get("titulo", ""),
         "articulo": r.get("articulo", ""),
         "pagina": r.get("pagina") or None,
@@ -702,8 +738,12 @@ def responder(pregunta, idx=None, vigente=False, categoria=None, sin_ocr=False, 
     peso_fuera = sum(c["peso"] for c in fuera) / total
     if peso_fuera >= PESO_FUERA_CORPUS_MAX:
         palabras = ", ".join("«" + c["termino"] + "»" for c in fuera[:4])
-        return dict(vacia, estado="ausente", titular="Esto no está en nuestra base.",
-                    motivo="No encontramos " + palabras + " en ninguna norma de la base (ISP/ANAMED y Código Sanitario).",
+        if getattr(idx, "idioma", "es") == "en":
+            motivo = ("No encontramos " + palabras + " en las partes del 21 CFR que cubre la base. "
+                      "El 21 CFR está en inglés: escribe la pregunta en inglés.")
+        else:
+            motivo = "No encontramos " + palabras + " en ninguna norma de la base (ISP/ANAMED y Código Sanitario)."
+        return dict(vacia, estado="ausente", titular="Esto no está en nuestra base.", motivo=motivo,
                     conceptos_fuera=[c["termino"] for c in fuera])
 
     salida, pq = buscar(pregunta, idx=idx, k=k, vigente=vigente, categoria=categoria, sin_ocr=sin_ocr, pq=pq)
@@ -724,7 +764,12 @@ def responder(pregunta, idx=None, vigente=False, categoria=None, sin_ocr=False, 
     # pasaje sin que haya una respuesta real detrás. Mismo umbral que ya se usa
     # para las alternativas de una palabra (IDF_GENERICO).
     nucleo_especifico = any(c["peso"] >= IDF_GENERICO for c in nucleo(pq["conceptos"]))
-    if p["cobertura_frase"] >= umbral and p["cobertura_pasaje"] >= UMBRAL_PASAJE_ENCONTRADO and dato_ok \
+    # Los umbrales del verde se calibraron con preguntas en español validadas por
+    # un QF. En el 21 CFR no hay todavía un set así, y sin él el verde saltaba en
+    # falso ("What is a combination product?" -> una sección de bioequivalencia).
+    # Hasta calibrarlo, la sección FDA llega como máximo a "parcial".
+    ingles = getattr(idx, "idioma", "es") == "en"
+    if not ingles and p["cobertura_frase"] >= umbral and p["cobertura_pasaje"] >= UMBRAL_PASAJE_ENCONTRADO and dato_ok \
             and p["nucleo"] and literal and nucleo_especifico:
         estado, titular = "encontrado", "Pasaje más cercano a tu pregunta"
         motivo = "Confirma que trate tu caso exacto (quién, qué producto, qué trámite) antes de usarlo."
@@ -735,6 +780,10 @@ def responder(pregunta, idx=None, vigente=False, categoria=None, sin_ocr=False, 
             faltante = {"plazo": "un plazo", "monto": "un monto", "temperatura": "una temperatura",
                         "definicion": "una definición", "quien": "quién debe hacerlo"}[pq["tipo"]]
             motivo = "Encontramos la norma relacionada, pero su texto no indica " + faltante + " para lo que preguntas."
+        elif ingles:
+            titular = "Sección del 21 CFR más cercana: revisa si aplica a tu caso"
+            motivo = ("En la sección FDA mostramos el pasaje más cercano sin marcarlo como respuesta exacta. "
+                      "Lee el texto completo de la sección antes de usarlo.")
         else:
             motivo = "La norma más cercana trata el tema, pero no responde toda la pregunta."
     else:
@@ -762,6 +811,8 @@ def responder(pregunta, idx=None, vigente=False, categoria=None, sin_ocr=False, 
     if estado != "ausente" and not es_ley(p["fila"]) and any(
             es_ley(c["fila"]) and c["cobertura_frase"] >= UMBRAL_PARCIAL for c in salida[1:3]):
         avisos.append("También hay texto de ley sobre esto. Si difiere del reglamento, prima la ley.")
+    if estado != "ausente" and es_cfr(p["fila"]):
+        avisos.insert(0, AVISO_JURISDICCION_FDA)
 
     return {
         "pregunta": pregunta, "tipo": pq["tipo"], "estado": estado, "titular": titular, "motivo": motivo,

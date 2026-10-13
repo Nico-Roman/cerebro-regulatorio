@@ -39,6 +39,7 @@ from respuesta import responder, VOCABULARIO
 
 DIR = Path(__file__).resolve().parent
 PREGUNTAS = DIR / "preguntas-reales.json"
+SETS_FDA = [DIR / "preguntas-doradas-fda.json", DIR / "preguntas-fuera-corpus-fda.json"]
 WEB = DIR.parent / "web"
 
 # Pisos de la compuerta. Medición al 11-09-2026: dev visible@3 19/22, holdout
@@ -106,8 +107,12 @@ def evaluar(idx, preguntas):
     return filas, stats
 
 
-def paridad(preguntas):
-    """Corre el motor TypeScript sobre las mismas preguntas y compara."""
+def paridad(preguntas, preguntas_fda=()):
+    """Corre el motor TypeScript sobre las mismas preguntas y compara.
+
+    Dos pasadas, una por índice: la chilena con preguntas-reales.json y la del
+    21 CFR con los sets FDA. Lo que sirve la web en cualquiera de las dos
+    pestañas tiene que ser exactamente lo que se evaluó acá."""
     node = shutil.which("node")
     script = WEB / "scripts" / "paridad-motor.mjs"
     if not node or not script.exists():
@@ -117,27 +122,29 @@ def paridad(preguntas):
         return False, "web/data/vocabulario.json no es idéntico a cerebro/vocabulario.json"
     corpus_web = WEB / "data" / "corpus.jsonl"
     corpus_local = DIR / "corpus" / "corpus.jsonl"
-    entrada = json.dumps({"preguntas": [p["pregunta"] for p in preguntas],
-                          "corpus": str(corpus_local if corpus_local.exists() else corpus_web)}, ensure_ascii=False)
-    try:
-        out = subprocess.run([node, "--experimental-strip-types", "--no-warnings", str(script)], input=entrada,
-                             capture_output=True, text=True, cwd=str(WEB), timeout=300, encoding="utf-8")
-    except Exception as e:  # noqa: BLE001
-        return False, "no se pudo correr el motor TypeScript: " + str(e)
-    if out.returncode != 0:
-        return False, "el motor TypeScript falló: " + out.stderr[-500:]
-    ts = json.loads(out.stdout)
-    idx = IX.load()
-    difieren = []
-    for p in preguntas:
-        py = responder(p["pregunta"], idx=idx)
-        a = firma(py)
-        b = ts.get(p["pregunta"])
-        if a != b:
-            difieren.append(p["id"])
+    pasadas = [("es", corpus_local if corpus_local.exists() else corpus_web, IX.load, list(preguntas))]
+    if preguntas_fda:
+        pasadas.append(("en", IX.corpus_fda(), IX.load_fda, list(preguntas_fda)))
+    difieren, total = [], 0
+    for idioma, corpus, cargar, ps in pasadas:
+        entrada = json.dumps({"preguntas": [p["pregunta"] for p in ps], "corpus": str(corpus), "idioma": idioma},
+                             ensure_ascii=False)
+        try:
+            out = subprocess.run([node, "--experimental-strip-types", "--no-warnings", str(script)], input=entrada,
+                                 capture_output=True, text=True, cwd=str(WEB), timeout=300, encoding="utf-8")
+        except Exception as e:  # noqa: BLE001
+            return False, "no se pudo correr el motor TypeScript: " + str(e)
+        if out.returncode != 0:
+            return False, "el motor TypeScript falló: " + out.stderr[-500:]
+        ts = json.loads(out.stdout)
+        idx = cargar()
+        for p in ps:
+            total += 1
+            if firma(responder(p["pregunta"], idx=idx)) != ts.get(p["pregunta"]):
+                difieren.append(p["id"])
     if difieren:
         return False, "Python y TypeScript difieren en: " + ", ".join(difieren)
-    return True, "Python y TypeScript idénticos en %d preguntas" % len(preguntas)
+    return True, "Python y TypeScript idénticos en %d preguntas" % total
 
 
 def firma(resp):
@@ -168,7 +175,8 @@ def main():
         if s["sin_texto_verde"] > GATE["sin_texto_verde_max"]:
             motivos.append("%s: %d preguntas sin texto salieron en verde" % (nombre, s["sin_texto_verde"]))
 
-    par_ok, par_msg = (None, "omitida") if args.sin_paridad else paridad(preguntas)
+    preguntas_fda = [q for f in SETS_FDA if f.exists() for q in json.loads(f.read_text(encoding="utf-8"))["preguntas"]]
+    par_ok, par_msg = (None, "omitida") if args.sin_paridad else paridad(preguntas, preguntas_fda)
     if par_ok is False:
         motivos.append(par_msg)
     pasa = not motivos
