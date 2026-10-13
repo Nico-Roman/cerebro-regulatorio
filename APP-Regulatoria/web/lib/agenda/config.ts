@@ -4,14 +4,15 @@
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { agendaConfig } from "@/lib/db/schema";
+import { ventanasDesdeFila, type Ventana } from "@/lib/agenda/ventanas";
+
+export type { Ventana };
 
 export interface ConfigAgenda {
   duracionMin: number;
   bufferMin: number;
-  diaInicio: number;
-  diaFin: number;
-  horaInicio: string;
-  horaFin: string;
+  pasoMin: number;
+  ventanas: Ventana[];
   zona: string;
   antelacionHoras: number;
   horizonteDias: number;
@@ -22,10 +23,16 @@ export interface ConfigAgenda {
 export const CONFIG_POR_DEFECTO: ConfigAgenda = {
   duracionMin: 30,
   bufferMin: 15,
-  diaInicio: 1,
-  diaFin: 5,
-  horaInicio: "19:00",
-  horaFin: "22:00",
+  pasoMin: 15,
+  // Cuando el cliente puede: dos tardes entre semana, el viernes desde las
+  // 16:00 y las mañanas del fin de semana.
+  ventanas: [
+    { dia: 1, inicio: "18:00", fin: "21:00" },
+    { dia: 3, inicio: "18:00", fin: "21:00" },
+    { dia: 5, inicio: "16:00", fin: "20:00" },
+    { dia: 6, inicio: "09:00", fin: "13:00" },
+    { dia: 7, inicio: "09:00", fin: "13:00" },
+  ],
   zona: "America/Santiago",
   antelacionHoras: 24,
   horizonteDias: 21,
@@ -47,10 +54,8 @@ export async function leerConfig(): Promise<ConfigAgenda> {
     return {
       duracionMin: fila.duracionMin,
       bufferMin: fila.bufferMin,
-      diaInicio: fila.diaInicio,
-      diaFin: fila.diaFin,
-      horaInicio: fila.horaInicio,
-      horaFin: fila.horaFin,
+      pasoMin: fila.pasoMin,
+      ventanas: ventanasDesdeFila(fila),
       zona: fila.zona,
       antelacionHoras: fila.antelacionHoras,
       horizonteDias: fila.horizonteDias,
