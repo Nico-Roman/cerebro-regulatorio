@@ -3,6 +3,7 @@ import Link from "next/link";
 import { OG_IMAGEN, SITE } from "@/lib/site";
 import { estadoCorpus, fechaLegible } from "@/lib/estado-corpus";
 import { materiasNoIncluidas, normasCubiertas } from "@/lib/cobertura";
+import { etiquetaCategoria } from "@/lib/search";
 
 export const metadata: Metadata = {
   title: "Qué normas incluye",
@@ -22,6 +23,9 @@ export default function CoberturaPage() {
   const normas = normasCubiertas();
   const fuera = materiasNoIncluidas();
   const estado = estadoCorpus();
+  // Desde que el RSA entra por la BCN (categoría alimentos), la línea fija deja
+  // de ser cierta; sin esa categoría en el corpus, vuelve a mostrarse.
+  const tieneAlimentos = normas.some((n) => n.materias.includes(etiquetaCategoria("alimentos")));
 
   return (
     <main className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
@@ -29,7 +33,7 @@ export default function CoberturaPage() {
       <h1 className="font-display mt-4 text-3xl leading-tight tracking-tight sm:text-4xl">Qué normas incluye</h1>
       <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted">
         El asistente responde solo con el texto de estas {normas.length} normas. Corpus actualizado al{" "}
-        {fechaLegible(estado.generado)}; la vigencia se toma del listado oficial del ISP y, para las leyes, del
+        {fechaLegible(estado.generado)}; la vigencia se toma del listado oficial del ISP y, para las leyes y los reglamentos que vienen de la BCN, del
         texto refundido de la BCN. Si tu pregunta es de una materia que no está acá, el asistente te lo dice en vez
         de responder.
       </p>
@@ -37,7 +41,9 @@ export default function CoberturaPage() {
       <section className="mt-10 border-l-2 border-amber-500/60 pl-5">
         <h2 className="label-micro text-muted">Lo que no incluye</h2>
         <ul className="mt-3 flex flex-col gap-1.5 text-sm text-muted">
-          <li>Los alimentos y los suplementos alimenticios (Reglamento Sanitario de los Alimentos, SEREMI).</li>
+          {!tieneAlimentos && (
+            <li>Los alimentos y los suplementos alimenticios (Reglamento Sanitario de los Alimentos, SEREMI).</li>
+          )}
           {fuera.map((m) => (
             <li key={m}>{m.charAt(0).toUpperCase() + m.slice(1)}.</li>
           ))}

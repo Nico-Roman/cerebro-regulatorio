@@ -949,6 +949,7 @@ const ETIQUETAS_CATEGORIA: Record<string, string> = {
   medicamentos: "Medicamentos",
   codigo_sanitario: "Código Sanitario",
   dispositivos_medicos: "Dispositivos médicos",
+  alimentos: "Alimentos y suplementos",
   otros: "Otras normas ISP",
   // La jurisdicción va en la etiqueta: cada tarjeta del 21 CFR dice que es de EE.UU.
   fda_bioequivalencia: "EE.UU. (FDA) · Bioequivalencia",

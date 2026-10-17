@@ -1,0 +1,25 @@
+{
+  "_comentario": [
+    "Tablas que la BCN publica como imagen dentro de un artículo y que el ingestor no puede leer.",
+    "Cada una se transcribe a mano desde la imagen oficial del XML (DataCodificada) y entra como un",
+    "pasaje más de su artículo (decretos_bcn.tablas_de). fecha_version_articulo = la versión del",
+    "artículo en la BCN cuando se transcribió: si la BCN lo modifica, el pasaje lo advierte.",
+    "Transcritas el 17-10-2026 desde el XML de idNorma 71271."
+  ],
+  "tablas": [
+    {
+      "bcn_id_norma": "71271",
+      "articulo": "120 BIS",
+      "imagen": "dto13-p13-1.jpeg",
+      "fecha_version_articulo": "2015-06-26",
+      "texto": "Tabla Nº 1 del artículo 120 bis: límites de contenido de energía, sodio, azúcares totales y grasas saturadas en alimentos.\nLímites para rotular el símbolo «ALTO EN» (sello) en alimentos sólidos, valores mayores a (por 100 g): energía 275 kcal/100 g; sodio 400 mg/100 g; azúcares totales 10 g/100 g; grasas saturadas 4 g por cada 100 g de alimento sólido.\nLímites para rotular el símbolo «ALTO EN» (sello) en alimentos líquidos, valores mayores a (por 100 ml): energía 70 kcal/100 ml; sodio 100 mg/100 ml; azúcares totales 5 g/100 ml; grasas saturadas 3 g por cada 100 ml de alimento líquido."
+    },
+    {
+      "bcn_id_norma": "71271",
+      "articulo": "120 BIS",
+      "imagen": "dto13-p13-2.jpeg",
+      "fecha_version_articulo": "2015-06-26",
+      "texto": "Cuadro Nº 1 del artículo 120 bis: dimensiones del símbolo «ALTO EN» (alto y ancho) según el área de la cara principal de la etiqueta: menor a 30 cm², se rotula en el envase mayor que los contenga; entre 30 y menor a 60 cm², 1,5 x 1,5 cm; entre 60 y menor a 100 cm², 2,0 x 2,0 cm; entre 100 y menor a 200 cm², 2,5 x 2,5 cm; entre 200 y menor a 300 cm², 3,0 x 3,0 cm; mayor o igual a 300 cm², 3,5 x 3,5 cm."
+    }
+  ]
+}

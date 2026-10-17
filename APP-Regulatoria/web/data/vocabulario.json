@@ -824,6 +824,63 @@
         "control obligatorio",
         "articulo 111"
       ]
+    },
+    {
+      "si": [
+        "sello",
+        "sellos",
+        "octogono",
+        "octogonos"
+      ],
+      "agregar": [
+        "caracteristicas nutricionales",
+        "alto en",
+        "simbolo octagonal"
+      ]
+    },
+    {
+      "si": [
+        "isotonica",
+        "isotonicas",
+        "hipotonica",
+        "hipotonicas"
+      ],
+      "agregar": [
+        "osmolalidad",
+        "electrolitos"
+      ]
+    },
+    {
+      "si": [
+        "advertencia",
+        "advertencias"
+      ],
+      "agregar": [
+        "leyenda"
+      ]
+    },
+    {
+      "si": [
+        "bebida",
+        "bebidas",
+        "jugo",
+        "jugos"
+      ],
+      "agregar": [
+        "liquidos",
+        "alimentos liquidos"
+      ]
+    },
+    {
+      "si": [
+        "tamano",
+        "tamanos",
+        "medida",
+        "medidas"
+      ],
+      "agregar": [
+        "dimensiones"
+      ]
     }
   ],
   "fuera_de_alcance": [
@@ -836,7 +893,8 @@
     {
       "patron": "rotulado nutricional|etiquetado nutricional|sellos? de advertencia|ley de etiquetado",
       "excepto": "",
-      "materia": "el rotulado nutricional de alimentos (Reglamento Sanitario de los Alimentos)"
+      "materia": "el rotulado nutricional de alimentos (Reglamento Sanitario de los Alimentos)",
+      "salvo_categoria": "alimentos"
     },
     {
       "patron": "veterinari|\\bsag\\b|bovinos?|ganado|mascotas?",
@@ -847,6 +905,11 @@
       "patron": "\\bimpuestos?\\b|\\biva\\b|tributos?\\b|aranceles? aduaner|derechos de aduana",
       "excepto": "",
       "materia": "materias tributarias o aduaneras"
+    },
+    {
+      "patron": "registr\\w*.{0,40}(suplementos?|alimentos?)\\b|(suplementos?|alimentos?)\\b.{0,40}registr",
+      "excepto": "uso medico|medicinal|farmaceutico|medicamento",
+      "materia": "los trámites de autorización de alimentos y suplementos ante la SEREMI"
     },
     {
       "patron": "\\bfda\\b|\\bema\\b|\\beuropea\\b|estados unidos",
