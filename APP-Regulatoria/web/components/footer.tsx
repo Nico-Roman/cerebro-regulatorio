@@ -17,10 +17,10 @@ export function Footer() {
               <Image
                 src="/logo-regulamed.png"
                 alt={`${SITE.nombre} — ${SITE.claim}`}
-                width={88}
-                height={88}
-                sizes="38px"
-                className="block h-[38px] w-[38px]"
+                width={94}
+                height={100}
+                sizes="47px"
+                className="block h-[50px] w-[47px]"
               />
               <span className="font-display text-base font-medium tracking-tight">
                 {SITE.nombre}
@@ -49,6 +49,11 @@ export function Footer() {
                 <li>
                   <Link href="/normativa" className="text-muted hover:text-foreground">
                     Buscador de normativa
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/noticias" className="text-muted hover:text-foreground">
+                    Noticias
                   </Link>
                 </li>
                 <li>

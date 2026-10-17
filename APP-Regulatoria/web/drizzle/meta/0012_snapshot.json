@@ -1,6 +1,6 @@
 {
-  "id": "2c9af4ed-2422-4b66-891b-ef761abfb8fe",
-  "prevId": "dce96254-23d3-42b6-8b19-9e14f4adad4e",
+  "id": "dce96254-23d3-42b6-8b19-9e14f4adad4e",
+  "prevId": "5dc2d3ee-0d5b-49dd-9481-d04dbe00b849",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -169,6 +169,19 @@
           "primaryKey": false,
           "notNull": true,
           "default": "'22:00'"
+        },
+        "ventanas": {
+          "name": "ventanas",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "paso_min": {
+          "name": "paso_min",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 30
         },
         "zona": {
           "name": "zona",
@@ -384,18 +397,6 @@
         "bloqueado": {
           "name": "bloqueado",
           "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "busquedas_planificadas": {
-          "name": "busquedas_planificadas",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "afirmaciones_sin_cita": {
-          "name": "afirmaciones_sin_cita",
-          "type": "integer",
           "primaryKey": false,
           "notNull": false
         },

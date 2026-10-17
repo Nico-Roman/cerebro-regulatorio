@@ -63,9 +63,8 @@ export default function Home() {
             la norma con su enlace oficial. Desde el 23-09 ya no promete "no lo
             resume": el asistente redacta un borrador, y la frase lo dice. */}
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          Escribe tu pregunta como se te ocurra. Te muestra los artículos que la
-          responden, con el enlace oficial del ISP, y un borrador con IA que cita
-          cada frase.
+          Escribe tu duda regulatoria y obtendrás una respuesta a tu pregunta que
+          incluya la cita exacta a la norma vigente
         </p>
 
         <div className="mt-9 max-w-3xl">
@@ -73,7 +72,7 @@ export default function Home() {
         </div>
 
         <p className="mt-7 max-w-2xl text-sm leading-relaxed text-muted">
-          Es gratuito. Solo tienes que registrarte.
+          Gratis 10 preguntas al día
         </p>
       </section>
 
@@ -90,8 +89,8 @@ export default function Home() {
           <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
             {SITE.nombre} se hace cargo del trámite ante el ISP: registrar tu producto,
             mantenerlo vigente y responder lo que la autoridad pida. Trabajamos con
-            laboratorios, importadores y marcas de productos farmacéuticos, cosméticos y
-            dispositivos médicos.
+            laboratorios, importadores y marcas de productos farmacéuticos, cosméticos,
+            dispositivos médicos y suplementos alimenticios.
           </p>
 
           {/* Las cifras van entre el titular y el video, que es donde más se
@@ -355,7 +354,7 @@ export default function Home() {
               <p className="mt-5 text-sm leading-relaxed text-muted">
                 Revisamos tu situación y te decimos con claridad qué trámite corresponde,
                 qué antecedentes necesitas y en qué orden conviene hacerlo. La primera
-                evaluación es breve y sin costo.
+                evaluación no tiene costo.
               </p>
 
               {/* Una acción dominante y dos alternativas, en vez de tres

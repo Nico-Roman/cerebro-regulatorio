@@ -1,5 +1,5 @@
 -- Snapshot y journal generados con `drizzle-kit generate`; el SQL, con
--- IF NOT EXISTS en tablas, columnas e índices igual que 0005–0012.
+-- IF NOT EXISTS en tablas, columnas e índices igual que 0005–0013.
 --
 -- Asistente, fase 2 (encargo C): /normativa es un hilo. Una tabla nueva y una
 -- columna que admite nulo: no toca filas existentes y se aplica con el servicio

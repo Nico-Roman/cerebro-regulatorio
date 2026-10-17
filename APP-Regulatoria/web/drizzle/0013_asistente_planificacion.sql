@@ -1,5 +1,5 @@
 -- Snapshot y journal generados con `drizzle-kit generate`; el SQL, con
--- IF NOT EXISTS igual que 0005–0011.
+-- IF NOT EXISTS igual que 0005–0012.
 --
 -- Asistente, fase 1 (encargo C): las búsquedas que propuso la planificación y
 -- cuántas oraciones del borrador imponen algo sin cita. Aditiva: dos columnas

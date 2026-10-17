@@ -1,5 +1,5 @@
 -- Snapshot y journal generados con `drizzle-kit generate`; el SQL, con
--- IF NOT EXISTS igual que 0005–0010.
+-- IF NOT EXISTS igual que 0005–0011.
 --
 -- Evaluación calificada (decisión del 24-09-2026): la agenda pide qué producto
 -- es y en qué etapa está (lib/calificacion.ts). Aditiva: dos columnas que

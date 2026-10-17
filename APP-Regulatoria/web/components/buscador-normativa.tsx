@@ -29,6 +29,9 @@ import { RespuestaIa } from "@/components/respuesta-ia";
 
 type Estado = "encontrado" | "parcial" | "ausente";
 
+// Dos bases con índice propio: la chilena y la de EE.UU. (21 CFR, FDA).
+type Jurisdiccion = "cl" | "fda";
+
 interface Resultado {
   cita: string;
   norma: string;
@@ -56,6 +59,7 @@ interface RespuestaApi {
   conversacionId: string | null;
   iaDisponible: boolean;
   restantesHoy: number | null;
+  fda?: { fecha_version: string; documentos: number; pasajes: number } | null;
 }
 
 interface Turno {
@@ -80,6 +84,7 @@ const ETIQUETAS_CATEGORIA: Record<string, string> = {
   laboratorio_nacional_de_control: "Laboratorio Nacional de Control",
   medicamentos: "Medicamentos",
   dispositivos_medicos: "Dispositivos médicos",
+  alimentos: "Alimentos y suplementos",
   otros: "Otras normas del ISP",
 };
 
@@ -96,6 +101,80 @@ const EJEMPLOS = [
   "¿Qué es una droguería?",
   "¿Qué es la farmacovigilancia?",
 ];
+
+// El 21 CFR está en inglés y el motor busca palabra por palabra: los ejemplos
+// enseñan a preguntar en inglés.
+const EJEMPLOS_FDA = [
+  "What are the responsibilities of the quality control unit?",
+  "electronic signature requirements",
+  "basic elements of informed consent",
+  "premarket notification 510(k) content",
+  "declaration of ingredients on cosmetic labels",
+];
+
+const MESES = [
+  "enero", "febrero", "marzo", "abril", "mayo", "junio",
+  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+];
+
+/** "2026-10-06" -> "6 de octubre de 2026", sin depender de la zona horaria. */
+function fechaLarga(iso: string): string {
+  const m = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/.exec(iso);
+  if (!m) return iso;
+  return `${Number(m[3])} de ${MESES[Number(m[2]) - 1]} de ${m[1]}`;
+}
+
+function SelectorJurisdiccion({
+  valor,
+  onCambio,
+}: {
+  valor: Jurisdiccion;
+  onCambio: (j: Jurisdiccion) => void;
+}) {
+  const opciones: Array<[Jurisdiccion, string]> = [
+    ["cl", "Chile · ISP"],
+    ["fda", "EE.UU. · FDA"],
+  ];
+  return (
+    <div
+      role="radiogroup"
+      aria-label="Normativa de qué país"
+      className="flex w-full border border-line sm:w-auto sm:self-start"
+    >
+      {opciones.map(([j, etiqueta]) => (
+        <button
+          key={j}
+          type="button"
+          role="radio"
+          aria-checked={valor === j}
+          onClick={() => onCambio(j)}
+          className={`flex-1 px-4 py-2 text-sm transition-colors sm:flex-none sm:py-1.5 sm:text-xs ${
+            valor === j ? "bg-accent/15 font-medium text-foreground" : "text-muted hover:text-foreground"
+          }`}
+        >
+          {etiqueta}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/** Siempre a la vista en la sección FDA: un pasaje del 21 CFR no rige en Chile. */
+function AvisoFda({ version }: { version: string | null }) {
+  return (
+    <div className="flex flex-col gap-1.5 border-l-2 border-sky-500/70 bg-sky-500/5 px-4 py-3 text-sm leading-relaxed">
+      <p className="text-sky-200">
+        <span className="font-medium">Normativa de EE.UU., no de Chile.</span> Buscas en el 21 CFR de la FDA: sirve
+        como referencia comparada, pero no rige en Chile. Para cumplir en Chile, cambia a «Chile · ISP».
+      </p>
+      <p className="text-xs text-muted">
+        El 21 CFR está en inglés: escribe la pregunta en inglés. Cubre 36 partes (GMP, ensayos clínicos, registro,
+        etiquetado, biológicos, cosméticos y dispositivos)
+        {version ? `, con las enmiendas al ${fechaLarga(version)}` : ""}. No incluye las guías de la FDA.
+      </p>
+    </div>
+  );
+}
 
 const ESTILO_ESTADO: Record<Estado, { borde: string; punto: string; texto: string }> = {
   encontrado: { borde: "border-accent/70", punto: "bg-neon", texto: "text-accent" },
@@ -137,7 +216,7 @@ function TextoCompleto({ r }: { r: Resultado }) {
   return (
     <details className="group text-xs">
       <summary className="cursor-pointer select-none text-muted underline-offset-4 hover:text-foreground hover:underline">
-        Ver texto completo{r.articulo ? " del artículo" : ""}
+        Ver texto completo{r.cita.startsWith("21 CFR") ? " de la sección" : r.articulo ? " del artículo" : ""}
       </summary>
       <p className="mt-3 whitespace-pre-line border-l border-line pl-3 leading-relaxed text-neutral-300">
         {r.texto.trim()}
@@ -387,6 +466,8 @@ export function BuscadorNormativa({
   // inicial del campo, no algo que se asigne después con un efecto.
   const consultaUrl = searchParams.get("q") ?? "";
   const [q, setQ] = useState(consultaUrl);
+  const [jurisdiccion, setJurisdiccion] = useState<Jurisdiccion>(searchParams.get("j") === "fda" ? "fda" : "cl");
+  const [versionFda, setVersionFda] = useState<string | null>(null);
   const [vigente, setVigente] = useState(false);
   const [categoria, setCategoria] = useState("");
   const [categorias, setCategorias] = useState<string[]>([]);
@@ -411,9 +492,15 @@ export function BuscadorNormativa({
       setQ("");
       try {
         const params = new URLSearchParams({ q: query });
-        if (vigente) params.set("vigente", "1");
-        if (categoria) params.set("categoria", categoria);
         if (conversacionId) params.set("conversacion", conversacionId);
+        if (jurisdiccion === "fda") {
+          // Los filtros son del corpus chileno: en el 21 CFR todo es vigente y
+          // las materias son otras.
+          params.set("j", "fda");
+        } else {
+          if (vigente) params.set("vigente", "1");
+          if (categoria) params.set("categoria", categoria);
+        }
         const res = await fetch(`/api/search?${params.toString()}`);
 
         // La sesión puede vencer con la pantalla abierta. Sin esto, un 401 se
@@ -423,7 +510,9 @@ export function BuscadorNormativa({
           // Navegación dura a propósito: la sesión acaba de morir y una
           // navegación blanda conservaría el encabezado de sesión iniciada.
           // eslint-disable-next-line @next/next/no-location-assign-relative-destination
-          window.location.href = `/ingresar?next=${encodeURIComponent(`/normativa?q=${encodeURIComponent(query)}`)}`;
+          window.location.href = `/ingresar?next=${encodeURIComponent(
+            `/normativa?q=${encodeURIComponent(query)}${jurisdiccion === "fda" ? "&j=fda" : ""}`
+          )}`;
           return;
         }
         if (res.status === 403) {
@@ -445,13 +534,25 @@ export function BuscadorNormativa({
         const datos = (await res.json()) as RespuestaApi;
         if (typeof datos.restantesHoy === "number") setRestantesHoy(datos.restantesHoy);
         if (datos.conversacionId) setConversacionId(datos.conversacionId);
+        if (datos.fda?.fecha_version) setVersionFda(datos.fda.fecha_version);
         actualizar(clave, { cargando: false, respuesta: datos });
       } catch {
         actualizar(clave, { cargando: false, aviso: "No pudimos completar la búsqueda. Revisa tu conexión y vuelve a intentar." });
       }
     },
-    [vigente, categoria, conversacionId, router]
+    [vigente, categoria, conversacionId, jurisdiccion, router]
   );
+
+  const cambiarJurisdiccion = (j: Jurisdiccion) => {
+    if (j === jurisdiccion) return;
+    // Un hilo del otro país en pantalla se leería como de este: cambiar de
+    // jurisdicción abre una conversación nueva.
+    setJurisdiccion(j);
+    setTurnos([]);
+    setConversacionId(null);
+    setQ("");
+  };
+  const ejemplos = jurisdiccion === "fda" ? EJEMPLOS_FDA : EJEMPLOS;
 
   useEffect(() => {
     fetch("/api/categorias")
@@ -503,6 +604,10 @@ export function BuscadorNormativa({
         </aside>
 
         <main className="order-1 flex w-full min-w-0 flex-1 flex-col gap-6 lg:order-2">
+          <SelectorJurisdiccion valor={jurisdiccion} onCambio={cambiarJurisdiccion} />
+
+          {jurisdiccion === "fda" && <AvisoFda version={versionFda} />}
+
           {turnos.length > 0 && (
             <div className="flex flex-col gap-6">
               {turnos.map((t) => (
@@ -523,7 +628,13 @@ export function BuscadorNormativa({
                 id="pregunta-normativa"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder={turnos.length ? "Sigue preguntando…" : "Ej: ¿cuál es la validez de una receta retenida?"}
+                placeholder={
+                  jurisdiccion === "fda"
+                    ? "Ej: What are the responsibilities of the quality control unit?"
+                    : turnos.length
+                      ? "Sigue preguntando…"
+                      : "Ej: ¿cuál es la validez de una receta retenida?"
+                }
                 aria-label="Tu pregunta sobre normativa"
                 maxLength={500}
                 className="min-w-0 flex-1 border border-line bg-transparent px-3 py-2.5 text-base outline-none focus:border-accent sm:py-2 sm:text-sm"
@@ -558,6 +669,7 @@ export function BuscadorNormativa({
                 </Link>
               </div>
             </div>
+            {jurisdiccion === "cl" && (
             <details className="text-xs text-muted">
               <summary className="cursor-pointer select-none hover:text-foreground">Filtros</summary>
               <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -587,13 +699,14 @@ export function BuscadorNormativa({
                 </select>
               </div>
             </details>
+            )}
           </form>
 
           {!turnos.length && (
             <div className="flex flex-col gap-3">
               <span className="label-micro text-muted">Prueba con</span>
               <div className="flex flex-wrap gap-2">
-                {EJEMPLOS.map((ej) => (
+                {ejemplos.map((ej) => (
                   <button
                     key={ej}
                     type="button"

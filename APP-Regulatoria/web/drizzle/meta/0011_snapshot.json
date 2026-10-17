@@ -1,5 +1,5 @@
 {
-  "id": "dce96254-23d3-42b6-8b19-9e14f4adad4e",
+  "id": "5dc2d3ee-0d5b-49dd-9481-d04dbe00b849",
   "prevId": "055c9c91-4434-4cc9-b9f3-2e8308e08b9c",
   "version": "7",
   "dialect": "postgresql",
@@ -169,6 +169,19 @@
           "primaryKey": false,
           "notNull": true,
           "default": "'22:00'"
+        },
+        "ventanas": {
+          "name": "ventanas",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "paso_min": {
+          "name": "paso_min",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 30
         },
         "zona": {
           "name": "zona",
@@ -1250,18 +1263,6 @@
         },
         "motivo": {
           "name": "motivo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "producto": {
-          "name": "producto",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "etapa": {
-          "name": "etapa",
           "type": "text",
           "primaryKey": false,
           "notNull": false

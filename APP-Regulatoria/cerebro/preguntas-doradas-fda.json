@@ -1,0 +1,133 @@
+{
+  "descripcion": "Set dorado de la sección EE.UU. (21 CFR, FDA), que se consulta con su propio índice. Las preguntas están en inglés porque el 21 CFR lo está. Cada fuente aceptable es la PARTE del 21 CFR ({doc_id} exacto, \"fda/21 CFR NNN\"): la sección exacta se lee en pantalla, pero la compuerta mide si el motor llega a la parte correcta. Cubre los doce grupos de partes-prioritarias.json para que una regresión en cualquiera se note. Mismo gate que el set chileno: recall@5 >= 90% y ninguna pregunta dorada en confianza baja. Validar con un QF que trabaje con FDA antes de ampliar.",
+  "version": "0.1",
+  "fecha": "2026-10-08",
+  "preguntas": [
+    {
+      "id": "fda-qcu",
+      "pregunta": "What are the responsibilities of the quality control unit?",
+      "categoria": "fda_gmp",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 211"}]
+    },
+    {
+      "id": "fda-batch-record",
+      "pregunta": "What must the batch production and control record include?",
+      "categoria": "fda_gmp",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 211"}, {"doc_id": "fda/21 CFR 212"}]
+    },
+    {
+      "id": "fda-esignature",
+      "pregunta": "electronic signature requirements",
+      "categoria": "fda_calidad_y_datos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 11"}]
+    },
+    {
+      "id": "fda-glp-qau",
+      "pregunta": "quality assurance unit in a nonclinical laboratory study",
+      "categoria": "fda_calidad_y_datos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 58"}]
+    },
+    {
+      "id": "fda-informed-consent",
+      "pregunta": "basic elements of informed consent",
+      "categoria": "fda_ensayos_clinicos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 50"}]
+    },
+    {
+      "id": "fda-irb",
+      "pregunta": "IRB membership requirements",
+      "categoria": "fda_ensayos_clinicos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 56"}]
+    },
+    {
+      "id": "fda-ind-safety",
+      "pregunta": "How many days does the sponsor have to submit an IND safety report?",
+      "categoria": "fda_ensayos_clinicos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 312"}]
+    },
+    {
+      "id": "fda-anda-content",
+      "pregunta": "content and format of an abbreviated new drug application",
+      "categoria": "fda_registro",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 314"}]
+    },
+    {
+      "id": "fda-orphan",
+      "pregunta": "request for orphan drug designation",
+      "categoria": "fda_registro",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 316"}]
+    },
+    {
+      "id": "fda-bioequivalence",
+      "pregunta": "types of evidence to establish bioequivalence",
+      "categoria": "fda_bioequivalencia",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 320"}]
+    },
+    {
+      "id": "fda-otc-monograph",
+      "pregunta": "conditions under which OTC drugs are generally recognized as safe and effective",
+      "categoria": "fda_medicamentos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 330"}, {"doc_id": "fda/21 CFR 310"}]
+    },
+    {
+      "id": "fda-boxed-warning",
+      "pregunta": "boxed warning in prescription drug labeling",
+      "categoria": "fda_etiquetado",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 201"}]
+    },
+    {
+      "id": "fda-drug-samples",
+      "pregunta": "distribution of prescription drug samples by representatives",
+      "categoria": "fda_distribucion",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 203"}]
+    },
+    {
+      "id": "fda-establishment-registration",
+      "pregunta": "establishment registration and drug listing",
+      "categoria": "fda_establecimientos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 207"}]
+    },
+    {
+      "id": "fda-biologics-license",
+      "pregunta": "biologics license application requirements",
+      "categoria": "fda_biologicos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 601"}, {"doc_id": "fda/21 CFR 600"}]
+    },
+    {
+      "id": "fda-hctp-donor",
+      "pregunta": "donor eligibility determination for human cells and tissues",
+      "categoria": "fda_biologicos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 1271"}]
+    },
+    {
+      "id": "fda-cosmetic-ingredients",
+      "pregunta": "declaration of ingredients on cosmetic labels",
+      "categoria": "fda_cosmeticos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 701"}]
+    },
+    {
+      "id": "fda-510k",
+      "pregunta": "premarket notification 510(k) content",
+      "categoria": "fda_dispositivos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 807"}]
+    },
+    {
+      "id": "fda-mdr",
+      "pregunta": "medical device reporting of deaths and serious injuries by manufacturers",
+      "categoria": "fda_dispositivos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 803"}]
+    },
+    {
+      "id": "fda-udi",
+      "pregunta": "unique device identifier on device labels",
+      "categoria": "fda_dispositivos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 801"}, {"doc_id": "fda/21 CFR 830"}]
+    },
+    {
+      "id": "fda-qmsr",
+      "pregunta": "quality management system requirements for medical device manufacturers",
+      "categoria": "fda_dispositivos",
+      "fuentes_aceptables": [{"doc_id": "fda/21 CFR 820"}]
+    }
+  ]
+}

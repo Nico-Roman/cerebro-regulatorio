@@ -7,6 +7,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { leerConfig } from "@/lib/agenda/config";
 import { agendaConfigurada } from "@/lib/agenda/google";
+import { NOMBRES_DIA } from "@/lib/agenda/ventanas";
 import { esAdmin, usuarioActual } from "@/lib/sesion";
 
 export const metadata: Metadata = {
@@ -63,7 +64,7 @@ export default async function AgendaConfigPage({
         <h1 className="font-display text-3xl tracking-tight">Configuración de la agenda</h1>
         <p className="text-sm text-muted">
           Cambia el horario de atención sin desplegar. Los huecos publicados se recalculan al
-          guardar.
+          guardar. Marca solo los días que atiendes, cada uno con su horario.
         </p>
       </header>
 
@@ -87,13 +88,46 @@ export default async function AgendaConfigPage({
       )}
 
       <form action="/api/admin/agenda" method="post" className="flex flex-col gap-5">
+        <fieldset className="flex flex-col gap-2">
+          <legend className="label-micro mb-2 text-muted">
+            Horario de atención · hora de Chile · la última reunión termina a la hora de cierre
+          </legend>
+          {[1, 2, 3, 4, 5, 6, 7].map((dia) => {
+            const ventana = config.ventanas.find((v) => v.dia === dia);
+            return (
+              <div key={dia} className="grid grid-cols-[7.5rem_1fr_1fr] items-center gap-3">
+                <label className="flex items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    name={`dia${dia}`}
+                    defaultChecked={!!ventana}
+                    className="h-4 w-4 accent-neutral-200"
+                  />
+                  {NOMBRES_DIA[dia]}
+                </label>
+                <input
+                  type="time"
+                  name={`inicio${dia}`}
+                  defaultValue={ventana?.inicio ?? "09:00"}
+                  aria-label={`${NOMBRES_DIA[dia]}: apertura`}
+                  className="border border-line bg-transparent px-3 py-2 text-sm outline-none focus:border-foreground"
+                />
+                <input
+                  type="time"
+                  name={`fin${dia}`}
+                  defaultValue={ventana?.fin ?? "13:00"}
+                  aria-label={`${NOMBRES_DIA[dia]}: cierre`}
+                  className="border border-line bg-transparent px-3 py-2 text-sm outline-none focus:border-foreground"
+                />
+              </div>
+            );
+          })}
+        </fieldset>
+
         <div className="grid gap-4 sm:grid-cols-2">
-          <Campo etiqueta="Hora de apertura" nombre="horaInicio" valor={config.horaInicio} ayuda="HH:MM, hora de Chile" />
-          <Campo etiqueta="Hora de cierre" nombre="horaFin" valor={config.horaFin} />
           <Campo etiqueta="Duración (min)" nombre="duracionMin" valor={config.duracionMin} tipo="number" />
+          <Campo etiqueta="Inicios cada (min)" nombre="pasoMin" valor={config.pasoMin} tipo="number" ayuda="Con 15 y reuniones de 30 se ofrecen 18:00, 18:15, 18:30…" />
           <Campo etiqueta="Buffer entre reuniones (min)" nombre="bufferMin" valor={config.bufferMin} tipo="number" ayuda="Se aplica antes y después de cada bloque ocupado" />
-          <Campo etiqueta="Primer día" nombre="diaInicio" valor={config.diaInicio} tipo="number" ayuda="1 = lunes … 7 = domingo" />
-          <Campo etiqueta="Último día" nombre="diaFin" valor={config.diaFin} tipo="number" />
           <Campo etiqueta="Antelación mínima (horas)" nombre="antelacionHoras" valor={config.antelacionHoras} tipo="number" />
           <Campo etiqueta="Horizonte (días)" nombre="horizonteDias" valor={config.horizonteDias} tipo="number" />
           <Campo etiqueta="Zona horaria" nombre="zona" valor={config.zona} />

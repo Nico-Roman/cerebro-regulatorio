@@ -14,6 +14,7 @@ const ENLACES = [
   { href: "/#areas", label: "Áreas" },
   // El asistente: preguntar, responder una observación o ver qué trámite toca.
   { href: "/normativa", label: "Asistente" },
+  { href: "/noticias", label: "Noticias" },
   { href: "/#contacto", label: "Contacto" },
 ];
 
@@ -37,13 +38,13 @@ export function Nav() {
           <Image
             src="/logo-regulamed.png"
             alt={`${SITE.nombre} — ${SITE.claim}`}
-            // Se muestra a 44 px: pedir el doble basta para pantallas retina,
-            // en vez de bajar el original de 577 px en cada página.
-            width={88}
-            height={88}
-            sizes="44px"
+            // PNG transparente recortado al dibujo (sin margen): se muestra a
+            // 55×58 px y se pide el doble para pantallas retina.
+            width={110}
+            height={116}
+            sizes="55px"
             priority
-            className="block h-[44px] w-[44px]"
+            className="block h-[58px] w-[55px]"
           />
           <span className="font-display text-base font-medium tracking-tight">
             {SITE.nombre}
@@ -51,9 +52,11 @@ export function Nav() {
         </Link>
 
         {/* Desde lg: a 768 px, y con sesión iniciada, los enlaces se montaban
-            sobre el logo. Con las guías publicadas (quinto enlace) no cabe a
-            1.024 px con sesión: ahí pasa a xl:flex. */}
-        <ul className="hidden items-center gap-7 lg:flex">
+            sobre el logo. Con seis enlaces (noticias + guías publicadas) no
+            cabe a 1.024 px con sesión: ahí pasa a xl:flex. */}
+        <ul
+          className={`hidden items-center gap-7 ${enlaces.length > 5 ? "xl:flex" : "lg:flex"}`}
+        >
           {enlaces.map((e) => (
             <li key={e.href}>
               <Link
