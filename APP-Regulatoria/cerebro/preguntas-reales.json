@@ -102,6 +102,8 @@
     {"id": "a02-leyenda-suplemento", "set": "dev", "tipo": "respondible", "requiere_categoria": "alimentos", "pregunta": "¿Qué advertencia tiene que decir la etiqueta de un suplemento?",
      "evidencia": [{"numero": "977", "contiene": "menores de 8 a[ñn]os"}]},
     {"id": "a03-bebida-isotonica", "set": "dev", "tipo": "respondible", "requiere_categoria": "alimentos", "pregunta": "¿Cuándo puedo decir que una bebida deportiva es isotónica?",
-     "evidencia": [{"numero": "977", "contiene": "isot[oó]nicas|250 y 340"}]}
+     "evidencia": [{"numero": "977", "contiene": "isot[oó]nicas|250 y 340"}]},
+    {"id": "a04-sello-sodio-liquido", "set": "dev", "tipo": "respondible", "requiere_categoria": "alimentos", "pregunta": "¿Desde cuánto sodio una bebida lleva el sello alto en sodio?",
+     "evidencia": [{"numero": "977", "contiene": "100 mg"}]}
   ]
 }

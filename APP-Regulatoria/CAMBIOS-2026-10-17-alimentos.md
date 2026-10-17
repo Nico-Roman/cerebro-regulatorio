@@ -39,6 +39,17 @@ Categoría nueva del corpus: `alimentos` («Alimentos y suplementos» en la web)
     producto y el corpus no lo dice en ninguna parte: sin la regla, «¿cómo se
     registra un suplemento?» salía en verde con la Res. 394 n° 7, que habla de
     productos antiguos registrados como medicamentos (verde falso en h15).
+- `decretos_bcn.texto_de()`: **arreglo de un defecto del PR 2**. `findtext()`
+  devolvía solo el texto anterior a la primera imagen incrustada. En el RSA,
+  28 artículos perdían 14.162 caracteres: el art. 120 bis se cortaba en la
+  Tabla Nº 1 y perdía sus excepciones y la regla del símbolo. El DS 825 y el
+  Código Sanitario no tienen imágenes y no cambian.
+- `tablas-transcritas.json` + `decretos_bcn.tablas_de()`: las tablas que la
+  BCN publica como imagen se transcriben a mano y entran como un pasaje más de
+  su artículo, rotulado como transcripción. Si el artículo cambia en la BCN,
+  el pasaje lo advierte. Transcritas: la Tabla Nº 1 (límites de los sellos
+  «ALTO EN») y el Cuadro Nº 1 (tamaño del símbolo) del art. 120 bis.
+- Más vocabulario: bebida/jugo → líquidos; tamaño/medida → dimensiones.
 - Web: etiqueta de la categoría en `lib/search.ts`, y `/cobertura` deja de
   decir «no incluye alimentos» cuando el corpus trae la categoría.
 
@@ -50,11 +61,11 @@ CI baja los PDF con otros nombres y categorías.
 
 | | Antes | Después |
 |---|---|---|
-| recall@5 (doradas) | 35/36 | **41/42** (6 nuevas `al-*`, todas OK; la falla es `cs-farmaceutico-direccion`, que ya existía) |
+| recall@5 (doradas) | 35/36 | **42/43** (7 nuevas `al-*`, todas OK; la falla es `cs-farmaceutico-direccion`, que ya existía) |
 | Abstención (fuera del corpus) | 3/3 | 2/2 (`alimentos-rotulado` pasa a las doradas cuando existe la categoría) |
-| Dev: visible@3 · verdes falsos | 19/22 · 0 | **22/25 · 0** (3 nuevas `a0*`, todas visibles) |
+| Dev: visible@3 · verdes falsos | 19/22 · 0 | **23/26 · 0** (4 nuevas `a0*`, todas visibles) |
 | Holdout: visible@3 · verdes falsos · abstención | 16/17 · 0 · 2/3 | **16/17 · 0 · 2/3** (sin cambios) |
-| Paridad Python ↔ TypeScript | — | idénticos en 51 preguntas |
+| Paridad Python ↔ TypeScript | — | idénticos en 52 preguntas |
 | Pruebas web | — | 60/60 |
 
 Nota honesta: h15 (holdout) se miró al diagnosticar el verde falso. El arreglo
@@ -64,8 +75,15 @@ es una regla de alcance, no una palabra agregada para esa pregunta.
 
 - **Ley 20.606:** no se encontró su idNorma en la BCN. Su contenido operativo
   (sellos y límites) está en el art. 120 bis del RSA, que sí entra.
-- **Tablas del RSA:** vienen como imagen en la BCN. Los límites de la Tabla
-  N° 1 del art. 120 bis (sodio, azúcares, calorías) no son buscables. Habría
-  que transcribirlos a mano en un pasaje curado.
-- Correr «Corpus diario» sobre la rama antes del merge, que es la compuerta
-  real con el corpus de CI.
+- **Otras tablas del RSA:** 28 artículos traen imágenes. Solo se
+  transcribieron las del art. 120 bis. El resto (aditivos, límites
+  microbiológicos, etc.) sigue marcado como «[Tabla o imagen en la fuente
+  oficial]».
+- **«Corpus diario» sobre la rama:** se lanzó el 17-10 y falló antes del build,
+  en el paso del TLS del ISP. Hoy el ISP no responde a los runners de GitHub
+  (5 timeouts; desde Chile responde en 0,3 s). La corrida programada de `main`
+  del mismo día falló igual. Relanzar cuando el ISP vuelva a responder: es la
+  compuerta real con el corpus de CI.
+- Una abstención conservadora conocida: «¿qué tamaño debe tener el sello en
+  una etiqueta de 80 cm2?» sale ausente («cm2» no existe en el corpus); con
+  «dimensiones» o «área de la etiqueta» responde el Cuadro Nº 1.

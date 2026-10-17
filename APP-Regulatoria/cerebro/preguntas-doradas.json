@@ -558,6 +558,15 @@
       "fuentes_aceptables": [{"tipo": "Resolución Exenta", "numero": "860", "doc_contains": "alimentos"}],
       "cita_esperada": "NT 191 (Res. Ex. 860/2017) art. 3: no se deben usar en suplementos alimentarios ni en alimentos con presentación propia de medicamentos.",
       "revisar_nico": false
+    },
+    {
+      "id": "al-limite-sodio-liquidos",
+      "pregunta": "¿Cuál es el límite de sodio para el sello ALTO EN en un alimento líquido?",
+      "categoria": "alimentos",
+      "requiere_categoria": "alimentos",
+      "fuentes_aceptables": [{"tipo": "Decreto Supremo", "numero": "977", "doc_contains": "alimentos"}],
+      "cita_esperada": "RSA (DS 977) art. 120 bis, Tabla Nº 1 (transcrita de la imagen oficial): líquidos, sodio mayor a 100 mg/100 ml.",
+      "revisar_nico": false
     }
   ]
 }

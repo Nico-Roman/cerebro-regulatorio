@@ -858,6 +858,29 @@
       "agregar": [
         "leyenda"
       ]
+    },
+    {
+      "si": [
+        "bebida",
+        "bebidas",
+        "jugo",
+        "jugos"
+      ],
+      "agregar": [
+        "liquidos",
+        "alimentos liquidos"
+      ]
+    },
+    {
+      "si": [
+        "tamano",
+        "tamanos",
+        "medida",
+        "medidas"
+      ],
+      "agregar": [
+        "dimensiones"
+      ]
     }
   ],
   "fuera_de_alcance": [

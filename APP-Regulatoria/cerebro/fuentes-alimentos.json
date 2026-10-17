@@ -5,7 +5,8 @@
     "vigencia certificada por la BCN y vigilancia de cambios por artículo. No hay listado del ISP",
     "para estas normas: las dicta el Minsal y las fiscaliza la SEREMI de Salud.",
     "Pendiente: la Ley 20.606 (no se encontró su idNorma en la BCN). Su contenido operativo",
-    "—los sellos «ALTO EN» y sus límites— está en el art. 120 bis del RSA, que sí entra."
+    "—los sellos «ALTO EN» y sus límites— está en el art. 120 bis del RSA, que sí entra; las",
+    "tablas de ese artículo vienen como imagen y están transcritas en tablas-transcritas.json."
   ],
   "categoria": "Alimentos",
   "normas": [

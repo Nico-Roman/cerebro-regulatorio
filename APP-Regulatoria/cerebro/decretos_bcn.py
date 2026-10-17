@@ -105,6 +105,23 @@ def sin_binarios(datos):
     return _BINARIO.sub(rb"\1\2", datos)
 
 
+def texto_de(ef):
+    """Texto completo de una parte. `findtext()` devuelve solo lo que va ANTES
+    del primer elemento hijo: cuando la BCN incrusta una imagen a mitad del
+    artículo (`ArchivoBinario`), todo lo que sigue quedaba fuera. En el RSA eso
+    eran 28 artículos y 14.162 caracteres (el art. 120 bis se cortaba en la
+    Tabla Nº 1 y perdía sus excepciones y la regla del símbolo «ALTO EN»)."""
+    t = ef.find("n:Texto", CS.NS)
+    if t is None:
+        return ""
+    partes = [t.text or ""]
+    for hijo in t:
+        if hijo.tag.endswith("ArchivoBinario"):
+            partes.append("\n[Tabla o imagen en la fuente oficial]\n")
+        partes.append(hijo.tail or "")
+    return CS._limpiar("".join(partes))
+
+
 class Decreto:
     def __init__(self, fecha_version, derogado, articulos):
         self.fecha_version = fecha_version
@@ -122,7 +139,7 @@ def cargar(id_norma):
             if (ef.get("tipoParte") or "") == "Artículo":
                 articulos.append({
                     "numero": CS._limpiar(ef.findtext("n:Metadatos/n:NombreParte", "", CS.NS)) or "?",
-                    "texto": CS._limpiar(ef.findtext("n:Texto", "", CS.NS)),
+                    "texto": texto_de(ef),
                     "fecha_version": ef.get("fechaVersion", ""),
                     "derogado": ef.get("derogado", "") != "no derogado",
                     "id_parte": ef.get("idParte", ""),
@@ -155,8 +172,10 @@ def registros(f, dec):
 
     for i, art in enumerate(dec.articulos):
         piezas = CS._partir(art["texto"])
+        n_texto = len(piezas)
+        piezas = piezas + tablas_de(idn, art)
         for j, pieza in enumerate(piezas):
-            if len(pieza) < 60 and len(piezas) > 1:
+            if len(pieza) < 60 and n_texto > 1 and j < n_texto:
                 continue
             if art["derogado"] or dec.derogado:
                 vigencia = "derogada"
@@ -193,8 +212,36 @@ def registros(f, dec):
                 # Las resoluciones de un solo cuerpo no numeran su artículo: sin
                 # número no se inventa uno ("Artículo ?" sería una cita falsa).
                 "articulo": ("Artículo " + art["numero"]) if art["numero"] != "?" else "",
-                "texto": (cabecera + pieza) if j == 0 else pieza,
+                # Las tablas transcritas llevan cabecera propia: son un pasaje aparte.
+                "texto": (cabecera + pieza) if (j == 0 or j >= n_texto) else pieza,
             }
+
+
+TABLAS = CS.BASE / "tablas-transcritas.json"
+_tablas = None
+
+
+def tablas_de(id_norma, art):
+    """Tablas que la BCN publica como IMAGEN dentro de un artículo (el RSA trae
+    así los límites de los sellos «ALTO EN», art. 120 bis). Se transcriben a
+    mano en tablas-transcritas.json y entran como un pasaje más del artículo,
+    rotulado como transcripción. Si el artículo cambió en la BCN después de la
+    transcripción, el pasaje lo advierte: la tabla puede haber cambiado."""
+    global _tablas
+    if _tablas is None:
+        _tablas = json.loads(TABLAS.read_text(encoding="utf-8")).get("tablas", []) if TABLAS.exists() else []
+    out = []
+    for t in _tablas:
+        if str(t.get("bcn_id_norma")) != str(id_norma) or t.get("articulo", "").lower() != art["numero"].lower():
+            continue
+        nota = ("[Tabla transcrita a mano desde la imagen oficial publicada por la BCN («" + t.get("imagen", "") +
+                "», versión del artículo " + t.get("fecha_version_articulo", "?") + "); verifica contra la fuente]")
+        if t.get("fecha_version_articulo") and art.get("fecha_version") and t["fecha_version_articulo"] != art["fecha_version"]:
+            nota += (" ⚠ El artículo cambió en la BCN (versión " + art["fecha_version"] +
+                     ") después de esta transcripción: la tabla puede no ser la vigente.")
+        # La nota va al final: la frase visible tiene que ser una fila de la tabla.
+        out.append(t["texto"] + "\n" + nota)
+    return out
 
 
 def snapshot(f, dec):
