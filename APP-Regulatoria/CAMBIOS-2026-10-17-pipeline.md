@@ -53,7 +53,7 @@ causas:
       régimen de control.
 - **El ISP caído no aborta.** El workflow avisa (`::warning::`) en vez de
   fallar. `actualizar-diario.js` sigue con el último listado conocido y los
-  PDF en caché, se salta ANDID y el reintento de faltantes, y la compuerta
+  PDF en caché, se salta ANDID y las descargas desde el ISP (lo del Diario Oficial se baja igual), y la compuerta
   decide si se publica. `estado-corpus.json` registra
   `isp.disponible/error/listado_sin_cambios_desde` y el resumen de
   `bcn_novedades`. Probado el mismo 17-10, con el ISP caído también desde

@@ -407,8 +407,6 @@ function main() {
   // lee la revisión semanal para reportar la normativa pendiente.
   say("Paso 2b/7: reintento de normas del listado que faltan en disco…");
   try {
-    // Sin ISP cada descarga esperaría su timeout: se reintenta en la próxima corrida.
-    if (!ispDisponible) throw new Error("el ISP no responde hoy; se reintenta en la próxima corrida");
     const snapshot = JSON.parse(
       fs.readFileSync(path.join(VIGILANCIA_DIR, "snapshots", "latest.json"), "utf-8")
     );
@@ -467,6 +465,10 @@ function main() {
         continue;
       }
       if (idx.porArchivo.has(base)) continue;
+      // Sin ISP, cada descarga desde el ISP esperaría su timeout: se reintenta
+      // en la próxima corrida. Lo que viene de otro sitio (los decretos de
+      // dispositivos del Diario Oficial) se baja igual.
+      if (!ispDisponible && /ispch\.(gob\.)?cl/i.test(r.enlace)) continue;
 
       try {
         const dest = downloadPdf(r);
