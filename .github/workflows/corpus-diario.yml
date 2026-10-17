@@ -102,14 +102,23 @@ jobs:
           # por defecto de curl, falla; con UA de Chrome responde 200 de forma
           # reproducible. Es el mismo UA que ya usa actualizar-diario.js.
           #
-          # Con reintentos: un solo timeout de 30 s botaba la corrida del día
-          # entero (curl 28). Hasta 5 intentos con 30 s de espera entre uno y
-          # otro, unos 4 minutos y medio en el peor caso. Si el ISP sigue sin
-          # responder después de eso, el job falla igual y avisa.
-          curl -sSf -o /dev/null -w 'ISP TLS OK (HTTP %{http_code})\n' --max-time 30 \
-            --retry 4 --retry-delay 30 --retry-all-errors \
-            -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36' \
-            https://www.ispch.gob.cl/normativa-anamed/
+          # Con reintentos: hasta 3 intentos con 20 s de espera.
+          #
+          # Si el ISP sigue sin responder, YA NO se aborta (17-10-2026): el ISP
+          # deja de responder a los runners de GitHub los fines de semana, y
+          # eso botaba todas las corridas de sábado y domingo aunque la BCN
+          # —ley, reglamentos y normas nuevas— respondiera normal. El pipeline
+          # sigue con el último listado conocido y los PDF en caché; la
+          # compuerta de calidad decide si se publica, y /api/estado muestra
+          # que el ISP no respondió.
+          if curl -sSf -o /dev/null -w 'ISP TLS OK (HTTP %{http_code})\n' --max-time 30 \
+               --retry 2 --retry-delay 20 --retry-all-errors \
+               -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36' \
+               https://www.ispch.gob.cl/normativa-anamed/; then
+            echo "ISP disponible."
+          else
+            echo "::warning::El ISP no responde desde GitHub: se sigue con el último listado conocido y los PDF en caché."
+          fi
 
       # Los 306 MB de PDF no están en el repo: se rebajan del ISP. La caché
       # evita rebajarlos todos los días. La clave sigue al snapshot del listado

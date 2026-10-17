@@ -146,6 +146,15 @@ function computeDiff(oldRecs, newRecs) {
 }
 
 // ---------- main ----------
+/** Primera corrida del tramo final del historial con este mismo contenido. */
+function desdeHistorial(contentHash) {
+  if (!fs.existsSync(HISTORIAL)) return null;
+  const h = JSON.parse(fs.readFileSync(HISTORIAL, 'utf8'));
+  let desde = null;
+  for (let i = h.length - 1; i >= 0 && h[i].contentHash === contentHash; i--) desde = h[i].timestamp;
+  return desde;
+}
+
 function run() {
   const ahora = new Date().toISOString();
   console.log(`[${ahora}] Descargando ${URL} ...`);
@@ -169,7 +178,14 @@ function run() {
   const diff = prev ? computeDiff(prev.records, records) : { nuevas: [], modificadas: [], eliminadas: [] };
   const nCambios = diff.nuevas.length + diff.modificadas.length + diff.eliminadas.length;
 
-  const snapshot = { fetchedAt: ahora, sourceUrl: URL, contentHash, total: records.length, records };
+  // contenidoDesde: desde cuándo el listado tiene ESTE contenido. fetchedAt
+  // cambia todos los días; si de él salía la vigencia de cada pasaje, el
+  // corpus entero se reescribía a diario sin un cambio real (y Railway
+  // redesplegaba por nada). La vigencia se ancla a esta fecha.
+  const contenidoDesde = prev && prev.contentHash === contentHash
+    ? (prev.contenidoDesde || desdeHistorial(contentHash) || prev.fetchedAt)
+    : ahora;
+  const snapshot = { fetchedAt: ahora, contenidoDesde, sourceUrl: URL, contentHash, total: records.length, records };
 
   // snapshot con timestamp solo cuando hay cambios (o es la línea base); latest.json siempre
   if (baseline || nCambios > 0) {

@@ -1,0 +1,1116 @@
+{
+  "vistas": {
+    "1220063": {
+      "norma": "Decreto 13",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "MODIFICA EL DECRETO SUPREMO N° 26, DE 2016, DEL MINISTERIO DE SALUD, REGLAMENTO PARA EL OTORGAMIENTO DE LA BONIFICACIÓN POR RETIRO VOLUNTARIO Y OTROS BENEFICIOS ESTABLECIDOS EN LA LEY N° 20.919",
+      "publicada": "2026-01-06",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «adjudica»"
+    },
+    "1220185": {
+      "norma": "Decreto 48",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "APRUEBA PLAN SECTORIAL DE MITIGACIÓN DEL CAMBIO CLIMATICO DEL MINISTERIO DE SALUD",
+      "publicada": "2026-01-09",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1220260": {
+      "norma": "Decreto 49",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "APRUEBA ACTUALIZACIÓN DEL PLAN SECTORIAL DE ADAPTACIÓN AL CAMBIO CLIMÁTICO SECTOR SALUD",
+      "publicada": "2026-01-09",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1220267": {
+      "norma": "Resolución 8168 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA; AGENCIA NACIONAL DE MEDICAMENTOS",
+      "titulo": "ABRE PERÍODO DE INFORMACIÓN PÚBLICA EN PROCEDIMIENTO DE RÉGIMEN DE CONTROL SANITARIO RESPECTO AL PRODUCTO ÁCIDO AZELAICO 15%",
+      "publicada": "2026-01-13",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «cosmetic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "8168",
+        "descripcion": "Abre período de información pública en procedimiento de régimen de control sanitario respecto al producto ácido azelaico 15%",
+        "fecha": "13/01/2026",
+        "categoria_corpus": "cosmeticos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1220286": {
+      "norma": "Decreto 29",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "APRUEBA REGLAMENTO SANITARIO SOBRE LABORES DE RECEPCIÓN Y ALMACENAMIENTO DE RESIDUOS DE PRODUCTOS PRIORITARIOS",
+      "publicada": "2026-01-14",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1220430": {
+      "norma": "Decreto 29",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "APRUEBA GARANTÍAS EXPLÍCITAS EN SALUD DEL RÉGIMEN GENERAL DE GARANTÍAS EN SALUD",
+      "publicada": "2026-01-16",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1220473": {
+      "norma": "Decreto 2",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "DECRETA ALERTA SANITARIA Y OTORGA FACULTADES EXTRAORDINARIAS QUE SEÑALA, POR EMERGENCIA PROVOCADA POR INCENDIOS EN LAS REGIONES DE ÑUBLE Y BIOBÍO",
+      "publicada": "2026-01-18",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «alerta sanitaria»"
+    },
+    "1220603": {
+      "norma": "Decreto 62 EXENTO",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "DETERMINA NÓMINA DE INTERVENCIONES SANITARIAS PRIORIZADAS OTORGADAS POR SISTEMA DE ACCESO PRIORIZADO PARA EL AÑO 2026 CONFORME A LA LEY Nº 21.736",
+      "publicada": "2026-01-22",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «presupuest»"
+    },
+    "1220753": {
+      "norma": "Resolución 8189 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-01-27",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «biologic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "8189",
+        "descripcion": "aprueba la prórroga del plazo para el cumplimiento de la resolución exenta N° E2854/24, que dispone la incorporación de nuevas cepas a la exigencia de demostración de aptitud de método microbiológico en ensayos de esterilidad y ausencia de patógenos de productos farmacéuticos",
+        "fecha": "27/01/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": true,
+        "aviso": "Extracto publicado en el Diario Oficial: el texto íntegro está en el sitio del ISP (www.ispch.cl).",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1220754": {
+      "norma": "Resolución 49 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-01-27",
+      "detectada": "2026-10-17",
+      "decision": "ya_en_corpus",
+      "motivo": "el corpus ya la trae por el listado del ISP o una fuente"
+    },
+    "1220755": {
+      "norma": "Resolución 140 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-01-27",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «farmacovigil»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "140",
+        "descripcion": "establece directrices para aplicar mecanismos de confianza regulatoria en funciones del Subdepartamento Farmacovigilancia del Departamento Agencia Nacional de Medicamentos",
+        "fecha": "27/01/2026",
+        "categoria_corpus": "farmacovigilancia",
+        "extracto": true,
+        "aviso": "Extracto publicado en el Diario Oficial: el texto íntegro está en el sitio del ISP (www.ispch.cl).",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1221080": {
+      "norma": "Decreto 8",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "MODIFICA DECRETO SUPREMO N° 977, DE 1996, DEL MINISTERIO DE SALUD, REGLAMENTO SANITARIO DE LOS ALIMENTOS",
+      "publicada": "2026-02-04",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «aliment»",
+      "fuente": {
+        "tipo": "Decreto",
+        "numero": "8",
+        "descripcion": "Modifica decreto supremo n° 977, de 1996, del ministerio de salud, reglamento sanitario de los alimentos",
+        "fecha": "04/02/2026",
+        "categoria_corpus": "alimentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1221081": {
+      "norma": "Decreto 1 EXENTO",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "APRUEBA \"NORMA GENERAL TÉCNICA N° 256 SOBRE PERSONAS CON DIAGNÓSTICO DE ENFERMEDADES POCO FRECUENTES, RARAS O HUÉRFANAS\"",
+      "publicada": "2026-02-04",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «internacion»",
+      "fuente": {
+        "tipo": "Decreto Exento",
+        "numero": "1",
+        "descripcion": "Aprueba \"norma general técnica n° 256 sobre personas con diagnóstico de enfermedades poco frecuentes, raras o huérfanas\"",
+        "fecha": "04/02/2026",
+        "categoria_corpus": "importacion_y_exportacion_control_y_vigilancia",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1221127": {
+      "norma": "Decreto 4 EXENTO",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "DISPONE VACUNACIÓN OBLIGATORIA CONTRA INFLUENZA PARA EL AÑO 2026 A GRUPO DE POBLACIÓN QUE INDICA",
+      "publicada": "2026-02-05",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «vacunacion obligatoria»"
+    },
+    "1221337": {
+      "norma": "Decreto 9 EXENTO",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "MODIFICA EL DECRETO Nº 500, DE 2012, DEL MINISTERIO DE SALUD, QUE APRUEBA LA NORMA TÉCNICA Nº 136, NOMINADA \"NORMA QUE DETERMINA LOS PRINCIPIOS ACTIVOS CONTENIDOS EN LOS PRODUCTOS FARMACÉUTICOS QUE DEBEN DEMOSTRAR SU EQUIVALENCIA TERAPÉUTICA Y LISTA DE PRODUCTOS FARMACÉUTICOS QUE SIRVEN DE REFERENCIA DE LOS MISMOS\"",
+      "publicada": "2026-02-12",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Decreto Exento",
+        "numero": "9",
+        "descripcion": "Modifica el decreto nº 500, de 2012, del ministerio de salud, que aprueba la norma técnica nº 136, nominada \"norma que determina los principios activos contenidos en los productos farmacéuticos que deben demostrar su equivalencia terapéutica y lista de productos farmacéuticos que sirven de referencia de los mismos\"",
+        "fecha": "12/02/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1221338": {
+      "norma": "Resolución 562",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "MODIFICA LA RESOLUCIÓN Nº 191 EXENTA, DE 2021, QUE ESTABLECE LA ESTRUCTURA ORGÁNICA, FUNCIONES Y DELEGACIÓN DE FIRMA Y FACULTADES DE LAS DISTINTAS DEPENDENCIAS DEL INSTITUTO DE SALUD PÚBLICA DE CHILE",
+      "publicada": "2026-02-12",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «estructura organica»"
+    },
+    "1221362": {
+      "norma": "Decreto 46",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "APRUEBA REGLAMENTO QUE ESTABLECE LOS REQUISITOS PARA AUTORIZAR EL USO DE ESCORIAS DE COBRE COMO ÁRIDOS ARTIFICIALES PARA LA CONSTRUCCIÓN",
+      "publicada": "2026-02-12",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1221732": {
+      "norma": "Resolución 1697 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "APRUEBA DOCUMENTO DENOMINADO \"PROTOCOLO DE VIGILANCIA OCUPACIONAL POR EXPOSICIÓN A FACTORES DE RIESGO DE TRASTORNOS MUSCULOESQUELÉTICOS V3\" Y DEJA SIN EFECTO RESOLUCIONES QUE INDICA",
+      "publicada": "2026-02-25",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1221816": {
+      "norma": "Decreto 7",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "DECRETA ALERTA SANITARIA Y OTORGA FACULTADES EXTRAORDINARIAS QUE INDICA POR AUMENTO DE VIRUS RESPIRATORIOS ESTACIONALES",
+      "publicada": "2026-02-28",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «alerta sanitaria»"
+    },
+    "1222105": {
+      "norma": "Resolución 477 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "MODIFICA LA RESOLUCIÓN N° E6267 EXENTA, DE FECHA 10 DE SEPTIEMBRE DE 2025, QUE APROBÓ EXIGENCIAS DE MODIFICACIÓN DE RÓTULO Y FOLLETOS DE INFORMACIÓN AL PACIENTE Y AL PROFESIONAL PARA PRODUCTOS FARMACÉUTICOS CON EFECTOS SOBRE LA CAPACIDAD DE CONDUCIR VEHÍCULOS Y OPERAR MAQUINARIAS",
+      "publicada": "2026-03-09",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "477",
+        "descripcion": "Modifica la resolución n° e6267 exenta, de fecha 10 de septiembre de 2025, que aprobó exigencias de modificación de rótulo y folletos de información al paciente y al profesional para productos farmacéuticos con efectos sobre la capacidad de conducir vehículos y operar maquinarias",
+        "fecha": "09/03/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1222106": {
+      "norma": "Resolución 675 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "ACTUALIZA LISTADO DE SUJETOS PASIVOS DEL INSTITUTO DE SALUD PÚBLICA DE CHILE Y DEJA SIN EFECTO RESOLUCIÓN QUE INDICA",
+      "publicada": "2026-03-09",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «sujetos pasivos»"
+    },
+    "1222107": {
+      "norma": "Resolución 405 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-03-09",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1222108": {
+      "norma": "Resolución 435 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-03-09",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «farmacias»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "435",
+        "descripcion": "aprueba \"Guía para la elaboración de preparados farmacéuticos homeopáticos en recetarios de farmacias\", elaborado por el Departamento Agencia Nacional de Medicamentos",
+        "fecha": "09/03/2026",
+        "categoria_corpus": "establecimientos_autorizacion_y_fiscalizacion",
+        "extracto": true,
+        "aviso": "Extracto publicado en el Diario Oficial: el texto íntegro está en el sitio del ISP (www.ispch.cl).",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1222109": {
+      "norma": "Resolución 531 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-03-09",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1222110": {
+      "norma": "Resolución 533 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-03-09",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «medicament»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "533",
+        "descripcion": "establece directrices para aplicar mecanismos de confianza regulatoria en funciones del Subdepartamento de Inspecciones del Departamento Agencia Nacional de Medicamentos",
+        "fecha": "09/03/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": true,
+        "aviso": "Extracto publicado en el Diario Oficial: el texto íntegro está en el sitio del ISP (www.ispch.cl).",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1222111": {
+      "norma": "Resolución 698 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-03-09",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1222112": {
+      "norma": "Resolución 873 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-03-09",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1222456": {
+      "norma": "Decreto 11 EXENTO",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "APRUEBA NORMA TÉCNICA N° 257 DE MEDICAMENTOS DE TERAPIA AVANZADA",
+      "publicada": "2026-03-18",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «medicament»",
+      "fuente": {
+        "tipo": "Decreto Exento",
+        "numero": "11",
+        "descripcion": "Aprueba norma técnica n° 257 de medicamentos de terapia avanzada",
+        "fecha": "18/03/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1222458": {
+      "norma": "Resolución 1238 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA; AGENCIA NACIONAL DE MEDICAMENTOS",
+      "titulo": "ABRE PERÍODO DE INFORMACIÓN PÚBLICA QUE INDICA",
+      "publicada": "2026-03-18",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «medicament»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "1238",
+        "descripcion": "Abre período de información pública que indica",
+        "fecha": "18/03/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1222459": {
+      "norma": "Resolución 1239 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA; AGENCIA NACIONAL DE MEDICAMENTOS",
+      "titulo": "ÁBRESE UN PERÍODO DE INFORMACIÓN PÚBLICA QUE INDICA",
+      "publicada": "2026-03-18",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «medicament»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "1239",
+        "descripcion": "Ábrese un período de información pública que indica",
+        "fecha": "18/03/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1222460": {
+      "norma": "Resolución 1240 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA; AGENCIA NACIONAL DE MEDICAMENTOS",
+      "titulo": "ABRE PERÍODO DE INFORMACIÓN PÚBLICA QUE INDICA",
+      "publicada": "2026-03-18",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «medicament»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "1240",
+        "descripcion": "Abre período de información pública que indica",
+        "fecha": "18/03/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1222461": {
+      "norma": "Resolución 1241 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA; AGENCIA NACIONAL DE MEDICAMENTOS",
+      "titulo": "ABRE PERÍODO DE INFORMACIÓN PÚBLICA QUE INDICA",
+      "publicada": "2026-03-18",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «medicament»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "1241",
+        "descripcion": "Abre período de información pública que indica",
+        "fecha": "18/03/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1222462": {
+      "norma": "Resolución 1242 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA; AGENCIA NACIONAL DE MEDICAMENTOS",
+      "titulo": "ABRE PERÍODO DE INFORMACIÓN PÚBLICA QUE INDICA",
+      "publicada": "2026-03-18",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «medicament»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "1242",
+        "descripcion": "Abre período de información pública que indica",
+        "fecha": "18/03/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1222514": {
+      "norma": "Decreto 25 EXENTO",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "INCORPORA LOS DISPOSITIVOS MÉDICOS Y DISPOSITIVOS MÉDICOS IN VITRO QUE SE INDICAN, AL RÉGIMEN DE CONTROL SANITARIO ESTABLECIDO EN EL ARTÍCULO 111° DEL CÓDIGO SANITARIO",
+      "publicada": "2026-03-19",
+      "detectada": "2026-10-17",
+      "decision": "ya_en_corpus",
+      "motivo": "el corpus ya la trae por el listado del ISP o una fuente"
+    },
+    "1222599": {
+      "norma": "Decreto 31 EXENTO",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "INCORPORA A LOS REACTIVOS DE DIAGNÓSTICO IN VITRO PARA CALIFICACIÓN MICROBIOLÓGICA DE DONACIONES EN SERVICIOS DE SANGRE, AL RÉGIMEN DE CONTROL SANITARIO ESTABLECIDO EN EL ARTÍCULO 111° DEL CÓDIGO SANITARIO",
+      "publicada": "2026-03-24",
+      "detectada": "2026-10-17",
+      "decision": "ya_en_corpus",
+      "motivo": "el corpus ya la trae por el listado del ISP o una fuente"
+    },
+    "1222708": {
+      "norma": "Resolución 273 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "DECLARA LA SUFICIENCIA DE FONDOS PARA LA CONVOCATORIA DEL CONCURSO PÚBLICO PARA EL PRIMER SEMESTRE DEL AÑO 2026 DEL FONDO NACIONAL DEL CÁNCER",
+      "publicada": "2026-03-27",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «concurso publico»"
+    },
+    "1222733": {
+      "norma": "Resolución 1243 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-03-28",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «dispositivos medic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "1243",
+        "descripcion": "aprueba \"Guía de evaluación del transporte de dispositivos médicos y dispositivos médicos In Vitro con cadena de frío\", elaborada por el Departamento Agencia Nacional de Dispositivos Médicos",
+        "fecha": "28/03/2026",
+        "categoria_corpus": "dispositivos_medicos",
+        "extracto": true,
+        "aviso": "Extracto publicado en el Diario Oficial: el texto íntegro está en el sitio del ISP (www.ispch.cl).",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1222734": {
+      "norma": "Resolución 1307 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-03-28",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "1307",
+        "descripcion": "establece directrices para aplicar mecanismos de confianza regulatoria en funciones del Subdepartamento de Registro de Productos Farmacéuticos para registro de productos farmacéuticos biológicos, y deja sin efecto resolución que indica",
+        "fecha": "28/03/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": true,
+        "aviso": "Extracto publicado en el Diario Oficial: el texto íntegro está en el sitio del ISP (www.ispch.cl).",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1222770": {
+      "norma": "Resolución 437 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "DISPONE USO OBLIGATORIO DE MASCARILLAS EN SERVICIOS DE URGENCIA DE TODOS LOS NIVELES DE ATENCIÓN, TANTO PÚBLICOS COMO PRIVADOS",
+      "publicada": "2026-03-31",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «alerta sanitaria»"
+    },
+    "1222858": {
+      "norma": "Decreto 26 EXENTO",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "MODIFICA EL DECRETO N° 28 EXENTO, DE 2012, DEL MINISTERIO DE SALUD, QUE \"APRUEBA LA NORMA TÉCNICA N° 127 SOBRE BUENAS PRÁCTICAS DE MANUFACTURA PARA LA INDUSTRIA DE PRODUCTOS FARMACÉUTICOS, RELACIONADA CON EL DECRETO N° 3, DE 2010, MEDIANTE EL CUAL SE APROBÓ EL REGLAMENTO DEL SISTEMA NACIONAL DE CONTROL DE PRODUCTOS FARMACÉUTICOS DE USO HUMANO\"",
+      "publicada": "2026-04-02",
+      "detectada": "2026-10-17",
+      "decision": "ya_en_corpus",
+      "motivo": "el corpus ya la trae por el listado del ISP o una fuente"
+    },
+    "1222993": {
+      "norma": "Resolución 331 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "MODIFICA LA RESOLUCIÓN N° 96 EXENTA, DE 1996, QUE APRUEBA ARANCEL DE ACCIONES DE PROTECCIÓN DE SALUD; Y LA RESOLUCIÓN N° 473 EXENTA, DE 2008, QUE APRUEBA ARANCELES DE PRESTACIÓN DE SALUD AMBIENTAL, AMBAS DEL MINISTERIO DE SALUD",
+      "publicada": "2026-04-09",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «aranceles»"
+    },
+    "1223236": {
+      "norma": "Decreto 18",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "DECRETA ALERTA SANITARIA POR EL PERÍODO QUE SE SEÑALA Y OTORGA FACULTADES EXTRAORDINARIAS QUE INDICA POR EMERGENCIA DE SALUD PÚBLICA ASOCIADA A LAS LISTAS DE ESPERA ONCOLÓGICAS NO GES Y GARANTÍAS DE OPORTUNIDAD ONCOLÓGICAS GES RETRASADAS",
+      "publicada": "2026-04-15",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «alerta sanitaria»"
+    },
+    "1223636": {
+      "norma": "Resolución 5693",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN GABAPENTINA EN SU COMPOSICIÓN",
+      "publicada": "2026-04-29",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución",
+        "numero": "5693",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, en la forma que indica, para los productos farmacéuticos que contienen gabapentina en su composición",
+        "fecha": "29/04/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1223637": {
+      "norma": "Resolución 5841 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN VINORELBINA EN SU COMPOSICIÓN",
+      "publicada": "2026-04-29",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "5841",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, en la forma que indica, para los productos farmacéuticos que contienen vinorelbina en su composición",
+        "fecha": "29/04/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1223660": {
+      "norma": "Decreto 50",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "PRORROGA VIGENCIA DEL DECRETO N° 38, DE 6 DE ABRIL DE 2022, DEL MINISTERIO DE SALUD, QUE DECRETA ALERTA SANITARIA POR EL PERÍODO QUE SE SEÑALA Y OTORGA FACULTADES EXTRAORDINARIAS QUE INDICA POR PRESENCIA DE MAREA ROJA EN LAS REGIONES DE LOS LAGOS Y DE AYSÉN",
+      "publicada": "2026-04-30",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «alerta sanitaria»"
+    },
+    "1223820": {
+      "norma": "Resolución 2112 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN QUETIAPINA EN SU COMPOSICIÓN",
+      "publicada": "2026-05-06",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "2112",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, en la forma que indica, para los productos farmacéuticos que contienen quetiapina en su composición",
+        "fecha": "06/05/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1223882": {
+      "norma": "Resolución 1199 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "APRUEBA PRESTACIONES Y ARANCELES DEL INSTITUTO DE SALUD PÚBLICA DE CHILE",
+      "publicada": "2026-05-07",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «prestaciones y aranceles»"
+    },
+    "1223883": {
+      "norma": "Resolución 1729 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "MODIFICA RESOLUCIÓN N° E1.199 EXENTA, DE 26 DE FEBRERO DE 2026, QUE APRUEBA PRESTACIONES Y ARANCELES DEL INSTITUTO DE SALUD PÚBLICA DE CHILE",
+      "publicada": "2026-05-07",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «prestaciones y aranceles»"
+    },
+    "1223884": {
+      "norma": "Resolución 1903 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-05-07",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «registro sanitario»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "1903",
+        "descripcion": "modifica resolución exenta Nº 405, de 20 de febrero de 2026, que aprobó la guía para el registro sanitario de productos farmacéuticos homeopáticos",
+        "fecha": "07/05/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": true,
+        "aviso": "Extracto publicado en el Diario Oficial: el texto íntegro está en el sitio del ISP (www.ispch.cl).",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1223885": {
+      "norma": "Resolución 2050 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-05-07",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «dispositivos medic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "2050",
+        "descripcion": "aprueba \"Guía de investigación clínica de dispositivos médicos en humanos",
+        "fecha": "07/05/2026",
+        "categoria_corpus": "dispositivos_medicos",
+        "extracto": true,
+        "aviso": "Extracto publicado en el Diario Oficial: el texto íntegro está en el sitio del ISP (www.ispch.cl).",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1224058": {
+      "norma": "Resolución 2255 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN TERIFLUNOMIDA EN SU COMPOSICIÓN",
+      "publicada": "2026-05-13",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "2255",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, en la forma que indica, para los productos farmacéuticos que contienen teriflunomida en su composición",
+        "fecha": "13/05/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1224354": {
+      "norma": "Resolución 2368 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "ESTABLECE LA ESTRUCTURA ORGÁNICA, FUNCIONES Y DELEGACIÓN DE FIRMA Y FACULTADES DE LAS DISTINTAS DEPENDENCIAS DEL INSTITUTO DE SALUD PÚBLICA DE CHILE Y DEJA SIN EFECTO LA RESOLUCIÓN QUE INDICA.",
+      "publicada": "2026-05-19",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «estructura organica»"
+    },
+    "1224849": {
+      "norma": "Resolución 2331 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-06-09",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1224850": {
+      "norma": "Resolución 2518 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-06-09",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1224897": {
+      "norma": "Resolución 2802 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN GENTAMICINA (USO SISTÉMICO) EN SU COMPOSICIÓN",
+      "publicada": "2026-06-10",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "2802",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, en la forma que indica, para los productos farmacéuticos que contienen gentamicina (uso sistémico) en su composición",
+        "fecha": "10/06/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1225587": {
+      "norma": "Decreto 59",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "MODIFICA DECRETO SUPREMO N° 13, DE 2015, DEL MINISTERIO DE SALUD, QUE MODIFICA EL REGLAMENTO SANITARIO DE LOS ALIMENTOS, EN EL SENTIDO QUE INDICA",
+      "publicada": "2026-06-30",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «aliment»",
+      "fuente": {
+        "tipo": "Decreto",
+        "numero": "59",
+        "descripcion": "Modifica decreto supremo n° 13, de 2015, del ministerio de salud, que modifica el reglamento sanitario de los alimentos, en el sentido que indica",
+        "fecha": "30/06/2026",
+        "categoria_corpus": "alimentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1225739": {
+      "norma": "Decreto 40 EXENTO",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "MODIFICA EL DECRETO Nº 28 EXENTO, DE 2012, DEL MINISTERIO DE SALUD, QUE APRUEBA LA NORMA TÉCNICA Nº 127 SOBRE \"BUENAS PRÁCTICAS DE MANUFACTURA PARA LA INDUSTRIA DE PRODUCTOS FARMACÉUTICOS\"",
+      "publicada": "2026-07-03",
+      "detectada": "2026-10-17",
+      "decision": "ya_en_corpus",
+      "motivo": "el corpus ya la trae por el listado del ISP o una fuente"
+    },
+    "1226254": {
+      "norma": "Resolución 3058 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-07-22",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1226255": {
+      "norma": "Resolución 3113 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-07-22",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "relevante sin materia específica",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "3113",
+        "descripcion": "aprueba \"Recomendaciones para la medición de niveles plasmáticos de fármacos inmunosupresores en el monitoreo de drogas terapéuticas en el laboratorio clínico\"",
+        "fecha": "22/07/2026",
+        "categoria_corpus": "otros",
+        "extracto": true,
+        "aviso": "Extracto publicado en el Diario Oficial: el texto íntegro está en el sitio del ISP (www.ispch.cl).",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1226288": {
+      "norma": "Decreto 64",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "DECLARA ALERTA SANITARIA POR EL PERÍODO QUE SE SEÑALA Y OTORGA FACULTADES EXTRAORDINARIAS QUE INDICA POR EMERGENCIA PROVOCADA POR SISTEMA FRONTAL EN LA REGIÓN DE TARAPACÁ, EN LA REGIÓN DE ANTOFAGASTA, EN LA REGIÓN DE ATACAMA Y EN LA REGIÓN DE COQUIMBO",
+      "publicada": "2026-07-22",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «alerta sanitaria»"
+    },
+    "1226348": {
+      "norma": "Resolución 3529 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN ETOPÓSIDO COMO SOLUCIÓN INYECTABLE",
+      "publicada": "2026-07-24",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "3529",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, en la forma que indica, para los productos farmacéuticos que contienen etopósido como solución inyectable",
+        "fecha": "24/07/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1226871": {
+      "norma": "Resolución 3745 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN ÓXIDO NÍTRICO EN SU COMPOSICIÓN",
+      "publicada": "2026-08-10",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "3745",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, en la forma que indica, para los productos farmacéuticos que contienen óxido nítrico en su composición",
+        "fecha": "10/08/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1226872": {
+      "norma": "Resolución 3746 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN VENLAFAXINA EN SU COMPOSICIÓN",
+      "publicada": "2026-08-10",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "3746",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, en la forma que indica, para los productos farmacéuticos que contienen venlafaxina en su composición",
+        "fecha": "10/08/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1227014": {
+      "norma": "Resolución 3852 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "MODIFICA FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE SE INDICA, E INSTRUYE ACTUALIZAR PLAN DE MANEJO DE RIESGOS PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN VALPROATO, O SUS DERIVADOS, EN SU COMPOSICIÓN",
+      "publicada": "2026-08-13",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "3852",
+        "descripcion": "Modifica folletos de información al profesional y al paciente, en la forma que se indica, e instruye actualizar plan de manejo de riesgos para los productos farmacéuticos que contienen valproato, o sus derivados, en su composición",
+        "fecha": "13/08/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1227205": {
+      "norma": "Resolución 3609 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "APRUEBA INSTRUCTIVO PARA EL USUARIO SOBRE EL CONTROL DE SERIE DE PRODUCTOS FARMACÉUTICOS DE USO HUMANO Y SUS TRÁMITES ASOCIADOS, Y DEJA SIN EFECTO RESOLUCIÓN QUE INDICA",
+      "publicada": "2026-08-18",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "3609",
+        "descripcion": "Aprueba instructivo para el usuario sobre el control de serie de productos farmacéuticos de uso humano y sus trámites asociados, y deja sin efecto resolución que indica",
+        "fecha": "18/08/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1227206": {
+      "norma": "Resolución 3741 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-08-18",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «antiglobulina»"
+    },
+    "1227266": {
+      "norma": "Resolución 3921 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA; AGENCIA NACIONAL DE MEDICAMENTOS",
+      "titulo": "ABRE PERÍODO DE INFORMACIÓN PÚBLICA RESPECTO DEL PRODUCTO BESTCAL 60 CÁPSULAS",
+      "publicada": "2026-08-19",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «medicament»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "3921",
+        "descripcion": "Abre período de información pública respecto del producto bestcal 60 cápsulas",
+        "fecha": "19/08/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1227306": {
+      "norma": "Resolución 170 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; FONDO NACIONAL DE SALUD",
+      "titulo": "MODIFICA RESOLUCIÓN 1G/N° 106 EXENTA, DE 2024, QUE ESTABLECE LA ESTRUCTURA Y ORGANIZACIÓN INTERNA DEL FONDO NACIONAL DE SALUD Y DETERMINA LOS COMETIDOS QUE CORRESPONDEN A SUS DIVISIONES Y DIRECCIONES ZONALES",
+      "publicada": "2026-08-20",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «designa»"
+    },
+    "1227398": {
+      "norma": "Decreto 71",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "MODIFICA DECRETO N° 64, DE 20 DE JULIO DE 2026, DEL MINISTERIO DE SALUD, QUE DECLARA ALERTA SANITARIA Y OTORGA FACULTADES EXTRAORDINARIAS QUE INDICA POR EMERGENCIA PROVOCADA POR SISTEMA FRONTAL EN LA REGIÓN DE ATACAMA Y EN LA REGIÓN DE COQUIMBO, EXTENDIÉNDOLA A LAS REGIONES DE TARAPACÁ Y ANTOFAGASTA",
+      "publicada": "2026-08-22",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «alerta sanitaria»"
+    },
+    "1227420": {
+      "norma": "Resolución 4010 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN LITIO",
+      "publicada": "2026-08-24",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "4010",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, en la forma que indica, para los productos farmacéuticos que contienen litio",
+        "fecha": "24/08/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1227527": {
+      "norma": "Resolución 895 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "MODIFICA RESOLUCIÓN N° 403 EXENTA, DE 11 DE JULIO DE 2013, DEL MINISTERIO DE SALUD, QUE APRUEBA NORMA GENERAL TÉCNICA N° 151 SOBRE ESTÁNDARES DE ACREDITACIÓN DE LOS COMITÉS ÉTICO CIENTÍFICOS",
+      "publicada": "2026-08-26",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1227654": {
+      "norma": "Resolución 20681",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "MODIFICA RESOLUCIÓN N° 437 EXENTA, DE 24 DE MARZO DE 2026, DEL MINISTERIO DE SALUD, QUE DISPONE USO OBLIGATORIO DE MASCARILLAS EN SERVICIOS DE URGENCIA DE TODOS LOS NIVELES DE ATENCIÓN, TANTO PÚBLICOS COMO PRIVADOS, EXTENDIENDO LA OBLIGATORIEDAD DE SU USO HASTA EL 30 DE SEPTIEMBRE DE 2026",
+      "publicada": "2026-09-01",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "administrativa: «alerta sanitaria»"
+    },
+    "1227739": {
+      "norma": "Resolución 4011 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-09-02",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "4011",
+        "descripcion": "aprueba lineamientos y exigencias para \"Productos farmacéuticos peligrosos\"",
+        "fecha": "02/09/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": true,
+        "aviso": "Extracto publicado en el Diario Oficial: el texto íntegro está en el sitio del ISP (www.ispch.cl).",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1227740": {
+      "norma": "Resolución 4142 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-09-02",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1227741": {
+      "norma": "Resolución 4143 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-09-02",
+      "detectada": "2026-10-17",
+      "decision": "descartada",
+      "motivo": "sin materia ANAMED"
+    },
+    "1227742": {
+      "norma": "Resolución 4235 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-09-02",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «registro sanitario»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "4235",
+        "descripcion": "aprueba el documento denominado \"Agua para uso farmacéutico: Guía para su registro sanitario y exigencias para antibióticos de uso oral\"",
+        "fecha": "02/09/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": true,
+        "aviso": "Extracto publicado en el Diario Oficial: el texto íntegro está en el sitio del ISP (www.ispch.cl).",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1227948": {
+      "norma": "Resolución 3265 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "DETERMINA RÉGIMEN DE CONTROL SANITARIO AL PRODUCTO KIT DE PRUEBA DE ALIENTO CON UREA MARCADA CON CARBONO -14",
+      "publicada": "2026-09-08",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «dispositivos medic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "3265",
+        "descripcion": "Determina régimen de control sanitario al producto kit de prueba de aliento con urea marcada con carbono -14",
+        "fecha": "08/09/2026",
+        "categoria_corpus": "dispositivos_medicos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1228618": {
+      "norma": "Resolución 4491 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN ANTICOAGULANTES ORALES EN SU COMPOSICIÓN",
+      "publicada": "2026-09-29",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "4491",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, en la forma que indica, para los productos farmacéuticos que contienen anticoagulantes orales en su composición",
+        "fecha": "29/09/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1228843": {
+      "norma": "Resolución 4492  EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN TIRZEPATIDA EN SU COMPOSICIÓN",
+      "publicada": "2026-10-05",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "4492",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, en la forma que indica, para los productos farmacéuticos que contienen tirzepatida en su composición",
+        "fecha": "05/10/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1229005": {
+      "norma": "Resolución 4925 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACIÓN AL PROFESIONAL Y AL PACIENTE, PARA LOS PRODUCTOS FARMACÉUTICOS QUE CONTIENEN ERITROMICINA DE USO SISTÉMICO, EN LA FORMA QUE INDICA",
+      "publicada": "2026-10-13",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «productos farmaceutic»",
+      "fuente": {
+        "tipo": "Resolución Exenta",
+        "numero": "4925",
+        "descripcion": "Instruye actualizar folletos de información al profesional y al paciente, para los productos farmacéuticos que contienen eritromicina de uso sistémico, en la forma que indica",
+        "fecha": "13/10/2026",
+        "categoria_corpus": "medicamentos",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    }
+  },
+  "exclusiones": [],
+  "actualizado": "2026-10-17"
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><Norma xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.leychile.cl/esquemas" xsi:schemaLocation="http://www.leychile.cl/esquemas http://www.leychile.cl/esquemas/EsquemaIntercambioNorma-v1-0.xsd" normaId="1223637" esTratado="no tratado" fechaVersion="2026-04-29" SchemaVersion="1.0" derogado="no derogado">
+  <Identificador fechaPromulgacion="2025-08-25" fechaPublicacion="2026-04-29">
+    <TiposNumeros>
+      <TipoNumero>
+        <Tipo>Resoluci&#243;n</Tipo>
+        <Numero>5841 EXENTA</Numero>
+      </TipoNumero>
+      <TipoNumero>
+        <Tipo>Resoluci&#243;n</Tipo>
+        <Numero>E 5841 EXENTA</Numero>
+      </TipoNumero>
+    </TiposNumeros>
+    <Organismos>
+      <Organismo>MINISTERIO DE SALUD</Organismo>
+      <Organismo>INSTITUTO DE SALUD P&#218;BLICA</Organismo>
+    </Organismos>
+  </Identificador>
+  <Metadatos>
+    <TituloNorma>INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACI&#211;N AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMAC&#201;UTICOS QUE CONTIENEN VINORELBINA EN SU COMPOSICI&#211;N</TituloNorma>
+    
+    
+    
+    <IdentificacionFuente>Diario Oficial</IdentificacionFuente>
+    <NumeroFuente>44437</NumeroFuente>
+  </Metadatos>
+  <Encabezado fechaVersion="2026-04-29" derogado="no derogado">
+    <Texto>INSTRUYE ACTUALIZAR FOLLETOS DE INFORMACI&#211;N AL PROFESIONAL Y AL PACIENTE, EN LA FORMA QUE INDICA, PARA LOS PRODUCTOS FARMAC&#201;UTICOS QUE CONTIENEN VINORELBINA EN SU COMPOSICI&#211;N
+     
+     N&#250;m. E 5.841 exenta.- Santiago, 25 de agosto de 2025.
+     
+     Vistos:
+     
+     Estos antecedentes; el Acta de la reuni&#243;n del 28 noviembre al 1 de diciembre de 2022 del Comit&#233; para la Evaluaci&#243;n de Riesgos en Farmacovigilancia (PRAC, por sus siglas en ingl&#233;s) de la Agencia Europea de Medicamentos (EMA, por sus siglas en ingl&#233;s), las Conclusiones cient&#237;ficas del Grupo de Coordinaci&#243;n para el Reconocimiento Mutuo y los Procedimientos Descentralizados - Humanos (CMDh) y fundamentos de la variaci&#243;n, modificaciones de la informaci&#243;n del producto y calendario de aplicaci&#243;n-PSUSA/00003124/202204 de la EMA, publicado el 24/01/2023, el Bolet&#237;n sobre seguridad de medicamentos de uso humano de diciembre de 2022, publicado por la Agencia Espa&#241;ola de Medicamentos y Productos Sanitarios (AEMPS) el 08/02/2023; el Informe T&#233;cnico de seguridad N&#186; 23-078 elaborado por la secci&#243;n Informaci&#243;n de Medicamentos del Subdepartamento Farmacovigilancia relacionado con el principio activo vinorelbina; la nota informativa de Farmacovigilancia de este Instituto "Revisi&#243;n de seguridad de vinorelbina-nuevas reacciones adversas" del 7 de noviembre de 2024, y
+     
+     Considerando:
+     
+     Primero: Que, el decreto con fuerza de ley N&#186; 1, de 2005, del Ministerio de Salud, que fija el texto refundido, coordinado y sistematizado del decreto ley N&#186; 2.763, de 1979, y de las leyes N&#186; 18.933 y N&#186; 18.469, establece, en su art&#237;culo 59, que es funci&#243;n de este Instituto ejercer las actividades relativas al control de calidad de medicamentos, alimentos de uso m&#233;dico y dem&#225;s productos sujetos a control sanitario.
+     A su turno, de conformidad con lo dispuesto en el art&#237;culo 96 del C&#243;digo Sanitario, el Instituto de Salud P&#250;blica de Chile es la autoridad encargada en todo el territorio nacional del control sanitario de los productos farmac&#233;uticos, de los establecimientos del &#225;rea y de fiscalizar el cumplimiento de las disposiciones que sobre esta materia se contienen en el citado C&#243;digo y sus reglamentos.
+     Segundo: Que, en particular, el art&#237;culo 63 del decreto supremo 3, de 2010, del Ministerio de Salud, dispone que "Por resoluci&#243;n fundada del Instituto, de oficio o a petici&#243;n del titular, podr&#225;n modificarse algunas de las menciones contenidas en la resoluci&#243;n del registro sanitario de una especialidad farmac&#233;utica".
+     A su turno, el art&#237;culo 64 del mismo reglamento estatuye que "El Instituto podr&#225; exigir, mediante resoluci&#243;n fundada, realizar o exigir que dentro de un plazo definido se realicen las modificaciones del registro que sean necesarias para garantizar la calidad, seguridad y eficacia en el uso de una o varias especialidades farmac&#233;uticas, cuando mediante antecedentes cient&#237;ficos emanados de la Organizaci&#243;n Mundial de la Salud, de organismos o entidades nacionales, internacionales o extranjeras o de su propia investigaci&#243;n, se forme la convicci&#243;n que alguna de las condiciones de uso autorizadas presenta un riesgo en su seguridad y eficacia".
+     Por su parte, el art&#237;culo 71 del mismo decreto dispone &#8211;en su parte pertinente&#8211; que "el titular de registro sanitario es el responsable final de la seguridad y eficacia del medicamento. Sin perjuicio de las obligaciones espec&#237;ficas establecidas en atenci&#243;n a la naturaleza de cada especialidad farmac&#233;utica, todo titular de registro sanitario estar&#225; obligado a: 5) Mantener actualizado el registro sanitario, con arreglo al estado de la ciencia y la t&#233;cnica, especialmente en relaci&#243;n con los m&#233;todos de control de calidad, as&#237; como a la seguridad y la eficacia de la especialidad farmac&#233;utica".
+     Tercero: Que vinorelbina es un f&#225;rmaco antineopl&#225;sico de la familia de los alcaloides de la vinca que est&#225; registrado en Chile desde 1993. Actualmente se encuentra aprobado para el tratamiento del c&#225;ncer de pulm&#243;n no microc&#237;tico y del c&#225;ncer de mama avanzado e incluido como garant&#237;as exigibles por Ley (GES), para las personas afiliadas a Fonasa o a Isapre, para el tratamiento del c&#225;ncer de pulm&#243;n en personas de 15 a&#241;os y m&#225;s.
+     Cuarto: Que en el acta de la reuni&#243;n del PRAC se evidencia que, seg&#250;n la revisi&#243;n de los datos de seguridad y eficacia, la relaci&#243;n beneficio-riesgo de los productos que contienen vinorelbina en las indicaciones aprobadas se mantiene sin cambios. No obstante, la informaci&#243;n del producto debe actualizarse para a&#241;adir la embolia pulmonar, el s&#237;ndrome de encefalopat&#237;a posterior reversible y la hiperpigmentaci&#243;n cut&#225;nea (hiperpigmentaci&#243;n supravenosa serpentina) como efectos adversos con una frecuencia desconocida.
+     Quinto: Que, posteriormente, en enero del a&#241;o 2023, el Grupo de Coordinaci&#243;n de Reconocimiento Mutuo y Procedimientos Descentralizados - Humano (CMDh) de la EMA, concord&#243; con las conclusiones realizadas por el PRAC, considerando que el balance beneficio-riesgo del vinorelbina se mantiene, siempre y cuando se realicen los cambios pertinentes en la informaci&#243;n del producto. Esto, teniendo en cuenta la informaci&#243;n disponible sobre los riesgos de embolia pulmonar, s&#237;ndrome de encefalopat&#237;a posterior reversible e hiperpigmentaci&#243;n de la piel (hiperpigmentaci&#243;n supravenosa en serpentina) obtenida de los ensayos cl&#237;nicos, la literatura, y las notificaciones espont&#225;neas, que incluyen, en algunos casos, una relaci&#243;n temporal estrecha y/o, una re-exposici&#243;n positiva, indicando que la relaci&#243;n causal entre vinorelbina y embolia pulmonar, s&#237;ndrome de encefalopat&#237;a posterior reversible e hiperpigmentaci&#243;n de la piel (hiperpigmentaci&#243;n supra venosa en serpentina) es, al menos, una posibilidad razonable.
+     Sexto: Que la Agencia Espa&#241;ola de Medicamentos y Productos Sanitarios (AEMPS) public&#243; el Bolet&#237;n sobre seguridad de medicamentos de uso humano en febrero de 2023, incluyendo la nueva informaci&#243;n de seguridad derivada de la evaluaci&#243;n de los datos de farmacovigilancia de medicamentos de uso humano comercializados en Espa&#241;a y los enlaces a los informes relacionados con la actividad de farmacovigilancia publicados en la p&#225;gina web de la AEMPS durante el periodo. En el apartado "Nueva informaci&#243;n de seguridad procedente de la evaluaci&#243;n peri&#243;dica de los datos de farmacovigilancia", se ha incluido la informaci&#243;n para vinorelbina, tanto de administraci&#243;n oral como intravenosa, se&#241;alando que dichos antecedentes deben ser incorporados a las fichas t&#233;cnicas y los prospectos de los medicamentos que contienen vinorelbina, y podr&#225;n consultarse en la web de la AEMPS.
+     S&#233;ptimo: Que, el Informe T&#233;cnico de Seguridad N&#186; 23-078 elaborado por la Secci&#243;n Informaci&#243;n de Medicamentos del Subdepartamento Farmacovigilancia determina en sus conclusiones que las evidencias identificadas a partir de la evaluaci&#243;n de los antecedentes y la literatura, son suficientes para incluir estas reacciones adversas, de frecuencia desconocida, por lo que propuso publicar esta informaci&#243;n en una nota informativa para advertir a los profesionales y pacientes y emitir una resoluci&#243;n para incluir en los folletos de informaci&#243;n para el productos farmac&#233;utico vinorelbina, en su forma de administraci&#243;n oral e intravenosa, la Embolia pulmonar y el S&#237;ndrome de encefalopat&#237;a posterior reversible, y de manera adicional para vinorelbina intravenosa, la Hiperpigmentaci&#243;n de la piel (hiperpigmentaci&#243;n supravenosa en serpentina).
+     Octavo: Que, el Instituto de Salud P&#250;blica public&#243; la nota informativa de farmacovigilancia denominada "Revisi&#243;n de Seguridad de Vinorelbina - Nuevas Reacciones Adversas", del 7 de noviembre de 2024, en la cual se da a conocer nueva informaci&#243;n de seguridad asociada al uso de vinorelbina y alerta sobre la importancia de reconocer oportunamente los signos y s&#237;ntomas que pueden indicar embolia pulmonar, s&#237;ndrome de encefalopat&#237;a posterior reversible e hiperpigmentaci&#243;n de la piel en serpentina, y que la Base Datos del Centro Nacional de Farmacovigilancia, registra, en el per&#237;odo comprendido entre el 1 de enero de 2022 al 30 de septiembre de 2024, 6 notificaciones de sospechas de reacciones adversas a medicamentos (RAM) asociadas a vinorelbina, ninguna de ellas asociada a los eventos relacionados con el tenor de la nota informativa.
+     Noveno: Que, en nuestro pa&#237;s, al 31 de enero de 2025, existe 1 registro sanitario vigente (incluyendo aquellos con suspensi&#243;n voluntaria de distribuci&#243;n), que contiene como principio activo vinorelbina, y que, al revisar el folleto de informaci&#243;n vigente, se ha constatado que requiere de actualizaci&#243;n respecto de la informaci&#243;n que ha sido evaluada.
+     D&#233;cimo: Que, los folletos de informaci&#243;n son documentos destinados a informar a sus usuarios sobre una especialidad farmac&#233;utica; a los profesionales de la salud legalmente habilitados con la finalidad de entregar los aspectos necesarios para prescribir o dispensar productos farmac&#233;uticos, y a los pacientes, para asegurar su correcto En este escenario, el decreto supremo N&#186; 3 del a&#241;o 2010, se&#241;ala que la modificaci&#243;n de los folletos debe ser exigida, mediante resoluci&#243;n fundada, por el Instituto de Salud P&#250;blica para garantizar la calidad, seguridad y eficacia en el uso de una o varias especialidades farmac&#233;uticas, cuando existan antecedentes que formen convicci&#243;n en la autoridad de que las condiciones de uso autorizadas presentan un riesgo en su seguridad y eficacia.
+     Und&#233;cimo: Que, debido a las consideraciones latamente explicadas, resulta necesario mandatar a los titulares de registros sanitarios de los productos farmac&#233;uticos que contienen vinorelbina en su composici&#243;n, a modificar sus folletos en los t&#233;rminos que se dispondr&#225; en lo resolutivo del presente instrumento.
+     
+     Teniendo presente:
+     
+     Las disposiciones de los art&#237;culos 96&#176; y 97&#186; del C&#243;digo Sanitario; los art&#237;culos 63&#186;, 64&#186;, 71&#186;, 218&#186;, 219&#186; y 220&#186; del decreto supremo N&#186; 3 de 2010 del Ministerio de Salud; los art&#237;culos 59&#186; letra b) y 61&#186; letra b), del DFL N&#186; 1 de 2005; y la resoluci&#243;n 36, de 2024, de la Contralor&#237;a General de la Rep&#250;blica, y las facultades que me confiere el decreto exento N&#186; 23, de 2024, del Ministerio de Salud, dicto la presente resoluci&#243;n:
+     
+     Resoluci&#243;n:</Texto>
+  </Encabezado>
+  <EstructurasFuncionales>
+    <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="2026-04-29" derogado="no derogado" idParte="10592996">
+      <Texto>     
+     1. Establ&#233;cese que los titulares de registros sanitarios de los productos farmac&#233;uticos que contienen el principio activo vinorelbina de administraci&#243;n oral o intravenosa en su composici&#243;n, deber&#225;n incluir en los folletos de informaci&#243;n al profesional y al paciente, la informaci&#243;n que, en cada caso, se indica a continuaci&#243;n:
+     
+     FOLLETOS DE INFORMACI&#211;N AL PROFESIONAL
+     
+     Reacciones adversas:
+     
+     Vinorelbina (intravenosa, oral):
+     
+     Trastornos respiratorios, tor&#225;cicos y mediast&#237;nicos:
+- Frecuencia desconocida: Embolia pulmonar
+     
+     Trastornos del sistema nervioso:
+- Frecuencia desconocida: S&#237;ndrome de encefalopat&#237;a posterior reversible
+     
+     Vinorelbina (intravenosa)
+     
+     Trastornos de la piel y del tejido subcut&#225;neo:
+- Frecuencia desconocida: Hiperpigmentaci&#243;n de la piel (hiperpigmentaci&#243;n supravenosa en serpentina)
+     
+     FOLLETOS DE INFORMACI&#211;N AL PACIENTE
+     
+     Advertencias y precauciones de uso:
+     
+     Vinorelbina (intravenosa, oral)
+     
+     Consulte a su m&#233;dico de inmediato, si est&#225; utilizando vinorelbina, y desarrolla alguno de los siguientes s&#237;ntomas:
+     
+     . Dolor tor&#225;cico, dificultad al respirar y desfallecimiento que puede ser s&#237;ntoma de co&#225;gulo en un vaso sangu&#237;neo en los pulmones (embolia pulmonar).
+     . Cefaleas, cambios en el estado mental que pueden llevar a confusi&#243;n y coma, convulsiones, visi&#243;n borrosa y presi&#243;n arterial alta, lo cual podr&#237;a indicar un trastorno neurol&#243;gico como el s&#237;ndrome de encefalopat&#237;a posterior reversible.
+     
+     Vinorelbina (intravenosa)
+     
+     Consulte a su m&#233;dico si presenta coloraci&#243;n m&#225;s oscura de la piel, la cual sigue la trayectoria de las venas.
+     
+     2. Determ&#237;nase que los titulares de los registros sanitarios de los productos farmac&#233;uticos que contienen el principio activo vinorelbina en su composici&#243;n, deber&#225;n, en caso que sus folletos no cumplan con lo instruido en el punto anterior, someter a la aprobaci&#243;n de este Instituto, la modificaci&#243;n de los folletos de informaci&#243;n al profesional y al paciente que incluyan los aspectos se&#241;alados anteriormente, en un plazo que no exceda de 90 d&#237;as h&#225;biles, contados desde la fecha de publicaci&#243;n de esta resoluci&#243;n.
+     3. Establ&#233;cese que todo registro sanitario de producto farmac&#233;utico que contenga el principio activo vinorelbina en su composici&#243;n, que se conceda o sea solicitado con posterioridad a la publicaci&#243;n de la presente resoluci&#243;n, deber&#225; cumplir con las exigencias establecidas en &#233;sta.
+     </Texto>
+      <Metadatos>
+        <NombreParte presente="no">&#160;</NombreParte>
+        <TituloParte presente="no">&#160;</TituloParte>
+        
+      </Metadatos>
+    </EstructuraFuncional>
+  </EstructurasFuncionales>
+  <Promulgacion fechaVersion="2026-04-29" derogado="no derogado">
+    <Texto>     An&#243;tese, comun&#237;quese y publ&#237;quese en el sitio web institucional www.ispch.cl, y su texto completo en el Diario Oficial.- Fresia Catterina Ferreccio Readi, Directora, Instituto de Salud P&#250;blica de Chile.</Texto>
+  </Promulgacion>
+  
+</Norma>

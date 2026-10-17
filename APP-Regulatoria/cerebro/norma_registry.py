@@ -163,9 +163,14 @@ class NormaRegistry:
                  fuentes_dispositivos: Path = FUENTES_DISPOSITIVOS):
         data = json.loads(snapshot_path.read_text(encoding="utf-8"))
         self.fetched_at = ""
+        self.contenido_desde = ""
         self.source_url = ""
         if isinstance(data, dict):
             self.fetched_at = (data.get("fetchedAt") or "")[:10]
+            # Desde cuándo el listado tiene este contenido (check-normativa.js).
+            # Es lo que va en la vigencia de cada pasaje: con fetched_at el
+            # corpus entero cambiaba a diario sin un cambio real.
+            self.contenido_desde = (data.get("contenidoDesde") or data.get("fetchedAt") or "")[:10]
             self.source_url = data.get("sourceUrl", "")
             records = data.get("records") or data.get("normas") or []
         else:
@@ -356,7 +361,7 @@ class NormaRegistry:
 
     def vigencia_fuente(self) -> str:
         """Procedencia real de la vigencia, leída del snapshot (no escrita a mano)."""
-        return "listado oficial ISP (snapshot " + (self.fetched_at or "fecha desconocida") + ")"
+        return "listado oficial ISP (sin cambios desde " + (self.contenido_desde or "fecha desconocida") + ")"
 
 
 if __name__ == "__main__":

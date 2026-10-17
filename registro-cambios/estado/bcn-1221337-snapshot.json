@@ -1,0 +1,30 @@
+{
+  "norma_id": "1221337",
+  "norma": "Decreto Exento 9",
+  "capturado": "2026-10-17T19:53:31-03:00",
+  "fecha_version": "2026-02-12",
+  "derogado": false,
+  "articulos": {
+    "primero": {
+      "fecha_version": "2026-02-12",
+      "derogado": false,
+      "id_parte": "10583161",
+      "libro": "",
+      "resumen": "Artículo primero.- Modifícase el decreto exento Nº 500, de 1 de junio de 2012, del Ministerio de Salud, que aprobó la Norma Técnica Nº 136, nominada \"Norma que "
+    },
+    "segundo": {
+      "fecha_version": "2026-02-12",
+      "derogado": false,
+      "id_parte": "10583162",
+      "libro": "",
+      "resumen": "Artículo segundo.- Publíquese por el Departamento de Políticas y Regulaciones Farmacéuticas, de Prestadores de Salud y Medicinas Complementarias de la División "
+    },
+    "tercero": {
+      "fecha_version": "2026-02-12",
+      "derogado": false,
+      "id_parte": "10583163",
+      "libro": "",
+      "resumen": "Artículo tercero.- Las disposiciones de este decreto regirán desde su publicación en el Diario Oficial."
+    }
+  }
+}

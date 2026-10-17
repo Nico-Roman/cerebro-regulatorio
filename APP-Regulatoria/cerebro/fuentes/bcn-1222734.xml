@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><Norma xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.leychile.cl/esquemas" xsi:schemaLocation="http://www.leychile.cl/esquemas http://www.leychile.cl/esquemas/EsquemaIntercambioNorma-v1-0.xsd" normaId="1222734" esTratado="no tratado" fechaVersion="2026-03-28" SchemaVersion="1.0" derogado="no derogado">
+  <Identificador fechaPromulgacion="2026-03-04" fechaPublicacion="2026-03-28">
+    <TiposNumeros>
+      <TipoNumero>
+        <Tipo>Resoluci&#243;n</Tipo>
+        <Numero>1307 EXENTA</Numero>
+      </TipoNumero>
+    </TiposNumeros>
+    <Organismos>
+      <Organismo>MINISTERIO DE SALUD</Organismo>
+      <Organismo>INSTITUTO DE SALUD P&#218;BLICA</Organismo>
+    </Organismos>
+  </Identificador>
+  <Metadatos>
+    <TituloNorma>EXTRACTO</TituloNorma>
+    
+    
+    
+    <IdentificacionFuente>Diario Oficial</IdentificacionFuente>
+    <NumeroFuente>44412</NumeroFuente>
+  </Metadatos>
+  <Encabezado fechaVersion="2026-03-28" derogado="no derogado">
+    <Texto>EXTRACTO</Texto>
+  </Encabezado>
+  <EstructurasFuncionales>
+    <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="2026-03-28" derogado="no derogado" idParte="10589493">
+      <Texto>     
+     Resoluci&#243;n exenta N&#186; 1.307 de 4 de marzo de 2026, establece directrices para aplicar mecanismos de confianza regulatoria en funciones del Subdepartamento de Registro de Productos Farmac&#233;uticos para registro de productos farmac&#233;uticos biol&#243;gicos, y deja sin efecto resoluci&#243;n que indica.
+     El texto &#237;ntegro de la presente resoluci&#243;n se encuentra disponible en la p&#225;gina web del Instituto de Salud P&#250;blica de Chile, www.ispch.cl.- 
+     </Texto>
+      <Metadatos>
+        <NombreParte presente="no">&#160;</NombreParte>
+        <TituloParte presente="no">&#160;</TituloParte>
+        
+      </Metadatos>
+    </EstructuraFuncional>
+  </EstructurasFuncionales>
+  <Promulgacion fechaVersion="2026-03-28" derogado="no derogado">
+    <Texto>     Fresia Catterina Ferreccio Readi, Director Instituto de Salud P&#250;blica.</Texto>
+  </Promulgacion>
+  
+</Norma>

@@ -1,8 +1,8 @@
 {
-  "generado": "2026-10-16",
+  "generado": "2026-10-17",
   "snapshot_fetched_at": "2026-10-16",
-  "documentos": 133,
-  "normas_listado_oficial": 124,
+  "documentos": 179,
+  "normas_listado_oficial": 127,
   "codigo_sanitario": {
     "version_refundida": "2025-09-29",
     "fuente": "https://www.bcn.cl/leychile/navegar?idNorma=5595"
@@ -11,7 +11,22 @@
     "fecha_version": "2026-10-14",
     "documentos": 36,
     "pasajes": 2346,
-    "generado": "2026-10-16"
+    "generado": "2026-10-17"
   },
-  "publicado_por": "github-actions"
+  "sugerencias_home": {
+    "dispositivos médicos": false
+  },
+  "isp": {
+    "disponible": false,
+    "error": "Command failed: curl -s --max-time 120 -A Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36 https://www.ispch.gob.cl/normativa-anamed/",
+    "listado_sin_cambios_desde": "2026-07-14"
+  },
+  "bcn_novedades": {
+    "candidatas": 82,
+    "nuevas": 2,
+    "incorporadas": 0,
+    "total_auto": 39,
+    "errores": 0
+  },
+  "publicado_por": "pc-local"
 }

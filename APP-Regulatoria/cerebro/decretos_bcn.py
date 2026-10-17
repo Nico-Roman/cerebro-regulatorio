@@ -39,7 +39,8 @@ CATEGORIA = "dispositivos_medicos"
 FUENTES_ALIMENTOS = CS.BASE / "fuentes-alimentos.json"
 # (archivo de fuentes, categoría del corpus). Los alimentos no tienen listado
 # del ISP ni PDF: entran solo por la BCN, que además certifica su vigencia.
-ARCHIVOS_FUENTES = [(FUENTES_DISPOSITIVOS, CATEGORIA), (FUENTES_ALIMENTOS, "alimentos")]
+FUENTES_AUTO = CS.BASE / "fuentes-bcn-auto.json"   # lo escribe bcn_novedades.py
+ARCHIVOS_FUENTES = [(FUENTES_DISPOSITIVOS, CATEGORIA), (FUENTES_ALIMENTOS, "alimentos"), (FUENTES_AUTO, "otros")]
 DIR_FUENTES = CS.BASE / "fuentes"
 DIR_ESTADO = CS.DIR_REGISTRO / "estado"
 
@@ -162,13 +163,16 @@ def registros(f, dec):
     tipo = canon_tipo(f.get("tipo", ""))
     numero = norm_numero(f.get("numero", ""))
     nombre = (f.get("tipo", "") + " " + f.get("numero", "")).strip()
-    categoria = f.get("_categoria", CATEGORIA)
+    # Las normas que detecta bcn_novedades.py traen su materia propia.
+    categoria = f.get("categoria_corpus") or f.get("_categoria", CATEGORIA)
     doc_id = categoria + "/" + nombre + " (BCN)"
     version = dec.fecha_version or "?"
     vig_fuente = ("texto refundido de BCN LeyChile, versión " + version +
                   " (la BCN certifica la vigencia; no depende del listado del ISP)")
     titulo = f.get("descripcion", "") or nombre
-    aviso = ("⏳ " + f["aviso"]) if f.get("aviso") else ""
+    if f.get("origen") == "bcn_novedades":
+        vig_fuente += "; incorporada automáticamente al detectarse en la BCN (bcn_novedades.py)"
+    aviso = (("📄 " if f.get("extracto") else "⏳ ") + f["aviso"]) if f.get("aviso") else ""
 
     for i, art in enumerate(dec.articulos):
         piezas = CS._partir(art["texto"])
