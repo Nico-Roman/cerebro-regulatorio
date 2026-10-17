@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-decretos_bcn.py — Decretos de dispositivos médicos tomados del XML de la BCN.
+decretos_bcn.py — Decretos y resoluciones tomados del XML de la BCN.
+
+Sirve a dos materias, cada una con su archivo de fuentes y su categoría:
+  · fuentes-dispositivos.json → dispositivos_medicos (encargo B, 24-09-2026)
+  · fuentes-alimentos.json    → alimentos (RSA, directrices de suplementos,
+                                NT 191; 17-10-2026)
 
 Encargo B (24-09-2026). Si un decreto del área de dispositivos está en la BCN,
 entra como el Código Sanitario: texto refundido en XML, troceado por artículo,
@@ -31,16 +36,26 @@ import codigo_sanitario as CS
 from norma_registry import FUENTES_DISPOSITIVOS, canon_tipo, norm_key, norm_numero
 
 CATEGORIA = "dispositivos_medicos"
+FUENTES_ALIMENTOS = CS.BASE / "fuentes-alimentos.json"
+# (archivo de fuentes, categoría del corpus). Los alimentos no tienen listado
+# del ISP ni PDF: entran solo por la BCN, que además certifica su vigencia.
+ARCHIVOS_FUENTES = [(FUENTES_DISPOSITIVOS, CATEGORIA), (FUENTES_ALIMENTOS, "alimentos")]
 DIR_FUENTES = CS.BASE / "fuentes"
 DIR_ESTADO = CS.DIR_REGISTRO / "estado"
 
 
 def fuentes():
-    """Las normas de fuentes-dispositivos.json que se toman de la BCN."""
-    if not FUENTES_DISPOSITIVOS.exists():
-        return []
-    datos = json.loads(FUENTES_DISPOSITIVOS.read_text(encoding="utf-8"))
-    return [n for n in datos.get("normas") or [] if str(n.get("bcn_id_norma") or "").strip()]
+    """Las normas de los archivos de fuentes que se toman de la BCN, cada una
+    con la categoría de su archivo en `_categoria`."""
+    out = []
+    for archivo, categoria in ARCHIVOS_FUENTES:
+        if not archivo.exists():
+            continue
+        datos = json.loads(archivo.read_text(encoding="utf-8"))
+        for n in datos.get("normas") or []:
+            if str(n.get("bcn_id_norma") or "").strip():
+                out.append(dict(n, _categoria=categoria))
+    return out
 
 
 def norma_id_de(f):
@@ -71,12 +86,23 @@ def descargar(id_norma, timeout=60):
         raise ValueError("El XML no es la norma " + str(id_norma) + " (vino " + repr(raiz.get("normaId")) + ")")
     if not any(e.get("tipoParte") == "Artículo" for e in raiz.iter(CS.Q + "EstructuraFuncional")):
         raise ValueError("El XML de la norma " + str(id_norma) + " no trae artículos.")
+    datos = sin_binarios(datos)
     dest = cache(id_norma)
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(".xml.tmp")
     tmp.write_bytes(datos)
     tmp.replace(dest)
     return dest
+
+
+_BINARIO = re.compile(rb"(<(?:\w+:)?DataCodificada\b[^>]*>).*?(</(?:\w+:)?DataCodificada>)", re.S)
+
+
+def sin_binarios(datos):
+    """Vacía las imágenes incrustadas (`DataCodificada`, en base64). En el RSA
+    son el 99% de los 19 MB del XML —las tablas vienen como imagen— y el
+    ingestor no las lee: guardarlas solo engorda la caché versionada."""
+    return _BINARIO.sub(rb"\1\2", datos)
 
 
 class Decreto:
@@ -102,6 +128,10 @@ def cargar(id_norma):
                     "id_parte": ef.get("idParte", ""),
                     "ruta": [r for r in ruta if r],
                 })
+                # Una resolución que aprueba una norma técnica trae el texto de la
+                # norma ANIDADO en su artículo ("Doble Articulado": Res. 860 → NT 191,
+                # arts. 1 a 7). Sin bajar a esos hijos, la norma técnica no entra.
+                recorrer(ef, ruta + [CS._titulo_de(ef)])
             else:
                 recorrer(ef, ruta + [CS._titulo_de(ef)])
 
@@ -115,7 +145,8 @@ def registros(f, dec):
     tipo = canon_tipo(f.get("tipo", ""))
     numero = norm_numero(f.get("numero", ""))
     nombre = (f.get("tipo", "") + " " + f.get("numero", "")).strip()
-    doc_id = CATEGORIA + "/" + nombre + " (BCN)"
+    categoria = f.get("_categoria", CATEGORIA)
+    doc_id = categoria + "/" + nombre + " (BCN)"
     version = dec.fecha_version or "?"
     vig_fuente = ("texto refundido de BCN LeyChile, versión " + version +
                   " (la BCN certifica la vigencia; no depende del listado del ISP)")
@@ -140,8 +171,8 @@ def registros(f, dec):
                 "doc_id": doc_id,
                 "chunk_id": doc_id + "#" + str(i) + "-" + str(j),
                 "norma_id": norma_id_de(f),
-                "categoria": CATEGORIA,
-                "categorias": [CATEGORIA],
+                "categoria": categoria,
+                "categorias": [categoria],
                 "tipo": tipo,
                 "numero": numero,
                 "titulo": titulo,
@@ -159,7 +190,9 @@ def registros(f, dec):
                 "fuente_url": url_humana(idn) + "&idParte=" + art["id_parte"],
                 "pdf_path": "",
                 "pagina": 0,
-                "articulo": "Artículo " + art["numero"],
+                # Las resoluciones de un solo cuerpo no numeran su artículo: sin
+                # número no se inventa uno ("Artículo ?" sería una cita falsa).
+                "articulo": ("Artículo " + art["numero"]) if art["numero"] != "?" else "",
                 "texto": (cabecera + pieza) if j == 0 else pieza,
             }
 

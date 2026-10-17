@@ -1,0 +1,45 @@
+{
+  "_comentario": [
+    "Normativa de alimentos y suplementos alimentarios (17-10-2026).",
+    "Entra solo por el XML de la BCN (decretos_bcn.py): texto refundido, troceado por artículo,",
+    "vigencia certificada por la BCN y vigilancia de cambios por artículo. No hay listado del ISP",
+    "para estas normas: las dicta el Minsal y las fiscaliza la SEREMI de Salud.",
+    "Pendiente: la Ley 20.606 (no se encontró su idNorma en la BCN). Su contenido operativo",
+    "—los sellos «ALTO EN» y sus límites— está en el art. 120 bis del RSA, que sí entra."
+  ],
+  "categoria": "Alimentos",
+  "normas": [
+    {
+      "tipo": "Decreto Supremo",
+      "numero": "977",
+      "descripcion": "Aprueba Reglamento Sanitario de los Alimentos (RSA)",
+      "fecha": "13/05/1997",
+      "bcn_id_norma": "71271",
+      "revisar_nico": false
+    },
+    {
+      "tipo": "Resolución Exenta",
+      "numero": "394",
+      "descripcion": "Fija directrices nutricionales sobre suplementos alimentarios y sus contenidos en vitaminas y minerales",
+      "fecha": "01/03/2002",
+      "bcn_id_norma": "194953",
+      "revisar_nico": false
+    },
+    {
+      "tipo": "Resolución Exenta",
+      "numero": "393",
+      "descripcion": "Fija directrices nutricionales sobre uso de vitaminas y minerales en alimentos",
+      "fecha": "01/03/2002",
+      "bcn_id_norma": "194952",
+      "revisar_nico": false
+    },
+    {
+      "tipo": "Resolución Exenta",
+      "numero": "860",
+      "descripcion": "Aprueba Norma Técnica N° 191 sobre directrices nutricionales para declarar propiedades saludables de los alimentos",
+      "fecha": "26/07/2017",
+      "bcn_id_norma": "1105664",
+      "revisar_nico": false
+    }
+  ]
+}

@@ -96,6 +96,12 @@
     {"id": "h22-arancel", "set": "holdout", "tipo": "sin_texto", "pregunta": "¿Cuánto cuesta el arancel del registro sanitario?", "evidencia": [], "caso": "arancel"},
     {"id": "h23-paracetamol", "set": "holdout", "tipo": "fuera", "pregunta": "¿Cuál es la dosis máxima de paracetamol en adultos?", "evidencia": []},
     {"id": "h24-equivalente-farmaceutico", "set": "holdout", "tipo": "respondible", "pregunta": "¿Qué es un equivalente farmacéutico?",
-     "evidencia": [{"numero": "3", "contiene": "Equivalentes farmac[eé]uticos: Productos farmac[eé]uticos que contienen"}]}
+     "evidencia": [{"numero": "3", "contiene": "Equivalentes farmac[eé]uticos: Productos farmac[eé]uticos que contienen"}]},
+    {"id": "a01-creatina-maximo", "set": "dev", "tipo": "respondible", "requiere_categoria": "alimentos", "pregunta": "¿Cuánta creatina puede tener al día un producto para deportistas?",
+     "evidencia": [{"numero": "977", "contiene": "creatina"}]},
+    {"id": "a02-leyenda-suplemento", "set": "dev", "tipo": "respondible", "requiere_categoria": "alimentos", "pregunta": "¿Qué advertencia tiene que decir la etiqueta de un suplemento?",
+     "evidencia": [{"numero": "977", "contiene": "menores de 8 a[ñn]os"}]},
+    {"id": "a03-bebida-isotonica", "set": "dev", "tipo": "respondible", "requiere_categoria": "alimentos", "pregunta": "¿Cuándo puedo decir que una bebida deportiva es isotónica?",
+     "evidencia": [{"numero": "977", "contiene": "isot[oó]nicas|250 y 340"}]}
   ]
 }

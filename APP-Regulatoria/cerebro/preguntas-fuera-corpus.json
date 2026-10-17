@@ -18,7 +18,8 @@
     {
       "id": "alimentos-rotulado",
       "pregunta": "¿Qué exige el rotulado nutricional de alimentos y los sellos de advertencia?",
-      "motivo": "Materia del Reglamento Sanitario de los Alimentos (DS 977), fuera de ANAMED."
+      "motivo": "Materia del Reglamento Sanitario de los Alimentos (DS 977), fuera de ANAMED. Desde el 17-10-2026 solo se espera abstención mientras el corpus no tenga la categoría alimentos; con ella, la pregunta pasa a las doradas (al-*).",
+      "solo_sin_categoria": "alimentos"
     },
     {
       "id": "veterinaria-sag",

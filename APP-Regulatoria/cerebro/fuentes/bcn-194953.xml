@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><Norma xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.leychile.cl/esquemas" xsi:schemaLocation="http://www.leychile.cl/esquemas http://www.leychile.cl/esquemas/EsquemaIntercambioNorma-v1-0.xsd" normaId="194953" esTratado="no tratado" fechaVersion="2005-01-13" SchemaVersion="1.0" derogado="no derogado">
+  <Identificador fechaPromulgacion="2002-02-20" fechaPublicacion="2002-03-01">
+    <TiposNumeros>
+      <TipoNumero>
+        <Tipo>Resoluci&#243;n</Tipo>
+        <Numero>394 EXENTA</Numero>
+      </TipoNumero>
+    </TiposNumeros>
+    <Organismos>
+      <Organismo>MINISTERIO DE SALUD</Organismo>
+    </Organismos>
+  </Identificador>
+  <Metadatos>
+    <TituloNorma>FIJA DIRECTRICES NUTRICIONALES SOBRE SUPLEMENTOS ALIMENTARIOS Y SUS CONTENIDOS EN VITAMINAS Y MINERALES</TituloNorma>
+    <Materias>
+      <Materia>SUPLEMENTOS ALIMENTARIOS MINERALIZADOS</Materia>
+      <Materia>SUPLEMENTOS ALIMENTARIOS VITAMINIZADOS</Materia>
+      <Materia>DIRECTRICES NUTRICIONALES</Materia>
+      <Materia>VITAMINAS</Materia>
+      <Materia>MINERALES</Materia>
+    </Materias>
+    
+    
+    <IdentificacionFuente>Diario Oficial</IdentificacionFuente>
+    <NumeroFuente>37199</NumeroFuente>
+  </Metadatos>
+  <Encabezado fechaVersion="2005-01-13" derogado="no derogado">
+    <Texto>FIJA DIRECTRICES NUTRICIONALES SOBRE SUPLEMENTOS
+ALIMENTARIOS Y SUS CONTENIDOS EN VITAMINAS Y MINERALES 
+     N&#250;m. 394 exenta.- Santiago, 20 de febrero de 2002.-
+Visto: lo dispuesto en los art&#237;culos 108 y 109 del C&#243;digo
+Sanitario, aprobado por el decreto con fuerza de ley N&#186;
+725, de 1967, del Ministerio de Salud; en el art&#237;culo 538
+del decreto supremo N&#186; 977 de 1996, de esta Secretar&#237;a de
+Estado, que aprueba el Reglamento Sanitario de los Alimentos
+y en la resoluci&#243;n N&#186; 520 de 1996, de la Contralor&#237;a
+General de la Rep&#250;blica;
+
+     Considerando:
+
+1&#186;.- Que el decreto supremo N&#186; 287, de 21 de septiembre de
+2001, del Ministerio de Salud, modific&#243; el Reglamento
+Sanitario de los Alimentos en materia de suplementos
+alimentarios;
+2&#186;.- Que los suplementos alimentarios son productos
+destinados a suplementar la dieta con fines saludables y
+contribuir a mantener o proteger estados fisiol&#243;gicos
+caracter&#237;sticos, y que su composici&#243;n podr&#225; corresponder
+a un nutriente o mezcla de nutrientes, entre los cuales se
+cuentan las vitaminas y minerales;
+3&#186;.- Que para tal efecto, corresponde al Ministerio de
+Salud fijar los l&#237;mites m&#237;nimos y m&#225;ximos de vitaminas y
+minerales a emplear en suplementos alimentarios; y
+
+     Teniendo presente: Las facultades que me confieren los
+art&#237;culos 4&#186; y 6&#186; del decreto ley N&#186; 2.763 de 1979,
+dicto la siguiente
+
+     R e s o l u c i &#243; n:
+</Texto>
+  </Encabezado>
+  <EstructurasFuncionales>
+    <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="2005-01-13" derogado="no derogado" idParte="6370807">
+      <Texto>1.   F&#237;janse los siguientes l&#237;mites m&#237;nimos y m&#225;ximos
+diarios para vitaminas y minerales que se empleen como
+ingredientes dietarios en suplementos alimentarios:
+
+                      TABLA N&#186; 1
+
+  LIMITES MINIMOS Y MAXIMOS DE VITAMINAS Y MINERALES EN
+                SUPLEMENTOS ALIMENTARIOS
+
+Nutriente      Unidad  Cantidad M&#237;nima  Cantidad M&#225;xima
+                         por porci&#243;n,        diaria
+                          mayor que
+
+VITAMINAS
+A                ug          200             1.000
+C                mg           60             1.000
+D                ug            2                20
+E                mg           20               500
+B1               mg          0,7                 6
+B2               mg          0,8                 6
+Niacina          mg          4,5                20
+B6               mg            1                50
+Folato           ug          100               500
+B12              ug            1                12
+Acido
+Pantot&#233;nico      mg            5                25
+Biotina          ug           30               150
+Colina           mg          275             2.000
+Vitamina K       ug           80               600
+Betacaroteno     mg            5                15
+MINERALES
+Calcio *         mg          400             1.600
+Cromo (Cr+3)     ug         17,5               200
+Cobre            mg          0,5               3,3
+Yodo             ug           30               150
+Hierro           mg          3,5                25
+Magnesio         mg           75               400
+Manganeso        mg          0,5                 4
+Molibdeno        ug           25               600
+F&#243;sforo *        mg          400             1.600
+Zinc             mg          3,8                20
+Selenio          ug         17,5               200
+
+2.   Como base de referencia para vitaminas y minerales en
+suplementos alimentarios se utilizar&#225; la siguiente tabla:
+
+                      TABLA N&#186; 2
+
+  DOSIS DIARIAS DE REFERENCIAS (DDR) DE VITAMINAS Y
+    MINERALES, PARA ADULTOS, ADOLESCENTES Y NI&#209;OS
+       MAYORES DE 4 A&#209;OS, A SER USADAS EN CHILE
+
+Nutriente               Unidad               DDR
+
+VITAMINAS
+A                         ug                 800
+C                         mg                  60
+D                         ug                   5
+E                         mg                  20
+B1                        mg                 1,4
+B2                        mg                 1,6
+Niacina                   mg                  18
+B6                        mg                   2
+Folato                    ug                 200
+B12                       ug                   1
+Acido Pantot&#233;nico         mg                  10
+Biotina                   ug                 300
+Colina                    mg                  550*
+Vitamina K                ug                   80
+Betacaroteno              mg                    -**
+MINERALES
+Calcio                    mg                  800
+Cromo (Cr+3)              ug                   35*
+Cobre                     mg                    2
+Yodo                      ug                  150
+Hierro                    mg                   14
+Magnesio                  mg                  300
+Manganeso                 mg                    2*
+Molibdeno                 ug                   50*
+F&#243;sforo                   mg                  800
+Zinc                      mg                   15
+Selenio                   ug                   70
+
+    *: En estos casos no se cuenta con una DDR, pero
+       se ha considerado como referencia el valor de
+       ingesta adecuada (IA).
+   **: Betacaroteno no cuenta con DDR ni IA.
+ 3.   Las vitaminas o minerales que no tengan l&#237;mites
+definidos, para su uso en suplementos alimentarios, no
+podr&#225;n agregarse a este tipo de productos.
+
+4.   Los siguientes productos no podr&#225;n formularse como
+suplementos alimenticios:      - F&#243;rmulas l&#225;cteas, postres
+de leche, bebidas l&#225;cteas y sustitutos l&#225;cteos con menos
+de 35% de prote&#237;nas de leche m/m en el extracto seco.
+     - Productos de confiter&#237;a y similares, tales como
+chocolates, bombones, caramelos, chicles, galletas, helados.
+     - Confituras y similares, tales como mermeladas,
+dulces, jaleas y frutas confitadas.
+     - Az&#250;car, miel y jarabes.
+     - Bebidas analcoh&#243;licas carbonatadas.
+     - T&#233;, caf&#233;, hierba mate e infusiones de agrado en
+base a hierbas arom&#225;ticas.
+     - Especias, condimentos y salsas.
+     - Encurtidos.
+     - Farin&#225;ceos para c&#243;ctel.
+     - Frutas procesadas.
+     - Carnes, productos c&#225;rnicos, pescados y mariscos.
+     Los Alimentos para Deportistas cuyos contenidos de
+vitaminas y minerales queden comprendido en las dosis de
+referencia contenidas en el N&#186;2 de esta resoluci&#243;n,
+podr&#225;n presentarse como bebidas analcoh&#243;licas
+carbonatadas.
+5.   Los l&#237;mites indicados podr&#225;n excederse hasta 25% en
+el caso de los minerales y hasta 40% en las vitaminas, con
+el objeto de paliar la p&#233;rdida por degradaci&#243;n que ellos
+puedan sufrir, de modo de asegurar que hasta el t&#233;rmino del
+plazo en que puede consumirse el suplemento alimentario,
+&#233;ste mantenga el nivel de vitaminas o minerales declarado
+en la respectiva etiqueta nutricional.
+     Durante todo el per&#237;odo de vida &#250;til del suplemento
+alimentario, &#233;ste deber&#225; tener como m&#237;nimo el 100% del
+valor de vitaminas o minerales declarados en su etiqueta.
+
+6.   La rotulaci&#243;n y publicidad de los suplementos
+alimentarios deber&#225; cumplir con lo se&#241;alado en el T&#237;tulo
+II, P&#225;rrafo II y en los art&#237;culos 536 y 537, todos del
+decreto supremo N&#186; 977 de 1996.
+     Respecto del modo de uso, se deber&#225; indicar su forma
+de consumo y la cantidad m&#225;xima de porciones diarias, de
+modo de no exceder los l&#237;mites m&#225;ximos diarios de
+vitaminas y minerales autorizados por la presente
+resoluci&#243;n.
+
+7.   Aquellos productos que, al momento de la publicaci&#243;n
+del decreto supremo N&#186; 287 de 2001, se encontraban en el
+comercio, ya sea amparados por los plazos estipulados en el
+art&#237;culo 1&#186; transitorio del DS N&#186; 855 de 1998 y sus
+pr&#243;rrogas o porque se encontraban registrados por el
+Instituto de Salud P&#250;blica como medicamentos
+complementarios, y queden comprendidos en la definici&#243;n de
+suplementos alimentarios, deber&#225;n adecuar su rotulado
+gr&#225;fico y publicidad dentro del plazo de 6 meses, contados
+desde la publicaci&#243;n en el Diario Oficial de esta
+resoluci&#243;n.
+
+8.   S&#243;lo podr&#225;n denominarse suplementos alimentarios
+aquellos productos que cumplan con la definici&#243;n
+establecida para ellos, en el art&#237;culo 534 del DS N&#186; 977
+de 1996.</Texto>
+      <Metadatos>
+        <NombreParte presente="no">&#160;</NombreParte>
+        <TituloParte presente="no">&#160;</TituloParte>
+        
+      </Metadatos>
+    </EstructuraFuncional>
+  </EstructurasFuncionales>
+  <Promulgacion fechaVersion="2002-03-01" derogado="no derogado">
+    <Texto>     An&#243;tese y publ&#237;quese.- Luis Gonzalo Navarrete Mu&#241;oz,
+Ministro de Salud Subrogante.
+
+     Lo que transcribo a Ud. para su conocimiento.- Saluda a
+usted, Luis Gonzalo Navarrete Mu&#241;oz, Subsecretario de
+Salud.</Texto>
+  </Promulgacion>
+  
+</Norma>
