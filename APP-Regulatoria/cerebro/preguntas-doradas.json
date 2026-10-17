@@ -504,6 +504,69 @@
       ],
       "cita_esperada": "DS 825/1998, Reglamento de Control de Productos y Elementos de Uso Médico.",
       "revisar_nico": true
+    },
+    {
+      "id": "al-creatina",
+      "pregunta": "¿Cuál es la cantidad máxima diaria de creatina en un alimento para deportistas?",
+      "categoria": "alimentos",
+      "requiere_categoria": "alimentos",
+      "fuentes_aceptables": [{"tipo": "Decreto Supremo", "numero": "977", "doc_contains": "alimentos"}],
+      "cita_esperada": "RSA (DS 977) art. 540 k): creatina, cantidad máxima por día 5 g.",
+      "revisar_nico": false
+    },
+    {
+      "id": "al-leyenda-suplemento",
+      "pregunta": "¿Qué leyenda debe llevar en la etiqueta un suplemento alimentario?",
+      "categoria": "alimentos",
+      "requiere_categoria": "alimentos",
+      "fuentes_aceptables": [{"tipo": "Decreto Supremo", "numero": "977", "doc_contains": "alimentos"}],
+      "cita_esperada": "RSA (DS 977) art. 537: «Su uso no es recomendable para consumo por menores de 8 años, embarazadas y nodrizas…».",
+      "revisar_nico": false
+    },
+    {
+      "id": "al-sellos",
+      "pregunta": "¿Cuándo un alimento debe llevar el sello ALTO EN sodio?",
+      "categoria": "alimentos",
+      "requiere_categoria": "alimentos",
+      "fuentes_aceptables": [{"tipo": "Decreto Supremo", "numero": "977", "doc_contains": "alimentos"}],
+      "cita_esperada": "RSA (DS 977) art. 120 bis: sodio, azúcares o grasas saturadas adicionados sobre los límites de la Tabla N° 1.",
+      "revisar_nico": false
+    },
+    {
+      "id": "al-isotonica",
+      "pregunta": "¿Qué osmolalidad debe tener una bebida isotónica para deportistas con electrolitos?",
+      "categoria": "alimentos",
+      "requiere_categoria": "alimentos",
+      "fuentes_aceptables": [{"tipo": "Decreto Supremo", "numero": "977", "doc_contains": "alimentos"}],
+      "cita_esperada": "RSA (DS 977) art. 540 h): entre 200 y 340 mosm/kg de agua; isotónica entre 250 y 340.",
+      "revisar_nico": false
+    },
+    {
+      "id": "al-vitaminas-suplemento",
+      "pregunta": "¿Cuáles son los límites máximos de vitaminas y minerales en suplementos alimentarios?",
+      "categoria": "alimentos",
+      "requiere_categoria": "alimentos",
+      "fuentes_aceptables": [{"tipo": "Resolución Exenta", "numero": "394", "doc_contains": "alimentos"}],
+      "cita_esperada": "Res. Ex. 394/2002, Tabla N° 1: límites mínimos y máximos de vitaminas y minerales en suplementos.",
+      "revisar_nico": false
+    },
+    {
+      "id": "al-mensajes-saludables",
+      "pregunta": "¿Se pueden usar mensajes saludables en un suplemento alimentario?",
+      "categoria": "alimentos",
+      "requiere_categoria": "alimentos",
+      "fuentes_aceptables": [{"tipo": "Resolución Exenta", "numero": "860", "doc_contains": "alimentos"}],
+      "cita_esperada": "NT 191 (Res. Ex. 860/2017) art. 3: no se deben usar en suplementos alimentarios ni en alimentos con presentación propia de medicamentos.",
+      "revisar_nico": false
+    },
+    {
+      "id": "al-limite-sodio-liquidos",
+      "pregunta": "¿Cuál es el límite de sodio para el sello ALTO EN en un alimento líquido?",
+      "categoria": "alimentos",
+      "requiere_categoria": "alimentos",
+      "fuentes_aceptables": [{"tipo": "Decreto Supremo", "numero": "977", "doc_contains": "alimentos"}],
+      "cita_esperada": "RSA (DS 977) art. 120 bis, Tabla Nº 1 (transcrita de la imagen oficial): líquidos, sodio mayor a 100 mg/100 ml.",
+      "revisar_nico": false
     }
   ]
 }
