@@ -1,7 +1,7 @@
 {
   "generado": "2026-10-17",
   "snapshot_fetched_at": "2026-10-16",
-  "documentos": 179,
+  "documentos": 180,
   "normas_listado_oficial": 127,
   "codigo_sanitario": {
     "version_refundida": "2025-09-29",
@@ -24,9 +24,9 @@
   "bcn_novedades": {
     "candidatas": 82,
     "nuevas": 2,
-    "incorporadas": 0,
-    "total_auto": 39,
+    "incorporadas": 1,
+    "total_auto": 40,
     "errores": 0
   },
-  "publicado_por": "pc-local"
+  "publicado_por": "github-actions"
 }

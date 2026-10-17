@@ -1109,6 +1109,34 @@
         "aviso": "",
         "origen": "bcn_novedades"
       }
+    },
+    "1221501": {
+      "norma": "Decreto 15 EXENTO",
+      "organismo": "MINISTERIO DE SALUD; SUBSECRETARÍA DE SALUD PÚBLICA",
+      "titulo": "APRUEBA NORMA TÉCNICA N° 258 SOBRE FRACCIONAMIENTO DE ENVASES DE MEDICAMENTOS EN ESTABLECIMIENTOS ASISTENCIALES DE ATENCIÓN ABIERTA Y CERRADA",
+      "publicada": "2026-02-17",
+      "detectada": "2026-10-17",
+      "decision": "incorporada",
+      "motivo": "materia: «establecimiento»",
+      "fuente": {
+        "tipo": "Decreto Exento",
+        "numero": "15",
+        "descripcion": "Aprueba norma técnica n° 258 sobre fraccionamiento de envases de medicamentos en establecimientos asistenciales de atención abierta y cerrada",
+        "fecha": "17/02/2026",
+        "categoria_corpus": "establecimientos_autorizacion_y_fiscalizacion",
+        "extracto": false,
+        "aviso": "",
+        "origen": "bcn_novedades"
+      }
+    },
+    "1223886": {
+      "norma": "Resolución 2053 EXENTA",
+      "organismo": "MINISTERIO DE SALUD; INSTITUTO DE SALUD PÚBLICA",
+      "titulo": "EXTRACTO",
+      "publicada": "2026-05-07",
+      "detectada": "2026-10-17",
+      "decision": "ya_en_corpus",
+      "motivo": "el corpus ya la trae por el listado del ISP o una fuente"
     }
   },
   "exclusiones": [],

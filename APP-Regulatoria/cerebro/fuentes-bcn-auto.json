@@ -73,6 +73,17 @@
       "bcn_id_norma": "1221337"
     },
     {
+      "tipo": "Decreto Exento",
+      "numero": "15",
+      "descripcion": "Aprueba norma técnica n° 258 sobre fraccionamiento de envases de medicamentos en establecimientos asistenciales de atención abierta y cerrada",
+      "fecha": "17/02/2026",
+      "categoria_corpus": "establecimientos_autorizacion_y_fiscalizacion",
+      "extracto": false,
+      "aviso": "",
+      "origen": "bcn_novedades",
+      "bcn_id_norma": "1221501"
+    },
+    {
       "tipo": "Resolución Exenta",
       "numero": "435",
       "descripcion": "aprueba \"Guía para la elaboración de preparados farmacéuticos homeopáticos en recetarios de farmacias\", elaborado por el Departamento Agencia Nacional de Medicamentos",
