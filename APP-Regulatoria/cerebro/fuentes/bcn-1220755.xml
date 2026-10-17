@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><Norma xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.leychile.cl/esquemas" xsi:schemaLocation="http://www.leychile.cl/esquemas http://www.leychile.cl/esquemas/EsquemaIntercambioNorma-v1-0.xsd" normaId="1220755" esTratado="no tratado" fechaVersion="2026-01-27" SchemaVersion="1.0" derogado="no derogado">
+  <Identificador fechaPromulgacion="2026-01-09" fechaPublicacion="2026-01-27">
+    <TiposNumeros>
+      <TipoNumero>
+        <Tipo>Resoluci&#243;n</Tipo>
+        <Numero>140 EXENTA</Numero>
+      </TipoNumero>
+      <TipoNumero>
+        <Tipo>Resoluci&#243;n</Tipo>
+        <Numero>E140 EXENTA</Numero>
+      </TipoNumero>
+    </TiposNumeros>
+    <Organismos>
+      <Organismo>MINISTERIO DE SALUD</Organismo>
+      <Organismo>INSTITUTO DE SALUD P&#218;BLICA</Organismo>
+    </Organismos>
+  </Identificador>
+  <Metadatos>
+    <TituloNorma>EXTRACTO</TituloNorma>
+    
+    
+    
+    <IdentificacionFuente>Diario Oficial</IdentificacionFuente>
+    <NumeroFuente>44360</NumeroFuente>
+  </Metadatos>
+  <Encabezado fechaVersion="2026-01-27" derogado="no derogado">
+    <Texto>EXTRACTO</Texto>
+  </Encabezado>
+  <EstructurasFuncionales>
+    <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="2026-01-27" derogado="no derogado" idParte="10580474">
+      <Texto>     
+     Resoluci&#243;n exenta N&#176; E140, de 9 de enero de 2026, establece directrices para aplicar mecanismos de confianza regulatoria en funciones del Subdepartamento Farmacovigilancia del Departamento Agencia Nacional de Medicamentos.
+     El texto &#237;ntegro de la presente resoluci&#243;n se encuentra disponible en la p&#225;gina web del Instituto de Salud P&#250;blica de Chile, www.ispch.cl.- 
+     </Texto>
+      <Metadatos>
+        <NombreParte presente="no">&#160;</NombreParte>
+        <TituloParte presente="no">&#160;</TituloParte>
+        
+      </Metadatos>
+    </EstructuraFuncional>
+  </EstructurasFuncionales>
+  <Promulgacion fechaVersion="2026-01-27" derogado="no derogado">
+    <Texto>     Fresia Catterina Ferreccio Readi, Director, Instituto de Salud P&#250;blica de Chile.</Texto>
+  </Promulgacion>
+  
+</Norma>

@@ -31,7 +31,7 @@ export default function AgendaPage() {
           Reserva 30 minutos
         </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
-          Los horarios que ves son huecos reales de mi calendario: si aparece, está libre. La
+          Los horarios que ves son huecos reales de nuestro calendario: si aparece, está libre. La
           reunión es por Google Meet y el enlace llega al confirmar.
         </p>
       </header>

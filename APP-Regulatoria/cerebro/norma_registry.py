@@ -34,6 +34,11 @@ from urllib.parse import unquote
 # Raíz del repo (ver nota en build_corpus.py): resuelve igual en el PC y en CI.
 ROOT = Path(__file__).resolve().parents[2]
 SNAPSHOT = ROOT / "vigilancia-isp" / "snapshots" / "latest.json"
+# Segundo listado oficial: dispositivos médicos (ANDID). Opcional: si no existe,
+# el corpus se arma solo con ANAMED y las fuentes mínimas de abajo.
+SNAPSHOT_ANDID = ROOT / "vigilancia-isp" / "snapshots" / "andid-latest.json"
+# Fuentes mínimas de dispositivos que entran aunque el listado ANDID no exista.
+FUENTES_DISPOSITIVOS = Path(__file__).resolve().parent / "fuentes-dispositivos.json"
 OVERRIDES = Path(__file__).resolve().parent / "overrides.json"
 
 
@@ -154,17 +159,47 @@ def misma_norma(a: str, b: str) -> bool:
 class NormaRegistry:
     """Listado oficial vigente del ISP, colapsado a normas únicas."""
 
-    def __init__(self, snapshot_path: Path = SNAPSHOT):
+    def __init__(self, snapshot_path: Path = SNAPSHOT, andid_path: Path = SNAPSHOT_ANDID,
+                 fuentes_dispositivos: Path = FUENTES_DISPOSITIVOS):
         data = json.loads(snapshot_path.read_text(encoding="utf-8"))
         self.fetched_at = ""
+        self.contenido_desde = ""
         self.source_url = ""
         if isinstance(data, dict):
             self.fetched_at = (data.get("fetchedAt") or "")[:10]
+            # Desde cuándo el listado tiene este contenido (check-normativa.js).
+            # Es lo que va en la vigencia de cada pasaje: con fetched_at el
+            # corpus entero cambiaba a diario sin un cambio real.
+            self.contenido_desde = (data.get("contenidoDesde") or data.get("fetchedAt") or "")[:10]
             self.source_url = data.get("sourceUrl", "")
             records = data.get("records") or data.get("normas") or []
         else:
             records = data
         self.snapshot_path = snapshot_path
+
+        # Listado ANDID: mismo esquema, mismo trato. Sus normas son tan
+        # "oficiales" como las de ANAMED.
+        self.andid_fetched_at = ""
+        if andid_path and andid_path.exists():
+            try:
+                andid = json.loads(andid_path.read_text(encoding="utf-8"))
+                self.andid_fetched_at = (andid.get("fetchedAt") or "")[:10]
+                records = list(records) + list(andid.get("records") or [])
+            except Exception as e:
+                print("[warn] snapshot ANDID ilegible: " + str(e), file=sys.stderr)
+
+        # Fuentes mínimas (no son listado oficial): se agregan al final y se
+        # marcan, para que una norma que solo venga de acá no herede vigencia.
+        semillas = []
+        if fuentes_dispositivos and fuentes_dispositivos.exists():
+            try:
+                fd = json.loads(fuentes_dispositivos.read_text(encoding="utf-8"))
+                for x in fd.get("normas") or []:
+                    semillas.append({**x, "categoria": fd.get("categoria", ""), "_semilla": True})
+            except Exception as e:
+                print("[warn] fuentes-dispositivos.json ilegible: " + str(e), file=sys.stderr)
+        records = list(records) + semillas
+        oficiales = set()   # norma_id con al menos una fila del listado oficial
 
         # Una norma puede figurar en varias categorías del sitio: es la MISMA
         # norma, no varias. Se colapsa por (tipo, numero) y se acumulan las
@@ -188,6 +223,12 @@ class NormaRegistry:
             norma_id = None
             for cand in self.ids_por_tn.get(tn, []):
                 if misma_norma(self.normas[cand]["descripcion"], desc):
+                    norma_id = cand
+                    break
+                # Una fuente mínima es la misma norma que la del listado ANDID
+                # con su tipo y número, aunque la descripción esté redactada
+                # distinto: el número no se repite dentro de la misma materia.
+                if r.get("_semilla") and (r.get("categoria") or "") in self.normas[cand]["categorias"]:
                     norma_id = cand
                     break
             if norma_id is None:
@@ -216,6 +257,13 @@ class NormaRegistry:
                     "materias": [],
                 }
                 self.normas[norma_id] = n
+            if r.get("_semilla"):
+                if r.get("aviso"):
+                    n["aviso"] = r["aviso"]
+                if not n["enlace"] and r.get("enlace"):
+                    n["enlace"] = r["enlace"].strip()
+            else:
+                oficiales.add(norma_id)
             cat = (r.get("categoria") or "").strip()
             if cat and cat not in n["categorias"]:
                 n["categorias"].append(cat)
@@ -231,6 +279,13 @@ class NormaRegistry:
                 self.by_url.setdefault(b, set()).add(norma_id)
             self.by_tn.setdefault(tn, set()).add(norma_id)
             self.by_tn_corto.setdefault((norm_key(tipo), numero_corto(numero)), set()).add(norma_id)
+
+        # Lo que solo vino de las fuentes mínimas no tiene vigencia certificada.
+        for nid, n in self.normas.items():
+            if nid not in oficiales:
+                n["vigencia_manual"] = "no_verificada"
+                n["vigencia_fuente_manual"] = ("fuente mínima de dispositivos médicos "
+                                               "(fuentes-dispositivos.json); no figura en un listado oficial del ISP")
 
         self.overrides = {}
         if OVERRIDES.exists():
@@ -306,7 +361,7 @@ class NormaRegistry:
 
     def vigencia_fuente(self) -> str:
         """Procedencia real de la vigencia, leída del snapshot (no escrita a mano)."""
-        return "listado oficial ISP (snapshot " + (self.fetched_at or "fecha desconocida") + ")"
+        return "listado oficial ISP (sin cambios desde " + (self.contenido_desde or "fecha desconocida") + ")"
 
 
 if __name__ == "__main__":

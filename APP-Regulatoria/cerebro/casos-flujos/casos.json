@@ -1,0 +1,391 @@
+{
+  "_comentario": [
+    "Casos de los flujos del asistente (encargo D). Los corre APP-Regulatoria/web/scripts/eval-flujos.mjs.",
+    "tramite: la ruta esperada sale de lib/flujos/rutas.json y se comprueba sin modelo; la explicación sí usa el modelo.",
+    "observaciones: 20 espacios para observaciones reconstruidas por Nico, SIN nombres de empresas, números de registro reales ni datos de pacientes (formato «id | tipo de producto | observación | qué respondería | norma»). Las vacías se saltan."
+  ],
+  "tramite": [
+    {
+      "id": "t01",
+      "respuestas": {
+        "producto": "medicamento",
+        "origen": "importado",
+        "uso": "humano",
+        "situacion": "sin_registro",
+        "registro_extranjero": "si"
+      },
+      "ruta_esperada": "medicamento-nuevo-con-registro-extranjero"
+    },
+    {
+      "id": "t02",
+      "respuestas": {
+        "producto": "medicamento",
+        "origen": "nacional",
+        "uso": "humano",
+        "situacion": "sin_registro",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "medicamento-nuevo"
+    },
+    {
+      "id": "t03",
+      "respuestas": {
+        "producto": "medicamento",
+        "origen": "importado",
+        "uso": "humano",
+        "situacion": "sin_registro",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "medicamento-nuevo"
+    },
+    {
+      "id": "t04",
+      "respuestas": {
+        "producto": "medicamento",
+        "origen": "nacional",
+        "uso": "humano",
+        "situacion": "registrado_con_cambios",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "medicamento-cambios"
+    },
+    {
+      "id": "t05",
+      "respuestas": {
+        "producto": "medicamento",
+        "origen": "importado",
+        "uso": "humano",
+        "situacion": "registrado_vigente",
+        "registro_extranjero": "si"
+      },
+      "ruta_esperada": "medicamento-vigente"
+    },
+    {
+      "id": "t06",
+      "respuestas": {
+        "producto": "medicamento",
+        "origen": "importado",
+        "uso": "veterinario",
+        "situacion": "sin_registro",
+        "registro_extranjero": "si"
+      },
+      "ruta_esperada": "veterinario"
+    },
+    {
+      "id": "t07",
+      "respuestas": {
+        "producto": "cosmetico",
+        "origen": "importado",
+        "uso": "humano",
+        "situacion": "sin_registro",
+        "registro_extranjero": "si"
+      },
+      "ruta_esperada": "cosmetico-nuevo"
+    },
+    {
+      "id": "t08",
+      "respuestas": {
+        "producto": "cosmetico",
+        "origen": "nacional",
+        "uso": "humano",
+        "situacion": "sin_registro",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "cosmetico-nuevo"
+    },
+    {
+      "id": "t09",
+      "respuestas": {
+        "producto": "cosmetico",
+        "origen": "nacional",
+        "uso": "humano",
+        "situacion": "registrado_con_cambios",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "cosmetico-cambios"
+    },
+    {
+      "id": "t10",
+      "respuestas": {
+        "producto": "cosmetico",
+        "origen": "importado",
+        "uso": "humano",
+        "situacion": "registrado_vigente",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "cosmetico-vigente"
+    },
+    {
+      "id": "t11",
+      "respuestas": {
+        "producto": "dispositivo",
+        "origen": "importado",
+        "uso": "humano",
+        "situacion": "sin_registro",
+        "registro_extranjero": "si"
+      },
+      "ruta_esperada": "dispositivo-nuevo"
+    },
+    {
+      "id": "t12",
+      "respuestas": {
+        "producto": "dispositivo",
+        "origen": "nacional",
+        "uso": "humano",
+        "situacion": "sin_registro",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "dispositivo-nuevo"
+    },
+    {
+      "id": "t13",
+      "respuestas": {
+        "producto": "dispositivo",
+        "origen": "importado",
+        "uso": "humano",
+        "situacion": "registrado_con_cambios",
+        "registro_extranjero": "si"
+      },
+      "ruta_esperada": "dispositivo-cambios"
+    },
+    {
+      "id": "t14",
+      "respuestas": {
+        "producto": "dispositivo",
+        "origen": "importado",
+        "uso": "humano",
+        "situacion": "registrado_vigente",
+        "registro_extranjero": "si"
+      },
+      "ruta_esperada": "dispositivo-vigente"
+    },
+    {
+      "id": "t15",
+      "respuestas": {
+        "producto": "suplemento",
+        "origen": "importado",
+        "uso": "humano",
+        "situacion": "sin_registro",
+        "registro_extranjero": "si"
+      },
+      "ruta_esperada": "suplemento-alimento"
+    },
+    {
+      "id": "t16",
+      "respuestas": {
+        "producto": "suplemento",
+        "origen": "nacional",
+        "uso": "humano",
+        "situacion": "registrado_vigente",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "suplemento-alimento"
+    },
+    {
+      "id": "t17",
+      "respuestas": {
+        "producto": "otro",
+        "origen": "nacional",
+        "uso": "humano",
+        "situacion": "sin_registro",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "otro"
+    },
+    {
+      "id": "t18",
+      "respuestas": {
+        "producto": "otro",
+        "origen": "importado",
+        "uso": "veterinario",
+        "situacion": "sin_registro",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "veterinario"
+    },
+    {
+      "id": "t19",
+      "respuestas": {
+        "producto": "cosmetico",
+        "origen": "importado",
+        "uso": "veterinario",
+        "situacion": "registrado_vigente",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "veterinario"
+    },
+    {
+      "id": "t20",
+      "respuestas": {
+        "producto": "dispositivo",
+        "origen": "nacional",
+        "uso": "veterinario",
+        "situacion": "sin_registro",
+        "registro_extranjero": "no"
+      },
+      "ruta_esperada": "veterinario"
+    }
+  ],
+  "observaciones": [
+    {
+      "id": "o01",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o02",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o03",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o04",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o05",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o06",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o07",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o08",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o09",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o10",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o11",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o12",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o13",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o14",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o15",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o16",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o17",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o18",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o19",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    },
+    {
+      "id": "o20",
+      "producto": "",
+      "observacion": "",
+      "respuesta_nico": "",
+      "norma": "",
+      "TODO": "Nico: observación reconstruida, sin datos de clientes ni de pacientes."
+    }
+  ]
+}

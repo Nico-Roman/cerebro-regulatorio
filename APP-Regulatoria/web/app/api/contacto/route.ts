@@ -8,6 +8,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { CorreoNoConfigurado, enviarCorreo } from "@/lib/correo";
 import { escaparHtml as escapar } from "@/lib/html";
 import { ipCliente } from "@/lib/ip";
+import { etapaValida, productoValido } from "@/lib/calificacion";
 import { consumirCupo } from "@/lib/rate-limit";
 import { SITE } from "@/lib/site";
 
@@ -24,6 +25,8 @@ interface Payload {
   empresa?: string;
   email?: string;
   area?: string;
+  producto?: string;
+  etapa?: string;
   mensaje?: string;
   website?: string;
 }
@@ -50,8 +53,10 @@ export async function POST(req: NextRequest) {
   const email = limpiar(body.email, 160);
   const area = limpiar(body.area, 120);
   const mensaje = limpiar(body.mensaje, 4000);
+  const producto = productoValido(body.producto);
+  const etapa = etapaValida(body.etapa);
 
-  if (!nombre || !email || !mensaje) {
+  if (!nombre || !email || !mensaje || !producto || !etapa) {
     return NextResponse.json(
       { ok: false, mensaje: "Faltan campos obligatorios." },
       { status: 400 }
@@ -80,6 +85,8 @@ export async function POST(req: NextRequest) {
     <p><strong>Empresa:</strong> ${escapar(empresa) || "—"}</p>
     <p><strong>Correo:</strong> ${escapar(email)}</p>
     <p><strong>Tema:</strong> ${escapar(area) || "—"}</p>
+    <p><strong>Producto:</strong> ${escapar(producto)}</p>
+    <p><strong>Etapa:</strong> ${escapar(etapa)}</p>
     <hr />
     <p style="white-space:pre-wrap">${escapar(mensaje)}</p>
   `;

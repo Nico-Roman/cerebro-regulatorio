@@ -5,6 +5,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { ETAPAS, PRODUCTOS } from "@/lib/calificacion";
 
 interface Slot {
   inicio: string;
@@ -48,7 +49,15 @@ export function AgendaReserva() {
   const [datos, setDatos] = useState<Disponibilidad | null>(null);
   const [diaElegido, setDiaElegido] = useState<string | null>(null);
   const [slotElegido, setSlotElegido] = useState<string | null>(null);
-  const [form, setForm] = useState({ nombre: "", email: "", empresa: "", motivo: "", web: "" });
+  const [form, setForm] = useState({
+    nombre: "",
+    email: "",
+    empresa: "",
+    producto: "",
+    etapa: "",
+    motivo: "",
+    web: "",
+  });
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [confirmada, setConfirmada] = useState<{ cuando: string; meetUrl: string | null } | null>(
@@ -133,7 +142,7 @@ export function AgendaReserva() {
     return (
       <div className="border border-line p-5 text-sm text-muted">
         <p>
-          Por ahora no hay horas publicadas. Escríbeme a{" "}
+          Por ahora no hay horas publicadas. Escríbenos desde{" "}
           <Link href="/#contacto" className="underline">
             el formulario de contacto
           </Link>{" "}
@@ -214,6 +223,38 @@ export function AgendaReserva() {
             placeholder="Empresa (opcional)"
             className="border border-line bg-transparent px-3 py-2.5 text-sm outline-none focus:border-accent"
           />
+          <select
+            required
+            value={form.producto}
+            onChange={(e) => setForm({ ...form, producto: e.target.value })}
+            aria-label="Producto"
+            className="border border-line bg-background px-3 py-2.5 text-base outline-none focus:border-accent sm:text-sm"
+          >
+            <option value="" disabled>
+              Producto
+            </option>
+            {PRODUCTOS.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
+          <select
+            required
+            value={form.etapa}
+            onChange={(e) => setForm({ ...form, etapa: e.target.value })}
+            aria-label="Etapa"
+            className="border border-line bg-background px-3 py-2.5 text-base outline-none focus:border-accent sm:text-sm"
+          >
+            <option value="" disabled>
+              Etapa
+            </option>
+            {ETAPAS.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
           <textarea
             value={form.motivo}
             onChange={(e) => setForm({ ...form, motivo: e.target.value })}

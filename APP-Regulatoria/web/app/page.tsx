@@ -3,6 +3,7 @@ import { jsonParaScript } from "@/lib/html";
 import { AREAS, FAQS, SERVICIOS, SITE, WHATSAPP_URL } from "@/lib/site";
 import { guiasPublicadas } from "@/lib/guias";
 import { BuscadorHome } from "@/components/buscador-home";
+import { estadoCorpus } from "@/lib/estado-corpus";
 import { FormularioContacto } from "@/components/formulario-contacto";
 import { VideoVsl } from "@/components/video-vsl";
 import { BloquePerfil, Cifras, Credenciales, Testimonios } from "@/components/prueba-social";
@@ -67,7 +68,7 @@ export default function Home() {
         </p>
 
         <div className="mt-9 max-w-3xl">
-          <BuscadorHome />
+          <BuscadorHome extra={estadoCorpus().sugerenciasHome} />
         </div>
 
         <p className="mt-7 max-w-2xl text-sm leading-relaxed text-muted">
@@ -154,7 +155,7 @@ export default function Home() {
               href="/asesoria"
               className="label-micro mt-8 inline-block border border-line px-4 py-2.5 transition-colors hover:border-accent"
             >
-              Cómo trabajo contigo
+              Cómo trabajamos contigo
             </Link>
           </div>
         </div>

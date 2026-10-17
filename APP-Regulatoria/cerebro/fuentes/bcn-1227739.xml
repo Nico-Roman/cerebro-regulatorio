@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><Norma xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.leychile.cl/esquemas" xsi:schemaLocation="http://www.leychile.cl/esquemas http://www.leychile.cl/esquemas/EsquemaIntercambioNorma-v1-0.xsd" normaId="1227739" esTratado="no tratado" fechaVersion="2026-09-02" SchemaVersion="1.0" derogado="no derogado">
+  <Identificador fechaPromulgacion="2026-08-10" fechaPublicacion="2026-09-02">
+    <TiposNumeros>
+      <TipoNumero>
+        <Tipo>Resoluci&#243;n</Tipo>
+        <Numero>4011 EXENTA</Numero>
+      </TipoNumero>
+    </TiposNumeros>
+    <Organismos>
+      <Organismo>MINISTERIO DE SALUD</Organismo>
+      <Organismo>INSTITUTO DE SALUD P&#218;BLICA</Organismo>
+    </Organismos>
+  </Identificador>
+  <Metadatos>
+    <TituloNorma>EXTRACTO</TituloNorma>
+    
+    
+    
+    <IdentificacionFuente>Diario Oficial</IdentificacionFuente>
+    <NumeroFuente>44540</NumeroFuente>
+  </Metadatos>
+  <Encabezado fechaVersion="2026-09-02" derogado="no derogado">
+    <Texto>EXTRACTO </Texto>
+  </Encabezado>
+  <EstructurasFuncionales>
+    <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="2026-09-02" derogado="no derogado" idParte="10608808">
+      <Texto>     
+     Resoluci&#243;n exenta N&#176; 4.011, de 10 de agosto de 2026, aprueba lineamientos y exigencias para "Productos farmac&#233;uticos peligrosos".
+     El texto &#237;ntegro de la presente resoluci&#243;n se encuentra disponible en la p&#225;gina web del Instituto de Salud P&#250;blica de Chile, www.ispch.cl.- </Texto>
+      <Metadatos>
+        <NombreParte presente="no">&#160;</NombreParte>
+        <TituloParte presente="no">&#160;</TituloParte>
+        
+      </Metadatos>
+    </EstructuraFuncional>
+  </EstructurasFuncionales>
+  <Promulgacion fechaVersion="2026-09-02" derogado="no derogado">
+    <Texto>     Fresia Catterina Ferreccio Readi, Directora Instituto de Salud P&#250;blica de Chile.</Texto>
+  </Promulgacion>
+  
+</Norma>

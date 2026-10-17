@@ -78,7 +78,20 @@ const CATEGORIA_MAP = {
   "farmacovigilancia": "farmacovigilancia",
   "ensayos clinicos": "ensayos_clinicos",
   "codigo sanitario": "codigo_sanitario",
+  // Listado ANDID y fuentes mínimas de dispositivos (encargo B).
+  "dispositivos medicos": "dispositivos_medicos",
 };
+
+// Fuentes mínimas de dispositivos médicos: entran aunque el listado ANDID no
+// responda (ver vigilancia-isp/check-normativa.js, runAndid).
+function fuentesDispositivos() {
+  try {
+    const f = JSON.parse(fs.readFileSync(path.join(CEREBRO_DIR, "fuentes-dispositivos.json"), "utf-8"));
+    return (f.normas || []).map((n) => ({ ...n, categoria: f.categoria, modificaciones: "", _semilla: true }));
+  } catch (e) {
+    return [];
+  }
+}
 
 const TIPOS = [
   "Decreto con Fuerza de Ley",
@@ -294,6 +307,16 @@ function correrScriptJson(args, nombre) {
   }
 }
 
+/** Desde cuándo el listado del ISP tiene el contenido actual (check-normativa.js). */
+function listadoDesde() {
+  try {
+    const s = JSON.parse(fs.readFileSync(path.join(VIGILANCIA_DIR, "snapshots", "latest.json"), "utf-8"));
+    return (s.contenidoDesde || s.fetchedAt || "").slice(0, 10) || null;
+  } catch {
+    return null;
+  }
+}
+
 function main() {
   fs.mkdirSync(LOG_DIR, { recursive: true });
   const stamp = new Date().toISOString().slice(0, 10);
@@ -302,13 +325,53 @@ function main() {
 
   say("Paso 1/7: vigilancia ISP (scrape + diff)…");
   const { run } = require(path.join(VIGILANCIA_DIR, "check-normativa.js"));
-  const { baseline, diff, total } = run();
+  // El ISP deja de responder a los servidores de GitHub los fines de semana
+  // (todas las corridas de sábado y domingo fallaban en este paso desde
+  // septiembre). Antes eso abortaba el día entero, aunque la BCN —de donde
+  // vienen la ley, los reglamentos y las normas nuevas— respondiera normal.
+  // Ahora se sigue con el último listado conocido y los PDF en caché: el
+  // corpus se arma igual y la compuerta decide si se publica.
+  let ispDisponible = true;
+  let ispError = null;
+  let baseline = false;
+  let diff = { nuevas: [], modificadas: [], eliminadas: [] };
+  let total = 0;
+  try {
+    ({ baseline, diff, total } = run());
+  } catch (e) {
+    ispDisponible = false;
+    ispError = e.message;
+    try {
+      total = JSON.parse(fs.readFileSync(path.join(VIGILANCIA_DIR, "snapshots", "latest.json"), "utf-8")).total;
+    } catch {
+      total = 0;
+    }
+    say(`  [warn] el ISP no respondió (${e.message}). Se sigue con el último listado conocido (${total} normas) y los PDF en caché.`);
+  }
   const nCambios = diff.nuevas.length + diff.modificadas.length + diff.eliminadas.length;
   say(`  total normas: ${total} · nuevas: ${diff.nuevas.length} · modificadas: ${diff.modificadas.length} · eliminadas: ${diff.eliminadas.length}`);
 
+  // Segundo listado: dispositivos médicos (ANDID). No aborta si no responde.
+  let andid = { encontrado: false, records: [], diff: { nuevas: [], modificadas: [], eliminadas: [] } };
+  try {
+    if (!ispDisponible) throw new Error("el ISP no responde hoy");
+    const { runAndid } = require(path.join(VIGILANCIA_DIR, "check-normativa.js"));
+    andid = runAndid();
+    say(andid.encontrado
+      ? `  ANDID: ${andid.total} normas · nuevas: ${andid.diff.nuevas.length} · modificadas: ${andid.diff.modificadas.length} · eliminadas: ${andid.diff.eliminadas.length}`
+      : "  [warn] ANDID: no se encontró el listado de dispositivos médicos; siguen las fuentes mínimas.");
+  } catch (e) {
+    say(`  [warn] ANDID: falló el scrape (${e.message}); siguen las fuentes mínimas.`);
+  }
+
   say("Paso 2/7: descarga de PDF nuevos/modificados…");
   const existing = buildExistingIndex();
-  const candidatos = [...diff.nuevas, ...diff.modificadas.map((m) => m.despues)];
+  const candidatos = [
+    ...diff.nuevas,
+    ...diff.modificadas.map((m) => m.despues),
+    ...andid.diff.nuevas,
+    ...andid.diff.modificadas.map((m) => m.despues),
+  ];
   let descargados = 0;
   let fallidos = 0;
   for (const r of candidatos) {
@@ -353,6 +416,12 @@ function main() {
     const claveNorma = (r) =>
       `${normKey(r.categoria)}|${normKey(r.tipo)}|${(r.numero || "").replace(/\D/g, "") || normKey(r.numero)}`;
 
+    // ANAMED + ANDID + fuentes mínimas de dispositivos: todo lo que el corpus
+    // debería tener se reconcilia con el disco, venga de donde venga.
+    const andidSnap = path.join(VIGILANCIA_DIR, "snapshots", "andid-latest.json");
+    const andidRecords = fs.existsSync(andidSnap) ? JSON.parse(fs.readFileSync(andidSnap, "utf-8")).records || [] : [];
+    snapshot.records = [...(snapshot.records || []), ...andidRecords, ...fuentesDispositivos()];
+
     const idx = buildExistingIndex();
     const resultados = {};
     const noRecuperables = [];
@@ -363,6 +432,20 @@ function main() {
       const clave = claveNorma(r);
       if (vistos.has(clave)) continue;
       vistos.add(clave);
+
+      if (r._semilla && !r.enlace) {
+        // Fuente mínima sin enlace todavía (p. ej. Decreto Exento 31/2026).
+        noRecuperables.push({
+          clave,
+          norma: `${r.tipo} ${r.numero}`,
+          categoria: r.categoria,
+          enlace: "",
+          motivo: r.pendiente || "fuente mínima sin enlace: falta la URL oficial",
+        });
+        continue;
+      }
+      // Los decretos que entran por el XML de la BCN no necesitan su PDF.
+      if (r._semilla && r.bcn_id_norma) continue;
 
       const base = urlBasename(r.enlace);
       if (!base.endsWith(".pdf")) {
@@ -382,6 +465,10 @@ function main() {
         continue;
       }
       if (idx.porArchivo.has(base)) continue;
+      // Sin ISP, cada descarga desde el ISP esperaría su timeout: se reintenta
+      // en la próxima corrida. Lo que viene de otro sitio (los decretos de
+      // dispositivos del Diario Oficial) se baja igual.
+      if (!ispDisponible && /ispch\.(gob\.)?cl/i.test(r.enlace)) continue;
 
       try {
         const dest = downloadPdf(r);
@@ -446,6 +533,33 @@ function main() {
     });
   } catch (e) {
     say(`  [warn] la vigilancia del Código Sanitario falló: ${e.message}`);
+  }
+  // Normas NUEVAS del Minsal y del ISP, detectadas en la BCN (bcn_novedades.py).
+  // Es la fuente que de verdad trae normativa nueva: el listado del ISP pasó
+  // meses sin cambiar mientras el ISP publicaba resoluciones en el Diario
+  // Oficial. Las relevantes quedan en fuentes-bcn-auto.json y entran al corpus
+  // en el paso siguiente. No aborta: sin BCN se sigue con lo ya incorporado.
+  say("Paso 4b/7: normas nuevas del Minsal y del ISP en la BCN…");
+  let novedades = null;
+  try {
+    const salida = execFileSync("python", ["bcn_novedades.py", "--buscar", "--json"], {
+      cwd: CEREBRO_DIR,
+      encoding: "utf-8",
+      stdio: ["ignore", "pipe", "inherit"],
+      maxBuffer: 16 * 1024 * 1024,
+    });
+    const lineas = salida.trim().split("\n");
+    for (const l of lineas.slice(0, -1)) say("  " + l);
+    novedades = JSON.parse(lineas[lineas.length - 1]);
+  } catch (e) {
+    say(`  [warn] la búsqueda de normas nuevas en la BCN falló: ${e.message}`);
+  }
+  // Decretos y resoluciones que vienen de la BCN (DS 825, RSA, normas nuevas):
+  // XML refundido y vigilancia por artículo.
+  try {
+    execFileSync("python", ["decretos_bcn.py", "--vigilar"], { cwd: CEREBRO_DIR, stdio: "inherit" });
+  } catch (e) {
+    say(`  [warn] la vigilancia de decretos BCN falló: ${e.message}`);
   }
 
   say("Paso 5/7: reconstrucción del corpus…");
@@ -565,6 +679,13 @@ function main() {
           normas_listado_oficial: meta.normas_listado_oficial,
           codigo_sanitario: meta.codigo_sanitario || null,
           fda,
+          // Sugerencias de la home que solo aparecen si su búsqueda ya
+          // devuelve una norma de esa materia (eval_respuestas.py).
+          sugerencias_home: (evalResp && evalResp.sugerencias_home) || {},
+          // Que el ISP no responda no frena la corrida, pero tiene que quedar
+          // visible: /api/estado lo muestra y la revisión semanal lo reporta.
+          isp: { disponible: ispDisponible, error: ispError, listado_sin_cambios_desde: listadoDesde() },
+          bcn_novedades: novedades,
           publicado_por: EN_CI ? "github-actions" : "pc-local",
         },
         null,

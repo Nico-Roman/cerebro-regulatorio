@@ -21,6 +21,9 @@ export type EstadoCorpus = {
   // Es una frescura distinta de la del corpus: el corpus puede regenerarse hoy
   // y aun así traer una ley vieja si la descarga de la BCN vino de caché.
   codigoSanitarioVersion: string | null;
+  // Sugerencias de la home que la compuerta comprobó que responden con una
+  // norma de su materia (p. ej. "dispositivos médicos" desde el encargo B).
+  sugerenciasHome: string[];
   diasDesdeGeneracion: number | null;
   fresco: boolean;
   vencido: boolean;
@@ -68,8 +71,16 @@ function leerArchivo(): DatosArchivo {
       typeof datos.normas_listado_oficial === "number" ? datos.normas_listado_oficial : null,
     publicadoPor: typeof datos.publicado_por === "string" ? datos.publicado_por : null,
     codigoSanitarioVersion: leerVersionLey(datos.codigo_sanitario),
+    sugerenciasHome: leerSugerencias(datos.sugerencias_home),
   };
   return cache;
+}
+
+function leerSugerencias(v: unknown): string[] {
+  if (!v || typeof v !== "object") return [];
+  return Object.entries(v as Record<string, unknown>)
+    .filter(([, ok]) => ok === true)
+    .map(([s]) => s);
 }
 
 export function estadoCorpus(ahora: number = Date.now()): EstadoCorpus {

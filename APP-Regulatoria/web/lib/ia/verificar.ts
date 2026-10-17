@@ -196,3 +196,66 @@ export function verificarDatos(textoModelo: string, textosPasajes: string[]): Ve
     ok: noVerificados.length === 0 && normasNoVerificadas.length === 0,
   };
 }
+
+// ── Afirmaciones sin cita (encargo C, punto 4) ──────────────────────────────
+//
+// Toda oración que imponga algo —una obligación, una prohibición, un plazo—
+// tiene que llevar al menos una cita [Pn] a un pasaje que exista. Es lo que un
+// químico farmacéutico va a copiar a un informe, y una obligación sin fuente es
+// exactamente lo que no puede llegar a un informe. La oración que no la lleva
+// se marca «Afirmación sin cita», se subraya en pantalla y el borrador no entra
+// a la caché.
+
+const RX_OBLIGACION =
+  /\b(?:debe|deben|debera|deberan|deberia|requiere|requieren|exige|exigen|prohibe|prohiben|prohibido|prohibida|obligatorio|obligatoria|obligatorios|obligatorias|plazo de)\b/;
+
+// Abreviaturas tras las que un punto no cierra la oración.
+const ABREVIATURAS = /\b(?:art|arts|inc|núm|num|n|res|ex|dto|dfl|sr|sra|etc|pág|pag)\.$/i;
+
+/** Oraciones del texto, sin partir «art. 217» ni «Res. Ex. 1651». */
+export function oraciones(texto: string): string[] {
+  const salida: string[] = [];
+  let actual = "";
+  const trozos = texto.split(/(?<=[.!?;])\s+|\n+/);
+  for (const t of trozos) {
+    actual = actual ? `${actual} ${t}` : t;
+    if (ABREVIATURAS.test(actual.trim())) continue;
+    if (actual.trim()) salida.push(actual.trim());
+    actual = "";
+  }
+  if (actual.trim()) salida.push(actual.trim());
+  return salida;
+}
+
+/**
+ * Lo mismo sobre un texto ya resuelto (citas reales en vez de [Pn]), para una
+ * redacción guardada: cualquier corchete que no sea «cita no verificable»
+ * cuenta como cita.
+ */
+export function afirmacionesSinCitaResueltas(texto: string): string[] {
+  return oraciones(texto).filter((o) => {
+    if (!RX_OBLIGACION.test(planoSinTildes(o.replace(/\[[^\]]*\]/g, " ")))) return false;
+    return !(o.match(/\[[^\]]+\]/g) || []).some((c) => !/cita no verificable/.test(c));
+  });
+}
+
+/** ¿La oración impone algo (obligación, prohibición, plazo)? */
+export function esAfirmacionNormativa(oracion: string): boolean {
+  return RX_OBLIGACION.test(planoSinTildes(oracion.replace(RX_MARCA_CITA, " ")));
+}
+
+/**
+ * Oraciones del borrador CRUDO (con [Pn]) que imponen algo sin una cita a un
+ * pasaje existente. `nPasajes` es cuántos pasajes recibió el modelo: [P9] con
+ * seis pasajes no cuenta como cita.
+ */
+export function afirmacionesSinCita(textoModelo: string, nPasajes: number): string[] {
+  return oraciones(textoModelo).filter((o) => {
+    if (!esAfirmacionNormativa(o)) return false;
+    const marcas = o.match(RX_MARCA_CITA) || [];
+    const valida = marcas.some((m) =>
+      [...m.matchAll(/\d+/g)].some((x) => Number(x[0]) >= 1 && Number(x[0]) <= nPasajes)
+    );
+    return !valida;
+  });
+}

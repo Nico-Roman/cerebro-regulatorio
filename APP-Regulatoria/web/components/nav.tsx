@@ -12,7 +12,8 @@ import { NavSesion } from "@/components/nav-sesion";
 const ENLACES = [
   { href: "/asesoria", label: "Asesoría" },
   { href: "/#areas", label: "Áreas" },
-  { href: "/normativa", label: "Buscador" },
+  // El asistente: preguntar, responder una observación o ver qué trámite toca.
+  { href: "/normativa", label: "Asistente" },
   { href: "/noticias", label: "Noticias" },
   { href: "/#contacto", label: "Contacto" },
 ];

@@ -1,17 +1,17 @@
 # Auditoría de corpus — Cerebro Regulatorio
 
-_Generado: 2026-10-16 · listado oficial ISP: snapshot 2026-10-16 (124 normas únicas)_
+_Generado: 2026-10-17 · listado oficial ISP: snapshot 2026-10-16 (127 normas únicas)_
 
 ## Resumen
 
-- **PDFs encontrados:** 128
-- **Documentos indexados (tras colapsar copias):** 133
+- **PDFs encontrados:** 130
+- **Documentos indexados (tras colapsar copias):** 180
 - **Copias duplicadas colapsadas:** 7
-- **Chunks (unidades de recuperación):** 2823
-- **Texto nativo:** 60  ·  **OCR:** 59  ·  **Sin texto extraíble:** 2
+- **Chunks (unidades de recuperación):** 3628
+- **Texto nativo:** 62  ·  **OCR:** 59  ·  **Sin texto extraíble:** 2
 - **Con match en listado oficial (→ vigente):** 120
-- **Sin match oficial (vigencia no verificada):** 1
-- **Sin metadatos del catálogo vault:** 121
+- **Sin match oficial (vigencia no verificada):** 3
+- **Sin metadatos del catálogo vault:** 123
 - **Documentos con modificación conocida:** 90
 - **Pasajes con disposición modificada (marcados ⛔):** 2
 - **Pasajes con alerta de OCR:** 224
@@ -28,6 +28,8 @@ _Generado: 2026-10-16 · listado oficial ISP: snapshot 2026-10-16 (124 normas ú
 
 | Documento | Tipo | Nº | Texto | Título desde |
 |---|---|---|---|---|
+| dispositivos_medicos/2781436 | Decreto Exento | 25 | nativo | override |
+| dispositivos_medicos/2782631 | Decreto Exento | 31 | nativo | override |
 | otros/CODIGO-ETICA-ISP |  |  | nativo | override |
 
 ## ⚠️ Documentos OCR con cifras sospechosas (candidatos a re-OCR)
@@ -94,6 +96,12 @@ Ordenados por nº de pasajes con alerta. El texto NO se corrige automáticamente
 
 | Documento | Tipo | Nº | Texto | Vigencia | Vault | Chunks | Match | Título | Alertas OCR | Copias | Modificada |
 |---|---|---|---|---|---|---|---|---|---|---|---|
+| alimentos/Decreto 59 (BCN) | Decreto | 59 | xml | vigente | no | 2 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| alimentos/Decreto 8 (BCN) | Decreto | 8 | xml | vigente | no | 4 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| alimentos/Decreto Supremo 977 (BCN) | Decreto Supremo | 977 | xml | vigente | no | 608 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| alimentos/Resolución Exenta 393 (BCN) | Resolución Exenta | 393 | xml | vigente | no | 5 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| alimentos/Resolución Exenta 394 (BCN) | Resolución Exenta | 394 | xml | vigente | no | 3 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| alimentos/Resolución Exenta 860 (BCN) | Resolución Exenta | 860 | xml | vigente | no | 10 | xml_bcn | bcn_leychile | 0 | 0 | no |
 | codigo_sanitario/Disposiciones finales | Decreto con Fuerza de Ley | 725 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | sí |
 | codigo_sanitario/Libro I | Decreto con Fuerza de Ley | 725 | xml | vigente | no | 39 | xml_bcn | bcn_leychile | 0 | 0 | sí |
 | codigo_sanitario/Libro II | Decreto con Fuerza de Ley | 725 | xml | vigente | no | 12 | xml_bcn | bcn_leychile | 0 | 0 | no |
@@ -106,7 +114,14 @@ Ordenados por nº de pasajes con alerta. El texto NO se corrige automáticamente
 | codigo_sanitario/Libro VIII | Decreto con Fuerza de Ley | 725 | xml | vigente | no | 10 | xml_bcn | bcn_leychile | 0 | 0 | sí |
 | codigo_sanitario/Libro X | Decreto con Fuerza de Ley | 725 | xml | vigente | no | 29 | xml_bcn | bcn_leychile | 0 | 0 | sí |
 | codigo_sanitario/Título Preliminar | Decreto con Fuerza de Ley | 725 | xml | vigente | no | 16 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| cosmeticos/Resolución Exenta 8168 (BCN) | Resolución Exenta | 8168 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
 | cosmeticos/decreto supremo 239 | Decreto Supremo | 239 | nativo | vigente | no | 121 | url | listado_oficial | 0 | 0 | sí |
+| dispositivos_medicos/2781436 | Decreto Exento | 25 | nativo | no_verificada | no | 34 | url | override | 0 | 0 | no |
+| dispositivos_medicos/2782631 | Decreto Exento | 31 | nativo | no_verificada | no | 18 | url | override | 0 | 0 | no |
+| dispositivos_medicos/Decreto Supremo 825 (BCN) | Decreto Supremo | 825 | xml | vigente | no | 36 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| dispositivos_medicos/Resolución Exenta 1243 (BCN) | Resolución Exenta | 1243 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| dispositivos_medicos/Resolución Exenta 2050 (BCN) | Resolución Exenta | 2050 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| dispositivos_medicos/Resolución Exenta 3265 (BCN) | Resolución Exenta | 3265 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
 | ensayos_clinicos/Circular A15-01  Abr.2016 Actualiza Pautas de Autoevaluacion para el proceso de Acreditacion de Comite Etico Cientificos | Circular | A15/01/2016 | ocr | vigente | no | 5 | url | listado_oficial | 3 | 0 | sí |
 | ensayos_clinicos/Res.-173-2024-GUIA-CONSIDERACIONES-GENERALES-PARA-ESTUDIOS-CLINICOS | Resolución Exenta | 173 | ocr | vigente | no | 8 | url | listado_oficial | 2 | 0 | sí |
 | ensayos_clinicos/Res.-Ex.-N°-273-2022-Aprueba-Guia-Tecnica-Lineamientos-Estudios-Clinicos-con-Biologicos | Resolución Exenta | 273 | ocr | vigente | no | 6 | url | listado_oficial | 4 | 0 | sí |
@@ -118,12 +133,14 @@ Ordenados por nº de pasajes con alerta. El texto NO se corrige automáticamente
 | ensayos_clinicos/resolución exenta a27 | Resolución Exenta | A27 | ocr | vigente | no | 8 | url | listado_oficial | 6 | 0 | sí |
 | establecimientos_autorizacion_y_fiscalizacion/Anexo-2-BPM-esteriles | Decreto Exento | 26 | ocr | vigente | no | 7 | url | listado_oficial | 7 | 0 | no |
 | establecimientos_autorizacion_y_fiscalizacion/BPM-Anexo-Agua-para-Uso-Farmaceutico-D-Ex-MINSAL-N°-36-2025 | Decreto Exento | 36 | ocr | vigente | no | 9 | url | listado_oficial | 9 | 0 | sí |
+| establecimientos_autorizacion_y_fiscalizacion/Decreto Exento 15 (BCN) | Decreto Exento | 15 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
 | establecimientos_autorizacion_y_fiscalizacion/Decreto-65-modifica-NT-127-radiofarmacos | Decreto Exento | 65 | nativo | vigente | no | 48 | url | listado_oficial | 0 | 0 | sí |
 | establecimientos_autorizacion_y_fiscalizacion/NT-128-Medicamentos-Herabarios-Tradicionales | Decreto Exento | 30 | vacio | vigente | no | 1 | url | listado_oficial | 0 | 0 | sí |
 | establecimientos_autorizacion_y_fiscalizacion/NT-biologicos | Decreto Exento | 40 | ocr | vigente | no | 8 | url | listado_oficial | 8 | 0 | no |
 | establecimientos_autorizacion_y_fiscalizacion/Resol-1588-del-15-04-2021 | Resolución Exenta | 1588 | ocr | vigente | no | 7 | url | listado_oficial | 6 | 0 | sí |
 | establecimientos_autorizacion_y_fiscalizacion/Resol.2111-2021-Fraccionamento-en-Drogueria | Resolución Exenta | 2111 | ocr | vigente | no | 8 | url | listado_oficial | 5 | 0 | no |
 | establecimientos_autorizacion_y_fiscalizacion/Resolucion-N°2748-2023 | Resolución Exenta | 2748 | ocr | vigente | no | 7 | url | listado_oficial | 4 | 0 | sí |
+| establecimientos_autorizacion_y_fiscalizacion/Resolución Exenta 435 (BCN) | Resolución Exenta | 435 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
 | establecimientos_autorizacion_y_fiscalizacion/decreto con fuerza de ley 1 | Decreto con Fuerza de Ley | 1 | nativo | vigente | no | 6 | url | listado_oficial | 0 | 0 | sí |
 | establecimientos_autorizacion_y_fiscalizacion/decreto exento 1.284 | Decreto Exento | 1284 | nativo | vigente | no | 4 | url | listado_oficial | 0 | 0 | sí |
 | establecimientos_autorizacion_y_fiscalizacion/decreto exento 122 | Decreto Exento | 122 | nativo | vigente | no | 13 | url | listado_oficial | 0 | 0 | sí |
@@ -168,6 +185,7 @@ Ordenados por nº de pasajes con alerta. El texto NO se corrige automáticamente
 | farmacovigilancia/DD_5038465_260421_P | Resolución Exenta | 2053 | nativo | vigente | no | 46 | url | listado_oficial | 0 | 0 | no |
 | farmacovigilancia/Norma-N°670-Guia-Vacunacion-Segura-2013 | Resolución Exenta | 670 | nativo | vigente | no | 85 | url | listado_oficial | 0 | 0 | no |
 | farmacovigilancia/Res.-E049-2026 | Resolución Exenta | 49 | nativo | vigente | no | 14 | url | listado_oficial | 0 | 0 | no |
+| farmacovigilancia/Resolución Exenta 140 (BCN) | Resolución Exenta | 140 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
 | farmacovigilancia/decreto 38 | Decreto | 38 | nativo | vigente | no | 29 | url | listado_oficial | 0 | 0 | sí |
 | farmacovigilancia/ley 20.850 | Ley | 20850 | nativo | vigente | no | 89 | url | listado_oficial | 0 | 0 | sí |
 | farmacovigilancia/resolucion exenta 108 | Resolución Exenta | 108 | nativo | vigente | no | 46 | url | listado_oficial | 0 | 1 | sí |
@@ -186,6 +204,7 @@ Ordenados por nº de pasajes con alerta. El texto NO se corrige automáticamente
 | farmacovigilancia/resolución exenta 441 | Resolución Exenta | 441 | nativo | vigente | no | 12 | url | listado_oficial | 0 | 0 | no |
 | farmacovigilancia/resolución exenta 504 | Resolución Exenta | 504 | ocr | vigente | no | 8 | url | listado_oficial | 4 | 0 | sí |
 | importacion_y_exportacion_control_y_vigilancia/5763-2023-1 | Resolución Exenta | 5763 | ocr | vigente | no | 9 | url | listado_oficial | 6 | 0 | sí |
+| importacion_y_exportacion_control_y_vigilancia/Decreto Exento 1 (BCN) | Decreto Exento | 1 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
 | importacion_y_exportacion_control_y_vigilancia/decreto exento 1.049 | Decreto Exento | 1049 | nativo | vigente | no | 12 | url | listado_oficial | 0 | 0 | sí |
 | importacion_y_exportacion_control_y_vigilancia/decreto exento 1.358 | Decreto Exento | 1358 | nativo | vigente | no | 32 | url | listado_oficial | 0 | 0 | sí |
 | importacion_y_exportacion_control_y_vigilancia/decreto exento 867 | Decreto Exento | 867 | nativo | vigente | no | 34 | url | listado_oficial | 0 | 0 | sí |
@@ -202,9 +221,38 @@ Ordenados por nº de pasajes con alerta. El texto NO se corrige automáticamente
 | medicamentos/1645 | Resolución Exenta | 1645 | ocr | vigente | no | 7 | url | listado_oficial | 5 | 1 | no |
 | medicamentos/2975-2020 | Resolución Exenta | 2975 | ocr | vigente | no | 6 | url | listado_oficial | 5 | 0 | sí |
 | medicamentos/DEx-MINSAL-N°-45-2025-Aprueba-Guia-MOVAL-Diario-Oficial-06102025 | Decreto Exento | 45 | nativo | vigente | no | 12 | url | listado_oficial | 0 | 0 | sí |
+| medicamentos/Decreto Exento 11 (BCN) | Decreto Exento | 11 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Decreto Exento 9 (BCN) | Decreto Exento | 9 | xml | vigente | no | 3 | xml_bcn | bcn_leychile | 0 | 0 | no |
 | medicamentos/Decreto-Exento-N°-48_2023 | Decreto Exento | 48 | ocr | vigente | no | 7 | url | listado_oficial | 7 | 0 | sí |
 | medicamentos/NT-133-Listado-Medicamentos-Herbarios | Decreto Exento | 25 | ocr | vigente | no | 4 | url | listado_oficial | 3 | 1 | no |
 | medicamentos/NT-208-BPA-BPD-Cadena-de-Frio | Decreto Exento | 48 | ocr | vigente | no | 6 | url | listado_oficial | 4 | 0 | sí |
+| medicamentos/Resolución 5693 (BCN) | Resolución Exenta | 5693 | xml | vigente | no | 5 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 1238 (BCN) | Resolución Exenta | 1238 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 1239 (BCN) | Resolución Exenta | 1239 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 1240 (BCN) | Resolución Exenta | 1240 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 1241 (BCN) | Resolución Exenta | 1241 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 1242 (BCN) | Resolución Exenta | 1242 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 1307 (BCN) | Resolución Exenta | 1307 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 1903 (BCN) | Resolución Exenta | 1903 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 2112 (BCN) | Resolución Exenta | 2112 | xml | vigente | no | 3 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 2255 (BCN) | Resolución Exenta | 2255 | xml | vigente | no | 3 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 2802 (BCN) | Resolución Exenta | 2802 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 3529 (BCN) | Resolución Exenta | 3529 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 3609 (BCN) | Resolución Exenta | 3609 | xml | vigente | no | 21 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 3745 (BCN) | Resolución Exenta | 3745 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 3746 (BCN) | Resolución Exenta | 3746 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 3852 (BCN) | Resolución Exenta | 3852 | xml | vigente | no | 9 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 3921 (BCN) | Resolución Exenta | 3921 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 4010 (BCN) | Resolución Exenta | 4010 | xml | vigente | no | 5 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 4011 (BCN) | Resolución Exenta | 4011 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 4235 (BCN) | Resolución Exenta | 4235 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 4491 (BCN) | Resolución Exenta | 4491 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 4492 (BCN) | Resolución Exenta | 4492 | xml | vigente | no | 2 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 477 (BCN) | Resolución Exenta | 477 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 4925 (BCN) | Resolución Exenta | 4925 | xml | vigente | no | 5 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 533 (BCN) | Resolución Exenta | 533 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 5841 (BCN) | Resolución Exenta | 5841 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
+| medicamentos/Resolución Exenta 8189 (BCN) | Resolución Exenta | 8189 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |
 | medicamentos/UCD240-22-RES.-2053-DE-2022-MONTELUKAST. | Resolución Exenta | 2053 | ocr | vigente | no | 5 | url | listado_oficial | 0 | 0 | sí |
 | medicamentos/decreto exento 107 | Decreto Exento | 107 | nativo | vigente | no | 13 | url | listado_oficial | 0 | 0 | no |
 | medicamentos/decreto exento 28 | Decreto Exento | 28 | nativo | vigente | no | 4 | url | listado_oficial | 0 | 0 | sí |
@@ -227,3 +275,4 @@ Ordenados por nº de pasajes con alerta. El texto NO se corrige automáticamente
 | medicamentos/resolución exenta 524 | Resolución Exenta | 524 | ocr | vigente | no | 8 | url | listado_oficial | 3 | 0 | sí |
 | medicamentos/resolución exenta 668 | Resolución Exenta | 668 | ocr | vigente | no | 2 | url | listado_oficial | 2 | 0 | no |
 | otros/CODIGO-ETICA-ISP |  |  | nativo | no_verificada | no | 62 | override_manual | override | 0 | 0 | no |
+| otros/Resolución Exenta 3113 (BCN) | Resolución Exenta | 3113 | xml | vigente | no | 1 | xml_bcn | bcn_leychile | 0 | 0 | no |

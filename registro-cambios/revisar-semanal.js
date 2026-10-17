@@ -496,6 +496,12 @@ function main() {
     process.exit(1);
   }
 
+  // Listado de dispositivos médicos (ANDID): mismo trato que ANAMED. La
+  // primera revisión que lo vea reporta sus normas como nuevas, que es lo que
+  // son para la bitácora.
+  const andid = leerJSON(path.join(VIGILANCIA, "snapshots", "andid-latest.json"));
+  if (andid && Array.isArray(andid.records)) snapshot.records = snapshot.records.concat(andid.records);
+
   const referencia = leerJSON(F.referencia);
   const esBaseline = !referencia;
   const diff = esBaseline

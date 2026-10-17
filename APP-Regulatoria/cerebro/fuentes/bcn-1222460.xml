@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><Norma xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.leychile.cl/esquemas" xsi:schemaLocation="http://www.leychile.cl/esquemas http://www.leychile.cl/esquemas/EsquemaIntercambioNorma-v1-0.xsd" normaId="1222460" esTratado="no tratado" fechaVersion="2026-03-18" SchemaVersion="1.0" derogado="no derogado">
+  <Identificador fechaPromulgacion="2026-03-02" fechaPublicacion="2026-03-18">
+    <TiposNumeros>
+      <TipoNumero>
+        <Tipo>Resoluci&#243;n</Tipo>
+        <Numero>1240 EXENTA</Numero>
+      </TipoNumero>
+      <TipoNumero>
+        <Tipo>Resoluci&#243;n</Tipo>
+        <Numero>E 1240 EXENTA</Numero>
+      </TipoNumero>
+    </TiposNumeros>
+    <Organismos>
+      <Organismo>MINISTERIO DE SALUD</Organismo>
+      <Organismo>INSTITUTO DE SALUD P&#218;BLICA</Organismo>
+      <Organismo>AGENCIA NACIONAL DE MEDICAMENTOS</Organismo>
+    </Organismos>
+  </Identificador>
+  <Metadatos>
+    <TituloNorma>ABRE PER&#205;ODO DE INFORMACI&#211;N P&#218;BLICA QUE INDICA</TituloNorma>
+    
+    
+    
+    <IdentificacionFuente>Diario Oficial</IdentificacionFuente>
+    <NumeroFuente>44403</NumeroFuente>
+  </Metadatos>
+  <Encabezado fechaVersion="2026-03-18" derogado="no derogado">
+    <Texto>ABRE PER&#205;ODO DE INFORMACI&#211;N P&#218;BLICA QUE INDICA
+     
+     N&#250;m. E1.240 exenta.- Santiago, 2 de marzo de 2026.
+     
+     Vistos:
+     
+     Los siguientes antecedentes: La solicitud de fecha 25 de septiembre de 2025, (ref: 1287/25) presentada por Gameto Inc.;
+     
+     Considerando:
+     
+     Primero: Que, de conformidad con lo se&#241;alado en la resoluci&#243;n exenta N&#186; 2.510 de 3 junio de 2021 del Instituto de Salud P&#250;blica, en relaci&#243;n con lo prescrito en el art&#237;culo 39 de la ley N&#186; 19.880, corresponde abrir un periodo de informaci&#243;n p&#250;blica a fin de que cualquier persona pueda examinar el procedimiento; y
+     
+     Teniendo presente:
+     
+     Las disposiciones contenidas en el C&#243;digo Sanitario; la ley N&#186; 19.880; el decreto supremo N&#186; 3 de 2010 del Ministerio de Salud; la resoluci&#243;n exenta N&#186; E562 de 2026, del Instituto de Salud P&#250;blica de Chile, dicto la siguiente:
+     
+     Resoluci&#243;n:</Texto>
+  </Encabezado>
+  <EstructurasFuncionales>
+    <EstructuraFuncional transitorio="no transitorio" tipoParte="Art&#237;culo" fechaVersion="2026-03-18" derogado="no derogado" idParte="10588115">
+      <Texto>     
+     &#193;brese un per&#237;odo de informaci&#243;n p&#250;blica por un t&#233;rmino de 10 d&#237;as en procedimiento de R&#233;gimen de Control Sanitario, respecto del producto Fertilo:
+     
+     1. La  exhibici&#243;n de los documentos estar&#225; disponible en la p&#225;gina web del Instituto de Salud P&#250;blica de Chile en el siguiente enlace https://www.ispch.cl/anamed/regimen-de-control-sanitario/etapa-de-informacion-publica-o-debido-emplazamiento/
+     2. Enti&#233;ndase incorporado a la presente resoluci&#243;n y constituyente de este acto administrativo, un anexo que contiene el informe de Evaluaci&#243;n de Solicitud de R&#233;gimen de control Sanitario N&#186; 53-A/26, el que se encontrar&#225; disponible en el portal web indicado en el numeral precedente.</Texto>
+      <Metadatos>
+        <NombreParte presente="no">&#160;</NombreParte>
+        <TituloParte presente="no">&#160;</TituloParte>
+        
+      </Metadatos>
+    </EstructuraFuncional>
+  </EstructurasFuncionales>
+  <Promulgacion fechaVersion="2026-03-18" derogado="no derogado">
+    <Texto>     An&#243;tese, comun&#237;quese, publ&#237;quese un informe en el Diario Oficial y los documentos en la p&#225;gina web del instituto www.ispch.cl.- Jorge Antonio Canales Pacheco, Jefe Departamento, Agencia Nacional de Medicamentos.</Texto>
+  </Promulgacion>
+  
+</Norma>

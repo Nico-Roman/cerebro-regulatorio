@@ -9,9 +9,9 @@ import { VideoVsl } from "@/components/video-vsl";
 import { BloquePerfil, Cifras, Testimonios } from "@/components/prueba-social";
 
 export const metadata: Metadata = {
-  title: "Asesoría regulatoria — cómo trabajo contigo",
+  title: "Asesoría regulatoria — cómo trabajamos contigo",
   description:
-    "Asesoría en asuntos regulatorios para productos farmacéuticos, cosméticos y dispositivos médicos ante el ISP/ANAMED. Mira la presentación, revisa el proceso y agenda una primera evaluación sin costo.",
+    "Asesoría en asuntos regulatorios para productos farmacéuticos, cosméticos y dispositivos médicos ante el ISP/ANAMED. Mira la presentación, revisa el proceso y agenda una primera evaluación.",
   alternates: { canonical: "/asesoria" },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: SITE.nombre,
     title: `Asesoría regulatoria · ${SITE.nombre}`,
     description:
-      "Cómo trabajo el registro sanitario, la farmacovigilancia y el cumplimiento normativo ante el ISP de Chile.",
+      "Cómo trabajamos el registro sanitario, la farmacovigilancia y el cumplimiento normativo ante el ISP de Chile.",
     images: [OG_IMAGEN],
   },
 };
@@ -67,8 +67,8 @@ export default function Asesoria() {
           <h1 className="font-display mt-5 max-w-4xl text-[2.25rem] leading-[1.08] font-medium tracking-tight sm:text-6xl">
             {hayVideo ? (
               <>
-                Antes de que me escribas,
-                <br className="hidden sm:block" /> escúchame {VSL.duracion}.
+                Antes de escribirnos, mira
+                <br className="hidden sm:block" /> este video de {VSL.duracion}.
               </>
             ) : (
               <>
@@ -81,7 +81,7 @@ export default function Asesoria() {
           {hayVideo && (
             <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
               Contratar una asesoría regulatoria a ciegas es caro. En este video te
-              cuento qué hago exactamente, cómo es el proceso y qué puedes esperar,
+              contamos qué hacemos exactamente, cómo es el proceso y qué puedes esperar,
               para que la primera reunión empiece en la pregunta que te importa y
               no en la presentación.
             </p>
@@ -184,8 +184,8 @@ export default function Asesoria() {
               </p>
               <p className="mt-5 text-sm leading-relaxed text-muted">
                 La mayoría de los expedientes que fallan no fallan por la norma:
-                fallan porque nadie miró cómo se ejecuta después. Yo trabajo en
-                los dos lados.
+                fallan porque nadie miró cómo se ejecuta después. Nosotros
+                trabajamos en los dos lados.
               </p>
             </div>
 
@@ -223,7 +223,7 @@ export default function Asesoria() {
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
           <span className="label-micro text-accent">Servicios</span>
           <h2 className="font-display mt-5 max-w-3xl text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
-            En qué te puedo ayudar concretamente.
+            En qué te podemos ayudar concretamente.
           </h2>
 
           <div className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
@@ -253,12 +253,12 @@ export default function Asesoria() {
             <div className="lg:w-80 lg:shrink-0">
               <span className="label-micro text-accent">Contacto</span>
               <h2 className="font-display mt-5 text-2xl leading-tight font-medium tracking-tight sm:text-4xl">
-                Cuéntame tu caso.
+                Cuéntanos tu caso.
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-muted">
-                Reviso tu situación y te digo con claridad qué trámite
+                Revisamos tu situación y te decimos con claridad qué trámite
                 corresponde, qué antecedentes necesitas y en qué orden conviene
-                hacerlo. La primera evaluación no tiene costo.
+                hacerlo. La primera evaluación es breve y sin costo.
               </p>
               <Link
                 href="/agenda"

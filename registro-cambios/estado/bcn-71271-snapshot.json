@@ -1,0 +1,3922 @@
+{
+  "norma_id": "71271",
+  "norma": "Decreto Supremo 977",
+  "capturado": "2026-10-17T23:36:43+00:00",
+  "fecha_version": "2026-06-19",
+  "derogado": false,
+  "articulos": {
+    "1": {
+      "fecha_version": "2016-11-28",
+      "derogado": false,
+      "id_parte": "8716312",
+      "libro": "",
+      "resumen": "Artículo 1.- Este reglamento establece las condiciones sanitarias a que deberá ceñirse la producción, importación, elaboración, envase, almacenamiento, distribu"
+    },
+    "2": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716314",
+      "libro": "",
+      "resumen": "Artículo 2.- Alimento o producto alimenticio es cualquier substancia o mezclas de substancias destinadas al consumo humano, incluyendo las bebidas y todos los i"
+    },
+    "3": {
+      "fecha_version": "2003-11-25",
+      "derogado": false,
+      "id_parte": "8716315",
+      "libro": "",
+      "resumen": "Artículo 3.- Todos los alimentos y materias primas, deberán responder en su composición química, condiciones microbiológicas y caracteres organolépticos, a sus "
+    },
+    "4": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716316",
+      "libro": "",
+      "resumen": "Artículo 4.- Corresponderá a los Servicios de Salud el control sanitario de los alimentos y velar por el cumplimiento de las disposiciones relativas a esta mate"
+    },
+    "5": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716317",
+      "libro": "",
+      "resumen": "Artículo 5.- Establecimientos de alimentos son los recintos en los cuales se producen, elaboran, preservan, envasan, almacenan, distribuyen, expenden y consumen"
+    },
+    "6": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716320",
+      "libro": "",
+      "resumen": "Artículo 6.- La instalación, modificación estructural y funcionamiento de cualquier establecimiento de alimentos deberá contar con autorización del Servicio de "
+    },
+    "7": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716321",
+      "libro": "",
+      "resumen": "Artículo 7.- Al solicitar la autorización para la instalación de un establecimiento, el interesado deberá presentar, según corresponda: a) autorización municipa"
+    },
+    "8": {
+      "fecha_version": "2024-04-25",
+      "derogado": false,
+      "id_parte": "8716322",
+      "libro": "",
+      "resumen": "Artículo 8.- La autorización será válida por un plazo de tres años contado desde su otorgamiento y se entenderá automáticamente prorrogada por períodos iguales "
+    },
+    "9": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716323",
+      "libro": "",
+      "resumen": "Artículo 9.- La autorización sólo podrá emitirse previa inspección del establecimiento y la solicitud de autorización deberá ser resuelta por el Servicio de Sal"
+    },
+    "10": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716324",
+      "libro": "",
+      "resumen": "Artículo 10.- Para aquellos establecimientos que el Ministerio de Salud determine, la autorización podrá emitirse sin practicar una inspección previa."
+    },
+    "11": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716325",
+      "libro": "",
+      "resumen": "Artículo 11.- Desde el inicio de su funcionamiento, el interesado deberá aplicar las prácticas generales de higiene en la manipulación incluyendo el cultivo, la"
+    },
+    "12": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716326",
+      "libro": "",
+      "resumen": "Artículo 12.- Los establecimientos de alimentos no podrán utilizarse para un fin distinto de aquel para el que fueron autorizados."
+    },
+    "13": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716327",
+      "libro": "",
+      "resumen": "Artículo 13.- La autoridad sanitaria deberá enrolar los establecimientos y para este efecto llevará un registro en el que se indicará el rubro o giro, su ubicac"
+    },
+    "14": {
+      "fecha_version": "2024-04-25",
+      "derogado": false,
+      "id_parte": "8716328",
+      "libro": "",
+      "resumen": "Artículo 14.- Para los fines de este reglamento se entenderá por: a) adecuado: suficiente para alcanzar el fin que persigue este reglamento; b) contaminación: l"
+    },
+    "15": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716330",
+      "libro": "",
+      "resumen": "Artículo 15.- No se permitirá cultivar, producir o recolectar alimentos en zonas contaminadas con agentes potencialmente nocivos o regadas con aguas sanitariame"
+    },
+    "16": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716332",
+      "libro": "",
+      "resumen": "Artículo 16.- Los alimentos se deberán proteger contra la contaminación por desechos de origen humano, animal, doméstico, industrial y agrícola cuya presencia p"
+    },
+    "17": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716333",
+      "libro": "",
+      "resumen": "Artículo 17.- Se deberán tomar precauciones adecuadas para que los desechos no se utilicen ni evacuen de manera que puedan constituir, a través de los alimentos"
+    },
+    "18": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716334",
+      "libro": "",
+      "resumen": "Artículo 18.- El equipo y los recipientes que se utilicen en la recolección y la producción de alimentos deberán construirse y conservarse de manera que no cons"
+    },
+    "19": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716335",
+      "libro": "",
+      "resumen": "Artículo 19.- Los alimentos que no son aptos para el consumo humano deberán separarse durante la recolección y producción y eliminarse de tal forma que no pueda"
+    },
+    "20": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716336",
+      "libro": "",
+      "resumen": "Artículo 20.- Los productos alimenticios y/o materias primas recolectados, se deberán almacenar en condiciones que confieran protección contra la contaminación "
+    },
+    "21": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716337",
+      "libro": "",
+      "resumen": "Artículo 21.- Los medios de transporte de los productos alimenticios recolectados deberán ser de materiales y construcción tales que permitan una limpieza fácil"
+    },
+    "22": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716338",
+      "libro": "",
+      "resumen": "Artículo 22.- Los establecimientos deberán estar situados en zonas alejadas de focos de insalubridad, olores objetables, humo, polvo y otros contaminantes y no "
+    },
+    "23": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716340",
+      "libro": "",
+      "resumen": "Artículo 23.- Las vías de acceso y zonas de circulación que se encuentren dentro del recinto del establecimiento o en sus inmediaciones, deberán tener una super"
+    },
+    "24": {
+      "fecha_version": "2018-07-07",
+      "derogado": false,
+      "id_parte": "8716341",
+      "libro": "",
+      "resumen": "Artículo 24.- Los edificios e instalaciones deberán proyectarse de tal manera que las operaciones puedan realizarse en las debidas condiciones higiénicas y se g"
+    },
+    "25": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716342",
+      "libro": "",
+      "resumen": "Artículo 25.- En las zonas de preparación de alimentos: a) los pisos, se construirán de materiales impermeables, no absorbentes, lavables, antideslizantes y ató"
+    },
+    "26": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716343",
+      "libro": "",
+      "resumen": "Artículo 26.- La zona de preparación de alimentos deberá estar separada de los recintos destinados a alojamientos, servicios higiénicos, vestuarios y acopio de "
+    },
+    "27": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716344",
+      "libro": "",
+      "resumen": "Artículo 27.- Deberá disponerse de abundante abastecimiento de agua potable que se ajustará a lo dispuesto en la reglamentación vigente, a presión y temperatura"
+    },
+    "28": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716345",
+      "libro": "",
+      "resumen": "Artículo 28.- El hielo, utilizado en contacto directo con el alimento, deberá fabricarse con agua que se ajuste a lo dispuesto en el presente reglamento, y habr"
+    },
+    "29": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716346",
+      "libro": "",
+      "resumen": "Artículo 29.- El vapor de agua utilizado en contacto directo con alimentos no deberá contener ninguna sustancia que pueda contaminar el alimento."
+    },
+    "30": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716347",
+      "libro": "",
+      "resumen": "Artículo 30.- El agua no potable que se utilice para la producción de vapor, refrigeración, lucha contra incendios y otros propósitos similares no relacionados "
+    },
+    "31": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716348",
+      "libro": "",
+      "resumen": "Artículo 31.- Los establecimientos deberán disponer de un sistema eficaz de evacuación de aguas residuales, el que deberá mantenerse en buen estado de funcionam"
+    },
+    "32": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716349",
+      "libro": "",
+      "resumen": "Artículo 32: Todos los establecimientos de producción, elaboración y transformación de alimentos deberán disponer de vestuarios y servicios higiénicos convenien"
+    },
+    "33": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716350",
+      "libro": "",
+      "resumen": "Artículo 33.- En las zonas de elaboración deberá disponerse de lavamanos provistos de jabón y medios higiénicos para secarse las manos, tales como, toallas de u"
+    },
+    "34": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716351",
+      "libro": "",
+      "resumen": "Artículo 34.- Todo el establecimiento deberá tener una iluminación natural o artificial adecuada, que no deberá alterar los colores, y que permita la apropiada "
+    },
+    "35": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716352",
+      "libro": "",
+      "resumen": "Artículo 35.- Deberá proveerse una ventilación adecuada para evitar el calor excesivo, la condensación de vapor de agua y acumulación de polvo y para eliminar e"
+    },
+    "36": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716353",
+      "libro": "",
+      "resumen": "Artículo 36.- Deberá disponerse de instalaciones separadas del lugar de elaboración para el almacenamiento de los desechos y materiales no comestibles, donde pe"
+    },
+    "37": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716354",
+      "libro": "",
+      "resumen": "Artículo 37.- Los establecimientos de alimentos en que se mantengan, almacenen o exhiban alimentos o materias primas, que precisen de frío para su conservación "
+    },
+    "38": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716355",
+      "libro": "",
+      "resumen": "Artículo 38.- Los establecimientos, sus equipos, utensilios y demás instalaciones, incluidos los desagües, deberán mantenerse en buen estado, limpios y ordenado"
+    },
+    "39": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716357",
+      "libro": "",
+      "resumen": "Artículo 39.-Los desechos deberán retirarse de las zonas de manipulación y otras zonas de trabajo, cuantas veces sea necesario y por lo menos una vez al día."
+    },
+    "40": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716358",
+      "libro": "",
+      "resumen": "Artículo 40.- Se deberá impedir el acceso de las plagas a los desechos. Inmediatamente después de su evacuación, los receptáculos utilizados para el almacenamie"
+    },
+    "41": {
+      "fecha_version": "2019-11-12",
+      "derogado": false,
+      "id_parte": "8716359",
+      "libro": "",
+      "resumen": "Artículo 41.- Todo establecimiento de producción, elaboración y transformación de alimentos deberá establecer un programa de limpieza y, de ser necesario, de de"
+    },
+    "42": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716360",
+      "libro": "",
+      "resumen": "Artículo 42.- Para impedir la contaminación de los alimentos, todo el equipo y utensilios deberán mantenerse debidamente protegidos en estantes, vitrinas, u otr"
+    },
+    "43": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716361",
+      "libro": "",
+      "resumen": "Artículo 43.- Deberán tomarse precauciones adecuadas para impedir que el alimento se contamine cuando las salas, el equipo y los utensilios se limpien o desinfe"
+    },
+    "44": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716362",
+      "libro": "",
+      "resumen": "Artículo 44.- Inmediatamente después de terminar el trabajo de la jornada o cuantas veces sea necesario, deberán limpiarse minuciosamente los pisos, incluidos l"
+    },
+    "45": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716363",
+      "libro": "",
+      "resumen": "Artículo 45.- Las salas de vestuario, servicios higiénicos, vías de acceso y los patios situados en las inmediaciones de los locales y que sean partes de éstos,"
+    },
+    "46": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716364",
+      "libro": "",
+      "resumen": "Artículo 46.- Se prohíbe la entrada a las salas y áreas de elaboración de los establecimientos de alimentos de toda especie animal, excepto en los mataderos, de"
+    },
+    "47": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716365",
+      "libro": "",
+      "resumen": "Artículo 47.- Deberá aplicarse un programa preventivo eficaz y continuo de lucha contra las plagas. Los establecimientos y las zonas circundantes deberán inspec"
+    },
+    "48": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716366",
+      "libro": "",
+      "resumen": "Artículo 48.- En caso que alguna plaga invada los establecimientos deberán adoptarse medidas de erradicación. El tratamiento con agentes químicos, físicos o bio"
+    },
+    "49": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716367",
+      "libro": "",
+      "resumen": "Artículo 49.- Sólo deberá emplearse plaguicidas si no pueden aplicarse con eficacia otras medidas de prevención. Antes de aplicar plaguicidas se deberá tener cu"
+    },
+    "50": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716368",
+      "libro": "",
+      "resumen": "Artículo 50.- Se prohíbe la mantención de plaguicidas u otras sustancias tóxicas que puedan representar un riesgo para la salud, en las zonas de producción, ela"
+    },
+    "51": {
+      "fecha_version": "2018-07-07",
+      "derogado": false,
+      "id_parte": "8716369",
+      "libro": "",
+      "resumen": "Artículo 51.- En las zonas de manipulación de alimentos se prohíbe almacenar sustancias que puedan contaminar los alimentos ni depositar o guardar en ellas ropa"
+    },
+    "52": {
+      "fecha_version": "2019-11-12",
+      "derogado": false,
+      "id_parte": "8716370",
+      "libro": "",
+      "resumen": "Artículo 52.- La dirección del establecimiento será responsable de que todas las personas que manipulen alimentos reciban una instrucción adecuada y continua en"
+    },
+    "53": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716372",
+      "libro": "",
+      "resumen": "Artículo 53.- La empresa tomará las medidas necesarias para evitar que el personal que padece o es portador de una enfermedad susceptible de transmitirse por lo"
+    },
+    "54": {
+      "fecha_version": "2003-06-24",
+      "derogado": false,
+      "id_parte": "8716373",
+      "libro": "",
+      "resumen": "Artículo 54.- INCISO ELIMINADO El personal que manipule alimentos no deberá atender pagos del público, sea recibiendo o entregando dinero, no deberá realizar ta"
+    },
+    "55": {
+      "fecha_version": "2017-10-28",
+      "derogado": false,
+      "id_parte": "8716374",
+      "libro": "",
+      "resumen": "Artículo 55.- El personal que manipula alimentos deberá lavarse siempre las manos cuando su nivel de limpieza pueda afectar la inocuidad de los alimentos, antes"
+    },
+    "56": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716375",
+      "libro": "",
+      "resumen": "Artículo 56.- Los manipuladores deberán mantener una esmerada limpieza personal mientras estén en funciones debiendo llevar ropa protectora, tal como: cofia o g"
+    },
+    "57": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716376",
+      "libro": "",
+      "resumen": "Artículo 57.- En las zonas en que se manipulen alimentos deberá prohibirse todo acto que pueda contaminar los alimentos, como: comer, fumar, masticar chicle, o "
+    },
+    "58": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716377",
+      "libro": "",
+      "resumen": "Artículo 58.- Si para manipular los alimentos se emplean guantes, éstos se mantendrán en perfectas condiciones de limpieza e higiene. El uso de guantes no eximi"
+    },
+    "59": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716378",
+      "libro": "",
+      "resumen": "Artículo 59.- Se deberá evitar la presencia de personas extrañas en las salas donde se manipulen alimentos. En la eventualidad que esto suceda se tomarán las pr"
+    },
+    "60": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716379",
+      "libro": "",
+      "resumen": "Artículo 60.- La responsabilidad del cumplimiento por parte del personal de todos los requisitos señalados en este párrafo, deberá asignarse al personal supervi"
+    },
+    "61": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716380",
+      "libro": "",
+      "resumen": "Artículo 61.- En la elaboración sólo deberán utilizarse materias primas e ingredientes en buen estado de conservación, debidamente identificados, exentos de mic"
+    },
+    "62": {
+      "fecha_version": "2018-07-07",
+      "derogado": false,
+      "id_parte": "8716382",
+      "libro": "",
+      "resumen": "Artículo 62.- Las materias primas, ingredientes, alimentos en proceso y envases almacenados en los locales del establecimiento deberán mantenerse en condiciones"
+    },
+    "63": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716383",
+      "libro": "",
+      "resumen": "Artículo 63.- El flujo del personal, vehículos y de materias primas en las distintas etapas del proceso, debe ser ordenado y conocido por todos los que particip"
+    },
+    "64": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716384",
+      "libro": "",
+      "resumen": "Artículo 64.- Todo el equipo que haya entrado en contacto con materias primas o con material contaminado deberá limpiarse, desinfectarse y verificarse el grado "
+    },
+    "65": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716385",
+      "libro": "",
+      "resumen": "Artículo 65.- En la manipulación de los alimentos sólo deberá utilizarse agua de calidad potable."
+    },
+    "66": {
+      "fecha_version": "2013-01-09",
+      "derogado": false,
+      "id_parte": "8716386",
+      "libro": "",
+      "resumen": "Artículo 66.- Deberán existir registros de producción, distribución y control de los alimentos y materias primas y conservarse, como mínimo, durante 90 días pos"
+    },
+    "67": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716387",
+      "libro": "",
+      "resumen": "Artículo 67.- Los productos terminados deberán almacenarse y transportarse en condiciones adecuadas de temperatura y humedad que garantice su aptitud para el co"
+    },
+    "68": {
+      "fecha_version": "2006-07-12",
+      "derogado": false,
+      "id_parte": "8716388",
+      "libro": "",
+      "resumen": "Artículo 68.- El transporte de alimentos perecibles que requieren frío para su conservación en estado fresco, enfriado y/o congelado, sólo podrá realizarse en v"
+    },
+    "69": {
+      "fecha_version": "2014-11-20",
+      "derogado": false,
+      "id_parte": "8716389",
+      "libro": "",
+      "resumen": "Artículo 69.- Los establecimientos de producción, elaboración, preservación y envase de alimentos deberán cumplir con las Buenas Prácticas de Fabricación (BPF) "
+    },
+    "70": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716390",
+      "libro": "",
+      "resumen": "Artículo 70.- Los procedimientos de laboratorio utilizados en el control de calidad, deberán ajustarse a métodos normalizados y reconocidos por organismos ofici"
+    },
+    "71": {
+      "fecha_version": "2018-07-07",
+      "derogado": false,
+      "id_parte": "8716391",
+      "libro": "",
+      "resumen": "Artículo 71.- En los establecimientos donde se expendan alimentos que necesitan conservarse a baja temperatura, se deberá contar con sistemas de frío que asegur"
+    },
+    "72": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716393",
+      "libro": "",
+      "resumen": "Artículo 72.- Tanto el local como los equipos, superficies de trabajo y utensilios deberán mantenerse en perfectas condiciones de limpieza. La vajilla, cubierto"
+    },
+    "73": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716394",
+      "libro": "",
+      "resumen": "Artículo 73.- Los locales donde se expenden alimentos para su consumo en el mismo establecimiento deberán contar además de lo dispuesto en el artículo 32 de est"
+    },
+    "74": {
+      "fecha_version": "2016-06-06",
+      "derogado": false,
+      "id_parte": "8716395",
+      "libro": "",
+      "resumen": "Artículo 74.- Los puestos emplazados en ferias libres, como también los quioscos, casetas y carros que carezcan de conexiones a las redes de agua potable, alcan"
+    },
+    "74 A": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716959",
+      "libro": "",
+      "resumen": "Artículo 74 a.- Los quioscos, casetas y carros podrán elaborar y expender fruta fresca confitada, frutos secos confitados, palomitas de maíz y algodón de azúcar"
+    },
+    "74 B": {
+      "fecha_version": "2016-06-06",
+      "derogado": false,
+      "id_parte": "8716960",
+      "libro": "",
+      "resumen": "Artículo 74 b.- Los quioscos, casetas y carros podrán freír, hornear y expender: masas sin relleno, empanadas de queso y productos vegetales. Asimismo, podrán e"
+    },
+    "75": {
+      "fecha_version": "2014-10-07",
+      "derogado": false,
+      "id_parte": "8716396",
+      "libro": "",
+      "resumen": "Artículo 75.- Se permite la venta de la bebida tradicional \"Mote con Huesillos\" provenientes de establecimientos autorizados en carros móviles especialmente dis"
+    },
+    "76": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716397",
+      "libro": "",
+      "resumen": "Artículo 76.- Los mataderos de aves y otras especies distintas del ganado, deberán estar ubicados en un sector permitido por el respectivo plano regulador y est"
+    },
+    "77": {
+      "fecha_version": "2010-06-25",
+      "derogado": false,
+      "id_parte": "8716399",
+      "libro": "",
+      "resumen": "Artículo 77.- Los mataderos de ganado se rigen por lo establecido en el Reglamento sobre estructura y funcionamiento de mataderos, establecimientos frigoríficos"
+    },
+    "78": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716400",
+      "libro": "",
+      "resumen": "Artículo 78.- Mataderos son aquellos establecimientos donde se sacrifican y faenan reses, aves y otras especies animales destinadas a la alimentación humana. De"
+    },
+    "79": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716401",
+      "libro": "",
+      "resumen": "Artículo 79.- Los mataderos de aves y otras especies distintas del ganado, deberán contar al menos con las siguientes dependencias: área destinada al lavado y d"
+    },
+    "80": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716402",
+      "libro": "",
+      "resumen": "Artículo 80.- Los mataderos, a que se refiere el artículo 76 cuando corresponda, deberán disponer de secciones para el procesamiento de subproductos, aisladas d"
+    },
+    "81": {
+      "fecha_version": "2010-06-25",
+      "derogado": false,
+      "id_parte": "8716403",
+      "libro": "",
+      "resumen": "Artículo 81.- Se prohíbe el sacrificio y el faenamiento de animales destinados a la alimentación humana en locales o recintos no autorizados por la autoridad sa"
+    },
+    "82": {
+      "fecha_version": "2010-06-25",
+      "derogado": false,
+      "id_parte": "8716404",
+      "libro": "",
+      "resumen": "Artículo 82.- La encierra de las reses deberá efectuarse por un período de tiempo de antelación al sacrificio, con el fin de permitir el reposo y el examen ante"
+    },
+    "83": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716406",
+      "libro": "",
+      "resumen": "Artículo 83.- Todas las especies de reses, aves y otras especies animales destinadas al sacrificio serán sometidas a inspección médico-veterinaria por la autori"
+    },
+    "84": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716407",
+      "libro": "",
+      "resumen": "Artículo 84.- La sangría, faenamiento y movilización interna de aves y de otras especies distintas de ganado, se hará en suspensión y los ganchos que soportan d"
+    },
+    "85": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716408",
+      "libro": "",
+      "resumen": "Artículo 85.- Todos los animales enfermos que se detecten en el examen ante-mortem, serán enviados a un corral especialmente habilitado para ello, el que se enc"
+    },
+    "86": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716409",
+      "libro": "",
+      "resumen": "Artículo 86.- Los órganos, partes o especies enteras no aptas para el consumo humano, de las especies de abasto deberán ser destruidos o sometidos a tratamiento"
+    },
+    "87": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716410",
+      "libro": "",
+      "resumen": "Artículo 87.- Los establecimientos señalados en el artículo 76 y los mataderos de reses deberán mantener un registro diario de la procedencia de los animales y "
+    },
+    "88": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716411",
+      "libro": "",
+      "resumen": "Artículo 88.- Establecimiento o sala de desosado es aquel recinto donde se desosan y/o trozan aves y otras especies distintas del ganado, destinadas a la alimen"
+    },
+    "89": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716413",
+      "libro": "",
+      "resumen": "Artículo 89.- Las salas destinadas a las labores de desosado, trozado, empaque y pesaje deberán disponer de un dispositivo de enfriamiento que permita mantener "
+    },
+    "90": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716414",
+      "libro": "",
+      "resumen": "Artículo 90.- El traslado del producto obtenido en las salas de desosado debe realizarse exclusivamente en cajas o contenedores que garanticen la calidad higién"
+    },
+    "91": {
+      "fecha_version": "2003-11-25",
+      "derogado": false,
+      "id_parte": "8716415",
+      "libro": "",
+      "resumen": "Artículo 91.- Empacadora de carne de ave u otras especies es el establecimiento destinado al envasado de carnes. Incluirá recepción, cámara frigorífica, cámara "
+    },
+    "92": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716416",
+      "libro": "",
+      "resumen": "Artículo 92.- El transporte de leches crudas deberá realizarse en envases destinados exclusivamente a este fin. Deberán ser de material inerte que permita su fá"
+    },
+    "93": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716418",
+      "libro": "",
+      "resumen": "Artículo 93.- Se prohíbe el transporte de leches o sus envases vacíos junto a animales, detergentes, desinfectantes, pesticidas, combustibles u otras sustancias"
+    },
+    "94": {
+      "fecha_version": "2019-03-06",
+      "derogado": false,
+      "id_parte": "8716419",
+      "libro": "",
+      "resumen": "Artículo 94.- Cuando los productores expendan leche directamente al público, deben cumplir los siguientes requisitos: a) contar con un local de ventas autorizad"
+    },
+    "95": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716420",
+      "libro": "",
+      "resumen": "Artículo 95.- Para los efectos de la aplicación del presente Reglamento, la responsabilidad derivada de las actividades de producción, importación, envase y com"
+    },
+    "96": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716423",
+      "libro": "",
+      "resumen": "Artículo 96.- Se prohíbe la fabricación, tenencia, distribución, comercialización o transferencia de alimentos elaborados o envasados en el país que, aun siendo"
+    },
+    "97": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716424",
+      "libro": "",
+      "resumen": "Artículo 97.- Los alimentos de exportación que no cumplan con las normas establecidas en el presente Reglamento deberán llevar impreso en su envase y en forma d"
+    },
+    "98": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716425",
+      "libro": "",
+      "resumen": "Artículo 98.- Alimento alterado es aquel que por causas naturales de índole física, química o biológica, o por causas derivadas de tratamientos tecnológicos, ai"
+    },
+    "99": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716426",
+      "libro": "",
+      "resumen": "Artículo 99.- Alimento adulterado es aquel que ha experimentado por intervención del hombre, cambios que le modifican sus características o cualidades propias s"
+    },
+    "100": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716427",
+      "libro": "",
+      "resumen": "Artículo 100.- Alimento falsificado es aquel que: a) se designe, rotule o expenda con nombre o calificativo que no corresponda a su origen, identidad, valor nut"
+    },
+    "101": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716428",
+      "libro": "",
+      "resumen": "Artículo 101.- Alimento contaminado es aquel que contenga: a) microorganismos, virus y/o parásitos, sustancias extrañas o deletéreas de origen mineral, orgánico"
+    },
+    "102": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716429",
+      "libro": "",
+      "resumen": "Artículo 102.- Se prohíbe la fabricación, importación, tenencia, distribución, comercialización o transferencia a cualquier título, de alimentos alterados, cont"
+    },
+    "103": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716430",
+      "libro": "",
+      "resumen": "Artículo 103.- No podrá llevarse a efecto enajenación alguna de alimentos, materias primas procedentes de rezagos de aduanas, de empresas de transporte o de sal"
+    },
+    "104": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716431",
+      "libro": "",
+      "resumen": "Artículo 104.- El interesado o el martillero encargado de la subasta en su caso, deberá solicitar con a lo menos veinte días de anticipación a la enajenación, u"
+    },
+    "105": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716432",
+      "libro": "",
+      "resumen": "Artículo 105.- Los alimentos que impliquen un riesgo para la salud deberán ser decomisados por la autoridad sanitaria, pudiendo quedar retenidos bajo custodia d"
+    },
+    "106": {
+      "fecha_version": "2017-08-02",
+      "derogado": false,
+      "id_parte": "8716433",
+      "libro": "",
+      "resumen": "Artículo 106.- \"Para los efectos de este reglamento se entiende por: 1) Alimento sucedáneo: Aquel alimento destinado a parecerse a un alimento usual, por su tex"
+    },
+    "107": {
+      "fecha_version": "2021-02-02",
+      "derogado": false,
+      "id_parte": "8716435",
+      "libro": "",
+      "resumen": "Artículo 107.- Todos los productos alimenticios que se almacenen, transporten o expendan envasados deberán llevar un rótulo o etiqueta que contenga la informaci"
+    },
+    "108": {
+      "fecha_version": "2013-10-18",
+      "derogado": false,
+      "id_parte": "8716436",
+      "libro": "",
+      "resumen": "Artículo 108.- Además los productos importados deberán cumplir con todas las disposiciones de rotulación estipuladas en el presente Reglamento. Cualquier inform"
+    },
+    "109": {
+      "fecha_version": "2016-12-13",
+      "derogado": false,
+      "id_parte": "8716437",
+      "libro": "",
+      "resumen": "Artículo 109.- La información en el rótulo deberá estar en idioma castellano, pudiendo repetirse eventualmente en otro idioma. Los datos deberán señalarse con c"
+    },
+    "110": {
+      "fecha_version": "2013-10-18",
+      "derogado": false,
+      "id_parte": "8716438",
+      "libro": "",
+      "resumen": "Artículo 110.- La rotulación y publicidad de cualquier tipo no deberá contener palabras, ilustraciones y/u otras representaciones gráficas que puedan inducir a "
+    },
+    "110 BIS": {
+      "fecha_version": "2015-06-26",
+      "derogado": false,
+      "id_parte": "9616211",
+      "libro": "",
+      "resumen": "Artículo 110 bis: Tratándose de cualquier alimento o producto alimenticio que, en su composición nutricional, contenga energía, sodio, azúcares o grasa saturada"
+    },
+    "110 TER": {
+      "fecha_version": "2017-11-28",
+      "derogado": false,
+      "id_parte": "9854681",
+      "libro": "",
+      "resumen": "Artículo 110 ter.- Cuando a un alimento o producto alimenticio se le haya adicionado sodio, azúcares o grasas saturadas, y su contenido supere el valor establec"
+    },
+    "111": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716439",
+      "libro": "",
+      "resumen": "Artículo 111.- La información debe colocarse en el envase de manera que no se separe del mismo. Cuando el envase esté cubierto por una envoltura no transparente"
+    },
+    "112": {
+      "fecha_version": "2013-10-18",
+      "derogado": false,
+      "id_parte": "8716440",
+      "libro": "",
+      "resumen": "Artículo 112.- Cuando en el etiquetado de un alimento se destaque la presencia o el contenido de uno o más ingredientes caracterizantes, o cuando la descripción"
+    },
+    "113": {
+      "fecha_version": "2005-05-06",
+      "derogado": false,
+      "id_parte": "8716441",
+      "libro": "",
+      "resumen": "Artículo 113.- En el etiquetado nutricional se podrá facultativamente, incorporar información nutricional complementaria y cuando corresponda, deberán rotular j"
+    },
+    "114": {
+      "fecha_version": "2007-06-16",
+      "derogado": false,
+      "id_parte": "8716442",
+      "libro": "",
+      "resumen": "Artículo 114.- Todos los alimentos que en su rotulación o publicidad declaren propiedades saludables o, cuando su descripción produzca el mismo efecto, quedarán"
+    },
+    "115": {
+      "fecha_version": "2015-06-26",
+      "derogado": false,
+      "id_parte": "8716443",
+      "libro": "",
+      "resumen": "Artículo 115.- Todos los alimentos envasados listos para su entrega al consumidor final deberán obligatoriamente incorporar en su rotulación la siguiente inform"
+    },
+    "116": {
+      "fecha_version": "2011-10-18",
+      "derogado": false,
+      "id_parte": "8716444",
+      "libro": "",
+      "resumen": "Artículo 116.- Cuando se haga una declaración de propiedades nutricionales o saludables con respecto a la cantidad o el tipo de carbohidratos disponibles o hidr"
+    },
+    "117": {
+      "fecha_version": "2000-05-26",
+      "derogado": false,
+      "id_parte": "8716445",
+      "libro": "",
+      "resumen": "Artículo 117.- La declaración de propiedades nutricionales, la declaración de propiedades saludables, la declaración de nutrientes y la información nutricional "
+    },
+    "118": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716446",
+      "libro": "",
+      "resumen": "Artículo 118.- Cuando se haga declaración de nutrientes podrán enumerarse, además, las vitaminas y minerales que se hallen presentes en cantidades significativa"
+    },
+    "119": {
+      "fecha_version": "2000-05-26",
+      "derogado": false,
+      "id_parte": "8716447",
+      "libro": "",
+      "resumen": "Artículo 119.- La información nutricional complementaria, que facultativamente se podrá añadir a la declaración de nutrientes, tendrá por objeto facilitar la co"
+    },
+    "120": {
+      "fecha_version": "2018-07-13",
+      "derogado": false,
+      "id_parte": "8716448",
+      "libro": "",
+      "resumen": "Artículo 120.- Para destacar las cualidades de cualquier tipo de alimento o producto alimenticio en cuanto a contenido energético (energía o calorías), grasa to"
+    },
+    "120 BIS": {
+      "fecha_version": "2015-06-26",
+      "derogado": false,
+      "id_parte": "9616212",
+      "libro": "",
+      "resumen": "\"Artículo 120 bis: Cuando a un alimento o producto alimenticio se le haya adicionado sodio, azúcares o grasas saturadas, y su contenido supere el valor establec"
+    },
+    "121": {
+      "fecha_version": "2007-06-16",
+      "derogado": false,
+      "id_parte": "8716449",
+      "libro": "",
+      "resumen": "Artículo 121.- En envases cuya superficie mayor sea inferior a 10 cm2, podrá omitirse el número de lote, lista de ingredientes e instrucciones para el uso, dato"
+    },
+    "122": {
+      "fecha_version": "2007-06-16",
+      "derogado": false,
+      "id_parte": "8716450",
+      "libro": "",
+      "resumen": "Artículo 122.- Para los efectos de este reglamento se entiende por: a) aparatos: los elementos mecánicos o equipos utilizables en la laboración, envasado, conse"
+    },
+    "123": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716452",
+      "libro": "",
+      "resumen": "Artículo 123.- Los utensilios, recipientes, envases, embalajes, envoltorios y aparatos destinados a la elaboración, conservación, fraccionamiento y distribución"
+    },
+    "124": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716453",
+      "libro": "",
+      "resumen": "Artículo 124.- El equipo y los utensilios empleados para materias no comestibles o desechos deberán identificarse, respecto a su utilización y no deberán emplea"
+    },
+    "125": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716454",
+      "libro": "",
+      "resumen": "Artículo 125.- Los metales en contacto con los alimentos y sus materias primas no deberán contener más de uno por ciento de impurezas constituidas por plomo, an"
+    },
+    "126": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716455",
+      "libro": "",
+      "resumen": "Artículo 126.- Todos los utensilios, recipientes, envases, embalajes, envolturas, laminados, películas, barnices, partes de aparatos, cañerías y accesorios de m"
+    },
+    "127": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716456",
+      "libro": "",
+      "resumen": "Artículo 127.- El aire de los envases se podrá reemplazar por un gas inerte tal como nitrógeno, bióxido de carbono u otros permitidos por la autoridad sanitaria"
+    },
+    "128": {
+      "fecha_version": "2008-05-15",
+      "derogado": false,
+      "id_parte": "8716457",
+      "libro": "",
+      "resumen": "Artículo 128.- Se permite el empleo de envases de retorno siempre que sea posible efectuar una correcta higienización de los mismos antes de usarlos nuevamente."
+    },
+    "129": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716458",
+      "libro": "",
+      "resumen": "Artículo 129.- Se prohíbe utilizar para contener sustancias alimenticias y sus correspondientes materias primas, recipientes que en su origen o en alguna oportu"
+    },
+    "130": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716459",
+      "libro": "",
+      "resumen": "Artículo 130.- Se considera aditivo alimentario cualquier sustancia que no se consume normalmente como alimento por sí misma ni se usa como ingrediente típico d"
+    },
+    "131": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716462",
+      "libro": "",
+      "resumen": "Artículo 131.- Se considera coadyuvante toda sustancia o materia, excluidos aparatos y utensilios, que no se consume como ingrediente alimenticio por sí misma y"
+    },
+    "132": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716463",
+      "libro": "",
+      "resumen": "Artículo 132.- Para los efectos del presente reglamento se consideran aditivos alimentarios permitidos, aquellos cuyo carácter inocuo ha sido evaluado toxicológ"
+    },
+    "133": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716464",
+      "libro": "",
+      "resumen": "Artículo 133.- Sólo se permite la incorporación de un aditivo a un alimento si: a) cumple con un fin tecnológico, tanto en la producción, elaboración, preparaci"
+    },
+    "134": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716465",
+      "libro": "",
+      "resumen": "Artículo 134.- Se prohíbe el uso de un aditivo, en caso que: a) disminuya sensiblemente el valor nutritivo del alimento al substituir un ingrediente importante "
+    },
+    "135": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716466",
+      "libro": "",
+      "resumen": "Artículo 135.- Todos los aditivos deberán cumplir las normas de identidad, de pureza y de evaluación de su toxicidad de acuerdo a las indicaciones del Codex Ali"
+    },
+    "136": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716467",
+      "libro": "",
+      "resumen": "Artículo 136.- Los aditivos deberán declararse obligatoriamente en la rotulación, en orden decreciente de proporciones, y en cualquiera de estas formas: a) con "
+    },
+    "137": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716468",
+      "libro": "",
+      "resumen": "Artículo 137.- Los aditivos sólo pueden ser agregados dentro de los límites establecidos en el Párrafo II de este Título y de los límites específicos que para c"
+    },
+    "138": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716469",
+      "libro": "",
+      "resumen": "Artículo 138.- En los casos en que se incorporen en un alimento dos o más aditivos con una misma función, a los cuales se les haya asignado concentraciones máxi"
+    },
+    "139": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716470",
+      "libro": "",
+      "resumen": "Artículo 139.- Si un aditivo alimentario cumple más de una función tecnológica y aparece clasificado sólo en una de ellas, se entiende como autorizado para las "
+    },
+    "140": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716471",
+      "libro": "",
+      "resumen": "Artículo 140.- Se permite usar como reguladores de acidez, sólo aquellos que se indican en este artículo, de acuerdo con las Buenas Prácticas de Fabricación: [T"
+    },
+    "141": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716473",
+      "libro": "",
+      "resumen": "Artículo 141.- Se permite usar como sustancias antiaglomerantes y antihumectantes sólo aquellas que se indican en este artículo y en concentraciones no mayores,"
+    },
+    "142": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716474",
+      "libro": "",
+      "resumen": "Artículo 142.- Se permite usar como sustancias antiespumantes y espumantes sólo aquellas que se indican en este artículo y en concentraciones no mayores, en pro"
+    },
+    "143": {
+      "fecha_version": "2012-08-23",
+      "derogado": false,
+      "id_parte": "8716475",
+      "libro": "",
+      "resumen": "Artículo 143.- Se permite usar como sustancias antioxidantes sólo aquellas que se indican en este artículo y en concentraciones no mayores a las que se señalan "
+    },
+    "144": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716476",
+      "libro": "",
+      "resumen": "Artículo 144.- Se permite usar como sustancias secuestrantes y sinergistas de antioxidantes sólo aquellas que se indican en este artículo y en concentraciones n"
+    },
+    "145": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716477",
+      "libro": "",
+      "resumen": "Artículo 145.- Se permite usar como sustancias colorantes sólo las que se señalan en el presente artículo. Para los efectos de rotulación se deberá emplear el n"
+    },
+    "146": {
+      "fecha_version": "2012-08-23",
+      "derogado": false,
+      "id_parte": "8716478",
+      "libro": "",
+      "resumen": "Artículo 146.- Sólo se permite usar los edulcorantes no nutritivos en uno o más de los siguientes alimentos: a) Alimentos para regímenes de control de peso. b) "
+    },
+    "147": {
+      "fecha_version": "2013-08-06",
+      "derogado": false,
+      "id_parte": "8716479",
+      "libro": "",
+      "resumen": "Artículo 147.- Se permite usar como sustancias emulsionantes sólo aquellas que se indican en este artículo y en concentraciones no mayores, en producto terminad"
+    },
+    "148": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716480",
+      "libro": "",
+      "resumen": "Artículo 148.- Sólo podrán usarse como sales emulsionantes aquellas que se indican en este artículo y sus concentraciones no podrán ser mayores, en producto ter"
+    },
+    "149": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716481",
+      "libro": "",
+      "resumen": "Artículo 149.- Sólo podrán usarse como aditivos enturbiantes los que se indican en la presente tabla, en concentraciones no mayores a las señaladas: [Tabla o im"
+    },
+    "150": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716482",
+      "libro": "",
+      "resumen": "Artículo 150.- Sólo se podrán usar como sustancias espesantes o estabilizadores, aquellas que se indican en este artículo, de acuerdo con Buenas Prácticas de Fa"
+    },
+    "151": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716483",
+      "libro": "",
+      "resumen": "Artículo 151.- Sólo podrán usarse como sustancias estabilizadoras de humedad, agentes de relleno y/o edulcorantes aquellas que se indican en este artículo, de a"
+    },
+    "152": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716484",
+      "libro": "",
+      "resumen": "Artículo 152.- Sólo podrán usarse como aditivos impermeabilizantes o sustancias de recubrimiento aquellas que se indican en este artículo y en concentración no "
+    },
+    "153": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716485",
+      "libro": "",
+      "resumen": "Artículo 153.- Se permite usar como sustancias leudantes, blanqueadoras y mejoradoras de la panificación, sólo aquellas que se indican en este artículo y en con"
+    },
+    "154": {
+      "fecha_version": "2013-08-06",
+      "derogado": false,
+      "id_parte": "8716486",
+      "libro": "",
+      "resumen": "Artículo 154.- Se permite utilizar como preservantes químicos sólo los que se indican en este artículo y en concentraciones no mayores, en productos terminando,"
+    },
+    "155": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716487",
+      "libro": "",
+      "resumen": "Artículo 155.- Se permite usar como saborizantes/aroma- tizantes aquellas sustancias aromáticas o mezclas de ellas obtenidas por procesos físicos o químicos de "
+    },
+    "156": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716488",
+      "libro": "",
+      "resumen": "Artículo 156.- Podrán usarse disolventes portadores o diluyentes de sustancias saborizantes/aromatizantes y de antioxidantes, siempre que cumplan con las normas"
+    },
+    "157": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716489",
+      "libro": "",
+      "resumen": "Artículo 157.- Se permite usar como acentuantes del sabor sólo los que se indican en este artículo y en concentraciones no mayores, en producto terminado listo "
+    },
+    "158": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716490",
+      "libro": "",
+      "resumen": "Artículo 158.- Se permite el uso de preparaciones enzimáticas y coadyuvantes de elaboración siempre que cumplan con las normas establecidas por el Codex Aliment"
+    },
+    "159": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716491",
+      "libro": "",
+      "resumen": "Artículo 159.- En el caso que antecedentes sanitarios y técnicos hagan conveniente introducir modificaciones a las listas establecidas en los artículos preceden"
+    },
+    "160": {
+      "fecha_version": "2018-07-13",
+      "derogado": false,
+      "id_parte": "8716492",
+      "libro": "",
+      "resumen": "Artículo 160.- Los elementos que se indican a continuación no podrán sobrepasar, en los alimentos señalados, los límites máximos siguientes: Límite máximo mg/kg"
+    },
+    "161": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716495",
+      "libro": "",
+      "resumen": "Artículo 161.- En el caso de que antecedentes sanitarios y técnicos hagan conveniente introducir modificaciones a las listas establecidas en el artículo precede"
+    },
+    "162": {
+      "fecha_version": "2009-12-11",
+      "derogado": false,
+      "id_parte": "8813727",
+      "libro": "",
+      "resumen": "Artículo 162.- El Ministerio de Salud mediante la dictación de la correspondiente norma técnica determinará las tolerancias de residuos de plaguicidas permitido"
+    },
+    "163": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716497",
+      "libro": "",
+      "resumen": "Artículo 163.- Para los fines de este Reglamento se entenderá por: Becquerel (Bq): unidad de actividad, equivale a una desintegración por segundo de cualquier r"
+    },
+    "164": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716499",
+      "libro": "",
+      "resumen": "Artículo 164.- El control de los niveles de intervención derivados (NID) deberá efectuarse en aquellos alimentos contaminados por radionucleidos liberados en un"
+    },
+    "165": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716500",
+      "libro": "",
+      "resumen": "Artículo 165.- Los radionucleidos de interés se clasifican en tres grupos de acuerdo a su radioactividad, cuyos valores de conversión de dosis (FCD) son los sig"
+    },
+    "166": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716501",
+      "libro": "",
+      "resumen": "Artículo 166.- La contaminación por radionucleidos no sobrepasará los niveles de intervención derivados (NID) por grupos de alimentos que se indican: Grupo I( )"
+    },
+    "167": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716502",
+      "libro": "",
+      "resumen": "Artículo 167.- Para efectos de cálculo de la contaminación de las leches y fórmulas para lactantes el 131I se considera como perteneciente al grupo II. Los valo"
+    },
+    "168": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716503",
+      "libro": "",
+      "resumen": "Artículo 168.- Los niveles de intervención derivados señalados en el artículo 166 se han calculado sobre la base de un alimento contaminado con sólo un radionuc"
+    },
+    "169": {
+      "fecha_version": "2013-10-05",
+      "derogado": false,
+      "id_parte": "8716504",
+      "libro": "",
+      "resumen": "Artículo 169.- Las micotoxinas que se indican a continuación no podrán sobrepasar los siguientes límites: . [Tabla o imagen en la fuente oficial] ."
+    },
+    "170": {
+      "fecha_version": "2009-12-11",
+      "derogado": false,
+      "id_parte": "8813729",
+      "libro": "",
+      "resumen": "Artículo 170.- Los contenidos máximos de Dioxinas y Bifenilos Policlorados Coplanares (PCBs) en los alimentos que a continuación se indican son los siguientes: "
+    },
+    "170 BIS": {
+      "fecha_version": "2023-09-25",
+      "derogado": false,
+      "id_parte": "10459152",
+      "libro": "",
+      "resumen": "Artículo 170 bis.- El contenido de Tetrahidrocannabinol (THC) en la semilla de cáñamo utilizada para la alimentación humana y los alimentos en base a cáñamo no "
+    },
+    "171": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716507",
+      "libro": "",
+      "resumen": "Artículo 171.- Para los fines del presente reglamento se entenderá por: a) criterio microbiológico: el valor o la gama de valores microbiológicos, establecidos "
+    },
+    "172": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716510",
+      "libro": "",
+      "resumen": "Artículo 172.- Para los fines del presente reglamento, se definen los criterios microbiológicos tomando como base la clasificación, los parámetros de control y "
+    },
+    "173": {
+      "fecha_version": "2017-08-02",
+      "derogado": false,
+      "id_parte": "8716512",
+      "libro": "",
+      "resumen": "Artículo 173.- Si en un alimento se detecta la presencia de microorganismos patógenos no contemplados en la lista indicada a continuación, la autoridad sanitari"
+    },
+    "174": {
+      "fecha_version": "2009-12-11",
+      "derogado": false,
+      "id_parte": "8814100",
+      "libro": "",
+      "resumen": "Artículo 174.- En los alimentos Listos Para el Consumo (LPC) se considera que no favorecen el desarrollo de Listeria monocytogenes cuando cumplen alguno de los "
+    },
+    "175": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716515",
+      "libro": "",
+      "resumen": "Artículo 175.- Las presentes disposiciones se aplican a todas las instalaciones de irradiación de alimentos y a todos los alimentos irradiados. No se aplican a "
+    },
+    "176": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716518",
+      "libro": "",
+      "resumen": "Artículo 176.- Los controles de calidad habituales, en todas las etapas desde la producción al consumo, son de responsabilidad del que solicita la preservación "
+    },
+    "177": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716519",
+      "libro": "",
+      "resumen": "Artículo 177.- Para los fines de este reglamento, se entenderá por: Energía ionizante: aquellas formas de radiación ionizante que se señalan a continuación; - R"
+    },
+    "178": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716521",
+      "libro": "",
+      "resumen": "Artículo 178.- El tratamiento de los alimentos por energía ionizante se llevará a cabo sólo en las instalaciones que hayan obtenido la autorización correspondie"
+    },
+    "179": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716523",
+      "libro": "",
+      "resumen": "Artículo 179.- El control de las instalaciones se ejercerá de conformidad a la legislación vigente. Los estudios dosimétricos se deberán efectuar antes de la ir"
+    },
+    "180": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716524",
+      "libro": "",
+      "resumen": "Artículo 180.- En la irradiación de alimentos se deberá llevar a cabo la dosimetría en la siguiente forma: a) medición exacta y precisa de la dosis absorbida po"
+    },
+    "181": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716525",
+      "libro": "",
+      "resumen": "Artículo 181.- En toda instalación o planta en que se aplique energía ionizante a los alimentos se deberá llevar un registro de cada lote o tanda, el que deberá"
+    },
+    "182": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716526",
+      "libro": "",
+      "resumen": "Artículo 182.- Las instalaciones destinadas a la preservación de alimentos por energía ionizante, serán inspeccionadas periódicamente y a lo menos una vez al añ"
+    },
+    "183": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716527",
+      "libro": "",
+      "resumen": "Artículo 183.- Además de lo dispuesto para el etiquetado general, todo alimento que haya sido tratado con radiación o energía ionizante debe llevar en el rótulo"
+    },
+    "184": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716529",
+      "libro": "",
+      "resumen": "Artículo 184.- Cuando más del 5% de un producto corresponda a materias irradiadas, la etiqueta deberá contener una declaración que indique el tratamiento. Se pr"
+    },
+    "185": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716530",
+      "libro": "",
+      "resumen": "Artículo 185.- Todo alimento importado preservado por energía ionizante deberá acreditar que la instalación donde fue realizado el tratamiento está inscrita en "
+    },
+    "186": {
+      "fecha_version": "2016-08-30",
+      "derogado": false,
+      "id_parte": "8716531",
+      "libro": "",
+      "resumen": "Artículo 186.- Alimentos congelados son aquellos, naturales o elaborados, que han sido sometidos, mediante un equipo apropiado, a un proceso térmico hasta que e"
+    },
+    "187": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716533",
+      "libro": "",
+      "resumen": "Artículo 187.- Para reducir al mínimo la actividad microbiológica, los alimentos precocidos destinados a la congelación rápida, deberán enfriarse lo más rápidam"
+    },
+    "188": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716534",
+      "libro": "",
+      "resumen": "Artículo 188.- Deberán adoptarse las medidas necesarias para evitar el aumento de la temperatura después del proceso de congelación rápida en la manipulación y "
+    },
+    "189": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716535",
+      "libro": "",
+      "resumen": "Artículo 189.- El almacenamiento de estos productos deberá realizarse en cámaras frigoríficas cuya temperatura se mantenga en -18ºC o inferior y con un mínimo d"
+    },
+    "190": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716536",
+      "libro": "",
+      "resumen": "Artículo 190.- El transporte interurbano de alimentos congelados deberá efectuarse con equipos capaces de mantener la temperatura del producto a -18ºC o más baj"
+    },
+    "191": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716537",
+      "libro": "",
+      "resumen": "Artículo 191.- El transporte local de los alimentos congelados destinados a la distribución a los minoristas deberá efectuarse de tal manera que todo aumento de"
+    },
+    "192": {
+      "fecha_version": "2016-08-30",
+      "derogado": false,
+      "id_parte": "8716538",
+      "libro": "",
+      "resumen": "Artículo 192.- Cuando los alimentos congelados se ofrezcan a la venta en esta condición deberán mantenerse en vitrinas congeladoras o conservadoras destinadas a"
+    },
+    "193": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716539",
+      "libro": "",
+      "resumen": "Artículo 193.- Las vitrinas congeladoras o conservadoras se instalarán de manera que la parte en que se expone el producto no esté sometida a un calor irradiant"
+    },
+    "194": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716540",
+      "libro": "",
+      "resumen": "Artículo 194.- Las vitrinas congeladoras o conservadoras no deberán cargarse por sobre la línea de carga. Los productos no deberán retirarse de ellas y volverse"
+    },
+    "195": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716541",
+      "libro": "",
+      "resumen": "Artículo 195.- Los productos congelados sin envasar deberán almacenarse y exponerse en compartimientos separados de los que se utilicen para los alimentos conge"
+    },
+    "196": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716542",
+      "libro": "",
+      "resumen": "Artículo 196.- Los establecimientos de expendio de productos precocidos congelados a granel, deberán contar con un manipulador encargado de fraccionar y envasar"
+    },
+    "197": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716543",
+      "libro": "",
+      "resumen": "Artículo 197.- Se regirán por las disposiciones del presente reglamento la higienización, el transporte, la industrialización, la distribución y el expendio de "
+    },
+    "198": {
+      "fecha_version": "2019-03-06",
+      "derogado": false,
+      "id_parte": "8716546",
+      "libro": "",
+      "resumen": "Artículo 198.- Leche es la secreción mamaria normal exenta de calostro, de animales lecheros, obtenida mediante uno o más ordeños, sin ningún tipo de adición o "
+    },
+    "199": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716547",
+      "libro": "",
+      "resumen": "Artículo 199.- Pasteurización es el procedimiento por el que se somete uniformemente la totalidad de las leches u otros productos lácteos a una temperatura conv"
+    },
+    "200": {
+      "fecha_version": "2019-03-06",
+      "derogado": false,
+      "id_parte": "8716548",
+      "libro": "",
+      "resumen": "Artículo 200.- La pasteurización de la leche o la aplicación de otros tratamientos microbicidas para su higienización será obligatoria en todo el país, como asi"
+    },
+    "201": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716549",
+      "libro": "",
+      "resumen": "Artículo 201.- Tratamiento a ultra alta temperatura (UHT) es el procedimiento al que se somete uniformemente la totalidad de las leches u otros productos lácteo"
+    },
+    "202": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716550",
+      "libro": "",
+      "resumen": "Artículo 202.- Esterilización es el procedimiento por el que se somete uniformemente la totalidad de las leches u otros productos lácteos a un proceso térmico e"
+    },
+    "203": {
+      "fecha_version": "2019-03-06",
+      "derogado": false,
+      "id_parte": "8717008",
+      "libro": "",
+      "resumen": "Artículo 203.- Las características de las leches, serán las siguientes: a) caracteres organolépticos normales; b) exenta de materias extrañas; c) exenta de sang"
+    },
+    "204": {
+      "fecha_version": "2000-05-26",
+      "derogado": false,
+      "id_parte": "8716553",
+      "libro": "",
+      "resumen": "Artículo 204.- La leche se clasificará en: a) leche natural es aquella que solamente ha sido sometida a enfriamiento y estandarización de su contenido de materi"
+    },
+    "205": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8717009",
+      "libro": "",
+      "resumen": "Artículo 205.- De acuerdo a su contenido de materia grasa láctea la leche se clasificará en: Eliminada Leche entera es aquella con un contenido superior a 30 g "
+    },
+    "206": {
+      "fecha_version": "2019-03-06",
+      "derogado": false,
+      "id_parte": "8716555",
+      "libro": "",
+      "resumen": "Artículo 206.- La leche cruda enviada a la planta por el productor será sometida a lo menos a las siguientes pruebas de control: Pruebas de aceptación o rechazo"
+    },
+    "207": {
+      "fecha_version": "2019-03-06",
+      "derogado": false,
+      "id_parte": "8717011",
+      "libro": "",
+      "resumen": "Artículo 207.- Las leches crudas deberán ser sometidas a tratamientos microbicidas, tales como: pasteurización, temperatura ultra alta, centrifugación, esterili"
+    },
+    "208": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8717013",
+      "libro": "",
+      "resumen": "Artículo 208.- Para el almacenamiento de las leches, las plantas dispondrán de estanques cerrados fijos que aseguren la conservación de la temperatura, premunid"
+    },
+    "209": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8717014",
+      "libro": "",
+      "resumen": "Artículo 209.- Los equipos de pasteurización tendrán dispositivos que verifiquen el correcto tratamiento de las leches, entre otros, un termómetro que indique d"
+    },
+    "210": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8717015",
+      "libro": "",
+      "resumen": "Artículo 210.- Se prohíbe la repasteurización de la leche o leches devueltas o sobrantes alteradas. Estas leches no podrán ser destinadas a la elaboración de al"
+    },
+    "211": {
+      "fecha_version": "2026-06-19",
+      "derogado": false,
+      "id_parte": "8716561",
+      "libro": "",
+      "resumen": "Artículo 211.- Inmediatamente después de pasteurizada las leches, deberán ser enfriadas a una temperatura no superior a 4°C, envasadas y conservadas a esta mism"
+    },
+    "212": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716563",
+      "libro": "",
+      "resumen": "Artículo 212.- Las plantas deberán vender las leches pasteurizadas en envases herméticamente cerrados y sellados para evitar su contaminación. Estos envases deb"
+    },
+    "213": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716564",
+      "libro": "",
+      "resumen": "Artículo 213.- Leche saborizada es el producto obtenido a partir de la leche entera, parcialmente descremada o descremada pasteurizada , sometida a tratamiento "
+    },
+    "214": {
+      "fecha_version": "2023-01-26",
+      "derogado": false,
+      "id_parte": "8716566",
+      "libro": "",
+      "resumen": "ARTÍCULO 214. Leches concentradas son aquellas que han sido privadas parcialmente de su contenido de agua, se clasifican en: a) Leche evaporada es el producto l"
+    },
+    "215": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716567",
+      "libro": "",
+      "resumen": "Artículo 215.- Sólo se podrá utilizar en la elaboración de leches concentradas los siguientes aditivos: fosfato disódico, fosfato tricálcico, citrato de sodio, "
+    },
+    "216": {
+      "fecha_version": "2026-06-19",
+      "derogado": false,
+      "id_parte": "8716568",
+      "libro": "",
+      "resumen": "Artículo 216.- La leche en polvo y la crema o nata de leche en polvo, son los productos obtenidos por la eliminación parcial del agua que contiene la leche; con"
+    },
+    "217": {
+      "fecha_version": "2021-02-02",
+      "derogado": true,
+      "id_parte": "8716569",
+      "libro": "",
+      "resumen": "Artículo 217.- Eliminado"
+    },
+    "218": {
+      "fecha_version": "2021-02-02",
+      "derogado": true,
+      "id_parte": "8716570",
+      "libro": "",
+      "resumen": "Artículo 218.- Eliminado."
+    },
+    "219": {
+      "fecha_version": "2023-01-26",
+      "derogado": false,
+      "id_parte": "8716571",
+      "libro": "",
+      "resumen": "ARTÍCULO 219. Manjar o dulce de leche es el producto obtenido a partir de leches cocidas adicionadas o no de azúcares, edulcorantes, polioles, fibras u otros in"
+    },
+    "220": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716572",
+      "libro": "",
+      "resumen": "Artículo 220.- Yogur es el producto lácteo coagulado obtenido por fermentación láctica mediante la acción de Lactobacillus bulgaricus y Streptococcus thermophil"
+    },
+    "221": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716573",
+      "libro": "",
+      "resumen": "Artículo 221.- Crema de leche es el producto lácteo relativamente rico en grasa separada de las leches que adoptan la forma de emulsión tipo leches descremadas "
+    },
+    "222": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716574",
+      "libro": "",
+      "resumen": "Artículo 222.- Se podrá utilizar en la elaboración de crema de leche, los siguientes aditivos: a) secuestrantes y emulsionantes autorizados en una dosis máxima "
+    },
+    "223": {
+      "fecha_version": "2013-11-29",
+      "derogado": false,
+      "id_parte": "8716575",
+      "libro": "",
+      "resumen": "Artículo 223.- La acidez de la crema de leche no excederá de 20 ml de NaOH 0,1 N/100 g. El expendio de las cremas de leche se hará, exclusivamente, en los envas"
+    },
+    "224": {
+      "fecha_version": "2013-11-29",
+      "derogado": false,
+      "id_parte": "8716576",
+      "libro": "",
+      "resumen": "Artículo 224.- Se denominará \"bebida láctea\" a los productos elaborados con base en leche, con un mínimo de 30% de leche en el producto final, tal como se consu"
+    },
+    "225": {
+      "fecha_version": "2017-01-18",
+      "derogado": false,
+      "id_parte": "8716577",
+      "libro": "",
+      "resumen": "Artículo 225.- Mantequilla, sin otra denominación, es el producto lácteo derivado exclusivamente de la crema pasteurizada de leches. Los productos que usen la e"
+    },
+    "226": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716579",
+      "libro": "",
+      "resumen": "Artículo 226.- Mantequilla de suero es el producto lácteo derivado exclusivamente de la crema del suero de la leche."
+    },
+    "227": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716580",
+      "libro": "",
+      "resumen": "Artículo 227.- La mantequilla deberá responder a las siguientes características: a) caracteres organolépticos normales; b) materia grasa de leche : mínimo 80%; "
+    },
+    "228": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716581",
+      "libro": "",
+      "resumen": "Artículo 228.- Mantequilla fermentada es aquella elaborada a partir de cremas fermentadas. Deberá cumplir con las características del artículo 227, exceptuando "
+    },
+    "229": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716582",
+      "libro": "",
+      "resumen": "Artículo 229.- Toda mantequilla deberá expenderse envasada, rotulada y mantenerse refrigerada."
+    },
+    "230": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716583",
+      "libro": "",
+      "resumen": "Artículo 230.- Grasa de mantequilla (butter oil), grasa de mantequilla deshidratada y grasa de leche anhidra, son productos obtenidos exclusivamente a partir de"
+    },
+    "231": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716584",
+      "libro": "",
+      "resumen": "Artículo 231.- La grasa de mantequilla deberá contener: a) materia grasa : mínimo 99,3%; b) humedad : máximo 0,5%; c) índice de peróxidos : máximo 0,8 meq oxíge"
+    },
+    "232": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716585",
+      "libro": "",
+      "resumen": "Artículo 232.- La grasa de mantequilla deshidratada y la grasa de leche anhidra deberá contener: a) materia grasa : mínimo 99,8%; b) humedad : máximo 0,1%; c) í"
+    },
+    "233": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716586",
+      "libro": "",
+      "resumen": "Artículo 233.- La grasa de mantequilla, grasa de mantequilla deshidratada y grasa de leche anhidra no destinadas al consumo directo ni para empleo en leche reco"
+    },
+    "234": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716587",
+      "libro": "",
+      "resumen": "Artículo 234.- Queso es el producto madurado o sin madurar, sólido o semisólido, obtenido coagulando leches, leches descremadas, leches parcialmente descremadas"
+    },
+    "235": {
+      "fecha_version": "2019-03-06",
+      "derogado": false,
+      "id_parte": "8716589",
+      "libro": "",
+      "resumen": "Artículo 235.- En aquellas localidades donde no rija la exigencia de la Ley Nº4869 de pasteurización de la leche, todos los quesos deberán tener un período de m"
+    },
+    "236": {
+      "fecha_version": "2003-11-25",
+      "derogado": false,
+      "id_parte": "8716590",
+      "libro": "",
+      "resumen": "Artículo 236.- Para su elaboración a los quesos se le podrá adicionar: a) cultivos de bacterias productoras de ácido láctico; b) cultivos de hongos o bacterias "
+    },
+    "237": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716591",
+      "libro": "",
+      "resumen": "Artículo 237.- Queso fresco y quesillo son aquellos quesos de elaboración reciente que no han sufrido ninguna transformación ni fermentación, salvo la láctica y"
+    },
+    "238": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716592",
+      "libro": "",
+      "resumen": "Artículo 238.- Queso maduro es el producto que requiere de un período de maduración a temperatura y en condiciones tales que se produzcan los cambios bioquímico"
+    },
+    "239": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716593",
+      "libro": "",
+      "resumen": "Artículo 239.- Queso fundido procesado untable o cortable es el producto obtenido por molienda, mezclado, fundición y emulsificación con la ayuda de calor y age"
+    },
+    "240": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716594",
+      "libro": "",
+      "resumen": "Artículo 240.- Los quesos podrán indicar además de los requisitos generales establecidos en este reglamento para la rotulación, el contenido mínimo de materia g"
+    },
+    "241": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716595",
+      "libro": "",
+      "resumen": "Artículo 241.- Cuando para la fabricación del producto se emplee leche que no sea la de vaca deberá indicarse la especie de donde procede la leche, así mismo cu"
+    },
+    "242": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716596",
+      "libro": "",
+      "resumen": "Artículo 242.- Todo local de venta, que lamine quesos con antelación al expendio, deberá contar con una área adecuada para dicho propósito, la cual deberá cumpl"
+    },
+    "243": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716597",
+      "libro": "",
+      "resumen": "Artículo 243.- Helados comestibles son los productos obtenidos de una emulsión de grasa y proteínas, con la adición de otros ingredientes o, de una mezcla de ag"
+    },
+    "244": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716599",
+      "libro": "",
+      "resumen": "Artículo 244.- Los ingredientes de leches que se empleen en los helados y sus mezclas deberán haber sido pasteurizados o sometidos a un tratamiento térmico equi"
+    },
+    "245": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716600",
+      "libro": "",
+      "resumen": "Artículo 245.- Mezclas para helados son productos en forma líquida o en polvo que se destinan a la preparación de helados."
+    },
+    "246": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716601",
+      "libro": "",
+      "resumen": "Artículo 246.- No se exigirá una nueva pasteurización para los helados comestibles fabricados con ingredientes concentrados o en polvo mediante la adición exclu"
+    },
+    "247": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716602",
+      "libro": "",
+      "resumen": "Artículo 247.- Aceites y grasas son los triglicéridos de ácidos grasos comercialmente puros, obtenidos de materias primas sanas y limpias, libres de productos n"
+    },
+    "248": {
+      "fecha_version": "2013-10-05",
+      "derogado": false,
+      "id_parte": "8716605",
+      "libro": "",
+      "resumen": "Artículo 248.- El contenido de humedad y materias volátiles, no deberá ser mayor a 0,2% en los aceites comestibles y no más de 0,5% en las mantecas o grasas. No"
+    },
+    "249": {
+      "fecha_version": "2003-11-25",
+      "derogado": false,
+      "id_parte": "8716606",
+      "libro": "",
+      "resumen": "Artículo 249.- No se consideran aptos para el consumo los alimentos grasos que estén rancios, alterados química y/o microbiológicamente, que contengan materias "
+    },
+    "250": {
+      "fecha_version": "2010-08-23",
+      "derogado": false,
+      "id_parte": "8716607",
+      "libro": "",
+      "resumen": "Artículo 250.- La distribución y comercialización de los aceites, mantecas y grasas comestibles deberá realizarse en sus envases originales, prohibiéndose su fr"
+    },
+    "251": {
+      "fecha_version": "2006-08-03",
+      "derogado": false,
+      "id_parte": "8716608",
+      "libro": "",
+      "resumen": "Artículo 251.- Aceites comestibles de origen vegetal son los obtenidos de los siguientes frutos o sus partes o de semillas oleaginosas: algodón, cártamo, giraso"
+    },
+    "252": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716610",
+      "libro": "",
+      "resumen": "Artículo 252.- Los aceites no deberán contener un porcentaje de ácido erúcico mayor de 5%."
+    },
+    "253": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716611",
+      "libro": "",
+      "resumen": "Artículo 253.- Mantecas o grasas comestibles de origen vegetal, son los alimentos grasos vegetales de consistencia sólida o semisólida a la temperatura de 15ºC,"
+    },
+    "254": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716612",
+      "libro": "",
+      "resumen": "Artículo 254.- Las constantes físicas y químicas de los aceites y mantecas de origen vegetal deberán corresponder a las indicadas en la tabla I. La composición "
+    },
+    "255": {
+      "fecha_version": "2016-10-12",
+      "derogado": false,
+      "id_parte": "8716613",
+      "libro": "",
+      "resumen": "Artículo 255.- Aceites comestibles de origen marino son los obtenidos de animales marinos y algas, con exclusión de anfibios y reptiles, de consistencia fluida "
+    },
+    "256": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716615",
+      "libro": "",
+      "resumen": "Artículo 256.- Mantecas o grasas comestibles de origen animal, son las extraídas de los tejidos adiposos de porcinos, ovinos, bovinos y aves, de consistencia só"
+    },
+    "257": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716616",
+      "libro": "",
+      "resumen": "Artículo 257.- Las constantes físicas y químicas de los aceites, mantecas o grasas comestibles de origen animal deberán corresponder a las indicadas en la tabla"
+    },
+    "258": {
+      "fecha_version": "2016-10-12",
+      "derogado": false,
+      "id_parte": "8716617",
+      "libro": "",
+      "resumen": "Artículo 258.- Aceites marinos modificados comestibles son los productos grasos de consistencia fluida a la temperatura de 15°C, obtenidos de especies pelágicas"
+    },
+    "259": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716619",
+      "libro": "",
+      "resumen": "Artículo 259.- Mantecas modificadas son los productos obtenidos de aceites vegetales o marinos que han sido sometidos a procesos de hidrogenación y eventualment"
+    },
+    "260": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716620",
+      "libro": "",
+      "resumen": "Artículo 260.- Manteca emulsionada, es la emulsión obtenida a partir de mantecas o grasas de origen animal marino y/o vegetal con agua. Deberá declararse el con"
+    },
+    "261": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716621",
+      "libro": "",
+      "resumen": "Artículo 261.- Aceite combinado es el producto obtenido de la mezcla de aceites de origen marino con aceites vegetales. El porcentaje máximo permitido de aceite"
+    },
+    "262": {
+      "fecha_version": "2005-05-06",
+      "derogado": false,
+      "id_parte": "8716622",
+      "libro": "",
+      "resumen": "Artículo 262.- Margarina es el producto en forma de emulsión usualmente del tipo agua/aceite, obtenido de grasas y aceites comestibles. Las margarinas deberán c"
+    },
+    "263": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716623",
+      "libro": "",
+      "resumen": "Artículo 263.- Las margarinas deberán cumplir con las siguientes características: a) La acidez de la materia grasa, expresada en ácido oléico, no será superior "
+    },
+    "264": {
+      "fecha_version": "2013-10-05",
+      "derogado": false,
+      "id_parte": "8716624",
+      "libro": "",
+      "resumen": "Artículo 264.- Las margarinas deberán almacenarse refrigeradas o, en su defecto, mantenerlas en lugares exentos de humedad y protegidas de los rayos solares. [T"
+    },
+    "265": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716625",
+      "libro": "",
+      "resumen": "Artículo 265.- Los aceites y mantecas utilizados en la producción industrial e institucional de alimentos fritos, deberán tener un contenido máximo de ácido lin"
+    },
+    "266": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716627",
+      "libro": "",
+      "resumen": "Artículo 266.- No deberán utilizarse los aceites o mantecas cuando sobrepasen los siguientes límites: a) acidez libre expresada como ácido oléico superior al 2,"
+    },
+    "267": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716628",
+      "libro": "",
+      "resumen": "Artículo 267.- Se prohíbe el uso de los aceites y mantecas provenientes de los procesos de frituras, descartados o reprocesados, en otros alimentos de uso human"
+    },
+    "268": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716629",
+      "libro": "",
+      "resumen": "Artículo 268.- Con la denominación de carne se entiende la parte comestible de los músculos de los animales de abasto como bovinos, ovinos, porcinos, equinos, c"
+    },
+    "269": {
+      "fecha_version": "2006-02-04",
+      "derogado": false,
+      "id_parte": "8716632",
+      "libro": "",
+      "resumen": "Artículo 269.- La carne comprende todos los tejidos blandos que rodean el esqueleto, incluyendo su cobertura grasa, tendones, vasos, nervios, aponeurosis, hueso"
+    },
+    "270": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716633",
+      "libro": "",
+      "resumen": "Artículo 270.- La carne recién faenada debe tener apariencia marmórea, con superficie brillante, ligeramente húmeda y elástica al tacto. El olor y el color debe"
+    },
+    "271": {
+      "fecha_version": "2010-06-25",
+      "derogado": false,
+      "id_parte": "8716634",
+      "libro": "",
+      "resumen": "Artículo 271.- Carne fresca es aquella que, aparte de haber sido refrigerada o enfriada en un rango de temperatura que va entre 0° a +7°C, según medición dispue"
+    },
+    "272": {
+      "fecha_version": "2010-06-25",
+      "derogado": false,
+      "id_parte": "8716635",
+      "libro": "",
+      "resumen": "Artículo 272.- Derogado."
+    },
+    "273": {
+      "fecha_version": "2010-06-25",
+      "derogado": false,
+      "id_parte": "8716636",
+      "libro": "",
+      "resumen": "Artículo 273.- Carne congelada es aquella cuya temperatura interna medida en el centro de la masa muscular es de -18°C como máximo. Sin embargo, para fines de t"
+    },
+    "274": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716637",
+      "libro": "",
+      "resumen": "Artículo 274.- Se prohíbe destinar los labios, ollares y las orejas de animales de abasto para el consumo directo así como formando parte de productos elaborado"
+    },
+    "275": {
+      "fecha_version": "2016-10-03",
+      "derogado": false,
+      "id_parte": "8716638",
+      "libro": "",
+      "resumen": "Artículo 275.- Carne molida es la carne triturada apta para el consumo humano. Se permitirá solamente su expendio: a) A pedido y molida en presencia del comprad"
+    },
+    "276": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716639",
+      "libro": "",
+      "resumen": "Artículo 276.- Carne marinada de res es aquella carne proveniente de las reses de abasto, que mediante inyección u otro método adecuado, ha sido adicionada de s"
+    },
+    "277": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716640",
+      "libro": "",
+      "resumen": "Artículo 277.- Sólo en establecimientos autorizados se permitirá la tenencia, almacenamiento, distribución y venta de carnes de bovinos, ovinos, caprinos, porci"
+    },
+    "278": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716641",
+      "libro": "",
+      "resumen": "Artículo 278.- Se prohíbe la tenencia y comercialización de carnes y subproductos comestibles cuando: a) estén en estado de alteración organoléptica debido a ca"
+    },
+    "279": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716642",
+      "libro": "",
+      "resumen": "Artículo 279.- Se prohíbe la comercialización, a cualquier título de carnes, visceras y subproductos con residuos de hormonas no endógenas promotoras de crecimi"
+    },
+    "280": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716643",
+      "libro": "",
+      "resumen": "Artículo 280.- Sin perjuicio de lo establecido en el artículo precedente, se prohíbe la comercialización, a cualquier título, de carnes y sus subproductos con r"
+    },
+    "281": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716644",
+      "libro": "",
+      "resumen": "Artículo 281.- Ave faenada es el producto de cualquiera de las especies de aves criadas en cautividad que hayan sido sacrificadas en mataderos de aves, a las qu"
+    },
+    "282": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716646",
+      "libro": "",
+      "resumen": "Artículo 282.- Carne de ave es la parte muscular de las especies de aves a que se refiere el presente reglamento, constituida por todos los tejidos blandos que "
+    },
+    "283": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716647",
+      "libro": "",
+      "resumen": "Artículo 283.- Ave trozada o partes de ave es cualquiera parte o partes comestibles de las aves faenadas, excluidas las menudencias y despojos."
+    },
+    "284": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716648",
+      "libro": "",
+      "resumen": "Artículo 284.- Menudencia (menudillo o menudo ) es el conjunto de órganos constituidos por hígado sin vesícula biliar, estómago muscular (molleja) desprovisto d"
+    },
+    "285": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716649",
+      "libro": "",
+      "resumen": "Artículo 285.- Despojos corresponden a la cabeza y las patas de las aves faenadas. No se permitirá su inclusión en la cavidad abdominal de las aves faenadas."
+    },
+    "286": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716650",
+      "libro": "",
+      "resumen": "Artículo 286.- Las aves faenadas, aves trozadas, así como las menudencias y despojos deben ser enfriados a 2°C como máximo y para su expendio en el punto de ven"
+    },
+    "287": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716651",
+      "libro": "",
+      "resumen": "Artículo 287.- Las aves faenadas, aves trozadas, así como las menudencias y despojos que han sido sometidas a refrigeración se deben mantener a una temperatura "
+    },
+    "288": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716652",
+      "libro": "",
+      "resumen": "Artículo 288.- Las aves faenadas, aves trozadas, así como las menudencias y despojos que han sido sometidos a congelación se deben mantener a una temperatura in"
+    },
+    "289": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716653",
+      "libro": "",
+      "resumen": "Artículo 289.- Las aves faenadas, sean éstas enfriadas, refrigeradas o congeladas, sólo se podrán comercializar y expender evisceradas."
+    },
+    "290": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716654",
+      "libro": "",
+      "resumen": "Artículo 290.- Toda ave faenada, en el momento del empaque, deberá ser identificada con una etiqueta que indique : a) individualización del matadero donde fue s"
+    },
+    "291": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716655",
+      "libro": "",
+      "resumen": "Artículo 291.- Las aves enfriadas, refrigeradas o congeladas, enteras o trozadas de venta directa al público, mediante sistema de autoservicio, se comercializar"
+    },
+    "292": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716656",
+      "libro": "",
+      "resumen": "Artículo 292.- Carne marinada de ave, es aquella carne proveniente de las aves de corral, que mediante inyección u otro método adecuado, ha sido adicionada de s"
+    },
+    "293": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716657",
+      "libro": "",
+      "resumen": "Artículo 293.- En las aves faenadas refrigeradas o congeladas no se permitirá porcentajes de agua residual mayores a los establecidos en este artículo. Se entie"
+    },
+    "294": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716658",
+      "libro": "",
+      "resumen": "Artículo 294.- El sacrificio, tenencia, almacenamiento, distribución y venta de carne de aves, sólo se permitirá en establecimientos autorizados. Se prohíbe la "
+    },
+    "295": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716659",
+      "libro": "",
+      "resumen": "Artículo 295.- Cecinas, sin otra denominación, son aquellos productos elaborados a base de carne y grasa de vacuno o cerdo, adicionados o no de aditivos, condim"
+    },
+    "296": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716661",
+      "libro": "",
+      "resumen": "Artículo 296.- Cecinas crudas frescas son aquellas que, como resultado de su elaboración, no sufren alteración significativa en los valores de aw y pH respecto "
+    },
+    "297": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716662",
+      "libro": "",
+      "resumen": "Artículo 297.- Cecinas crudas maduradas son aquellos productos ahumados o no, sometidos a procesos de curación y maduración, de duración prolongada y que, como "
+    },
+    "298": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716663",
+      "libro": "",
+      "resumen": "Artículo 298.- Cecinas crudas acidificadas son aquellos productos ahumados o no, que como consecuencia de su elaboración sufren una disminución del valor de su "
+    },
+    "299": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716664",
+      "libro": "",
+      "resumen": "Artículo 299.- Cecinas cocidas son aquellos productos que, cualquiera sea su forma de elaboración, son sometidos a un tratamiento térmico, en que la temperatura"
+    },
+    "300": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716665",
+      "libro": "",
+      "resumen": "Artículo 300.- Hamburguesa, sin otra denominación, es el producto elaborado con carne picada o molida, adicionada o no de grasa animal,, sal, aditivos permitido"
+    },
+    "301": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716666",
+      "libro": "",
+      "resumen": "Artículo 301.- En la elaboración de cecinas y hamburguesas se permitirá usar como extensor de la carne proteínas no cárnicas autorizadas. En el caso de usar pro"
+    },
+    "302": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716667",
+      "libro": "",
+      "resumen": "Artículo 302.- Las cecinas crudas frescas, acidificadas y cecinas cocidas se deben mantener en refrigeración (0-6ºC) inmediatamente después de su elaboración, y"
+    },
+    "303": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716668",
+      "libro": "",
+      "resumen": "Artículo 303.- El transporte y distribución de todo tipo de cecinas deberá efectuarse en vehículos autorizados bajo condiciones de refrigeración (entre 0 y 6ºC)"
+    },
+    "304": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716669",
+      "libro": "",
+      "resumen": "Artículo 304.- Jamón es una cecina cocida y curada, preparada con carne de pierna de cerdo, entera o trozada, separada del resto en un punto posterior al extrem"
+    },
+    "305": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716670",
+      "libro": "",
+      "resumen": "Artículo 305.- Fiambre de jamón es una cecina cocida y curada, preparada con carne de cerdo trozada, picada o molida, y adicionada de agua, sal, aditivos y otro"
+    },
+    "306": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716671",
+      "libro": "",
+      "resumen": "Artículo 306.- Salchicha o vienesa es una cecina cocida y curada, de masa homogénea, elaborada en base a carne de cerdo, vacuno u otras especies y adicionada co"
+    },
+    "307": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716672",
+      "libro": "",
+      "resumen": "Artículo 307.- Cuando se usen membranas artificiales no comestibles en el embutido de cecinas, su rotulación deberá advertir que ellas deben ser retiradas antes"
+    },
+    "308": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716673",
+      "libro": "",
+      "resumen": "Artículo 308.- Se prohíbe agregar colorantes artificiales a las carnes y pastas, empleadas en la elaboración de cecinas. Se permite el uso de estos colorantes e"
+    },
+    "309": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716674",
+      "libro": "",
+      "resumen": "Artículo 309.- Se prohíbe agregar sustancias amiláceas a las cecinas, salvo las que se expendan enlatadas, en cuyo caso se permitirá hasta un 5%."
+    },
+    "310": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716675",
+      "libro": "",
+      "resumen": "Artículo 310.- En la elaboración de cecinas se permitirá el uso de nitrito de sodio, nitrato de sodio y nitrato de potasio, solos o en mezcla bajo las siguiente"
+    },
+    "311": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716676",
+      "libro": "",
+      "resumen": "Artículo 311.- En cecinas se permitirá: a) un contenido máximo de 125 mg/kg de nitrito de sodio residual; b) un contenido máximo de 30 mg/kg de nitrosaminas exp"
+    },
+    "312": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716677",
+      "libro": "",
+      "resumen": "Artículo 312.- Los productos elaborados de carne y productos cárneos, comprenden entre otros: a) jugo de carne es la parte líquida de las fibras musculares obte"
+    },
+    "313": {
+      "fecha_version": "2006-07-12",
+      "derogado": false,
+      "id_parte": "8716679",
+      "libro": "",
+      "resumen": "Artículo 313.- Pescado fresco es aquel recientemente capturado y que no ha sido sometido a ningún proceso después de su extracción, a excepción del eviscerado c"
+    },
+    "314": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716681",
+      "libro": "",
+      "resumen": "Artículo 314.- Pescado fresco enfriado es aquel que después de su extracción, ha sido eviscerado y enfriado a una temperatura entre 0 y 3ºC con el objeto de con"
+    },
+    "315": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716682",
+      "libro": "",
+      "resumen": "Artículo 315.- Pescado congelado es aquel que recientemente capturado, es procesado y sometido a una temperatura de -18°C como máxima, medida en su centro térmi"
+    },
+    "316": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716683",
+      "libro": "",
+      "resumen": "Artículo 316.- Pescado ahumado es aquel, que previamente salado o no, es sometido a la acción del humo de maderas duras u otro procedimiento."
+    },
+    "317": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716684",
+      "libro": "",
+      "resumen": "Artículo 317.- Todos los pescados frescos y enfriados que se expenden o elaboren deben ser eviscerados tan pronto sean capturados, excepto algunas especies de t"
+    },
+    "318": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716685",
+      "libro": "",
+      "resumen": "Artículo 318.- El pescado fresco que no sea eviscerado inmediatamente después de su captura, sólo podrá comercializarse si ha sido sometido de inmediato a la co"
+    },
+    "319": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716686",
+      "libro": "",
+      "resumen": "Artículo 319.- El pescado fresco destinado a la exportación, podrá transportarse y comercializarse sin eviscerar previa autorización en tal sentido del Director"
+    },
+    "320": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716687",
+      "libro": "",
+      "resumen": "Artículo 320.- El pescado fresco y el pescado fresco enfriado, deberán cumplir con las características físico-organolépticas siguientes: a) aspecto general: bue"
+    },
+    "321": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716688",
+      "libro": "",
+      "resumen": "Artículo 321.- El pescado fraccionado deberá cumplir con las siguientes características físico-organolépticas: a) aspecto externo - tronco: mantener la pigmenta"
+    },
+    "322": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716689",
+      "libro": "",
+      "resumen": "Artículo 322.- Todo local de venta que fraccione pescado con antelación al expendio, deberá contar con un lugar adecuado para dicho propósito el cual deberá cum"
+    },
+    "323": {
+      "fecha_version": "2006-07-12",
+      "derogado": false,
+      "id_parte": "8716690",
+      "libro": "",
+      "resumen": "Artículo 323.- Los pescados que se comercialicen para el consumo humano deberán estar refrigerados y exentos de parásitos y sus quistes."
+    },
+    "324": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716691",
+      "libro": "",
+      "resumen": "Artículo 324.- Los pescados frescos, frescos enfriados y congelados no deberán contener más de: a) 30 mg/100g de nitrógeno básico volátil total (NBVT) para pece"
+    },
+    "325": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716692",
+      "libro": "",
+      "resumen": "Artículo 325.- Marisco es todo aquel animal invertebrado comestible que tiene en el agua su medio normal de vida. Comprende moluscos, crustáceos, equinodermos, "
+    },
+    "326": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716694",
+      "libro": "",
+      "resumen": "Artículo 326.- Los mariscos que pueden permanecer vivos fuera de su medio natural (bivalvos, crustáceos, equinodermos y tunicados), cuando se expendan en estado"
+    },
+    "327": {
+      "fecha_version": "2006-07-12",
+      "derogado": false,
+      "id_parte": "8716695",
+      "libro": "",
+      "resumen": "Artículo 327.- Marisco fresco es aquel recientemente capturado y que no ha sido sometido a ningún proceso después de su extracción. Desde el momento de la extra"
+    },
+    "328": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716696",
+      "libro": "",
+      "resumen": "Artículo 328.- Marisco fresco enfriado es aquel que después de su extracción ha sido enfriado a una temperatura entre 0 y 3ªC, con el objeto de conservarlo dura"
+    },
+    "329": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716697",
+      "libro": "",
+      "resumen": "Artículo 329.- Marisco congelado es aquel que inmediatamente después de su extracción ha sido procesado y sometido a una temperatura de -18ºC como máxima, medid"
+    },
+    "330": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716698",
+      "libro": "",
+      "resumen": "Artículo 330.- Para evaluar el estado de frescura de los mariscos, deberán observarse las siguientes características: Moluscos bivalvos y gastrópodos: a) aspect"
+    },
+    "331": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716699",
+      "libro": "",
+      "resumen": "Artículo 331.- Los mariscos que se comercialicen para el consumo humano deberán estar exentos de quistes de parásitos ."
+    },
+    "332": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716700",
+      "libro": "",
+      "resumen": "Artículo 332.- El Nitrógeno Básico Volátil Total (N.B.V.T.), en mariscos frescos, enfriados y congelados con excepción de crustáceos, será de 30mg/100 gramos co"
+    },
+    "333": {
+      "fecha_version": "2025-07-15",
+      "derogado": false,
+      "id_parte": "8716701",
+      "libro": "",
+      "resumen": "Artículo 333.- Los contenidos máximos de toxinas marinas en mariscos destinados al consumo humano (cuerpo entero o cualquier parte consumible por separado) debe"
+    },
+    "334": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716702",
+      "libro": "",
+      "resumen": "Artículo 334.- El marisco expuesto a posibles contaminaciones, sean naturales o provocadas por el hombre, deberá ser sometido a un proceso de purificación, debi"
+    },
+    "335": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716703",
+      "libro": "",
+      "resumen": "Artículo 335.- La instalación y funcionamiento de establecimientos destinados a la crianza, cultivo, engorda y purificación de mariscos destinados al consumo, a"
+    },
+    "336": {
+      "fecha_version": "2000-04-28",
+      "derogado": false,
+      "id_parte": "8716704",
+      "libro": "",
+      "resumen": "Artículo 336.- Huevo es el óvulo completamente evolucionado de la gallina. Los huevos de otras aves deben designarse con la calificación complementaria de la es"
+    },
+    "337": {
+      "fecha_version": "2000-04-28",
+      "derogado": false,
+      "id_parte": "8716706",
+      "libro": "",
+      "resumen": "Artículo 337.- Huevo fresco es el huevo entero en su cáscara que no ha sufrido ningún proceso de conservación y que tiene un período de almacenaje no superior a"
+    },
+    "338": {
+      "fecha_version": "2000-04-28",
+      "derogado": false,
+      "id_parte": "8716707",
+      "libro": "",
+      "resumen": "Artículo 338.- Huevo conservado es el huevo entero en su cáscara que se ha mantenido refrigerado o en un lugar fresco y que tiene un período de almacenaje no su"
+    },
+    "339": {
+      "fecha_version": "2000-04-28",
+      "derogado": false,
+      "id_parte": "8716708",
+      "libro": "",
+      "resumen": "Artículo 339.- Huevo refrigerado es el huevo entero en su cáscara que ha sido sometido desde su producción a la acción del frío y mantenido en esas condiciones "
+    },
+    "340": {
+      "fecha_version": "2000-04-28",
+      "derogado": false,
+      "id_parte": "8716709",
+      "libro": "",
+      "resumen": "Artículo 340.- Todo huevo entero en su cáscara, destinado a consumo directo, deberá ser transportado a los sitios de expendio en envases o bandejas nuevas. Todo"
+    },
+    "341": {
+      "fecha_version": "2000-04-28",
+      "derogado": false,
+      "id_parte": "8716710",
+      "libro": "",
+      "resumen": "Artículo 341.- Queda prohibida la venta de huevos que presenten las siguientes alteraciones: - Manchados - Cáscara fisurada - Cáscara trizada o rota - Signos de"
+    },
+    "342": {
+      "fecha_version": "2000-04-28",
+      "derogado": false,
+      "id_parte": "8716711",
+      "libro": "",
+      "resumen": "Artículo 342.- Huevo entero deshidratado o desecado es aquel desprovisto de su cáscara y al que se le ha extraído el agua por evaporación. No deberá contener má"
+    },
+    "343": {
+      "fecha_version": "2000-04-28",
+      "derogado": false,
+      "id_parte": "8716712",
+      "libro": "",
+      "resumen": "Artículo 343.- Huevo entero líquido es aquel privado de la cáscara, que conserva las proporciones naturales de la clara y de la yema, las que mezcladas dan luga"
+    },
+    "344": {
+      "fecha_version": "2000-04-28",
+      "derogado": false,
+      "id_parte": "8716713",
+      "libro": "",
+      "resumen": "Artículo 344.- Se permite el agregado como antiaglomerante o antihumectante al huevo en polvo de no más de 1% en peso de dióxido de silicio, y no más de 1,5% en"
+    },
+    "345": {
+      "fecha_version": "2000-04-28",
+      "derogado": false,
+      "id_parte": "8716714",
+      "libro": "",
+      "resumen": "Artículo 345.- Los establecimientos que elaboren huevo líquido y huevo congelado deberán someter los huevos a utilizar como materia prima a un proceso de lavado"
+    },
+    "346": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716715",
+      "libro": "",
+      "resumen": "Artículo 346.- La denominación genérica de alimentos farináceos está reservada para designar a los productos naturales, simples o transformados, que se caracter"
+    },
+    "347": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716718",
+      "libro": "",
+      "resumen": "Artículo 347.- Harina, sin otro calificativo, es el producto pulverulento obtenido por la molienda gradual y sistemática de granos de trigo de la especie Tritic"
+    },
+    "348": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716720",
+      "libro": "",
+      "resumen": "Artículo 348.- El producto pulverulento proveniente de la molienda de otros granos, será designado con la palabra harina, seguida de un calificativo que indique"
+    },
+    "349": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716721",
+      "libro": "",
+      "resumen": "Artículo 349.- La harina deberá responder a los siguientes requisitos: a) contener hasta un máximo de 15,0% de humedad; b) contener hasta un máximo de 0,25% de "
+    },
+    "350": {
+      "fecha_version": "2026-06-19",
+      "derogado": false,
+      "id_parte": "8716722",
+      "libro": "",
+      "resumen": "Artículo 350.- La harina deberá contener como mínimo las siguientes cantidades de vitaminas y sales minerales: - Tiamina 6,3 mg/kg. - Riboflavina 1,3 mg/kg. - N"
+    },
+    "351": {
+      "fecha_version": "2010-03-16",
+      "derogado": false,
+      "id_parte": "8716723",
+      "libro": "",
+      "resumen": "Artículo 351.- Las mezclas vitamínicas que se comercialicen para enriquecer la harina sean nacionales o importadas deberán indicar en su rotulación las cantidad"
+    },
+    "352": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716724",
+      "libro": "",
+      "resumen": "Artículo 352.- Harina integral es el producto resultante de la trituración del cereal previa limpieza y acondicionamiento, hasta llegar a un 100% de extracción."
+    },
+    "353": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716725",
+      "libro": "",
+      "resumen": "Artículo 353.- La harina integral deberá cumplir con las características siguientes: a) humedad, no más de 15,0%; b) fibra cruda, no más de 1,5% sobre la base d"
+    },
+    "354": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716726",
+      "libro": "",
+      "resumen": "Artículo 354.- Las harinas de legumbres no deben contener más de 10 unidades de inhibidor de tripsina por miligramo de harina seca, 300 unidades de hemoaglutina"
+    },
+    "355": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716727",
+      "libro": "",
+      "resumen": "Artículo 355.- Las harinas no deberán contener insectos, partes de éstos o sus estados evolutivos, ácaros ni otros elementos extraños."
+    },
+    "356": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716728",
+      "libro": "",
+      "resumen": "Artículo 356.- Con el nombre de pan sin otra denominación, se entiende el producto de la cocción de la masa resultante de una mezcla de harina de trigo, levadur"
+    },
+    "357": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716730",
+      "libro": "",
+      "resumen": "Artículo 357.- El pan deberá presentar las características siguientes: a) olor y sabor característico; b) cocción y panificación normales; c) limpio y sin cuerp"
+    },
+    "358": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716731",
+      "libro": "",
+      "resumen": "Artículo 358.- Con el nombre de masas o pastas horneadas se designan diversos productos elaborados en base a harinas, y adicionados o no de especies y otros ing"
+    },
+    "359": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716732",
+      "libro": "",
+      "resumen": "Artículo 359.- El pan, los pasteles, las masas, pastas y otros productos de pastelería y repostería, no deberán contener sustancias extrañas, insectos, parte de"
+    },
+    "360": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716733",
+      "libro": "",
+      "resumen": "Artículo 360.- Las mezclas de aditivos mejoradores de panificación usados en la industria panadera no deberán contener bromato de potasio."
+    },
+    "361": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716734",
+      "libro": "",
+      "resumen": "Artículo 361.- Fideos son los productos constituidos por mezclas de sémolas de trigo y/o harina con agua potable, no fermentadas, sin cocción y que han sido som"
+    },
+    "362": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716736",
+      "libro": "",
+      "resumen": "Artículo 362.- Los fideos deberán cumplir con los siguientes requisitos: a) agua, máximo 13,5% y b) acidez total no superior a 0,25%, expresada en ácido sulfúri"
+    },
+    "363": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716737",
+      "libro": "",
+      "resumen": "Artículo 363.- Fideos enriquecidos con vitaminas y sales minerales son aquellos que contienen como mínimo los siguientes nutrientes por cada kilogramo de produc"
+    },
+    "364": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716738",
+      "libro": "",
+      "resumen": "Artículo 364.- Fideos o pastas con o al huevo son aquellos a los cuales se les ha agregado huevos frescos enteros o su equivalente deshidratado, de modo que con"
+    },
+    "365": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716739",
+      "libro": "",
+      "resumen": "Artículo 365.- Pastas alimenticias frescas son los productos fabricados con sémolas de trigo y/o harina con agua potable, adicionados o no con huevos, hortaliza"
+    },
+    "366": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716740",
+      "libro": "",
+      "resumen": "Artículo 366.- Las pastas alimenticias frescas deben cumplir con los siguientes requisitos: a) humedad, máximo 35%, y b) acidez, máximo 0,20% expresada en ácido"
+    },
+    "367": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716741",
+      "libro": "",
+      "resumen": "Artículo 367.- Los fideos y productos afines no deberán contener insectos o sus estados evolutivos, ácaros ni hongos."
+    },
+    "368": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716742",
+      "libro": "",
+      "resumen": "Artículo 368.- Los productos farináceos para coctel que se comercializan envasados, tales como: papas fritas, ramitas, productos extruidos, cereales dilatados, "
+    },
+    "369": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716744",
+      "libro": "",
+      "resumen": "Artículo 369.- Los cereales para el desayuno son los productos elaborados a base de harinas o granos de cereales adicionados o no de aditivos autorizados, sal c"
+    },
+    "370": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716745",
+      "libro": "",
+      "resumen": "Artículo 370.- Los productos descritos en este párrafo deberán presentar los caracteres que les son propios como sabor, olor, aspecto, textura y estar exentos d"
+    },
+    "371": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716746",
+      "libro": "",
+      "resumen": "Artículo 371.- Se incluyen en este grupo diversos productos derivados de cereales y tubérculos tales como: chuchoca es el producto total de la molienda gruesa d"
+    },
+    "372": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716748",
+      "libro": "",
+      "resumen": "Artículo 372.- Levadura para panificación es el producto obtenido de la propagación industrial de levaduras del género Saccharomyces en medios de cultivos adecu"
+    },
+    "373": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716750",
+      "libro": "",
+      "resumen": "Artículo 373.- Levadura prensada o filtrada para panificación corresponde a la levadura que ha sido centrifugada, prensada o filtrada, de manera que su humedad "
+    },
+    "374": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716751",
+      "libro": "",
+      "resumen": "Artículo 374.- Levadura seca y levadura seca instantánea para panificación corresponde a la levadura que ha sido deshidratada, de manera que su humedad no sea s"
+    },
+    "375": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716752",
+      "libro": "",
+      "resumen": "Artículo 375.- Polvos de hornear son aquellos productos formados de ácido carbónico y sus sales sódica, potásica, cálcica y amónica y otros leudantes químicos a"
+    },
+    "376": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716753",
+      "libro": "",
+      "resumen": "Artículo 376.- Se podrán usar como agentes leudantes otros productos, siempre que estén expresamente autorizados para este fin en este reglamento."
+    },
+    "377": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716754",
+      "libro": "",
+      "resumen": "Artículo 377.- Con el nombre de azúcar sólo podrá denominarse a la sacarosa natural cristalizada proveniente de la raíz de la remolacha azucarera (Beta vulgaris"
+    },
+    "378": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716757",
+      "libro": "",
+      "resumen": "Artículo 378.- Azúcar crudo es el producto sólido cristalizado, obtenido de la caña de azúcar o de la remolacha azucarera, constituido esencialmente por cristal"
+    },
+    "379": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716758",
+      "libro": "",
+      "resumen": "Artículo 379.- Azúcar blanco granulado o refinado es el producto que contiene por lo menos un 99,5% de sacarosa y no más de 0,1% de sustancias insolubles en agu"
+    },
+    "380": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716759",
+      "libro": "",
+      "resumen": "Artículo 380.- Azúcar rubio granulado es el producto cristalizado obtenido de la caña de azúcar o de la remolacha azucarera que contiene como mínimo 98.5% de sa"
+    },
+    "381": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716760",
+      "libro": "",
+      "resumen": "Artículo 381.- Azúcar flor o azúcar en polvo (azúcar glacé) es el producto que se obtiene al moler finamente el azúcar blanco granulado o el azúcar refinado gra"
+    },
+    "382": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716761",
+      "libro": "",
+      "resumen": "Artículo 382.- Chancaca es el producto obtenido al concentrar y cristalizar el jugo purificado de caña o de remolacha. Debe contener como mínimo 80% de sacarosa"
+    },
+    "383": {
+      "fecha_version": "2024-04-16",
+      "derogado": false,
+      "id_parte": "8716762",
+      "libro": "",
+      "resumen": "Artículo 383.- Con el nombre de azúcares se entenderá a los carbohidratos endulzantes, monosacáridos y disacáridos refinados, concentrados y/o cristalizados, pa"
+    },
+    "384": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716763",
+      "libro": "",
+      "resumen": "Artículo 384.- Se reserva la denominación de jarabes a los derivados, sucedáneos y subproductos de los azúcares naturales que comprenden a las sustancias cuya n"
+    },
+    "385": {
+      "fecha_version": "2006-01-23",
+      "derogado": true,
+      "id_parte": "8716765",
+      "libro": "",
+      "resumen": "Artículo 385.- DEROGADO"
+    },
+    "386": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716766",
+      "libro": "",
+      "resumen": "Artículo 386.- DEROGADO"
+    },
+    "387": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716767",
+      "libro": "",
+      "resumen": "Artículo 387.- Jarabe de glucosa es una solución concentrada y purificada de sacáridos nutritivos obtenidos del almidón."
+    },
+    "388": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716768",
+      "libro": "",
+      "resumen": "Artículo 388.- El jarabe de glucosa destinado a la fabricación de productos de confitería podrá contener como máximo 400 mg/kg de anhídrido sulfuroso, aceptándo"
+    },
+    "389": {
+      "fecha_version": "2000-05-26",
+      "derogado": false,
+      "id_parte": "8716769",
+      "libro": "",
+      "resumen": "Artículo 389.- Jarabe de glucosa \"deshidratada\" es el jarabe de glucosa del que se ha separado parcialmente el agua. Debe contener como mínimo 20% m/m de azúcar"
+    },
+    "390": {
+      "fecha_version": "2000-05-26",
+      "derogado": false,
+      "id_parte": "8716770",
+      "libro": "",
+      "resumen": "Artículo 390.- Jarabe de maíz de alta fructosa, es un jarabe de maíz, obtenido por isomerización enzimática de una solución de alta dextrosa, conteniendo al men"
+    },
+    "391": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716771",
+      "libro": "",
+      "resumen": "Artículo 391.- Jarabes naturales son los jugos naturales azucarados de productos vegetales (caña, maíz, remolacha, palma, frutas y otros), concentrados hasta la"
+    },
+    "392": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716772",
+      "libro": "",
+      "resumen": "Artículo 392.- Jarabes artificiales son las soluciones concentradas de azúcares en agua potable, con adición de sustancias aromáticas, colorantes y ácidos permi"
+    },
+    "393": {
+      "fecha_version": "2019-11-12",
+      "derogado": false,
+      "id_parte": "8716773",
+      "libro": "",
+      "resumen": "Artículo 393.- Se entiende por \"miel\" la sustancia dulce natural producida por abejas Apis mellifera a partir del néctar de las plantas o de secreciones de part"
+    },
+    "393 bis": {
+      "fecha_version": "2019-11-12",
+      "derogado": false,
+      "id_parte": "10067640",
+      "libro": "",
+      "resumen": "Artículo 393 bis.- Se entenderá por \"polen corbicular\" el conglomerado de polen extraído desde las flores por la abeja de la especie Apis mellifera, la cual mez"
+    },
+    "394": {
+      "fecha_version": "2019-11-12",
+      "derogado": false,
+      "id_parte": "8716775",
+      "libro": "",
+      "resumen": "Artículo 394.- Podrá denominarse como \"miel de palma\" al producto dulce, viscoso y de color caramelo oscuro, obtenido por concentración de savia de palma chilen"
+    },
+    "395": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716776",
+      "libro": "",
+      "resumen": "Artículo 395.- Productos de confitería son las preparaciones de diferentes formas de presentación y consistencia, que contienen azúcares como materia básica car"
+    },
+    "396": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716779",
+      "libro": "",
+      "resumen": "Artículo 396.- Semilla de cacao o cacao en grano es la semilla sana y limpia del Theobroma cacao L., que ha sido sometida a fermentación y posterior desecación."
+    },
+    "397": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716781",
+      "libro": "",
+      "resumen": "Artículo 397.- Cacao o cacao en polvo es el producto obtenido de la pulverización de la torta de cacao. Deberá contener como máximo 8% de humedad y 5% de cascar"
+    },
+    "398": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716782",
+      "libro": "",
+      "resumen": "Artículo 398.- Chocolate es el producto homogéneo obtenido de un proceso de fabricación adecuado de materias de cacao que puede ser combinado con productos láct"
+    },
+    "399": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716783",
+      "libro": "",
+      "resumen": "Artículo 399.- Chocolate sucedáneo es el producto en el que la manteca de cacao ha sido reemplazada parcial o totalmente por materias grasas de origen vegetal, "
+    },
+    "400": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716784",
+      "libro": "",
+      "resumen": "Artículo 400.- Cacao azucarado en polvo es el producto obtenido a partir de cacao en polvo, con la adición de azúcar y destinado a ser disuelto en agua o leche."
+    },
+    "401": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716785",
+      "libro": "",
+      "resumen": "Artículo 401.- Con el nombre genérico de producto en polvo para preparar postres y refrescos, se denominan los productos en polvo o granulados que, por dispersi"
+    },
+    "402": {
+      "fecha_version": "2003-11-25",
+      "derogado": false,
+      "id_parte": "8716787",
+      "libro": "",
+      "resumen": "Artículo 402.- Polvos para preparar postres de gelatina son los productos constituidos por mezclas de gelatina y azúcares o edulcorantes autorizados, adicionado"
+    },
+    "403": {
+      "fecha_version": "2003-11-25",
+      "derogado": false,
+      "id_parte": "8716788",
+      "libro": "",
+      "resumen": "Artículo 403.- La gelatina utilizada en la elaboración de postres debe provenir de la hidrólisis selectiva del colágeno principal proteína estructural de la pie"
+    },
+    "404": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716789",
+      "libro": "",
+      "resumen": "Artículo 404.- Polvos para preparar refrescos o bebidas instantáneas en polvo son los productos constituidos por azúcares o mezclas de azúcares y edulcorantes a"
+    },
+    "405": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716790",
+      "libro": "",
+      "resumen": "Artículo 405.- La rotulación de edulcorantes en estos productos deberá ajustarse a lo estipulado en el Título III. De los Aditivos Alimentarios de este reglamen"
+    },
+    "406": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716791",
+      "libro": "",
+      "resumen": "Artículo 406.- Con la denominación genérica de \"confituras\", se entienden los productos obtenidos por cocción de frutas, hortalizas o tubérculos (enteros o frac"
+    },
+    "407": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716793",
+      "libro": "",
+      "resumen": "Artículo 407.- Las frutas y hortalizas confitadas, glaseadas cristalizadas o escarchadas, escurridas y almibaradas, deberán cumplir con lo siguiente: a) deben e"
+    },
+    "408": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716794",
+      "libro": "",
+      "resumen": "Artículo 408.- Conserva es el producto alimenticio contenido en envase herméticamente sellado y que ha sido sometido posteriormente a un tratamiento térmico que"
+    },
+    "409": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716797",
+      "libro": "",
+      "resumen": "Artículo 409.- Envase herméticamente sellado es aquel que ha sido diseñado para impedir la entrada de microorganismos durante y después del tratamiento térmico,"
+    },
+    "410": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716798",
+      "libro": "",
+      "resumen": "Artículo 410.- Tratamiento térmico son las condiciones de tiempo y temperatura necesarias para conseguir la esterilidad comercial."
+    },
+    "411": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716799",
+      "libro": "",
+      "resumen": "Artículo 411.- Tratamiento programado es el tratamiento térmico utilizado por el fabricante para un producto determinado y un tamaño de envase definido, para co"
+    },
+    "412": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716800",
+      "libro": "",
+      "resumen": "Artículo 412.- Esterilidad comercial es el estado que se consigue aplicando calor suficiente, solo o en combinación con otros procesos de conservación de alimen"
+    },
+    "413": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716801",
+      "libro": "",
+      "resumen": "Artículo 413.- Alimento ácido es todo alimento cuyo pH natural sea de 4.5 o menor."
+    },
+    "414": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716802",
+      "libro": "",
+      "resumen": "Artículo 414.- Alimento de baja acidez es cualquier alimento con un valor de pH mayor de 4.5 y una actividad de agua mayor de 0.85. Incluye frutas, vegetales o "
+    },
+    "415": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716803",
+      "libro": "",
+      "resumen": "Artículo 415.- Alimento en conserva acidificado es todo alimento que haya sido tratado para obtener un pH de equilibrio de 4.5 o menor después del tratamiento t"
+    },
+    "416": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716804",
+      "libro": "",
+      "resumen": "Artículo 416.- El agua utilizada para el enfriamiento de las conservas deberá ser clorada, debiendo controlarse, para asegurar en todo momento un nivel no infer"
+    },
+    "417": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716805",
+      "libro": "",
+      "resumen": "Artículo 417.- Se debe asegurar la hermeticidad de las conservas mediante procedimientos idóneos. Se deberá llevar un registro de los controles de hermeticidad."
+    },
+    "418": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716806",
+      "libro": "",
+      "resumen": "Artículo 418.- Los autoclaves utilizados en el tratamiento térmico deben estar provistos de un termómetro de precisión de 1ºC y además de un dispositivo de regi"
+    },
+    "419": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716807",
+      "libro": "",
+      "resumen": "Artículo 419.- Se prohíbe la tenencia, distribución y expendio de conservas cuyos envases se presenten hinchados, abollados, con evidencia de haber perdido su h"
+    },
+    "420": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716808",
+      "libro": "",
+      "resumen": "Artículo 420.- En productos en conserva, la fecha o código de elaboración se estampará en una de las tapas del envase bajo relieve o con equipos automáticos de "
+    },
+    "421": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716809",
+      "libro": "",
+      "resumen": "Artículo 421.- El tratamiento térmico deberá ser establecido por el fabricante para cada producto, formulación y formato mediante instrumentos y estudios de cur"
+    },
+    "422": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716811",
+      "libro": "",
+      "resumen": "Artículo 422.- Deberá llevarse en registro para cada carga que contenga la siguiente información: a) condiciones del tratamiento térmico; b) productos empleados"
+    },
+    "423": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716813",
+      "libro": "",
+      "resumen": "Artículo 423.- Las conservas de carne no deberán contener más de 100 mg/Kg de nitrito residual, expresado como nitrito de sodio."
+    },
+    "424": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716815",
+      "libro": "",
+      "resumen": "Artículo 424.- Encurtidos o pickles son los frutos u hortalizas sometidas a fermentación láctica con adición de sal, conservados o no en vinagre. Los encurtidos"
+    },
+    "425": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716817",
+      "libro": "",
+      "resumen": "Artículo 425.- Las aceitunas conservadas por esterilización térmica (como las aceitunas aderezadas ennegrecidas por oxidación) deberán haber recibido un tratami"
+    },
+    "426": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716818",
+      "libro": "",
+      "resumen": "Artículo 426.- Caldo deshidratado es el producto constituido por verduras o mezclas de carne y sus extractos, grasa, sal comestible, condimentos, especias y ace"
+    },
+    "427": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716820",
+      "libro": "",
+      "resumen": "Artículo 427.- Sopas y sopas cremas deshidratadas son aquellos productos elaborados a base de mezclas de cereales y sus derivados, leguminosas sometidas a trata"
+    },
+    "428": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716821",
+      "libro": "",
+      "resumen": "Artículo 428.- Sopas y sopas cremas deshidratadas instantáneas no necesitarán cocción y para ser consumidas sólo requieren la adición de agua de acuerdo a las i"
+    },
+    "429": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716822",
+      "libro": "",
+      "resumen": "Artículo 429.- La creatinina de los caldos, sopas y sopas cremas debe corresponder exclusivamente a los componentes del producto natural."
+    },
+    "430": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716823",
+      "libro": "",
+      "resumen": "Artículo 430.- La denominación de \"especias\" comprende a plantas o partes de ellas (raíces, rizomas, bulbos, hojas, cortezas, flores, frutos y semillas) que con"
+    },
+    "431": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716826",
+      "libro": "",
+      "resumen": "Artículo 431.- Las especias deben ser sanas, limpias, genuinas y presentar las características que les son propias. Deben contener la totalidad de sus principio"
+    },
+    "432": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716827",
+      "libro": "",
+      "resumen": "Artículo 432.- Las especias no deben estar agotadas, alteradas, contaminadas con insectos o parásitos, ni en mal estado de conservación o higiene. Queda prohíbi"
+    },
+    "433": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716828",
+      "libro": "",
+      "resumen": "Artículo 433.- Las especias que a continuación se indican deben cumplir con los siguientes límites de humedad, cenizas totales,cenizas insolubles en ácido clorh"
+    },
+    "434": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716829",
+      "libro": "",
+      "resumen": "Artículo 434.- Si se sustituye la vainilla natural por vainillina o etil-vainillina, los rótulos y publicidad deberán indicar: \"aromatizado con vainillina o eti"
+    },
+    "435": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716830",
+      "libro": "",
+      "resumen": "Artículo 435.- Sal comestible es el cloruro de sodio proveniente de depósitos geológicos, de lagos salados o de agua de mar. Se incluye en esta definición aquel"
+    },
+    "436": {
+      "fecha_version": "2016-11-28",
+      "derogado": false,
+      "id_parte": "8716832",
+      "libro": "",
+      "resumen": "Artículo 436.- La sal comestible, sin otra denominación, sea cristalizada o molida, deberá contener un mínimo de 97% de cloruro de sodio en base seca, con exclu"
+    },
+    "437": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716833",
+      "libro": "",
+      "resumen": "Artículo 437.- La sal comestible con menor contenido de sodio deberá ceñirse a las especificaciones que para cada descriptor nutricional establece el artículo 1"
+    },
+    "438": {
+      "fecha_version": "2022-11-11",
+      "derogado": false,
+      "id_parte": "8716834",
+      "libro": "",
+      "resumen": "Artículo 438.- Toda sal comestible deberá contener yodo adicionado, en forma de yodatos o de yoduros de sodio o de potasio, en una concentración entre 0,015 y 0"
+    },
+    "439": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716835",
+      "libro": "",
+      "resumen": "Artículo 439.- Toda sal comestible deberá estar exenta de cualquier sustancia tóxica. No deberá contener: a) más de 0,5% de nitratos, expresados como nitrato de"
+    },
+    "440": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716836",
+      "libro": "",
+      "resumen": "Artículo 440.- La designación de \"vinagre\" o \"vinagre de vino\" corresponde al producto de la fermentación acética del vino. Los vinagres obtenidos por fermentac"
+    },
+    "441": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716838",
+      "libro": "",
+      "resumen": "Artículo 441.- El vinagre o vinagre de vino debe presentar las siguientes características: a) líquido de color, olor y sabor propios de su naturaleza, límpido, "
+    },
+    "442": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716839",
+      "libro": "",
+      "resumen": "Artículo 442.- Los vinagres que no procedan de vino (alcohol, azúcares, hidromiel, zumos de frutas, cerveza, malta, sidra, suero lácteo u otros) corresponderán "
+    },
+    "443": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716840",
+      "libro": "",
+      "resumen": "Artículo 443.- Los vinagres, en general, no deben contener sustancias extrañas a su materia prima de origen, ni se aceptará que sean adicionados de ácidos miner"
+    },
+    "444": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716841",
+      "libro": "",
+      "resumen": "Artículo 444.- No se permitirá la elaboración, distribución o expendio bajo el nombre de vinagre, de productos a base de ácido acético o láctico, que no proveng"
+    },
+    "445": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716842",
+      "libro": "",
+      "resumen": "Artículo 445.- Se denomina salsa a los productos preparados, de consistencia líquida o semilíquida a base de pulpa de frutos, condimentos naturales o elaborados"
+    },
+    "446": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716844",
+      "libro": "",
+      "resumen": "Artículo 446.- Salsa de mostaza es la mezcla de harina de mostaza con vinagre, sal, otros condimentos y acidulantes permitidos. Debe responder a los siguientes "
+    },
+    "447": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716845",
+      "libro": "",
+      "resumen": "Artículo 447.- Toda mezcla con otras sustancias espesantes, colorantes permitidos u otros ingredientes no señalados en la definición de salsa de mostaza, sólo p"
+    },
+    "448": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716846",
+      "libro": "",
+      "resumen": "Artículo 448.- Salsa de tomates es el producto resultante de la molienda y tamizaje parcial de tomates de las variedades rojas (Lycopersicum esculentum Mill), s"
+    },
+    "449": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716847",
+      "libro": "",
+      "resumen": "Artículo 449.- Ketchup es el producto obtenido de la molienda y tamizaje de tomates de las variedades rojas (Lycopersicum esculentum Mill.), sanos y maduros cuy"
+    },
+    "450": {
+      "fecha_version": "2011-10-29",
+      "derogado": false,
+      "id_parte": "8716848",
+      "libro": "",
+      "resumen": "Artículo 450.- Mayonesa es la emulsión de aceite comestible en huevo y agua, adicionada de vinagre, jugo de limón, otros ácidos orgánicos, sal comestible, condi"
+    },
+    "451": {
+      "fecha_version": "2011-10-29",
+      "derogado": false,
+      "id_parte": "8716849",
+      "libro": "",
+      "resumen": "Artículo 451.- Aderezos para ensaladas (salad dressings) son las emulsiones en las cuales el aceite comestible se encuentra finamente disperso en un medio acuos"
+    },
+    "452": {
+      "fecha_version": "2013-01-26",
+      "derogado": false,
+      "id_parte": "8716850",
+      "libro": "",
+      "resumen": "Artículo 452.- Té, sin otra denominación es el producto obtenido de hojas tiernas, yemas, pecíolos o pedúnculos, sanos y limpios de las especies del género Thea"
+    },
+    "453": {
+      "fecha_version": "2013-01-26",
+      "derogado": false,
+      "id_parte": "8716853",
+      "libro": "",
+      "resumen": "Artículo 453.- Las materias primas para la elaboración de los distintos tipos de té deben cumplir con los siguientes requisitos: a) Contener un máximo de: 20% d"
+    },
+    "454": {
+      "fecha_version": "2013-01-26",
+      "derogado": false,
+      "id_parte": "8716854",
+      "libro": "",
+      "resumen": "Artículo 454.- Yerba Mate es el producto constituido por hojas, ramas jóvenes, brotes, pecíolos o pedúnculos desecados, ligeramente tostados o desmenuzados, de "
+    },
+    "455": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716856",
+      "libro": "",
+      "resumen": "Artículo 455.- Café tostado es el producto constituido por las semillas sanas y limpias de las diferentes especies del género Coffea, que por medio del calor ha"
+    },
+    "456": {
+      "fecha_version": "2021-02-02",
+      "derogado": false,
+      "id_parte": "8716858",
+      "libro": "",
+      "resumen": "Artículo 456.- Café soluble o café instantáneo es el producto resultante de la deshidratación del extracto obtenido exclusivamente a partir del café en grano re"
+    },
+    "457": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716859",
+      "libro": "",
+      "resumen": "Artículo 457.- Sucedáneos del café son aquellos productos de origen vegetal (soya, higo, achicoria u otros), que desecados y/o tostados o tostados con azúcar o "
+    },
+    "458": {
+      "fecha_version": "2013-01-26",
+      "derogado": false,
+      "id_parte": "8716860",
+      "libro": "",
+      "resumen": "Artículo 458.- Sucedáneo del café instantáneo o soluble es el producto resultante de la deshidratación del extracto acuoso de los sucedáneos del café mencionado"
+    },
+    "459": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716861",
+      "libro": "",
+      "resumen": "Artículo 459.- La denominación de hierbas aromáticas comprende ciertas plantas o partes de ellas (raíces, rizomas, bulbos, hojas, cortezas, flores, frutos y sem"
+    },
+    "460": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716863",
+      "libro": "",
+      "resumen": "Artículo 460.- Las hierbas aromáticas deben ser genuinas, sanas, presentar las características macroscópicas y microscópicas que les son propias. No deben conte"
+    },
+    "461": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716864",
+      "libro": "",
+      "resumen": "Artículo 461.- Las hierbas aromáticas deben contener la totalidad de sus principios activos y otros metabolitos secundarios de importancia para su caracterizaci"
+    },
+    "462": {
+      "fecha_version": "2003-11-25",
+      "derogado": false,
+      "id_parte": "8716865",
+      "libro": "",
+      "resumen": "Artículo 462.- Las hierbas aromáticas pueden expenderse enteras o molidas, ya sea solas o en mezclas."
+    },
+    "463": {
+      "fecha_version": "2003-11-25",
+      "derogado": false,
+      "id_parte": "8716866",
+      "libro": "",
+      "resumen": "Artículo 463.- Las hierbas aromáticas no deberán tener materias o sustancias contaminantes en niveles nocivos para la salud, ni principios activos en concentrac"
+    },
+    "464": {
+      "fecha_version": "2013-01-26",
+      "derogado": false,
+      "id_parte": "8716867",
+      "libro": "",
+      "resumen": "Artículo 464.- Las hierbas aromáticas deben envasarse en materiales apropiados que permitan conservar en condiciones óptimas su sabor y aroma. Las hierbas aromá"
+    },
+    "465": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716868",
+      "libro": "",
+      "resumen": "Artículo 465.- Comidas o platos preparados son aquellas elaboraciones culinarias que se expenden, listos para su consumo, sean fríos o calientes o que requieran"
+    },
+    "466": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716870",
+      "libro": "",
+      "resumen": "Artículo 466.- Las comidas o platos preparados que se expendan calientes deberán mantenerse y transportarse en receptáculos térmicos que aseguren la conservació"
+    },
+    "467": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716871",
+      "libro": "",
+      "resumen": "Artículo 467.- Las vitrinas en que se exhiban comidas o platos preparados deberán cumplir con los requisitos establecidos en este reglamento."
+    },
+    "468": {
+      "fecha_version": "2015-06-26",
+      "derogado": false,
+      "id_parte": "8716872",
+      "libro": "",
+      "resumen": "Artículo 468.- Las comidas o platos preparados que se presenten envasados para la venta, que se expendan para llevar en porciones y/o variedades predefinidas po"
+    },
+    "469": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716873",
+      "libro": "",
+      "resumen": "Artículo 469.- Agua potable es aquella agua apta para usos alimentarios, y deberá cumplir con la normativa sanitaria vigente."
+    },
+    "470": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716875",
+      "libro": "",
+      "resumen": "Artículo 470.- Agua mineral de mesa es aquella de composición química especial proveniente de fuentes naturales oficialmente registradas, que es apropiada para "
+    },
+    "471": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716876",
+      "libro": "",
+      "resumen": "Artículo 471.- El agua mineral de mesa deberá obtenerse en condiciones que garantice la pureza bacteriológica original y envasarse en su fuente de origen, salvo"
+    },
+    "472": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716877",
+      "libro": "",
+      "resumen": "Artículo 472.- El agua mineral natural embotellada deberá cumplir con la normativa sanitaria vigente. (Decreto Nº 106 de 1997, del Ministerio de Salud, Reglamen"
+    },
+    "473": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716878",
+      "libro": "",
+      "resumen": "Artículo 473.- El agua mineral no deberá contener los contaminantes ni sobrepasar los límites de las sustancias que específicamente determina el Reglamento de A"
+    },
+    "474": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716879",
+      "libro": "",
+      "resumen": "Artículo 474.- La rotulación del envase de agua mineral, deberá cumplir con los siguientes requisitos adicionales a los establecidos en el Título II: a) cuando "
+    },
+    "475": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716880",
+      "libro": "",
+      "resumen": "Artículo 475.- El anhídrido carbónico empleado en la preparación de aguas de bebidas carbonatadas debe contener un mínimo de 98% de este gas y no más de 0,2% de"
+    },
+    "476": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716881",
+      "libro": "",
+      "resumen": "Artículo 476.- Hielo para consumo humano es el producto obtenido por congelación de agua potable. Sus características químicas y microbiológicas serán las exigi"
+    },
+    "477": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716882",
+      "libro": "",
+      "resumen": "Artículo 477.- Se prohíbe el fraccionamiento del hielo en barras para ser incorporado a los alimentos."
+    },
+    "478": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716883",
+      "libro": "",
+      "resumen": "Artículo 478.- Son bebidas analcohólicas aquellas elaboradas a base de agua potable, carbonatada o no, y adicionadas de una o más de las siguientes sustancias: "
+    },
+    "479": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716886",
+      "libro": "",
+      "resumen": "Artículo 479.- Bebida refrescante de fruta, es aquella bebida analcohólica a la cual se le ha adicionado jugos de frutas o sus extractos y cuyo contenido de sól"
+    },
+    "480": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716887",
+      "libro": "",
+      "resumen": "Artículo 480.- Bebida de fantasía, es aquella bebida analcohólica que no contiene jugos de frutas o sus extractos, o que ha sido adicionada de éstos pero en can"
+    },
+    "481": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716888",
+      "libro": "",
+      "resumen": "Artículo 481.- Las bebidas analcohólicas que contengan cafeína o quinina no deberán exceder la cantidad de 180 mg/l de cafeína, ni 130 mg/l de quinina o sus sal"
+    },
+    "482": {
+      "fecha_version": "2017-01-18",
+      "derogado": false,
+      "id_parte": "8716889",
+      "libro": "",
+      "resumen": "Artículo 482.- Jugo o zumo puro de fruta u hortaliza es el producto sin fermentar, pero fermentable, pulposo, turbio o claro, destinado al consumo directo, obte"
+    },
+    "483": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716891",
+      "libro": "",
+      "resumen": "Artículo 483.- El jugo o zumo puro de frutas u hortalizas deberá cumplir los siguientes requisitos: a) el contenido de sólidos solubles, con exclusión de los az"
+    },
+    "484": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716892",
+      "libro": "",
+      "resumen": "Artículo 484.- Jugo o zumo concentrado es el producto sin fermentar pero fermentable una vez reconstituido, conservado exclusivamente por medios físicos y obten"
+    },
+    "485": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716893",
+      "libro": "",
+      "resumen": "Artículo 485.- Néctar de fruta es el producto pulposo o no pulposo, sin fermentar pero fermentable, obtenido mezclando el jugo o zumo de fruta y/o toda la parte"
+    },
+    "486": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716894",
+      "libro": "",
+      "resumen": "Artículo 486.- El néctar de frutas deberá cumplir los siguientes requisitos: a) el contenido de sólidos solubles de los néctares, con exclusión de azúcares añad"
+    },
+    "487": {
+      "fecha_version": "2017-01-18",
+      "derogado": false,
+      "id_parte": "8716895",
+      "libro": "",
+      "resumen": "Artículo 487.- Los valores mínimos de sólidos solubles en las frutas que se enuncian a continuación son referenciales: Frutas Sólidos solubles, % m/m mínimo Boy"
+    },
+    "487 A": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716989",
+      "libro": "",
+      "resumen": "Artículo 487 A.- Aguas envasadas, son aguas potables tratadas que pueden ser o no purificadas (destilación, nanofiltración, osmosis inversa o cualquier otro mét"
+    },
+    "487 B": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716991",
+      "libro": "",
+      "resumen": "Artículo 487 B.- Las aguas envasadas sin gas deberán ser sometidas a procesos necesarios para asegurar su calidad sanitaria, estos procesos pueden ser: ozonific"
+    },
+    "487 C": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716992",
+      "libro": "",
+      "resumen": "Artículo 487 C.- Las aguas envasadas solo podrán expenderse cuando contengan electrolitos y deberán contener como mínimo 10 mg/l de sólidos totales."
+    },
+    "487 D": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716993",
+      "libro": "",
+      "resumen": "Artículo 487 D.- A las aguas envasadas se les podrán incorporar nutrientes, en concentraciones según la normativa respectiva. Los nutrientes incorporados a esta"
+    },
+    "487 E": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716994",
+      "libro": "",
+      "resumen": "Artículo 487 E.- La rotulación de las aguas envasadas deberá incluir, la composición y concentración de las sales minerales o electrolitos, según corresponda a "
+    },
+    "487 F": {
+      "fecha_version": "2006-01-23",
+      "derogado": false,
+      "id_parte": "8716995",
+      "libro": "",
+      "resumen": "Artículo 487 F.- El anhídrido carbónico empleado en la elaboración de aguas envasadas, debe contener un mínimo de 98% de este gas y no más de 0,2% de monóxido d"
+    },
+    "488": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716896",
+      "libro": "",
+      "resumen": "Artículo 488.- Los alimentos para regímenes especiales son aquellos elaborados o preparados, especialmente, para satisfacer necesidades fisiológicas o fisiopato"
+    },
+    "489": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716899",
+      "libro": "",
+      "resumen": "Artículo 489.- Los alimentos para regímenes especiales, sin perjuicio del cumplimiento de las normas generales de etiquetado del presente reglamento, deberán in"
+    },
+    "490": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716900",
+      "libro": "",
+      "resumen": "Artículo 490.- ELIMINADO"
+    },
+    "491": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716901",
+      "libro": "",
+      "resumen": "Artículo 491.- ELIMINADO."
+    },
+    "492": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716902",
+      "libro": "",
+      "resumen": "Artículo 492.- ELIMINADO."
+    },
+    "493": {
+      "fecha_version": "2019-07-03",
+      "derogado": false,
+      "id_parte": "8716903",
+      "libro": "",
+      "resumen": "Artículo 493.- Las fórmulas para lactantes son aquellos productos que satisfacen los requerimientos nutricionales de los lactantes, cuando la alimentación con l"
+    },
+    "494": {
+      "fecha_version": "2019-07-03",
+      "derogado": false,
+      "id_parte": "8716905",
+      "libro": "",
+      "resumen": "Artículo 494.- Las fórmulas para lactantes se clasifican en: a) fórmula de inicio: es el producto líquido o en polvo para reconstituir, especialmente fabricados"
+    },
+    "495": {
+      "fecha_version": "2019-07-03",
+      "derogado": false,
+      "id_parte": "8716906",
+      "libro": "",
+      "resumen": "Artículo 495.- El producto debe haber sido elaborado exclusivamente por medios físicos y envasado de manera que se evite su alteración y contaminación en cualqu"
+    },
+    "496": {
+      "fecha_version": "2014-09-17",
+      "derogado": false,
+      "id_parte": "8716907",
+      "libro": "",
+      "resumen": "Artículo 496.- La fórmula de continuación reconstituida deberá presentar la siguiente composición básica: a) energía: mínimo 60 kcal/100 ml máximo 85 kcal/100 m"
+    },
+    "497": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716908",
+      "libro": "",
+      "resumen": "Artículo 497.- Además de lo dispuesto en el presente reglamento para etiquetado general y para regímenes especiales, en la rotulación y/o publicidad de cualquie"
+    },
+    "497 BIS": {
+      "fecha_version": "2017-11-28",
+      "derogado": false,
+      "id_parte": "9854682",
+      "libro": "",
+      "resumen": "Artículo 497 bis.- Se prohíbe toda acción de publicidad de fórmulas de inicio y fórmulas de continuación hasta los 12 meses de edad, de las que trata el present"
+    },
+    "498": {
+      "fecha_version": "2019-07-03",
+      "derogado": false,
+      "id_parte": "8716909",
+      "libro": "",
+      "resumen": "Artículo 498.- Preparaciones comerciales de alimentos infantiles son aquellas utilizadas durante el período de destete y adaptación de los niños a la alimentaci"
+    },
+    "499": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716911",
+      "libro": "",
+      "resumen": "Artículo 499.- Las preparaciones comerciales de alimentos infantiles para administrarse directamente según el tamaño de partículas se clasifican en: a) colados "
+    },
+    "500": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716912",
+      "libro": "",
+      "resumen": "Artículo 500.- Los alimentos infantiles deshidratados, una vez reconstituidos serán parecidos en cuanto a consistencia y tamaño de sus partículas a los descrito"
+    },
+    "501": {
+      "fecha_version": "2019-07-03",
+      "derogado": false,
+      "id_parte": "8716913",
+      "libro": "",
+      "resumen": "Artículo 501.- Estos alimentos infantiles deben contener sustancias inocuas y adecuadas para la alimentación de los lactantes y niños pequeños hasta los 36 mese"
+    },
+    "502": {
+      "fecha_version": "2019-07-03",
+      "derogado": false,
+      "id_parte": "8716914",
+      "libro": "",
+      "resumen": "Artículo 502.- Estos alimentos deberán presentar la siguiente composición: a) Proteínas El contenido de proteínas de los colados o picados deberá ser el corresp"
+    },
+    "503": {
+      "fecha_version": "2019-07-03",
+      "derogado": false,
+      "id_parte": "8716915",
+      "libro": "",
+      "resumen": "Artículo 503.- Sólo se permitirá el uso de los siguientes aditivos, en la cantidad que se indica por 100 g o 100 ml del producto listo para el consumo: . [Tabla"
+    },
+    "504": {
+      "fecha_version": "2019-07-03",
+      "derogado": false,
+      "id_parte": "8716916",
+      "libro": "",
+      "resumen": "Artículo 504.- El producto deberá prepararse con especial cuidado, mediante buenas prácticas de fabricación, a fin de eliminar totalmente los residuos de los pl"
+    },
+    "505": {
+      "fecha_version": "2019-07-03",
+      "derogado": false,
+      "id_parte": "8716917",
+      "libro": "",
+      "resumen": "Artículo 505.- Además de lo dispuesto para etiquetado general y para regímenes especiales, las preparaciones comerciales de alimentos infantiles deberán indicar"
+    },
+    "505 BIS": {
+      "fecha_version": "2019-07-03",
+      "derogado": false,
+      "id_parte": "10035115",
+      "libro": "",
+      "resumen": "Artículo 505 bis.- La información y rotulación nutricional de los alimentos comprendidos en este párrafo deberán expresarse por cada 100 g o 100 ml, según corre"
+    },
+    "506": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716918",
+      "libro": "",
+      "resumen": "Artículo 506.- Los alimentos para uso infantil procesados a base de cereales son aquellos destinados a completar el régimen alimentario normal de niños desde lo"
+    },
+    "507": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716920",
+      "libro": "",
+      "resumen": "Artículo 507.- Los alimentos elaborados a base de cereales están preparados principalmente con uno o más cereales molidos que se procesan para lograr un escaso "
+    },
+    "508": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716921",
+      "libro": "",
+      "resumen": "Artículo 508.- Las categorías descritas en artículo 507 se preparan principalmente con uno o más productos molidos de cereales, como trigo, arroz, cebada, avena"
+    },
+    "509": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716922",
+      "libro": "",
+      "resumen": "Artículo 509.- Los requisitos relativos al contenido energético y de nutrientes se refieren al producto listo para el consumo tal como se vende, o preparado de "
+    },
+    "510": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716923",
+      "libro": "",
+      "resumen": "Artículo 510.- Tanto el producto como sus componentes no deberán haberse tratado con radiaciones ionizantes. Queda prohibido el uso de grasas hidrogenadas y par"
+    },
+    "511": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716924",
+      "libro": "",
+      "resumen": "Artículo 511.- Todos los ingredientes, incluso los facultativos, deberán estar limpios y ser inocuos, apropiados y de buena calidad. Todos los procedimientos de"
+    },
+    "512": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716925",
+      "libro": "",
+      "resumen": "Artículo 512.- Sólo se permitirá el uso de los siguientes aditivos y en las cantidades indicadas por cada 100 g de producto listo para el consumo, preparado con"
+    },
+    "513": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716926",
+      "libro": "",
+      "resumen": "Artículo 513.- Además de lo dispuesto para etiquetado general y para regímenes especiales en el artículo 491 en la etiqueta de estos alimentos se indicará lo si"
+    },
+    "514": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716927",
+      "libro": "",
+      "resumen": "Artículo 514.- Un alimento de uso médico o medicinal es una categoría de alimentos para regímenes especiales, formulados, elaborados y presentados especialmente"
+    },
+    "515": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716929",
+      "libro": "",
+      "resumen": "Artículo 515.- Estos alimentos se clasificarán de acuerdo a las instrucciones del fabricante en: a) Alimentos completos con una formulación de nutrientes especí"
+    },
+    "516": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716930",
+      "libro": "",
+      "resumen": "Artículo 516.- Un alimento libre de gluten es aquel que está preparado únicamente con ingredientes que por su origen natural y por la aplicación de buenas práct"
+    },
+    "517": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716932",
+      "libro": "",
+      "resumen": "Artículo 517.- Las harinas libres de gluten destinadas a la panificación, así como el pan libre de gluten, deberán contener las vitaminas y minerales establecid"
+    },
+    "518": {
+      "fecha_version": "2018-07-24",
+      "derogado": false,
+      "id_parte": "8716933",
+      "libro": "",
+      "resumen": "Artículo 518.- El término \"Libre de gluten\" y el logo o símbolo de la espiga tachada, sólo podrán utilizarse cuando el resultado del análisis de laboratorio del"
+    },
+    "519": {
+      "fecha_version": "2003-11-25",
+      "derogado": false,
+      "id_parte": "8716934",
+      "libro": "",
+      "resumen": "Artículo 519.- Se entiende por alimentos para regímenes de control de peso, aquellos que según las instrucciones correspondientes sustituyen la totalidad de la "
+    },
+    "520": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716936",
+      "libro": "",
+      "resumen": "Artículo 520.- Un producto que se presente como sustituto de todas las comidas de la dieta diaria deberá aportar como mínimo 800 kcal. y como máximo 1.200 kcal."
+    },
+    "521": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716937",
+      "libro": "",
+      "resumen": "Artículo 521.- Si el producto se presenta como sustituto de una o más comidas de la dieta diaria deberá aportar como mínimo 200 kcal y como máximo 400 kcal. por"
+    },
+    "522": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716938",
+      "libro": "",
+      "resumen": "Artículo 522.- Los sustitutos de comidas para regímenes de control de peso se prepararán con elementos constituyentes de proteínas de origen animal y vegetal qu"
+    },
+    "523": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716939",
+      "libro": "",
+      "resumen": "Artículo 523.- El contenido de proteínas de estos productos será de un 25% como mínimo y un 50% como máximo de la energía disponible del alimento listo para su "
+    },
+    "524": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716940",
+      "libro": "",
+      "resumen": "Artículo 524.- Estos alimentos deberán cumplir con el descriptor bajo en grasa y no deberán aportar, en forma de grasa total, más del 30% de la energía disponib"
+    },
+    "525": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716941",
+      "libro": "",
+      "resumen": "Artículo 525.- Cuando un alimento se presente como sustitutivo de todas las comidas de un día, deberá contener, al menos, el 100% de las cantidades de vitaminas"
+    },
+    "526": {
+      "fecha_version": "2009-10-23",
+      "derogado": false,
+      "id_parte": "8716942",
+      "libro": "",
+      "resumen": "Artículo 526.- Cuando un producto se presente como sustituto de una sola comida de la dieta diaria, es decir como reemplazo de una de las principales comidas de"
+    },
+    "527": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716943",
+      "libro": "",
+      "resumen": "Artículo 527.- Estos productos se etiquetarán conforme las disposiciones relativas a etiquetado general y según lo dispuesto en el artículo 491. Si en las instr"
+    },
+    "528": {
+      "fecha_version": "2000-01-13",
+      "derogado": false,
+      "id_parte": "8716944",
+      "libro": "",
+      "resumen": "Artículo 528.- En la etiqueta o en el etiquetado deberá hacerse referencia a la necesidad de mantener una ingesta adecuada de líquido cuando se utilizan prepara"
+    },
+    "529": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716945",
+      "libro": "",
+      "resumen": "Art�culo 529°.- DEROGADO"
+    },
+    "530": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716947",
+      "libro": "",
+      "resumen": "Art�culo 530°.- DEROGADO"
+    },
+    "531": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716948",
+      "libro": "",
+      "resumen": "Art�culo 531°.- DEROGADO"
+    },
+    "532": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716949",
+      "libro": "",
+      "resumen": "Art�culo 532°.- DEROGADO"
+    },
+    "533": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716950",
+      "libro": "",
+      "resumen": "Art�culo 533°.- DEROGADO"
+    },
+    "534": {
+      "fecha_version": "2003-01-20",
+      "derogado": false,
+      "id_parte": "8716975",
+      "libro": "",
+      "resumen": "Artículo 534.- Suplementos alimentarios son aquellos productos elaborados o preparados especialmente para suplementar la dieta con fines saludables y contribuir"
+    },
+    "535": {
+      "fecha_version": "2002-02-18",
+      "derogado": false,
+      "id_parte": "8716972",
+      "libro": "",
+      "resumen": "Artículo 535.- Los ingredientes dietarios para suplementos alimentarios, que son las substancias utilizadas intencionalmente para suplementar la dieta humana, i"
+    },
+    "536": {
+      "fecha_version": "2005-05-06",
+      "derogado": false,
+      "id_parte": "8716963",
+      "libro": "",
+      "resumen": "Artículo 536.- La declaración de propiedades saludables y nutricionales, y la información nutricional complementaria que se describa en los envases de estos pro"
+    },
+    "537": {
+      "fecha_version": "2002-02-18",
+      "derogado": false,
+      "id_parte": "8716973",
+      "libro": "",
+      "resumen": "Artículo 537.- La publicidad, a través de cualquier medio, así como la rotulación de los suplementos alimentarios, deberá adecuarse a las normas que sobre el pa"
+    },
+    "538": {
+      "fecha_version": "2002-02-18",
+      "derogado": false,
+      "id_parte": "8716974",
+      "libro": "",
+      "resumen": "Artículo 538.- Los niveles, máximo y mínimo, de vitaminas, minerales y demás componentes a que alude el artículo 534, serán establecidos por resolución del Mini"
+    },
+    "539": {
+      "fecha_version": "2003-01-20",
+      "derogado": false,
+      "id_parte": "8716976",
+      "libro": "",
+      "resumen": "Artículo 539.- Alimentos para deportistas son aquellos productos alimentarios formulados para satisfacer requerimientos de individuos sanos, en especial de aque"
+    },
+    "540": {
+      "fecha_version": "2011-11-24",
+      "derogado": false,
+      "id_parte": "8716969",
+      "libro": "",
+      "resumen": "Artículo 540.- Sólo podrán considerarse alimentos para deportistas aquellos que cumplan con los requisitos de alguna de las propiedades nutricionales que se ind"
+    },
+    "541": {
+      "fecha_version": "2005-05-06",
+      "derogado": false,
+      "id_parte": "8716971",
+      "libro": "",
+      "resumen": "Artículo 541.- Los alimentos para deportistas se etiquetarán conforme a las disposiciones relativas a etiquetado general y según lo dispuesto en los artículos 1"
+    },
+    "542": {
+      "fecha_version": "2003-01-20",
+      "derogado": false,
+      "id_parte": "8716977",
+      "libro": "",
+      "resumen": "Artículo 542.- Las infracciones a las disposiciones del presente reglamento serán sancionadas por los Servicios de Salud en cuyo territorio se hayan cometido, p"
+    },
+    "543": {
+      "fecha_version": "2003-01-20",
+      "derogado": false,
+      "id_parte": "8716978",
+      "libro": "",
+      "resumen": "Artículo 543.- El presente reglamento entrará en vigencia ciento ochenta días después de su publicación en el Diario Oficial, fecha en que se entenderán derogad"
+    },
+    "?": {
+      "fecha_version": "1997-05-13",
+      "derogado": false,
+      "id_parte": "8716955",
+      "libro": "",
+      "resumen": "Artículo Transitorio.- Sin perjuicio de lo dispuesto en el artículo anterior, la autoridad sanitaria podrá, por resolución fundada, autorizar la comercializació"
+    }
+  }
+}
